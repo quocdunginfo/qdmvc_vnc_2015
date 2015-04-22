@@ -41,25 +41,13 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                         'price' => array(
                             'SourceExpr' => 'price'
                         ),
-                        'congsuat' => array(
-                            'SourceExpr' => 'congsuat'
-                        ),
-                        'trongluong' => array(
-                            'SourceExpr' => 'trongluong'
-                        ),
-                        'xuatxu' => array(
-                            'SourceExpr' => 'xuatxu'
-                        ),
-                        'dongco' => array(
-                            'SourceExpr' => 'dongco'
-                        ),
                         'active' => array(
                             'SourceExpr' => 'active',
                             'DataType' => static::getDataType('active')
                         ),
-                        'mota1' => array(
-                            'SourceExpr' => 'mota1',
-                            'DataType' => static::getDataType('mota1')
+                        'description' => array(
+                            'SourceExpr' => 'description',
+                            'DataType' => static::getDataType('description')
                         ),
                     )
                 )

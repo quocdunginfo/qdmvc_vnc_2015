@@ -244,6 +244,29 @@ class Qdmvc_Page_Index {
             'Model' => 'QdLog',
             'DataPort' => 'log_port'
         ),
+        'bestchoiceitem_card' => array(
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_BestChoiceItem',
+            'Caption' => array(
+                'en' => 'BestChoiceItem',
+                'vn' => 'BestChoiceItem'
+            ),
+            'Model' => 'QdPost',
+            'DataPort' => 'post_port',
+            'PageList' => 'bestchoiceitem_list'
+        ),
+        'bestchoiceitem_list' => array(
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_BestChoiceItem_list',
+            'Caption' => array(
+                'en' => 'BestChoiceItem List',
+                'vn' => 'BestChoiceItem List'
+            ),
+            'Model' => 'QdPost',
+            'DataPort' => 'post_port'
+        ),
         'navigation' => array(
             'Active'=>false,
             'PageType' => 'Card',

@@ -3,6 +3,7 @@
 class QdProduct extends QdRoot
 {
     static $table_name = 'mpd_product';
+
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
@@ -16,7 +17,7 @@ class QdProduct extends QdRoot
                     'Method' => 'Lookup',
                     'Table' => 'QdProductCat',
                     'Field' => 'name',
-                    'TableFilter' =>  array(
+                    'TableFilter' => array(
                         0 => array(
                             'Field' => 'id',
                             'Type' => 'FIELD',
@@ -38,19 +39,16 @@ class QdProduct extends QdRoot
                     'Table' => 'QdProductCat',
                     'Field' => 'id',
                     'TableFilter' => array(
-                        /*
-                        0 => array(
+                        /*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
                                 'Value' => ''
                             ),
-                            'Field' => '',
+                            'Field' => 'order',
                             'Type' => 'FIELD',
-                            'Value' => ''
-                        )
-                        */
-
+                            'Value' => 10
+                        )*/
                     )
                 )
             ),
@@ -73,30 +71,10 @@ class QdProduct extends QdRoot
             'price' => array(
                 'Caption' => array('vn' => 'Giá'),
             ),
-            'xuatxu' => array(
-                'Caption' => array('vn' => 'Xuất xứ'),
-            ),
-            'congsuat' => array(
-                'Caption' => array('vn' => 'Công suất'),
-            ),
-            'dongco' => array(
-                'Caption' => array('vn' => 'Động cơ'),
-            ),
-            'trongluong' => array(
-                'Caption' => array('vn' => 'Trọng lượng'),
-            ),
-            'baohanh' => array(
-                'Caption' => array('vn' => 'Bảo hành'),
-            ),
-            'mota1' => array(
+            'description' => array(
                 'Caption' => array('vn' => 'Mô tả'),
                 'DataType' => 'WYSIWYG',
             ),
-            'mota2' => array(
-                'Caption' => array('vn' => 'Mô tả 2'),
-                'DataType' => 'WYSIWYG',
-            ),
-            'mota3' => array(),
         ));
     }
 
@@ -106,6 +84,7 @@ class QdProduct extends QdRoot
     static $belongs_to = array(
         array('product_cat_obj', 'class_name' => 'QdProductCat', 'foreign_key' => 'product_cat_id', 'primary_key' => 'id')
     );
+
     public function getProductCatObj()
     {
         return $this->product_cat_obj;
@@ -124,14 +103,14 @@ class QdProduct extends QdRoot
         array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
         return $re;
     }
+
     /*
      * Validation
      *
      */
     protected function nameOnValidate($field_name)
     {
-        if($this->$field_name=='')
-        {
+        if ($this->$field_name == '') {
             $this->pushValidateError($field_name, 'Name bắt buộc');
         }
         /*
@@ -144,6 +123,7 @@ class QdProduct extends QdRoot
         }
         */
     }
+
     protected function activeOnValidate($field_name)
     {
         /*
@@ -156,40 +136,38 @@ class QdProduct extends QdRoot
         }
         */
     }
+
     protected function codeOnValidate($field_name)
     {
-        if($this->$field_name == '')
-        {
-            if($this->name!=null)
-            {
+        if ($this->$field_name == '') {
+            if ($this->name != null) {
                 $this->pushValidateError($field_name, 'Code tự động in hoa và bằng Name', 'info');
                 $this->$field_name = strtoupper($this->name);
             }
         }
     }
+
     protected function priceOnValidate($field_name)
     {
-        if($this->$field_name!='' && $this->$field_name <= 0)
-        {
+        if ($this->$field_name != '' && $this->$field_name <= 0) {
             $this->pushValidateError($field_name, 'Price phải lớn hơn 0', 'error');
         }
     }
+
     protected function product_cat_idOnValidate($field_name)
     {
         //check exit
-        if($this->getProductCatObj()==null)
-        {
+        if ($this->getProductCatObj() == null) {
             $this->pushValidateError($field_name, 'Product Cat không tồn tại!');
-            if(!$this->is_new_record())
-            {
+            if (!$this->is_new_record()) {
                 $this->$field_name = $this->xRec()->$field_name;
             }
         }
     }
+
     protected function avatarOnValidate($field_name)
     {
-        if($this->$field_name=='')
-        {
+        if ($this->$field_name == '') {
             $pro_setup = QdProductSetup::GET();
             $this->$field_name = $pro_setup->df_pro_avatar;
             $this->pushValidateError($field_name, 'Tự động gán Avatar mặc định cho Product', 'info');
@@ -199,7 +177,6 @@ class QdProduct extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdProduct();
-        $obj->trongluong = 'KG';
         return $obj;
     }
 
