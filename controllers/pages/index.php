@@ -13,7 +13,9 @@ class Qdmvc_Page_Index {
             'Caption' => array(
                 'en' => 'Page Main',
                 'vn' => 'Trang chính',
-            )
+            ),
+            'Model' => 'QdNote',
+            'DataPort' => 'note_port',
         ),
         'product_card' => array(
             'Active'=>true,
@@ -249,11 +251,11 @@ class Qdmvc_Page_Index {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_BestChoiceItem',
             'Caption' => array(
-                'en' => 'BestChoiceItem',
-                'vn' => 'BestChoiceItem'
+                'en' => 'Best Choice Item',
+                'vn' => 'Best Choice Item'
             ),
-            'Model' => 'QdPost',
-            'DataPort' => 'post_port',
+            'Model' => 'QdBestChoiceItem',
+            'DataPort' => 'bestchoiceitem_port',
             'PageList' => 'bestchoiceitem_list'
         ),
         'bestchoiceitem_list' => array(
@@ -261,8 +263,77 @@ class Qdmvc_Page_Index {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_BestChoiceItem_list',
             'Caption' => array(
-                'en' => 'BestChoiceItem List',
-                'vn' => 'BestChoiceItem List'
+                'en' => 'Best Choice Item List',
+                'vn' => 'Best Choice Item List'
+            ),
+            'Model' => 'QdBestChoiceItem',
+            'DataPort' => 'bestchoiceitem_port'
+        ),
+        'bestchoicecat_card' => array(
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_BestChoiceCat',
+            'Caption' => array(
+                'en' => 'Best Choice Cat',
+                'vn' => 'Best Choice Cat'
+            ),
+            'Model' => 'QdBestChoiceCat',
+            'DataPort' => 'bestchoicecat_port',
+            'PageList' => 'bestchoicecat_list'
+        ),
+        'bestchoicecat_list' => array(
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_BestChoiceCat_list',
+            'Caption' => array(
+                'en' => 'Best Choice Cat List',
+                'vn' => 'Best Choice Cat List'
+            ),
+            'Model' => 'QdBestChoiceCat',
+            'DataPort' => 'bestchoicecat_port'
+        ),
+        'postcat_card' => array(
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_PostCat',
+            'Caption' => array(
+                'en' => 'Post Cat',
+                'vn' => 'Post Cat'
+            ),
+            'Model' => 'QdPostCat',
+            'DataPort' => 'postcat_port',
+            'PageList' => 'postcat_list'
+        ),
+        'postcat_list' => array(
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_PostCat_list',
+            'Caption' => array(
+                'en' => 'Post Cat List',
+                'vn' => 'Post Cat List'
+            ),
+            'Model' => 'QdPostCat',
+            'DataPort' => 'postcat_port'
+        ),
+        'post_card' => array(
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_Post',
+            'Caption' => array(
+                'en' => 'Post',
+                'vn' => 'Post'
+            ),
+            'Model' => 'Qdpost',
+            'DataPort' => 'post_port',
+            'PageList' => 'post_list'
+        ),
+        'post_list' => array(
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_post_list',
+            'Caption' => array(
+                'en' => 'Post List',
+                'vn' => 'Post List'
             ),
             'Model' => 'QdPost',
             'DataPort' => 'post_port'

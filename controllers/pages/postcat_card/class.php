@@ -6,19 +6,19 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_Post extends Qdmvc_Page_Root {
+class Qdmvc_Page_PostCat extends Qdmvc_Page_Root {
     public function run()
     {
         parent::run();
     }
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_Post';
+        return 'Qdmvc_View_PostCat';
     }
 
     public static function getPage()
     {
-        return 'post_card';
+        return 'postcat_card';
     }
 
     protected static function initFields()
@@ -32,28 +32,31 @@ class Qdmvc_Page_Post extends Qdmvc_Page_Root {
                         'SourceExpr' => 'id',
                         'PrimaryKey' => true
                     ),
-                    'content' => array(
-                        'SourceExpr' => 'content',
-                    ),
                     'title' => array(
                         'SourceExpr' => 'title',
+                        'DataType' => static::getDataType('title')
                     ),
-                    'type' => array(
-                        'SourceExpr' => 'type',
-                        'DataType' => static::getDataType('type')
-                    ),
-                    'short_content' => array(
-                        'SourceExpr' => 'short_content',
+                    'description' => array(
+                        'SourceExpr' => 'description',
+                        'DataType' => static::getDataType('description')
                     ),
                     'avatar' => array(
                         'SourceExpr' => 'avatar',
                         'DataType' => static::getDataType('avatar')
                     ),
-                    'post_cat_id' => array(
-                        'SourceExpr' => 'post_cat_id',
-                        'DataType' => static::getDataType('post_cat_id'),
-                        'LookupURL' => static::getLookupURL('post_cat_id')
-                    )
+                    'order' => array(
+                        'SourceExpr' => 'order',
+                        'DataType' => static::getDataType('order')
+                    ),
+                    'type' => array(
+                        'SourceExpr' => 'type',
+                        'DataType' => static::getDataType('type'),
+                        'ReadOnly' => static::isReadOnly('type')
+                    ),
+                    'parent_id' => array(
+                        'SourceExpr' => 'parent_id',
+                        'LookupURL' => static::getLookupURL('parent_id')
+                    ),
                 )
             )
         );

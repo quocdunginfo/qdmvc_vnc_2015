@@ -5,7 +5,6 @@
  * Date: 05/03/2015
  * Time: 11:35 PM
  */
-Qdmvc::loadPage('root');
 Qdmvc::loadPage('feedback_list');
 class Qdmvc_Page_FeedbackDone_List extends Qdmvc_Page_Feedback_List
 {

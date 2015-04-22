@@ -5,24 +5,25 @@
  * Date: 05/03/2015
  * Time: 11:35 PM
  */
-Qdmvc::loadPage('post_list');
+Qdmvc::loadPage('postcat_list');
 
-class Qdmvc_Page_BestChoiceItem_List extends Qdmvc_Page_Post_List
+class Qdmvc_Page_BestChoiceCat_List extends Qdmvc_Page_PostCat_List
 {
+
     protected function getCustomPageView()
     {
         return array(
-            'type' => QdPost::$TYPE_BESTCHOICEITEM
+            'type' => QdPostCat::$TYPE_BESTCHOICECAT
         );
     }
 
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_BestChoiceItem_List';
+        return 'Qdmvc_View_BestChoiceCat_List';
     }
 
     public static function getPage()
     {
-        return 'bestchoiceitem_list';
+        return 'bestchoicecat_list';
     }
 }
