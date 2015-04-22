@@ -183,7 +183,7 @@ class Qdmvc_Page_Index {
             'Class'=>'Qdmvc_Page_Note',
             'Caption' => array(
                 'en' => 'Note',
-                'vn' => 'Note'
+                'vn' => 'Ghi chú'
             ),
             'Model' => 'QdNote',
             'DataPort' => 'note_port',
@@ -206,7 +206,7 @@ class Qdmvc_Page_Index {
             'Class'=>'Qdmvc_Page_Image',
             'Caption' => array(
                 'en' => 'Image',
-                'vn' => 'Image'
+                'vn' => 'Hình ảnh'
             ),
             'Model' => 'QdImage',
             'DataPort' => 'image_port',
