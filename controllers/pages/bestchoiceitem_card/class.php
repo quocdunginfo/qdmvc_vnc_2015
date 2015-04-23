@@ -16,4 +16,15 @@ class Qdmvc_Page_BestChoiceItem extends Qdmvc_Page_Post {
     {
         return 'bestchoiceitem_card';
     }
+
+    protected static function initFields()
+    {
+        $obj = parent::initFields();
+        $obj['Group1']['Fields']['_post_cat_desc'] = array(
+            'SourceExpr' => '_post_cat_desc',
+            'ReadOnly' => static::isReadOnly('_post_cat_desc')
+        );
+        return $obj;
+    }
+
 }

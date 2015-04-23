@@ -20,4 +20,12 @@ class Qdmvc_Page_BestChoiceCat extends Qdmvc_Page_PostCat {
     {
         return 'bestchoicecat_card';
     }
+    protected static function initFields()
+    {
+        $obj = parent::initFields();
+        unset($obj['Group1']['Fields']['parent_id']);
+        unset($obj['Group1']['Fields']['avatar']);
+        return $obj;
+    }
+
 }

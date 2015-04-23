@@ -9,11 +9,6 @@ Qdmvc::loadPage('root');
 
 class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root
 {
-    public function run()
-    {
-        parent::run();
-    }
-
     protected static function getViewClass()
     {
         return 'Qdmvc_View_ProductCat_List';
@@ -42,4 +37,12 @@ class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root
     {
         return 'product_cat_list';
     }
+
+    protected function getCustomPageView()
+    {
+        return array(
+            'type' => QdProductCat::$TYPE_PRODUCTCAT
+        );
+    }
+
 }

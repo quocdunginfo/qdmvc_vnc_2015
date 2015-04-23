@@ -12,7 +12,7 @@ class QdBestChoiceItem extends QdPost
 
     public static function getInitObj()
     {
-        $obj = parent::getInitObj();
+        $obj = new QdBestChoiceItem();
         $obj->type = static::$TYPE_BESTCHOICEITEM;
         return $obj;
     }
@@ -33,6 +33,24 @@ class QdBestChoiceItem extends QdPost
                     'Field' => 'type',
                     'Type' => 'FIELD',
                     'Value' => QdBestChoiceCat::$TYPE_BESTCHOICECAT
+                )
+            )
+        );
+        $obj['_post_cat_desc'] = array(
+            'Name' => 'product_cat_desc',
+            'Caption' => array('en' => 'Product Cat Desc', 'vn' => 'Mô tả loại'),
+            'DataType' => 'Text',
+            'FieldClass' => 'FlowField',
+            'FieldClass_FlowField' => array(
+                'Method' => 'Lookup',
+                'Table' => 'QdPostCat',
+                'Field' => 'description',
+                'TableFilter' => array(
+                    0 => array(
+                        'Field' => 'id',
+                        'Type' => 'FIELD',
+                        'Value' => 'post_cat_id'
+                    )
                 )
             )
         );

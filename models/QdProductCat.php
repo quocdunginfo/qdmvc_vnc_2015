@@ -3,6 +3,8 @@
 class QdProductCat extends QdRoot
 {
     static $table_name = 'mpd_product_cat';
+    public static $TYPE_PRODUCTCAT = 0;
+    public static $TYPE_BIGSALE = 100;
 
     /*
     static $has_many = array(
@@ -50,6 +52,18 @@ class QdProductCat extends QdRoot
                     )
                 )
             ),
+            'type' => array(
+                'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    static::$TYPE_BIGSALE => array(
+                        'Caption' => array('en' => 'Big Sale', 'vn' => 'Big Sale'),
+                    ),
+                    static::$TYPE_PRODUCTCAT => array(
+                        'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
+                    ),
+                )
+            )
         ));
     }
 

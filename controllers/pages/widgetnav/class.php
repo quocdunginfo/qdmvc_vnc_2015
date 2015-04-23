@@ -6,19 +6,19 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_Post extends Qdmvc_Page_Root {
+class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
     public function run()
     {
         parent::run();
     }
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_Post';
+        return 'Qdmvc_View_WidgetNav';
     }
 
     public static function getPage()
     {
-        return 'post_card';
+        return 'widgetnav';
     }
 
     protected static function initFields()
@@ -36,26 +36,32 @@ class Qdmvc_Page_Post extends Qdmvc_Page_Root {
                         'SourceExpr' => 'title',
                     ),
                     'content' => array(
-                        'SourceExpr' => 'content',
+                        'SourceExpr' => 'content'
                     ),
-                    'short_content' => array(
-                        'SourceExpr' => 'short_content',
+                    'button_text' => array(
+                        'SourceExpr' => 'button_text',
                     ),
-                    'type' => array(
-                        'SourceExpr' => 'type',
-                        'DataType' => static::getDataType('type')
+                    'path' => array(
+                        'SourceExpr' => 'path',
                     ),
-                    'avatar' => array(
-                        'SourceExpr' => 'avatar',
-                        'DataType' => static::getDataType('avatar')
-                    ),
-                    'post_cat_id' => array(
-                        'SourceExpr' => 'post_cat_id',
-                        'DataType' => static::getDataType('post_cat_id'),
-                        'LookupURL' => static::getLookupURL('post_cat_id')
-                    ),
+                    'order' => array(
+                        'SourceExpr' => 'order',
+                    )
                 )
             )
+            /* SAMPLE
+            ,
+            'Group2' => array(
+                'Type' => 'Part',
+                'Name' => 'Lines',
+                'PagePartID' => '',
+                'SubPageLink' => array(
+                    'Field' => '',
+                    'Type' => 'FIELD',//'CONST',
+                    'Value' => ''
+                )
+            )
+            */
         );
     }
 

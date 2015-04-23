@@ -31,11 +31,11 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
                         'SourceExpr' => 'id',
                         'PrimaryKey' => true
                     ),
-                    /*
-                    'date_modified' => array(
-                        'SourceExpr' => 'date_modified',
-                        'DataType' => static::getDataType('date_modified')
-                    ),*/
+
+                    'type' => array(
+                        'SourceExpr' => 'type',
+                        'DataType' => static::getDataType('type')
+                    ),
                     'name' => array(
                         'SourceExpr' => 'name'
                     ),
