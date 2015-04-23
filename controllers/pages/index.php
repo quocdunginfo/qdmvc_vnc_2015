@@ -6,8 +6,36 @@
  * Time: 8:06 AM
  */
 class Qdmvc_Page_Index {
+    public static function getIndex()
+    {
+        return static::$index;
+    }
+    public static function buildJSONTree($lang='en')
+    {
+        $re = array();
+        foreach(static::$index as $key=>$config)
+        {
+            $tmp = array();
+            $active = isset($config['Active'])?$config['Active']:true;
+            $p_id = isset($config['ParentId'])?$config['ParentId']:-1;
+            if(!$active)
+            {
+                continue;
+            }
+
+            $text = isset($config['Caption']) && isset($config['Caption'][$lang])?$config['Caption'][$lang]:$key;
+            $tmp['text'] = $text;
+            $tmp['id'] = $key;
+            $tmp['parentid'] = $p_id;
+            $tmp['value'] = Qdmvc_Helper::getCompactPageListLink($key);
+
+            array_push($re, $tmp);
+        }
+        return json_encode($re);
+    }
     private static $index = array(
         'main' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'Class'=>'Qdmvc_Page_Main',
             'Caption' => array(
@@ -18,6 +46,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'note_port',
         ),
         'product_card' => array(
+            'ParentId' => 'product_cat_card',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Product_Card',
@@ -30,6 +59,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'product_list'
         ),
         'product_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Product_List',
@@ -41,6 +71,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'product_port'
         ),
         'product_cat_card' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductCat_Card',
@@ -53,6 +84,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'product_cat_list'
         ),
         'product_cat_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductCat_List',
@@ -64,6 +96,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'product_cat_port'
         ),
         'product_order_card' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductOrder_Card',
@@ -76,6 +109,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'product_order_list'
         ),
         'product_order_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductOrder_List',
@@ -87,6 +121,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'product_order_port'
         ),
         'product_order_done_card' => array(
+            'ParentId' => 'product_order_card',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductOrderDone_Card',
@@ -99,6 +134,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'product_order_done_list'
         ),
         'product_order_done_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductOrderDone_List',
@@ -110,6 +146,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'product_order_port'
         ),
         'feedback_card' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Feedback_Card',
@@ -122,6 +159,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'feedback_list'
         ),
         'feedback_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Feedback_List',
@@ -133,6 +171,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'feedback_port'
         ),
         'feedback_done_card' => array(
+            'ParentId' => 'feedback_card',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_FeedbackDone_Card',
@@ -145,6 +184,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'feedback_done_list'
         ),
         'feedback_done_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_FeedbackDone_List',
@@ -156,6 +196,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'feedback_port'
         ),
         'product_setup' => array(
+            'ParentId' => 'setup',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductSetup',
@@ -167,6 +208,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'product_setup_port'
         ),
         'setup' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Setup',
@@ -178,6 +220,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'setup_port'
         ),
         'note' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Note',
@@ -190,6 +233,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'note_list'
         ),
         'note_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Note_list',
@@ -201,6 +245,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'note_port'
         ),
         'image' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Image',
@@ -213,6 +258,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'image_list'
         ),
         'image_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Image_list',
@@ -224,6 +270,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'image_port'
         ),
         'log' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Log',
@@ -236,6 +283,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'log_list'
         ),
         'log_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Log_list',
@@ -247,6 +295,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'log_port'
         ),
         'bestchoiceitem_card' => array(
+            'ParentId' => 'bestchoicecat_card',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_BestChoiceItem',
@@ -259,6 +308,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'bestchoiceitem_list'
         ),
         'bestchoiceitem_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_BestChoiceItem_list',
@@ -270,6 +320,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'bestchoiceitem_port'
         ),
         'bestchoicecat_card' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_BestChoiceCat',
@@ -282,6 +333,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'bestchoicecat_list'
         ),
         'bestchoicecat_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_BestChoiceCat_list',
@@ -293,6 +345,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'bestchoicecat_port'
         ),
         'postcat_card' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_PostCat',
@@ -305,6 +358,7 @@ class Qdmvc_Page_Index {
             'PageList' => 'postcat_list'
         ),
         'postcat_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_PostCat_list',
@@ -316,6 +370,7 @@ class Qdmvc_Page_Index {
             'DataPort' => 'postcat_port'
         ),
         'post_card' => array(
+            'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Post',
@@ -323,11 +378,12 @@ class Qdmvc_Page_Index {
                 'en' => 'Post',
                 'vn' => 'Post'
             ),
-            'Model' => 'Qdpost',
+            'Model' => 'QdPost',
             'DataPort' => 'post_port',
             'PageList' => 'post_list'
         ),
         'post_list' => array(
+            'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_post_list',
@@ -338,7 +394,58 @@ class Qdmvc_Page_Index {
             'Model' => 'QdPost',
             'DataPort' => 'post_port'
         ),
+        'widgetnav' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_WidgetNav',
+            'Caption' => array(
+                'en' => 'Widget Nav',
+                'vn' => 'Widget Nav'
+            ),
+            'Model' => 'QdWidgetNav',
+            'DataPort' => 'widgetnav_port',
+            'PageList' => 'widgetnav_list'
+        ),
+        'widgetnav_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_WidgetNav_List',
+            'Caption' => array(
+                'en' => 'Widget Nav List',
+                'vn' => 'Widget Nav List'
+            ),
+            'Model' => 'QdWidgetNav',
+            'DataPort' => 'widgetnav_port',
+        ),
+        'progrp' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ProGrp_Card',
+            'Caption' => array(
+                'en' => 'Product Group',
+                'vn' => 'Nhóm các SP'
+            ),
+            'Model' => 'QdProGrp',
+            'DataPort' => 'progrp_port',
+            'PageList' => 'progrp_list'
+        ),
+        'progrp_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ProGrp_List',
+            'Caption' => array(
+                'en' => 'Product Group List',
+                'vn' => 'Product Group List'
+            ),
+            'Model' => 'QdProGrp',
+            'DataPort' => 'progrp_port',
+        ),
         'navigation' => array(
+            'ParentId' => '',
             'Active'=>false,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Navigation',
@@ -351,32 +458,4 @@ class Qdmvc_Page_Index {
             'PageList' => 'note_list'
         ),
     );
-    public static function getIndex()
-    {
-        return static::$index;
-    }
-    public static function buildJSONTree($lang='en')
-    {
-        $re = array();
-        $count=1;
-        foreach(static::$index as $key=>$config)
-        {
-            $tmp = array();
-            $active = isset($config['Active'])?$config['Active']:true;
-            if(!$active)
-            {
-                continue;
-            }
-
-            $text = isset($config['Caption']) && isset($config['Caption'][$lang])?$config['Caption'][$lang]:$key;
-            $tmp['text'] = $text;
-            $tmp['id'] = $count;
-            $tmp['parentid'] = -1;
-            $tmp['value'] = Qdmvc_Helper::getCompactPageListLink($key);
-
-            array_push($re, $tmp);
-            $count++;
-        }
-        return json_encode($re);
-    }
 }

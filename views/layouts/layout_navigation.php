@@ -27,7 +27,11 @@ class Qdmvc_Layout_Navigation
 
                     $("#splitter").jqxSplitter({width: '99%', height: height, panels: [{size: 250}]});
                     // Create jqxTree
+                    Array.prototype.insert = function (index, item) {
+                        this.splice(index, 0, item);
+                    };
                     var data = <?=Qdmvc_Page_Index::buildJSONTree($this->data['language'])?>;
+                    data.insert(0, {id: 'hidden', text: 'hidden', parrent: -1, value: ''});
                     // prepare the data
                     var source =
                     {
@@ -64,6 +68,8 @@ class Qdmvc_Layout_Navigation
                         {
                             return;//ignore folder
                         }
+                        //unselect all
+                        $('#jqxTree').jqxTree('selectItem', $("#jqxTree").find('li:first')[0]);
                         //check existed
                         var totaltab = $('#jqxTabs').jqxTabs('length');
                         var i=0;
@@ -87,12 +93,13 @@ class Qdmvc_Layout_Navigation
         <div id="splitter">
             <div>
                 <div style="visibility: hidden; border: none;" id='jqxTree'>
+                    <li>Hidden</li>
                 </div>
             </div>
             <div id="ContentPanel">
                 <div id='jqxTabs' style="float: left;">
                     <ul style="margin-left: 30px;" id="unorderedList">
-                        <li>Home</li>
+                        <li style="display: none">Home</li>
                     </ul>
                     <div>
                         Home page content
@@ -100,6 +107,18 @@ class Qdmvc_Layout_Navigation
                 </div>
             </div>
         </div>
+        <script>
+            (function($){
+                $(document).ready(function(){
+                    $('#panelContentpaneljqxTree li').click(function(){
+                        //alert('wtf');
+                    });
+                });
+            })(jQuery);
+        </script>
+        <style>
+            #hidden {display: none}
+        </style>
 
     <?php
     }
