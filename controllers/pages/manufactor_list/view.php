@@ -6,8 +6,9 @@
  * Time: 11:32 PM
  */
 //Qdmvc_Helper::qd_media_choose('cavatar', 'avatar', false);
+
 Qdmvc::loadLayout('layout_list');
-class Qdmvc_View_ProductCat_List extends Qdmvc_Layout_List
+class Qdmvc_View_Manufactor_List extends Qdmvc_Layout_List
 {
 
 }

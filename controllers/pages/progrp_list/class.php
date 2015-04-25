@@ -23,9 +23,17 @@ class Qdmvc_Page_ProGrp_List extends Qdmvc_Page_Root
                     'SourceExpr' => 'product_id',
                     'Width' => 100
                 ),
+                '_product_name' => array(
+                    'SourceExpr' => '_product_name',
+                    'Width' => 200,
+                ),
                 'group_id' => array(
                     'SourceExpr' => 'group_id',
+                    'Width' => 100
                 ),
+                '_group_name' => array(
+                    'SourceExpr' => '_group_name',
+                )
             )
         );
     }

@@ -425,8 +425,8 @@ class Qdmvc_Page_Index {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProGrp_Card',
             'Caption' => array(
-                'en' => 'Product Group',
-                'vn' => 'Nhóm các SP'
+                'en' => 'Product-Group',
+                'vn' => 'SP-Nhóm'
             ),
             'Model' => 'QdProGrp',
             'DataPort' => 'progrp_port',
@@ -443,6 +443,131 @@ class Qdmvc_Page_Index {
             ),
             'Model' => 'QdProGrp',
             'DataPort' => 'progrp_port',
+        ),
+        'probigsale' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ProBigSale_Card',
+            'Caption' => array(
+                'en' => 'BigSale Products',
+                'vn' => 'Các SP BigSale'
+            ),
+            'Model' => 'QdProBigSale',
+            'DataPort' => 'probigsale_port',
+            'PageList' => 'probigsale_list'
+        ),
+        'probigsale_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ProBigSale_List',
+            'Caption' => array(
+                'en' => 'BigSale Products',
+                'vn' => 'BigSale Products'
+            ),
+            'Model' => 'QdProBigSale',
+            'DataPort' => 'probigsale_port',
+        ),
+        'bigsalecat' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_BigSaleCat_Card',
+            'Caption' => array(
+                'en' => 'BigSale Cat',
+                'vn' => 'BigSale Cat',
+            ),
+            'Model' => 'QdBigSaleCat',
+            'DataPort' => 'product_cat_port',
+            'PageList' => 'bigsalecat_list'
+        ),
+        'bigsalecat_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_BigSaleCat_List',
+            'Caption' => array(
+                'en' => 'BigSale Cat List',
+                'vn' => 'BigSale Cat List',
+            ),
+            'Model' => 'QdBigSaleCat',
+            'DataPort' => 'product_cat_port'
+        ),
+        'propromotion' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ProPromotion_Card',
+            'Caption' => array(
+                'en' => 'Promotion Products',
+                'vn' => 'Các SP KM'
+            ),
+            'Model' => 'QdProPromotion',
+            'DataPort' => 'progrp_port',
+            'PageList' => 'propromotion_list'
+        ),
+        'propromotion_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ProPromotion_List',
+            'Caption' => array(
+                'en' => 'Promotion Products',
+                'vn' => 'Promotion Products'
+            ),
+            'Model' => 'QdProPromotion',
+            'DataPort' => 'progrp_port',
+        ),
+        'promotioncat' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_PromotionCat_Card',
+            'Caption' => array(
+                'en' => 'Promotion Cat',
+                'vn' => 'Promotion Cat',
+            ),
+            'Model' => 'QdPromotionCat',
+            'DataPort' => 'product_cat_port',
+            'PageList' => 'promotioncat_list'
+        ),
+        'promotioncat_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_PromotionCat_List',
+            'Caption' => array(
+                'en' => 'Promotion Cat List',
+                'vn' => 'Promotion Cat List',
+            ),
+            'Model' => 'QdPromotionCat',
+            'DataPort' => 'product_cat_port'
+        ),
+        'manufactor' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_Manufactor',
+            'Caption' => array(
+                'en' => 'Manufactor',
+                'vn' => 'Hãng SX'
+            ),
+            'Model' => 'QdManufactor',
+            'DataPort' => 'product_cat_port',
+            'PageList' => 'manufactor_list'
+        ),
+        'manufactor_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_Manufactor_list',
+            'Caption' => array(
+                'en' => 'Manufactor List',
+                'vn' => 'Manufactor List'
+            ),
+            'Model' => 'QdManufactor',
+            'DataPort' => 'product_cat_port',
         ),
         'navigation' => array(
             'ParentId' => '',

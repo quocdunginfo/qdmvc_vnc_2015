@@ -7,6 +7,6 @@
  */
 //import libraries
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate {
+class Qdmvc_View_ProPromotion_Card extends Qdmvc_Layout_CardNavigate {
 
 }

@@ -5,11 +5,20 @@ class QdProductCat extends QdRoot
     static $table_name = 'mpd_product_cat';
     public static $TYPE_PRODUCTCAT = 0;
     public static $TYPE_BIGSALE = 100;
+    public static $TYPE_PROMOTION = 137;
+    public static $TYPE_MANUFACTOR = 215;
 
     /*
     static $has_many = array(
         array('product_list', 'class_name' => 'QdProduct', 'primary_key' => 'id', 'foreign_key' => 'product_cat_id')
     );*/
+    public static function getInitObj()
+    {
+        $obj = new QdProductCat();
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        return $obj;
+    }
+
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
@@ -24,6 +33,24 @@ class QdProductCat extends QdRoot
             'order' => array(
                 'Caption' => array('vn' => 'Thứ tự'),
             ),
+            '_parent_name' => array(
+                'Name' => '_parent_name',
+                'Caption' => array('en' => 'Parent Name', 'vn' => 'Tên cha'),
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+                'FieldClass_FlowField' => array(
+                    'Method' => 'Lookup',
+                    'Table' => 'QdProductCat',
+                    'Field' => 'name',
+                    'TableFilter' => array(
+                        0 => array(
+                            'Field' => 'id',
+                            'Type' => 'FIELD',
+                            'Value' => 'parent_id'
+                        )
+                    )
+                )
+            ),
             'parent_id' => array(
                 'Name' => 'parent_id',
                 'Caption' => array('en' => 'Parent ID', 'vn' => 'Mã LSP cha'),
@@ -36,31 +63,40 @@ class QdProductCat extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProductCat',
                     'Field' => 'id',
-                    'TableFilter' => array(/*
-                        0 => array(
+                    'TableFilter' => array(
+                        /*0 => array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
                                 'Value' => ''
                             ),
-                            'Field' => '',
+                            'Field' => 'is_leaf',
                             'Type' => 'FIELD',
-                            'Value' => ''
-                        )
-                        */
-
+                            'Value' => true
+                        )*/
                     )
                 )
             ),
+            /*
+            'is_leaf' => array(
+                'Caption' => array('en' => 'Is leaf', 'vn' => 'Nút lá'),
+                'DataType' => 'Boolean'
+            ),*/
             'type' => array(
                 'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    static::$TYPE_BIGSALE => array(
-                        'Caption' => array('en' => 'Big Sale', 'vn' => 'Big Sale'),
-                    ),
                     static::$TYPE_PRODUCTCAT => array(
                         'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
+                    ),
+                    static::$TYPE_BIGSALE => array(
+                        'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
+                    ),
+                    static::$TYPE_PROMOTION => array(
+                        'Caption' => array('en' => 'Promotion', 'vn' => 'Khuyến mãi'),
+                    ),
+                    static::$TYPE_MANUFACTOR => array(
+                        'Caption' => array('en' => 'Manufactor', 'vn' => 'Hãng SX'),
                     ),
                 )
             )

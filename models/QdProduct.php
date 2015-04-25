@@ -52,6 +52,50 @@ class QdProduct extends QdRoot
                     )
                 )
             ),
+            '_manufacturer_name' => array(
+                'Name' => '_manufacturer_name',
+                'Caption' => array('en' => 'Manufactor Name', 'vn' => 'Tên Hãng SX'),
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+                'FieldClass_FlowField' => array(
+                    'Method' => 'Lookup',
+                    'Table' => 'QdManufactor',
+                    'Field' => 'name',
+                    'TableFilter' => array(
+                        0 => array(
+                            'Field' => 'id',
+                            'Type' => 'FIELD',
+                            'Value' => 'manufacturer_id'
+                        )
+                    )
+                )
+            ),
+            'manufacturer_id' => array(
+                'Name' => 'manufacturer_id',
+                'Caption' => array('en' => 'Manufactor ID', 'vn' => 'Mã Hãng SX'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdManufactor',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        /*array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'order',
+                            'Type' => 'FIELD',
+                            'Value' => 10
+                        )*/
+                    )
+                )
+            ),
             'avatar' => array(
                 'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
                 'DataType' => 'Image',

@@ -20,7 +20,33 @@ class QdProductSetup extends QdRootSetup
             ),
             'advice_phone' => array(
                 'Caption' => array('en' => 'Advice Phone', 'vn' => 'SĐT tư vấn'),
-            )
+            ),
+            'bigsalecat_id' => array(
+                'Name' => 'bigsalecat_id',
+                'Caption' => array('en' => 'Big Sale', 'vn' => 'Big Sale'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdProductCat',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'type',
+                            'Type' => 'FIELD',
+                            'Value' => QdProductCat::$TYPE_BIGSALE
+                        )
+                    )
+                )
+            ),
         ));
     }
 

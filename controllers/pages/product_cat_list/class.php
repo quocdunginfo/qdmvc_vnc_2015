@@ -19,16 +19,19 @@ class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root
         return array_merge(
             parent::initFields(),
             array(
-                'parent_id' => array(
-                    'SourceExpr' => 'parent_id',
-                    'Width' => 100
-                ),
                 'order' => array(
                     'SourceExpr' => 'order',
                     'Width' => 100
                 ),
                 'name' => array(
-                    'SourceExpr' => 'name'
+                    'SourceExpr' => 'name',
+                ),
+                'parent_id' => array(
+                    'SourceExpr' => 'parent_id',
+                    'Width' => 100
+                ),
+                '_parent_name' => array(
+                    'SourceExpr' => '_parent_name',
                 ),
             ));
     }

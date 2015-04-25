@@ -35,6 +35,14 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                             'SourceExpr' => '_product_cat_name',
                             'ReadOnly' => static::isReadOnly('_product_cat_name')
                         ),
+                        'manufacturer_id' => array(
+                            'SourceExpr' => 'manufacturer_id',
+                            'LookupURL' => static::getLookupURL('manufacturer_id')
+                        ),
+                        '_manufacturer_name' => array(
+                            'SourceExpr' => '_manufacturer_name',
+                            'ReadOnly' => static::isReadOnly('_manufacturer_name')
+                        ),
                         'code' => array(
                             'SourceExpr' => 'code'
                         ),

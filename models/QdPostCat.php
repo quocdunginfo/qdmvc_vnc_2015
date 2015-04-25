@@ -64,11 +64,11 @@ class QdPostCat extends QdRoot
                 'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    '100' => array(
-                        'Caption' => array('en' => 'Best choice Cat', 'vn' => 'Best choice Cat'),
-                    ),
-                    '0' => array(
+                    static::$TYPE_POSTCAT => array(
                         'Caption' => array('en' => 'Post Cat', 'vn' => 'Post Cat'),
+                    ),
+                    static::$TYPE_BESTCHOICECAT => array(
+                        'Caption' => array('en' => 'Best choice Cat', 'vn' => 'Best choice Cat'),
                     ),
                 )
             )

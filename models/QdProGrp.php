@@ -7,6 +7,24 @@ class QdProGrp extends QdRoot
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
+            '_product_name' => array(
+                'Name' => '_product_name',
+                'Caption' => array('en' => 'Product Name', 'vn' => 'Tên SP'),
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+                'FieldClass_FlowField' => array(
+                    'Method' => 'Lookup',
+                    'Table' => 'QdProduct',
+                    'Field' => 'name',
+                    'TableFilter' => array(
+                        0 => array(
+                            'Field' => 'id',
+                            'Type' => 'FIELD',
+                            'Value' => 'product_id'
+                        )
+                    )
+                )
+            ),
             'product_id' => array(
                 'Name' => 'product_id',
                 'Caption' => array('en' => 'Product ID', 'vn' => 'Mã SP'),
@@ -34,6 +52,39 @@ class QdProGrp extends QdRoot
                 )
             ),
             'order' => array(),
+            'group_type' => array(
+                'Caption' => array('en' => 'Group Type', 'vn' => 'Phân loại'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    QdProductCat::$TYPE_PRODUCTCAT => array(
+                        'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
+                    ),
+                    QdProductCat::$TYPE_BIGSALE => array(
+                        'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
+                    ),
+                    QdProductCat::$TYPE_PROMOTION=> array(
+                        'Caption' => array('en' => 'Promotion', 'vn' => 'Khuyến mãi'),
+                    ),
+                )
+            ),
+            '_group_name' => array(
+                'Name' => '_group_name',
+                'Caption' => array('en' => 'Category Name', 'vn' => 'Tên loại'),
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+                'FieldClass_FlowField' => array(
+                    'Method' => 'Lookup',
+                    'Table' => 'QdProductCat',
+                    'Field' => 'name',
+                    'TableFilter' => array(
+                        0 => array(
+                            'Field' => 'id',
+                            'Type' => 'FIELD',
+                            'Value' => 'group_id'
+                        )
+                    )
+                )
+            ),
             'group_id' => array(
                 'Name' => 'group_id',
                 'Caption' => array('en' => 'Group ID', 'vn' => 'Mã nhóm'),
@@ -55,7 +106,7 @@ class QdProGrp extends QdRoot
                             ),
                             'Field' => 'type',
                             'Type' => 'FIELD',
-                            'Value' => QdProductCat::$TYPE_BIGSALE
+                            'Value' => QdProductCat::$TYPE_PRODUCTCAT
                         )
                     )
                 )
@@ -66,6 +117,7 @@ class QdProGrp extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdProGrp();
+        $obj->group_type = QdProductCat::$TYPE_PRODUCTCAT;
         return $obj;
     }
 }
