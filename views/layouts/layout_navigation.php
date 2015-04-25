@@ -23,9 +23,9 @@ class Qdmvc_Layout_Navigation
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    height = $(window).height();
+                    height = $(window).height()-3;
 
-                    $("#splitter").jqxSplitter({width: '99%', height: height, panels: [{size: 250}]});
+                    $("#splitter").jqxSplitter({width: '99%', height: height, panels: [{size: 230}]});
                     // Create jqxTree
                     Array.prototype.insert = function (index, item) {
                         this.splice(index, 0, item);
@@ -99,7 +99,7 @@ class Qdmvc_Layout_Navigation
             <div id="ContentPanel">
                 <div id='jqxTabs' style="float: left;">
                     <ul style="margin-left: 30px;" id="unorderedList">
-                        <li style="display: none">Home</li>
+                        <li>Home</li>
                     </ul>
                     <div>
                         Home page content

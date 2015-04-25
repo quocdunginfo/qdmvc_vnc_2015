@@ -470,7 +470,7 @@ class Qdmvc_Layout_Card
     private function generateFieldCombobox($f_name, $value, $options)
     {
         ?>
-        <select name="<?= $f_name ?>" id="<?= $f_name ?>">
+        <select class="qd-option-field" name="<?= $f_name ?>" id="<?= $f_name ?>">
             <?php foreach ($options as $key=>$caption): ?>
                 <option value="<?=$key ?>" <?=$value==$key?'selected':''?>><?= $caption ?></option>
             <?php endforeach; ?>
@@ -544,6 +544,9 @@ class Qdmvc_Layout_Card
             .qd-card-grid .col-md-6 {
                 /*height: 30px;*/
                 margin-bottom: 7px;
+            }
+            .qd-card-grid .qd-option-field {
+                height: 24px;
             }
 
             .qd-card-grid .qd-field-caption {
