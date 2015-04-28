@@ -10,13 +10,13 @@ class Qdmvc_RegisterAdminMenu
     public function qd_register_custom_menu_page()
     {
         //main page
-        add_menu_page('QD PLUGIN', 'QD PLUGIN', 'manage_options', 'main', array($this, 'add_page_main'));
+        add_menu_page('QD PLUGIN', 'QD PLUGIN', 'qdmvc_admin', 'main', array($this, 'add_page_main'));
         //sub pages
         //Auto add sub Page based on Index tree
         //return;
         foreach (Qdmvc_Page_Index::getIndex() as $p_name => $config) {
 
-            add_submenu_page('main', $config['Caption'][Qdmvc_Config::getLanguage()], $config['Caption'][Qdmvc_Config::getLanguage()], 'manage_options', $p_name, array($this, "{$p_name}"));
+            add_submenu_page('main', $config['Caption'][Qdmvc_Config::getLanguage()], $config['Caption'][Qdmvc_Config::getLanguage()], 'qdmvc_admin', $p_name, array($this, "{$p_name}"));
         }
     }
 
