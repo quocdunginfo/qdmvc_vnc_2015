@@ -520,13 +520,14 @@ class Qdmvc_Layout_Card
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= $f_name ?>" value="<?= $value ?>">
+            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= $f_name ?>" value="">
 
             <button id="e<?= $f_name ?>" value="">...</button>
 
             <script>
                 (function ($) {
                     $(document).ready(function () {
+                        $("#<?=$f_name?>").val("<?=str_replace('"', '\"', $value)?>");
                         $("#e<?=$f_name?>").click(function () {
                             requestEditorWindow($('#<?=$f_name?>').val(), '<?=$f_name?>');
                         });
