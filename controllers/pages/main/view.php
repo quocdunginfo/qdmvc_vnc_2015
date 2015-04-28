@@ -21,4 +21,5 @@ echo 'Page Main works!';
 
 //$record = new QdBestChoiceItem();
 //$record->SETRANGE('code', 'a', false);
+//$obj = new QdTRootSetup();
 ?>

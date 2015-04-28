@@ -207,6 +207,18 @@ class Qdmvc_Page_Index {
             'Model' => 'QdProductSetup',
             'DataPort' => 'product_setup_port'
         ),
+        'theme_root_setup' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_TRootSetup',
+            'Caption' => array(
+                'en' => 'Theme Root Setup',
+                'vn' => 'Theme Root Setup',
+            ),
+            'Model' => 'QdTRootSetup',
+            'DataPort' => 'theme/root_setup_port'
+        ),
         'setup' => array(
             'ParentId' => -1,
             'Active'=>true,
