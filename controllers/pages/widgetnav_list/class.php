@@ -38,6 +38,9 @@ class Qdmvc_Page_WidgetNav_List extends Qdmvc_Page_Root
                 ),
                 'order' => array(
                     'SourceExpr' => 'order',
+                ),
+                '_group_name' => array(
+                    'SourceExpr' => '_group_name',
                 )
             ));
     }

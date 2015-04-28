@@ -53,6 +53,10 @@ class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
                         'DataType' => static::getDataType('_group_name'),
                         'ReadOnly' => static::isReadOnly('_group_name')
                     ),
+                    'target' => array(
+                        'SourceExpr' => 'target',
+                        'DataType' => static::getDataType('target'),
+                    ),
                 )
             )
             /* SAMPLE

@@ -12,6 +12,18 @@ class QdWidgetNav extends QdRoot
             'button_text' => array(),
             'path' => array(),
             'order' => array(),
+            'target' => array(
+                'Caption' => array('en' => 'Target', 'vn' => 'Target'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    '_self' => array(
+                        'Caption' => array('en' => 'Default', 'vn' => 'Mặc định'),
+                    ),
+                    '_blank' => array(
+                        'Caption' => array('en' => 'New Tab', 'vn' => 'Tab mới'),
+                    ),
+                )
+            ),
             '_group_name' => array(
                 'Name' => '_group_name',
                 'Caption' => array('en' => 'Group Name', 'vn' => 'Tên nhóm'),
