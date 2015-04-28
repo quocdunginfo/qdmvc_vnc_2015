@@ -406,8 +406,33 @@ class Qdmvc_Page_Index {
             'Model' => 'QdPost',
             'DataPort' => 'post_port'
         ),
-        'widgetnav' => array(
+        'widgetnavcat' => array(
             'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_WidgetNavCat',
+            'Caption' => array(
+                'en' => 'Widget Nav Cat',
+                'vn' => 'Widget Nav Cat'
+            ),
+            'Model' => 'QdWidgetNavCat',
+            'DataPort' => 'postcat_port',
+            'PageList' => 'widgetnavcat_list'
+        ),
+        'widgetnavcat_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_WidgetNavCat_list',
+            'Caption' => array(
+                'en' => 'Widget Nav Cat List',
+                'vn' => 'Widget Nav Cat List'
+            ),
+            'Model' => 'QdWidgetNavCat',
+            'DataPort' => 'postcat_port',
+        ),
+        'widgetnav' => array(
+            'ParentId' => 'widgetnavcat',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_WidgetNav',

@@ -5,6 +5,7 @@ class QdPostCat extends QdRoot
     static $table_name = 'mpd_post_cat';
     public static $TYPE_BESTCHOICECAT = 100;
     public static $TYPE_POSTCAT = 0;
+    public static $TYPE_WIDGETNAV = 211;
 
     /*
     static $has_many = array(
@@ -69,6 +70,9 @@ class QdPostCat extends QdRoot
                     ),
                     static::$TYPE_BESTCHOICECAT => array(
                         'Caption' => array('en' => 'Best choice Cat', 'vn' => 'Best choice Cat'),
+                    ),
+                    static::$TYPE_WIDGETNAV => array(
+                        'Caption' => array('en' => 'WidgetNavs Cat', 'vn' => 'WidgetNavs Cat'),
                     ),
                 )
             )

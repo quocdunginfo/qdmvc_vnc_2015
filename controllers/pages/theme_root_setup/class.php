@@ -62,6 +62,11 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_Root {
                         'SourceExpr' => 'bottomleft_footer_note',
                         'DataType' => static::getDataType('bottomleft_footer_note')
                     ),
+                    'widgetnavcat_id' => array(
+                        'SourceExpr' => 'widgetnavcat_id',
+                        'DataType' => static::getDataType('widgetnavcat_id'),
+                        'LookupURL' => static::getLookupURL('widgetnavcat_id')
+                    ),
                 )
             )
             /* SAMPLE

@@ -7,10 +7,6 @@
  */
 Qdmvc::loadPage('root');
 class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
-    public function run()
-    {
-        parent::run();
-    }
     protected static function getViewClass()
     {
         return 'Qdmvc_View_WidgetNav';
@@ -46,7 +42,17 @@ class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
                     ),
                     'order' => array(
                         'SourceExpr' => 'order',
-                    )
+                    ),
+                    'group_id' => array(
+                        'SourceExpr' => 'group_id',
+                        'DataType' => static::getDataType('group_id'),
+                        'LookupURL' => static::getLookupURL('group_id')
+                    ),
+                    '_group_name' => array(
+                        'SourceExpr' => '_group_name',
+                        'DataType' => static::getDataType('_group_name'),
+                        'ReadOnly' => static::isReadOnly('_group_name')
+                    ),
                 )
             )
             /* SAMPLE

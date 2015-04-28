@@ -19,6 +19,32 @@ class QdTRootSetup extends QdRootSetup
             'bottomleft_footer_note' => array(
                 'DataType' => 'WYSIWYG',
             ),
+            'widgetnavcat_id' => array(
+                'Name' => 'widgetnavcat_id',
+                'Caption' => array('en' => 'Widget Nav Cat', 'vn' => 'Widget Nav Cat'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdWidgetNavCat',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        /*array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'type',
+                            'Type' => 'FIELD',
+                            'Value' => QdPostCat::$TYPE_WIDGETNAV
+                        )*/
+                    )
+                )
+            ),
         ));
     }
 
