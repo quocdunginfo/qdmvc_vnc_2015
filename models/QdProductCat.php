@@ -21,7 +21,7 @@ class QdProductCat extends QdRoot
 
     public static function getFieldsConfig()
     {
-        return array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             'name' => array(
                 'Caption' => array('vn' => 'Tên LSP'),
             ),
@@ -63,8 +63,7 @@ class QdProductCat extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProductCat',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*0 => array(
+                    'TableFilter' => array(/*0 => array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -101,6 +100,24 @@ class QdProductCat extends QdRoot
                 )
             )
         ));
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdProduct',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'product_cat_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                )
+            )
+        );
+
+        return $obj;
     }
 
     public function getProducts()

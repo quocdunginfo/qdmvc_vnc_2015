@@ -29,6 +29,23 @@ class QdManufactor extends QdProductCat
                 )
             )
         );
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdProduct',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'manufacturer_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                )
+            )
+        );
+
         return $obj;
     }
 }

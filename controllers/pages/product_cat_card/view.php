@@ -9,25 +9,5 @@
 Qdmvc::loadLayout('layout_cardnavigate');
 class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
 {
-    protected function formValidation()
-    {
-        ?>
-        <script>
-            (function ($) {
-                $(document).ready(function () {
-                    requestFormValidate(
-                        [
-                            {
-                                input: '#name',
-                                message: 'Name is required!',
-                                action: 'keyup, blur',
-                                rule: 'required'
-                            }
-                        ]
-                    );
-                });
-            })(jQuery);
-        </script>
-        <?php
-    }
+
 }
