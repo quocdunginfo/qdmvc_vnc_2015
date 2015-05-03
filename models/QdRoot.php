@@ -17,6 +17,10 @@ class QdRoot extends ActiveRecord\Model
         '__sys_image_url' => array(
             'FieldClass' => 'System'
         ),
+        '__sys_lines_url' => array(
+            'FieldClass' => 'System',
+            'TableRelation' => array()
+        ),
         '__lasteditor_name' => array(
             'Name' => '_lasteditor_name',
             'Caption' => array('en' => 'Last editor name', 'vn' => 'Sửa bởi'),
@@ -433,6 +437,50 @@ class QdRoot extends ActiveRecord\Model
         }
     }
 
+    /**
+     * This Fn require Qdmvc Index Tree loaded 1st to use Qdmvc_Page_Index
+     * @param $model
+     * @return int|string
+     */
+    protected static function getDefaultNavigatePage($model)
+    {
+        return Qdmvc_Page_Index::getDefaultNavigatePage($model);
+    }
+    public static function hasLines()
+    {
+        $cfg = static::getFieldsConfig();
+        if(isset($cfg['__sys_lines_url']['TableRelation']) && !empty($cfg['__sys_lines_url']['TableRelation']))
+        {
+            return true;
+        }
+        return false;
+    }
+    protected function getLinesURL($line_field='')
+    {
+        $tbrelation = static::getTableRelation($line_field);
+        if($tbrelation==null || empty($tbrelation))
+        {
+            return '';
+        }
+        $tbfilter = $tbrelation['TableFilter'];
+        $filter_arr = array();
+        $df_lk_page = static::getDefaultNavigatePage($tbrelation['Table']);
+        $getfield = $tbrelation['Field'];
+
+        foreach($tbfilter as $item)
+        {
+            if($item['Type']=='FIELD')
+            {
+                $filter_arr[$item['Field']] = $this->{$item['Value']};
+            }else if($item['Type']=='CONST')
+            {
+                $filter_arr[$item['Field']] = $item['Value'];
+            }
+        }
+
+        return Qdmvc_Helper::getCompactPageListLink($df_lk_page, $filter_arr);
+    }
+
     public static function getLookupFields()
     {
         if (static::$lookup_fields != null) {
@@ -516,7 +564,11 @@ class QdRoot extends ActiveRecord\Model
             }else if($field_name=='__sys_image_url')
             {
                 return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('image', array('model' => $class_name, 'model_id' => $this->id));
-            }else if($field_name=='__lasteditor_name')
+            }else if($field_name=='__sys_lines_url')
+            {
+                return $this->getLinesURL($field_name);
+            }
+            else if($field_name=='__lasteditor_name')
             {
                 if($this->lasteditor_id >0 )
                 {

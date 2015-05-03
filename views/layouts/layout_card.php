@@ -95,6 +95,7 @@ class Qdmvc_Layout_Card
                     $('#jqxlookupwin').jqxWindow('open');
                 })(jQuery);
             }
+
             function requestFormValidate(rules_) {
                 (function ($) {
                     //register validate
@@ -399,8 +400,9 @@ class Qdmvc_Layout_Card
                     });
                 })(jQuery);
             </script>
-            <button style="opacity: 0.8;" id="qdmsgclear" class="btn btn-info pull-right">MSG</button>
-            <!-- Single button -->
+            <button style="opacity: 0.8;" id="qdmsgclear" class="btn btn-info btn-xs pull-right">MSG</button>
+
+            <!-- Single button
             <div class="btn-group dropup pull-right">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false">
@@ -410,7 +412,7 @@ class Qdmvc_Layout_Card
                     <li><a href="#" id="tourPageCardNewRecord">New record ?</a></li>
                     <li class="divider"></li>
                 </ul>
-            </div>
+            </div> -->
             <div style="clear: both"></div>
         </div>
     <?php
@@ -662,8 +664,9 @@ class Qdmvc_Layout_Card
             (function ($) {
 
                 $(document).ready(function () {
-                    //add cardBar
-                    //$('#jqxNavigationBar').jqxNavigationBar('insert', 0, 'Card', 'Content');
+                    <?php if($this->page->hasLines()): ?>
+                    $("#qdlines").show();
+                    <?php endif; ?>
                 });
             })(jQuery);
         </script>
@@ -805,7 +808,6 @@ class Qdmvc_Layout_Card
                                 //To disable
                                 $("#qdnote").attr("disabled", "disabled");
                                 requestLookupWindow(getObj()['__sys_note_url']);
-                                //alert('Module is under constructing...');
 
                                 $("#qdnote").removeAttr("disabled");
                             });
@@ -813,9 +815,15 @@ class Qdmvc_Layout_Card
                                 //To disable
                                 $("#qdimage").attr("disabled", "disabled");
                                 requestLookupWindow(getObj()['__sys_image_url']);
-                                //alert('Module is under constructing...');
 
                                 $("#qdimage").removeAttr("disabled");
+                            });
+                            $("#qdlines").bind("click", function (event) {
+                                //To disable
+                                $("#qdlines").attr("disabled", "disabled");
+                                requestLookupWindow(getObj()['__sys_lines_url']);
+
+                                $("#qdlines").removeAttr("disabled");
                             });
 
 
@@ -896,6 +904,9 @@ class Qdmvc_Layout_Card
                             </span>
                             <span>
                                 <button class="qd-action-btn" type="button" id="qdimage">Images</button>
+                            </span>
+                            <span>
+                                <button class="qd-action-btn" type="button" id="qdlines" style="display: none">Lines</button>
                             </span>
                         </div>
                     </div>
@@ -1091,7 +1102,7 @@ class Qdmvc_Layout_Card
     {
         ?>
         <?= $this->style() ?>
-        <?= $this->helpTour() ?>
+        <?php //$this->helpTour() ?>
 
         <?= $this->formValidation() ?>
         <?= $this->progressSpinner() ?>

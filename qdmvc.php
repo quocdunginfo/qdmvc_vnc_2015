@@ -4,9 +4,11 @@ Plugin Name: qdmvc
 */
 
 //Because Helper is declared outside to public provider for other location use (theme)
+//Router and helper does not using Model so it could be loaded 1st
 Qdmvc::loadHelper('main');
-Qdmvc::loadModel();
 Qdmvc::loadRouter();
+//Model must load public to ensure other location usage
+Qdmvc::loadModel();
 class Qdmvc
 {
     private static $included_file = array(
@@ -28,8 +30,6 @@ class Qdmvc
 
     private static function init()
     {
-        //required Qdmvc root index tree
-        static::loadIndex('index');
         //require related library
         foreach (static::$included_file as $item) {
             static::load($item);
@@ -132,6 +132,11 @@ class Qdmvc
     }
     public static function loadModel()
     {
+        //Index must be loaded before Model
+        //Reason: QdRoot->getDefaultLookupPage
+        Qdmvc::loadIndex('index');//quocdunginfo, performance
+
+        //Phpactive record init
         $connection = QdPhpactiverecords::getCon();
         ActiveRecord\Config::initialize(function ($cfg) use ($connection) {
             $model_dir = Qdmvc::getModel();
