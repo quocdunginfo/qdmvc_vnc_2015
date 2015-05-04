@@ -96,7 +96,7 @@ class Qdmvc_Layout_List
     {
         ?>
         <script>
-            function gridGetSelectedRow(){//not work
+            function gridGetSelectedRow() {//not work
                 (function ($) {
                     var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
                     if (getselectedrowindexes.length > 0) {
@@ -108,45 +108,35 @@ class Qdmvc_Layout_List
                 })(jQuery);
             }
         </script>
-        <?php
+    <?php
     }
+
     protected function lookupToolbar()
     {
         ?>
         <!-- Lookup toolbar -->
-        <div>
-            <button id="qdchoose" type="button">Choose</button>
+        <span>
+            <span>
+                <button id="qdchoose" type="button">Choose</button> --
+            </span>
 
             <script type="text/javascript">
                 (function ($) {
                     $(document).ready(function () {
-                        /*
-                         $('#qdaddline').click(function () {
-                         $('#jqxgrid').jqxGrid('addrow', null, {});
-
-                         //updateGrid();//quocdunginfo
-                         });
-                         $('#deleteline').click(function () {
-                         //$('#jqxgrid').jqxGrid('addrow', null, {});
-                         //updateGrid();//quocdunginfo
-                         });
-                         */
 
                         $('#qdchoose').click(function () {
 
                             //$('#jqxgrid').jqxGrid('addrow', null, {});
 
                             var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                            if (getselectedrowindexes.length > 0)
-                            {
+                            if (getselectedrowindexes.length > 0) {
                                 // returns the selected row's data.
 
                                 var row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
                                 try {
                                     parent.setLookupResult(row.<?=$this->data['getfield']?>, "<?=$this->data['returnid']?>");
 
-                                }catch(error)
-                                {
+                                } catch (error) {
                                     console.log(error);
                                 }
                             }
@@ -154,14 +144,62 @@ class Qdmvc_Layout_List
                     });
                 })(jQuery);
             </script>
-        </div>
+        </span>
 
-        <?php
+    <?php
     }
+    protected function generalToolbar()
+    {
+        ?>
+        <!-- General toolbar -->
+        <span>
+            <span>
+                <button id="qdshowall" type="button">Show All</button>
+            </span>
+            <span>
+                <button id="qdreload" type="button">Reload</button>
+            </span>
+            <span>
+                <button id="qdprint" type="button">Print</button>
+            </span>
+
+            <script type="text/javascript">
+                (function ($) {
+                    $(document).ready(function () {
+
+                       $("#qdprint").click(function () {
+                            var gridContent = $("#jqxgrid").jqxGrid('exportdata', 'html');
+                            var newWindow = window.open('', '', 'width=800, height=500'),
+                                document = newWindow.document.open(),
+                                pageContent =
+                                    '<!DOCTYPE html>\n' +
+                                    '<html>\n' +
+                                    '<head>\n' +
+                                    '<meta charset="utf-8" />\n' +
+                                    '<title>jQWidgets Grid</title>\n' +
+                                    '</head>\n' +
+                                    '<body>\n' + gridContent + '\n</body>\n</html>';
+                            document.write(pageContent);
+                            document.close();
+                            newWindow.print();
+                        });
+                        $("#qdreload").click(function () {
+                            updateGrid();
+                        });
+                        $("#qdshowall").click(function () {
+                            $("#jqxgrid").jqxGrid({pagesize: 999999});
+                        });
+                    });
+                })(jQuery);
+            </script>
+        </span>
+
+    <?php
+    }
+
     public function render()
     {
-        if($this->data['view_style']=='compact')
-        {
+        if ($this->data['view_style'] == 'compact') {
             Qdmvc_Helper::requestCompact();
         }
         ?>
@@ -201,20 +239,24 @@ class Qdmvc_Layout_List
                             showgroupsheader: true,
                             groupable: true,
                             virtualmode: true,
-                            pagesize: 10,
+                            pagesize: 20,
+                            pagesizeoptions: ['5', '10', '20', '50', '100', '999999'],
                             /*Enable Inline Editing*/
                             /*editable: true,
-                            editmode: "dblclick",*/
+                             editmode: "dblclick",*/
                             columnsresize: true,
                             //scrollmode: 'deferred',
                             rendergridrows: function () {
                                 return dataadapter.records;
                             },
-                            columns: dataGridDefine
+                            columns: dataGridDefine,
                             /*
                              columns: [
                              { text: 'Ship Name', datafield: 'parent_id', columntype: 'combobox' }
                              ]*/
+                            ready: function () {
+
+                            }
                         });
 
                     //event
@@ -239,8 +281,7 @@ class Qdmvc_Layout_List
                                 echo 'parent.setObj(args.row, true);';
                             }
                             ?>
-                        }catch(error)
-                        {
+                        } catch (error) {
                             console.log(error);
                         }
                     });
@@ -257,20 +298,20 @@ class Qdmvc_Layout_List
                         try {
                             //auto select first row
                             /*
-                            var index = $('#jqxgrid').jqxGrid('getrowboundindex', 0);
-                            $('#jqxgrid').jqxGrid('selectrow', index);
-                            */
+                             var index = $('#jqxgrid').jqxGrid('getrowboundindex', 0);
+                             $('#jqxgrid').jqxGrid('selectrow', index);
+                             */
                             /*
-                            var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                            if (getselectedrowindexes.length > 0)
-                            {
-                                // returns the selected row's data.
+                             var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
+                             if (getselectedrowindexes.length > 0)
+                             {
+                             // returns the selected row's data.
 
-                                var selectedRowData = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
-                                console.log(selectedRowData);
+                             var selectedRowData = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
+                             console.log(selectedRowData);
 
-                            }
-                            */
+                             }
+                             */
                             //select 1st row on screen
                             var visiblerows = $("#jqxgrid").jqxGrid('getloadedrows');
                             $("#jqxgrid").jqxGrid('selectrow', visiblerows[0].boundindex);
@@ -283,14 +324,13 @@ class Qdmvc_Layout_List
             })(jQuery);
         </script>
 
+        <?php
+        if ($this->data['role'] == 'lookup') {
+            $this->lookupToolbar();
+        }
+        ?>
+        <?=$this->generalToolbar()?>
         <div id='jqxWidget'>
-            <?php
-            if($this->data['role']=='lookup')
-            {
-                $this->lookupToolbar();
-            }
-            ?>
-
             <div id="jqxgrid"></div>
         </div>
     <?php

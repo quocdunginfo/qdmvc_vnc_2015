@@ -583,6 +583,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdManufactor',
             'DataPort' => 'manufactor_port',
         ),
+        'object_task' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ObjectTask',
+            'Caption' => array(
+                'en' => 'ObjectTask',
+                'vn' => 'ObjectTask'
+            ),
+            'Model' => 'QdObjectTask',
+            'DataPort' => 'object_task_port',
+            'PageList' => 'object_task_list'
+        ),
+        'object_task_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ObjectTask_list',
+            'Caption' => array(
+                'en' => 'ObjectTask List',
+                'vn' => 'ObjectTask List'
+            ),
+            'Model' => 'QdObjectTask',
+            'DataPort' => 'object_task_port',
+        ),
         'navigation' => array(
             'ParentId' => '',
             'Active'=>false,
