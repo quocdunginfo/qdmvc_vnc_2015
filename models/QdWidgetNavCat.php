@@ -37,6 +37,22 @@ class QdWidgetNavCat extends QdPostCat
                 )*/
             )
         );
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdWidgetNav',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'group_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                )
+            )
+        );
         return $obj;
     }
 }

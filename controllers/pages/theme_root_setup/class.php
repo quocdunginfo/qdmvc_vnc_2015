@@ -67,6 +67,11 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_Root {
                         'DataType' => static::getDataType('widgetnavcat_id'),
                         'LookupURL' => static::getLookupURL('widgetnavcat_id')
                     ),
+                    'social_icon' => array(
+                        'SourceExpr' => 'social_icon',
+                        'DataType' => static::getDataType('social_icon'),
+                        'LookupURL' => static::getLookupURL('social_icon')
+                    ),
                 )
             )
             /* SAMPLE

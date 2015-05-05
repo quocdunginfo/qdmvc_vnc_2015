@@ -393,7 +393,7 @@ class Qdmvc_Page_IndexMenu {
                 'vn' => 'Widget Nav Cat'
             ),
             'Model' => 'QdWidgetNavCat',
-            'DataPort' => 'postcat_port',
+            'DataPort' => 'widgetnavcat_port',
             'PageList' => 'widgetnavcat_list'
         ),
         'widgetnavcat_list' => array(
@@ -406,7 +406,7 @@ class Qdmvc_Page_IndexMenu {
                 'vn' => 'Widget Nav Cat List'
             ),
             'Model' => 'QdWidgetNavCat',
-            'DataPort' => 'postcat_port',
+            'DataPort' => 'widgetnavcat_port',
         ),
         'widgetnav' => array(
             'ParentId' => 'widgetnavcat',

@@ -18,6 +18,18 @@ class QdProductCat extends QdRoot
         $obj->type = static::$TYPE_PRODUCTCAT;
         return $obj;
     }
+    public function getProducts2()
+    {
+        $record = new QdProBigSale();
+        $record->SETRANGE('group_id', $this->id, true);
+
+        $re = array();
+        foreach($record->GETLIST() as $item)
+        {
+            array_push($re, QdProduct::GET($item->product_id));
+        }
+        return $re;
+    }
 
     public static function getFieldsConfig()
     {
@@ -29,6 +41,9 @@ class QdProductCat extends QdRoot
                 'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
                 'DataType' => 'Image',
                 'Description' => 'Hình đại diện'
+            ),
+            'active' => array(
+                'DataType' => 'Boolean',
             ),
             'order' => array(
                 'Caption' => array('vn' => 'Thứ tự'),

@@ -45,6 +45,32 @@ class QdTRootSetup extends QdRootSetup
                     )
                 )
             ),
+            'social_icon' => array(
+                'Name' => 'social_icon',
+                'Caption' => array('en' => 'Social Icon', 'vn' => 'Social Icon'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdWidgetNavCat',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        /*array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'type',
+                            'Type' => 'FIELD',
+                            'Value' => QdPostCat::$TYPE_WIDGETNAV
+                        )*/
+                    )
+                )
+            ),
         ));
     }
 

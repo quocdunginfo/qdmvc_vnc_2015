@@ -49,6 +49,10 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
                     ),
                     'order' => array(
                         'SourceExpr' => 'order'
+                    ),
+                    'active' => array(
+                        'SourceExpr' => 'active',
+                        'DataType' => static::getDataType('active')
                     )
                 )
             ),

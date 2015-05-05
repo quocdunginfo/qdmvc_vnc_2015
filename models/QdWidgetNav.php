@@ -3,6 +3,8 @@
 class QdWidgetNav extends QdRoot
 {
     static $table_name = 'mpd_widgetnav';
+    public static $TARGET_BLANK = '_blank';
+    public static $TARGET_SELF = '_self';
 
     public static function getFieldsConfig()
     {
@@ -16,10 +18,10 @@ class QdWidgetNav extends QdRoot
                 'Caption' => array('en' => 'Target', 'vn' => 'Target'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    '_self' => array(
+                    static::$TARGET_SELF => array(
                         'Caption' => array('en' => 'Default', 'vn' => 'Mặc định'),
                     ),
-                    '_blank' => array(
+                    static::$TARGET_BLANK => array(
                         'Caption' => array('en' => 'New Tab', 'vn' => 'Tab mới'),
                     ),
                 )
@@ -41,6 +43,11 @@ class QdWidgetNav extends QdRoot
                         )
                     )
                 )
+            ),
+            'avatar' => array(
+                'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
+                'DataType' => 'Image',
+                'Description' => 'Hình đại diện',
             ),
             'group_id' => array(
                 'Name' => 'post_cat_id',
@@ -74,6 +81,7 @@ class QdWidgetNav extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdWidgetNav();
+        $obj->target = static::$TARGET_BLANK;
         return $obj;
     }
 }

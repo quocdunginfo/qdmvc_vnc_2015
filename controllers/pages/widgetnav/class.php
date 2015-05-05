@@ -57,6 +57,10 @@ class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
                         'SourceExpr' => 'target',
                         'DataType' => static::getDataType('target'),
                     ),
+                    'avatar' => array(
+                        'SourceExpr' => 'avatar',
+                        'DataType' => static::getDataType('avatar'),
+                    ),
                 )
             )
             /* SAMPLE
