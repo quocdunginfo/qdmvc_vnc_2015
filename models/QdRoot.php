@@ -141,10 +141,13 @@ class QdRoot extends ActiveRecord\Model
 
     public static function GET($id = 1)
     {
-        if (static::exists($id)) {
-            return static::find($id);
+        try {
+            if (static::exists($id)) {
+                return static::find($id);
+            }
+        } catch (Exception $ex) {
+            return null;
         }
-        return null;
     }
 
     /**
@@ -189,11 +192,10 @@ class QdRoot extends ActiveRecord\Model
         return $this->SETFILTER($filter);
     }
 
-    public function delete($location='')
+    public function delete($location = '')
     {
         $class_name = $this->getCalledClassName();
-        if($class_name!='QdLog')
-        {
+        if ($class_name != 'QdLog') {
             $location .= "|{$class_name}|delete";
             $action = QdLog::$ACTION_DELETE;
             //write log
@@ -267,12 +269,12 @@ class QdRoot extends ActiveRecord\Model
      */
     protected static function ISPK($field)
     {
-        if(strtolower($field)==strtolower(static::$primary_key))
-        {
+        if (strtolower($field) == strtolower(static::$primary_key)) {
             return true;
         }
         return false;
     }
+
     public function getImages()
     {
         $record = new QdImage();
@@ -280,13 +282,12 @@ class QdRoot extends ActiveRecord\Model
         $record->SETRANGE('model_id', $this->id);
         return $record;
     }
+
     public function SETRANGE($field, $value, $exact = true)
     {
         //ignore filter on FLOWFIELD
-        if(!static::ISFLOWFIELD($field))
-        {
-            if(static::ISPK($field))
-            {
+        if (!static::ISFLOWFIELD($field)) {
+            if (static::ISPK($field)) {
                 $exact = true;//force filter exact on PK field
             }
             $this->record_filter['filter'][$field]['value'] = $value;
@@ -351,7 +352,7 @@ class QdRoot extends ActiveRecord\Model
             }
             //cache
             $tmp = $c->GETLIST();
-			$this->qd_cached_attr[$flowfield_name] = $tmp[0]->{$ff_config['Field']};
+            $this->qd_cached_attr[$flowfield_name] = $tmp[0]->{$ff_config['Field']};
             //return
             return $this->qd_cached_attr[$flowfield_name];
         }
@@ -446,20 +447,20 @@ class QdRoot extends ActiveRecord\Model
     {
         return Qdmvc_Page_Index::getDefaultNavigatePage($model);
     }
+
     public static function hasLines()
     {
         $cfg = static::getFieldsConfig();
-        if(isset($cfg['__sys_lines_url']['TableRelation']) && !empty($cfg['__sys_lines_url']['TableRelation']))
-        {
+        if (isset($cfg['__sys_lines_url']['TableRelation']) && !empty($cfg['__sys_lines_url']['TableRelation'])) {
             return true;
         }
         return false;
     }
-    protected function getLinesURL($line_field='')
+
+    protected function getLinesURL($line_field = '')
     {
         $tbrelation = static::getTableRelation($line_field);
-        if($tbrelation==null || empty($tbrelation))
-        {
+        if ($tbrelation == null || empty($tbrelation)) {
             return '';
         }
         $tbfilter = $tbrelation['TableFilter'];
@@ -467,13 +468,10 @@ class QdRoot extends ActiveRecord\Model
         $df_lk_page = static::getDefaultNavigatePage($tbrelation['Table']);
         $getfield = $tbrelation['Field'];
 
-        foreach($tbfilter as $item)
-        {
-            if($item['Type']=='FIELD')
-            {
+        foreach ($tbfilter as $item) {
+            if ($item['Type'] == 'FIELD') {
                 $filter_arr[$item['Field']] = $this->{$item['Value']};
-            }else if($item['Type']=='CONST')
-            {
+            } else if ($item['Type'] == 'CONST') {
                 $filter_arr[$item['Field']] = $item['Value'];
             }
         }
@@ -536,7 +534,8 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
-    public static function ISSYSTEMFIELD($field_name='')
+
+    public static function ISSYSTEMFIELD($field_name = '')
     {
         try {
             $config = static::getFieldsConfig();
@@ -545,6 +544,7 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
+
     public function __get($field_name)
     {
         //check cached value
@@ -555,31 +555,23 @@ class QdRoot extends ActiveRecord\Model
         if (static::ISFLOWFIELD($field_name)) {
             //CALC FlowField First
             return $this->CALCFIELDS($field_name);
-        }else if (static::ISSYSTEMFIELD($field_name)) {
+        } else if (static::ISSYSTEMFIELD($field_name)) {
             $class_name = $this->getCalledClassName();
             //system preserved field
-            if($field_name=='__sys_note_url')
-            {
+            if ($field_name == '__sys_note_url') {
                 return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('note', array('model' => $class_name, 'model_id' => $this->id));
-            }else if($field_name=='__sys_image_url')
-            {
+            } else if ($field_name == '__sys_image_url') {
                 return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('image', array('model' => $class_name, 'model_id' => $this->id));
-            }else if($field_name=='__sys_lines_url')
-            {
+            } else if ($field_name == '__sys_lines_url') {
                 return $this->getLinesURL($field_name);
-            }
-            else if($field_name=='__lasteditor_name')
-            {
-                if($this->lasteditor_id >0 )
-                {
+            } else if ($field_name == '__lasteditor_name') {
+                if ($this->lasteditor_id > 0) {
                     $user_info = get_userdata($this->lasteditor_id);
                     return $this->qd_cached_attr[$field_name] = $user_info->user_login;
                 }
                 return Qdmvc_Helper::getNoneText();
-            }else if($field_name=='__owner_name')
-            {
-                if($this->owner_id > 0)
-                {
+            } else if ($field_name == '__owner_name') {
+                if ($this->owner_id > 0) {
                     $user_info = get_userdata($this->owner_id);
                     return $this->qd_cached_attr[$field_name] = $user_info->user_login;
                 }
@@ -588,10 +580,12 @@ class QdRoot extends ActiveRecord\Model
         }
         return parent::__get($field_name);
     }
+
     public function getCalledClassName()
     {
         return get_called_class();
     }
+
     public function getClassName()
     {
         return get_class($this);
@@ -613,14 +607,13 @@ class QdRoot extends ActiveRecord\Model
     public function __set($name, $value)
     {
         //prevent set ERROR on 2 special type
-        if(static::ISFLOWFIELD($name) || static::ISSYSTEMFIELD($name))
-        {
+        if (static::ISFLOWFIELD($name) || static::ISSYSTEMFIELD($name)) {
             return $value;
         }
         return parent::__set($name, $value);
     }
 
-    public function save($validate = true, $location='')
+    public function save($validate = true, $location = '')
     {
         //replace all \" to ", to prevent " loopback when saving
         $config = static::getFieldsConfig();
@@ -632,12 +625,11 @@ class QdRoot extends ActiveRecord\Model
         }
         //do validate and save
         if ($this->VALIDATE()) {
-            $action = $this->is_new_record()?QdLog::$ACTION_INSERT:QdLog::$ACTION_MODIFY;
+            $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
             $re = parent::save($validate);
             $class_name = $this->getCalledClassName();
             $location .= "|{$class_name}|save";
-            if($re && $class_name!='QdLog')
-            {
+            if ($re && $class_name != 'QdLog') {
                 //write log
                 $this->writeLog($action, $location);//quocdunginfo
             }
@@ -646,7 +638,8 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
-    protected function writeLog($action=0, $location='')
+
+    protected function writeLog($action = 0, $location = '')
     {
         $location .= '|writeLog';
         $obj = QdLog::getInitObj($this->getCalledClassName(), $this->id, $action, $location);
