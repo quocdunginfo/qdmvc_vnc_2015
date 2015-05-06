@@ -37,6 +37,32 @@ class QdBestChoiceCat extends QdPostCat
                 )*/
             )
         );
+
+        //do not use parent existing-config
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdBestChoiceItem',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'post_cat_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                )
+            )
+        );
         return $obj;
+    }
+    public function getBestChoiceItems()
+    {
+        $record = new QdBestChoiceItem();
+        $record->SETFILTERDEFAULT(array(
+            'post_cat_id' => array('value' => $this->id, 'exact' => true)
+        ));
+        return $record;
     }
 }

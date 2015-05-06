@@ -234,7 +234,7 @@ class Qdmvc_Page_IndexMenu {
             'DataPort' => 'note_port'
         ),
         'image' => array(
-            'ParentId' => -1,
+            'ParentId' => 'imggrp',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Image',
@@ -607,6 +607,31 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdObjectTask',
             'DataPort' => 'object_task_port',
+        ),
+        'imggrp' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ImgGrp',
+            'Caption' => array(
+                'en' => 'Img Group',
+                'vn' => 'Img Group',
+            ),
+            'Model' => 'QdImgGrp',
+            'DataPort' => 'imggrp_port',
+            'PageList' => 'imggrp_list'
+        ),
+        'imggrp_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ImgGrp_list',
+            'Caption' => array(
+                'en' => 'Img Group List',
+                'vn' => 'Img Group List',
+            ),
+            'Model' => 'QdImgGrp',
+            'DataPort' => 'imggrp_port',
         ),
         'navigation' => array(
             'ParentId' => '',

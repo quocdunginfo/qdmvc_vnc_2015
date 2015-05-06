@@ -6,6 +6,7 @@ class QdPostCat extends QdRoot
     public static $TYPE_BESTCHOICECAT = 100;
     public static $TYPE_POSTCAT = 0;
     public static $TYPE_WIDGETNAV = 211;
+    public static $TYPE_IMGGRP = 50;
 
     /*
     static $has_many = array(
@@ -20,7 +21,7 @@ class QdPostCat extends QdRoot
 
     public static function getFieldsConfig()
     {
-        return array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             'title' => array(
                 'Caption' => array('en' => 'Title', 'vn' => 'Tiêu đề'),
             ),
@@ -74,9 +75,30 @@ class QdPostCat extends QdRoot
                     static::$TYPE_WIDGETNAV => array(
                         'Caption' => array('en' => 'WidgetNavs Cat', 'vn' => 'WidgetNavs Cat'),
                     ),
+                    static::$TYPE_IMGGRP => array(
+                        'Caption' => array('en' => 'Img group', 'vn' => 'Img Group'),
+                    ),
                 )
             )
         ));
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdPost',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'post_cat_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                )
+            )
+        );
+
+        return $obj;
     }
 
     protected function orderOnValidate($field_name)
@@ -98,26 +120,4 @@ class QdPostCat extends QdRoot
             }
         }
     }
-
-    /*public function delete($location = '')
-    {
-        //Xóa hết Product
-        $class = $this->getCalledClassName();
-        $re = true;
-        $location .= "|{$class}|delete";
-        $objs = $this->getProducts();
-        $objs = $objs->GETLIST();
-
-        foreach ($objs as $item) {
-            if (!$item->delete($location)) {
-                $re = $re && false;
-            }
-        }
-
-        if ($re) {
-            return parent::delete('');
-        }
-        return false;
-    }*/
-
 }

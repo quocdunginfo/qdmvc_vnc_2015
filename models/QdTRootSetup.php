@@ -19,6 +19,9 @@ class QdTRootSetup extends QdRootSetup
             'bottomleft_footer_note' => array(
                 'DataType' => 'WYSIWYG',
             ),
+            'vnc_logo' => array(
+                'DataType' => 'Image',
+            ),
             'widgetnavcat_id' => array(
                 'Name' => 'widgetnavcat_id',
                 'Caption' => array('en' => 'Widget Nav Cat', 'vn' => 'Widget Nav Cat'),
@@ -30,6 +33,32 @@ class QdTRootSetup extends QdRootSetup
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
                     'Table' => 'QdWidgetNavCat',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        /*array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'type',
+                            'Type' => 'FIELD',
+                            'Value' => QdPostCat::$TYPE_WIDGETNAV
+                        )*/
+                    )
+                )
+            ),
+            'img_slider' => array(
+                'Name' => 'img_slider',
+                'Caption' => array('en' => 'Banner', 'vn' => 'Banner'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdImgGrp',
                     'Field' => 'id',
                     'TableFilter' => array(
                         /*array(
