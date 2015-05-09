@@ -18,7 +18,7 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                     'Fields' => array(
                         'id' => array(
                             'SourceExpr' => 'id',
-                            'PrimaryKey' => true
+                            'ReadOnly' => true
                         ),
                         'name' => array(
                             'SourceExpr' => 'name'
@@ -38,6 +38,10 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                         'manufacturer_id' => array(
                             'SourceExpr' => 'manufacturer_id',
                             'LookupURL' => static::getLookupURL('manufacturer_id')
+                        ),
+                        'size_id' => array(
+	                        'SourceExpr' => 'size_id',
+	                        'LookupURL' => static::getLookupURL('size_id')
                         ),
                         '_manufacturer_name' => array(
                             'SourceExpr' => '_manufacturer_name',

@@ -633,6 +633,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdImgGrp',
             'DataPort' => 'imggrp_port',
         ),
+        'size' => array(
+	        'ParentId' => 'product_cat_card',
+	        'Active'=>true,
+	        'PageType' => 'Card',
+	        'Class'=>'Qdmvc_Page_Size',
+	        'Caption' => array(
+		        'en' => 'Size',
+		        'vn' => 'Size'
+	        ),
+	        'Model' => 'QdSize',
+	        'DataPort' => 'size_port',
+	        'PageList' => 'size_list'
+        ),
+        'size_list' => array(
+	        'ParentId' => -1,
+	        'Active'=>false,
+	        'PageType' => 'List',
+	        'Class'=>'Qdmvc_Page_Size_list',
+	        'Caption' => array(
+		        'en' => 'Size List',
+		        'vn' => 'Size List'
+	        ),
+	        'Model' => 'QdSize',
+	        'DataPort' => 'size_port'
+        ),
         'navigation' => array(
             'ParentId' => '',
             'Active'=>false,

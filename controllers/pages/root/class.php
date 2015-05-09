@@ -68,6 +68,7 @@ class Qdmvc_Page_Root
             'id' => array(
                 'SourceExpr' => 'id',
                 'PrimaryKey' => true,
+	            'ReadOnly' => true,
                 'Width' => 70
             )
         );

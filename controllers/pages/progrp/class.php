@@ -30,6 +30,7 @@ class Qdmvc_Page_ProGrp_Card extends Qdmvc_Page_Root
                         ),
                         'group_id' => array(
                             'SourceExpr' => 'group_id',
+                            'LookupURL' => static::getLookupURL('group_id')
                         ),
                         '_group_name' => array(
                             'SourceExpr' => '_group_name',

@@ -70,6 +70,32 @@ class QdProduct extends QdRoot
                     )
                 )
             ),
+            'size_id' => array(
+	            'Name' => 'size_id',
+	            'Caption' => array('en' => 'Size ID', 'vn' => 'Mã Size'),
+	            'DataType' => 'Code',
+	            'Numeric' => true,
+	            'Description' => '',
+	            'Editable' => true,
+	            'InitValue' => '0',
+	            'FieldClass' => 'Normal',//'FlowField'
+	            'TableRelation' => array(
+		            'Table' => 'QdSize',
+		            'Field' => 'id',
+		            'TableFilter' => array(
+			            /*array(
+				'Condition' => array(
+					'Field' => '',
+					'Type' => 'CONST',//'FIELD'
+					'Value' => ''
+				),
+				'Field' => 'order',
+				'Type' => 'FIELD',
+				'Value' => 10
+			)*/
+		            )
+	            )
+            ),
             'manufacturer_id' => array(
                 'Name' => 'manufacturer_id',
                 'Caption' => array('en' => 'Manufactor ID', 'vn' => 'Mã Hãng SX'),

@@ -208,6 +208,37 @@ class QdProductCat extends QdRoot
             $this->pushValidateError($field_name, 'Tự động gán Avatar mặc định cho Product Cat', 'info');
         }
     }
+    public function getDeepLevel()
+    {
+        if($this->parent_id<=0)
+        {
+            return 0;
+        }else {
+            $p_obj = static::GET($this->parent_id);
+            if ($p_obj != null) {
+                return $p_obj->getDeepLevel() + 1;
+            }else
+            {
+                return 0;
+            }
+        }
+    }
+    public static function genObjectsToArray($list)
+    {
+        $re = array();
+        foreach($list as $item)
+        {
+            array_push($re, array(
+                'id' => $item->id,
+                'title' => $item->name,
+                'url' => 'http://google.com',
+                'active' => true,
+                'deep' => $item->getDeepLevel(),
+                'parent_id' => $item->parent_id
+            ));
+        }
+        return $re;
+    }
 
     /*public function delete($location = '')
     {
