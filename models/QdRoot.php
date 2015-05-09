@@ -10,7 +10,9 @@ class QdRoot extends ActiveRecord\Model
 {
     protected static $fields_config = array(
         //SAMPLE FIELD CONFIG
-        'id' => array(),
+        'id' => array(
+
+        ),
         '__sys_note_url' => array(
             'FieldClass' => 'System'
         ),
@@ -178,7 +180,7 @@ class QdRoot extends ActiveRecord\Model
     protected $record_filter = array(
         'filter_default' => array(),//array('field' => array('value' => 'value_filter', 'exact' => true));
         'filter' => array(),//array('field' => array('value' => 'value_filter', 'exact' => true));
-        'limit' => 10,
+        'limit' => -1,
         'offset' => 0,
         'order' => array('field' => 'id', 'direction' => 'asc'),//true: asc, false: desc
         //Since 01032015
