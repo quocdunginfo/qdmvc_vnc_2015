@@ -178,8 +178,8 @@ class QdRoot extends ActiveRecord\Model
     }
 
     protected $record_filter = array(
-        'filter_default' => array(),//array('field' => array('value' => 'value_filter', 'exact' => true));
-        'filter' => array(),//array('field' => array('value' => 'value_filter', 'exact' => true));
+        'filter_default' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'exact' => true, 'operator' => '='));
+        'filter' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'exact' => true, 'operator' => '='));
         'limit' => -1,
         'offset' => 0,
         'order' => array('field' => 'id', 'direction' => 'asc'),//true: asc, false: desc
@@ -285,15 +285,20 @@ class QdRoot extends ActiveRecord\Model
         return $record;
     }
 
-    public function SETRANGE($field, $value, $exact = true)
+    public function SETRANGE($field, $value, $exact = true, $operator = '=')
     {
         //ignore filter on FLOWFIELD
         if (!static::ISFLOWFIELD($field)) {
             if (static::ISPK($field)) {
                 $exact = true;//force filter exact on PK field
             }
-            $this->record_filter['filter'][$field]['value'] = $value;
-            $this->record_filter['filter'][$field]['exact'] = $exact;
+            $tmp = array();
+            $tmp['value'] = $value;
+            $tmp['exact'] = $exact;
+            $tmp['operator'] = $operator;
+            $tmp['field'] = $field;
+
+            array_push($this->record_filter['filter'], $tmp);
         }
         return $this;
     }
@@ -333,7 +338,16 @@ class QdRoot extends ActiveRecord\Model
      */
     public function REMOVERANGE($field)
     {
-        unset($this->record_filter['filter'][static::getPF($field)]);
+        $re = array();
+        foreach($this->record_filter['filter'] as $config)
+        {
+            if($config['field']!=$field)
+            {
+                array_push($re, $config);
+            }
+        }
+        //unset($this->record_filter['filter'][static::getPF($field)]);
+        $this->record_filter = $re;
         return $this;
     }
 
@@ -386,9 +400,12 @@ class QdRoot extends ActiveRecord\Model
     {
         if (is_array($record['filter']) && count($record['filter']) > 0) {
             $where = '';
-            foreach ($record['filter'] as $key => $config) {
-                if ($config['exact'] == true) {
-                    $where .= "`{$key}` = '{$config['value']}' " . $record['filter_relation'] . " ";//quocdunginfo
+            foreach ($record['filter'] as $config) {
+                $key = $config['field'];
+                $operator = isset($config['operator'])?$config['operator']:'=';
+                $exact = isset($config['exact'])?$config['exact']:true;
+                if ($exact == true) {
+                    $where .= "`{$key}` {$operator} '{$config['value']}' " . $record['filter_relation'] . " ";//quocdunginfo
                 } else {
                     $where .= "`{$key}` LIKE '%{$config['value']}%' " . $record['filter_relation'] . " ";//quocdunginfo
                 }
