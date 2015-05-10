@@ -138,7 +138,7 @@ class QdProductCat extends QdRoot
     public function getProducts()
     {
         $obj = new QdProduct();
-        $obj->SETFILTERDEFAULT(array('product_cat_id' => array('value' => $this->id, 'exact' => true)));
+        $obj->SETFILTERDEFAULT(array(array('field' => 'product_cat_id','value' => $this->id, 'exact' => true, 'operator' => '=')));
         return $obj;
     }
 

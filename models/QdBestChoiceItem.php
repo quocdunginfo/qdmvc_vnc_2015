@@ -6,7 +6,7 @@ class QdBestChoiceItem extends QdPost
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            'type' => array('value' => static::$TYPE_BESTCHOICEITEM, 'exact' => true)
+            array('field' => 'type', 'value' => static::$TYPE_BESTCHOICEITEM, 'exact' => true, 'operator' => '=')
         ));
     }
 

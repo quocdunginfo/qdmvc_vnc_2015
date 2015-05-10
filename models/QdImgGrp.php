@@ -6,7 +6,7 @@ class QdImgGrp extends QdPostCat
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            'type' => array('value' => static::$TYPE_IMGGRP, 'exact' => true)
+            array('field' => 'type', 'value' => static::$TYPE_IMGGRP, 'exact' => true, 'operator' => '=')
         ));
     }
 
@@ -27,8 +27,8 @@ class QdImgGrp extends QdPostCat
     {
         $record = new QdImage();
         $record->SETFILTERDEFAULT(array(
-            'model' => array('value' => $this->getCalledClassName(), 'exact' => true),
-            'model_id' => array('value' => $this->id, 'exact' => true),
+            array('field' => 'model', 'value' => $this->getCalledClassName(), 'exact' => true, 'operator' => '='),
+            array('field' => 'model_id','value' => $this->id, 'exact' => true, 'operator' => '='),
         ));
         return $record;
     }

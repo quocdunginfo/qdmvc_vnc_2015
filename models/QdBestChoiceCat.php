@@ -6,7 +6,7 @@ class QdBestChoiceCat extends QdPostCat
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            'type' => array('value' => static::$TYPE_BESTCHOICECAT, 'exact' => true)
+            array('field' => 'type', 'value' => static::$TYPE_BESTCHOICECAT, 'exact' => true, 'operator' => '=')
         ));
     }
 
@@ -61,7 +61,7 @@ class QdBestChoiceCat extends QdPostCat
     {
         $record = new QdBestChoiceItem();
         $record->SETFILTERDEFAULT(array(
-            'post_cat_id' => array('value' => $this->id, 'exact' => true)
+            array('field' => 'post_cat_id', 'value' => $this->id, 'exact' => true, 'operator' => '=')
         ));
         return $record;
     }

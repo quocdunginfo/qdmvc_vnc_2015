@@ -6,7 +6,7 @@ class QdProBigSale extends QdProGrp
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            'group_type' => array('value' => QdProductCat::$TYPE_BIGSALE, 'exact' => true)
+            array('field' => 'group_type', 'value' => QdProductCat::$TYPE_BIGSALE, 'exact' => true, 'operator' => '=')
         ));
     }
 
