@@ -347,7 +347,7 @@ class QdRoot extends ActiveRecord\Model
             }
         }
         //unset($this->record_filter['filter'][static::getPF($field)]);
-        $this->record_filter = $re;
+        $this->record_filter['filter'] = $re;
         return $this;
     }
 
