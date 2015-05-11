@@ -145,6 +145,19 @@ class QdProduct extends QdRoot
                 'Caption' => array('vn' => 'Mô tả'),
                 'DataType' => 'WYSIWYG',
             ),
+            'doitra_baohanh' => array(
+                'Caption' => array('vn' => 'Đổi trả/Bảo hành'),
+                'DataType' => 'WYSIWYG',
+            ),
+            'giaohang_thanhtoan' => array(
+                'Caption' => array('vn' => 'Giao hàng/Thanh toán'),
+                'DataType' => 'WYSIWYG',
+            ),
+            'temp_out_of_stock' => array(
+                'Caption' => array('vn' => 'Tạm hết hàng'),
+                'DataType' => 'Boolean',
+                'InitValue' => false,
+            ),
         ));
     }
 
@@ -247,6 +260,8 @@ class QdProduct extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdProduct();
+        $tmp = QdProductSetup::GET();
+        $obj->description = $tmp->df_product_desc_tpl;
         return $obj;
     }
 

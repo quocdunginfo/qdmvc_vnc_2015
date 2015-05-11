@@ -57,9 +57,21 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                             'SourceExpr' => 'active',
                             'DataType' => static::getDataType('active')
                         ),
+                        'temp_out_of_stock' => array(
+                            'SourceExpr' => 'temp_out_of_stock',
+                            'DataType' => static::getDataType('temp_out_of_stock')
+                        ),
                         'description' => array(
                             'SourceExpr' => 'description',
                             'DataType' => static::getDataType('description')
+                        ),
+                        'doitra_baohanh' => array(
+                            'SourceExpr' => 'doitra_baohanh',
+                            'DataType' => static::getDataType('doitra_baohanh')
+                        ),
+                        'giaohang_thanhtoan' => array(
+                            'SourceExpr' => 'giaohang_thanhtoan',
+                            'DataType' => static::getDataType('giaohang_thanhtoan')
                         ),
                     )
                 )

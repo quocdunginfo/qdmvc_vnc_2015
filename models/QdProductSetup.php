@@ -18,6 +18,10 @@ class QdProductSetup extends QdRootSetup
                 'Caption' => array('en' => 'DF Product Ava', 'vn' => 'Hình mặc định Product'),
                 'DataType' => 'Image'
             ),
+            'df_product_desc_tpl' => array(
+                'Caption' => array('en' => 'DF Product Desc Tpl', 'vn' => 'DF Product Desc Tpl'),
+                'DataType' => 'WYSIWYG'
+            ),
             'advice_phone' => array(
                 'Caption' => array('en' => 'Advice Phone', 'vn' => 'SĐT tư vấn'),
             ),
