@@ -7,10 +7,6 @@
  */
 Qdmvc::loadPage('root');
 class Qdmvc_Page_Post extends Qdmvc_Page_Root {
-    public function run()
-    {
-        parent::run();
-    }
     protected static function getViewClass()
     {
         return 'Qdmvc_View_Post';
@@ -30,16 +26,18 @@ class Qdmvc_Page_Post extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'ReadOnly' => true
                     ),
                     'title' => array(
                         'SourceExpr' => 'title',
                     ),
                     'content' => array(
                         'SourceExpr' => 'content',
+                        'DataType' => static::getDataType('content')
                     ),
                     'short_content' => array(
                         'SourceExpr' => 'short_content',
+                        'DataType' => static::getDataType('short_content')
                     ),
                     'type' => array(
                         'SourceExpr' => 'type',
@@ -48,6 +46,10 @@ class Qdmvc_Page_Post extends Qdmvc_Page_Root {
                     'avatar' => array(
                         'SourceExpr' => 'avatar',
                         'DataType' => static::getDataType('avatar')
+                    ),
+                    'order' => array(
+                        'SourceExpr' => 'order',
+                        'DataType' => static::getDataType('order')
                     ),
                     'post_cat_id' => array(
                         'SourceExpr' => 'post_cat_id',

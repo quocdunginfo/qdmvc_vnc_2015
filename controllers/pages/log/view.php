@@ -7,5 +7,22 @@
  */
 Qdmvc::loadLayout('layout_cardnavigate');
 class Qdmvc_View_Log extends Qdmvc_Layout_CardNavigate {
-
+    protected function onReadyHook()
+    {
+        ?>
+        <script>
+            (function($){
+                $(document).ready(function(){
+                    $("#qdnew").hide();
+                    $("#qdclone").hide();
+                    $("#qddelete").hide();
+                    //$("#qdnote").hide();
+                    //$("#qdimage").hide();
+                    $("#qdupdate").hide();
+                });
+            })(jQuery);
+        </script>
+        <?php
+        parent::onReadyHook();
+    }
 }

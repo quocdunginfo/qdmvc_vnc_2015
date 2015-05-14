@@ -32,6 +32,9 @@ class Qdmvc_Page_Log_List extends Qdmvc_Page_Root
                 'location' => array(
                     'SourceExpr' => 'location',
                 ),
+                'owner_id' => array(
+                    'SourceExpr' => 'owner_id',
+                ),
                 'action' => array(
                     'SourceExpr' => 'action',
                 ),

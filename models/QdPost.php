@@ -5,26 +5,41 @@ class QdPost extends QdRoot
     static $table_name = 'mpd_post';
     public static $TYPE_BESTCHOICEITEM = 100;
     public static $TYPE_POST = 0;
+    public static $TYPE_ABOUT = 57;
 
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
-            'content' => array(),
-            'short_content' => array(),
+            'order' => array(
+
+            ),
+            'content' => array(
+                'Caption' => array('en' => 'Content', 'vn' => 'Nội dung'),
+                'DataType' => 'WYSIWYG',
+            ),
+            'short_content' => array(
+                'Caption' => array('en' => 'Short content', 'vn' => 'Tóm tắt'),
+                'DataType' => 'WYSIWYG',
+            ),
             'avatar' => array(
                 'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
                 'DataType' => 'Image',
             ),
-            'title' => array(),
+            'title' => array(
+                'Caption' => array('en' => 'Title', 'vn' => 'Tiêu đề'),
+            ),
             'type' => array(
                 'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    '100' => array(
+                    static::$TYPE_BESTCHOICEITEM => array(
                         'Caption' => array('en' => 'Best choice item', 'vn' => 'Best choice item'),
                     ),
-                    '0' => array(
+                    static::$TYPE_POST => array(
                         'Caption' => array('en' => 'Post', 'vn' => 'Post'),
+                    ),
+                    static::$TYPE_ABOUT => array(
+                        'Caption' => array('en' => 'About', 'vn' => 'About'),
                     ),
                 )
             ),

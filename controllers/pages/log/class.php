@@ -7,10 +7,6 @@
  */
 Qdmvc::loadPage('root');
 class Qdmvc_Page_Log extends Qdmvc_Page_Root {
-    public function run()
-    {
-        parent::run();
-    }
     protected static function getViewClass()
     {
         return 'Qdmvc_View_Log';

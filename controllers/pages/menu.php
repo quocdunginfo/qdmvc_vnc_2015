@@ -658,6 +658,31 @@ class Qdmvc_Page_IndexMenu {
 	        'Model' => 'QdSize',
 	        'DataPort' => 'size_port'
         ),
+        'about' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_About',
+            'Caption' => array(
+                'en' => 'About',
+                'vn' => 'About'
+            ),
+            'Model' => 'QdAbout',
+            'DataPort' => 'about_port',
+            'PageList' => 'about_list'
+        ),
+        'about_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_About_list',
+            'Caption' => array(
+                'en' => 'About List',
+                'vn' => 'About List'
+            ),
+            'Model' => 'QdAbout',
+            'DataPort' => 'about_port'
+        ),
         'navigation' => array(
             'ParentId' => '',
             'Active'=>false,
