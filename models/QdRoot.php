@@ -13,6 +13,9 @@ class QdRoot extends ActiveRecord\Model
         'id' => array(
 
         ),
+        'owner_id' => array(
+
+        ),
         '__sys_note_url' => array(
             'FieldClass' => 'System'
         ),
@@ -182,7 +185,9 @@ class QdRoot extends ActiveRecord\Model
         'filter' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'exact' => true, 'operator' => '='));
         'limit' => -1,
         'offset' => 0,
-        'order' => array('field' => 'id', 'direction' => 'asc'),//true: asc, false: desc
+        'order' => array(
+            //'id' => 'asc'
+        ),
         //Since 01032015
         'filter_raw' => '1=1 OR 2=2',//raw SQL Condition
         'filter_relation' => 'AND'
@@ -261,7 +266,12 @@ class QdRoot extends ActiveRecord\Model
      */
     public function SETORDERBY($field, $asc = 'asc')
     {
-        $this->record_filter['order'] = array('field' => $field, 'direction' => $asc);
+        $this->record_filter['order'][$field] = $asc;
+        return $this;
+    }
+    public function REMOVEORDERBY()
+    {
+        $this->record_filter['order'] = array('id' => 'desc');
         return $this;
     }
 
@@ -411,9 +421,9 @@ class QdRoot extends ActiveRecord\Model
                 }
             }
             if (strtoupper($record['filter_relation']) == 'AND') {
-                $where .= '1=1';
+                $where .= '1=1';//trick to avoid SQL fail
             } else {
-                $where .= '1=2';
+                $where .= '1=2';//trick to avoid SQL fail
             }
             return array($where);
         }
@@ -437,9 +447,25 @@ class QdRoot extends ActiveRecord\Model
             if ($record['offset'] > 0) {
                 $re['offset'] = $record['offset'];
             }
+            //BEGIN ORDER
+            $order_s = '';
+            $count = 0;
             if (is_array($record['order']) && count($record['order']) > 0) {
-                $re['order'] = $record['order']['field'] . ' ' . $record['order']['direction'];
+                foreach($record['order'] as $order_k=>$order_v)
+                {
+                    if($count>0)
+                    {
+                        $order_s .= ', ';
+                    }
+                    $order_s .= "`{$order_k}` {$order_v}";
+                    $count++;
+                }
             }
+            if($order_s!='')
+            {
+                $re['order'] = $order_s;
+            }
+            //END ORDER
             return $re;
         }
         return $re;
