@@ -642,7 +642,21 @@ class QdRoot extends ActiveRecord\Model
         foreach ($list as $item) {
             $arr = array();
             foreach (static::getFieldsConfig() as $key => $value) {
-                $arr[$key] = $item->$key;
+                if(static::getDataType($key)=='Date')
+                {
+                    $dtmp0 = $item->$key;
+                    //$dtmp = new DateTime($item->$key);
+                    if($dtmp0!=null)
+                    {
+                        $arr[$key] = date_format($dtmp0, get_option( 'date_format', 'j/m/Y' ));//quocdunginfo
+                    }else
+                    {
+                        $arr[$key] = '';
+                    }
+
+                }else{
+                    $arr[$key] = $item->$key;
+                }
             }
             array_push($tmp, $arr);
         }
@@ -705,5 +719,9 @@ class QdRoot extends ActiveRecord\Model
         } catch (Exception $ex) {
             return array();
         }
+    }
+    public function fn_($location, $params=array())
+    {
+
     }
 }

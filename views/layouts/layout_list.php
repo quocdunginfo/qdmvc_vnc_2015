@@ -117,7 +117,7 @@ class Qdmvc_Layout_List
         <!-- Lookup toolbar -->
         <span>
             <span>
-                <button id="qdchoose" type="button">Choose</button> --
+                <button class="btn btn-primary btn-xs" id="qdchoose" type="button">Choose</button> --
             </span>
 
             <script type="text/javascript">
@@ -154,13 +154,13 @@ class Qdmvc_Layout_List
         <!-- General toolbar -->
         <span>
             <span>
-                <button id="qdshowall" type="button">Show All</button>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdshowall" type="button">Show All</button>
             </span>
             <span>
-                <button id="qdreload" type="button">Reload</button>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdreload" type="button">Reload</button>
             </span>
             <span>
-                <button id="qdprint" type="button">Print</button>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdprint" type="button">Print</button>
             </span>
 
             <script type="text/javascript">
