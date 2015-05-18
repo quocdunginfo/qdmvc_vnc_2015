@@ -44,7 +44,7 @@ class Qdmvc_Page_Setup extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'Hidden' => true
                     ),
                     'df_language' => array(
                         'SourceExpr' => 'df_language',

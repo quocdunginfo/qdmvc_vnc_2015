@@ -21,7 +21,8 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                             'ReadOnly' => true
                         ),
                         'name' => array(
-                            'SourceExpr' => 'name'
+                            'SourceExpr' => 'name',
+                            'DataType' => static::getDataType('name')
                         ),
                         'avatar' => array(
                             'SourceExpr' => 'avatar',
@@ -72,6 +73,10 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                         'giaohang_thanhtoan' => array(
                             'SourceExpr' => 'giaohang_thanhtoan',
                             'DataType' => static::getDataType('giaohang_thanhtoan')
+                        ),
+                        'date_modified' => array(
+                            'SourceExpr' => 'date_modified',
+                            'DataType' => static::getDataType('date_modified')
                         ),
                     )
                 )

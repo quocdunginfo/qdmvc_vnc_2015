@@ -134,6 +134,7 @@ class QdProduct extends QdRoot
             ),
             'name' => array(
                 'Caption' => array('vn' => 'Tên SP'),
+                'DataType' => 'Color',
             ),
             'code' => array(
                 'Caption' => array('vn' => 'Mã SP'),
@@ -157,6 +158,10 @@ class QdProduct extends QdRoot
                 'Caption' => array('vn' => 'Tạm hết hàng'),
                 'DataType' => 'Boolean',
                 'InitValue' => false,
+            ),
+            'date_modified' => array(
+                'Caption' => array('vn' => 'Ngày cập nhật'),
+                'DataType' => 'Date',
             ),
         ));
     }
@@ -264,5 +269,11 @@ class QdProduct extends QdRoot
         $obj->description = $tmp->df_product_desc_tpl;
         return $obj;
     }
-
+    public function fn_active($location, $params=array())
+    {
+        $this->active = true;
+        $this->code .= 'e';
+        $this->save(true, $location . '|'.$this->getCalledClassName() . '|fn_active');
+        $this->pushValidateError('active', 'Active thành công', 'info');
+    }
 }

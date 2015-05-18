@@ -44,7 +44,7 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'Hidden' => true
                     ),
                     'product_per_segment' => array(
                         'SourceExpr' => 'product_per_segment'

@@ -44,7 +44,7 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'Hidden' => true
                     ),
                     'topleft_tuvan' => array(
                         'SourceExpr' => 'topleft_tuvan',

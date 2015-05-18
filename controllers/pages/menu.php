@@ -683,6 +683,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdAbout',
             'DataPort' => 'about_port'
         ),
+        'menu' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_Menu',
+            'Caption' => array(
+                'en' => 'Menu',
+                'vn' => 'Menu'
+            ),
+            'Model' => 'QdMenu',
+            'DataPort' => 'menu_port',
+            'PageList' => 'menu_list'
+        ),
+        'menu_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_Menu_list',
+            'Caption' => array(
+                'en' => 'Menu List',
+                'vn' => 'Menu List'
+            ),
+            'Model' => 'QdMenu',
+            'DataPort' => 'menu_port'
+        ),
         'navigation' => array(
             'ParentId' => '',
             'Active'=>false,
