@@ -188,6 +188,18 @@ class Qdmvc_Dataport
     {
         $recordstartindex = isset($_REQUEST['recordstartindex']) ? $_REQUEST['recordstartindex'] : 0;
         $pagesize = isset($_REQUEST['pagesize']) ? $_REQUEST['pagesize'] : 10;
+        //SORT => May 19, 2015
+        $sort_field = 'id';
+        if(isset($_REQUEST['sortdatafield']) && $_REQUEST['sortdatafield']!='')
+        {
+            $sort_field = $_REQUEST['sortdatafield'];
+        }
+        $sort_direction = 'desc';
+        if(isset($_REQUEST['sortorder']) && $_REQUEST['sortorder']!='')
+        {
+            $sort_direction = $_REQUEST['sortorder'];
+        }
+        //END SORT
 
         $c = static::$model;
         $record = new $c();
@@ -209,7 +221,7 @@ class Qdmvc_Dataport
 
         $record->SETLIMIT($pagesize);
         $record->SETOFFSET($recordstartindex);
-        $record->SETORDERBY('id', 'desc');
+        $record->SETORDERBY($sort_field, $sort_direction);
 
         $this->pushMsg('List Card Return');
         $this->finish(null, $record->GETLIST(), $record->COUNTLIST());
