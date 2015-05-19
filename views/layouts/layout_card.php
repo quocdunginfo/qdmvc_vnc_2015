@@ -971,7 +971,8 @@ class Qdmvc_Layout_Card
                             </span>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdlines"
-                                        style="display: none">Lines
+                                        style="display: none">
+                                    <?=$this->page->getFieldCaption('__sys_lines_url', $this->data['language'])?>
                                 </button>
                             </span>
 

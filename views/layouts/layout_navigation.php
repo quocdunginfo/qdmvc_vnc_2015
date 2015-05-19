@@ -20,12 +20,17 @@ class Qdmvc_Layout_Navigation
     {
         Qdmvc_Helper::requestCompact();
         ?>
+        <style>
+            #wpbody-content {
+                overflow-y: hidden !important;
+            }
+        </style>
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    height = $(window).height()-3;
+                    //height = $(window).height()-3;
 
-                    $("#splitter").jqxSplitter({width: '99%', height: height, panels: [{size: 230}]});
+                    $("#splitter").jqxSplitter({width: '100%', height: '100%', panels: [{size: 230}]});
                     // Create jqxTree
                     Array.prototype.insert = function (index, item) {
                         this.splice(index, 0, item);
@@ -53,9 +58,9 @@ class Qdmvc_Layout_Navigation
                         name: 'text',
                         map: 'label'
                     }]);
-                    $('#jqxTree').jqxTree({source: records, height: '100%', width: '100%'});
-                    //$('#jqxTree').jqxTree({  height: '100%', width: '100%' });
+                    $('#jqxTree').jqxTree({source: records, height: '100%', width: '100%', incrementalSearch: true});
                     $('#jqxTree').css('visibility', 'visible');
+                    $('#jqxTree').jqxTree('expandAll');
                     $('#jqxTree').on('select', function (event) {
                         //$("#ContentPanel").html("<div style='margin: 10px;'>" + event.args.element.id + "</div>");
                         //add tab

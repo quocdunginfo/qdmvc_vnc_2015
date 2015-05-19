@@ -108,7 +108,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
             </div>
         </div>
         <div>
-            <div style="height: 520px; width: 100%">
+            <div style="height: 450px; width: 100%">
                 <!-- Content Place Holder 2 -->
                 <iframe id="list" src="<?= $this->getPageListURL() ?>"
                         width="100%" height="99%" scrolling="no" frameborder="0">

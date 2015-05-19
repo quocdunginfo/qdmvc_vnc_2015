@@ -24,6 +24,7 @@ class QdRoot extends ActiveRecord\Model
         ),
         '__sys_lines_url' => array(
             'FieldClass' => 'System',
+            'Caption' => array('en' => 'Lines', 'vn' => 'Lines'),
             'TableRelation' => array()
         ),
         '__lasteditor_name' => array(

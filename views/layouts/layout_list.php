@@ -162,7 +162,9 @@ class Qdmvc_Layout_List
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdprint" type="button">Print</button>
             </span>
-
+            <span>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdexport" type="button">Export Excel</button>
+            </span>
             <script type="text/javascript">
                 (function ($) {
                     $(document).ready(function () {
@@ -188,6 +190,9 @@ class Qdmvc_Layout_List
                         });
                         $("#qdshowall").click(function () {
                             $("#jqxgrid").jqxGrid({pagesize: 999999});
+                        });
+                        $("#qdexport").click(function () {
+                            $("#jqxgrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
                         });
                     });
                 })(jQuery);
@@ -220,7 +225,14 @@ class Qdmvc_Layout_List
                         root: 'rows',
                         beforeprocessing: function (data) {
                             source.totalrecords = data.total;
+                        },
+                        //Server side sorting May 19, 2015
+                        sort: function () {
+                            // update the grid and send a request to the server.
+                            console.log('Send SORT to Server');
+                            $("#jqxgrid").jqxGrid('updatebounddata', 'sort');
                         }
+                        //
                     };
 
                     var dataadapter = new $.jqx.dataAdapter(source);
@@ -240,6 +252,7 @@ class Qdmvc_Layout_List
                             groupable: true,
                             virtualmode: true,
                             pagesize: 20,
+                            sortable: true,/*May 19 2015*/
                             pagesizeoptions: ['5', '10', '20', '50', '100', '999999'],
                             /*Enable Inline Editing*/
                             /*editable: true,

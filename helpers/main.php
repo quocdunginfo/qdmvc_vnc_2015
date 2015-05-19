@@ -213,20 +213,24 @@ class Qdmvc_Helper
         ?>
         <style>
             @media all, screen {
+                /*Hide built-in WP elements*/
                 #wpadminbar, #adminmenuback, #adminmenuwrap, #wpfooter, #update-nag, .update-nag {
                     display: none !important;
                 }
-                #wpbody-content{
-                    padding-bottom: 0px;
-                }
-                #wpcontent, #wpbody {
-                    margin: 0px !important;
-                    padding: 0px !important;
-                    /*width: 100%;*/
-                    /*height: 100%;*/
-                }
 
                 html.wp-toolbar {
+                    padding: 0 !important;
+                }
+                /*jqspliter stretch width 100% not horizontal scroll bar => 19052015*/
+                #wpbody-content {
+                    overflow-x: hidden !important;
+                }
+                /*jqspliter stretch height 100% => 19052015*/
+                html, body, #wpbody, #wpbody-content, #wpwrap, #wpcontent
+                {
+                    height: 100% !important;
+                    width: 100% !important;
+                    margin: 0 !important;
                     padding: 0 !important;
                 }
             }
