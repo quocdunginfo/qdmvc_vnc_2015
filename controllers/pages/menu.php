@@ -708,6 +708,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdMenu',
             'DataPort' => 'menu_port'
         ),
+        'pro2pro' => array(
+            'ParentId' => 'product_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_Pro2Pro_Card',
+            'Caption' => array(
+                'en' => 'Linking Products',
+                'vn' => 'SP liên kết'
+            ),
+            'Model' => 'QdPro2Pro',
+            'DataPort' => 'pro2pro_port',
+            'PageList' => 'pro2pro_list'
+        ),
+        'pro2pro_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_pro2pro_list',
+            'Caption' => array(
+                'en' => 'List',
+                'vn' => 'List'
+            ),
+            'Model' => 'QdPro2Pro',
+            'DataPort' => 'pro2pro_port'
+        ),
         'navigation' => array(
             'ParentId' => '',
             'Active'=>false,

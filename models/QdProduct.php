@@ -6,7 +6,7 @@ class QdProduct extends QdRoot
 
     public static function getFieldsConfig()
     {
-        return array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             //SAMPLE FIELD CONFIG
             '_product_cat_name' => array(
                 'Name' => 'product_cat_name',
@@ -84,15 +84,15 @@ class QdProduct extends QdRoot
 		            'Field' => 'id',
 		            'TableFilter' => array(
 			            /*array(
-				'Condition' => array(
-					'Field' => '',
-					'Type' => 'CONST',//'FIELD'
-					'Value' => ''
-				),
-				'Field' => 'order',
-				'Type' => 'FIELD',
-				'Value' => 10
-			)*/
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'order',
+                            'Type' => 'FIELD',
+                            'Value' => 10
+                        )*/
 		            )
 	            )
             ),
@@ -164,6 +164,24 @@ class QdProduct extends QdRoot
                 'DataType' => 'Date',
             ),
         ));
+        $obj['__sys_lines_url']['Caption'] = array('en' => 'Related Products', 'vn' => 'SP liên kết');
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdPro2Pro',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'product_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                )
+            )
+        );
+        return $obj;
     }
 
     static $alias_attribute = array(
