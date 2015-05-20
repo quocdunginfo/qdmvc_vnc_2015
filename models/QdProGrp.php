@@ -59,10 +59,10 @@ class QdProGrp extends QdRoot
                     QdProductCat::$TYPE_PRODUCTCAT => array(
                         'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
                     ),
-                    QdProductCat::$TYPE_BIGSALE => array(
+                    QdBigSaleCat::$TYPE_BIGSALE => array(
                         'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
                     ),
-                    QdProductCat::$TYPE_PROMOTION=> array(
+                    QdPromotionCat::$TYPE_PROMOTION=> array(
                         'Caption' => array('en' => 'Promotion', 'vn' => 'Khuyến mãi'),
                     ),
                 )

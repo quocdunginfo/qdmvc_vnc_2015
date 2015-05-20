@@ -433,7 +433,7 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdWidgetNav',
             'DataPort' => 'widgetnav_port',
         ),
-        'progrp' => array(
+        /*'progrp' => array(
             'ParentId' => 'product_cat_card',
             'Active'=>true,
             'PageType' => 'Card',
@@ -457,7 +457,7 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdProGrp',
             'DataPort' => 'progrp_port',
-        ),
+        ),*/
         'probigsale' => array(
             'ParentId' => 'product_cat_card',
             'Active'=>true,
@@ -493,7 +493,7 @@ class Qdmvc_Page_IndexMenu {
                 'vn' => 'BigSale Cat',
             ),
             'Model' => 'QdBigSaleCat',
-            'DataPort' => 'product_cat_port',
+            'DataPort' => 'bigsalecat_port',
             'PageList' => 'bigsalecat_list'
         ),
         'bigsalecat_list' => array(
@@ -506,7 +506,7 @@ class Qdmvc_Page_IndexMenu {
                 'vn' => 'BigSale Cat List',
             ),
             'Model' => 'QdBigSaleCat',
-            'DataPort' => 'product_cat_port'
+            'DataPort' => 'bigsalecat_port'
         ),
         'propromotion' => array(
             'ParentId' => 'product_cat_card',
@@ -543,7 +543,7 @@ class Qdmvc_Page_IndexMenu {
                 'vn' => 'Promotion Cat',
             ),
             'Model' => 'QdPromotionCat',
-            'DataPort' => 'product_cat_port',
+            'DataPort' => 'promotioncat_port',
             'PageList' => 'promotioncat_list'
         ),
         'promotioncat_list' => array(
@@ -556,7 +556,7 @@ class Qdmvc_Page_IndexMenu {
                 'vn' => 'Promotion Cat List',
             ),
             'Model' => 'QdPromotionCat',
-            'DataPort' => 'product_cat_port'
+            'DataPort' => 'promotioncat_port'
         ),
         'manufactor' => array(
             'ParentId' => 'product_cat_card',
@@ -582,6 +582,56 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdManufactor',
             'DataPort' => 'manufactor_port',
+        ),
+        'manufactor_qa' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ManufactorQA',
+            'Caption' => array(
+                'en' => 'Manufactor QA',
+                'vn' => 'Hãng SX QA'
+            ),
+            'Model' => 'QdManufactorQA',
+            'DataPort' => 'manufactor_qa_port',
+            'PageList' => 'manufactor_qa_list'
+        ),
+        'manufactor_qa_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ManufactorQA_list',
+            'Caption' => array(
+                'en' => 'Manufactor QA List',
+                'vn' => 'Manufactor QA List'
+            ),
+            'Model' => 'QdManufactorQA',
+            'DataPort' => 'manufactor_qa_port',
+        ),
+        'manufactor_gd' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ManufactorGD',
+            'Caption' => array(
+                'en' => 'Manufactor GD',
+                'vn' => 'Hãng SX GD'
+            ),
+            'Model' => 'QdManufactorGD',
+            'DataPort' => 'manufactor_gd_port',
+            'PageList' => 'manufactor_gd_list'
+        ),
+        'manufactor_gd_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ManufactorGD_list',
+            'Caption' => array(
+                'en' => 'Manufactor GD List',
+                'vn' => 'Manufactor GD List'
+            ),
+            'Model' => 'QdManufactorGD',
+            'DataPort' => 'manufactor_gd_port',
         ),
         'object_task' => array(
             'ParentId' => -1,
@@ -710,7 +760,7 @@ class Qdmvc_Page_IndexMenu {
         ),
         'pro2pro' => array(
             'ParentId' => 'product_card',
-            'Active'=>true,
+            'Active'=>false,
             'PageType' => 'Card',
             'Class'=> 'Qdmvc_Page_Pro2Pro_Card',
             'Caption' => array(

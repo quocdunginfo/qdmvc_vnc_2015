@@ -4,9 +4,6 @@ class QdProductCat extends QdRoot
 {
     static $table_name = 'mpd_product_cat';
     public static $TYPE_PRODUCTCAT = 0;
-    public static $TYPE_BIGSALE = 100;
-    public static $TYPE_PROMOTION = 137;
-    public static $TYPE_MANUFACTOR = 215;
 
     /*
     static $has_many = array(
@@ -16,6 +13,7 @@ class QdProductCat extends QdRoot
     {
         $obj = new QdProductCat();
         $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->active = true;
         return $obj;
     }
     public function getProducts2()
@@ -102,15 +100,6 @@ class QdProductCat extends QdRoot
                 'Options' => array(
                     static::$TYPE_PRODUCTCAT => array(
                         'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
-                    ),
-                    static::$TYPE_BIGSALE => array(
-                        'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
-                    ),
-                    static::$TYPE_PROMOTION => array(
-                        'Caption' => array('en' => 'Promotion', 'vn' => 'Khuyến mãi'),
-                    ),
-                    static::$TYPE_MANUFACTOR => array(
-                        'Caption' => array('en' => 'Manufactor', 'vn' => 'Hãng SX'),
                     ),
                 )
             )

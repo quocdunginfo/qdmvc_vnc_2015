@@ -46,7 +46,7 @@ class QdProductSetup extends QdRootSetup
                             ),
                             'Field' => 'type',
                             'Type' => 'FIELD',
-                            'Value' => QdProductCat::$TYPE_BIGSALE
+                            'Value' => QdBigSaleCat::$TYPE_BIGSALE
                         )
                     )
                 )

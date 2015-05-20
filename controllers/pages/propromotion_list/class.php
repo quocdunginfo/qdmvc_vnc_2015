@@ -21,7 +21,7 @@ class Qdmvc_Page_ProPromotion_List extends Qdmvc_Page_ProGrp_List
     protected function getCustomPageView()
     {
         return array(
-            'group_type' => QdProductCat::$TYPE_PROMOTION
+            'group_type' => QdPromotionCat::$TYPE_PROMOTION
         );
     }
 

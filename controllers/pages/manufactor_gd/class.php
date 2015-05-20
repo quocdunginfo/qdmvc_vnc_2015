@@ -5,15 +5,15 @@
  * Date: 05/03/2015
  * Time: 11:36 PM
  */
-Qdmvc::loadPage('product_cat_card');
-class Qdmvc_Page_PromotionCat_Card extends Qdmvc_Page_ProductCat_Card {
+Qdmvc::loadPage('manufactor');
+class Qdmvc_Page_ManufactorGD extends Qdmvc_Page_Manufactor {
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_PromotionCat_Card';
+        return 'Qdmvc_View_ManufactorGD';
     }
 
     public static function getPage()
     {
-        return 'promotioncat';
+        return 'manufactor_gd';
     }
 }

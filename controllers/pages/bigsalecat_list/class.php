@@ -21,7 +21,7 @@ class Qdmvc_Page_BigSaleCat_List extends Qdmvc_Page_ProductCat_List
     protected function getCustomPageView()
     {
         return array(
-            'type' => QdProductCat::$TYPE_BIGSALE
+            'type' => QdBigSaleCat::$TYPE_BIGSALE
         );
     }
 

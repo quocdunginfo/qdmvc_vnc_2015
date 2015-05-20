@@ -21,7 +21,7 @@ class Qdmvc_Page_ProBigSale_List extends Qdmvc_Page_ProGrp_List
     protected function getCustomPageView()
     {
         return array(
-            'group_type' => QdProductCat::$TYPE_BIGSALE
+            'group_type' => QdBigSaleCat::$TYPE_BIGSALE
         );
     }
 

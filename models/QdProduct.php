@@ -3,6 +3,10 @@
 class QdProduct extends QdRoot
 {
     static $table_name = 'mpd_product';
+    public static $TYPE_DEFAULT = '';
+    public static $TYPE_QUANAO = 'QA';
+    public static $TYPE_GIAYDEP = 'GD';
+    public static $TYPE_OTHER = 'OT';
 
     public static function getFieldsConfig()
     {
@@ -134,7 +138,7 @@ class QdProduct extends QdRoot
             ),
             'name' => array(
                 'Caption' => array('vn' => 'Tên SP'),
-                'DataType' => 'Color',
+                //'DataType' => 'Color',
             ),
             'code' => array(
                 'Caption' => array('vn' => 'Mã SP'),
@@ -158,6 +162,24 @@ class QdProduct extends QdRoot
                 'Caption' => array('vn' => 'Tạm hết hàng'),
                 'DataType' => 'Boolean',
                 'InitValue' => false,
+            ),
+            'type' => array(
+                'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    static::$TYPE_DEFAULT => array(
+                        'Caption' => array('en' => 'Default', 'vn' => 'Mặc định'),
+                    ),
+                    static::$TYPE_QUANAO => array(
+                        'Caption' => array('en' => 'Clothes', 'vn' => 'Quần áo'),
+                    ),
+                    static::$TYPE_GIAYDEP => array(
+                        'Caption' => array('en' => 'Shoes', 'vn' => 'Gìay dép'),
+                    ),
+                    static::$TYPE_OTHER => array(
+                        'Caption' => array('en' => 'Other', 'vn' => 'Khác'),
+                    ),
+                )
             ),
             'date_modified' => array(
                 'Caption' => array('vn' => 'Ngày cập nhật'),
@@ -283,8 +305,8 @@ class QdProduct extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdProduct();
-        $tmp = QdProductSetup::GET();
-        $obj->description = $tmp->df_product_desc_tpl;
+        $obj->description = Qdmvc_Config::getProductSetup()->df_product_desc_tpl;
+        $obj->type = static::$TYPE_DEFAULT;
         return $obj;
     }
     public function fn_active($location, $params=array())

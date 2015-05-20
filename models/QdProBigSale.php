@@ -6,7 +6,7 @@ class QdProBigSale extends QdProGrp
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            array('field' => 'group_type', 'value' => QdProductCat::$TYPE_BIGSALE, 'exact' => true, 'operator' => '=')
+            array('field' => 'group_type', 'value' => QdBigSaleCat::$TYPE_BIGSALE, 'exact' => true, 'operator' => '=')
         ));
     }
 
@@ -22,16 +22,22 @@ class QdProBigSale extends QdProGrp
                 ),
                 'Field' => 'type',
                 'Type' => 'FIELD',
-                'Value' => QdProductCat::$TYPE_BIGSALE
+                'Value' => QdBigSaleCat::$TYPE_BIGSALE
             )
         );
+        $obj['group_type']['Options'] = array(
+            QdBigSaleCat::$TYPE_BIGSALE => array(
+                'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
+            ),
+        );
+
         return $obj;
     }
 
     public static function getInitObj()
     {
         $obj = new QdProBigSale();
-        $obj->group_type = QdProductCat::$TYPE_BIGSALE;
+        $obj->group_type = QdBigSaleCat::$TYPE_BIGSALE;
         return $obj;
     }
 }

@@ -7,6 +7,7 @@
  */
 class Qdmvc_Config {
     private static $language = null;
+    private static $product_setup = null;
     function __construct(){
 
     }
@@ -18,5 +19,14 @@ class Qdmvc_Config {
             static::$language = $tmp->df_language;
         }
         return static::$language;
+    }
+    public static function getProductSetup()
+    {
+        if(static::$product_setup==null)
+        {
+            $tmp = QdProductSetup::GET();
+            static::$product_setup = $tmp;
+        }
+        return static::$product_setup;
     }
 }
