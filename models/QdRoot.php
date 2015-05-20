@@ -61,6 +61,7 @@ class QdRoot extends ActiveRecord\Model
     public function on_before_create()
     {
         $this->date_created = new DateTime();
+        $this->date_modified = $this->date_created;//can not insert date time null
         $this->owner_id = get_current_user_id();
     }
 
@@ -189,8 +190,7 @@ class QdRoot extends ActiveRecord\Model
         'order' => array(
             //'id' => 'asc'
         ),
-        //Since 01032015
-        'filter_raw' => '1=1 OR 2=2',//raw SQL Condition
+        //'filter_raw' => '1=1 OR 2=2',//raw SQL Condition//May 21 2015, DO NOT USE ANYMORE
         'filter_relation' => 'AND'
     );
 
@@ -400,6 +400,10 @@ class QdRoot extends ActiveRecord\Model
     public function GETLIST()
     {
         $query = static::_generateQuery($this->record_filter);
+        if(empty($query))//could not find all with empty array query
+        {
+            return static::all();
+        }
         return static::all($query);
     }
 
