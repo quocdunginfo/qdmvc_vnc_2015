@@ -237,4 +237,14 @@ class Qdmvc_Helper
         </style>
         <?php
     }
+
+    /**
+     * Check null
+     * @param $obj
+     * @return bool
+     */
+    public static function isNullOrEmpty($obj)
+    {
+        return (!isset($obj) || $obj===null || $obj===false || $obj==='');
+    }
 }

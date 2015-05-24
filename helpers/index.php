@@ -5,6 +5,4 @@
  * Date: 05/03/2015
  * Time: 11:49 PM
  */
-class Qdmvc_Helper_Index{
-
-}
+//Qdmvc::loadIndex('helpers/main');//DO NOT NEED BECAUSE QDMVC.PHP loaded YET

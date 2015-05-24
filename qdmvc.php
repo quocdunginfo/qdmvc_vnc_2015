@@ -49,6 +49,10 @@ class Qdmvc
     {
         static::loadController('pages/' . $name . '/class');
     }
+    public static function loadPageView($name)
+    {
+        static::loadController('pages/' . $name . '/view');
+    }
     public static function runPage($name)
     {
         //load class
