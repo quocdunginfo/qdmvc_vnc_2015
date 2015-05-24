@@ -128,9 +128,18 @@ class Qdmvc_Dataport
     {
 
     }
-
+    protected static function canInsert()
+    {
+        return true;
+    }
     protected function insert()
     {
+        if(!static::canInsert())
+        {
+            $this->pushMsg('Permission: Could not Insert!', 'error');
+            return;
+        }
+
         //insert
         $c = static::$model;
         $this->obj = new $c();
@@ -149,9 +158,18 @@ class Qdmvc_Dataport
     {
         return get_called_class();
     }
-
+    protected static function canEdit()
+    {
+        return true;
+    }
     protected function update()
     {
+        if(!static::canEdit())
+        {
+            $this->pushMsg('Permission: Could not Edit!', 'error');
+            return;
+        }
+
         //update
         $c = static::$model;
         $this->obj = $c::GET($this->data["id"]);
@@ -164,9 +182,21 @@ class Qdmvc_Dataport
         }
         $this->pushMsg($this->obj->GETVALIDATION());
     }
-
+    protected static function canView()
+    {
+        return true;
+    }
+    protected static function canDelete(){
+        return true;
+    }
     protected function delete()
     {
+        if(!static::canDelete())
+        {
+            $this->pushMsg('Permission: Could not Delete!', 'error');
+            return;
+        }
+
         $c = static::$model;
         $this->obj = $c::find($this->data['id']);
         $class_name = $this->getCalledClass();
@@ -186,6 +216,13 @@ class Qdmvc_Dataport
 
     protected function list_return()
     {
+        if(!static::canView())
+        {
+            $this->pushMsg('Permission: Could not View', 'error');
+            $this->finish(null, array(), 0);
+            return;
+        }
+
         $recordstartindex = isset($_REQUEST['recordstartindex']) ? $_REQUEST['recordstartindex'] : 0;
         $pagesize = isset($_REQUEST['pagesize']) ? $_REQUEST['pagesize'] : 10;
         //SORT => May 19, 2015

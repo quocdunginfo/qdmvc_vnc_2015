@@ -9,4 +9,19 @@ Qdmvc::loadDataPort('note_port');
 class Qdmvc_DataPort_Log extends Qdmvc_DataPort_Note
 {
     protected static $model = 'QdLog';
+
+    protected static function canEdit()
+    {
+        return false;
+    }
+
+    protected static function canDelete()
+    {
+        return false;
+    }
+
+    protected static function canInsert()
+    {
+        return false;
+    }
 }
