@@ -22,7 +22,7 @@ class Qdmvc_Page_Feedback_Card extends Qdmvc_Page_Root
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'ReadOnly' => true
                     ),
                     'customer_name' => array(
                         'SourceExpr' => 'customer_name'

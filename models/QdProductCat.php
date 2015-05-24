@@ -4,7 +4,7 @@ class QdProductCat extends QdRoot
 {
     static $table_name = 'mpd_product_cat';
     public static $TYPE_PRODUCTCAT = 0;
-
+    public static $TYPE_MANUFACTOR = 215;
     /*
     static $has_many = array(
         array('product_list', 'class_name' => 'QdProduct', 'primary_key' => 'id', 'foreign_key' => 'product_cat_id')
@@ -13,6 +13,7 @@ class QdProductCat extends QdRoot
     {
         $obj = new QdProductCat();
         $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
         $obj->active = true;
         return $obj;
     }
@@ -100,6 +101,28 @@ class QdProductCat extends QdRoot
                 'Options' => array(
                     static::$TYPE_PRODUCTCAT => array(
                         'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
+                    ),
+                    /*
+                    static::$TYPE_MANUFACTOR => array(
+                        'Caption' => array('en' => 'Manufactor', 'vn' => 'Hãng SX'),
+                    )*/
+                )
+            ),
+            'type2' => array(
+                'Caption' => array('en' => 'Type2', 'vn' => 'Dòng SP'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_DEFAULT => array(
+                        'Caption' => array('en' => 'Product Cat DF', 'vn' => 'Loại SP DF'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
+                        'Caption' => array('en' => 'Product Cat GD', 'vn' => 'Loại SP GD'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
+                        'Caption' => array('en' => 'Product Cat QA', 'vn' => 'Loại SP QA'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
+                        'Caption' => array('en' => 'Product Cat Other', 'vn' => 'Loại SP Other'),
                     ),
                 )
             )

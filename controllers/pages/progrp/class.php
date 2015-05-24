@@ -18,7 +18,7 @@ class Qdmvc_Page_ProGrp_Card extends Qdmvc_Page_Root
                     'Fields' => array(
                         'id' => array(
                             'SourceExpr' => 'id',
-                            'PrimaryKey' => true
+                            'ReadOnly' => true
                         ),
                         'product_id' => array(
                             'SourceExpr' => 'product_id',

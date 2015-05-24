@@ -3,8 +3,8 @@
 class QdSize extends QdRoot
 {
     static $table_name = 'mpd_size';
-	public static $TYPE_QUANAO = '10';
-	public static $TYPE_GIAYDEP = '15';
+	public static $TYPE_QUANAO = 10;
+	public static $TYPE_GIAYDEP = 15;
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(

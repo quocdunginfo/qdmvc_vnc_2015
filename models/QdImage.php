@@ -7,14 +7,17 @@ class QdImage extends QdNote
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
-            'path' => array(
-                'Caption' => array('en' => 'Image', 'vn' => 'Hình ảnh'),
-                'DataType' => 'Image',
-            ),
-            'order' => array(
-                'Caption' => array('en' => 'Order', 'vn' => 'Thứ tự'),
-            ),
-        )
+                'path' => array(
+                    'Caption' => array('en' => 'Image', 'vn' => 'Hình ảnh'),
+                    'DataType' => 'Image',
+                ),
+                'active' => array(
+                    'DataType' => 'Boolean'
+                ),
+                'order' => array(
+                    'Caption' => array('en' => 'Order', 'vn' => 'Thứ tự'),
+                ),
+            )
         );
     }
 
@@ -28,20 +31,17 @@ class QdImage extends QdNote
 
     protected function orderOnValidate($field_name)
     {
-        if($this->{$field_name}!='')
-        {
-            if($this->{$field_name}<=0)
-            {
+        if ($this->{$field_name} != '') {
+            if ($this->{$field_name} <= 0) {
                 $this->pushValidateError($field_name, 'Thứ tự phải lớn hơn 0');
             }
-        }
-        else
-        {
+        } else {
             $this->{$field_name} = $this->GETMAX($field_name) + 10;
             $this->pushValidateError($field_name, 'Thứ tự được gán tự động RANGE +10', 'info');
         }
 
     }
+
     public function GETMAX($field)
     {
         //$query = array_merge(static::_generateQuery($this->record_filter), array('select' => "max(`{$field}`)"));
@@ -50,13 +50,12 @@ class QdImage extends QdNote
         $record->SETRANGE('model_id', $this->model_id);
         $list = $record->GETLIST();
         $max = 0;
-        foreach($list as $item)
-        {
-            if($item->{$field} >= $max)
-            {
+        foreach ($list as $item) {
+            if ($item->{$field} >= $max) {
                 $max = $item->{$field};
             }
         }
         return $max;
     }
+
 }

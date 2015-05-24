@@ -30,7 +30,7 @@ class Qdmvc_Page_PostCat extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'ReadOnly' => true
                     ),
                     'title' => array(
                         'SourceExpr' => 'title',

@@ -29,12 +29,16 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'ReadOnly' => true
                     ),
 
                     'type' => array(
                         'SourceExpr' => 'type',
                         'DataType' => static::getDataType('type')
+                    ),
+                    'type2' => array(
+                        'SourceExpr' => 'type2',
+                        'DataType' => static::getDataType('type2')
                     ),
                     'name' => array(
                         'SourceExpr' => 'name'

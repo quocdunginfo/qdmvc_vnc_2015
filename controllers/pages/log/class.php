@@ -26,7 +26,7 @@ class Qdmvc_Page_Log extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'ReadOnly' => true
                     ),
                     'location' => array(
                         'SourceExpr' => 'location',

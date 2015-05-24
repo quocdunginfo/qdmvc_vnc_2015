@@ -22,7 +22,7 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdNote',
             'DataPort' => 'note_port',
         ),
-        'product_card' => array(
+        'product' => array(
             'ParentId' => 'product_cat_card',
             'Active'=>true,
             'PageType' => 'Card',
@@ -46,6 +46,31 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdProduct',
             'DataPort' => 'product_port'
+        ),
+        'product_qa' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ProductQA_Card',
+            'Caption' => array(
+                'en' => 'Product QA',
+                'vn' => 'Sản phẩm QA',
+            ),
+            'Model' => 'QdProductQA',
+            'DataPort' => 'product_qa_port',
+            'PageList' => 'product_qa_list'
+        ),
+        'product_qa_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ProductQA_List',
+            'Caption' => array(
+                'en' => 'Product QA List',
+                'vn' => 'Product QA List'
+            ),
+            'Model' => 'QdProductQA',
+            'DataPort' => 'product_qa_port'
         ),
         'product_cat_card' => array(
             'ParentId' => -1,
@@ -71,6 +96,31 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdProductCat',
             'DataPort' => 'product_cat_port'
+        ),
+        'product_cat_qa' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ProductCatQA_Card',
+            'Caption' => array(
+                'en' => 'Product Cat QA',
+                'vn' => 'Loại SP QA',
+            ),
+            'Model' => 'QdProductCatQA',
+            'DataPort' => 'product_cat_qa_port',
+            'PageList' => 'product_cat_qa_list'
+        ),
+        'product_cat_qa_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ProductCatQA_List',
+            'Caption' => array(
+                'en' => 'Product Cat QA List',
+                'vn' => 'Product Cat QA List',
+            ),
+            'Model' => 'QdProductCatQA',
+            'DataPort' => 'product_cat_qa_port'
         ),
         'product_order_card' => array(
             'ParentId' => -1,
@@ -759,7 +809,7 @@ class Qdmvc_Page_IndexMenu {
             'DataPort' => 'menu_port'
         ),
         'pro2pro' => array(
-            'ParentId' => 'product_card',
+            'ParentId' => 'product',
             'Active'=>false,
             'PageType' => 'Card',
             'Class'=> 'Qdmvc_Page_Pro2Pro_Card',

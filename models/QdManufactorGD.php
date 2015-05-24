@@ -6,17 +6,17 @@ class QdManufactorGD extends QdManufactor
 	{
 		parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
 
-		$this->SETFILTERDEFAULT(array(
-			array('field' => 'type', 'value' => static::$TYPE_MANUFACTOR_GIAYDEP, 'exact' => true, 'operator' => '=')
+		$this->ADDFILTERDEFAULT(array(
+            array('field' => 'type2', 'value' => static::$TYPE2_MANUFACTOR_GIAYDEP, 'exact' => true, 'operator' => '='),
 		));
-
 	}
 	public static function getInitObj()
     {
         $tmp = parent::getInitObj();
 
         $obj = new QdManufactorGD();
-        $obj->type = static::$TYPE_MANUFACTOR_GIAYDEP;
+        $obj->type = $tmp->type;
+        $obj->type2 = static::$TYPE2_MANUFACTOR_GIAYDEP;
         $obj->active = $tmp->active;
         return $obj;
     }
@@ -42,7 +42,12 @@ class QdManufactorGD extends QdManufactor
             )
         );
         $obj['type']['Options'] = array(
-            static::$TYPE_MANUFACTOR_GIAYDEP => array(
+            static::$TYPE_MANUFACTOR => array(
+                'Caption' => array('en' => 'Manufactor', 'vn' => 'Hãng SX'),
+            )
+        );
+        $obj['type2']['Options'] = array(
+            static::$TYPE2_MANUFACTOR_GIAYDEP => array(
                 'Caption' => array('en' => 'Manufactor GD', 'vn' => 'Hãng SX GD'),
             )
         );

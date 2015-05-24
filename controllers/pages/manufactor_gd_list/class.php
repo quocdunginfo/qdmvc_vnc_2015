@@ -22,7 +22,8 @@ class Qdmvc_Page_ManufactorGD_List extends Qdmvc_Page_Manufactor_List
     protected function getCustomPageView()
     {
         return array(
-            'type' => QdManufactor::$TYPE_MANUFACTOR_GIAYDEP
+            'type' => QdManufactor::$TYPE_MANUFACTOR,
+            'type2' => QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP,
         );
     }
 }

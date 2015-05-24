@@ -13,7 +13,7 @@ class QdProduct extends QdRoot
         $obj = array_merge(parent::getFieldsConfig(), array(
             //SAMPLE FIELD CONFIG
             '_product_cat_name' => array(
-                'Name' => 'product_cat_name',
+                'Name' => '_product_cat_name',
                 'Caption' => array('en' => 'Product Cat Name', 'vn' => 'Tên loại SP'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
@@ -29,6 +29,12 @@ class QdProduct extends QdRoot
                         )
                     )
                 )
+            ),
+            //SAMPLE FIELD CONFIG
+            '_price_discount' => array(
+                'Name' => '_price_discount',
+                'DataType' => 'Decimal',
+                'FieldClass' => 'FlowField',
             ),
             'product_cat_id' => array(
                 'Name' => 'product_cat_id',
@@ -162,6 +168,9 @@ class QdProduct extends QdRoot
                 'Caption' => array('vn' => 'Tạm hết hàng'),
                 'DataType' => 'Boolean',
                 'InitValue' => false,
+            ),
+            'discount_percent' => array(
+                'DataType' => 'Decimal',
             ),
             'type' => array(
                 'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
@@ -312,8 +321,33 @@ class QdProduct extends QdRoot
     public function fn_active($location, $params=array())
     {
         $this->active = true;
-        $this->code .= 'e';
         $this->save(true, $location . '|'.$this->getCalledClassName() . '|fn_active');
         $this->pushValidateError('active', 'Active thành công', 'info');
+    }
+    public function getRProducts2()
+    {
+        $re = array();
+        $record = new QdPro2Pro();
+        $record->SETRANGE('product_id', $this->id, true);
+        $tmp = $record->GETLIST();
+        foreach($tmp as $item)
+        {
+            $tmp2 = QdProduct::GET($item->r_product_id);
+            if($tmp2!=null)
+            {
+                array_push($re, $tmp2);
+            }
+        }
+        return $re;
+    }
+    protected function CALCFIELDS($flowfield_name)
+    {
+        if ($flowfield_name == '_price_discount') {
+
+            $this->qd_cached_attr[$flowfield_name] = $this->price - ( $this->price * $this->discount_percent );
+            //return
+            return $this->qd_cached_attr[$flowfield_name];
+        }
+        return parent::CALCFIELDS($flowfield_name);
     }
 }

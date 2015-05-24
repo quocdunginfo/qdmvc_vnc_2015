@@ -2,10 +2,10 @@
 
 class QdManufactor extends QdProductCat
 {
-    public static $TYPE_MANUFACTOR = 215;
-    public static $TYPE_MANUFACTOR_QUANAO = 216;
-    public static $TYPE_MANUFACTOR_GIAYDEP = 217;
-    public static $TYPE_MANUFACTOR_OTHER = 250;
+    public static $TYPE2_MANUFACTOR_DEFAULT = 2151;
+    public static $TYPE2_MANUFACTOR_QUANAO = 2152;
+    public static $TYPE2_MANUFACTOR_GIAYDEP = 2153;
+    public static $TYPE2_MANUFACTOR_OTHER = 2154;
 
 	public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
 	{
@@ -44,7 +44,7 @@ class QdManufactor extends QdProductCat
         );
         $obj['type']['Options'] = array(
             static::$TYPE_MANUFACTOR => array(
-                'Caption' => array('en' => 'Manufactor DF', 'vn' => 'Hãng SX DF'),
+                'Caption' => array('en' => 'Manufactor', 'vn' => 'Hãng SX'),
             )
         );
         $obj['__sys_lines_url']['TableRelation'] = array(

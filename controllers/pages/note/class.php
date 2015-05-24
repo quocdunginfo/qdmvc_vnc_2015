@@ -30,7 +30,7 @@ class Qdmvc_Page_Note extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'ReadOnly' => true
                     ),
                     'content' => array(
                         'SourceExpr' => 'content'

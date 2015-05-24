@@ -30,11 +30,15 @@ class Qdmvc_Page_Image extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'PrimaryKey' => true
+                        'ReadOnly' => true
                     ),
                     'path' => array(
                         'SourceExpr' => 'path',
                         'DataType' => static::getDataType('path')
+                    ),
+                    'active' => array(
+                        'SourceExpr' => 'active',
+                        'DataType' => static::getDataType('active')
                     ),
                     'order' => array(
                         'SourceExpr' => 'order'

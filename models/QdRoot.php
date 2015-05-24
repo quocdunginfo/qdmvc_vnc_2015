@@ -199,6 +199,11 @@ class QdRoot extends ActiveRecord\Model
         $this->record_filter['filter_default'] = $filter;
         return $this->SETFILTER($filter);
     }
+    public function ADDFILTERDEFAULT($filter = array())
+    {
+        $this->record_filter['filter_default'] = array_merge($filter);
+        return $this->SETFILTER($filter);
+    }
 
     public function delete($location = '')
     {
@@ -404,6 +409,7 @@ class QdRoot extends ActiveRecord\Model
         {
             return static::all();
         }
+
         return static::all($query);
     }
 

@@ -58,6 +58,15 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                         'price' => array(
                             'SourceExpr' => 'price'
                         ),
+                        'discount_percent' => array(
+                            'SourceExpr' => 'discount_percent',
+                            'DataType' => static::getDataType('discount_percent'),
+                        ),
+                        '_price_discount' => array(
+                            'SourceExpr' => '_price_discount',
+                            'DataType' => static::getDataType('_price_discount'),
+                            'ReadOnly' => true
+                        ),
                         'active' => array(
                             'SourceExpr' => 'active',
                             'DataType' => static::getDataType('active')
@@ -95,6 +104,6 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
 
     public static function getPage()
     {
-        return 'product_card';
+        return 'product';
     }
 }

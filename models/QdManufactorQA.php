@@ -6,8 +6,8 @@ class QdManufactorQA extends QdManufactor
 	{
 		parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
 
-		$this->SETFILTERDEFAULT(array(
-			array('field' => 'type', 'value' => static::$TYPE_MANUFACTOR_QUANAO, 'exact' => true, 'operator' => '=')
+		$this->ADDFILTERDEFAULT(array(
+			array('field' => 'type2', 'value' => static::$TYPE2_MANUFACTOR_QUANAO, 'exact' => true, 'operator' => '=')
 		));
 
 	}
@@ -16,7 +16,8 @@ class QdManufactorQA extends QdManufactor
         $tmp = parent::getInitObj();
 
         $obj = new QdManufactorQA();
-        $obj->type = static::$TYPE_MANUFACTOR_QUANAO;
+        $obj->type= $tmp->type;
+        $obj->type2 = static::$TYPE2_MANUFACTOR_QUANAO;
         $obj->active = $tmp->active;
         return $obj;
     }
@@ -41,8 +42,8 @@ class QdManufactorQA extends QdManufactor
                 )*/
             )
         );
-        $obj['type']['Options'] = array(
-            static::$TYPE_MANUFACTOR_QUANAO => array(
+        $obj['type2']['Options'] = array(
+            static::$TYPE2_MANUFACTOR_QUANAO => array(
                 'Caption' => array('en' => 'Manufactor QA', 'vn' => 'Hãng SX QA'),
             )
         );
