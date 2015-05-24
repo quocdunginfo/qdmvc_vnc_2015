@@ -67,9 +67,18 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_Root {
                         'DataType' => static::getDataType('widgetnavcat_id'),
                         'LookupURL' => static::getLookupURL('widgetnavcat_id')
                     ),
+                    'partnergrp_id' => array(
+                        'SourceExpr' => 'partnergrp_id',
+                        'DataType' => static::getDataType('partnergrp_id'),
+                        'LookupURL' => static::getLookupURL('partnergrp_id')
+                    ),
                     'vnc_logo' => array(
                         'SourceExpr' => 'vnc_logo',
                         'DataType' => static::getDataType('vnc_logo'),
+                    ),
+                    'commercial_logo' => array(
+                        'SourceExpr' => 'commercial_logo',
+                        'DataType' => static::getDataType('commercial_logo'),
                     ),
                     'social_icon' => array(
                         'SourceExpr' => 'social_icon',

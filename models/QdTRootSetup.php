@@ -22,6 +22,9 @@ class QdTRootSetup extends QdRootSetup
             'vnc_logo' => array(
                 'DataType' => 'Image',
             ),
+            'commercial_logo' => array(
+                'DataType' => 'Image',
+            ),
             'widgetnavcat_id' => array(
                 'Name' => 'widgetnavcat_id',
                 'Caption' => array('en' => 'Widget Nav Cat', 'vn' => 'Widget Nav Cat'),
@@ -33,6 +36,32 @@ class QdTRootSetup extends QdRootSetup
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
                     'Table' => 'QdWidgetNavCat',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        /*array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'type',
+                            'Type' => 'FIELD',
+                            'Value' => QdPostCat::$TYPE_WIDGETNAV
+                        )*/
+                    )
+                )
+            ),
+            'partnergrp_id' => array(
+                'Name' => 'partnergrp_id',
+                'Caption' => array('en' => 'Partner Group', 'vn' => 'Nhóm Đối tác'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdPartnerGrp',
                     'Field' => 'id',
                     'TableFilter' => array(
                         /*array(

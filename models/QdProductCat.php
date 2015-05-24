@@ -208,6 +208,8 @@ class QdProductCat extends QdRoot
                 if (!$this->is_new_record()) {
                     $this->$field_name = $this->xRec()->$field_name;
                 }
+            }else if($this->$field_name == $this->id){
+                $this->pushValidateError($field_name, 'Không thể chọn cha là chính nó!');
             }
         }
     }

@@ -51,6 +51,11 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
                         'SourceExpr' => 'parent_id',
                         'LookupURL' => static::getLookupURL('parent_id')
                     ),
+                    '_parent_name' => array(
+                        'SourceExpr' => '_parent_name',
+                        'DataType' => static::getDataType('_parent_name'),
+                        'ReadOnly' => true
+                    ),
                     'order' => array(
                         'SourceExpr' => 'order'
                     ),

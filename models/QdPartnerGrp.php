@@ -1,16 +1,19 @@
 <?php
 
-class QdWidgetNavCat extends QdPostCat
+class QdPartnerGrp extends QdWidgetNavCat
 {
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+        $this->SETFILTERDEFAULT(array(
+            array('field' => 'type', 'value' => static::$TYPE_PARTNER, 'exact' => true, 'operator' => '=')
+        ));
     }
 
     public static function getInitObj()
     {
-        $obj = new QdWidgetNavCat();//init_obj trên page card sẽ không áp đúng __sys_note_url nếu chọn parent::
-        $obj->type = static::$TYPE_WIDGETNAV;
+        $obj = new QdPartnerGrp();//init_obj trên page card sẽ không áp đúng __sys_note_url nếu chọn parent::
+        $obj->type = static::$TYPE_PARTNER;
         return $obj;
     }
 
@@ -18,17 +21,17 @@ class QdWidgetNavCat extends QdPostCat
     {
         $obj = parent::getFieldsConfig();
         //change parent_id filter
-        $obj['parent_id']['TableRelation']['Table'] = 'QdWidgetNavCat';
+        $obj['parent_id']['TableRelation']['Table'] = 'QdPartnerGrp';
 
         $obj['type']['Options']= array(
-            static::$TYPE_WIDGETNAV => array(
-                'Caption' => array('en' => 'WidgetNavs Cat', 'vn' => 'WidgetNavs Cat'),
+            static::$TYPE_PARTNER => array(
+                'Caption' => array('en' => 'Partner Grp', 'vn' => 'Partner Grp'),
             ),
         );
 
 
         $obj['__sys_lines_url']['TableRelation'] = array(
-            'Table' => 'QdWidgetNav',
+            'Table' => 'QdPartner',
             'Field' => 'id',
             'TableFilter' => array(
                 array(

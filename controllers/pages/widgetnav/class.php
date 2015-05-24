@@ -40,6 +40,10 @@ class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
                     'path' => array(
                         'SourceExpr' => 'path',
                     ),
+                    'active' => array(
+                        'SourceExpr' => 'active',
+                        'DataType' => static::getDataType('active'),
+                    ),
                     'order' => array(
                         'SourceExpr' => 'order',
                     ),

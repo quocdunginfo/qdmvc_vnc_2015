@@ -7,6 +7,7 @@ class QdPostCat extends QdRoot
     public static $TYPE_POSTCAT = 0;
     public static $TYPE_WIDGETNAV = 211;
     public static $TYPE_IMGGRP = 50;
+    public static $TYPE_PARTNER = 487;
 
     /*
     static $has_many = array(

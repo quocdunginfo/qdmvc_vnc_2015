@@ -7,6 +7,7 @@ class QdWidgetNav extends QdRoot
     public static $TARGET_SELF = '_self';
     public static $TYPE_DEFAULT = 0;
     public static $TYPE_MENU = 10;
+    public static $TYPE_PARTNER = 20;
 
     public static function getFieldsConfig()
     {
@@ -50,6 +51,9 @@ class QdWidgetNav extends QdRoot
                 'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
                 'DataType' => 'Image',
                 'Description' => 'Hình đại diện',
+            ),
+            'active' => array(
+                'DataType' => 'Boolean',
             ),
             'type' => array(
                 'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
@@ -98,6 +102,7 @@ class QdWidgetNav extends QdRoot
         $obj = new QdWidgetNav();
         $obj->target = static::$TARGET_BLANK;
         $obj->type = static::$TYPE_DEFAULT;
+        $obj->active = true;
         return $obj;
     }
 }
