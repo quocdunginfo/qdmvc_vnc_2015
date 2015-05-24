@@ -38,7 +38,8 @@ class Qdmvc_Layout_Card
             function clearFormValidationMark() {
                 (function ($) {
                     //clear form validation mark and tooltip
-                    var $inputs = $("#cardForm :input[type=text]");
+                    //var $inputs = $("#cardForm :input[type=text]");
+                    var $inputs = $("#cardForm :input");
                     $inputs.each(function () {
                         $(this).css('border-color', '#ddd');//set to boootstrap default
                         try {

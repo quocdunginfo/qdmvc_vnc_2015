@@ -48,7 +48,15 @@ class Qdmvc_Page_Index {
             $tmp['text'] = $text;
             $tmp['id'] = $key;
             $tmp['parentid'] = $p_id;
-            $tmp['value'] = Qdmvc_Helper::getCompactPageListLink($key);
+            if(!Qdmvc_Helper::isNullOrEmpty($config['PageType']) && $config['PageType']=='Folder')
+            {
+                $tmp['value'] = '';
+            }
+            else
+            {
+                $tmp['value'] = Qdmvc_Helper::getCompactPageListLink($key);
+            }
+
 
             array_push($re, $tmp);
         }
