@@ -25,6 +25,10 @@ class QdProductSetup extends QdRootSetup
             'advice_phone' => array(
                 'Caption' => array('en' => 'Advice Phone', 'vn' => 'SĐT tư vấn'),
             ),
+            'support_phone' => array(
+                'Caption' => array('en' => 'Support Phone', 'vn' => 'SĐT hỗ trợ'),
+                'DataType' => 'WYSIWYG'
+            ),
             'bigsalecat_id' => array(
                 'Name' => 'bigsalecat_id',
                 'Caption' => array('en' => 'Big Sale', 'vn' => 'Big Sale'),

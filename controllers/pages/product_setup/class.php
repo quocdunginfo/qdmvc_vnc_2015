@@ -65,6 +65,10 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_Root {
                         'SourceExpr' => 'advice_phone',
                         'DataType' => static::getDataType('advice_phone')
                     ),
+                    'support_phone' => array(
+                        'SourceExpr' => 'support_phone',
+                        'DataType' => static::getDataType('support_phone')
+                    ),
                     'bigsalecat_id' => array(
                         'SourceExpr' => 'bigsalecat_id',
                         'LookupURL' => static::getLookupURL('bigsalecat_id')

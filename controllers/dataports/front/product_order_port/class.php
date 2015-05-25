@@ -15,21 +15,23 @@ class Qdmvc_DataPort_FrontProductOrder extends Qdmvc_DataPort_ProductOrder
         }
     }
 
-    protected function delete()
+    protected static function canView()
     {
-        $this->pushMsg('Không được phép xóa, ID='.$this->obj->id);
-        $this->finish();
+        return false;
     }
 
-    protected function update()
+    protected static function canDelete()
     {
-        $this->pushMsg('Không được phép sửa, ID='.$this->obj->id);
-        $this->finish();
+        return false;
+    }
+
+    protected static function canEdit()
+    {
+        return false;
     }
 
     protected function checkSecurity()
     {
         return true;
     }
-
 }
