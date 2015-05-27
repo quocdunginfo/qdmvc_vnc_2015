@@ -14,7 +14,7 @@ class QdProduct extends QdRoot
             //SAMPLE FIELD CONFIG
             '_product_cat_name' => array(
                 'Name' => '_product_cat_name',
-                'Caption' => array('en' => 'Product Cat Name', 'vn' => 'Tên loại SP'),
+                'Caption' => array('en-US' => 'Product Cat Name', 'vi-VN' => 'Tên loại SP'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -38,7 +38,7 @@ class QdProduct extends QdRoot
             ),
             'product_cat_id' => array(
                 'Name' => 'product_cat_id',
-                'Caption' => array('en' => 'Product Cat ID', 'vn' => 'Mã loại SP'),
+                'Caption' => array('en-US' => 'Product Cat ID', 'vi-VN' => 'Mã loại SP'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -64,7 +64,7 @@ class QdProduct extends QdRoot
             ),
             '_manufacturer_name' => array(
                 'Name' => '_manufacturer_name',
-                'Caption' => array('en' => 'Manufactor Name', 'vn' => 'Tên Hãng SX'),
+                'Caption' => array('en-US' => 'Manufactor Name', 'vi-VN' => 'Tên Hãng SX'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -82,7 +82,7 @@ class QdProduct extends QdRoot
             ),
             'size_id' => array(
 	            'Name' => 'size_id',
-	            'Caption' => array('en' => 'Size ID', 'vn' => 'Mã Size'),
+	            'Caption' => array('en-US' => 'Size ID', 'vi-VN' => 'Mã Size'),
 	            'DataType' => 'Code',
 	            'Numeric' => true,
 	            'Description' => '',
@@ -108,7 +108,7 @@ class QdProduct extends QdRoot
             ),
             'manufacturer_id' => array(
                 'Name' => 'manufacturer_id',
-                'Caption' => array('en' => 'Manufactor ID', 'vn' => 'Mã Hãng SX'),
+                'Caption' => array('en-US' => 'Manufactor ID', 'vi-VN' => 'Mã Hãng SX'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -133,39 +133,39 @@ class QdProduct extends QdRoot
                 )
             ),
             'avatar' => array(
-                'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
+                'Caption' => array('en-US' => 'Avatar', 'vi-VN' => 'Hình đại diện'),
                 'DataType' => 'Image',
                 'Description' => 'Hình đại diện',
             ),
             'active' => array(
-                'Caption' => array('en' => 'Active', 'vn' => 'Kích hoạt'),
+                'Caption' => array('en-US' => 'Active', 'vi-VN' => 'Kích hoạt'),
                 'DataType' => 'Boolean',
                 'InitValue' => true,
             ),
             'name' => array(
-                'Caption' => array('vn' => 'Tên SP'),
+                'Caption' => array('vi-VN' => 'Tên SP'),
                 //'DataType' => 'Color',
             ),
             'code' => array(
-                'Caption' => array('vn' => 'Mã SP'),
+                'Caption' => array('vi-VN' => 'Mã SP'),
             ),
             'price' => array(
-                'Caption' => array('vn' => 'Giá'),
+                'Caption' => array('vi-VN' => 'Giá'),
             ),
             'description' => array(
-                'Caption' => array('vn' => 'Mô tả'),
+                'Caption' => array('vi-VN' => 'Mô tả'),
                 'DataType' => 'WYSIWYG',
             ),
             'doitra_baohanh' => array(
-                'Caption' => array('vn' => 'Đổi trả/Bảo hành'),
+                'Caption' => array('vi-VN' => 'Đổi trả/Bảo hành'),
                 'DataType' => 'WYSIWYG',
             ),
             'giaohang_thanhtoan' => array(
-                'Caption' => array('vn' => 'Giao hàng/Thanh toán'),
+                'Caption' => array('vi-VN' => 'Giao hàng/Thanh toán'),
                 'DataType' => 'WYSIWYG',
             ),
             'temp_out_of_stock' => array(
-                'Caption' => array('vn' => 'Tạm hết hàng'),
+                'Caption' => array('vi-VN' => 'Tạm hết hàng'),
                 'DataType' => 'Boolean',
                 'InitValue' => false,
             ),
@@ -173,29 +173,29 @@ class QdProduct extends QdRoot
                 'DataType' => 'Decimal',
             ),
             'type' => array(
-                'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
+                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$TYPE_DEFAULT => array(
-                        'Caption' => array('en' => 'Default', 'vn' => 'Mặc định'),
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
                     ),
                     static::$TYPE_QUANAO => array(
-                        'Caption' => array('en' => 'Clothes', 'vn' => 'Quần áo'),
+                        'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
                     ),
                     static::$TYPE_GIAYDEP => array(
-                        'Caption' => array('en' => 'Shoes', 'vn' => 'Gìay dép'),
+                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Gìay dép'),
                     ),
                     static::$TYPE_OTHER => array(
-                        'Caption' => array('en' => 'Other', 'vn' => 'Khác'),
+                        'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
                     ),
                 )
             ),
             'date_modified' => array(
-                'Caption' => array('vn' => 'Ngày cập nhật'),
+                'Caption' => array('vi-VN' => 'Ngày cập nhật'),
                 'DataType' => 'Date',
             ),
         ));
-        $obj['__sys_lines_url']['Caption'] = array('en' => 'Related Products', 'vn' => 'SP liên kết');
+        $obj['__sys_lines_url']['Caption'] = array('en-US' => 'Related Products', 'vi-VN' => 'SP liên kết');
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdPro2Pro',
             'Field' => 'id',
@@ -305,7 +305,7 @@ class QdProduct extends QdRoot
     protected function avatarOnValidate($field_name)
     {
         if ($this->$field_name == '') {
-            $pro_setup = QdProductSetup::GET();
+            $pro_setup = QdSetupProduct::GET();
             $this->$field_name = $pro_setup->df_pro_avatar;
             $this->pushValidateError($field_name, 'Tự động gán Avatar mặc định cho Product', 'info');
         }

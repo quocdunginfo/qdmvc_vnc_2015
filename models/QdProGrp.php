@@ -9,7 +9,7 @@ class QdProGrp extends QdRoot
         $obj = array_merge(parent::getFieldsConfig(), array(
             '_product_name' => array(
                 'Name' => '_product_name',
-                'Caption' => array('en' => 'Product Name', 'vn' => 'Tên SP'),
+                'Caption' => array('en-US' => 'Product Name', 'vi-VN' => 'Tên SP'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -27,7 +27,7 @@ class QdProGrp extends QdRoot
             ),
             'product_id' => array(
                 'Name' => 'product_id',
-                'Caption' => array('en' => 'Product ID', 'vn' => 'Mã SP'),
+                'Caption' => array('en-US' => 'Product ID', 'vi-VN' => 'Mã SP'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -53,23 +53,23 @@ class QdProGrp extends QdRoot
             ),
             'order' => array(),
             'group_type' => array(
-                'Caption' => array('en' => 'Group Type', 'vn' => 'Phân loại'),
+                'Caption' => array('en-US' => 'Group Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
                     QdProductCat::$TYPE_PRODUCTCAT => array(
-                        'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
+                        'Caption' => array('en-US' => 'Product Cat', 'vi-VN' => 'Product Cat'),
                     ),
                     QdBigSaleCat::$TYPE_BIGSALE => array(
-                        'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
+                        'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Bán chạy'),
                     ),
                     QdPromotionCat::$TYPE_PROMOTION=> array(
-                        'Caption' => array('en' => 'Promotion', 'vn' => 'Khuyến mãi'),
+                        'Caption' => array('en-US' => 'Promotion', 'vi-VN' => 'Khuyến mãi'),
                     ),
                 )
             ),
             '_group_name' => array(
                 'Name' => '_group_name',
-                'Caption' => array('en' => 'Category Name', 'vn' => 'Tên loại'),
+                'Caption' => array('en-US' => 'Category Name', 'vi-VN' => 'Tên loại'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -87,7 +87,7 @@ class QdProGrp extends QdRoot
             ),
             'group_id' => array(
                 'Name' => 'group_id',
-                'Caption' => array('en' => 'Group ID', 'vn' => 'Mã nhóm'),
+                'Caption' => array('en-US' => 'Group ID', 'vi-VN' => 'Mã nhóm'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',

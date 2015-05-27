@@ -22,7 +22,7 @@ class QdWidgetNavCat extends QdPostCat
 
         $obj['type']['Options']= array(
             static::$TYPE_WIDGETNAV => array(
-                'Caption' => array('en' => 'WidgetNavs Cat', 'vn' => 'WidgetNavs Cat'),
+                'Caption' => array('en-US' => 'WidgetNavs Cat', 'vi-VN' => 'WidgetNavs Cat'),
             ),
         );
 

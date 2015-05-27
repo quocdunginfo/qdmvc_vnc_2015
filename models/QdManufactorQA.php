@@ -44,7 +44,7 @@ class QdManufactorQA extends QdManufactor
         );
         $obj['type2']['Options'] = array(
             static::$TYPE2_MANUFACTOR_QUANAO => array(
-                'Caption' => array('en' => 'Manufactor QA', 'vn' => 'Hãng SX QA'),
+                'Caption' => array('en-US' => 'Manufactor QA', 'vi-VN' => 'Hãng SX QA'),
             )
         );
         return $obj;

@@ -34,73 +34,73 @@ class QdObjectTask extends QdRoot
                 'DataType' => 'Boolean',
             ),
             'object_type' => array(
-                'Caption' => array('en' => 'Object Type', 'vn' => 'Object Type'),
+                'Caption' => array('en-US' => 'Object Type', 'vi-VN' => 'Object Type'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$OBJECT_TYPE_MODEL => array(
-                        'Caption' => array('en' => 'Model', 'vn' => 'Model'),
+                        'Caption' => array('en-US' => 'Model', 'vi-VN' => 'Model'),
                     ),
                     static::$OBJECT_TYPE_PAGE => array(
-                        'Caption' => array('en' => 'Page', 'vn' => 'Page'),
+                        'Caption' => array('en-US' => 'Page', 'vi-VN' => 'Page'),
                     ),
                     static::$OBJECT_TYPE_DATAPORT => array(
-                        'Caption' => array('en' => 'Dataport', 'vn' => 'Dataport'),
+                        'Caption' => array('en-US' => 'Dataport', 'vi-VN' => 'Dataport'),
                     ),
                     static::$OBJECT_TYPE_LAYOUT => array(
-                        'Caption' => array('en' => 'Layout', 'vn' => 'Layout'),
+                        'Caption' => array('en-US' => 'Layout', 'vi-VN' => 'Layout'),
                     ),
                     static::$OBJECT_TYPE_MENU => array(
-                        'Caption' => array('en' => 'menu', 'vn' => 'Menu'),
+                        'Caption' => array('en-US' => 'menu', 'vi-VN' => 'Menu'),
                     ),
                     static::$OBJECT_TYPE_TABLE => array(
-                        'Caption' => array('en' => 'Table', 'vn' => 'Table'),
+                        'Caption' => array('en-US' => 'Table', 'vi-VN' => 'Table'),
                     ),
                     static::$OBJECT_TYPE_COLUMN => array(
-                        'Caption' => array('en' => 'Column', 'vn' => 'Column'),
+                        'Caption' => array('en-US' => 'Column', 'vi-VN' => 'Column'),
                     ),
                     static::$OBJECT_TYPE_OTHER => array(
-                        'Caption' => array('en' => 'Other', 'vn' => 'Other'),
+                        'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Other'),
                     ),
                 )
             ),
             'object_name' => array(),
             'version' => array(),
             'layer' => array(
-                'Caption' => array('en' => 'Layer', 'vn' => 'Layer'),
+                'Caption' => array('en-US' => 'Layer', 'vi-VN' => 'Layer'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$LAYER_FW => array(
-                        'Caption' => array('en' => 'Framework', 'vn' => 'Framework'),
+                        'Caption' => array('en-US' => 'Framework', 'vi-VN' => 'Framework'),
                     ),
                     static::$LAYER_APP => array(
-                        'Caption' => array('en' => 'App', 'vn' => 'App'),
+                        'Caption' => array('en-US' => 'App', 'vi-VN' => 'App'),
                     ),
                     static::$LAYER_THEME => array(
-                        'Caption' => array('en' => 'Theme', 'vn' => 'Theme'),
+                        'Caption' => array('en-US' => 'Theme', 'vi-VN' => 'Theme'),
                     ),
                     static::$LAYER_DB => array(
-                        'Caption' => array('en' => 'Database', 'vn' => 'Database'),
+                        'Caption' => array('en-US' => 'Database', 'vi-VN' => 'Database'),
                     ),
                     static::$LAYER_OTHER => array(
-                        'Caption' => array('en' => 'Other', 'vn' => 'Other'),
+                        'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Other'),
                     ),
                 )
             ),
             'action' => array(
-                'Caption' => array('en' => 'Action', 'vn' => 'Action'),
+                'Caption' => array('en-US' => 'Action', 'vi-VN' => 'Action'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$ACTION_CREATE => array(
-                        'Caption' => array('en' => 'Create', 'vn' => 'Create'),
+                        'Caption' => array('en-US' => 'Create', 'vi-VN' => 'Create'),
                     ),
                     static::$ACTION_MODIFY => array(
-                        'Caption' => array('en' => 'Modify', 'vn' => 'Modify'),
+                        'Caption' => array('en-US' => 'Modify', 'vi-VN' => 'Modify'),
                     ),
                     static::$ACTION_REMOVE => array(
-                        'Caption' => array('en' => 'Remove', 'vn' => 'Remove'),
+                        'Caption' => array('en-US' => 'Remove', 'vi-VN' => 'Remove'),
                     ),
                     static::$ACTION_OTHER => array(
-                        'Caption' => array('en' => 'Other', 'vn' => 'Other'),
+                        'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Other'),
                     ),
                 )
             ),

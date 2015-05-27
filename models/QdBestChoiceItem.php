@@ -38,7 +38,7 @@ class QdBestChoiceItem extends QdPost
         );
         $obj['_post_cat_desc'] = array(
             'Name' => 'product_cat_desc',
-            'Caption' => array('en' => 'Product Cat Desc', 'vn' => 'Mô tả loại'),
+            'Caption' => array('en-US' => 'Product Cat Desc', 'vi-VN' => 'Mô tả loại'),
             'DataType' => 'Text',
             'FieldClass' => 'FlowField',
             'FieldClass_FlowField' => array(

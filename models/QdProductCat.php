@@ -34,10 +34,10 @@ class QdProductCat extends QdRoot
     {
         $obj = array_merge(parent::getFieldsConfig(), array(
             'name' => array(
-                'Caption' => array('vn' => 'Tên LSP'),
+                'Caption' => array('vi-VN' => 'Tên LSP'),
             ),
             'avatar' => array(
-                'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
+                'Caption' => array('en-US' => 'Avatar', 'vi-VN' => 'Hình đại diện'),
                 'DataType' => 'Image',
                 'Description' => 'Hình đại diện'
             ),
@@ -45,11 +45,11 @@ class QdProductCat extends QdRoot
                 'DataType' => 'Boolean',
             ),
             'order' => array(
-                'Caption' => array('vn' => 'Thứ tự'),
+                'Caption' => array('vi-VN' => 'Thứ tự'),
             ),
             '_parent_name' => array(
                 'Name' => '_parent_name',
-                'Caption' => array('en' => 'Parent Name', 'vn' => 'Tên cha'),
+                'Caption' => array('en-US' => 'Parent Name', 'vi-VN' => 'Tên cha'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -67,7 +67,7 @@ class QdProductCat extends QdRoot
             ),
             'parent_id' => array(
                 'Name' => 'parent_id',
-                'Caption' => array('en' => 'Parent ID', 'vn' => 'Mã LSP cha'),
+                'Caption' => array('en-US' => 'Parent ID', 'vi-VN' => 'Mã LSP cha'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -92,37 +92,37 @@ class QdProductCat extends QdRoot
             ),
             /*
             'is_leaf' => array(
-                'Caption' => array('en' => 'Is leaf', 'vn' => 'Nút lá'),
+                'Caption' => array('en-US' => 'Is leaf', 'vi-VN' => 'Nút lá'),
                 'DataType' => 'Boolean'
             ),*/
             'type' => array(
-                'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
+                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$TYPE_PRODUCTCAT => array(
-                        'Caption' => array('en' => 'Product Cat', 'vn' => 'Product Cat'),
+                        'Caption' => array('en-US' => 'Product Cat', 'vi-VN' => 'Product Cat'),
                     ),
                     /*
                     static::$TYPE_MANUFACTOR => array(
-                        'Caption' => array('en' => 'Manufactor', 'vn' => 'Hãng SX'),
+                        'Caption' => array('en-US' => 'Manufactor', 'vi-VN' => 'Hãng SX'),
                     )*/
                 )
             ),
             'type2' => array(
-                'Caption' => array('en' => 'Type2', 'vn' => 'Dòng SP'),
+                'Caption' => array('en-US' => 'Type2', 'vi-VN' => 'Dòng SP'),
                 'DataType' => 'Option',
                 'Options' => array(
                     QdManufactor::$TYPE2_MANUFACTOR_DEFAULT => array(
-                        'Caption' => array('en' => 'Product Cat DF', 'vn' => 'Loại SP DF'),
+                        'Caption' => array('en-US' => 'Product Cat DF', 'vi-VN' => 'Loại SP DF'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
-                        'Caption' => array('en' => 'Product Cat GD', 'vn' => 'Loại SP GD'),
+                        'Caption' => array('en-US' => 'Product Cat GD', 'vi-VN' => 'Loại SP GD'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
-                        'Caption' => array('en' => 'Product Cat QA', 'vn' => 'Loại SP QA'),
+                        'Caption' => array('en-US' => 'Product Cat QA', 'vi-VN' => 'Loại SP QA'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
-                        'Caption' => array('en' => 'Product Cat Other', 'vn' => 'Loại SP Other'),
+                        'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),
                     ),
                 )
             )
@@ -187,8 +187,9 @@ class QdProductCat extends QdRoot
     public function getBreadcrumbs()
     {
         $re = array();
-        array_push($re, array('name' => 'Sản phẩm', 'url' => $this->getPermalink()));
-        array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
+        $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
+        array_push($re, array('name' => $this->name, 'url' => add_query_arg(array('product-cat-id' => $this->id), $product_search)));
         return $re;
     }
 
@@ -217,7 +218,7 @@ class QdProductCat extends QdRoot
     protected function avatarOnValidate($field_name)
     {
         if ($this->$field_name == '') {
-            $pro_setup = QdProductSetup::GET();
+            $pro_setup = QdSetupProduct::GET();
             $this->$field_name = $pro_setup->df_pro_cat_avatar;
             $this->pushValidateError($field_name, 'Tự động gán Avatar mặc định cho Product Cat', 'info');
         }

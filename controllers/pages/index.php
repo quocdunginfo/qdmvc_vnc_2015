@@ -31,7 +31,7 @@ class Qdmvc_Page_Index {
             }
         }
     }
-    public static function buildJSONTree($lang='en')
+    public static function buildJSONTree($lang='en-US')
     {
         $re = array();
         foreach(static::getIndex() as $key=>$config)

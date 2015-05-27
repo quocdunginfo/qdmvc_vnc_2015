@@ -24,22 +24,22 @@ class QdPostCat extends QdRoot
     {
         $obj = array_merge(parent::getFieldsConfig(), array(
             'title' => array(
-                'Caption' => array('en' => 'Title', 'vn' => 'Tiêu đề'),
+                'Caption' => array('en-US' => 'Title', 'vi-VN' => 'Tiêu đề'),
             ),
             'description' => array(
-                'Caption' => array('en' => 'Description', 'vn' => 'Mô tả'),
+                'Caption' => array('en-US' => 'Description', 'vi-VN' => 'Mô tả'),
             ),
             'avatar' => array(
-                'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
+                'Caption' => array('en-US' => 'Avatar', 'vi-VN' => 'Hình đại diện'),
                 'DataType' => 'Image',
                 'Description' => 'Hình đại diện'
             ),
             'order' => array(
-                'Caption' => array('vn' => 'Thứ tự'),
+                'Caption' => array('vi-VN' => 'Thứ tự'),
             ),
             'parent_id' => array(
                 'Name' => 'parent_id',
-                'Caption' => array('en' => 'Parent ID', 'vn' => 'Mã loại cha'),
+                'Caption' => array('en-US' => 'Parent ID', 'vi-VN' => 'Mã loại cha'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -64,20 +64,20 @@ class QdPostCat extends QdRoot
                 )
             ),
             'type' => array(
-                'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
+                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$TYPE_POSTCAT => array(
-                        'Caption' => array('en' => 'Post Cat', 'vn' => 'Post Cat'),
+                        'Caption' => array('en-US' => 'Post Cat', 'vi-VN' => 'Post Cat'),
                     ),
                     static::$TYPE_BESTCHOICECAT => array(
-                        'Caption' => array('en' => 'Best choice Cat', 'vn' => 'Best choice Cat'),
+                        'Caption' => array('en-US' => 'Best choice Cat', 'vi-VN' => 'Best choice Cat'),
                     ),
                     static::$TYPE_WIDGETNAV => array(
-                        'Caption' => array('en' => 'WidgetNavs Cat', 'vn' => 'WidgetNavs Cat'),
+                        'Caption' => array('en-US' => 'WidgetNavs Cat', 'vi-VN' => 'WidgetNavs Cat'),
                     ),
                     static::$TYPE_IMGGRP => array(
-                        'Caption' => array('en' => 'Img group', 'vn' => 'Img Group'),
+                        'Caption' => array('en-US' => 'Img group', 'vi-VN' => 'Img Group'),
                     ),
                 )
             )

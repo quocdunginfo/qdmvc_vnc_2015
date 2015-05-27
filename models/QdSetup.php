@@ -18,18 +18,17 @@ class QdSetup extends QdRootSetup
     {
         return array_merge(parent::getFieldsConfig(), array(
             'df_language' => array(
-                'Caption' => array('en' => 'DF Language', 'vn' => 'Ngôn ngữ mặc định'),
+                'Caption' => array('en-US' => 'DF Language', 'vi-VN' => 'Ngôn ngữ mặc định'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    'en' => array(
-                        'Caption' => array('en' => 'English', 'vn' => 'Tiếng Anh'),
+                    'en-US' => array(
+                        'Caption' => array('en-US' => 'English', 'vi-VN' => 'Tiếng Anh'),
                     ),
-                    'vn' => array(
-                        'Caption' => array('en' => 'Vietnamese', 'vn' => 'Tiếng việt'),
+                    'vi-VN' => array(
+                        'Caption' => array('en-US' => 'Vietnamese', 'vi-VN' => 'Tiếng việt'),
                     ),
                 )
             ),
-
         ));
     }
 

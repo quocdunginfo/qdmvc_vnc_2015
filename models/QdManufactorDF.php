@@ -44,7 +44,7 @@ class QdManufactorDF extends QdManufactor
         );
         $obj['type2']['Options'] = array(
             static::$TYPE2_MANUFACTOR_DEFAULT => array(
-                'Caption' => array('en' => 'Manufactor DF', 'vn' => 'Hãng SX DF'),
+                'Caption' => array('en-US' => 'Manufactor DF', 'vi-VN' => 'Hãng SX DF'),
             )
         );
         return $obj;

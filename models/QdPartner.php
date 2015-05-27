@@ -8,7 +8,7 @@ class QdPartner extends QdWidgetNav
         $obj['group_id']['TableRelation']['Table'] = 'QdPartnerGrp';
         $obj['type']['Options'] = array(
             static::$TYPE_PARTNER => array(
-                'Caption' => array('en' => 'Partner', 'vn' => 'Partner'),
+                'Caption' => array('en-US' => 'Partner', 'vi-VN' => 'Partner'),
             ),
         );
         return $obj;

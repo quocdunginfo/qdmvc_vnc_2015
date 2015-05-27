@@ -25,7 +25,7 @@ class QdPartnerGrp extends QdWidgetNavCat
 
         $obj['type']['Options']= array(
             static::$TYPE_PARTNER => array(
-                'Caption' => array('en' => 'Partner Grp', 'vn' => 'Partner Grp'),
+                'Caption' => array('en-US' => 'Partner Grp', 'vi-VN' => 'Partner Grp'),
             ),
         );
 

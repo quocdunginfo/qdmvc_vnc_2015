@@ -10,15 +10,15 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_Root {
     public function run()
     {
         //prepare data
-        if(QdProductSetup::GET()==null)
+        if(QdSetupProduct::GET()==null)
         {
-            $obj = new QdProductSetup();
+            $obj = new QdSetupProduct();
             $obj->save();
             $this->data['obj'] = $obj;
         }
         else
         {
-            $this->data['obj'] = QdProductSetup::GET();
+            $this->data['obj'] = QdSetupProduct::GET();
         }
 
         //load View and render
@@ -46,9 +46,6 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_Root {
                         'SourceExpr' => 'id',
                         'Hidden' => true
                     ),
-                    'product_per_segment' => array(
-                        'SourceExpr' => 'product_per_segment'
-                    ),
                     'df_pro_cat_avatar' => array(
                         'SourceExpr' => 'df_pro_cat_avatar',
                         'DataType' => static::getDataType('df_pro_cat_avatar')
@@ -60,14 +57,6 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_Root {
                     'df_pro_avatar' => array(
                         'SourceExpr' => 'df_pro_avatar',
                         'DataType' => static::getDataType('df_pro_avatar')
-                    ),
-                    'advice_phone' => array(
-                        'SourceExpr' => 'advice_phone',
-                        'DataType' => static::getDataType('advice_phone')
-                    ),
-                    'support_phone' => array(
-                        'SourceExpr' => 'support_phone',
-                        'DataType' => static::getDataType('support_phone')
                     ),
                     'bigsalecat_id' => array(
                         'SourceExpr' => 'bigsalecat_id',

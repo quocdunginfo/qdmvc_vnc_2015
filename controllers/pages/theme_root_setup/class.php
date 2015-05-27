@@ -5,25 +5,8 @@
  * Date: 05/03/2015
  * Time: 11:36 PM
  */
-Qdmvc::loadPage('root');
-class Qdmvc_Page_TRootSetup extends Qdmvc_Page_Root {
-    public function run()
-    {
-        //prepare data
-        if(QdTRootSetup::GET()==null)
-        {
-            $obj = new QdTRootSetup();
-            $obj->save();
-            $this->data['obj'] = $obj;
-        }
-        else
-        {
-            $this->data['obj'] = QdTRootSetup::GET();
-        }
-
-        //load View and render
-        parent::run();
-    }
+Qdmvc::loadPage('root_setup');
+class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
 
     protected static function getViewClass()
     {

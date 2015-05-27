@@ -35,7 +35,7 @@ class QdBigSaleCat extends QdProductCat
         );
         $obj['type']['Options'] = array(
             static::$TYPE_BIGSALE => array(
-                'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
+                'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Bán chạy'),
             ),
         );
         return $obj;

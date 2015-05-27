@@ -43,7 +43,7 @@ class QdManufactorGD extends QdManufactor
         );
         $obj['type2']['Options'] = array(
             static::$TYPE2_MANUFACTOR_GIAYDEP => array(
-                'Caption' => array('en' => 'Manufactor GD', 'vn' => 'Hãng SX GD'),
+                'Caption' => array('en-US' => 'Manufactor GD', 'vi-VN' => 'Hãng SX GD'),
             )
         );
         return $obj;

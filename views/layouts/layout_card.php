@@ -1086,38 +1086,38 @@ class Qdmvc_Layout_Card
         return array(
             20 => array(
                 'Caption' => array(
-                    'en' => 'Create new record for input (but NOT saved yet)',
-                    'vn' => 'Tạo mới một record để nhập liệu (tuy nhiên KHÔNG lưu)'
+                    'en-US' => 'Create new record for input (but NOT saved yet)',
+                    'vi-VN' => 'Tạo mới một record để nhập liệu (tuy nhiên KHÔNG lưu)'
                 )
             ),
             40 => array(
                 'Caption' => array(
-                    'en' => 'Input record property',
-                    'vn' => 'Nhập liệu cho từng thuộc tính'
+                    'en-US' => 'Input record property',
+                    'vi-VN' => 'Nhập liệu cho từng thuộc tính'
                 )
             ),
             60 => array(
                 'Caption' => array(
-                    'en' => 'Press Save button',
-                    'vn' => 'Click nút lưu'
+                    'en-US' => 'Press Save button',
+                    'vi-VN' => 'Click nút lưu'
                 )
             ),
             80 => array(
                 'Caption' => array(
-                    'en' => 'Focus on this area to see new added record',
-                    'vn' => 'Quan sát ở đây để thấy record mới thêm'
+                    'en-US' => 'Focus on this area to see new added record',
+                    'vi-VN' => 'Quan sát ở đây để thấy record mới thêm'
                 )
             ),
             100 => array(
                 'Caption' => array(
-                    'en' => 'Notification area, validation msg will raise beside here, click to clear msgs',
-                    'vn' => 'Khi lưu, các thông báo lỗi (nếu có) sẽ xuất hiện ở đây'
+                    'en-US' => 'Notification area, validation msg will raise beside here, click to clear msgs',
+                    'vi-VN' => 'Khi lưu, các thông báo lỗi (nếu có) sẽ xuất hiện ở đây'
                 )
             ),
             101 => array(
                 'Caption' => array(
-                    'en' => 'Validation also marked on each field which cause error',
-                    'vn' => 'Đồng thời cũng sẽ đánh dấu trên Form các Field gây lỗi (màu viền: đỏ (lỗi), vàng (cảnh báo), xanh(dữ liệu tự động gán),...)'
+                    'en-US' => 'Validation also marked on each field which cause error',
+                    'vi-VN' => 'Đồng thời cũng sẽ đánh dấu trên Form các Field gây lỗi (màu viền: đỏ (lỗi), vàng (cảnh báo), xanh(dữ liệu tự động gán),...)'
                 )
             )
         );
@@ -1161,7 +1161,7 @@ class Qdmvc_Layout_Card
                             $count=1;
                             foreach($mapping as $elementId=>$nodeNo):
                             $tmp = $this->getHelpTourNodes();
-                            $intro = $tmp[$nodeNo]['Caption']['vn'];
+                            $intro = $tmp[$nodeNo]['Caption']['vi-VN'];
                             $priority = $count;
                             ?>
                         HelpTourSetMetaData('<?=$elementId?>', '<?=$intro?>', <?=$priority?>);

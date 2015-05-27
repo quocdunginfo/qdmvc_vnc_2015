@@ -149,7 +149,7 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|insert";
         if ($this->obj->save(true, $location)) {
-            $this->pushMsg('Thêm thành công, ID=' . $this->obj->id);
+            $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_insert_ok'), $this->obj->id));
         }
         $this->pushMsg($this->obj->GETVALIDATION());
     }
@@ -178,7 +178,7 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|update";
         if ($this->obj->save(true, $location)) {
-            $this->pushMsg('Cập nhật thành công, ID=' . $this->obj->id);
+            $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_update_ok'), $this->obj->id));
         }
         $this->pushMsg($this->obj->GETVALIDATION());
     }
@@ -202,7 +202,7 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|delete";
         if ($this->obj->delete($location)) {
-            $this->pushMsg('Xóa thành công, ID=' . $this->obj->id);
+            $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_delete_ok'), $this->obj->id));
         }
         $this->pushMsg($this->obj->GETVALIDATION());
     }

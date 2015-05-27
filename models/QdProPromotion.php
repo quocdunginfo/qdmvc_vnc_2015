@@ -27,7 +27,7 @@ class QdProPromotion extends QdProGrp
         );
         $obj['group_type']['Options'] = array(
             QdPromotionCat::$TYPE_PROMOTION => array(
-                'Caption' => array('en' => 'Promotion', 'vn' => 'Khuyến mãi'),
+                'Caption' => array('en-US' => 'Promotion', 'vi-VN' => 'Khuyến mãi'),
             ),
         );
         return $obj;

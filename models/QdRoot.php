@@ -24,18 +24,18 @@ class QdRoot extends ActiveRecord\Model
         ),
         '__sys_lines_url' => array(
             'FieldClass' => 'System',
-            'Caption' => array('en' => 'Lines', 'vn' => 'Lines'),
+            'Caption' => array('en-US' => 'Lines', 'vi-VN' => 'Lines'),
             'TableRelation' => array()
         ),
         '__lasteditor_name' => array(
             'Name' => '_lasteditor_name',
-            'Caption' => array('en' => 'Last editor name', 'vn' => 'Sửa bởi'),
+            'Caption' => array('en-US' => 'Last editor name', 'vi-VN' => 'Sửa bởi'),
             'DataType' => 'Text',
             'FieldClass' => 'System',
         ),
         '__owner_name' => array(
             'Name' => '_lasteditor_name',
-            'Caption' => array('en' => 'Owner name', 'vn' => 'Tạo bởi'),
+            'Caption' => array('en-US' => 'Owner name', 'vi-VN' => 'Tạo bởi'),
             'DataType' => 'Text',
             'FieldClass' => 'System',
         ),
@@ -551,7 +551,7 @@ class QdRoot extends ActiveRecord\Model
         }
     }
 
-    public static function getFieldCaption($field_name, $lang = 'en')
+    public static function getFieldCaption($field_name, $lang = 'en-US')
     {
         try {
             $config = static::getFieldsConfig();
@@ -716,7 +716,7 @@ class QdRoot extends ActiveRecord\Model
         $obj->save();
     }
 
-    public static function getFieldOptions($field_name, $lang = 'en')
+    public static function getFieldOptions($field_name, $lang = 'en-US')
     {
         try {
             $tmp = array();

@@ -18,20 +18,20 @@ class QdWidgetNav extends QdRoot
             'path' => array(),
             'order' => array(),
             'target' => array(
-                'Caption' => array('en' => 'Target', 'vn' => 'Target'),
+                'Caption' => array('en-US' => 'Target', 'vi-VN' => 'Target'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$TARGET_SELF => array(
-                        'Caption' => array('en' => 'Default', 'vn' => 'Mặc định'),
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
                     ),
                     static::$TARGET_BLANK => array(
-                        'Caption' => array('en' => 'New Tab', 'vn' => 'Tab mới'),
+                        'Caption' => array('en-US' => 'New Tab', 'vi-VN' => 'Tab mới'),
                     ),
                 )
             ),
             '_group_name' => array(
                 'Name' => '_group_name',
-                'Caption' => array('en' => 'Group Name', 'vn' => 'Tên nhóm'),
+                'Caption' => array('en-US' => 'Group Name', 'vi-VN' => 'Tên nhóm'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -48,7 +48,7 @@ class QdWidgetNav extends QdRoot
                 )
             ),
             'avatar' => array(
-                'Caption' => array('en' => 'Avatar', 'vn' => 'Hình đại diện'),
+                'Caption' => array('en-US' => 'Avatar', 'vi-VN' => 'Hình đại diện'),
                 'DataType' => 'Image',
                 'Description' => 'Hình đại diện',
             ),
@@ -56,21 +56,21 @@ class QdWidgetNav extends QdRoot
                 'DataType' => 'Boolean',
             ),
             'type' => array(
-                'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
+                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$TYPE_DEFAULT => array(
-                        'Caption' => array('en' => 'Default', 'vn' => 'Mặc định'),
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
                     ),
                     static::$TYPE_MENU => array(
-                        'Caption' => array('en' => 'Menu', 'vn' => 'Menu'),
+                        'Caption' => array('en-US' => 'Menu', 'vi-VN' => 'Menu'),
                     ),
 
                 )
             ),
             'group_id' => array(
                 'Name' => 'post_cat_id',
-                'Caption' => array('en' => 'Cat ID', 'vn' => 'Mã loại'),
+                'Caption' => array('en-US' => 'Cat ID', 'vi-VN' => 'Mã loại'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',

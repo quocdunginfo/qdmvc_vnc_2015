@@ -27,7 +27,7 @@ class QdAbout extends QdPost
         $obj = parent::getFieldsConfig();
         $obj['_post_cat_desc'] = array(
             'Name' => 'product_cat_desc',
-            'Caption' => array('en' => 'Product Cat Desc', 'vn' => 'Mô tả loại'),
+            'Caption' => array('en-US' => 'Product Cat Desc', 'vi-VN' => 'Mô tả loại'),
             'DataType' => 'Text',
             'FieldClass' => 'FlowField',
             'FieldClass_FlowField' => array(
@@ -44,20 +44,20 @@ class QdAbout extends QdPost
             )
         );
         $obj['tpl_type'] = array(
-            'Caption' => array('en' => 'Template', 'vn' => 'Template'),
+            'Caption' => array('en-US' => 'Template', 'vi-VN' => 'Template'),
             'DataType' => 'Option',
             'Options' => array(
                 static::$TPL_TYPE_IMG => array(
-                    'Caption' => array('en' => 'Img Center', 'vn' => 'Img Center'),
+                    'Caption' => array('en-US' => 'Img Center', 'vi-VN' => 'Img Center'),
                 ),
                 static::$TPL_TYPE_TEXT => array(
-                    'Caption' => array('en' => 'Text Center', 'vn' => 'Text Center'),
+                    'Caption' => array('en-US' => 'Text Center', 'vi-VN' => 'Text Center'),
                 ),
                 static::$TPL_TYPE_TEXTIMG => array(
-                    'Caption' => array('en' => 'Text/Img', 'vn' => 'Text/Img'),
+                    'Caption' => array('en-US' => 'Text/Img', 'vi-VN' => 'Text/Img'),
                 ),
                 static::$TPL_TYPE_IMGTEXT => array(
-                    'Caption' => array('en' => 'Img/Text', 'vn' => 'Img/Text'),
+                    'Caption' => array('en-US' => 'Img/Text', 'vi-VN' => 'Img/Text'),
                 ),
             )
         );

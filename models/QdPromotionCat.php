@@ -36,7 +36,7 @@ class QdPromotionCat extends QdProductCat
         );
         $obj['type']['Options'] = array(
             static::$TYPE_PROMOTION => array(
-                'Caption' => array('en' => 'Promotion', 'vn' => 'Khuyến mãi'),
+                'Caption' => array('en-US' => 'Promotion', 'vi-VN' => 'Khuyến mãi'),
             ),
         );
         return $obj;

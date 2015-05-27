@@ -27,7 +27,7 @@ class QdTRootSetup extends QdRootSetup
             ),
             'widgetnavcat_id' => array(
                 'Name' => 'widgetnavcat_id',
-                'Caption' => array('en' => 'Widget Nav Cat', 'vn' => 'Widget Nav Cat'),
+                'Caption' => array('en-US' => 'Widget Nav Cat', 'vi-VN' => 'Widget Nav Cat'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -53,7 +53,7 @@ class QdTRootSetup extends QdRootSetup
             ),
             'partnergrp_id' => array(
                 'Name' => 'partnergrp_id',
-                'Caption' => array('en' => 'Partner Group', 'vn' => 'Nhóm Đối tác'),
+                'Caption' => array('en-US' => 'Partner Group', 'vi-VN' => 'Nhóm Đối tác'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -79,7 +79,7 @@ class QdTRootSetup extends QdRootSetup
             ),
             'img_slider' => array(
                 'Name' => 'img_slider',
-                'Caption' => array('en' => 'Banner', 'vn' => 'Banner'),
+                'Caption' => array('en-US' => 'Banner', 'vi-VN' => 'Banner'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -105,7 +105,7 @@ class QdTRootSetup extends QdRootSetup
             ),
             'social_icon' => array(
                 'Name' => 'social_icon',
-                'Caption' => array('en' => 'Social Icon', 'vn' => 'Social Icon'),
+                'Caption' => array('en-US' => 'Social Icon', 'vi-VN' => 'Social Icon'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',

@@ -19,7 +19,7 @@ class QdProductCatDF extends QdProductCat
         $obj = parent::getFieldsConfig();
         $obj['type2']['Options'] = array(
             QdManufactor::$TYPE2_MANUFACTOR_DEFAULT => array(
-                'Caption' => array('en' => 'Product Cat DF', 'vn' => 'Loại SP DF'),
+                'Caption' => array('en-US' => 'Product Cat DF', 'vi-VN' => 'Loại SP DF'),
             )
         );
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatDF';

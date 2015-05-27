@@ -44,7 +44,7 @@ class QdManufactor extends QdProductCat
         );
         $obj['type']['Options'] = array(
             static::$TYPE_MANUFACTOR => array(
-                'Caption' => array('en' => 'Manufactor', 'vn' => 'Hãng SX'),
+                'Caption' => array('en-US' => 'Manufactor', 'vi-VN' => 'Hãng SX'),
             )
         );
         $obj['__sys_lines_url']['TableRelation'] = array(

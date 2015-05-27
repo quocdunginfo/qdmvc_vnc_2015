@@ -9,7 +9,7 @@ class QdPro2Pro extends QdRoot
         return array_merge(parent::getFieldsConfig(), array(
             '_product_name' => array(
                 'Name' => '_product_name',
-                'Caption' => array('en' => 'Product Name', 'vn' => 'Tên SP'),
+                'Caption' => array('en-US' => 'Product Name', 'vi-VN' => 'Tên SP'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -27,7 +27,7 @@ class QdPro2Pro extends QdRoot
             ),
             'product_id' => array(
                 'Name' => 'product_id',
-                'Caption' => array('en' => 'Product ID', 'vn' => 'Mã SP'),
+                'Caption' => array('en-US' => 'Product ID', 'vi-VN' => 'Mã SP'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',
@@ -54,7 +54,7 @@ class QdPro2Pro extends QdRoot
             'order' => array(),
             '_r_product_name' => array(
                 'Name' => '_r_product_name',
-                'Caption' => array('en' => 'Child Product Name', 'vn' => 'Tên SP liên kết'),
+                'Caption' => array('en-US' => 'Child Product Name', 'vi-VN' => 'Tên SP liên kết'),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -72,7 +72,7 @@ class QdPro2Pro extends QdRoot
             ),
             'r_product_id' => array(
                 'Name' => 'r_product_id',
-                'Caption' => array('en' => 'Child Product', 'vn' => 'Mã SP liên kết'),
+                'Caption' => array('en-US' => 'Child Product', 'vi-VN' => 'Mã SP liên kết'),
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => '',

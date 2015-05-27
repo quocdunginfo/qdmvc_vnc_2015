@@ -12,25 +12,25 @@ class QdLog extends QdNote
     {
         return array_merge(parent::getFieldsConfig(), array(
             'action' => array(
-                'Caption' => array('en' => 'Action', 'vn' => 'Hành động'),
+                'Caption' => array('en-US' => 'Action', 'vi-VN' => 'Hành động'),
                 'DataType' => 'Option',
                 'Options' => array(
                     '0' => array(
-                        'Caption' => array('en' => 'Undefined', 'vn' => 'Không xác định'),
+                        'Caption' => array('en-US' => 'Undefined', 'vi-VN' => 'Không xác định'),
                     ),
                     '1' => array(
-                        'Caption' => array('en' => 'Insert', 'vn' => 'Thêm mới'),
+                        'Caption' => array('en-US' => 'Insert', 'vi-VN' => 'Thêm mới'),
                     ),
                     '2' => array(
-                        'Caption' => array('en' => 'Modify', 'vn' => 'Sửa'),
+                        'Caption' => array('en-US' => 'Modify', 'vi-VN' => 'Sửa'),
                     ),
                     '3' => array(
-                        'Caption' => array('en' => 'Delete', 'vn' => 'Xóa'),
+                        'Caption' => array('en-US' => 'Delete', 'vi-VN' => 'Xóa'),
                     ),
                 )
             ),
             'location' => array(
-                'Caption' => array('en' => 'Location', 'vn' => 'Nơi phát sinh'),
+                'Caption' => array('en-US' => 'Location', 'vi-VN' => 'Nơi phát sinh'),
             ),
 
         ));

@@ -6,6 +6,6 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadPageView('root_setup');
-class Qdmvc_View_TRootSetup extends Qdmvc_View_RootSetup {
+class Qdmvc_View_SetupProductOrder extends Qdmvc_View_RootSetup {
 
 }

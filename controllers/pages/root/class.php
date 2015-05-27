@@ -189,7 +189,7 @@ class Qdmvc_Page_Root
     /*
      * Trả về Caption của 1 field nào đó, thông qua Setup trong Model tương ứng
      */
-    public function getFieldCaption($field_name, $lang = 'en')
+    public function getFieldCaption($field_name, $lang = 'en-US')
     {
         $c = static::getModel();
         return $c::getFieldCaption($field_name, $lang);
@@ -248,7 +248,7 @@ class Qdmvc_Page_Root
         return '';
     }
 
-    public static function getCaption($lang = 'en')
+    public static function getCaption($lang = 'en-US')
     {
         $index = Qdmvc_Page_Index::getIndex();
         $page = $index[static::getPage()];
@@ -267,7 +267,7 @@ class Qdmvc_Page_Root
         return $this->data;
     }
 
-    public function getFieldOptions($f_name, $lang = 'en')
+    public function getFieldOptions($f_name, $lang = 'en-US')
     {
         $c = static::getModel();
         return $c::getFieldOptions($f_name, $lang);

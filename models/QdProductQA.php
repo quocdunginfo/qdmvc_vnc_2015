@@ -8,7 +8,7 @@ class QdProductQA extends QdProduct
 
         $obj['type']['Options'] = array(
             static::$TYPE_QUANAO => array(
-                'Caption' => array('en' => 'Clothes', 'vn' => 'Quần áo'),
+                'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
             ),
         );
         $obj['size_id']['TableRelation']['TableFilter'] = array(

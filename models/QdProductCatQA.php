@@ -19,7 +19,7 @@ class QdProductCatQA extends QdProductCat
         $obj = parent::getFieldsConfig();
         $obj['type2']['Options'] = array(
             QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
-                'Caption' => array('en' => 'Product Cat QA', 'vn' => 'Loại SP QA'),
+                'Caption' => array('en-US' => 'Product Cat QA', 'vi-VN' => 'Loại SP QA'),
             )
         );
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatQA';

@@ -16,8 +16,8 @@ class Qdmvc_Page_IndexMenu {
             'Active'=>false,
             'Class'=>'Qdmvc_Page_Main',
             'Caption' => array(
-                'en' => 'Page Main',
-                'vn' => 'Trang chính',
+                'en-US' => 'Page Main',
+                'vi-VN' => 'Trang chính',
             ),
             'Model' => 'QdNote',
             'DataPort' => 'note_port',
@@ -28,8 +28,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Product_Card',
             'Caption' => array(
-                'en' => 'Product',
-                'vn' => 'Sản phẩm',
+                'en-US' => 'Product',
+                'vi-VN' => 'Sản phẩm',
             ),
             'Model' => 'QdProduct',
             'DataPort' => 'product_port',
@@ -41,8 +41,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Product_List',
             'Caption' => array(
-                'en' => 'Product List',
-                'vn' => 'Product List'
+                'en-US' => 'Product List',
+                'vi-VN' => 'Product List'
             ),
             'Model' => 'QdProduct',
             'DataPort' => 'product_port'
@@ -53,8 +53,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductQA_Card',
             'Caption' => array(
-                'en' => 'Product QA',
-                'vn' => 'Sản phẩm QA',
+                'en-US' => 'Product QA',
+                'vi-VN' => 'Sản phẩm QA',
             ),
             'Model' => 'QdProductQA',
             'DataPort' => 'product_qa_port',
@@ -66,8 +66,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductQA_List',
             'Caption' => array(
-                'en' => 'Product QA List',
-                'vn' => 'Product QA List'
+                'en-US' => 'Product QA List',
+                'vi-VN' => 'Product QA List'
             ),
             'Model' => 'QdProductQA',
             'DataPort' => 'product_qa_port'
@@ -78,8 +78,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductCat_Card',
             'Caption' => array(
-                'en' => 'Product Cat',
-                'vn' => 'Loại sản phẩm',
+                'en-US' => 'Product Cat',
+                'vi-VN' => 'Loại sản phẩm',
             ),
             'Model' => 'QdProductCat',
             'DataPort' => 'product_cat_port',
@@ -91,8 +91,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductCat_List',
             'Caption' => array(
-                'en' => 'Product Cat List',
-                'vn' => 'Product Cat List',
+                'en-US' => 'Product Cat List',
+                'vi-VN' => 'Product Cat List',
             ),
             'Model' => 'QdProductCat',
             'DataPort' => 'product_cat_port'
@@ -103,8 +103,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductCatDF_Card',
             'Caption' => array(
-                'en' => 'Product Cat DF',
-                'vn' => 'Loại SP DF',
+                'en-US' => 'Product Cat DF',
+                'vi-VN' => 'Loại SP DF',
             ),
             'Model' => 'QdProductCatDF',
             'DataPort' => 'product_cat_df_port',
@@ -116,8 +116,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductCatDF_List',
             'Caption' => array(
-                'en' => 'Product Cat DF List',
-                'vn' => 'Product Cat DF List',
+                'en-US' => 'Product Cat DF List',
+                'vi-VN' => 'Product Cat DF List',
             ),
             'Model' => 'QdProductCatDF',
             'DataPort' => 'product_cat_df_port'
@@ -128,8 +128,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductCatQA_Card',
             'Caption' => array(
-                'en' => 'Product Cat QA',
-                'vn' => 'Loại SP QA',
+                'en-US' => 'Product Cat QA',
+                'vi-VN' => 'Loại SP QA',
             ),
             'Model' => 'QdProductCatQA',
             'DataPort' => 'product_cat_qa_port',
@@ -141,8 +141,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductCatQA_List',
             'Caption' => array(
-                'en' => 'Product Cat QA List',
-                'vn' => 'Product Cat QA List',
+                'en-US' => 'Product Cat QA List',
+                'vi-VN' => 'Product Cat QA List',
             ),
             'Model' => 'QdProductCatQA',
             'DataPort' => 'product_cat_qa_port'
@@ -153,8 +153,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductCatGD_Card',
             'Caption' => array(
-                'en' => 'Product Cat GD',
-                'vn' => 'Loại SP GD',
+                'en-US' => 'Product Cat GD',
+                'vi-VN' => 'Loại SP GD',
             ),
             'Model' => 'QdProductCatGD',
             'DataPort' => 'product_cat_gd_port',
@@ -166,8 +166,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductCatGD_List',
             'Caption' => array(
-                'en' => 'Product Cat GD List',
-                'vn' => 'Product Cat GD List',
+                'en-US' => 'Product Cat GD List',
+                'vi-VN' => 'Product Cat GD List',
             ),
             'Model' => 'QdProductCatGD',
             'DataPort' => 'product_cat_gd_port'
@@ -178,8 +178,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductOrder_Card',
             'Caption' => array(
-                'en' => 'Product Order',
-                'vn' => 'Đơn đặt hàng (Open)',
+                'en-US' => 'Product Order',
+                'vi-VN' => 'Đơn đặt hàng (Open)',
             ),
             'Model' => 'QdProductOrder',
             'DataPort' => 'product_order_port',
@@ -191,8 +191,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductOrder_List',
             'Caption' => array(
-                'en' => 'Product Order List',
-                'vn' => 'Product Order List',
+                'en-US' => 'Product Order List',
+                'vi-VN' => 'Product Order List',
             ),
             'Model' => 'QdProductOrder',
             'DataPort' => 'product_order_port'
@@ -203,8 +203,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductOrderDone_Card',
             'Caption' => array(
-                'en' => 'Product Order Done',
-                'vn' => 'Đơn đặt hàng (Done)',
+                'en-US' => 'Product Order Done',
+                'vi-VN' => 'Đơn đặt hàng (Done)',
             ),
             'Model' => 'QdProductOrder',
             'DataPort' => 'product_order_port',
@@ -216,8 +216,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProductOrderDone_List',
             'Caption' => array(
-                'en' => 'Product Order Done List',
-                'vn' => 'Product Order Done List'
+                'en-US' => 'Product Order Done List',
+                'vi-VN' => 'Product Order Done List'
             ),
             'Model' => 'QdProductOrder',
             'DataPort' => 'product_order_port'
@@ -228,8 +228,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Feedback_Card',
             'Caption' => array(
-                'en' => 'Feedback',
-                'vn' => 'Phản hồi KH (Open)',
+                'en-US' => 'Feedback',
+                'vi-VN' => 'Phản hồi KH (Open)',
             ),
             'Model' => 'QdFeedback',
             'DataPort' => 'feedback_port',
@@ -241,8 +241,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Feedback_List',
             'Caption' => array(
-                'en' => 'Feedback List',
-                'vn' => 'Feedback List'
+                'en-US' => 'Feedback List',
+                'vi-VN' => 'Feedback List'
             ),
             'Model' => 'QdFeedback',
             'DataPort' => 'feedback_port'
@@ -253,8 +253,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_FeedbackDone_Card',
             'Caption' => array(
-                'en' => 'Feedback Done',
-                'vn' => 'Phản hồi KH (Done)',
+                'en-US' => 'Feedback Done',
+                'vi-VN' => 'Phản hồi KH (Done)',
             ),
             'Model' => 'QdFeedback',
             'DataPort' => 'feedback_port',
@@ -266,8 +266,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_FeedbackDone_List',
             'Caption' => array(
-                'en' => 'Feedback Done List',
-                'vn' => 'Feedback Done List'
+                'en-US' => 'Feedback Done List',
+                'vi-VN' => 'Feedback Done List'
             ),
             'Model' => 'QdFeedback',
             'DataPort' => 'feedback_port'
@@ -278,11 +278,23 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProductSetup',
             'Caption' => array(
-                'en' => 'Product Setup',
-                'vn' => 'Cấu hình Sản phẩm',
+                'en-US' => 'Product Setup',
+                'vi-VN' => 'Cấu hình Sản phẩm',
             ),
-            'Model' => 'QdProductSetup',
+            'Model' => 'QdSetupProduct',
             'DataPort' => 'product_setup_port'
+        ),
+        'setup_product_order' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_SetupProductOrder',
+            'Caption' => array(
+                'en-US' => 'Product Order Setup',
+                'vi-VN' => 'Cấu hình đặt hàng SP',
+            ),
+            'Model' => 'QdSetupProductOrder',
+            'DataPort' => 'setup_product_order_port'
         ),
         'theme_root_setup' => array(
             'ParentId' => 'setup',
@@ -290,8 +302,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=> 'Qdmvc_Page_TRootSetup',
             'Caption' => array(
-                'en' => 'Theme Root Setup',
-                'vn' => 'Theme Root Setup',
+                'en-US' => 'Theme Root Setup',
+                'vi-VN' => 'Theme Root Setup',
             ),
             'Model' => 'QdTRootSetup',
             'DataPort' => 'theme/root_setup_port'
@@ -302,8 +314,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Setup',
             'Caption' => array(
-                'en' => 'General Setup',
-                'vn' => 'Cấu hình chung',
+                'en-US' => 'General Setup',
+                'vi-VN' => 'Cấu hình chung',
             ),
             'Model' => 'QdSetup',
             'DataPort' => 'setup_port'
@@ -314,8 +326,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Note',
             'Caption' => array(
-                'en' => 'Note',
-                'vn' => 'Ghi chú'
+                'en-US' => 'Note',
+                'vi-VN' => 'Ghi chú'
             ),
             'Model' => 'QdNote',
             'DataPort' => 'note_port',
@@ -327,8 +339,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Note_list',
             'Caption' => array(
-                'en' => 'Note List',
-                'vn' => 'Note List'
+                'en-US' => 'Note List',
+                'vi-VN' => 'Note List'
             ),
             'Model' => 'QdNote',
             'DataPort' => 'note_port'
@@ -339,8 +351,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Image',
             'Caption' => array(
-                'en' => 'Image',
-                'vn' => 'Hình ảnh'
+                'en-US' => 'Image',
+                'vi-VN' => 'Hình ảnh'
             ),
             'Model' => 'QdImage',
             'DataPort' => 'image_port',
@@ -352,8 +364,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Image_list',
             'Caption' => array(
-                'en' => 'Image List',
-                'vn' => 'Image List'
+                'en-US' => 'Image List',
+                'vi-VN' => 'Image List'
             ),
             'Model' => 'QdImage',
             'DataPort' => 'image_port'
@@ -364,8 +376,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Log',
             'Caption' => array(
-                'en' => 'Log',
-                'vn' => 'Log'
+                'en-US' => 'Log',
+                'vi-VN' => 'Log'
             ),
             'Model' => 'QdLog',
             'DataPort' => 'log_port',
@@ -377,8 +389,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Log_list',
             'Caption' => array(
-                'en' => 'Log List',
-                'vn' => 'Log List'
+                'en-US' => 'Log List',
+                'vi-VN' => 'Log List'
             ),
             'Model' => 'QdLog',
             'DataPort' => 'log_port'
@@ -389,8 +401,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_BestChoiceItem',
             'Caption' => array(
-                'en' => 'Best Choice Item',
-                'vn' => 'Best Choice Item'
+                'en-US' => 'Best Choice Item',
+                'vi-VN' => 'Best Choice Item'
             ),
             'Model' => 'QdBestChoiceItem',
             'DataPort' => 'bestchoiceitem_port',
@@ -402,8 +414,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_BestChoiceItem_list',
             'Caption' => array(
-                'en' => 'Best Choice Item List',
-                'vn' => 'Best Choice Item List'
+                'en-US' => 'Best Choice Item List',
+                'vi-VN' => 'Best Choice Item List'
             ),
             'Model' => 'QdBestChoiceItem',
             'DataPort' => 'bestchoiceitem_port'
@@ -414,8 +426,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_BestChoiceCat',
             'Caption' => array(
-                'en' => 'Best Choice Cat',
-                'vn' => 'Best Choice Cat'
+                'en-US' => 'Best Choice Cat',
+                'vi-VN' => 'Best Choice Cat'
             ),
             'Model' => 'QdBestChoiceCat',
             'DataPort' => 'bestchoicecat_port',
@@ -427,8 +439,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_BestChoiceCat_list',
             'Caption' => array(
-                'en' => 'Best Choice Cat List',
-                'vn' => 'Best Choice Cat List'
+                'en-US' => 'Best Choice Cat List',
+                'vi-VN' => 'Best Choice Cat List'
             ),
             'Model' => 'QdBestChoiceCat',
             'DataPort' => 'bestchoicecat_port'
@@ -439,8 +451,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_PostCat',
             'Caption' => array(
-                'en' => 'Post Cat',
-                'vn' => 'Post Cat'
+                'en-US' => 'Post Cat',
+                'vi-VN' => 'Post Cat'
             ),
             'Model' => 'QdPostCat',
             'DataPort' => 'postcat_port',
@@ -452,8 +464,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_PostCat_list',
             'Caption' => array(
-                'en' => 'Post Cat List',
-                'vn' => 'Post Cat List'
+                'en-US' => 'Post Cat List',
+                'vi-VN' => 'Post Cat List'
             ),
             'Model' => 'QdPostCat',
             'DataPort' => 'postcat_port'
@@ -464,8 +476,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Post',
             'Caption' => array(
-                'en' => 'Post',
-                'vn' => 'Post'
+                'en-US' => 'Post',
+                'vi-VN' => 'Post'
             ),
             'Model' => 'QdPost',
             'DataPort' => 'post_port',
@@ -477,8 +489,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_post_list',
             'Caption' => array(
-                'en' => 'Post List',
-                'vn' => 'Post List'
+                'en-US' => 'Post List',
+                'vi-VN' => 'Post List'
             ),
             'Model' => 'QdPost',
             'DataPort' => 'post_port'
@@ -489,8 +501,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_WidgetNavCat',
             'Caption' => array(
-                'en' => 'Widget Nav Cat',
-                'vn' => 'Widget Nav Cat'
+                'en-US' => 'Widget Nav Cat',
+                'vi-VN' => 'Widget Nav Cat'
             ),
             'Model' => 'QdWidgetNavCat',
             'DataPort' => 'widgetnavcat_port',
@@ -502,8 +514,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_WidgetNavCat_list',
             'Caption' => array(
-                'en' => 'Widget Nav Cat List',
-                'vn' => 'Widget Nav Cat List'
+                'en-US' => 'Widget Nav Cat List',
+                'vi-VN' => 'Widget Nav Cat List'
             ),
             'Model' => 'QdWidgetNavCat',
             'DataPort' => 'widgetnavcat_port',
@@ -514,8 +526,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_PartnerGrp',
             'Caption' => array(
-                'en' => 'Partner Group',
-                'vn' => 'Nhóm Đối tác'
+                'en-US' => 'Partner Group',
+                'vi-VN' => 'Nhóm Đối tác'
             ),
             'Model' => 'QdPartnerGrp',
             'DataPort' => 'partnergrp_port',
@@ -527,8 +539,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_PartnerGrp_list',
             'Caption' => array(
-                'en' => 'PartnerGrp List',
-                'vn' => 'PartnerGrp List'
+                'en-US' => 'PartnerGrp List',
+                'vi-VN' => 'PartnerGrp List'
             ),
             'Model' => 'QdPartnerGrp',
             'DataPort' => 'partnergrp_port',
@@ -539,8 +551,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Partner',
             'Caption' => array(
-                'en' => 'Partner',
-                'vn' => 'Đối tác'
+                'en-US' => 'Partner',
+                'vi-VN' => 'Đối tác'
             ),
             'Model' => 'QdPartner',
             'DataPort' => 'partner_port',
@@ -552,8 +564,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Partner_list',
             'Caption' => array(
-                'en' => 'Partner List',
-                'vn' => 'Partner List'
+                'en-US' => 'Partner List',
+                'vi-VN' => 'Partner List'
             ),
             'Model' => 'QdPartner',
             'DataPort' => 'partner_port',
@@ -564,8 +576,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_WidgetNav',
             'Caption' => array(
-                'en' => 'Widget Nav',
-                'vn' => 'Widget Nav'
+                'en-US' => 'Widget Nav',
+                'vi-VN' => 'Widget Nav'
             ),
             'Model' => 'QdWidgetNav',
             'DataPort' => 'widgetnav_port',
@@ -577,8 +589,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_WidgetNav_List',
             'Caption' => array(
-                'en' => 'Widget Nav List',
-                'vn' => 'Widget Nav List'
+                'en-US' => 'Widget Nav List',
+                'vi-VN' => 'Widget Nav List'
             ),
             'Model' => 'QdWidgetNav',
             'DataPort' => 'widgetnav_port',
@@ -589,8 +601,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProGrp_Card',
             'Caption' => array(
-                'en' => 'Product-Group',
-                'vn' => 'SP-Nhóm'
+                'en-US' => 'Product-Group',
+                'vi-VN' => 'SP-Nhóm'
             ),
             'Model' => 'QdProGrp',
             'DataPort' => 'progrp_port',
@@ -602,8 +614,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProGrp_List',
             'Caption' => array(
-                'en' => 'Product Group List',
-                'vn' => 'Product Group List'
+                'en-US' => 'Product Group List',
+                'vi-VN' => 'Product Group List'
             ),
             'Model' => 'QdProGrp',
             'DataPort' => 'progrp_port',
@@ -614,8 +626,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProBigSale_Card',
             'Caption' => array(
-                'en' => 'BigSale Products',
-                'vn' => 'Các SP BigSale'
+                'en-US' => 'BigSale Products',
+                'vi-VN' => 'Các SP BigSale'
             ),
             'Model' => 'QdProBigSale',
             'DataPort' => 'probigsale_port',
@@ -627,8 +639,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProBigSale_List',
             'Caption' => array(
-                'en' => 'BigSale Products',
-                'vn' => 'BigSale Products'
+                'en-US' => 'BigSale Products',
+                'vi-VN' => 'BigSale Products'
             ),
             'Model' => 'QdProBigSale',
             'DataPort' => 'probigsale_port',
@@ -639,8 +651,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_BigSaleCat_Card',
             'Caption' => array(
-                'en' => 'BigSale Cat',
-                'vn' => 'BigSale Cat',
+                'en-US' => 'BigSale Cat',
+                'vi-VN' => 'BigSale Cat',
             ),
             'Model' => 'QdBigSaleCat',
             'DataPort' => 'bigsalecat_port',
@@ -652,8 +664,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_BigSaleCat_List',
             'Caption' => array(
-                'en' => 'BigSale Cat List',
-                'vn' => 'BigSale Cat List',
+                'en-US' => 'BigSale Cat List',
+                'vi-VN' => 'BigSale Cat List',
             ),
             'Model' => 'QdBigSaleCat',
             'DataPort' => 'bigsalecat_port'
@@ -664,8 +676,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProPromotion_Card',
             'Caption' => array(
-                'en' => 'Promotion Products',
-                'vn' => 'Các SP KM'
+                'en-US' => 'Promotion Products',
+                'vi-VN' => 'Các SP KM'
             ),
             'Model' => 'QdProPromotion',
             'DataPort' => 'progrp_port',
@@ -677,8 +689,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ProPromotion_List',
             'Caption' => array(
-                'en' => 'Promotion Products',
-                'vn' => 'Promotion Products'
+                'en-US' => 'Promotion Products',
+                'vi-VN' => 'Promotion Products'
             ),
             'Model' => 'QdProPromotion',
             'DataPort' => 'progrp_port',
@@ -689,8 +701,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_PromotionCat_Card',
             'Caption' => array(
-                'en' => 'Promotion Cat',
-                'vn' => 'Promotion Cat',
+                'en-US' => 'Promotion Cat',
+                'vi-VN' => 'Promotion Cat',
             ),
             'Model' => 'QdPromotionCat',
             'DataPort' => 'promotioncat_port',
@@ -702,8 +714,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_PromotionCat_List',
             'Caption' => array(
-                'en' => 'Promotion Cat List',
-                'vn' => 'Promotion Cat List',
+                'en-US' => 'Promotion Cat List',
+                'vi-VN' => 'Promotion Cat List',
             ),
             'Model' => 'QdPromotionCat',
             'DataPort' => 'promotioncat_port'
@@ -714,8 +726,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Manufactor',
             'Caption' => array(
-                'en' => 'Manufactor',
-                'vn' => 'Hãng SX'
+                'en-US' => 'Manufactor',
+                'vi-VN' => 'Hãng SX'
             ),
             'Model' => 'QdManufactor',
             'DataPort' => 'manufactor_port',
@@ -727,8 +739,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Manufactor_list',
             'Caption' => array(
-                'en' => 'Manufactor List',
-                'vn' => 'Manufactor List'
+                'en-US' => 'Manufactor List',
+                'vi-VN' => 'Manufactor List'
             ),
             'Model' => 'QdManufactor',
             'DataPort' => 'manufactor_port',
@@ -739,8 +751,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ManufactorDF',
             'Caption' => array(
-                'en' => 'Manufactor DF',
-                'vn' => 'Hãng SX DF'
+                'en-US' => 'Manufactor DF',
+                'vi-VN' => 'Hãng SX DF'
             ),
             'Model' => 'QdManufactorDF',
             'DataPort' => 'manufactor_df_port',
@@ -752,8 +764,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ManufactorDF_list',
             'Caption' => array(
-                'en' => 'Manufactor DF List',
-                'vn' => 'Manufactor DF List'
+                'en-US' => 'Manufactor DF List',
+                'vi-VN' => 'Manufactor DF List'
             ),
             'Model' => 'QdManufactorDF',
             'DataPort' => 'manufactor_df_port',
@@ -764,8 +776,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ManufactorQA',
             'Caption' => array(
-                'en' => 'Manufactor QA',
-                'vn' => 'Hãng SX QA'
+                'en-US' => 'Manufactor QA',
+                'vi-VN' => 'Hãng SX QA'
             ),
             'Model' => 'QdManufactorQA',
             'DataPort' => 'manufactor_qa_port',
@@ -777,8 +789,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ManufactorQA_list',
             'Caption' => array(
-                'en' => 'Manufactor QA List',
-                'vn' => 'Manufactor QA List'
+                'en-US' => 'Manufactor QA List',
+                'vi-VN' => 'Manufactor QA List'
             ),
             'Model' => 'QdManufactorQA',
             'DataPort' => 'manufactor_qa_port',
@@ -789,8 +801,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ManufactorGD',
             'Caption' => array(
-                'en' => 'Manufactor GD',
-                'vn' => 'Hãng SX GD'
+                'en-US' => 'Manufactor GD',
+                'vi-VN' => 'Hãng SX GD'
             ),
             'Model' => 'QdManufactorGD',
             'DataPort' => 'manufactor_gd_port',
@@ -802,8 +814,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ManufactorGD_list',
             'Caption' => array(
-                'en' => 'Manufactor GD List',
-                'vn' => 'Manufactor GD List'
+                'en-US' => 'Manufactor GD List',
+                'vi-VN' => 'Manufactor GD List'
             ),
             'Model' => 'QdManufactorGD',
             'DataPort' => 'manufactor_gd_port',
@@ -814,8 +826,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ObjectTask',
             'Caption' => array(
-                'en' => 'ObjectTask',
-                'vn' => 'ObjectTask'
+                'en-US' => 'ObjectTask',
+                'vi-VN' => 'ObjectTask'
             ),
             'Model' => 'QdObjectTask',
             'DataPort' => 'object_task_port',
@@ -827,8 +839,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ObjectTask_list',
             'Caption' => array(
-                'en' => 'ObjectTask List',
-                'vn' => 'ObjectTask List'
+                'en-US' => 'ObjectTask List',
+                'vi-VN' => 'ObjectTask List'
             ),
             'Model' => 'QdObjectTask',
             'DataPort' => 'object_task_port',
@@ -839,8 +851,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ImgGrp',
             'Caption' => array(
-                'en' => 'Img Group',
-                'vn' => 'Img Group',
+                'en-US' => 'Img Group',
+                'vi-VN' => 'Img Group',
             ),
             'Model' => 'QdImgGrp',
             'DataPort' => 'imggrp_port',
@@ -852,8 +864,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_ImgGrp_list',
             'Caption' => array(
-                'en' => 'Img Group List',
-                'vn' => 'Img Group List',
+                'en-US' => 'Img Group List',
+                'vi-VN' => 'Img Group List',
             ),
             'Model' => 'QdImgGrp',
             'DataPort' => 'imggrp_port',
@@ -864,8 +876,8 @@ class Qdmvc_Page_IndexMenu {
 	        'PageType' => 'Card',
 	        'Class'=>'Qdmvc_Page_Size',
 	        'Caption' => array(
-		        'en' => 'Size',
-		        'vn' => 'Size'
+		        'en-US' => 'Size',
+		        'vi-VN' => 'Size'
 	        ),
 	        'Model' => 'QdSize',
 	        'DataPort' => 'size_port',
@@ -877,8 +889,8 @@ class Qdmvc_Page_IndexMenu {
 	        'PageType' => 'List',
 	        'Class'=>'Qdmvc_Page_Size_list',
 	        'Caption' => array(
-		        'en' => 'Size List',
-		        'vn' => 'Size List'
+		        'en-US' => 'Size List',
+		        'vi-VN' => 'Size List'
 	        ),
 	        'Model' => 'QdSize',
 	        'DataPort' => 'size_port'
@@ -889,8 +901,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_About',
             'Caption' => array(
-                'en' => 'About',
-                'vn' => 'About'
+                'en-US' => 'About',
+                'vi-VN' => 'About'
             ),
             'Model' => 'QdAbout',
             'DataPort' => 'about_port',
@@ -902,8 +914,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_About_list',
             'Caption' => array(
-                'en' => 'About List',
-                'vn' => 'About List'
+                'en-US' => 'About List',
+                'vi-VN' => 'About List'
             ),
             'Model' => 'QdAbout',
             'DataPort' => 'about_port'
@@ -914,8 +926,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Menu',
             'Caption' => array(
-                'en' => 'Menu',
-                'vn' => 'Menu'
+                'en-US' => 'Menu',
+                'vi-VN' => 'Menu'
             ),
             'Model' => 'QdMenu',
             'DataPort' => 'menu_port',
@@ -927,8 +939,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_Menu_list',
             'Caption' => array(
-                'en' => 'Menu List',
-                'vn' => 'Menu List'
+                'en-US' => 'Menu List',
+                'vi-VN' => 'Menu List'
             ),
             'Model' => 'QdMenu',
             'DataPort' => 'menu_port'
@@ -939,8 +951,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=> 'Qdmvc_Page_Pro2Pro_Card',
             'Caption' => array(
-                'en' => 'Linking Products',
-                'vn' => 'SP liên kết'
+                'en-US' => 'Linking Products',
+                'vi-VN' => 'SP liên kết'
             ),
             'Model' => 'QdPro2Pro',
             'DataPort' => 'pro2pro_port',
@@ -952,8 +964,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'List',
             'Class'=>'Qdmvc_Page_pro2pro_list',
             'Caption' => array(
-                'en' => 'List',
-                'vn' => 'List'
+                'en-US' => 'List',
+                'vi-VN' => 'List'
             ),
             'Model' => 'QdPro2Pro',
             'DataPort' => 'pro2pro_port'
@@ -963,8 +975,8 @@ class Qdmvc_Page_IndexMenu {
             'Active'=>true,
             'PageType' => 'Folder',
             'Caption' => array(
-                'en' => 'Folder',
-                'vn' => 'Thư mục'
+                'en-US' => 'Folder',
+                'vi-VN' => 'Thư mục'
             ),
         ),
         'navigation' => array(
@@ -973,8 +985,8 @@ class Qdmvc_Page_IndexMenu {
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Navigation',
             'Caption' => array(
-                'en' => 'Navigation',
-                'vn' => 'Navigation'
+                'en-US' => 'Navigation',
+                'vi-VN' => 'Navigation'
             ),
             'Model' => 'QdNote',
             'DataPort' => 'note_port',

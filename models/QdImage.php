@@ -8,14 +8,14 @@ class QdImage extends QdNote
     {
         return array_merge(parent::getFieldsConfig(), array(
                 'path' => array(
-                    'Caption' => array('en' => 'Image', 'vn' => 'Hình ảnh'),
+                    'Caption' => array('en-US' => 'Image', 'vi-VN' => 'Hình ảnh'),
                     'DataType' => 'Image',
                 ),
                 'active' => array(
                     'DataType' => 'Boolean'
                 ),
                 'order' => array(
-                    'Caption' => array('en' => 'Order', 'vn' => 'Thứ tự'),
+                    'Caption' => array('en-US' => 'Order', 'vi-VN' => 'Thứ tự'),
                 ),
             )
         );

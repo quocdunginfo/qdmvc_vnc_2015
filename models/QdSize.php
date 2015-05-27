@@ -14,14 +14,14 @@ class QdSize extends QdRoot
 	            'DataType' => 'WYSIWYG'
             ),
             'type' => array(
-	            'Caption' => array('en' => 'Type', 'vn' => 'Phân loại'),
+	            'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
 	            'DataType' => 'Option',
 	            'Options' => array(
 		            static::$TYPE_QUANAO => array(
-			            'Caption' => array('en' => 'Clothes', 'vn' => 'Quần áo'),
+			            'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
 		            ),
 		            static::$TYPE_GIAYDEP => array(
-			            'Caption' => array('en' => 'Shoes', 'vn' => 'Giáy dép'),
+			            'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giáy dép'),
 		            ),
 	            )
             )

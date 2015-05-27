@@ -19,7 +19,7 @@ class QdProductCatGD extends QdProductCat
         $obj = parent::getFieldsConfig();
         $obj['type2']['Options'] = array(
             QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
-                'Caption' => array('en' => 'Product Cat GD', 'vn' => 'Loại SP GD'),
+                'Caption' => array('en-US' => 'Product Cat GD', 'vi-VN' => 'Loại SP GD'),
             )
         );
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatGD';

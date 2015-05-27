@@ -27,7 +27,7 @@ class QdProBigSale extends QdProGrp
         );
         $obj['group_type']['Options'] = array(
             QdBigSaleCat::$TYPE_BIGSALE => array(
-                'Caption' => array('en' => 'Big Sale', 'vn' => 'Bán chạy'),
+                'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Bán chạy'),
             ),
         );
 

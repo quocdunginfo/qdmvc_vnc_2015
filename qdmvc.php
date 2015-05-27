@@ -12,7 +12,6 @@ Qdmvc::loadModel();
 class Qdmvc
 {
     private static $included_file = array(
-        'config/index',
         'native/register-admin-menu',
         'native/page-meta-box',
         'native/db-init',

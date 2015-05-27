@@ -24,7 +24,7 @@ class Qdmvc_Config {
     {
         if(static::$product_setup==null)
         {
-            $tmp = QdProductSetup::GET();
+            $tmp = QdSetupProduct::GET();
             static::$product_setup = $tmp;
         }
         return static::$product_setup;

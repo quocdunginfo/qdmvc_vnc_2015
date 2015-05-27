@@ -8,16 +8,16 @@ class QdFeedback extends QdRoot
     {
         return array_merge(parent::getFieldsConfig(), array(
             'customer_name' => array(
-                'Caption' => array('en' => 'Customer Name', 'vn' => 'Tên KH')
+                'Caption' => array('en-US' => 'Customer Name', 'vi-VN' => 'Tên KH')
             ),
             'customer_email' => array(
-                'Caption' => array('en' => 'Customer Email', 'vn' => 'Email KH')
+                'Caption' => array('en-US' => 'Customer Email', 'vi-VN' => 'Email KH')
             ),
             'content' => array(
-                'Caption' => array('en' => 'Content', 'vn' => 'Nội dung')
+                'Caption' => array('en-US' => 'Content', 'vi-VN' => 'Nội dung')
             ),
             'done' => array(
-                'Caption' => array('en' => 'Done', 'vn' => 'Hoàn tất'),
+                'Caption' => array('en-US' => 'Done', 'vi-VN' => 'Hoàn tất'),
                 'DataType' => 'Boolean'
             ),
         ));
