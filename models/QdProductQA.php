@@ -7,7 +7,7 @@ class QdProductQA extends QdProduct
         $obj = parent::getFieldsConfig();
 
         $obj['type']['Options'] = array(
-            static::$TYPE_QUANAO => array(
+            QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
                 'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
             ),
         );
@@ -20,12 +20,40 @@ class QdProductQA extends QdProduct
                 ),
                 'Field' => 'type',
                 'Type' => 'CONST',
-                'Value' => QdSize::$TYPE_QUANAO
+                'Value' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
             )
         );
 
         $obj['product_cat_id']['TableRelation']['Table'] = 'QdProductCatQA';
         $obj['manufacturer_id']['TableRelation']['Table'] = 'QdManufactorQA';
+
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdPro2Pro',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'product_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                ),
+                /* Chưa sử dụng
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'r_product_type',
+                    'Type' => 'CONST',
+                    'Value' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
+                )*/
+            )
+        );
 
         return $obj;
     }
@@ -37,7 +65,7 @@ class QdProductQA extends QdProduct
         $obj = new QdProductQA();
         $obj->description = $tmp->description;
 
-        $obj->type = QdProductQA::$TYPE_QUANAO;
+        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_QUANAO;
         return $obj;
     }
 

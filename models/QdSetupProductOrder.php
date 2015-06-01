@@ -15,6 +15,14 @@ class QdSetupProductOrder extends QdRootSetup
         return array_merge(parent::getFieldsConfig(), array(
             'btn_dathang' => array(),
             'btn_goidathang' => array(),
+            'order_form_title' => array(),
+            'form_order_done_title' => array(),
+            'form_order_done_tpl' => array(
+                'DataType' => 'WYSIWYG'
+            ),
+            'form_order_done_avatar' => array(
+                'DataType' => 'Image'
+            ),
             'advice_phone' => array(
                 'Caption' => array('en-US' => 'Advice Phone', 'vi-VN' => 'SĐT tư vấn'),
             ),

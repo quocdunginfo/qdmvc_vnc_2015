@@ -3,11 +3,6 @@
 class QdProduct extends QdRoot
 {
     static $table_name = 'mpd_product';
-    public static $TYPE_DEFAULT = '';
-    public static $TYPE_QUANAO = 'QA';
-    public static $TYPE_GIAYDEP = 'GD';
-    public static $TYPE_OTHER = 'OT';
-
     public static function getFieldsConfig()
     {
         $obj = array_merge(parent::getFieldsConfig(), array(
@@ -176,16 +171,16 @@ class QdProduct extends QdRoot
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    static::$TYPE_DEFAULT => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_DEFAULT => array(
                         'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
                     ),
-                    static::$TYPE_QUANAO => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
                         'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
                     ),
-                    static::$TYPE_GIAYDEP => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
                         'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Gìay dép'),
                     ),
-                    static::$TYPE_OTHER => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
                     ),
                 )
@@ -315,7 +310,7 @@ class QdProduct extends QdRoot
     {
         $obj = new QdProduct();
         $obj->description = Qdmvc_Config::getProductSetup()->df_product_desc_tpl;
-        $obj->type = static::$TYPE_DEFAULT;
+        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
         return $obj;
     }
     public function fn_active($location, $params=array())
