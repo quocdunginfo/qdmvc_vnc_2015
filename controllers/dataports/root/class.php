@@ -272,6 +272,15 @@ class Qdmvc_Dataport
             if ($c::ISFLOWFIELD($key) || $c::ISSYSTEMFIELD($key)) {
                 continue;
             }
+            //check allow submit field
+            if(!QdT_Library::isNullOrEmpty(static::allowSubmitFields()))
+            {
+                if(!in_array($key, static::allowSubmitFields()))
+                {
+                    continue;
+                }
+            }
+
             //Boolean
             if (in_array($c::getDataType($key), array('Boolean'))) {
                 if (isset($_POST['data'][$key])) {
@@ -297,5 +306,9 @@ class Qdmvc_Dataport
                 }
             }
         }
+    }
+    protected static function allowSubmitFields()
+    {
+        return array();
     }
 }
