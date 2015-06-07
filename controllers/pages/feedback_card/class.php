@@ -27,6 +27,9 @@ class Qdmvc_Page_Feedback_Card extends Qdmvc_Page_Root
                     'customer_name' => array(
                         'SourceExpr' => 'customer_name'
                     ),
+                    'customer_phone' => array(
+                        'SourceExpr' => 'customer_phone'
+                    ),
                     'customer_email' => array(
                         'SourceExpr' => 'customer_email'
                     ),
@@ -34,8 +37,12 @@ class Qdmvc_Page_Feedback_Card extends Qdmvc_Page_Root
                         'SourceExpr' => 'done',
                         'DataType' => static::getDataType('done')
                     ),
+                    'title' => array(
+                        'SourceExpr' => 'title'
+                    ),
                     'content' => array(
-                        'SourceExpr' => 'content'
+                        'SourceExpr' => 'content',
+                        'DataType' => static::getDataType('content')
                     )
                 )
             )

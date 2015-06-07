@@ -970,6 +970,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdPro2Pro',
             'DataPort' => 'pro2pro_port'
         ),
+        'contact' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_Contact_Card',
+            'Caption' => array(
+                'en-US' => 'Contact',
+                'vi-VN' => 'Liên hệ'
+            ),
+            'Model' => 'QdContact',
+            'DataPort' => 'contact_port',
+            'PageList' => 'contact_list'
+        ),
+        'contact_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_Contact_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdContact',
+            'DataPort' => 'contact_port'
+        ),
         'folder1' => array(
             'ParentId' => -1,
             'Active'=>true,

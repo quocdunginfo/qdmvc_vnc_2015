@@ -3,27 +3,23 @@ Qdmvc::loadDataPort('feedback_port');
 
 class Qdmvc_DataPort_FrontFeedback extends Qdmvc_DataPort_Feedback
 {
-    private static $submit_fields = array('customer_name', 'customer_email', 'content');
-    protected function delete()
+    protected static function allowSubmitFields()
     {
-        $this->pushMsg('Không được phép xóa');
-        $this->finish();
+        return array('customer_name', 'customer_email', 'content', 'customer_phone', 'title');
+    }
+    protected static function canView()
+    {
+        return false;
     }
 
-    protected function update()
+    protected static function canDelete()
     {
-        $this->pushMsg('Không được phép sửa');
-        $this->finish();
+        return false;
     }
-    protected function assign()
+
+    protected static function canEdit()
     {
-        foreach(static::$submit_fields as $item)
-        {
-            if(isset($_POST['data'][$item]))
-            {
-                $this->obj->$item = $_POST['data'][$item];
-            }
-        }
+        return false;
     }
     protected function checkSecurity()
     {

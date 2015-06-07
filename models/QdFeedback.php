@@ -10,11 +10,18 @@ class QdFeedback extends QdRoot
             'customer_name' => array(
                 'Caption' => array('en-US' => 'Customer Name', 'vi-VN' => 'Tên KH')
             ),
+            'customer_phone' => array(
+                'Caption' => array('en-US' => 'Customer Phone', 'vi-VN' => 'SĐT KH')
+            ),
             'customer_email' => array(
                 'Caption' => array('en-US' => 'Customer Email', 'vi-VN' => 'Email KH')
             ),
+            'title' => array(
+                'Caption' => array('en-US' => 'Title', 'vi-VN' => 'Tiêu đề')
+            ),
             'content' => array(
-                'Caption' => array('en-US' => 'Content', 'vi-VN' => 'Nội dung')
+                'Caption' => array('en-US' => 'Content', 'vi-VN' => 'Nội dung'),
+                'DataType' => 'WYSIWYG'
             ),
             'done' => array(
                 'Caption' => array('en-US' => 'Done', 'vi-VN' => 'Hoàn tất'),
