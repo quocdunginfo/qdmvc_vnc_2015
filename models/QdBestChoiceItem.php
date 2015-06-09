@@ -54,6 +54,11 @@ class QdBestChoiceItem extends QdPost
                 )
             )
         );
+        $obj['type']['Options'] = array(
+            static::$TYPE_BESTCHOICEITEM => array(
+                'Caption' => array('en-US' => 'Best choice item', 'vi-VN' => 'Best choice item'),
+            ),
+        );
         return $obj;
     }
 

@@ -32,15 +32,27 @@ class QdPost extends QdRoot
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    static::$TYPE_BESTCHOICEITEM => array(
-                        'Caption' => array('en-US' => 'Best choice item', 'vi-VN' => 'Best choice item'),
-                    ),
                     static::$TYPE_POST => array(
                         'Caption' => array('en-US' => 'Post', 'vi-VN' => 'Post'),
                     ),
-                    static::$TYPE_ABOUT => array(
-                        'Caption' => array('en-US' => 'About', 'vi-VN' => 'About'),
-                    ),
+                )
+            ),
+            '_post_cat_name' => array(
+                'Name' => '_post_cat_name',
+                'Caption' => array('en-US' => 'Post Cat Name', 'vi-VN' => 'Tên Loại'),
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+                'FieldClass_FlowField' => array(
+                    'Method' => 'Lookup',
+                    'Table' => 'QdPostCat',
+                    'Field' => 'title',
+                    'TableFilter' => array(
+                        0 => array(
+                            'Field' => 'id',
+                            'Type' => 'FIELD',
+                            'Value' => 'post_cat_id'
+                        )
+                    )
                 )
             ),
             'post_cat_id' => array(
@@ -77,5 +89,11 @@ class QdPost extends QdRoot
         $obj = new QdPost();
         $obj->type = static::$TYPE_POST;
         return $obj;
+    }
+    public function getPermalink()
+    {
+        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/service.php'));
+        $query = add_query_arg(array('id' => $this->id/*, 'title' => $this->name*/), $query);
+        return $query;
     }
 }

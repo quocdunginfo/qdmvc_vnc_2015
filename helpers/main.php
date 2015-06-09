@@ -245,6 +245,6 @@ class Qdmvc_Helper
      */
     public static function isNullOrEmpty($obj)
     {
-        return (!isset($obj) || $obj===null || $obj===false || $obj==='' || empty($obj));
+        return (!isset($obj) || $obj===null || $obj===false || $obj==='' || (is_array($obj) && empty($obj)));
     }
 }

@@ -26,7 +26,6 @@ class QdWidgetNavCat extends QdPostCat
             ),
         );
 
-
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdWidgetNav',
             'Field' => 'id',

@@ -40,6 +40,10 @@ class Qdmvc_Page_PostCat_List extends Qdmvc_Page_Root
                     'SourceExpr' => 'type',
                     'DataType' => static::getDataType('type')
                 ),
+                'active' => array(
+                    'SourceExpr' => 'active',
+                    'Width' => 100
+                ),
             ));
     }
 

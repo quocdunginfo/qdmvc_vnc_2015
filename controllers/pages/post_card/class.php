@@ -56,6 +56,11 @@ class Qdmvc_Page_Post extends Qdmvc_Page_Root {
                         'DataType' => static::getDataType('post_cat_id'),
                         'LookupURL' => static::getLookupURL('post_cat_id')
                     ),
+                    '_post_cat_name' => array(
+                        'SourceExpr' => '_post_cat_name',
+                        'DataType' => static::getDataType('_post_cat_name'),
+                        'ReadOnly' => static::isReadOnly('_post_cat_name')
+                    ),
                 )
             )
         );

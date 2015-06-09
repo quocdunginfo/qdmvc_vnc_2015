@@ -29,7 +29,6 @@ class QdPartnerGrp extends QdWidgetNavCat
             ),
         );
 
-
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdPartner',
             'Field' => 'id',

@@ -19,6 +19,12 @@ class QdPostCat extends QdRoot
         $obj->type = static::$TYPE_POSTCAT;
         return $obj;
     }
+    public function getChilds()
+    {
+        $tmp = new QdPost();
+        $tmp->SETRANGE('post_cat_id', $this->id);
+        return $tmp;
+    }
 
     public static function getFieldsConfig()
     {
@@ -36,6 +42,9 @@ class QdPostCat extends QdRoot
             ),
             'order' => array(
                 'Caption' => array('vi-VN' => 'Thứ tự'),
+            ),
+            'active' => array(
+                'DataType' => 'Boolean'
             ),
             'parent_id' => array(
                 'Name' => 'parent_id',
@@ -69,15 +78,6 @@ class QdPostCat extends QdRoot
                 'Options' => array(
                     static::$TYPE_POSTCAT => array(
                         'Caption' => array('en-US' => 'Post Cat', 'vi-VN' => 'Post Cat'),
-                    ),
-                    static::$TYPE_BESTCHOICECAT => array(
-                        'Caption' => array('en-US' => 'Best choice Cat', 'vi-VN' => 'Best choice Cat'),
-                    ),
-                    static::$TYPE_WIDGETNAV => array(
-                        'Caption' => array('en-US' => 'WidgetNavs Cat', 'vi-VN' => 'WidgetNavs Cat'),
-                    ),
-                    static::$TYPE_IMGGRP => array(
-                        'Caption' => array('en-US' => 'Img group', 'vi-VN' => 'Img Group'),
                     ),
                 )
             )

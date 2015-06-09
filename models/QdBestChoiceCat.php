@@ -55,6 +55,11 @@ class QdBestChoiceCat extends QdPostCat
                 )
             )
         );
+        $obj['type']['Options'] = array(
+            static::$TYPE_BESTCHOICECAT => array(
+                'Caption' => array('en-US' => 'Best choice Cat', 'vi-VN' => 'Best choice Cat'),
+            ),
+        );
         return $obj;
     }
     public function getBestChoiceItems()

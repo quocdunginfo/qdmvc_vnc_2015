@@ -48,6 +48,10 @@ class Qdmvc_Page_PostCat extends Qdmvc_Page_Root {
                         'SourceExpr' => 'order',
                         'DataType' => static::getDataType('order')
                     ),
+                    'active' => array(
+                        'SourceExpr' => 'active',
+                        'DataType' => static::getDataType('active')
+                    ),
                     'type' => array(
                         'SourceExpr' => 'type',
                         'DataType' => static::getDataType('type'),
