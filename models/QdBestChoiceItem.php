@@ -54,11 +54,21 @@ class QdBestChoiceItem extends QdPost
                 )
             )
         );
+        $obj['link'] = array(
+            'Caption' => array('en-US' => 'Link', 'vi-VN' => 'Link'),
+            'DataType' => 'Text',
+        );
+        $obj['title_color'] = array(
+            'Caption' => array('en-US' => 'Title color', 'vi-VN' => 'Màu tiêu đề'),
+            'DataType' => 'Color',
+        );
         $obj['type']['Options'] = array(
             static::$TYPE_BESTCHOICEITEM => array(
                 'Caption' => array('en-US' => 'Best choice item', 'vi-VN' => 'Best choice item'),
             ),
         );
+        unset($obj['content']);
+        unset($obj['short_content']);
         return $obj;
     }
 
