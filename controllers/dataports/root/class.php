@@ -76,7 +76,7 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|call_fn";
         if (method_exists($this->obj, $function)) {
-            if ($this->obj->$function($location, arr)) {
+            if ($this->obj->$function($location, array())) {
                 $this->pushMsg('Call Fn OK, ID=' . $this->obj->id);
             }
             $this->pushMsg($this->obj->GETVALIDATION());
@@ -150,6 +150,11 @@ class Qdmvc_Dataport
         $location = "|{$class_name}|insert";
         if ($this->obj->save(true, $location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_insert_ok'), $this->obj->id));
+            return true;
+        }
+        else
+        {
+            return false;
         }
         $this->pushMsg($this->obj->GETVALIDATION());
     }

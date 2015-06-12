@@ -48,6 +48,13 @@ class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup {
                         'SourceExpr' => 'form_order_done_tpl',
                         'DataType' => static::getDataType('form_order_done_tpl')
                     ),
+                    'order_done_email_title' => array(
+                        'SourceExpr' => 'order_done_email_title',
+                    ),
+                    'order_done_email_tpl' => array(
+                        'SourceExpr' => 'order_done_email_tpl',
+                        'DataType' => static::getDataType('order_done_email_tpl')
+                    ),
                     'form_order_done_avatar' => array(
                         'SourceExpr' => 'form_order_done_avatar',
                         'DataType' => static::getDataType('form_order_done_avatar')

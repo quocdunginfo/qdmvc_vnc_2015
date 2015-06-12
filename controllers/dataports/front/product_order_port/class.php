@@ -4,7 +4,7 @@ class Qdmvc_DataPort_FrontProductOrder extends Qdmvc_DataPort_ProductOrder
 {
     protected static function allowSubmitFields()
     {
-        return array('product_id', 'customer_name','customer_phone', 'customer_email', 'customer_address', 'mota', 'count');
+        return array('sex','product_id', 'customer_name','customer_phone', 'customer_email', 'customer_address', 'mota', 'count');
     }
 
     protected static function canView()
@@ -26,4 +26,17 @@ class Qdmvc_DataPort_FrontProductOrder extends Qdmvc_DataPort_ProductOrder
     {
         return true;
     }
+
+    protected function insert()
+    {
+        if(parent::insert())
+        {
+            //send email
+            if (method_exists($this->obj, 'fn_send_email'))
+            {
+                $this->obj->fn_send_email();
+            }
+        }
+    }
+
 }

@@ -247,4 +247,17 @@ class Qdmvc_Helper
     {
         return (!isset($obj) || $obj===null || $obj===false || $obj==='' || (is_array($obj) && empty($obj)));
     }
+    public static function sendEmail($email, $title, $content, $html=true)
+    {
+        error_reporting(0);
+        if($html==true) {
+            add_filter('wp_mail_content_type', 'set_html_content_type');
+        }
+        $re = wp_mail($email, $title, $content);
+        return $re;
+    }
+}
+
+function set_html_content_type() {
+    return 'text/html';
 }

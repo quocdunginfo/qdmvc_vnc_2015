@@ -8,6 +8,9 @@ class QdProductOrder extends QdRoot
         array('product_obj', 'class_name' => 'QdProduct', 'foreign_key' => 'product_id', 'primary_key' => 'id')
     );
 
+    public static $TYPE_SEX_MALE = 1;
+    public static $TYPE_SEX_FEMALE = 0;
+
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
@@ -46,6 +49,18 @@ class QdProductOrder extends QdRoot
                     )
                 )
             ),
+            'sex' => array(
+                'Caption' => array('en-US' => 'Sex', 'vi-VN' => 'Giới tính'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    static::$TYPE_SEX_MALE => array(
+                        'Caption' => array('en-US' => 'Male', 'vi-VN' => 'Nam'),
+                    ),
+                    static::$TYPE_SEX_FEMALE => array(
+                        'Caption' => array('en-US' => 'Female', 'vi-VN' => 'Nữ'),
+                    ),
+                )
+            ),
             'customer_name' => array(
                 'Caption' => array('en-US' => 'Customer Name', 'vi-VN' => 'Tên KH')
             ),
@@ -73,7 +88,8 @@ class QdProductOrder extends QdRoot
 
     public function getProduct()
     {
-        return $this->product_obj;
+        return QdProduct::GET($this->product_id);
+        //return $this->product_obj;
     }
 
     public function save($validate = true, $location='')
@@ -139,5 +155,39 @@ class QdProductOrder extends QdRoot
         }
         return parent::delete($location);
     }
+    public function fn_send_email()
+    {
+        if(!is_email($this->customer_email))
+        {
+            return false;
+        }
+        $pro = $this->getProduct();
+        $pro_name = '';
+        $pro_code = '';
+        if(!Qdmvc_Helper::isNullOrEmpty($pro))
+        {
+            $pro_name = $pro->name;
+            $pro_code = $pro->code;
+        }
+        else
+        {
+            return false;
+        }
 
+        $p_order_setup = QdSetupProductOrder::GET();
+        if(Qdmvc_Helper::isNullOrEmpty($p_order_setup))
+        {
+            return false;
+        }
+
+        $tpl = $p_order_setup->order_done_email_tpl;
+
+        $sex_title = $this->sex==1?'Anh':'Chị';
+
+
+        $tpl = str_replace(array('{sex}', '{customer_name}', '{product_name}', '{product_code}'), array($sex_title, $this->customer_name, $pro_name, $pro_code), $tpl);
+        $title = $p_order_setup->order_done_email_title;
+        $content = $tpl;
+        return Qdmvc_Helper::sendEmail($this->customer_email, $title, $content);
+    }
 }

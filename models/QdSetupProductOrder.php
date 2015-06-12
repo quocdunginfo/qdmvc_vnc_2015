@@ -20,6 +20,12 @@ class QdSetupProductOrder extends QdRootSetup
             'form_order_done_tpl' => array(
                 'DataType' => 'WYSIWYG'
             ),
+            'order_done_email_title' => array(
+
+            ),
+            'order_done_email_tpl' => array(
+                'DataType' => 'WYSIWYG'
+            ),
             'form_order_done_avatar' => array(
                 'DataType' => 'Image'
             ),

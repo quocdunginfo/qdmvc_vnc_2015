@@ -31,6 +31,10 @@ class Qdmvc_Page_ProductOrder_Card extends Qdmvc_Page_Root
                         'SourceExpr' => '_product_name',
                         'ReadOnly' => static::isReadOnly('_product_name')
                     ),
+                    'sex' => array(
+                        'SourceExpr' => 'sex',
+                        'DataType' => static::getDataType('sex')
+                    ),
                     'customer_name' => array(
                         'SourceExpr' => 'customer_name'
                     ),
