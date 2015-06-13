@@ -142,7 +142,7 @@ class Qdmvc_Dataport
 
         //insert
         $c = static::$model;
-        $this->obj = new $c();
+        $this->obj = $c::getInitObj();
         $this->beforeInsertAssign();
         $this->assign();
 

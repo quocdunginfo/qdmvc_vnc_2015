@@ -712,8 +712,8 @@ class QdRoot extends ActiveRecord\Model
     protected function writeLog($action = 0, $location = '')
     {
         $location .= '|writeLog';
-        $obj = QdLog::getInitObj($this->getCalledClassName(), $this->id, $action, $location);
-        $obj->save();
+        $obj = QdLog::getInitObj($this->getCalledClassName(), $this->id, $action, $location, Qdmvc_Helper::getClientIP());
+        return $obj->save();
     }
 
     public static function getFieldOptions($field_name, $lang = 'en-US')
