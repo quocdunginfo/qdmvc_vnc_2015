@@ -28,6 +28,10 @@ class Qdmvc_Page_Log extends Qdmvc_Page_Root {
                         'SourceExpr' => 'id',
                         'ReadOnly' => true
                     ),
+                    'ip' => array(
+                        'SourceExpr' => 'ip',
+                        'DataType' => static::getDataType('ip')
+                    ),
                     'location' => array(
                         'SourceExpr' => 'location',
                         'DataType' => static::getDataType('location')

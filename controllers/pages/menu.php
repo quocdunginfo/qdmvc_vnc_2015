@@ -995,6 +995,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdContact',
             'DataPort' => 'contact_port'
         ),
+        'subscriber' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_Subscriber_Card',
+            'Caption' => array(
+                'en-US' => 'Subscriber',
+                'vi-VN' => 'Subscriber'
+            ),
+            'Model' => 'QdSubscriber',
+            'DataPort' => 'subscriber_port',
+            'PageList' => 'subscriber_list'
+        ),
+        'subscriber_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_subscriber_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdSubscriber',
+            'DataPort' => 'subscriber_port'
+        ),
         'folder1' => array(
             'ParentId' => -1,
             'Active'=>true,

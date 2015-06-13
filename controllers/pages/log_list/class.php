@@ -38,6 +38,10 @@ class Qdmvc_Page_Log_List extends Qdmvc_Page_Root
                 'action' => array(
                     'SourceExpr' => 'action',
                 ),
+                'ip' => array(
+                    'SourceExpr' => 'ip',
+                    'Width' => 150
+                ),
             ));
     }
 

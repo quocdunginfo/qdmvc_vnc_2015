@@ -24,6 +24,11 @@ class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
                         'SourceExpr' => 'id',
                         'ReadOnly' => true
                     ),
+                    'type' => array(
+                        'SourceExpr' => 'type',
+                        'DataType' => static::getDataType('type')
+                    )
+                    ,
                     'name' => array(
                         'SourceExpr' => 'name'
                     ),

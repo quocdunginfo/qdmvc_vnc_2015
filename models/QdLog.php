@@ -15,16 +15,16 @@ class QdLog extends QdNote
                 'Caption' => array('en-US' => 'Action', 'vi-VN' => 'Hành động'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    '0' => array(
+                    static::$ACTION_UNDEFINED => array(
                         'Caption' => array('en-US' => 'Undefined', 'vi-VN' => 'Không xác định'),
                     ),
-                    '1' => array(
+                    static::$ACTION_INSERT => array(
                         'Caption' => array('en-US' => 'Insert', 'vi-VN' => 'Thêm mới'),
                     ),
-                    '2' => array(
+                    static::$ACTION_MODIFY => array(
                         'Caption' => array('en-US' => 'Modify', 'vi-VN' => 'Sửa'),
                     ),
-                    '3' => array(
+                    static::$ACTION_DELETE => array(
                         'Caption' => array('en-US' => 'Delete', 'vi-VN' => 'Xóa'),
                     ),
                 )
@@ -32,17 +32,20 @@ class QdLog extends QdNote
             'location' => array(
                 'Caption' => array('en-US' => 'Location', 'vi-VN' => 'Nơi phát sinh'),
             ),
-
+            'ip' => array(
+                'Caption' => array('en-US' => 'IP', 'vi-VN' => 'IP'),
+            ),
         ));
     }
 
-    public static function getInitObj($model='', $model_id='', $action=0, $location='')
+    public static function getInitObj($model='', $model_id='', $action=0, $location='', $ip='')
     {
         $obj = new QdLog();
         $obj->model = $model;
         $obj->model_id = $model_id;
         $obj->action = $action;
         $obj->location = $location;
+        $obj->ip = $ip;
         return $obj;
     }
 }

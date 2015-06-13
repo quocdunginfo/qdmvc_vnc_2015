@@ -35,4 +35,12 @@ class Qdmvc_Page_Contact_List extends Qdmvc_Page_Root
             )
         ));
     }
+
+    protected function getPageView()
+    {
+        return array(
+            'type' => QdContact::$TYPE_VNC
+        );
+    }
+
 }
