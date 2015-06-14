@@ -18,24 +18,21 @@ class Qdmvc_Page_Pro2Pro_Card extends Qdmvc_Page_Root
                     'Fields' => array(
                         'id' => array(
                             'SourceExpr' => 'id',
-                            'Hidden' => true
                         ),
                         'product_id' => array(
                             'SourceExpr' => 'product_id',
-                            'LookupURL' => static::getLookupURL('product_id'),
-                            'ReadOnly' => true
                         ),
                         '_product_name' => array(
                             'SourceExpr' => '_product_name',
-                            'ReadOnly'=>static::isReadOnly('_product_name'),
+
                         ),
                         'r_product_id' => array(
                             'SourceExpr' => 'r_product_id',
-                            'LookupURL' => static::getLookupURL('r_product_id')
+
                         ),
                         '_r_product_name' => array(
                             'SourceExpr' => '_r_product_name',
-                            'ReadOnly'=>static::isReadOnly('_r_product_name')
+
                         ),
                         'order' => array(
                             'SourceExpr' => 'order',

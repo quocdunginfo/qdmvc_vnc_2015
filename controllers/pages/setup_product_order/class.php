@@ -30,42 +30,42 @@ class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup {
                     ),
                     'advice_phone' => array(
                         'SourceExpr' => 'advice_phone',
-                        'DataType' => static::getDataType('advice_phone')
+
                     ),
                     'support_phone' => array(
                         'SourceExpr' => 'support_phone',
-                        'DataType' => static::getDataType('support_phone')
+
                     ),
                     'order_form_title' => array(
                         'SourceExpr' => 'order_form_title',
-                        'DataType' => static::getDataType('order_form_title')
+
                     ),
                     'form_order_done_title' => array(
                         'SourceExpr' => 'form_order_done_title',
-                        'DataType' => static::getDataType('form_order_done_title')
+
                     ),
                     'form_order_done_tpl' => array(
                         'SourceExpr' => 'form_order_done_tpl',
-                        'DataType' => static::getDataType('form_order_done_tpl')
+
                     ),
                     'order_done_email_title' => array(
                         'SourceExpr' => 'order_done_email_title',
                     ),
                     'order_done_email_tpl' => array(
                         'SourceExpr' => 'order_done_email_tpl',
-                        'DataType' => static::getDataType('order_done_email_tpl')
+
                     ),
                     'form_order_done_avatar' => array(
                         'SourceExpr' => 'form_order_done_avatar',
-                        'DataType' => static::getDataType('form_order_done_avatar')
+
                     ),
                     'btn_dathang' => array(
                         'SourceExpr' => 'btn_dathang',
-                        'DataType' => static::getDataType('btn_dathang')
+
                     ),
                     'btn_goidathang' => array(
                         'SourceExpr' => 'btn_goidathang',
-                        'DataType' => static::getDataType('btn_goidathang')
+
                     ),
 
                 )

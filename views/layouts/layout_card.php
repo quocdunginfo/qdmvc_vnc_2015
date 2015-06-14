@@ -503,7 +503,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldLookup($f_name, $f_val, $f_lku)
+    private function generateFieldLookup($f_name, $f_val, $f_lku, $readonly=false)
     {
         ?>
         <div class="qd-lookup-input">
@@ -530,11 +530,11 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldText($f_name, $value)
+    private function generateFieldText($f_name, $value, $readonly=false)
     {
         ?>
         <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>"
-               value="<?= $value ?>">
+               value="<?= $value ?>" <?=$readonly==true?'readonly':''?>>
     <?php
     }
 
@@ -554,10 +554,10 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldCombobox($f_name, $value, $options)
+    private function generateFieldCombobox($f_name, $value, $options, $readonly=false)
     {
         ?>
-        <select class="qd-option-field" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
+        <select class="qd-option-field" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" <?=$readonly?'disabled':''?>>
             <?php foreach ($options as $key => $caption): ?>
                 <option value="<?= $key ?>" <?= $value == $key ? 'selected' : '' ?>><?= $caption ?></option>
             <?php endforeach; ?>
@@ -596,7 +596,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldBoolean($f_name, $value = 0)
+    private function generateFieldBoolean($f_name, $value = 0, $readonly=false)
     {
         ?>
         <input <?= $value == 1 ? 'checked="checked"' : '' ?> type="checkbox" name="<?= $f_name ?>"
@@ -670,18 +670,22 @@ class Qdmvc_Layout_Card
         <div class="container qd-card-grid" style="width: 100%">
             <div class="row clearfix">
                 <?php
-                foreach ($this->page->getLayout() as $group => $config) :
+                $tmp_page = $this->page;
+                foreach ($tmp_page::getLayout() as $group => $config) :
                     if (isset($config['Type']) && $config['Type'] == 'Group') :
                         if (isset($config['Fields'])) :
-
                             foreach ($config['Fields'] as $key => $f_config) :
-                                $type = $f_config['DataType'];
-                                $f_name = $f_config['SourceExpr'];
+                                $type = $tmp_page::getDataType($key);
+
+                                $readonly = $tmp_page::isReadOnly($key);
+                                $readonly = QdT_Library::isNullOrEmpty($readonly)?false:true;
+
+                                $f_name = $tmp_page::getSourceExpr($key);
                                 if ($type == 'Option') {
-                                    $options = $this->page->getFieldOptions($f_name, $this->data['language']);
+                                    $options = $tmp_page::getFieldOptions($f_name, $this->data['language']);
                                 }
                                 $f_val = $this->obj != null ? $this->obj->$f_name : '';
-                                $f_lku = $f_config['LookupURL'];
+                                $f_lku = $tmp_page::getLookupURL($f_name);
 
                                 if ($f_config['Hidden']) {
                                     $this->generateFieldHidden($f_name, $f_val);
@@ -697,9 +701,7 @@ class Qdmvc_Layout_Card
                                     <!-- END Caption -->
                                     <div class="pull-right">
                                         <?php
-                                        if ($f_config['ReadOnly']) {
-                                            $this->generateFieldReadOnly($f_name, $f_val);
-                                        } else if ($type == 'Color') {
+                                        if ($type == 'Color') {
                                             $this->generateFieldColor($f_name, $f_val);
                                         } else if ($type == 'Boolean') {
                                             $this->generateFieldBoolean($f_name, $f_val);
@@ -710,11 +712,11 @@ class Qdmvc_Layout_Card
                                         } else if ($type == 'WYSIWYG') {
                                             $this->generateFieldWYSIWYG($f_name, $f_val);
                                         } else if ($type == 'Option') {
-                                            $this->generateFieldCombobox($f_name, $f_val, $options);
-                                        } else if (isset($f_lku)) {
-                                            $this->generateFieldLookup($f_name, $f_val, $f_lku);
+                                            $this->generateFieldCombobox($f_name, $f_val, $options, $readonly);
+                                        } else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
+                                            $this->generateFieldLookup($f_name, $f_val, $f_lku, $readonly);
                                         } else {
-                                            $this->generateFieldText($f_name, $f_val, $f_lku);
+                                            $this->generateFieldText($f_name, $f_val, $readonly);
                                         }
                                         ?>
                                     </div>
@@ -880,6 +882,10 @@ class Qdmvc_Layout_Card
                             $("#qdimage").bind("click", function (event) {
                                 requestLookupWindow(getObj()['__sys_image_url']);
                             });
+                            //card button event
+                            $("#qdlog").bind("click", function (event) {
+                                requestLookupWindow(getObj()['__sys_log_url']);
+                            });
                             $("#qdlines").bind("click", function (event) {
                                 requestLookupWindow(getObj()['__sys_lines_url']);
                             });
@@ -963,15 +969,19 @@ class Qdmvc_Layout_Card
                                 </button>
                             </span>
                             <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdnote">Notes
+                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdnote">Notes
                                 </button>
                             </span>
                             <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdimage">Images
+                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdimage">Images
                                 </button>
                             </span>
                             <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdlines"
+                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdlog">Logs
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdlines"
                                         style="display: none">
                                     <?=$this->page->getFieldCaption('__sys_lines_url', $this->data['language'])?>
                                 </button>
@@ -1004,8 +1014,9 @@ class Qdmvc_Layout_Card
     protected function Bars()
     {
         $this->cardBar();
+        $tmp_page = $this->page;
         //render Page Part from Page Setup
-        foreach ($this->page->getLayout() as $group => $config) :
+        foreach ($tmp_page::getLayout() as $group => $config) :
             if (isset($config['Type']) && $config['Type'] == 'Part'):
                 ?>
                 <div>

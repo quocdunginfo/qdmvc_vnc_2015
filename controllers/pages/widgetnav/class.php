@@ -42,32 +42,32 @@ class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
                     ),
                     'active' => array(
                         'SourceExpr' => 'active',
-                        'DataType' => static::getDataType('active'),
+
                     ),
                     'order' => array(
                         'SourceExpr' => 'order',
                     ),
                     'group_id' => array(
                         'SourceExpr' => 'group_id',
-                        'DataType' => static::getDataType('group_id'),
-                        'LookupURL' => static::getLookupURL('group_id')
+
+
                     ),
                     '_group_name' => array(
                         'SourceExpr' => '_group_name',
-                        'DataType' => static::getDataType('_group_name'),
-                        'ReadOnly' => static::isReadOnly('_group_name')
+
+
                     ),
                     'type' => array(
                         'SourceExpr' => 'type',
-                        'DataType' => static::getDataType('type'),
+
                     ),
                     'target' => array(
                         'SourceExpr' => 'target',
-                        'DataType' => static::getDataType('target'),
+
                     ),
                     'avatar' => array(
                         'SourceExpr' => 'avatar',
-                        'DataType' => static::getDataType('avatar'),
+
                     ),
                 )
             )

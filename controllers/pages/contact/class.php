@@ -22,11 +22,9 @@ class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'ReadOnly' => true
                     ),
                     'type' => array(
                         'SourceExpr' => 'type',
-                        'DataType' => static::getDataType('type')
                     )
                     ,
                     'name' => array(
@@ -46,15 +44,12 @@ class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
                     ),
                     'active' => array(
                         'SourceExpr' => 'active',
-                        'DataType' => static::getDataType('active')
                     ),
                     'order' => array(
                         'SourceExpr' => 'order',
-                        'DataType' => static::getDataType('order')
                     ),
                     'description' => array(
                         'SourceExpr' => 'description',
-                        'DataType' => static::getDataType('description')
                     )
                 )
             )

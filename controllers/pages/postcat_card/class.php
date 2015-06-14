@@ -34,32 +34,32 @@ class Qdmvc_Page_PostCat extends Qdmvc_Page_Root {
                     ),
                     'title' => array(
                         'SourceExpr' => 'title',
-                        'DataType' => static::getDataType('title')
+
                     ),
                     'description' => array(
                         'SourceExpr' => 'description',
-                        'DataType' => static::getDataType('description')
+
                     ),
                     'avatar' => array(
                         'SourceExpr' => 'avatar',
-                        'DataType' => static::getDataType('avatar')
+
                     ),
                     'order' => array(
                         'SourceExpr' => 'order',
-                        'DataType' => static::getDataType('order')
+
                     ),
                     'active' => array(
                         'SourceExpr' => 'active',
-                        'DataType' => static::getDataType('active')
+
                     ),
                     'type' => array(
                         'SourceExpr' => 'type',
-                        'DataType' => static::getDataType('type'),
-                        'ReadOnly' => static::isReadOnly('type')
+
+
                     ),
                     'parent_id' => array(
                         'SourceExpr' => 'parent_id',
-                        'LookupURL' => static::getLookupURL('parent_id')
+
                     ),
                 )
             )

@@ -26,31 +26,28 @@ class Qdmvc_Page_Log extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'ReadOnly' => true
                     ),
                     'ip' => array(
                         'SourceExpr' => 'ip',
-                        'DataType' => static::getDataType('ip')
                     ),
                     'location' => array(
                         'SourceExpr' => 'location',
-                        'DataType' => static::getDataType('location')
                     ),
                     '__owner_name' => array(
                         'SourceExpr' => '__owner_name',
-                        'ReadOnly' => true
+
                     ),
                     'action' => array(
                         'SourceExpr' => 'action',
-                        'DataType' => static::getDataType('action')
+
                     ),
                     'model' => array(
                         'SourceExpr' => 'model',
-                        'ReadOnly' => true
+
                     ),
                     'model_id' => array(
                         'SourceExpr' => 'model_id',
-                        'ReadOnly' => true
+
                     )
                 )
             )

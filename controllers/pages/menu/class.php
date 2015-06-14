@@ -25,16 +25,15 @@ class Qdmvc_Page_Menu extends Qdmvc_Page_WidgetNav
         //add
         $obj['Group1']['Fields']['position_1'] = array(
             'SourceExpr' => 'position_1',
-            'DataType' => static::getDataType('position_1'),
+
         );
         $obj['Group1']['Fields']['position_2'] = array(
             'SourceExpr' => 'position_2',
-            'DataType' => static::getDataType('position_2'),
+
         );
         //hide
         $obj['Group1']['Fields']['type'] = array(
             'SourceExpr' => 'type',
-            //'DataType' => static::getDataType('type'),
             'Hidden' => true
         );
         //disable

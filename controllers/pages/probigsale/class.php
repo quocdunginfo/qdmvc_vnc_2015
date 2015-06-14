@@ -23,7 +23,7 @@ class Qdmvc_Page_ProBigSale_Card extends Qdmvc_Page_ProGrp_Card
         $obj = parent::initFields();
         $obj['General']['Fields']['group_id'] = array(
             'SourceExpr' => 'group_id',
-            'LookupURL' => static::getLookupURL('group_id')
+
         );
         return $obj;
     }

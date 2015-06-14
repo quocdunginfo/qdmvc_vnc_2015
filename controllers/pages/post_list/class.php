@@ -5,15 +5,10 @@
  * Date: 05/03/2015
  * Time: 11:35 PM
  */
-Qdmvc::loadPage('root');
+Qdmvc::loadPage('root_list');
 
-class Qdmvc_Page_Post_List extends Qdmvc_Page_Root
+class Qdmvc_Page_Post_List extends Qdmvc_Page_Root_List
 {
-    public function run()
-    {
-        parent::run();
-    }
-
     protected function getCustomPageView()
     {
         return array(
@@ -44,7 +39,6 @@ class Qdmvc_Page_Post_List extends Qdmvc_Page_Root
                 ),
                 'type' => array(
                     'SourceExpr' => 'type',
-                    'DataType' => static::getDataType('type')
                 )
             ));
     }

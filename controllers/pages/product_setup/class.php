@@ -48,19 +48,19 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_Root {
                     ),
                     'df_pro_cat_avatar' => array(
                         'SourceExpr' => 'df_pro_cat_avatar',
-                        'DataType' => static::getDataType('df_pro_cat_avatar')
+
                     ),
                     'df_product_desc_tpl' => array(
                         'SourceExpr' => 'df_product_desc_tpl',
-                        'DataType' => static::getDataType('df_product_desc_tpl')
+
                     ),
                     'df_pro_avatar' => array(
                         'SourceExpr' => 'df_pro_avatar',
-                        'DataType' => static::getDataType('df_pro_avatar')
+
                     ),
                     'bigsalecat_id' => array(
                         'SourceExpr' => 'bigsalecat_id',
-                        'LookupURL' => static::getLookupURL('bigsalecat_id')
+
                     ),
                 )
             )

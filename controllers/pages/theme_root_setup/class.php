@@ -31,47 +31,47 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
                     ),
                     'topleft_tuvan' => array(
                         'SourceExpr' => 'topleft_tuvan',
-                        'DataType' => static::getDataType('topleft_tuvan')
+
                     ),
                     'topcenter_promotion' => array(
                         'SourceExpr' => 'topcenter_promotion',
-                        'DataType' => static::getDataType('topcenter_promotion')
+
                     ),
                     'topright_navs' => array(
                         'SourceExpr' => 'topright_navs',
-                        'DataType' => static::getDataType('topright_navs')
+
                     ),
                     'bottomleft_footer_note' => array(
                         'SourceExpr' => 'bottomleft_footer_note',
-                        'DataType' => static::getDataType('bottomleft_footer_note')
+
                     ),
                     'widgetnavcat_id' => array(
                         'SourceExpr' => 'widgetnavcat_id',
-                        'DataType' => static::getDataType('widgetnavcat_id'),
-                        'LookupURL' => static::getLookupURL('widgetnavcat_id')
+
+
                     ),
                     'partnergrp_id' => array(
                         'SourceExpr' => 'partnergrp_id',
-                        'DataType' => static::getDataType('partnergrp_id'),
-                        'LookupURL' => static::getLookupURL('partnergrp_id')
+
+
                     ),
                     'vnc_logo' => array(
                         'SourceExpr' => 'vnc_logo',
-                        'DataType' => static::getDataType('vnc_logo'),
+
                     ),
                     'commercial_logo' => array(
                         'SourceExpr' => 'commercial_logo',
-                        'DataType' => static::getDataType('commercial_logo'),
+
                     ),
                     'social_icon' => array(
                         'SourceExpr' => 'social_icon',
-                        'DataType' => static::getDataType('social_icon'),
-                        'LookupURL' => static::getLookupURL('social_icon')
+
+
                     ),
                     'img_slider' => array(
                         'SourceExpr' => 'img_slider',
-                        'DataType' => static::getDataType('img_slider'),
-                        'LookupURL' => static::getLookupURL('img_slider')
+
+                        
                     ),
                 )
             )

@@ -5,9 +5,9 @@
  * Date: 05/03/2015
  * Time: 11:35 PM
  */
-Qdmvc::loadPage('root');
+Qdmvc::loadPage('root_list');
 
-class Qdmvc_Page_WidgetNav_List extends Qdmvc_Page_Root
+class Qdmvc_Page_WidgetNav_List extends Qdmvc_Page_Root_List
 {
     protected static function getViewClass()
     {
@@ -44,5 +44,4 @@ class Qdmvc_Page_WidgetNav_List extends Qdmvc_Page_Root
                 )
             ));
     }
-
 }

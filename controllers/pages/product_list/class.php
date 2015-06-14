@@ -5,9 +5,9 @@
  * Date: 05/03/2015
  * Time: 11:35 PM
  */
-Qdmvc::loadPage('root');
+Qdmvc::loadPage('root_list');
 
-class Qdmvc_Page_Product_List extends Qdmvc_Page_Root
+class Qdmvc_Page_Product_List extends Qdmvc_Page_Root_List
 {
     public function run()
     {
@@ -38,7 +38,7 @@ class Qdmvc_Page_Product_List extends Qdmvc_Page_Root
                 ),
                 '_product_cat_name' => array(
                     'SourceExpr' => '_product_cat_name',
-                    'DataType' => static::getDataType('_product_cat_name')
+
                 ),
             )
         );

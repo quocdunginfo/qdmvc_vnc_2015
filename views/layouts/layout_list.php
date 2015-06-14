@@ -50,7 +50,8 @@ class Qdmvc_Layout_List
 
             var dataGridDefine = [
                 <?php
-                    foreach($this->page->getLayout() as $key=>$config)//quocdunginfo
+                    $tmp_page = $this->page;
+                    foreach($tmp_page::getLayout() as $key=>$config)//quocdunginfo
                     {
                         $f_name = $config['SourceExpr'];
                         $caption = $this->page->getFieldCaption($f_name, $this->data['language']);

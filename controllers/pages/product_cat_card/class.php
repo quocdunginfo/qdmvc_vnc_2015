@@ -34,34 +34,33 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
 
                     'type' => array(
                         'SourceExpr' => 'type',
-                        'DataType' => static::getDataType('type')
+
                     ),
                     'type2' => array(
                         'SourceExpr' => 'type2',
-                        'DataType' => static::getDataType('type2')
+
                     ),
                     'name' => array(
                         'SourceExpr' => 'name'
                     ),
                     'avatar' => array(
                         'SourceExpr' => 'avatar',
-                        'DataType' => static::getDataType('avatar')
+
                     ),
                     'parent_id' => array(
                         'SourceExpr' => 'parent_id',
-                        'LookupURL' => static::getLookupURL('parent_id')
                     ),
                     '_parent_name' => array(
                         'SourceExpr' => '_parent_name',
-                        'DataType' => static::getDataType('_parent_name'),
-                        'ReadOnly' => true
+
+
                     ),
                     'order' => array(
                         'SourceExpr' => 'order'
                     ),
                     'active' => array(
                         'SourceExpr' => 'active',
-                        'DataType' => static::getDataType('active')
+
                     )
                 )
             ),

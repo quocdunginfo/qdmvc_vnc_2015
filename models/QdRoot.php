@@ -11,12 +11,15 @@ class QdRoot extends ActiveRecord\Model
     protected static $fields_config = array(
         //SAMPLE FIELD CONFIG
         'id' => array(
-
+            'ReadOnly' => true
         ),
         'owner_id' => array(
-
+            'ReadOnly' => true
         ),
         '__sys_note_url' => array(
+            'FieldClass' => 'System'
+        ),
+        '__sys_log_url' => array(
             'FieldClass' => 'System'
         ),
         '__sys_image_url' => array(
@@ -187,8 +190,7 @@ class QdRoot extends ActiveRecord\Model
         'filter' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'exact' => true, 'operator' => '='));
         'limit' => -1,
         'offset' => 0,
-        'order' => array(
-            //'id' => 'asc'
+        'order' => array(//'id' => 'asc'
         ),
         //'filter_raw' => '1=1 OR 2=2',//raw SQL Condition//May 21 2015, DO NOT USE ANYMORE
         'filter_relation' => 'AND'
@@ -199,6 +201,7 @@ class QdRoot extends ActiveRecord\Model
         $this->record_filter['filter_default'] = $filter;
         return $this->SETFILTER($filter);
     }
+
     public function ADDFILTERDEFAULT($filter = array())
     {
         $this->record_filter['filter_default'] = array_merge($filter);
@@ -275,6 +278,7 @@ class QdRoot extends ActiveRecord\Model
         $this->record_filter['order'][$field] = $asc;
         return $this;
     }
+
     public function REMOVEORDERBY()
     {
         $this->record_filter['order'] = array('id' => 'desc');
@@ -355,10 +359,8 @@ class QdRoot extends ActiveRecord\Model
     public function REMOVERANGE($field)
     {
         $re = array();
-        foreach($this->record_filter['filter'] as $config)
-        {
-            if($config['field']!=$field)
-            {
+        foreach ($this->record_filter['filter'] as $config) {
+            if ($config['field'] != $field) {
                 array_push($re, $config);
             }
         }
@@ -405,7 +407,7 @@ class QdRoot extends ActiveRecord\Model
     public function GETLIST()
     {
         $query = static::_generateQuery($this->record_filter);
-        if(empty($query))//could not find all with empty array query
+        if (empty($query))//could not find all with empty array query
         {
             return static::all();
         }
@@ -423,8 +425,8 @@ class QdRoot extends ActiveRecord\Model
             $where = '';
             foreach ($record['filter'] as $config) {
                 $key = $config['field'];
-                $operator = isset($config['operator'])?$config['operator']:'=';
-                $exact = isset($config['exact'])?$config['exact']:true;
+                $operator = isset($config['operator']) ? $config['operator'] : '=';
+                $exact = isset($config['exact']) ? $config['exact'] : true;
                 if ($exact == true) {
                     $where .= "`{$key}` {$operator} '{$config['value']}' " . $record['filter_relation'] . " ";//quocdunginfo
                 } else {
@@ -462,18 +464,15 @@ class QdRoot extends ActiveRecord\Model
             $order_s = '';
             $count = 0;
             if (is_array($record['order']) && count($record['order']) > 0) {
-                foreach($record['order'] as $order_k=>$order_v)
-                {
-                    if($count>0)
-                    {
+                foreach ($record['order'] as $order_k => $order_v) {
+                    if ($count > 0) {
                         $order_s .= ', ';
                     }
                     $order_s .= "`{$order_k}` {$order_v}";
                     $count++;
                 }
             }
-            if($order_s!='')
-            {
+            if ($order_s != '') {
                 $re['order'] = $order_s;
             }
             //END ORDER
@@ -484,11 +483,15 @@ class QdRoot extends ActiveRecord\Model
 
     protected static $lookup_fields = null;
 
-    protected static function ISLOOKUPFIELD($field_name)
+    public static function ISLOOKUPFIELD($field_name)
     {
         try {
             $config = static::getFieldsConfig();
-            return $config[$field_name]['TableRelation']['Table'] != '';
+            if(!Qdmvc_Helper::isNullOrEmpty($config[$field_name]['TableRelation']['Table']))
+            {
+                return true;
+            }
+            return false;
         } catch (Exception $e) {
             return false;
         }
@@ -571,11 +574,24 @@ class QdRoot extends ActiveRecord\Model
         return static::$fields_config;
     }
 
+    public static function getSingleFieldConfig($f_name, $meta_name, $lang = '')
+    {
+        if ($meta_name == 'ReadOnly') {
+            return static::ISREADONLY($f_name);
+        } else {
+            $config = static::getFieldsConfig();
+            if (!Qdmvc_Helper::isNullOrEmpty($config[$f_name][$meta_name])) {
+                return $config[$f_name][$meta_name];
+            }
+        }
+        return '';
+    }
+
     public static function ISREADONLY($f_name)
     {
         try {
             $config = static::getFieldsConfig();
-            return ($config[$f_name]['ReadOnly'] || static::ISFLOWFIELD($f_name));
+            return (static::ISSYSTEMFIELD($f_name) || static::ISFLOWFIELD($f_name) || (!Qdmvc_Helper::isNullOrEmpty($config[$f_name]['ReadOnly'])));
         } catch (Exception $ex) {
             return false;
         }
@@ -616,6 +632,8 @@ class QdRoot extends ActiveRecord\Model
             //system preserved field
             if ($field_name == '__sys_note_url') {
                 return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('note', array('model' => $class_name, 'model_id' => $this->id));
+            } else if ($field_name == '__sys_log_url') {
+                return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('log', array('model' => $class_name, 'model_id' => $this->id));
             } else if ($field_name == '__sys_image_url') {
                 return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('image', array('model' => $class_name, 'model_id' => $this->id));
             } else if ($field_name == '__sys_lines_url') {
@@ -653,19 +671,16 @@ class QdRoot extends ActiveRecord\Model
         foreach ($list as $item) {
             $arr = array();
             foreach (static::getFieldsConfig() as $key => $value) {
-                if(static::getDataType($key)=='Date')
-                {
+                if (static::getDataType($key) == 'Date') {
                     $dtmp0 = $item->$key;
                     //$dtmp = new DateTime($item->$key);
-                    if($dtmp0!=null)
-                    {
-                        $arr[$key] = date_format($dtmp0, get_option( 'date_format', 'j/m/Y' ));//quocdunginfo
-                    }else
-                    {
+                    if ($dtmp0 != null) {
+                        $arr[$key] = date_format($dtmp0, get_option('date_format', 'j/m/Y'));//quocdunginfo
+                    } else {
                         $arr[$key] = '';
                     }
 
-                }else{
+                } else {
                     $arr[$key] = $item->$key;
                 }
             }
@@ -731,7 +746,8 @@ class QdRoot extends ActiveRecord\Model
             return array();
         }
     }
-    public function fn_($location, $params=array())
+
+    public function fn_($location, $params = array())
     {
 
     }

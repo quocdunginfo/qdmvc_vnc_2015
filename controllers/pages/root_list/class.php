@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: quocd_000
+ * Date: 05/03/2015
+ * Time: 11:34 PM
+ */
+Qdmvc::loadPage('root');
+class Qdmvc_Page_Root_List extends Qdmvc_Page_Root
+{
+    function __construct()
+    {
+        parent::__construct();
+    }
+
+    protected static function getFieldsConfig($f_name, $meta_name, $lang = 'en-US')
+    {
+        //check in Layout first
+        $tmp_config = static::initFields();
+        if(!QdT_Library::isNullOrEmpty($tmp_config[$f_name][$meta_name]))
+        {
+            return $tmp_config[$f_name][$meta_name];
+        }
+        //check in Model
+        $c = static::getModel();
+        return $c::getSingleFieldConfig($f_name, $lang);
+    }
+}

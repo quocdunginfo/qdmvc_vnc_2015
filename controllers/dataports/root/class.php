@@ -154,9 +154,10 @@ class Qdmvc_Dataport
         }
         else
         {
+            $this->pushMsg($this->obj->GETVALIDATION());
             return false;
         }
-        $this->pushMsg($this->obj->GETVALIDATION());
+
     }
 
     public function getCalledClass()
@@ -184,8 +185,14 @@ class Qdmvc_Dataport
         $location = "|{$class_name}|update";
         if ($this->obj->save(true, $location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_update_ok'), $this->obj->id));
+            return true;
         }
-        $this->pushMsg($this->obj->GETVALIDATION());
+        else
+        {
+            $this->pushMsg($this->obj->GETVALIDATION());
+            return false;
+        }
+
     }
     protected static function canView()
     {
@@ -208,8 +215,12 @@ class Qdmvc_Dataport
         $location = "|{$class_name}|delete";
         if ($this->obj->delete($location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_delete_ok'), $this->obj->id));
+            return true;
         }
-        $this->pushMsg($this->obj->GETVALIDATION());
+        else {
+            $this->pushMsg($this->obj->GETVALIDATION());
+            return false;
+        }
     }
 
     private function loadPostValue()

@@ -5,9 +5,9 @@
  * Date: 05/03/2015
  * Time: 11:35 PM
  */
-Qdmvc::loadPage('root');
+Qdmvc::loadPage('root_list');
 
-class Qdmvc_Page_PostCat_List extends Qdmvc_Page_Root
+class Qdmvc_Page_PostCat_List extends Qdmvc_Page_Root_List
 {
     protected static function getViewClass()
     {
@@ -38,7 +38,7 @@ class Qdmvc_Page_PostCat_List extends Qdmvc_Page_Root
                 ),
                 'type' => array(
                     'SourceExpr' => 'type',
-                    'DataType' => static::getDataType('type')
+
                 ),
                 'active' => array(
                     'SourceExpr' => 'active',

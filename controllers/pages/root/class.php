@@ -27,15 +27,6 @@ class Qdmvc_Page_Root
             $this->data['view_style'] = 'compact';//compact, full
         }
 
-        //pre-filter
-        /*
-        if(isset($_GET['filterfield'])) {
-            $this->data['filter'] = array(
-                0 => array('filterfield' => $_GET['filterfield'], 'filtervalue' => $_GET['filtervalue'])
-            );
-        }*/
-
-
         static::initFields();
     }
 
@@ -94,8 +85,7 @@ class Qdmvc_Page_Root
     public static function getWidth($f_name)
     {
         try {
-            $tmp = static::getLayout();
-            return $tmp[$f_name]['Width'];
+            return static::getFieldsConfig($f_name, 'Width');
         } catch (Exception $ex) {
             return '';
         }
@@ -106,32 +96,40 @@ class Qdmvc_Page_Root
         return '';
     }
 
-    protected static function isReadOnly($f_name)
+    public static function isReadOnly($f_name)
     {
-        $c = static::getModel();
-        return $c::ISREADONLY($f_name);
+        //$c = static::getModel();
+        //return $c::ISREADONLY($f_name);
+        return static::getFieldsConfig($f_name, 'ReadOnly');
     }
 
-    protected static function getDataType($field_name)
+    public static function getDataType($field_name)
     {
-        $c = static::getModel();
-        return $c::getDataType($field_name);
+        return static::getFieldsConfig($field_name, 'DataType');
     }
 
-    protected static function getLookupURL($field_name)
+    public static function getLookupURL($field_name)
     {
         $c = static::getModel();
-        $tbrelation = $c::getTableRelation($field_name);
-        $tbfilter = $tbrelation['TableFilter'];
-        $filter_arr = array();
-        $df_lk_page = static::getDefaultLookupPage($tbrelation['Table']);
-        $getfield = $tbrelation['Field'];
+        if($c::ISLOOKUPFIELD($field_name))
+        {
+            $tbrelation = $c::getTableRelation($field_name);
+            if(!Qdmvc_Helper::isNullOrEmpty($tbrelation))
+            {
+                $tbfilter = $tbrelation['TableFilter'];
 
-        foreach ($tbfilter as $item) {
-            $filter_arr[$item['Field']] = $item['Value'];
+                $filter_arr = array();
+                $df_lk_page = static::getDefaultLookupPage($tbrelation['Table']);
+                $getfield = $tbrelation['Field'];
+
+                foreach ($tbfilter as $item) {
+                    $filter_arr[$item['Field']] = $item['Value'];
+                }
+
+                return Qdmvc_Helper::getLookupPath($df_lk_page, $field_name, $filter_arr, $getfield);
+            }
         }
-
-        return Qdmvc_Helper::getLookupPath($df_lk_page, $field_name, $filter_arr, $getfield);
+        return '';
     }
 
     protected static function getDefaultLookupPage($model)
@@ -195,7 +193,7 @@ class Qdmvc_Page_Root
         return $c::getFieldCaption($field_name, $lang);
     }
 
-    public function getLayout()
+    public static function getLayout()
     {
         if (static::$fields_show == null) {
             static::$fields_show = static::initFields();
@@ -267,9 +265,32 @@ class Qdmvc_Page_Root
         return $this->data;
     }
 
-    public function getFieldOptions($f_name, $lang = 'en-US')
+    public static function getFieldOptions($f_name, $lang = 'en-US')
     {
         $c = static::getModel();
         return $c::getFieldOptions($f_name, $lang);
+    }
+    protected static function getFieldsConfig($f_name, $meta_name, $lang = 'en-US')
+    {
+        //check in Layout first
+        foreach (static::getLayout() as $group => $config) {
+            if (isset($config['Type']) && $config['Type'] == 'Group') {
+                if (!Qdmvc_Helper::isNullOrEmpty($config['Fields'][$f_name][$meta_name])) {
+                    return $config['Fields'][$f_name][$meta_name];
+                }
+            }
+        }
+        //check in Model
+        $c = static::getModel();
+        return $c::getSingleFieldConfig($f_name, $meta_name);
+    }
+    public static function getSourceExpr($f_name)
+    {
+        $re = static::getFieldsConfig($f_name, 'SourceExpr');
+        if(Qdmvc_Helper::isNullOrEmpty($re))
+        {
+            $re = $f_name;
+        }
+        return $re;
     }
 }

@@ -19,6 +19,7 @@ class Qdmvc_View_Log extends Qdmvc_Layout_CardNavigate {
                     //$("#qdnote").hide();
                     //$("#qdimage").hide();
                     $("#qdupdate").hide();
+                    $("#qdlog").hide();
                 });
             })(jQuery);
         </script>

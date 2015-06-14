@@ -26,34 +26,34 @@ class Qdmvc_Page_ObjectTask extends Qdmvc_Page_Root {
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'ReadOnly' => true
+
                     ),
                     'layer' => array(
                         'SourceExpr' => 'layer',
-                        'DataType' => static::getDataType('layer')
+
                     ),
                     'action' => array(
                         'SourceExpr' => 'action',
-                        'DataType' => static::getDataType('action')
+
                     ),
                     'object_type' => array(
                         'SourceExpr' => 'object_type',
-                        'DataType' => static::getDataType('object_type')
+
                     ),
                     'object_name' => array(
                         'SourceExpr' => 'object_name',
                     ),
                     'version' => array(
                         'SourceExpr' => 'version',
-                        'DataType' => static::getDataType('version')
+
                     ),
                     'description' => array(
                         'SourceExpr' => 'description',
-                        'DataType' => static::getDataType('description')
+
                     ),
                     'compatible' => array(
                         'SourceExpr' => 'compatible',
-                        'DataType' => static::getDataType('compatible')
+
                     ),
                 )
             )

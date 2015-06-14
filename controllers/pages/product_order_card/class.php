@@ -21,19 +21,19 @@ class Qdmvc_Page_ProductOrder_Card extends Qdmvc_Page_Root
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'ReadOnly' => true
+
                     ),
                     'product_id' => array(
                         'SourceExpr' => 'product_id',
-                        'LookupURL' => static::getLookupURL('product_id')
+
                     ),
                     '_product_name' => array(
                         'SourceExpr' => '_product_name',
-                        'ReadOnly' => static::isReadOnly('_product_name')
+
                     ),
                     'sex' => array(
                         'SourceExpr' => 'sex',
-                        'DataType' => static::getDataType('sex')
+
                     ),
                     'customer_name' => array(
                         'SourceExpr' => 'customer_name'
@@ -52,7 +52,7 @@ class Qdmvc_Page_ProductOrder_Card extends Qdmvc_Page_Root
                     ),
                     'done' => array(
                         'SourceExpr' => 'done',
-                        'DataType' => static::getDataType('done')
+
                     ),
                     'mota' => array(
                         'SourceExpr' => 'mota'

@@ -22,15 +22,12 @@ class Qdmvc_Page_BestChoiceItem extends Qdmvc_Page_Post {
         $obj = parent::initFields();
         $obj['Group1']['Fields']['_post_cat_desc'] = array(
             'SourceExpr' => '_post_cat_desc',
-            'ReadOnly' => static::isReadOnly('_post_cat_desc')
         );
         $obj['Group1']['Fields']['title_color'] = array(
             'SourceExpr' => 'title_color',
-            'DataType' => static::getDataType('title_color')
         );
         $obj['Group1']['Fields']['link'] = array(
             'SourceExpr' => 'link',
-            'DataType' => static::getDataType('link')
         );
         unset($obj['Group1']['Fields']['content']);
         unset($obj['Group1']['Fields']['short_content']);

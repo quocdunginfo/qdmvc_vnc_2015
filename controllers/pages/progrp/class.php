@@ -18,30 +18,30 @@ class Qdmvc_Page_ProGrp_Card extends Qdmvc_Page_Root
                     'Fields' => array(
                         'id' => array(
                             'SourceExpr' => 'id',
-                            'ReadOnly' => true
+
                         ),
                         'product_id' => array(
                             'SourceExpr' => 'product_id',
-                            'LookupURL' => static::getLookupURL('product_id')
+
                         ),
                         '_product_name' => array(
                             'SourceExpr' => '_product_name',
-                            'ReadOnly'=>static::isReadOnly('_product_name'),
+
                         ),
                         'group_id' => array(
                             'SourceExpr' => 'group_id',
-                            'LookupURL' => static::getLookupURL('group_id')
+
                         ),
                         '_group_name' => array(
                             'SourceExpr' => '_group_name',
-                            'ReadOnly'=>static::isReadOnly('_group_name')
+
                         ),
                         'order' => array(
                             'SourceExpr' => 'order',
                         ),
                         'group_type' => array(
                             'SourceExpr' => 'group_type',
-                            'DataType' => static::getDataType('group_type'),
+
                         ),
                     )
                 )

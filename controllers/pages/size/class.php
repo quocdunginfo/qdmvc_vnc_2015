@@ -40,11 +40,11 @@ class Qdmvc_Page_Size extends Qdmvc_Page_Root {
                     ),
                     'type' => array(
 	                    'SourceExpr' => 'type',
-	                    'DataType' => static::getDataType('type')
+
                     ),
                     'description' => array(
                         'SourceExpr' => 'description',
-                        'DataType' => static::getDataType('description')
+
                     )
                 )
             )
