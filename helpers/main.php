@@ -233,6 +233,9 @@ class Qdmvc_Helper
                     margin: 0 !important;
                     padding: 0 !important;
                 }
+                #wpwrap .screen-reader-shortcut {
+                    display: none !important;
+                }
             }
         </style>
         <?php
