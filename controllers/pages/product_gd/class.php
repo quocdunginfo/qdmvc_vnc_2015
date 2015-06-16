@@ -6,15 +6,15 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('product');
-class Qdmvc_Page_ProductQA_Card extends Qdmvc_Page_Product_Card
+class Qdmvc_Page_ProductGD_Card extends Qdmvc_Page_Product_Card
 {
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_ProductQA_Card';
+        return 'Qdmvc_View_ProductGD_Card';
     }
 
     public static function getPage()
     {
-        return 'product_qa';
+        return 'product_gd';
     }
 }

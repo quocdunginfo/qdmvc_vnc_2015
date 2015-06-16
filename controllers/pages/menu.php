@@ -47,6 +47,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdProduct',
             'DataPort' => 'product_port'
         ),
+        'product_df' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ProductDF_Card',
+            'Caption' => array(
+                'en-US' => 'Product DF',
+                'vi-VN' => 'Sản phẩm DF',
+            ),
+            'Model' => 'QdProductDF',
+            'DataPort' => 'product_df_port',
+            'PageList' => 'product_df_list'
+        ),
+        'product_df_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ProductDF_List',
+            'Caption' => array(
+                'en-US' => 'Product DF List',
+                'vi-VN' => 'Product DF List'
+            ),
+            'Model' => 'QdProductDF',
+            'DataPort' => 'product_df_port'
+        ),
         'product_qa' => array(
             'ParentId' => 'product_cat_card',
             'Active'=>true,
@@ -71,6 +96,31 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdProductQA',
             'DataPort' => 'product_qa_port'
+        ),
+        'product_gd' => array(
+            'ParentId' => 'product_cat_card',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_ProductGD_Card',
+            'Caption' => array(
+                'en-US' => 'Product GD',
+                'vi-VN' => 'Sản phẩm GD',
+            ),
+            'Model' => 'QdProductGD',
+            'DataPort' => 'product_gd_port',
+            'PageList' => 'product_gd_list'
+        ),
+        'product_gd_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_ProductGD_List',
+            'Caption' => array(
+                'en-US' => 'Product GD List',
+                'vi-VN' => 'Product GD List'
+            ),
+            'Model' => 'QdProductGD',
+            'DataPort' => 'product_gd_port'
         ),
         'product_cat_card' => array(
             'ParentId' => -1,
