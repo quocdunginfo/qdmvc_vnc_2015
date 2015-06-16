@@ -23,6 +23,7 @@ class QdProductCatQA extends QdProductCat
             )
         );
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatQA';
+        $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductQA';
 
         return $obj;
     }

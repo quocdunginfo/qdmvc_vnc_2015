@@ -47,6 +47,7 @@ class QdManufactorQA extends QdManufactor
                 'Caption' => array('en-US' => 'Manufactor QA', 'vi-VN' => 'Hãng SX QA'),
             )
         );
+        $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductQA';
         return $obj;
     }
 }

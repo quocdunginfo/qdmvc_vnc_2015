@@ -41,17 +41,6 @@ class QdProductQA extends QdProduct
                     'Type' => 'FIELD',
                     'Value' => 'id'
                 ),
-                /* Chưa sử dụng
-                array(
-                    'Condition' => array(
-                        'Field' => '',
-                        'Type' => 'CONST',//'FIELD'
-                        'Value' => ''
-                    ),
-                    'Field' => 'r_product_type',
-                    'Type' => 'CONST',
-                    'Value' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
-                )*/
             )
         );
 
