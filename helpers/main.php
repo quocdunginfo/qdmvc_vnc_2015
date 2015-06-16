@@ -291,6 +291,14 @@ class Qdmvc_Helper
         // return unreliable ip since all else failed
         return $_SERVER['REMOTE_ADDR'];
     }
+    public static function getFullURLFromAbsPath($abs_path='')
+    {
+        $tmp = is_ssl()?'https':'http';
+        $tmp .='://';
+        $tmp .= $_SERVER['HTTP_HOST'];
+        $tmp .= $abs_path;
+        return $tmp;
+    }
 }
 
 function set_html_content_type() {
