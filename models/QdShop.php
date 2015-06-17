@@ -1,34 +1,25 @@
 <?php
 
-class QdWidgetNavCat extends QdPostCat
+class QdShop extends QdContact
 {
+    public static $TYPE_SHOP = 30;
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+        $this->SETFILTERDEFAULT(array(
+            array('field' => 'type', 'value' => static::$TYPE_SHOP, 'exact' => true, 'operator' => '=')
+        ));
     }
-
-    public static function getInitObj()
-    {
-        $obj = new QdWidgetNavCat();//init_obj trên page card sẽ không áp đúng __sys_note_url nếu chọn parent::
-        $obj->type = static::$TYPE_WIDGETNAV;
-        $obj->active = true;
-        return $obj;
-    }
-
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        //change parent_id filter
-        $obj['parent_id']['TableRelation']['Table'] = 'QdWidgetNavCat';
-
-        $obj['type']['Options']= array(
-            static::$TYPE_WIDGETNAV => array(
-                'Caption' => array('en-US' => 'WidgetNavs Cat', 'vi-VN' => 'WidgetNavs Cat'),
+        $obj['type']['Options'] = array(
+            static::$TYPE_SHOP => array(
+                'Caption' => array('en-US' => 'Shop', 'vi-VN' => 'Cửa hàng'),
             ),
         );
-
         $obj['__sys_lines_url']['TableRelation'] = array(
-            'Table' => 'QdWidgetNav',
+            'Table' => 'QdPro2Shop',
             'Field' => 'id',
             'TableFilter' => array(
                 array(
@@ -37,12 +28,24 @@ class QdWidgetNavCat extends QdPostCat
                         'Type' => 'CONST',//'FIELD'
                         'Value' => ''
                     ),
-                    'Field' => 'group_id',
+                    'Field' => 'shop_id',
                     'Type' => 'FIELD',
                     'Value' => 'id'
                 )
             )
         );
+
         return $obj;
     }
+
+    public static function getInitObj()
+    {
+        $tmp = parent::getInitObj();
+
+        $obj = new QdShop();
+        $obj->type = static::$TYPE_SHOP;
+        $obj->active = $tmp->active;
+        return $obj;
+    }
+
 }

@@ -17,6 +17,7 @@ class QdPostCat extends QdRoot
     {
         $obj = new QdPostCat();
         $obj->type = static::$TYPE_POSTCAT;
+        $obj->active=true;
         return $obj;
     }
     public function getChilds()

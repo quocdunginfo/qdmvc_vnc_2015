@@ -6,7 +6,6 @@ class QdWidgetNav extends QdRoot
     public static $TARGET_BLANK = '_blank';
     public static $TARGET_SELF = '_self';
     public static $TYPE_DEFAULT = 0;
-    public static $TYPE_MENU = 10;
     public static $TYPE_PARTNER = 20;
 
     public static function getFieldsConfig()
@@ -62,10 +61,6 @@ class QdWidgetNav extends QdRoot
                     static::$TYPE_DEFAULT => array(
                         'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
                     ),
-                    static::$TYPE_MENU => array(
-                        'Caption' => array('en-US' => 'Menu', 'vi-VN' => 'Menu'),
-                    ),
-
                 )
             ),
             'group_id' => array(

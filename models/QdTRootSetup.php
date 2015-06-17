@@ -25,6 +25,23 @@ class QdTRootSetup extends QdRootSetup
             'commercial_logo' => array(
                 'DataType' => 'Image',
             ),
+            'banner_service_page' => array(
+                'Name' => 'banner_service_page',
+                'Caption' => array('en-US' => 'Banner Service Page', 'vi-VN' => 'Banner trang DV'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdWidgetNavCat',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+
+                    )
+                )
+            ),
             'widgetnavcat_id' => array(
                 'Name' => 'widgetnavcat_id',
                 'Caption' => array('en-US' => 'Widget Nav Cat', 'vi-VN' => 'Widget Nav Cat'),

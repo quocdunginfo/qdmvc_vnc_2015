@@ -2,12 +2,19 @@
 
 class QdMenu extends QdWidgetNav
 {
+    public static $TYPE_MENU = 10;
     public static function getFieldsConfig()
     {
-        return array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             'position_1' => array(),
             'position_2' => array(),
         ));
+        $obj['type']['Options'] = array(
+            static::$TYPE_MENU => array(
+                'Caption' => array('en-US' => 'Menu', 'vi-VN' => 'Menu'),
+            ),
+        );
+        return $obj;
     }
 
     public static function getInitObj()

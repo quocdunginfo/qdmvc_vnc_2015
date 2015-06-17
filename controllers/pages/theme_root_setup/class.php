@@ -50,6 +50,9 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
 
 
                     ),
+                    'banner_service_page' => array(
+
+                    ),
                     'partnergrp_id' => array(
                         'SourceExpr' => 'partnergrp_id',
 

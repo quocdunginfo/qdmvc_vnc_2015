@@ -1020,6 +1020,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdPro2Pro',
             'DataPort' => 'pro2pro_port'
         ),
+        'pro2shop' => array(
+            'ParentId' => 'product',
+            'Active'=>false,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_Pro2Shop_Card',
+            'Caption' => array(
+                'en-US' => 'Products in Shop',
+                'vi-VN' => 'SP thuộc cửa hàng'
+            ),
+            'Model' => 'QdPro2Shop',
+            'DataPort' => 'pro2shop_port',
+            'PageList' => 'pro2shop_list'
+        ),
+        'pro2shop_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_pro2shop_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdPro2Shop',
+            'DataPort' => 'pro2shop_port'
+        ),
         'contact' => array(
             'ParentId' => -1,
             'Active'=>true,
@@ -1044,6 +1069,31 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdContact',
             'DataPort' => 'contact_port'
+        ),
+        'shop' => array(
+            'ParentId' => -1,
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_Shop_Card',
+            'Caption' => array(
+                'en-US' => 'Shop',
+                'vi-VN' => 'Cửa hàng'
+            ),
+            'Model' => 'QdShop',
+            'DataPort' => 'shop_port',
+            'PageList' => 'shop_list'
+        ),
+        'shop_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_Shop_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdShop',
+            'DataPort' => 'shop_port'
         ),
         'subscriber' => array(
             'ParentId' => -1,
