@@ -574,7 +574,7 @@ class QdRoot extends ActiveRecord\Model
         return static::$fields_config;
     }
 
-    public static function getSingleFieldConfig($f_name, $meta_name, $lang = '')
+    public static function getSingleFieldConfig($f_name, $meta_name, $lang = 'en-US')
     {
         if ($meta_name == 'ReadOnly') {
             return static::ISREADONLY($f_name);

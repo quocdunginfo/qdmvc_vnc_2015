@@ -24,6 +24,11 @@ class Qdmvc_Page_Root_List extends Qdmvc_Page_Root
         }
         //check in Model
         $c = static::getModel();
-        return $c::getSingleFieldConfig($f_name, $lang);
+        $tmp = $c::getSingleFieldConfig($f_name, $meta_name, $lang);
+        if(QdT_Library::isNullOrEmpty($tmp) && $meta_name=='SourceExpr')
+        {
+            $tmp = $f_name;
+        }
+        return $tmp;
     }
 }

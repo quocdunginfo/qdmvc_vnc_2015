@@ -9,6 +9,7 @@
 class Qdmvc_Layout_Card
 {
     protected $obj = null;
+    protected $obj_json = null;
     protected $page = null;
     protected $data = null;
     protected static $ctl_prefix = 'ctl_';
@@ -19,6 +20,7 @@ class Qdmvc_Layout_Card
         $this->data = $page->getData();
         if (isset($this->data['obj'])) {
             $this->obj = $this->data['obj'];
+            $this->obj_json = json_encode($this->data['obj_json']);
         }
     }
 
@@ -495,9 +497,7 @@ class Qdmvc_Layout_Card
         ?>
 
 
-        <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>"
-               value="<?= $value ?>"
-               readonly>
+        <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" readonly>
 
 
     <?php
@@ -508,8 +508,7 @@ class Qdmvc_Layout_Card
         ?>
         <div class="qd-lookup-input">
             <input class="text-input" type="text" name="<?= $f_name ?>"
-                   id="<?= static::$ctl_prefix . $f_name ?>"
-                   value="<?= $f_val ?>">
+                   id="<?= static::$ctl_prefix . $f_name ?>">
             <button onclick='requestLookupWindow("<?= $f_lku ?>")'
                     data-lookupurl="<?= $f_lku ?>" id="lookup_cs_<?= $f_name ?>"
                     value="">...
@@ -522,9 +521,8 @@ class Qdmvc_Layout_Card
     {
         ?>
         <div class="qd-lookup-input">
-            <input type='text' id='<?= static::$ctl_prefix . $f_name ?>' name="<?= $f_name ?>" value="<?= $value ?>"/>
-            <button onclick='requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")' id="datepicker_cs_<?= $f_name ?>"
-                    value="">...
+            <input type='text' id='<?= static::$ctl_prefix . $f_name ?>' name="<?= $f_name ?>"/>
+            <button onclick='requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")' id="datepicker_cs_<?= $f_name ?>">...
             </button>
         </div>
     <?php
@@ -534,7 +532,7 @@ class Qdmvc_Layout_Card
     {
         ?>
         <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>"
-               value="<?= $value ?>" <?=$readonly==true?'readonly':''?>>
+               <?=$readonly==true?'readonly':''?>>
     <?php
     }
 
@@ -542,15 +540,14 @@ class Qdmvc_Layout_Card
     {
         ?>
         <input class="text-input color {hash:true}" type="text" name="<?= $f_name ?>"
-               id="<?= static::$ctl_prefix . $f_name ?>"
-               value="<?= $value ?>">
+               id="<?= static::$ctl_prefix . $f_name ?>">
     <?php
     }
 
     private function generateFieldHidden($f_name, $value)
     {
         ?>
-        <input value="<?= $value ?>" type="hidden" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
+        <input type="hidden" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
     <?php
     }
 
@@ -559,7 +556,7 @@ class Qdmvc_Layout_Card
         ?>
         <select class="qd-option-field" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" <?=$readonly?'disabled':''?>>
             <?php foreach ($options as $key => $caption): ?>
-                <option value="<?= $key ?>" <?= $value == $key ? 'selected' : '' ?>><?= $caption ?></option>
+                <option value="<?=$key?>"><?= $caption ?></option>
             <?php endforeach; ?>
         </select>
     <?php
@@ -569,8 +566,7 @@ class Qdmvc_Layout_Card
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>"
-                   value="<?= $value ?>">
+            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
 
             <button id="media_cs_<?= $f_name ?>" value="">...</button>
             <?php
@@ -599,8 +595,7 @@ class Qdmvc_Layout_Card
     private function generateFieldBoolean($f_name, $value = 0, $readonly=false)
     {
         ?>
-        <input <?= $value == 1 ? 'checked="checked"' : '' ?> type="checkbox" name="<?= $f_name ?>"
-                                                             id="<?= static::$ctl_prefix . $f_name ?>" value="1">
+        <input type="checkbox" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1">
     <?php
     }
 
@@ -608,15 +603,14 @@ class Qdmvc_Layout_Card
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>"
-                   value="">
+            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
 
             <button id="editor_cs_<?= $f_name ?>" value="">...</button>
 
             <script>
                 (function ($) {
                     $(document).ready(function () {
-                        $("#<?=static::$ctl_prefix.$f_name?>").val("<?=str_replace('"', '\"', $value)?>");
+                        //$("#<?=static::$ctl_prefix.$f_name?>").val("<?=str_replace('"', '\"', $value)?>");
                         $("#editor_cs_<?=$f_name?>").click(function () {
                             requestEditorWindow($('#<?=static::$ctl_prefix.$f_name?>').val(), '<?=static::$ctl_prefix.$f_name?>');
                         });
@@ -684,7 +678,7 @@ class Qdmvc_Layout_Card
                                 if ($type == 'Option') {
                                     $options = $tmp_page::getFieldOptions($f_name, $this->data['language']);
                                 }
-                                $f_val = $this->obj != null ? $this->obj->$f_name : '';
+                                $f_val = '';
                                 $f_lku = $tmp_page::getLookupURL($f_name);
 
                                 if ($f_config['Hidden']) {

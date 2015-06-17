@@ -19,6 +19,9 @@ class Qdmvc_Page_RootSetup extends Qdmvc_Page_Root {
             $this->data['obj'] = $c::GET();
         }
 
+        $tmp = $c::toJSON(array($this->data['obj']));
+        $this->data['obj_json'] = $tmp[0];
+
         //load View and render
         parent::run();
     }

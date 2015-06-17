@@ -53,9 +53,9 @@ class Qdmvc_Layout_List
                     $tmp_page = $this->page;
                     foreach($tmp_page::getLayout() as $key=>$config)//quocdunginfo
                     {
-                        $f_name = $config['SourceExpr'];
-                        $caption = $this->page->getFieldCaption($f_name, $this->data['language']);
-                        $width = $this->page->getWidth($f_name);
+                        $f_name = $tmp_page::getSourceExpr($key);
+                        $caption = $tmp_page->getFieldCaption($f_name, $this->data['language']);
+                        $width = $tmp_page->getWidth($f_name);
 
                         ?>
                 {
