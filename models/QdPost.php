@@ -96,4 +96,14 @@ class QdPost extends QdRoot
         $query = add_query_arg(array('id' => $this->id/*, 'title' => $this->name*/), $query);
         return $query;
     }
+    public function getBreadcrumbs()
+    {
+        $re = $this->getPostCatObj()->getBreadcrumbs();
+        array_push($re, array('name' => $this->title, 'url' => $this->getPermalink()));
+        return $re;
+    }
+    public function getPostCatObj()
+    {
+        return QdPostCat::GET($this->post_cat_id);
+    }
 }

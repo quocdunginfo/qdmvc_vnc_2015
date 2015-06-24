@@ -751,4 +751,8 @@ class QdRoot extends ActiveRecord\Model
     {
 
     }
+    public function getBreadcrumbs()
+    {
+        return array(array('name' => Qdmvc_Helper::getNoneText(), 'url' => Qdmvc_Helper::getNoneLink()));
+    }
 }
