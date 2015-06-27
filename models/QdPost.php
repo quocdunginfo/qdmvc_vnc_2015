@@ -92,8 +92,9 @@ class QdPost extends QdRoot
     }
     public function getPermalink()
     {
-        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/service.php'));
-        $query = add_query_arg(array('id' => $this->id/*, 'title' => $this->name*/), $query);
+        /*$query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/service.php'));
+        $query = add_query_arg(array('id' => $this->id, 'title' => $this->name), $query);*/
+        $query = site_url(sprintf('%s/%s-%s.html',Qdmvc_Helper::sanitize_title_with_dashes($this->getPostCatObj()->title) ,Qdmvc_Helper::sanitize_title_with_dashes($this->title), $this->id));
         return $query;
     }
     public function getBreadcrumbs()
