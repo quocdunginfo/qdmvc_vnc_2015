@@ -299,6 +299,15 @@ class Qdmvc_Helper
         $tmp .= $abs_path;
         return $tmp;
     }
+    public static function getCurrentUserName()
+    {
+        $current_user = wp_get_current_user();
+        if($current_user!=null)
+        {
+            return $current_user->user_login;
+        }
+        return null;
+    }
 }
 
 function set_html_content_type() {

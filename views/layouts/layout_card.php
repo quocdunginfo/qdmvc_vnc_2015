@@ -103,7 +103,7 @@ class Qdmvc_Layout_Card
             function requestDatePickerWindow(return_id) {
                 (function ($) {
                     datepicker_tmp_return_id = return_id;
-                    $('#qddatepicker').val($('#'+return_id).val());
+                    $('#qddatepicker').val($('#' + return_id).val());
                     $('#jqxdatepickerwin').jqxWindow('open');
                 })(jQuery);
 
@@ -386,8 +386,8 @@ class Qdmvc_Layout_Card
                                     {format: 'DD/MM/YYYY', inline: true, keepOpen: true}
                                 );
 
-                                $('#datepicker_chooser').click(function(){
-                                    $('#'+datepicker_tmp_return_id).val($('#qddatepicker').val());
+                                $('#datepicker_chooser').click(function () {
+                                    $('#' + datepicker_tmp_return_id).val($('#qddatepicker').val());
                                     $('#jqxdatepickerwin').jqxWindow('close');
                                 });
                             });
@@ -503,7 +503,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldLookup($f_name, $f_val, $f_lku, $readonly=false)
+    private function generateFieldLookup($f_name, $f_val, $f_lku, $readonly = false)
     {
         ?>
         <div class="qd-lookup-input">
@@ -522,17 +522,18 @@ class Qdmvc_Layout_Card
         ?>
         <div class="qd-lookup-input">
             <input type='text' id='<?= static::$ctl_prefix . $f_name ?>' name="<?= $f_name ?>"/>
-            <button onclick='requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")' id="datepicker_cs_<?= $f_name ?>">...
+            <button onclick='requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")'
+                    id="datepicker_cs_<?= $f_name ?>">...
             </button>
         </div>
     <?php
     }
 
-    private function generateFieldText($f_name, $value, $readonly=false)
+    private function generateFieldText($f_name, $value, $readonly = false)
     {
         ?>
         <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>"
-               <?=$readonly==true?'readonly':''?>>
+            <?= $readonly == true ? 'readonly' : '' ?>>
     <?php
     }
 
@@ -551,12 +552,13 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldCombobox($f_name, $value, $options, $readonly=false)
+    private function generateFieldCombobox($f_name, $value, $options, $readonly = false)
     {
         ?>
-        <select class="qd-option-field" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" <?=$readonly?'disabled':''?>>
+        <select class="qd-option-field" name="<?= $f_name ?>"
+                id="<?= static::$ctl_prefix . $f_name ?>" <?= $readonly ? 'disabled' : '' ?>>
             <?php foreach ($options as $key => $caption): ?>
-                <option value="<?=$key?>"><?= $caption ?></option>
+                <option value="<?= $key ?>"><?= $caption ?></option>
             <?php endforeach; ?>
         </select>
     <?php
@@ -592,7 +594,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldBoolean($f_name, $value = 0, $readonly=false)
+    private function generateFieldBoolean($f_name, $value = 0, $readonly = false)
     {
         ?>
         <input type="checkbox" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1">
@@ -623,6 +625,7 @@ class Qdmvc_Layout_Card
 
     private function generateFields()
     {
+        $tmp_page = $this->page;
         ?>
         <style>
             .qd-card-grid .col-md-6 {
@@ -662,68 +665,89 @@ class Qdmvc_Layout_Card
             }
         </style>
         <div class="container qd-card-grid" style="width: 100%">
-            <div class="row clearfix">
-                <?php
-                $tmp_page = $this->page;
-                foreach ($tmp_page::getLayout() as $group => $config) :
-                    if (isset($config['Type']) && $config['Type'] == 'Group') :
-                        if (isset($config['Fields'])) :
-                            foreach ($config['Fields'] as $key => $f_config) :
-                                $type = $tmp_page::getDataType($key);
+            <div class="row clearfix" style="overflow-x: hidden">
+                <script type="text/javascript">
+                    (function ($) {
+                        $(document).ready(function () {
+                            $('#jqxTabs').jqxTabs({width: '100%', position: 'top'});
+                        });
+                    })(jQuery);
 
-                                $readonly = $tmp_page::isReadOnly($key);
-                                $readonly = QdT_Library::isNullOrEmpty($readonly)?false:true;
+                </script>
+                <div id='jqxTabs'>
+                    <ul>
+                        <?php
+                        foreach ($tmp_page::getLayout() as $group => $config) :
+                            ?>
+                            <li>
+                                <?= $tmp_page::getTabConfig($group, 'Name', $this->data['language']) ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php
+                    foreach ($tmp_page::getLayout() as $group => $config) :
+                        if (isset($config['Type']) && $config['Type'] == 'Group') :
+                            echo '<div>';
+                            if (isset($config['Fields'])) :
+                                foreach ($config['Fields'] as $key => $f_config) :
+                                    $type = $tmp_page::getDataType($key);
 
-                                $f_name = $tmp_page::getSourceExpr($key);
-                                if ($type == 'Option') {
-                                    $options = $tmp_page::getFieldOptions($f_name, $this->data['language']);
-                                }
-                                $f_val = '';
-                                $f_lku = $tmp_page::getLookupURL($f_name);
+                                    $readonly = $tmp_page::isReadOnly($key);
+                                    $readonly = QdT_Library::isNullOrEmpty($readonly) ? false : true;
 
-                                if ($f_config['Hidden']) {
-                                    $this->generateFieldHidden($f_name, $f_val);
-                                    continue;
-                                }
-                                ?>
-                                <div class="col-md-6">
-                                    <!-- Caption -->
-                                    <div
-                                        class="qd-field-caption pull-left"><?= $this->page->getFieldCaption($f_name, $this->data['language']) ?>
-                                        :
+                                    $f_name = $tmp_page::getSourceExpr($key);
+                                    if ($type == 'Option') {
+                                        $options = $tmp_page::getFieldOptions($f_name, $this->data['language']);
+                                    }
+                                    $f_val = '';
+                                    $f_lku = $tmp_page::getLookupURL($f_name);
+
+                                    if ($f_config['Hidden']) {
+                                        $this->generateFieldHidden($f_name, $f_val);
+                                        continue;
+                                    }
+                                    ?>
+                                    <div class="col-md-6">
+                                        <!-- Caption -->
+                                        <div
+                                            class="qd-field-caption pull-left"><?= $this->page->getFieldCaption($f_name, $this->data['language']) ?>
+                                            :
+                                        </div>
+                                        <!-- END Caption -->
+                                        <div class="pull-right">
+                                            <?php
+                                            if ($type == 'Color') {
+                                                $this->generateFieldColor($f_name, $f_val);
+                                            } else if ($type == 'Boolean') {
+                                                $this->generateFieldBoolean($f_name, $f_val);
+                                            } else if ($type == 'Image') {
+                                                $this->generateFieldImage($f_name, $f_val);
+                                            } else if ($type == 'Date') {
+                                                $this->generateFieldDate($f_name, $f_val);
+                                            } else if ($type == 'WYSIWYG') {
+                                                $this->generateFieldWYSIWYG($f_name, $f_val);
+                                            } else if ($type == 'Option') {
+                                                $this->generateFieldCombobox($f_name, $f_val, $options, $readonly);
+                                            } else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
+                                                $this->generateFieldLookup($f_name, $f_val, $f_lku, $readonly);
+                                            } else {
+                                                $this->generateFieldText($f_name, $f_val, $readonly);
+                                            }
+                                            ?>
+                                        </div>
+
+                                        <div style="clear: both"></div>
+
                                     </div>
-                                    <!-- END Caption -->
-                                    <div class="pull-right">
-                                        <?php
-                                        if ($type == 'Color') {
-                                            $this->generateFieldColor($f_name, $f_val);
-                                        } else if ($type == 'Boolean') {
-                                            $this->generateFieldBoolean($f_name, $f_val);
-                                        } else if ($type == 'Image') {
-                                            $this->generateFieldImage($f_name, $f_val);
-                                        } else if ($type == 'Date') {
-                                            $this->generateFieldDate($f_name, $f_val);
-                                        } else if ($type == 'WYSIWYG') {
-                                            $this->generateFieldWYSIWYG($f_name, $f_val);
-                                        } else if ($type == 'Option') {
-                                            $this->generateFieldCombobox($f_name, $f_val, $options, $readonly);
-                                        } else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
-                                            $this->generateFieldLookup($f_name, $f_val, $f_lku, $readonly);
-                                        } else {
-                                            $this->generateFieldText($f_name, $f_val, $readonly);
-                                        }
-                                        ?>
-                                    </div>
-
-                                    <div style="clear: both"></div>
-
-                                </div>
-                            <?php
-                            endforeach;
+                                <?php
+                                endforeach;
+                            endif;
+                            echo '</div>';
                         endif;
-                    endif;
-                endforeach;
-                ?>
+                    endforeach;
+                    ?>
+                </div>
+
             </div>
         </div>
     <?php
@@ -945,39 +969,44 @@ class Qdmvc_Layout_Card
                                 }
                             </style>
                             <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdupdate">Save
+                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdupdate">
+                                    <?=Qdmvc_Message::getMsg('btn_save')?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdnew">
-                                    New
+                                    <?=Qdmvc_Message::getMsg('btn_new')?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qddelete">
-                                    Delete
+                                    <?=Qdmvc_Message::getMsg('btn_delete')?>
                                 </button>
                             </span>
                             <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdclone">Clone
+                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdclone">
+                                    <?=Qdmvc_Message::getMsg('btn_clone')?>
                                 </button>
                             </span>
                             <span>
-                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdnote">Notes
+                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdnote">
+                                    <?=Qdmvc_Message::getMsg('btn_note')?>
                                 </button>
                             </span>
                             <span>
-                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdimage">Images
+                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdimage">
+                                    <?=Qdmvc_Message::getMsg('btn_image')?>
                                 </button>
                             </span>
                             <span>
-                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdlog">Logs
+                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdlog">
+                                    <?=Qdmvc_Message::getMsg('btn_log')?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdlines"
                                         style="display: none">
-                                    <?=$this->page->getFieldCaption('__sys_lines_url', $this->data['language'])?>
+                                    <?= $this->page->getFieldCaption('__sys_lines_url', $this->data['language']) ?>
                                 </button>
                             </span>
 
@@ -1008,7 +1037,9 @@ class Qdmvc_Layout_Card
     protected function Bars()
     {
         $this->cardBar();
+        return;
         $tmp_page = $this->page;
+
         //render Page Part from Page Setup
         foreach ($tmp_page::getLayout() as $group => $config) :
             if (isset($config['Type']) && $config['Type'] == 'Part'):
@@ -1250,7 +1281,7 @@ class Qdmvc_Layout_Card
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"
                     aria-expanded="false">
-                Functions <span class="caret"></span>
+                <?=Qdmvc_Message::getMsg('btn_function')?> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
                 <?php

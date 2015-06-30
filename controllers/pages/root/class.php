@@ -298,4 +298,17 @@ class Qdmvc_Page_Root
         }
         return $re;
     }
+    /*Page Card only*/
+    public static function getTabConfig($tabid, $meta, $lang='en-US')
+    {
+        $layout = static::getLayout();
+        if(isset($layout[$tabid]) && isset($layout[$tabid][$meta]))
+        {
+            if(isset($layout[$tabid][$meta][$lang]))
+            {
+                return $layout[$tabid][$meta][$lang];
+            }
+        }
+        return '@'.$tabid;
+    }
 }
