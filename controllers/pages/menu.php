@@ -358,6 +358,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdTRootSetup',
             'DataPort' => 'theme/root_setup_port'
         ),
+        'user_personalization' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_UserPersonalization',
+            'Caption' => array(
+                'en-US' => 'User Personalization',
+                'vi-VN' => 'User Personalization',
+            ),
+            'Model' => 'QdUserPersonalization',
+            'DataPort' => 'user_personalization_port',
+            'PageList' => 'user_personalization_list'
+        ),
+        'user_personalization_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_UserPersonalization_List',
+            'Caption' => array(
+                'en-US' => 'User Personalization List',
+                'vi-VN' => 'User Personalization List',
+            ),
+            'Model' => 'QdUserPersonalization',
+            'DataPort' => 'user_personalization_port'
+        ),
         'setup' => array(
             'ParentId' => -1,
             'Active'=>true,

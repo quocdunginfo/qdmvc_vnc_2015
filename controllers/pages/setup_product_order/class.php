@@ -22,12 +22,34 @@ class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup {
         return array(
             'Group1' => array(
                 'Type' => 'Group',
-                'Name' => 'General',
+                'Name' => array(
+                    'vi-VN' => 'Thông tin chung',
+                    'en-US' => 'General'
+                ),
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
                         'Hidden' => true
                     ),
+                    'btn_dathang' => array(
+                        'SourceExpr' => 'btn_dathang',
+
+                    ),
+                    'btn_goidathang' => array(
+                        'SourceExpr' => 'btn_goidathang',
+
+                    ),
+
+                )
+            )
+            ,
+            'Tab1' => array(
+                'Type' => 'Group',
+                'Name' => array(
+                    'vi-VN' => 'Form đặt hàng',
+                    'en-US' => 'Form order'
+                ),
+                'Fields' => array(
                     'advice_phone' => array(
                         'SourceExpr' => 'advice_phone',
 
@@ -40,6 +62,17 @@ class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup {
                         'SourceExpr' => 'order_form_title',
 
                     ),
+                )
+            )
+            ,
+            'Tab2' => array(
+                'Type' => 'Group',
+                'Name' => array(
+                    'vi-VN' => 'Đặt hàng thành công',
+                    'en-US' => 'Message done'
+                ),
+                'Fields' => array(
+
                     'form_order_done_title' => array(
                         'SourceExpr' => 'form_order_done_title',
 
@@ -59,30 +92,8 @@ class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup {
                         'SourceExpr' => 'form_order_done_avatar',
 
                     ),
-                    'btn_dathang' => array(
-                        'SourceExpr' => 'btn_dathang',
-
-                    ),
-                    'btn_goidathang' => array(
-                        'SourceExpr' => 'btn_goidathang',
-
-                    ),
-
                 )
             )
-            /* SAMPLE
-            ,
-            'Group2' => array(
-                'Type' => 'Part',
-                'Name' => 'Lines',
-                'PagePartID' => '',
-                'SubPageLink' => array(
-                    'Field' => '',
-                    'Type' => 'FIELD',//'CONST',
-                    'Value' => ''
-                )
-            )
-            */
         );
     }
 

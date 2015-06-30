@@ -23,12 +23,29 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
         return array(
             'Group1' => array(
                 'Type' => 'Group',
-                'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
                         'Hidden' => true
                     ),
+
+                    'banner_service_page' => array(
+
+                    ),
+                    'partnergrp_id' => array(
+                        'SourceExpr' => 'partnergrp_id',
+
+
+                    ),
+                )
+            ),
+            'Tab1' => array(
+                'Type' => 'Group',
+                'Name' => array(
+                    'vi-VN' => 'Header',
+                    'en-US' => 'Header'
+                ),
+                'Fields' => array(
                     'topleft_tuvan' => array(
                         'SourceExpr' => 'topleft_tuvan',
 
@@ -41,16 +58,27 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
                         'SourceExpr' => 'topright_navs',
 
                     ),
-                    'bottomleft_footer_note' => array(
-                        'SourceExpr' => 'bottomleft_footer_note',
+                    'vnc_logo' => array(
+                        'SourceExpr' => 'vnc_logo',
 
                     ),
+                    'img_slider' => array(
+                        'SourceExpr' => 'img_slider',
+
+
+                    ),
+                )
+            ),
+            'Tab2' => array(
+                'Type' => 'Group',
+                'Name' => array(
+                    'vi-VN' => 'Footer',
+                    'en-US' => 'Footer'
+                ),
+                'Fields' => array(
                     'widgetnavcat_id' => array(
                         'SourceExpr' => 'widgetnavcat_id',
 
-
-                    ),
-                    'banner_service_page' => array(
 
                     ),
                     'partnergrp_id' => array(
@@ -58,39 +86,22 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
 
 
                     ),
-                    'vnc_logo' => array(
-                        'SourceExpr' => 'vnc_logo',
+                    'social_icon' => array(
+                        'SourceExpr' => 'social_icon',
+
+
+                    ),
+                    'bottomleft_footer_note' => array(
+                        'SourceExpr' => 'bottomleft_footer_note',
 
                     ),
                     'commercial_logo' => array(
                         'SourceExpr' => 'commercial_logo',
 
                     ),
-                    'social_icon' => array(
-                        'SourceExpr' => 'social_icon',
-
-
-                    ),
-                    'img_slider' => array(
-                        'SourceExpr' => 'img_slider',
-
-                        
-                    ),
                 )
-            )
-            /* SAMPLE
-            ,
-            'Group2' => array(
-                'Type' => 'Part',
-                'Name' => 'Lines',
-                'PagePartID' => '',
-                'SubPageLink' => array(
-                    'Field' => '',
-                    'Type' => 'FIELD',//'CONST',
-                    'Value' => ''
-                )
-            )
-            */
+            ),
+
         );
     }
 
