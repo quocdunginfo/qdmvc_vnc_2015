@@ -14,6 +14,7 @@ class Qdmvc_Dataport
     protected $msg = array();//array(array('msg' => 'MSG', 'type' => 'error'), array('msg2' => 'MSG', 'type' => 'warning', 'hash' => md5))
     protected $action = 'update';
     protected $function = '';
+    protected $function_params = array();
     private $for_card = true;
 
     function __construct()
@@ -76,7 +77,7 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|call_fn";
         if (method_exists($this->obj, $function)) {
-            if ($this->obj->$function($location, array())) {
+            if ($this->obj->$function($location, $this->function_params)) {
                 $this->pushMsg('Call Fn OK, ID=' . $this->obj->id);
             }
             $this->pushMsg($this->obj->GETVALIDATION());
@@ -225,9 +226,10 @@ class Qdmvc_Dataport
 
     private function loadPostValue()
     {
-        $this->data = $_POST['data'];
-        $this->action = $_POST['action'];
-        $this->function = $_POST['function'];
+        $this->data = isset($_POST['data'])?$_POST['data']:array();
+        $this->function_params = isset($_POST['params'])?$_POST['params']:array();
+        $this->action = isset($_POST['action'])?$_POST['action']:'';
+        $this->function = isset($_POST['function'])?$_POST['function']:'';
     }
 
     protected function list_return()

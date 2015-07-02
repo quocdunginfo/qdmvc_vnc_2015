@@ -5,7 +5,6 @@ class QdPost extends QdRoot
     static $table_name = 'mpd_post';
     public static $TYPE_BESTCHOICEITEM = 100;
     public static $TYPE_POST = 0;
-    public static $TYPE_ABOUT = 57;
 
     public static function getFieldsConfig()
     {

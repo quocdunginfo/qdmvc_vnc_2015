@@ -19,7 +19,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         <script>
             //update grid
-            function updateGrid() {
+            MYAPP.updateGrid = function() {
                 try {
                     document.getElementById('list').contentWindow.updateGrid();
                 } catch (error) {
@@ -36,11 +36,11 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         <script>
             //gate way to comunicate with parent windows
-            function doubleClickObj(obj) {//do not change func name
+            MYAPP.doubleClickObj = function(obj) {//do not change func name
                 (function ($) {
                     $('#jqxNavigationBar').jqxNavigationBar('expandAt', 0);
                     //set obj too
-                    setObj(obj);
+                    MYAPP.setObj(obj);
                 })(jQuery);
             }
         </script>
@@ -74,9 +74,9 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
     protected function onSaveOK()
     {
         ?>
-        if(!formValidationError())
+        if(!MYAPP.formValidationError())
         {
-            updateGrid();
+            MYAPP.updateGrid();
         }
 
         <?php
@@ -85,7 +85,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
     protected function onDeleteOK()
     {
         ?>
-        updateGrid();
+        MYAPP.updateGrid();
     <?php
         parent::onDeleteOK();
     }

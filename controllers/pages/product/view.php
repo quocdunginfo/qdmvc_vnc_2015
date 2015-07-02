@@ -12,12 +12,31 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate {
     {
         $obj = parent::serverFunctions();
         $obj = array_merge($obj, array(
-            array(
-                'fn_name' => 'fn_active',
+            'btn_active' => array(
+                //'fn_name' => 'fn_active',
                 'label' => 'Active'
             )
         ));
         return $obj;
+    }
+
+    protected function onReadyHook()
+    {
+        parent::onReadyHook();
+        ?>
+        <script type="text/javascript">
+            (function ($) {
+                $(document).ready(function () {
+                    $('#btn_active').click(function(){
+                        callFn('fn_active', null, function(data){
+                            alert('done');
+                        });
+                    });
+
+                });
+            })(jQuery);
+        </script>
+        <?php
     }
 
 }

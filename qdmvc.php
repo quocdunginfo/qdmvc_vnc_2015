@@ -9,6 +9,7 @@ Qdmvc::loadHelper('main');
 Qdmvc::loadRouter();
 //Model must load public to ensure other location usage
 Qdmvc::loadModel();
+
 class Qdmvc
 {
     private static $included_file = array(
@@ -36,9 +37,16 @@ class Qdmvc
         //loading widgets
         require_once(Qdmvc::getWidget('index.php'));
     }
+
+    public static function loadJS()
+    {
+        wp_register_script('qdmvc_js_msg-'.Qdmvc_Config::getLanguage(), plugins_url('/messages/js/msg-'.Qdmvc_Config::getLanguage().'.js', __FILE__));
+        wp_enqueue_script('qdmvc_js_msg-'.Qdmvc_Config::getLanguage());
+    }
+
     public static function loadNative($pure_path)
     {
-        static::load('native/'.$pure_path);
+        static::load('native/' . $pure_path);
     }
 
     /*
@@ -48,10 +56,12 @@ class Qdmvc
     {
         static::loadController('pages/' . $name . '/class');
     }
+
     public static function loadPageView($name)
     {
         static::loadController('pages/' . $name . '/view');
     }
+
     public static function runPage($name)
     {
         //load class
@@ -62,30 +72,33 @@ class Qdmvc
 
     public static function loadLayout($pure_path)
     {
-        require_once(static::getView('layouts/'.$pure_path.'.php'));
+        require_once(static::getView('layouts/' . $pure_path . '.php'));
     }
 
     public static function loadController($pure_path)
     {
-        require_once(static::getController($pure_path.'.php'));
+        require_once(static::getController($pure_path . '.php'));
     }
 
     public static function loadHelper($pure_path)
     {
-        require_once(static::getHelper($pure_path.'.php'));
+        require_once(static::getHelper($pure_path . '.php'));
     }
+
     public static function runDataPort($pure_path)
     {
         static::loadDataPort($pure_path);
-        static::loadController('dataports/'.$pure_path.'/controller');
+        static::loadController('dataports/' . $pure_path . '/controller');
     }
+
     public static function loadDataPort($pure_path)
     {
-        require_once(static::getController('dataports/'.$pure_path.'/class.php'));
+        require_once(static::getController('dataports/' . $pure_path . '/class.php'));
     }
+
     public static function loadIndex($pure_path)
     {
-        require_once(static::getPluginDir($pure_path).'.php');
+        require_once(static::getPluginDir($pure_path) . '.php');
     }
 
     /*
@@ -96,29 +109,31 @@ class Qdmvc
         return plugin_dir_path(__FILE__) . $pure_path;
     }
 
-    protected static function getWidget($path='')
+    protected static function getWidget($path = '')
     {
-        return Qdmvc::getPluginDir('widgets/'.$path);
-    }
-    protected static function getHelper($path='')
-    {
-        return Qdmvc::getPluginDir('helpers/'.$path);
+        return Qdmvc::getPluginDir('widgets/' . $path);
     }
 
-    protected static function getView($path='')
+    protected static function getHelper($path = '')
     {
-        return (Qdmvc::getPluginDir('views/'.$path));
+        return Qdmvc::getPluginDir('helpers/' . $path);
     }
 
-    public static function getModel($path='')//Power net new server need public
+    protected static function getView($path = '')
     {
-        return (Qdmvc::getPluginDir('models/'.$path));
+        return (Qdmvc::getPluginDir('views/' . $path));
     }
 
-    protected static function getController($path='')
+    public static function getModel($path = '')//Power net new server need public
     {
-        return (Qdmvc::getPluginDir('controllers/'.$path));
+        return (Qdmvc::getPluginDir('models/' . $path));
     }
+
+    protected static function getController($path = '')
+    {
+        return (Qdmvc::getPluginDir('controllers/' . $path));
+    }
+
     public static function run()
     {
         //check dependency
@@ -133,6 +148,7 @@ class Qdmvc
         //2nd level construct
         static::init();
     }
+
     public static function loadModel()
     {
         //Index must be loaded before Model
@@ -150,26 +166,28 @@ class Qdmvc
             $cfg->set_default_connection('production');
         });
     }
+
     public static function load($pure_path)
     {
-        require_once(Qdmvc::getPluginDir($pure_path).'.php');
+        require_once(Qdmvc::getPluginDir($pure_path) . '.php');
     }
+
     public static function loadRouter()
     {
         static::load('native/router');
     }
+
     public static function IS_QDMVC_PAGE()
     {
         return (isset($_GET['page']) && array_key_exists($_GET['page'], Qdmvc_Page_Index::getIndex()));
     }
 }
-if(is_admin())
-{
+
+if (is_admin()) {
     Qdmvc::run();
 
     //load UI Kit
-    if(Qdmvc::IS_QDMVC_PAGE())
-    {
+    if (Qdmvc::IS_QDMVC_PAGE()) {
         QdJqwidgets::registerResource(true);//quocdunginfo, need to find other solution because every WP page got this hook
     }
 }

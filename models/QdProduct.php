@@ -315,7 +315,7 @@ class QdProduct extends QdRoot
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
         return $obj;
     }
-    public function fn_active($location, $params=array())
+    public function fn_active($location, $params)
     {
         $this->active = true;
         $this->save(true, $location . '|'.$this->getCalledClassName() . '|fn_active');

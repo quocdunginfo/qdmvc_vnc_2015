@@ -14,7 +14,7 @@ class Qdmvc_Layout_CardSetup extends Qdmvc_Layout_Card
         <script>
             (function($){
                 $(document).ready(function(){
-                    setObj(<?=$this->obj_json?>);
+                    MYAPP.setObj(<?=$this->obj_json?>);
                     $("#qdnew").hide();
                     $("#qdclone").hide();
                     $("#qddelete").hide();

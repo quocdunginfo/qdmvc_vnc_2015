@@ -2,10 +2,13 @@
 
 class QdAbout extends QdPost
 {
+    public static $TYPE_ABOUT = 57;
+
     public static $TPL_TYPE_IMG = 0;
     public static $TPL_TYPE_TEXT = 10;
     public static $TPL_TYPE_TEXTIMG = 20;
     public static $TPL_TYPE_IMGTEXT = 30;
+
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
@@ -60,6 +63,11 @@ class QdAbout extends QdPost
                     'Caption' => array('en-US' => 'Img/Text', 'vi-VN' => 'Img/Text'),
                 ),
             )
+        );
+        $obj['type']['Options'] = array(
+            static::$TYPE_ABOUT => array(
+                'Caption' => array('en-US' => 'Post', 'vi-VN' => 'Post'),
+            ),
         );
         return $obj;
     }

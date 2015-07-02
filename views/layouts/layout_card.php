@@ -28,16 +28,16 @@ class Qdmvc_Layout_Card
     {
         ?>
         <script>
-            var formValidation = {};
-            function formValidationError() {
-                for (i in formValidation) {
-                    if (formValidation[i].type == 'error') {
+            MYAPP.formValidation = {};
+            MYAPP.formValidationError = function() {
+                for (i in MYAPP.formValidation) {
+                    if (MYAPP.formValidation[i].type == 'error') {
                         return true;
                     }
                 }
                 return false;
-            }
-            function clearFormValidationMark() {
+            };
+            MYAPP.clearFormValidationMark = function () {
                 (function ($) {
                     //clear form validation mark and tooltip
                     //var $inputs = $("#cardForm :input[type=text]");
@@ -52,8 +52,8 @@ class Qdmvc_Layout_Card
                     });
 
                 })(jQuery);
-            }
-            function showMsg(msg) {
+            };
+            MYAPP.showMsg = function (msg) {
                 (function ($) {
                     //clear notification
                     $('#jqxMsg').jqxNotification('closeAll');
@@ -90,7 +90,7 @@ class Qdmvc_Layout_Card
             }
         </script>
         <script>
-            function requestLookupWindow(src) {
+            MYAPP.requestLookupWindow = function(src) {
                 //set window iframe source
                 //alert(src);
                 (function ($) {
@@ -98,17 +98,16 @@ class Qdmvc_Layout_Card
                     $('#windowFrame').attr('src', src);
                     $('#jqxlookupwin').jqxWindow('open');
                 })(jQuery);
-            }
-            var datepicker_tmp_return_id = null;
-            function requestDatePickerWindow(return_id) {
+            };
+            MYAPP.datepicker_tmp_return_id = null;
+            MYAPP.requestDatePickerWindow = function(return_id) {
                 (function ($) {
-                    datepicker_tmp_return_id = return_id;
+                    MYAPP.datepicker_tmp_return_id = return_id;
                     $('#qddatepicker').val($('#' + return_id).val());
                     $('#jqxdatepickerwin').jqxWindow('open');
                 })(jQuery);
-
-            }
-            function requestFormValidate(rules_) {
+            };
+            MYAPP.requestFormValidate = function(rules_) {
                 (function ($) {
                     //register validate
                     $('#cardForm').jqxValidator({
@@ -129,7 +128,7 @@ class Qdmvc_Layout_Card
                 $(document).ready(function () {
                     //auto assign value from obj
                     //validate, require
-                    requestFormValidate(
+                    MYAPP.requestFormValidate(
                         []
                     );
                 });
@@ -162,7 +161,7 @@ class Qdmvc_Layout_Card
                     duration: 800,
                     opacity: 0.7,
                     classOveride: false
-                }
+                };
                 this.options = jQuery.extend(defaults, options);
                 this.container = jQuery(el);
 
@@ -200,7 +199,7 @@ class Qdmvc_Layout_Card
                             overlay.remove();
                         });
                     }
-                }
+                };
 
                 this.init();
             }
@@ -235,12 +234,13 @@ class Qdmvc_Layout_Card
     {
         ?>
         <script>
+            var MYAPP = MYAPP || {};
             // prepare the data
-            var data_port = '<?=$this->data['data_port']?>';
-            var current_obj = null;
-            var init_obj = <?=$this->data['init_obj']?>;
+            MYAPP.data_port = '<?=$this->data['data_port']?>';
+            MYAPP.current_obj = null;
+            MYAPP.init_obj = <?=$this->data['init_obj']?>;
             //ajax_loader
-            var ajax_loader;
+            MYAPP.ajax_loader;
         </script>
     <?php
     }
@@ -314,21 +314,21 @@ class Qdmvc_Layout_Card
                 </div>
                 <?php wp_editor('', 'wptexteditor', $settings = array()); ?>
                 <script>
-                    var wptexteditor_returnid = 'notset';
+                    MYAPP.wptexteditor_returnid = 'notset';
                     (function ($) {
                         $(document).ready(function () {
                             $('#wptexteditor_done').click(function () {
                                 var content = tinyMCE.get('wptexteditor').getContent();
-                                $('#' + wptexteditor_returnid).val(content);
+                                $('#' + MYAPP.wptexteditor_returnid).val(content);
                                 //close editor
                                 $('#jqxwptexteditor').jqxWindow('close');
                             });
                         });
                     })(jQuery);
-                    function requestEditorWindow(initVal, returnId) {
+                    MYAPP.requestEditorWindow = function(initVal, returnId) {
                         (function ($) {
-                            wptexteditor_returnid = returnId;
-                            console.log('WYSIWYG opened, returnId: ' + wptexteditor_returnid);
+                            MYAPP.wptexteditor_returnid = returnId;
+                            console.log('WYSIWYG opened, returnId: ' + MYAPP.wptexteditor_returnid);
                             $('#jqxwptexteditor').jqxWindow('open');
 
                             tinyMCE.get('wptexteditor').setContent(initVal);
@@ -387,7 +387,7 @@ class Qdmvc_Layout_Card
                                 );
 
                                 $('#datepicker_chooser').click(function () {
-                                    $('#' + datepicker_tmp_return_id).val($('#qddatepicker').val());
+                                    $('#' + MYAPP.datepicker_tmp_return_id).val($('#qddatepicker').val());
                                     $('#jqxdatepickerwin').jqxWindow('close');
                                 });
                             });
@@ -404,15 +404,15 @@ class Qdmvc_Layout_Card
     {
         ?>
         <script>
-            function getObj() {
-                return current_obj;
-            }
+            MYAPP.getObj = function() {
+                return MYAPP.current_obj;
+            };
             //gate way to comunicate with parent windows
-            function setObj(obj) {//do not change func name
+            MYAPP.setObj = function(obj) {//do not change func name
                 (function ($) {
                     //clear form validation mark but not error msg
-                    clearFormValidationMark();
-                    current_obj = obj;
+                    MYAPP.clearFormValidationMark();
+                    MYAPP.current_obj = obj;
                     //fill data
                     $("#cardForm").autofill(obj);
 
@@ -421,8 +421,8 @@ class Qdmvc_Layout_Card
                     console.log('layout_cardnavigate -> setObj: ');
                     console.log(obj);
                 })(jQuery);
-            }
-            function setLookupResult(value, txtId) {
+            };
+            MYAPP.setLookupResult = function(value, txtId) {
                 (function ($) {
                     txtId = '<?=static::$ctl_prefix?>' + txtId;
                     $("#" + txtId).val(value).change();
@@ -509,7 +509,7 @@ class Qdmvc_Layout_Card
         <div class="qd-lookup-input">
             <input class="text-input" type="text" name="<?= $f_name ?>"
                    id="<?= static::$ctl_prefix . $f_name ?>">
-            <button onclick='requestLookupWindow("<?= $f_lku ?>")'
+            <button onclick='MYAPP.requestLookupWindow("<?= $f_lku ?>")'
                     data-lookupurl="<?= $f_lku ?>" id="lookup_cs_<?= $f_name ?>"
                     value="">...
             </button>
@@ -522,7 +522,7 @@ class Qdmvc_Layout_Card
         ?>
         <div class="qd-lookup-input">
             <input type='text' id='<?= static::$ctl_prefix . $f_name ?>' name="<?= $f_name ?>"/>
-            <button onclick='requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")'
+            <button onclick='MYAPP.requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")'
                     id="datepicker_cs_<?= $f_name ?>">...
             </button>
         </div>
@@ -614,7 +614,7 @@ class Qdmvc_Layout_Card
                     $(document).ready(function () {
                         //$("#<?=static::$ctl_prefix.$f_name?>").val("<?=str_replace('"', '\"', $value)?>");
                         $("#editor_cs_<?=$f_name?>").click(function () {
-                            requestEditorWindow($('#<?=static::$ctl_prefix.$f_name?>').val(), '<?=static::$ctl_prefix.$f_name?>');
+                            MYAPP.requestEditorWindow($('#<?=static::$ctl_prefix.$f_name?>').val(), '<?=static::$ctl_prefix.$f_name?>');
                         });
                     });
                 })(jQuery);
@@ -825,7 +825,7 @@ class Qdmvc_Layout_Card
                             //validate trigger
                             $("#cardForm").on("validationSuccess", function (event) {
                                 //AJAX progress Bar
-                                ajax_loader = new ajaxLoader("#cardForm");
+                                MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 //build data
                                 var json = form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                                 //begin lock
@@ -833,7 +833,7 @@ class Qdmvc_Layout_Card
                                 var action = $("#<?=static::$ctl_prefix?>id").val() != 0 ? "update" : "insert";
                                 var postdata = {submit: "submit", action: action, data: json};
                                 console.log(postdata);
-                                $.post(data_port, postdata)
+                                $.post(MYAPP.data_port, postdata)
                                     .done(function (data) {
                                         //data JSON
                                         console.log(data);
@@ -843,11 +843,11 @@ class Qdmvc_Layout_Card
 
                                         console.log(data.rows[0]);
 
-                                        clearFormValidationMark();
-                                        setObj(data.rows[0]);
+                                        MYAPP.clearFormValidationMark();
+                                        MYAPP.setObj(data.rows[0]);
 
-                                        formValidation = data.msg;
-                                        showMsg(data.msg);//must be called after setObj(...)
+                                        MYAPP.formValidation = data.msg;
+                                        MYAPP.showMsg(data.msg);//must be called after setObj(...)
 
                                         <?=$this->onSaveOK()?>
                                     })
@@ -856,7 +856,7 @@ class Qdmvc_Layout_Card
                                     })
                                     .always(function () {
                                         //release lock
-                                        ajax_loader.remove();
+                                        MYAPP.ajax_loader.remove();
                                     });
                             });
 
@@ -871,7 +871,7 @@ class Qdmvc_Layout_Card
                                 try {
                                     document.getElementById("cardForm").reset();
                                     //set init obj
-                                    setObj(init_obj);
+                                    MYAPP.setObj(MYAPP.init_obj);
                                     //force set id = 0
                                     $("#<?=static::$ctl_prefix?>id").val("0").change();
 
@@ -895,17 +895,17 @@ class Qdmvc_Layout_Card
 
                             //card button event
                             $("#qdnote").bind("click", function (event) {
-                                requestLookupWindow(getObj()['__sys_note_url']);
+                                MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_note_url']);
                             });
                             $("#qdimage").bind("click", function (event) {
-                                requestLookupWindow(getObj()['__sys_image_url']);
+                                MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_image_url']);
                             });
                             //card button event
                             $("#qdlog").bind("click", function (event) {
-                                requestLookupWindow(getObj()['__sys_log_url']);
+                                MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_log_url']);
                             });
                             $("#qdlines").bind("click", function (event) {
-                                requestLookupWindow(getObj()['__sys_lines_url']);
+                                MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_lines_url']);
                             });
 
 
@@ -914,17 +914,17 @@ class Qdmvc_Layout_Card
                                     return false;
                                 }
                                 //AJAX loader
-                                ajax_loader = new ajaxLoader("#cardForm");
+                                MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 //begin lock
                                 var id_ = $("#<?=static::$ctl_prefix?>id").val();
                                 console.log(id_);
-                                $.post(data_port, {submit: "submit", action: "delete", data: {id: id_}})
+                                $.post(MYAPP.data_port, {submit: "submit", action: "delete", data: {id: id_}})
                                     .done(function (data) {
                                         //data JSON
                                         //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
 
                                         //....
-                                        showMsg(data.msg);
+                                        MYAPP.showMsg(data.msg);
 
                                         <?=$this->OnDeleteOK()?>
                                     })
@@ -933,7 +933,7 @@ class Qdmvc_Layout_Card
                                     })
                                     .always(function () {
                                         //release lock
-                                        ajax_loader.remove();
+                                        MYAPP.ajax_loader.remove();
                                     });
                             });
 
@@ -1159,68 +1159,13 @@ class Qdmvc_Layout_Card
         );
     }
 
-    protected function helpTour()
-    {
-        ?>
-        <script>
-            function ClearHelpTourMetaData() {
-                (function ($) {
-                    <?php
-                    foreach($this->getHelpTourPipes() as $triggerBtn=>$nodeIds)
-                    {
-                        foreach($nodeIds as $nodeId=>$priority)
-                        {
-                        ?>
-                    $('<?=$nodeId?>').removeAttr('data-intro');
-                    $('<?=$nodeId?>').removeAttr('data-step');
-                    <?php
-                    }
-                }
-                ?>
-                })(jQuery);
-            }
-            function HelpTourSetMetaData(elementId, intro, priority) {
-                (function ($) {
-                    $(elementId).attr('data-intro', intro);
-                    $(elementId).attr('data-step', priority);
-                })(jQuery);
-
-            }
-            (function ($) {
-                $(document).ready(function () {
-                    <?php foreach($this->getHelpTourPipes() as $tourPipe=>$mapping): ?>
-                    $('<?=$tourPipe?>').click(function () {
-                        //clear all node data-mark before start new Tour !!!!!!
-                        //...https://github.com/usablica/intro.js/blob/master/example/programmatic/index.html
-                        ClearHelpTourMetaData();
-                        <?php
-                            $count=1;
-                            foreach($mapping as $elementId=>$nodeNo):
-                            $tmp = $this->getHelpTourNodes();
-                            $intro = $tmp[$nodeNo]['Caption']['vi-VN'];
-                            $priority = $count;
-                            ?>
-                        HelpTourSetMetaData('<?=$elementId?>', '<?=$intro?>', <?=$priority?>);
-                        <?php
-                        $count++;
-                        endforeach;
-                        ?>
-                        introJs().start();
-                    });
-                    <?php endforeach; ?>
-                });
-            })(jQuery);
-        </script>
-    <?php
-    }
-
     private $sample_serverfns =
         array(
-            array(
+            'id1' => array(
                 'fn_name' => 'action1',
                 'label' => 'button_name1'
             ),
-            array(
+            'id2' => array(
                 'fn_name' => 'action2',
                 'label' => 'button_name2'
             ),
@@ -1238,18 +1183,18 @@ class Qdmvc_Layout_Card
         }
         ?>
         <script>
-            function callFn(fn_name) {
+            function callFn(fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
                 (function ($) {
                     //AJAX progress Bar
-                    ajax_loader = new ajaxLoader("#cardForm");
+                    MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                     //build data
                     var json = form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                     //begin lock
 
                     console.log(json);
-                    var postdata = {submit: "submit", action: '', function: fn_name, data: json};
+                    var postdata = {submit: "submit", action: '', function: fn_name, data: json, params: params};
                     console.log(postdata);
-                    $.post(data_port, postdata)
+                    $.post(MYAPP.data_port, postdata)
                         .done(function (data) {
                             //data JSON
                             console.log(data);
@@ -1259,20 +1204,32 @@ class Qdmvc_Layout_Card
 
                             console.log(data.rows[0]);
 
-                            clearFormValidationMark();
-                            setObj(data.rows[0]);
+                            MYAPP.clearFormValidationMark();
+                            MYAPP.setObj(data.rows[0]);
 
-                            formValidation = data.msg;
-                            showMsg(data.msg);//must be called after setObj(...)
+                            MYAPP.formValidation = data.msg;
+                            MYAPP.showMsg(data.msg);//must be called after setObj(...)
 
                             <?=$this->onCallFnOK()?>
+                            if(on_done_fn!=undefined)
+                            {
+                                on_done_fn(data);
+                            }
                         })
                         .fail(function (data) {
                             console.log(data);
+                            if(on_fail_fn!=undefined)
+                            {
+                                on_fail_fn(data);
+                            }
                         })
-                        .always(function () {
+                        .always(function (data) {
                             //release lock
-                            ajax_loader.remove();
+                            MYAPP.ajax_loader.remove();
+                            if(on_final_fn!=undefined)
+                            {
+                                on_final_fn(data);
+                            }
                         });
                 })(jQuery);
             }
@@ -1285,12 +1242,24 @@ class Qdmvc_Layout_Card
             </button>
             <ul class="dropdown-menu" role="menu">
                 <?php
-                foreach ($this->serverFunctions() as $item) {
+                foreach ($this->serverFunctions() as $item=>$config) {
                     ?>
-                    <li><a id="<?= $item['fn_name'] ?>"
-                           href="javascript:callFn('<?= $item['fn_name'] ?>')"><?= $item['label'] ?></a></li>
-
+                    <li><a id="<?= $item ?>"><?= $config['label'] ?></a></li>
                 <?php
+                    if(!QdT_Library::isNullOrEmpty($config['fn_name']))
+                    {
+                        ?>
+                        <script>
+                            (function ($) {
+                                $(document).ready(function () {
+                                    $('#<?=$item?>').click(function(){
+                                        MYAPP.callFn('<?=$config['fn_name']?>');
+                                    });
+                                });
+                            })(jQuery);
+                        </script>
+                    <?php
+                    }
                 }
                 ?>
             </ul>
@@ -1301,14 +1270,12 @@ class Qdmvc_Layout_Card
     public function render()
     {
         ?>
-        <?= $this->style() ?>
-        <?php //$this->helpTour() ?>
-
-        <?= $this->formValidation() ?>
-        <?= $this->progressSpinner() ?>
         <?= $this->preConfig() ?>
         <?= $this->internalGateway() ?>
         <?= $this->externalGateway() ?>
+        <?= $this->style() ?>
+        <?= $this->formValidation() ?>
+        <?= $this->progressSpinner() ?>
         <?= $this->onReadyHook() ?>
         <?= $this->lookupWindowLayout() ?>
         <?= $this->lookupDatePickerLayout() ?>

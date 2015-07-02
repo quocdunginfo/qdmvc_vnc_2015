@@ -46,7 +46,7 @@ class Qdmvc_Layout_List
                 //check field can edit when linked to Header page
 
                 return true;
-            }
+            };
 
             var dataGridDefine = [
                 <?php
@@ -135,7 +135,7 @@ class Qdmvc_Layout_List
 
                                 var row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
                                 try {
-                                    parent.setLookupResult(row.<?=$this->data['getfield']?>, "<?=$this->data['returnid']?>");
+                                    parent.MYAPP.setLookupResult(row.<?=$this->data['getfield']?>, "<?=$this->data['returnid']?>");
 
                                 } catch (error) {
                                     console.log(error);
@@ -291,8 +291,8 @@ class Qdmvc_Layout_List
                             <?php
                             if($this->data['role']=='navigate')
                             {
-                                echo 'parent.clearFormValidationMark();';
-                                echo 'parent.setObj(args.row, true);';
+                                echo 'parent.MYAPP.clearFormValidationMark();';
+                                echo 'parent.MYAPP.setObj(args.row, true);';
                             }
                             ?>
                         } catch (error) {
@@ -302,7 +302,7 @@ class Qdmvc_Layout_List
                     $('#jqxgrid').on('rowdoubleclick', function (event) {
                         rbindex = event.args.rowindex;
                         obj = $(this).jqxGrid('getrowdata', rbindex);
-                        parent.doubleClickObj(obj);
+                        parent.MYAPP.doubleClickObj(obj);
                     });
                     $("#jqxgrid").on("pagechanged", function (event) {
                         console.log('jqxgrid page changed');

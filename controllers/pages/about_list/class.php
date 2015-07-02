@@ -12,7 +12,7 @@ class Qdmvc_Page_About_List extends Qdmvc_Page_Post_List
     protected function getCustomPageView()
     {
         return array(
-            'type' => QdPost::$TYPE_ABOUT
+            'type' => QdAbout::$TYPE_ABOUT
         );
     }
 
