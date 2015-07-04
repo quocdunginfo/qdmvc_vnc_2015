@@ -52,6 +52,21 @@ class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
                         'SourceExpr' => 'description',
                     )
                 )
+            ),
+            'Tab1' => array(
+                'Type' => 'Group',
+                'Name' => 'Location',
+                'Fields' => array(
+                    'address_province_id' => array(
+
+                    ),
+                    'address_district_id' => array(
+
+                    ),
+                    'address_ward_id' => array(
+
+                    ),
+                )
             )
         );
     }

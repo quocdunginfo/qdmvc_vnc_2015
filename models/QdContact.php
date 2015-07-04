@@ -47,6 +47,54 @@ class QdContact extends QdRoot
                     ),
                 )
             ),
+            'address_province_id' => array(
+                'Name' => 'address_province_id',
+                'Caption' => array('en-US' => 'Province ID', 'vi-VN' => 'Mã Tỉnh/TP'),
+                'DataType' => 'Code',
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdVnProvince',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+
+                    )
+                )
+            ),
+            'address_district_id' => array(
+                'Name' => 'address_district_id',
+                'Caption' => array('en-US' => 'District ID', 'vi-VN' => 'Mã Quận/Huyện'),
+                'DataType' => 'Code',
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdVnDistrict',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+
+                    )
+                )
+            ),
+            'address_ward_id' => array(
+                'Name' => 'address_ward_id',
+                'Caption' => array('en-US' => 'Ward ID', 'vi-VN' => 'Mã Phường/Xã'),
+                'DataType' => 'Code',
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdVnWard',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+
+                    )
+                )
+            ),
         ));
     }
 
@@ -58,4 +106,27 @@ class QdContact extends QdRoot
         return $obj;
     }
 
+    protected function address_district_idOnValidate($field_name)
+    {
+        if($this->address_province_id=='')
+        {
+            $tmp = QdVnDistrict::GET($this->$field_name);
+            if($tmp!=null)
+            {
+                $this->address_province_id = $tmp->provinceid;
+            }
+        }
+    }
+    protected function address_ward_idOnValidate($field_name)
+    {
+        if($this->address_district_id=='')
+        {
+            $tmp = QdVnWard::GET($this->$field_name);
+            if($tmp!=null)
+            {
+                $this->address_district_id = $tmp->districtid;
+                $this->address_district_idOnValidate('address_district_id');
+            }
+        }
+    }
 }

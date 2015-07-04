@@ -7,16 +7,16 @@
  */
 Qdmvc::loadPage('root_list');
 
-class Qdmvc_Page_Note_List extends Qdmvc_Page_Root_List
+class Qdmvc_Page_VnProvince_List extends Qdmvc_Page_Root_List
 {
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_Note_List';
+        return 'Qdmvc_View_VnProvince_List';
     }
 
     public static function getPage()
     {
-        return 'note_list';
+        return 'vnprovince_list';
     }
 
     protected static function initFields()
@@ -24,10 +24,9 @@ class Qdmvc_Page_Note_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-            'content' => array(
-                'SourceExpr' => 'content',
-            )
-        ));
+                'name' => array(),
+                'type' => array(),
+            ));
     }
 
 }

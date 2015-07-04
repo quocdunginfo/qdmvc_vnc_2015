@@ -1137,7 +1137,7 @@ class Qdmvc_Page_IndexMenu {
             'ParentId' => -1,
             'Active'=>false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_subscriber_list',
+            'Class'=>'Qdmvc_Page_Subscriber_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1145,14 +1145,89 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdSubscriber',
             'DataPort' => 'subscriber_port'
         ),
-        'folder1' => array(
+        'csdl' => array(
             'ParentId' => -1,
             'Active'=>true,
             'PageType' => 'Folder',
             'Caption' => array(
-                'en-US' => 'Folder',
-                'vi-VN' => 'Thư mục'
+                'en-US' => 'CSDL Hành chính',
+                'vi-VN' => 'CSDL Hành chính'
             ),
+        ),
+        'vndistrict' => array(
+            'ParentId' => 'csdl',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_VnDistrict_Card',
+            'Caption' => array(
+                'en-US' => 'VnDistrict',
+                'vi-VN' => 'VnDistrict'
+            ),
+            'Model' => 'QdVnDistrict',
+            'DataPort' => 'vndistrict_port',
+            'PageList' => 'vndistrict_list'
+        ),
+        'vndistrict_list' => array(
+            'ParentId' => 'csdl',
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_VnDistrict_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdVnDistrict',
+            'DataPort' => 'vndistrict_port'
+        ),
+        'vnprovince' => array(
+            'ParentId' => 'csdl',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_VnProvince_Card',
+            'Caption' => array(
+                'en-US' => 'VnProvince',
+                'vi-VN' => 'VnProvince'
+            ),
+            'Model' => 'QdVnProvince',
+            'DataPort' => 'vnprovince_port',
+            'PageList' => 'vnprovince_list'
+        ),
+        'vnprovince_list' => array(
+            'ParentId' => 'csdl',
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_VnProvince_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdVnProvince',
+            'DataPort' => 'vnprovince_port'
+        ),
+        'vnward' => array(
+            'ParentId' => 'csdl',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=> 'Qdmvc_Page_VnWard_Card',
+            'Caption' => array(
+                'en-US' => 'VnWard',
+                'vi-VN' => 'VnWard'
+            ),
+            'Model' => 'QdVnWard',
+            'DataPort' => 'vnward_port',
+            'PageList' => 'vnward_list'
+        ),
+        'vnward_list' => array(
+            'ParentId' => 'csdl',
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_VnWard_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdVnWard',
+            'DataPort' => 'vnward_port'
         ),
         'navigation' => array(
             'ParentId' => '',
