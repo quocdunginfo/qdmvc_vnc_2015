@@ -302,10 +302,14 @@ class Qdmvc_Dataport
             //Boolean
             if (in_array($c::getDataType($key), array('Boolean'))) {
                 if (isset($_POST['data'][$key])) {
-                    $this->obj->$key = 1;
+                    if($_POST['data'][$key]=='true' || $_POST['data'][$key]=='1' || $_POST['data'][$key]==1 || $_POST['data'][$key]==true)
+                    {
+                        $this->obj->$key = 1;
+                    }
                 } else {
                     $this->obj->$key = 0;
                 }
+                continue;
             }
             if ($c::getDataType($key) == 'Date') {
                 if (isset($_POST['data'][$key])) {
@@ -318,10 +322,11 @@ class Qdmvc_Dataport
                         $this->obj->$key = $tmp;
                     }
                 }
-            } else {
-                if (isset($_POST['data'][$key])) {
-                    $this->obj->$key = $_POST['data'][$key];
-                }
+                continue;
+            }
+
+            if (isset($_POST['data'][$key])) {
+                $this->obj->$key = $_POST['data'][$key];
             }
         }
     }
