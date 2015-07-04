@@ -66,7 +66,7 @@ class QdAbout extends QdPost
         );
         $obj['type']['Options'] = array(
             static::$TYPE_ABOUT => array(
-                'Caption' => array('en-US' => 'Post', 'vi-VN' => 'Post'),
+                'Caption' => array('en-US' => 'About', 'vi-VN' => 'About'),
             ),
         );
         return $obj;

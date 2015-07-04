@@ -99,7 +99,7 @@ class Qdmvc_Layout_Card
                     $('#jqxlookupwin').jqxWindow('open');
                 })(jQuery);
             };
-            MYAAPP.addQueryToLookupURL = function(lurl, dynamic_filter_fields){
+            MYAPP.addQueryToLookupURL = function(lurl, dynamic_filter_fields){
                 var i;
                 for(i=0;i<dynamic_filter_fields.length;i++)
                 {
@@ -253,6 +253,7 @@ class Qdmvc_Layout_Card
             MYAPP.init_obj = <?=$this->data['init_obj']?>;
             //ajax_loader
             MYAPP.ajax_loader;
+            MYAPP.viewModel = {};
         </script>
     <?php
     }
@@ -417,11 +418,11 @@ class Qdmvc_Layout_Card
         ?>
         <script>
             MYAPP.getObj = function() {
-                return MYAPP.current_obj;
+                return ko.toJS(MYAPP.viewModel);
             };
             //gate way to comunicate with parent windows
             MYAPP.setObj = function(obj) {//do not change func name
-                (function ($) {
+                /*(function ($) {
                     //clear form validation mark but not error msg
                     MYAPP.clearFormValidationMark();
                     MYAPP.current_obj = obj;
@@ -432,12 +433,14 @@ class Qdmvc_Layout_Card
                     //$('#jqxNavigationBar').jqxNavigationBar('collapseAt', 0);
                     console.log('layout_cardnavigate -> setObj: ');
                     console.log(obj);
-                })(jQuery);
+                })(jQuery);*/
+                MYAPP.clearFormValidationMark();
+                ko.mapping.fromJS(obj, MYAPP.viewModel);
             };
             MYAPP.setLookupResult = function(value, txtId) {
                 (function ($) {
                     txtId = '<?=static::$ctl_prefix?>' + txtId;
-                    $("#" + txtId).val(value).change();
+                    $("#" + txtId).val(value);//.change();
                     //auto close window
                     $('#jqxlookupwin').jqxWindow('close');
                 })(jQuery);
@@ -504,23 +507,11 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldReadOnly($f_name, $value = '')
-    {
-        ?>
-
-
-        <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" readonly>
-
-
-    <?php
-    }
-
     private function generateFieldLookup($f_name, $f_val, $f_lku, $readonly = false)
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>"
-                   id="<?= static::$ctl_prefix . $f_name ?>">
+            <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
             <button onclick='MYAPP.requestLookupWindow("<?= $f_lku ?>")'
                     data-lookupurl="<?= $f_lku ?>" id="lookup_cs_<?= $f_name ?>"
                     value="">...
@@ -533,7 +524,7 @@ class Qdmvc_Layout_Card
     {
         ?>
         <div class="qd-lookup-input">
-            <input type='text' id='<?= static::$ctl_prefix . $f_name ?>' name="<?= $f_name ?>"/>
+            <input class="text-input" type="text" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
             <button onclick='MYAPP.requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")'
                     id="datepicker_cs_<?= $f_name ?>">...
             </button>
@@ -544,8 +535,7 @@ class Qdmvc_Layout_Card
     private function generateFieldText($f_name, $value, $readonly = false)
     {
         ?>
-        <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>"
-            <?= $readonly == true ? 'readonly' : '' ?>>
+        <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
     <?php
     }
 
@@ -553,14 +543,14 @@ class Qdmvc_Layout_Card
     {
         ?>
         <input class="text-input color {hash:true}" type="text" name="<?= $f_name ?>"
-               id="<?= static::$ctl_prefix . $f_name ?>">
+               id="<?= static::$ctl_prefix . $f_name ?>" data-bind="value: <?=$f_name?>">
     <?php
     }
 
     private function generateFieldHidden($f_name, $value)
     {
         ?>
-        <input type="hidden" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
+        <input type="hidden" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="<?=$f_name?>" />
     <?php
     }
 
@@ -568,7 +558,7 @@ class Qdmvc_Layout_Card
     {
         ?>
         <select class="qd-option-field" name="<?= $f_name ?>"
-                id="<?= static::$ctl_prefix . $f_name ?>" <?= $readonly ? 'disabled' : '' ?>>
+                id="<?= static::$ctl_prefix . $f_name ?>" <?= $readonly ? 'disabled' : '' ?> data-bind="value: <?=$f_name?>">
             <?php foreach ($options as $key => $caption): ?>
                 <option value="<?= $key ?>"><?= $caption ?></option>
             <?php endforeach; ?>
@@ -580,7 +570,7 @@ class Qdmvc_Layout_Card
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
+            <input class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
 
             <button id="media_cs_<?= $f_name ?>" value="">...</button>
             <?php
@@ -609,7 +599,8 @@ class Qdmvc_Layout_Card
     private function generateFieldBoolean($f_name, $value = 0, $readonly = false)
     {
         ?>
-        <input type="checkbox" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1">
+        <!--<input type="checkbox" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1">-->
+        <input type="checkbox" data-bind="checked: <?=$f_name?>" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1"/>
     <?php
     }
 
@@ -617,7 +608,7 @@ class Qdmvc_Layout_Card
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>">
+            <input class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
 
             <button id="editor_cs_<?= $f_name ?>" value="">...</button>
 
@@ -657,6 +648,7 @@ class Qdmvc_Layout_Card
             .qd-card-grid input[type=text] {
                 display: block;
                 width: 250px;
+                height: 24px;
                 -moz-box-sizing: border-box;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
@@ -770,11 +762,13 @@ class Qdmvc_Layout_Card
         ?>
         <script>
             (function ($) {
-
                 $(document).ready(function () {
                     <?php if($this->page->hasLines()): ?>
                     $("#qdlines").show();
                     <?php endif; ?>
+
+                    MYAPP.viewModel = ko.mapping.fromJS(MYAPP.init_obj);
+                    ko.applyBindings(MYAPP.viewModel); // This makes Knockout get to work
                 });
             })(jQuery);
         </script>
@@ -839,10 +833,10 @@ class Qdmvc_Layout_Card
                                 //AJAX progress Bar
                                 MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 //build data
-                                var json = form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
+                                var json = MYAPP.getObj();//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                                 //begin lock
                                 console.log(json);
-                                var action = $("#<?=static::$ctl_prefix?>id").val() != 0 ? "update" : "insert";
+                                var action = $('#ctl_id').val() != 0 ? "update" : "insert";
                                 var postdata = {submit: "submit", action: action, data: json};
                                 console.log(postdata);
                                 $.post(MYAPP.data_port, postdata)
@@ -850,8 +844,6 @@ class Qdmvc_Layout_Card
                                         //data JSON
                                         console.log(data);
                                         //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
-
-                                        $("#<?=static::$ctl_prefix?>id").val(data.id).change();
 
                                         console.log(data.rows[0]);
 
@@ -881,11 +873,11 @@ class Qdmvc_Layout_Card
                             $("#qdnew").bind("click", function (event) {
                                 //To disable
                                 try {
-                                    document.getElementById("cardForm").reset();
+                                    //document.getElementById("cardForm").reset();
                                     //set init obj
                                     MYAPP.setObj(MYAPP.init_obj);
                                     //force set id = 0
-                                    $("#<?=static::$ctl_prefix?>id").val("0").change();
+                                    MYAPP.viewModel.id(0);//$("#<?=static::$ctl_prefix?>id").val("0");//.change();
 
                                     <?=$this->onNewOK()?>
                                 } catch (error) {
@@ -899,7 +891,7 @@ class Qdmvc_Layout_Card
                                     return false;
                                 }
 
-                                $("#<?=static::$ctl_prefix?>id").val("0").change();
+                                MYAPP.viewModel.id(0); //$("#<?=static::$ctl_prefix?>id").val("0").change();
                                 $("#qdupdate").click();
 
                                 <?=$this->onCloneOK()?>
@@ -928,7 +920,7 @@ class Qdmvc_Layout_Card
                                 //AJAX loader
                                 MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 //begin lock
-                                var id_ = $("#<?=static::$ctl_prefix?>id").val();
+                                var id_ = MYAPP.viewModel.id();//$("#<?=static::$ctl_prefix?>id").val();
                                 console.log(id_);
                                 $.post(MYAPP.data_port, {submit: "submit", action: "delete", data: {id: id_}})
                                     .done(function (data) {
@@ -1200,7 +1192,7 @@ class Qdmvc_Layout_Card
                     //AJAX progress Bar
                     MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                     //build data
-                    var json = form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
+                    var json = MYAPP.getObj();//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                     //begin lock
 
                     console.log(json);

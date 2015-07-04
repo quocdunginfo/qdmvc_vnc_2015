@@ -10,6 +10,7 @@ class Qdmvc_Layout_CardSetup extends Qdmvc_Layout_Card
 {
     protected function onReadyHook()
     {
+        parent::onReadyHook();
         ?>
         <script>
             (function($){
@@ -24,6 +25,5 @@ class Qdmvc_Layout_CardSetup extends Qdmvc_Layout_Card
             })(jQuery);
         </script>
         <?php
-        parent::onReadyHook();
     }
 }
