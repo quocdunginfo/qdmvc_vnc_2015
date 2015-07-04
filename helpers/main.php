@@ -47,10 +47,11 @@ class Qdmvc_Helper
         }
         return admin_url("admin.php?page={$page_name}&qdrole=navigate{$filter_string}");
     }
+    /*
     public static function getCompactPagePartLink($page_name, $filterfield, $filtervalue)
     {
         return admin_url("admin.php?page={$page_name}&filterfield={$filterfield}&filtervalue={$filtervalue}");//quocdunginfo
-    }
+    }*/
 
     public static function getNoneLink()
     {

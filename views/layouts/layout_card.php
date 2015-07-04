@@ -99,6 +99,18 @@ class Qdmvc_Layout_Card
                     $('#jqxlookupwin').jqxWindow('open');
                 })(jQuery);
             };
+            MYAAPP.addQueryToLookupURL = function(lurl, dynamic_filter_fields){
+                var i;
+                for(i=0;i<dynamic_filter_fields.length;i++)
+                {
+                    var tmp_id = $('#ctl_'+dynamic_filter_fields[i]).val();
+                    if(tmp_id!='')
+                    {
+                        lurl += '&filterdatafield'+i+'='+dynamic_filter_fields[i]+'&filtervalue'+i+'='+tmp_id;
+                    }
+                }
+                return lurl;
+            };
             MYAPP.datepicker_tmp_return_id = null;
             MYAPP.requestDatePickerWindow = function(return_id) {
                 (function ($) {
@@ -1276,11 +1288,11 @@ class Qdmvc_Layout_Card
         <?= $this->style() ?>
         <?= $this->formValidation() ?>
         <?= $this->progressSpinner() ?>
-        <?= $this->onReadyHook() ?>
         <?= $this->lookupWindowLayout() ?>
         <?= $this->lookupDatePickerLayout() ?>
         <?= $this->Bar() ?>
         <?= $this->msgPanelLayout() ?>
+        <?= $this->onReadyHook() ?>
     <?php
     }
 }
