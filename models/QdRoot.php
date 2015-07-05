@@ -78,16 +78,15 @@ class QdRoot extends ActiveRecord\Model
 
     protected function pushValidateError($field_name = '', $msg = '', $type = 'error')
     {
-        $hash = md5($field_name . $msg . $type);
-        /*foreach($this->fields_validation as $item)
+        if(is_array($field_name))
         {
-            if($item['hash']==$hash)
-            {
-                 return;
-            }
+            $this->fields_validation = array_merge($this->fields_validation, $field_name);
         }
-        array_push($this->fields_validation, array('field' => $field_name, 'msg' => $msg, 'type' => $type, 'hash' => $hash));*/
-        $this->fields_validation[$hash] = array('field' => $field_name, 'msg' => $msg, 'type' => $type);
+        else
+        {
+            $hash = md5($field_name . $msg . $type);
+            $this->fields_validation[$hash] = array('field' => $field_name, 'msg' => $msg, 'type' => $type);
+        }
     }
 
     private $_xRec = null;
@@ -487,8 +486,7 @@ class QdRoot extends ActiveRecord\Model
     {
         try {
             $config = static::getFieldsConfig();
-            if(!Qdmvc_Helper::isNullOrEmpty($config[$field_name]['TableRelation']['Table']))
-            {
+            if (!Qdmvc_Helper::isNullOrEmpty($config[$field_name]['TableRelation']['Table'])) {
                 return true;
             }
             return false;
@@ -697,10 +695,12 @@ class QdRoot extends ActiveRecord\Model
         }
         return parent::__set($name, $value);
     }
-    protected function getNoSeries()
+
+    public function getNoSeries()
     {
-        return '';
+        return false;
     }
+
     public function save($validate = true, $location = '')
     {
         //replace all \" to ", to prevent " loopback when saving
@@ -715,27 +715,29 @@ class QdRoot extends ActiveRecord\Model
         if ($this->VALIDATE()) {
             $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
             //assign no series before insert
-            if($this->id === null || $this->id === '' || $this->id === 0 || $this->id === '0')
-            {
-                $tmpnose = $this->getNoSeries();
-                if($tmpnose===false)
+            if ($this->id===null || $this->id===false || $this->id===0 || $this->id==='0') {
+                $use_noseries = $this->getNoSeries();
+                if( $use_noseries === false)
                 {
-                    $this->pushValidateError('','NoSeries not set', 'error');
-                    return false;
+                    //do not use noseries
                 }
-                else{
-                    $this->id = $tmpnose;
+                else
+                {
+                    //use no series
+                    $tmpnose = $this->getNoFromNoSeries($use_noseries);
+                    if ($tmpnose === false) {
+                        $this->pushValidateError('', 'NoSeries Fail', 'error');
+                        return false;
+                    } else {
+                        $this->id = $tmpnose;
+                    }
                 }
+            } else {
+                //manual or update => do not get next no
             }
-            else{
-                //manual noseries or update => do not get next no
-            }
+
             try {
-                $re = parent::save($validate);
-                if($re==false)
-                {
-                    $this->id = 0;
-                }
+                $re = parent::save($validate);//checked on July 05, 2015, Only 1 root save called
                 $class_name = $this->getCalledClassName();
                 $location .= "|{$class_name}|save";
                 if ($re && $class_name != 'QdLog') {
@@ -743,9 +745,8 @@ class QdRoot extends ActiveRecord\Model
                     $this->writeLog($action, $location);//quocdunginfo
                 }
                 return $re;
-            }catch (Exception $ex)
-            {
-                $this->id = 0;
+            } catch (Exception $ex) {
+                //$this->id = 0;
                 return false;
             }
 
@@ -781,8 +782,26 @@ class QdRoot extends ActiveRecord\Model
     {
 
     }
+
     public function getBreadcrumbs()
     {
         return array(array('name' => Qdmvc_Helper::getNoneText(), 'url' => Qdmvc_Helper::getNoneLink()));
+    }
+
+    private function getNoFromNoSeries($noseries_id)
+    {
+        $tmp = QdNoSeries::GET($noseries_id);
+        if ($tmp != null) {
+            $next_no = $tmp->getNextNo();
+            if ($next_no === false) {
+                $this->pushValidateError($tmp->GETVALIDATION());
+                //$this->pushValidateError('', 'ERROR: getNoFromNoSeries', 'error');
+                return false;
+            } else {
+                return $next_no;
+            }
+        } else {
+            return false;
+        }
     }
 }

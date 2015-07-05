@@ -16,6 +16,7 @@ class Qdmvc_Dataport
     protected $function = '';
     protected $working_mode = '';
     protected $function_params = array();
+    protected $manual_no = false;
     private $for_card = true;
 
     function __construct()
@@ -144,6 +145,19 @@ class Qdmvc_Dataport
         }
         //insert
         $c = static::$model;
+        //check manual mode
+        if($this->manual_no==true)
+        {
+            //get noseries
+            $tmp = new $c();
+            $tmp = QdNoSeries::GET($tmp->getNoSeries());
+            if($tmp!=null && $tmp->manual_allowed==false)
+            {
+                $this->pushMsg('Manual No are not allowed for this Model', 'error');
+                return;
+            }
+        }
+
         $this->obj = $c::getInitObj();
         $this->obj->id = $this->data['id'];//force assign id while manual mode
         $this->beforeInsertAssign();
@@ -188,7 +202,13 @@ class Qdmvc_Dataport
             $this->working_mode = 'update_fail';
             return;
         }
-
+        //prevent manual no
+        if($this->manual_no==true)
+        {
+            $this->pushMsg('[Manual No] are not allowed in update mode', 'error');
+            $this->working_mode = 'update_fail';
+            return;
+        }
         //update
         $c = static::$model;
         $this->obj = $c::GET($this->data["id"]);
@@ -257,6 +277,19 @@ class Qdmvc_Dataport
         $this->data = isset($_POST['data'])?$_POST['data']:array();
         $this->function_params = isset($_POST['params'])?$_POST['params']:array();
         $this->action = isset($_POST['action'])?$_POST['action']:'';
+
+        if(isset($_POST['manual_no']))
+        {
+            if($_POST['manual_no']==='false' || $_POST['manual_no']===false || $_POST['manual_no']===0 || $_POST['manual_no']==='0')
+            {
+                //do not thing
+            }
+            else
+            {
+                $this->manual_no = true;
+            }
+        }
+
         $this->function = isset($_POST['function'])?$_POST['function']:'';
     }
 
@@ -272,7 +305,7 @@ class Qdmvc_Dataport
         $recordstartindex = isset($_REQUEST['recordstartindex']) ? $_REQUEST['recordstartindex'] : 0;
         $pagesize = isset($_REQUEST['pagesize']) ? $_REQUEST['pagesize'] : 10;
         //SORT => May 19, 2015
-        $sort_field = 'date_modified';
+        $sort_field = 'date_created';
         if(isset($_REQUEST['sortdatafield']) && $_REQUEST['sortdatafield']!='')
         {
             $sort_field = $_REQUEST['sortdatafield'];
@@ -329,13 +362,12 @@ class Qdmvc_Dataport
 
             //Boolean
             if (in_array($c::getDataType($key), array('Boolean'))) {
+                $this->obj->$key = 0;
                 if (isset($_POST['data'][$key])) {
-                    if($_POST['data'][$key]=='true' || $_POST['data'][$key]=='1' || $_POST['data'][$key]==1 || $_POST['data'][$key]==true)
+                    if($_POST['data'][$key]==='true' || $_POST['data'][$key]==='1' || $_POST['data'][$key]===1 || $_POST['data'][$key]===true)
                     {
                         $this->obj->$key = 1;
                     }
-                } else {
-                    $this->obj->$key = 0;
                 }
                 continue;
             }

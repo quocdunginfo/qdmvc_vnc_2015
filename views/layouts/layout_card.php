@@ -255,6 +255,7 @@ class Qdmvc_Layout_Card
             MYAPP.ajax_loader;
             MYAPP.viewModel = {};
             MYAPP.is_insert = true;
+            MYAPP.manual_no = true;
         </script>
     <?php
     }
@@ -438,6 +439,7 @@ class Qdmvc_Layout_Card
                     console.log(obj);
                 })(jQuery);*/
                 MYAPP.is_insert = false;
+                MYAPP.manual_no = false;
                 MYAPP.clearFormValidationMark();
                 ko.mapping.fromJS(obj, MYAPP.viewModel);
             };
@@ -779,6 +781,10 @@ class Qdmvc_Layout_Card
 
                     MYAPP.viewModel = ko.mapping.fromJS(MYAPP.init_obj);
                     ko.applyBindings(MYAPP.viewModel); // This makes Knockout get to work
+
+                    $('#ctl_id').keyup(function(){
+                        MYAPP.manual_no = true;
+                    });
                 });
             })(jQuery);
         </script>
@@ -847,14 +853,13 @@ class Qdmvc_Layout_Card
                                 //begin lock
                                 console.log(json);
                                 var action = MYAPP.is_insert ? "insert" : "update";
-                                var postdata = {submit: "submit", action: action, data: json};
+                                var postdata = {submit: "submit", action: action, data: json, manual_no: MYAPP.manual_no};
                                 console.log(postdata);
                                 $.post(MYAPP.data_port, postdata)
                                     .done(function (data) {
                                         //data JSON
                                         console.log(data);
                                         //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
-
                                         console.log(data.rows[0]);
 
                                         MYAPP.clearFormValidationMark();

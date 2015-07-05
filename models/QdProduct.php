@@ -189,6 +189,9 @@ class QdProduct extends QdRoot
                 'Caption' => array('vi-VN' => 'Ngày cập nhật'),
                 'DataType' => 'Date',
             ),
+            'noseries' => array(
+
+            )
         ));
         $obj['__sys_lines_url']['Caption'] = array('en-US' => 'Related Products', 'vi-VN' => 'SP liên kết');
         $obj['__sys_lines_url']['TableRelation'] = array(
@@ -348,18 +351,11 @@ class QdProduct extends QdRoot
         }
         return parent::CALCFIELDS($flowfield_name);
     }
-    protected function getNoSeries()
+    public function getNoSeries()
     {
         //assign no series
         $setup = QdSetupProduct::GET();
-        $tmp = QdNoSeries::GET($setup->product_noseries);
-        if($tmp!=null)
-        {
-            return $tmp->getNextNo();
-        }
-        else
-        {
-            return false;
-        }
+        $this->noseries = $setup->product_noseries;
+        return $setup->product_noseries;
     }
 }

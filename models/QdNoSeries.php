@@ -6,7 +6,7 @@ class QdNoSeries extends QdRoot
 
     public static function getFieldsConfig()
     {
-        return array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             'from_no' => array(
                 'DataType' => 'Integer',
             ),
@@ -31,6 +31,8 @@ class QdNoSeries extends QdRoot
                 'DataType' => 'Boolean',
             ),
         ));
+        $obj['id']['ReadOnly'] = false;
+        return $obj;
     }
 
     public static function getInitObj()
@@ -47,7 +49,20 @@ class QdNoSeries extends QdRoot
     }
     public function getNextNo()
     {
+        //check active
+        if($this->active==false)
+        {
+            $this->pushValidateError('', 'No Series is not active', 'error');
+            return false;
+        }
+
         $this->last_no++;
+        if($this->last_no>$this->to_no)
+        {
+            $this->pushValidateError('', 'No Series reach maximum of '.($this->last_no-1), 'error');
+            return false;
+        }
+
         $tmp = $this->prefix;
         if($this->fixed_length==true)
         {
@@ -62,6 +77,6 @@ class QdNoSeries extends QdRoot
         {
             return $tmp;
         }
-        return '';
+        return false;
     }
 }
