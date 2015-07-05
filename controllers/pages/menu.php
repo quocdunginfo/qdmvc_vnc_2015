@@ -383,6 +383,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdUserPersonalization',
             'DataPort' => 'user_personalization_port'
         ),
+        'noseries' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_NoSeries',
+            'Caption' => array(
+                'en-US' => 'Noseries',
+                'vi-VN' => 'Noseries',
+            ),
+            'Model' => 'QdNoSeries',
+            'DataPort' => 'noseries_port',
+            'PageList' => 'noseries_list'
+        ),
+        'noseries_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_NoSeries_List',
+            'Caption' => array(
+                'en-US' => 'Noseries',
+                'vi-VN' => 'Noseries',
+            ),
+            'Model' => 'QdNoSeries',
+            'DataPort' => 'noseries_port'
+        ),
         'setup' => array(
             'ParentId' => -1,
             'Active'=>true,

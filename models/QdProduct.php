@@ -207,6 +207,7 @@ class QdProduct extends QdRoot
                 )
             )
         );
+        $obj['id']['ReadOnly'] = false;
         return $obj;
     }
 
@@ -227,7 +228,7 @@ class QdProduct extends QdRoot
         /*$query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-detail.php'));
         $query = add_query_arg(array('id' => $this->id), $query);*/
 
-        $query = site_url(sprintf('%s-%s.html', Qdmvc_Helper::sanitize_title_with_dashes($this->name), $this->id));
+        $query = site_url(sprintf('%s/%s.html', Qdmvc_Helper::sanitize_title_with_dashes($this->name), $this->id));
         return $query;
     }
 
@@ -346,5 +347,19 @@ class QdProduct extends QdRoot
             return $this->qd_cached_attr[$flowfield_name];
         }
         return parent::CALCFIELDS($flowfield_name);
+    }
+    protected function getNoSeries()
+    {
+        //assign no series
+        $setup = QdSetupProduct::GET();
+        $tmp = QdNoSeries::GET($setup->product_noseries);
+        if($tmp!=null)
+        {
+            return $tmp->getNextNo();
+        }
+        else
+        {
+            return false;
+        }
     }
 }

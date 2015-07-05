@@ -14,6 +14,7 @@ class Qdmvc_Dataport
     protected $msg = array();//array(array('msg' => 'MSG', 'type' => 'error'), array('msg2' => 'MSG', 'type' => 'warning', 'hash' => md5))
     protected $action = 'update';
     protected $function = '';
+    protected $working_mode = '';
     protected $function_params = array();
     private $for_card = true;
 
@@ -105,6 +106,7 @@ class Qdmvc_Dataport
         $re['id'] = $id;
 
         $re['total'] = $total;
+        $re['working_mode'] = $this->working_mode;
 
         echo json_encode($re);
         exit(0);
@@ -140,25 +142,34 @@ class Qdmvc_Dataport
             $this->pushMsg('Permission: Could not Insert!', 'error');
             return;
         }
-
         //insert
         $c = static::$model;
         $this->obj = $c::getInitObj();
+        $this->obj->id = $this->data['id'];//force assign id while manual mode
         $this->beforeInsertAssign();
         $this->assign();
+
+        //check duplicate id
+        if($c::GET($this->data['id']))
+        {
+            $this->pushMsg(sprintf('Can not insert: Duplicate ID with record %s', $this->data['id']), 'error');
+            $this->working_mode = 'insert_fail';
+            return false;
+        }
 
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|insert";
         if ($this->obj->save(true, $location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_insert_ok'), $this->obj->id));
+            $this->working_mode = 'insert_ok';
             return true;
         }
         else
         {
             $this->pushMsg($this->obj->GETVALIDATION());
+            $this->working_mode = 'insert_fail';
             return false;
         }
-
     }
 
     public function getCalledClass()
@@ -174,23 +185,32 @@ class Qdmvc_Dataport
         if(!static::canEdit())
         {
             $this->pushMsg('Permission: Could not Edit!', 'error');
+            $this->working_mode = 'update_fail';
             return;
         }
 
         //update
         $c = static::$model;
         $this->obj = $c::GET($this->data["id"]);
+        if($this->obj==null)
+        {
+            $this->pushMsg('Record does not existed for update', 'error');
+            $this->working_mode = 'update_fail';
+            return;
+        }
         $this->beforeInsertAssign();
         $this->assign();
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|update";
         if ($this->obj->save(true, $location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_update_ok'), $this->obj->id));
+            $this->working_mode = 'update_ok';
             return true;
         }
         else
         {
             $this->pushMsg($this->obj->GETVALIDATION());
+            $this->working_mode = 'update_fail';
             return false;
         }
 
@@ -207,19 +227,27 @@ class Qdmvc_Dataport
         if(!static::canDelete())
         {
             $this->pushMsg('Permission: Could not Delete!', 'error');
+            $this->working_mode = 'delete_fail';
             return;
         }
-
         $c = static::$model;
-        $this->obj = $c::find($this->data['id']);
+        $this->obj = $c::GET($this->data['id']);
+        if($this->obj==null)
+        {
+            $this->pushMsg('Record does not existed for delete', 'error');
+            $this->working_mode = 'delete_fail';
+            return;
+        }
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|delete";
         if ($this->obj->delete($location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_delete_ok'), $this->obj->id));
+            $this->working_mode = 'delete_ok';
             return true;
         }
         else {
             $this->pushMsg($this->obj->GETVALIDATION());
+            $this->working_mode = 'delete_fail';
             return false;
         }
     }
@@ -244,7 +272,7 @@ class Qdmvc_Dataport
         $recordstartindex = isset($_REQUEST['recordstartindex']) ? $_REQUEST['recordstartindex'] : 0;
         $pagesize = isset($_REQUEST['pagesize']) ? $_REQUEST['pagesize'] : 10;
         //SORT => May 19, 2015
-        $sort_field = 'id';
+        $sort_field = 'date_modified';
         if(isset($_REQUEST['sortdatafield']) && $_REQUEST['sortdatafield']!='')
         {
             $sort_field = $_REQUEST['sortdatafield'];

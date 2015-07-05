@@ -254,6 +254,7 @@ class Qdmvc_Layout_Card
             //ajax_loader
             MYAPP.ajax_loader;
             MYAPP.viewModel = {};
+            MYAPP.is_insert = true;
         </script>
     <?php
     }
@@ -333,6 +334,7 @@ class Qdmvc_Layout_Card
                             $('#wptexteditor_done').click(function () {
                                 var content = tinyMCE.get('wptexteditor').getContent();
                                 $('#' + MYAPP.wptexteditor_returnid).val(content);
+                                $('#' + MYAPP.wptexteditor_returnid).trigger('change');
                                 //close editor
                                 $('#jqxwptexteditor').jqxWindow('close');
                             });
@@ -401,6 +403,7 @@ class Qdmvc_Layout_Card
 
                                 $('#datepicker_chooser').click(function () {
                                     $('#' + MYAPP.datepicker_tmp_return_id).val($('#qddatepicker').val());
+                                    $('#' + MYAPP.datepicker_tmp_return_id).trigger('change');
                                     $('#jqxdatepickerwin').jqxWindow('close');
                                 });
                             });
@@ -434,13 +437,13 @@ class Qdmvc_Layout_Card
                     console.log('layout_cardnavigate -> setObj: ');
                     console.log(obj);
                 })(jQuery);*/
+                MYAPP.is_insert = false;
                 MYAPP.clearFormValidationMark();
                 ko.mapping.fromJS(obj, MYAPP.viewModel);
             };
             MYAPP.setLookupResult = function(value, txtId) {
                 (function ($) {
-                    txtId = '<?=static::$ctl_prefix?>' + txtId;
-                    $("#" + txtId).val(value);//.change();
+                    eval('MYAPP.viewModel.'+txtId)(value);
                     //auto close window
                     $('#jqxlookupwin').jqxWindow('close');
                 })(jQuery);
@@ -520,7 +523,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldDate($f_name, $value)
+    private function generateFieldDate($f_name, $value, $readonly=false)
     {
         ?>
         <div class="qd-lookup-input">
@@ -538,8 +541,14 @@ class Qdmvc_Layout_Card
         <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
     <?php
     }
+    private function generateFieldInteger($f_name, $value, $readonly = false)
+    {
+        ?>
+        <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
+    <?php
+    }
 
-    private function generateFieldColor($f_name, $value)
+    private function generateFieldColor($f_name, $value, $readonly=false)
     {
         ?>
         <input class="text-input color {hash:true}" type="text" name="<?= $f_name ?>"
@@ -547,10 +556,10 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldHidden($f_name, $value)
+    private function generateFieldHidden($f_name, $value, $readonly=false)
     {
         ?>
-        <input type="hidden" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="<?=$f_name?>" />
+        <input type="hidden" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="value: <?=$f_name?>" />
     <?php
     }
 
@@ -566,7 +575,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldImage($f_name, $value)
+    private function generateFieldImage($f_name, $value, $readonly=false)
     {
         ?>
         <div class="qd-lookup-input">
@@ -604,7 +613,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldWYSIWYG($f_name, $value = 0)
+    private function generateFieldWYSIWYG($f_name, $value = 0, $readonly=false)
     {
         ?>
         <div class="qd-lookup-input">
@@ -615,7 +624,6 @@ class Qdmvc_Layout_Card
             <script>
                 (function ($) {
                     $(document).ready(function () {
-                        //$("#<?=static::$ctl_prefix.$f_name?>").val("<?=str_replace('"', '\"', $value)?>");
                         $("#editor_cs_<?=$f_name?>").click(function () {
                             MYAPP.requestEditorWindow($('#<?=static::$ctl_prefix.$f_name?>').val(), '<?=static::$ctl_prefix.$f_name?>');
                         });
@@ -721,15 +729,17 @@ class Qdmvc_Layout_Card
                                         <div class="pull-right">
                                             <?php
                                             if ($type == 'Color') {
-                                                $this->generateFieldColor($f_name, $f_val);
+                                                $this->generateFieldColor($f_name, $f_val, $readonly);
                                             } else if ($type == 'Boolean') {
-                                                $this->generateFieldBoolean($f_name, $f_val);
+                                                $this->generateFieldBoolean($f_name, $f_val, $readonly);
                                             } else if ($type == 'Image') {
-                                                $this->generateFieldImage($f_name, $f_val);
+                                                $this->generateFieldImage($f_name, $f_val, $readonly);
+                                            } else if ($type == 'Integer') {
+                                                $this->generateFieldInteger($f_name, $f_val, $readonly);
                                             } else if ($type == 'Date') {
-                                                $this->generateFieldDate($f_name, $f_val);
+                                                $this->generateFieldDate($f_name, $f_val, $readonly);
                                             } else if ($type == 'WYSIWYG') {
-                                                $this->generateFieldWYSIWYG($f_name, $f_val);
+                                                $this->generateFieldWYSIWYG($f_name, $f_val, $readonly);
                                             } else if ($type == 'Option') {
                                                 $this->generateFieldCombobox($f_name, $f_val, $options, $readonly);
                                             } else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
@@ -836,7 +846,7 @@ class Qdmvc_Layout_Card
                                 var json = MYAPP.getObj();//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                                 //begin lock
                                 console.log(json);
-                                var action = $('#ctl_id').val() != 0 ? "update" : "insert";
+                                var action = MYAPP.is_insert ? "insert" : "update";
                                 var postdata = {submit: "submit", action: action, data: json};
                                 console.log(postdata);
                                 $.post(MYAPP.data_port, postdata)
@@ -851,6 +861,11 @@ class Qdmvc_Layout_Card
                                         MYAPP.setObj(data.rows[0]);
 
                                         MYAPP.formValidation = data.msg;
+                                        //tracking insert fail
+                                        if(data.working_mode == 'insert_fail'){
+                                            MYAPP.is_insert = true;//manual noseries insert but fail
+                                        }
+                                        //show error msg
                                         MYAPP.showMsg(data.msg);//must be called after setObj(...)
 
                                         <?=$this->onSaveOK()?>
@@ -877,7 +892,8 @@ class Qdmvc_Layout_Card
                                     //set init obj
                                     MYAPP.setObj(MYAPP.init_obj);
                                     //force set id = 0
-                                    MYAPP.viewModel.id(0);//$("#<?=static::$ctl_prefix?>id").val("0");//.change();
+                                    MYAPP.viewModel.id(0);
+                                    MYAPP.is_insert = true;
 
                                     <?=$this->onNewOK()?>
                                 } catch (error) {
@@ -891,7 +907,7 @@ class Qdmvc_Layout_Card
                                     return false;
                                 }
 
-                                MYAPP.viewModel.id(0); //$("#<?=static::$ctl_prefix?>id").val("0").change();
+                                MYAPP.viewModel.id(0);
                                 $("#qdupdate").click();
 
                                 <?=$this->onCloneOK()?>
@@ -920,7 +936,7 @@ class Qdmvc_Layout_Card
                                 //AJAX loader
                                 MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 //begin lock
-                                var id_ = MYAPP.viewModel.id();//$("#<?=static::$ctl_prefix?>id").val();
+                                var id_ = MYAPP.viewModel.id();
                                 console.log(id_);
                                 $.post(MYAPP.data_port, {submit: "submit", action: "delete", data: {id: id_}})
                                     .done(function (data) {
@@ -947,6 +963,7 @@ class Qdmvc_Layout_Card
                                     e.preventDefault(); // Stops IE from triggering the button to be clicked
 
                                     //simulate save click
+                                    $('#qdupdate').focus();//knock out js only update value to model after lose focus
                                     $("#qdupdate").click();
                                 }
                             });
@@ -1204,7 +1221,7 @@ class Qdmvc_Layout_Card
                             console.log(data);
                             //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
 
-                            //$("#<?=static::$ctl_prefix?>id").val(data.id).change();
+
 
                             console.log(data.rows[0]);
 

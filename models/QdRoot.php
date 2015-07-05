@@ -310,7 +310,7 @@ class QdRoot extends ActiveRecord\Model
         //ignore filter on FLOWFIELD
         if (!static::ISFLOWFIELD($field)) {
             if (static::ISPK($field)) {
-                $exact = true;//force filter exact on PK field
+                //$exact = true;//force filter exact on PK field//Disable this auto convention since NoSeries
             }
             $tmp = array();
             $tmp['value'] = $value;
@@ -697,7 +697,10 @@ class QdRoot extends ActiveRecord\Model
         }
         return parent::__set($name, $value);
     }
-
+    protected function getNoSeries()
+    {
+        return '';
+    }
     public function save($validate = true, $location = '')
     {
         //replace all \" to ", to prevent " loopback when saving
@@ -711,14 +714,41 @@ class QdRoot extends ActiveRecord\Model
         //do validate and save
         if ($this->VALIDATE()) {
             $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
-            $re = parent::save($validate);
-            $class_name = $this->getCalledClassName();
-            $location .= "|{$class_name}|save";
-            if ($re && $class_name != 'QdLog') {
-                //write log
-                $this->writeLog($action, $location);//quocdunginfo
+            //assign no series before insert
+            if($this->id === null || $this->id === '' || $this->id === 0 || $this->id === '0')
+            {
+                $tmpnose = $this->getNoSeries();
+                if($tmpnose===false)
+                {
+                    $this->pushValidateError('','NoSeries not set', 'error');
+                    return false;
+                }
+                else{
+                    $this->id = $tmpnose;
+                }
             }
-            return $re;
+            else{
+                //manual noseries or update => do not get next no
+            }
+            try {
+                $re = parent::save($validate);
+                if($re==false)
+                {
+                    $this->id = 0;
+                }
+                $class_name = $this->getCalledClassName();
+                $location .= "|{$class_name}|save";
+                if ($re && $class_name != 'QdLog') {
+                    //write log
+                    $this->writeLog($action, $location);//quocdunginfo
+                }
+                return $re;
+            }catch (Exception $ex)
+            {
+                $this->id = 0;
+                return false;
+            }
+
         } else {
             return false;
         }

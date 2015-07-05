@@ -18,6 +18,7 @@ class QdShop extends QdContact
                 'Caption' => array('en-US' => 'Shop', 'vi-VN' => 'Cửa hàng'),
             ),
         );
+        $obj['__sys_lines_url']['Caption'] = array('en-US' => 'Shop Products', 'vi-VN' => 'SP trong Shop');
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdPro2Shop',
             'Field' => 'id',

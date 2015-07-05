@@ -45,6 +45,40 @@ class QdSetupProduct extends QdRootSetup
                     )
                 )
             ),
+            'product_noseries' => array(
+                'Name' => 'product_noseries',
+                'Caption' => array('en-US' => 'Product Noseries', 'vi-VN' => 'SP Noseries'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdNoSeries',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        
+                    )
+                )
+            ),
+            'product_qa_noseries' => array(
+                'Name' => 'product_qa_noseries',
+                'Caption' => array('en-US' => 'Product QA Noseries', 'vi-VN' => 'SP QA Noseries'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdNoSeries',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+
+                    )
+                )
+            ),
         ));
     }
 

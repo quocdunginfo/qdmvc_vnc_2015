@@ -74,6 +74,7 @@ class QdProductOrder extends QdRoot
                 'Caption' => array('vi-VN' => 'SĐT KH'),
             ),
             'count' => array(
+                'DataType' => 'Integer',
                 'Caption' => array('en-US' => 'Quantity', 'vi-VN' => 'SL đặt')
             ),
             'done' => array(

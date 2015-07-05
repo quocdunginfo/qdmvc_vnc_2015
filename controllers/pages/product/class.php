@@ -19,7 +19,7 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
-                        'ReadOnly' => true
+                        'ReadOnly' => false
                     ),
                     'type' => array(
                         'SourceExpr' => 'type',
@@ -68,7 +68,6 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                     ),
                     'temp_out_of_stock' => array(
                         'SourceExpr' => 'temp_out_of_stock',
-
                     ),
                 )
             ),

@@ -18,7 +18,6 @@ class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
         return array(
             'Group1' => array(
                 'Type' => 'Group',
-                'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
                         'SourceExpr' => 'id',
@@ -55,7 +54,7 @@ class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
             ),
             'Tab1' => array(
                 'Type' => 'Group',
-                'Name' => 'Location',
+                'Name' => array('vi-VN' => 'Vị trí', 'en-US' => 'Location'),
                 'Fields' => array(
                     'address_province_id' => array(
 
