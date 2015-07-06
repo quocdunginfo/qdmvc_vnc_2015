@@ -304,7 +304,7 @@ class Qdmvc_Layout_Card
             })(jQuery);
         </script>
 
-        <div id="jqxlookupwin">
+        <div id="jqxlookupwin" style="display: none">
             <div id="windowHeader">
                     <span>
                         Lookup Window
@@ -317,7 +317,7 @@ class Qdmvc_Layout_Card
                 </iframe>
             </div>
         </div>
-        <div id="jqxwptexteditor">
+        <div id="jqxwptexteditor" style="display: none">
             <div id="windowHeader">
                     <span>
                         WYSIWYG Editor Window
@@ -383,7 +383,7 @@ class Qdmvc_Layout_Card
             })(jQuery);
         </script>
 
-        <div id="jqxdatepickerwin">
+        <div id="jqxdatepickerwin" style="display: none">
             <div id="windowHeader">
                     <span>
                         DatePicker Window
@@ -805,7 +805,7 @@ class Qdmvc_Layout_Card
     {
 
     }
-
+    /*
     private function linesBar()
     {
         ?>
@@ -827,7 +827,7 @@ class Qdmvc_Layout_Card
             </div>
         </div>
     <?php
-    }
+    }*/
 
     private function cardBar()
     {
@@ -1097,6 +1097,7 @@ class Qdmvc_Layout_Card
         <script>
             (function ($) {
                 $(document).ready(function () {
+                    $("#jqxNavigationBar").css("display", "block");
                     //navigation bar
                     $("#jqxNavigationBar").jqxNavigationBar({
                         width: '100%',
@@ -1108,7 +1109,7 @@ class Qdmvc_Layout_Card
         </script>
 
         <div id='jqxWidget'>
-            <div id="jqxNavigationBar">
+            <div id="jqxNavigationBar" style="display: none">
                 <?= $this->Bars() ?>
             </div>
         </div>
@@ -1209,7 +1210,7 @@ class Qdmvc_Layout_Card
         }
         ?>
         <script>
-            function callFn(fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
+            MYAPP.callFn = function(fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
                 (function ($) {
                     //AJAX progress Bar
                     MYAPP.ajax_loader = new ajaxLoader("#cardForm");
@@ -1269,8 +1270,9 @@ class Qdmvc_Layout_Card
             <ul class="dropdown-menu" role="menu">
                 <?php
                 foreach ($this->serverFunctions() as $item=>$config) {
+                    $fn_label = isset($config['label'][$this->data['language']])?$config['label'][$this->data['language']]:'@'.$item;
                     ?>
-                    <li><a id="<?= $item ?>"><?= $config['label'] ?></a></li>
+                    <li><a id="<?= $item ?>"><?= $fn_label ?></a></li>
                 <?php
                     if(!QdT_Library::isNullOrEmpty($config['fn_name']))
                     {

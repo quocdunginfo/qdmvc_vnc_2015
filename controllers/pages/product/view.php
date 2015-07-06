@@ -14,7 +14,10 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate {
         $obj = array_merge($obj, array(
             'btn_active' => array(
                 //'fn_name' => 'fn_active',
-                'label' => 'Active'
+                'label' => array(
+                    'vi-VN' => 'Kích hoạt',
+                    'en-US' => 'Active'
+                )
             )
         ));
         return $obj;

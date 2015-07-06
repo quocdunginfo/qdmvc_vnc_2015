@@ -64,10 +64,23 @@ class Qdmvc
 
     public static function runPage($name)
     {
-        //load class
+        $cache_key = $_SERVER['REQUEST_URI'].get_current_user_id().Qdmvc_Config::getLanguage();
+        $cache_result = Qdmvc_Helper::cacheGetByKey($cache_key);
+        if($cache_result!==false)
+        {
+            echo $cache_result;
+            return;
+        }
+        ob_start();
+
+        //MAIN fn: load class
         static::loadPage($name);
         //load controller
         static::loadController('pages/' . $name . '/controller');
+        //END Main fn
+
+        $cache_result = ob_get_contents();
+        Qdmvc_Helper::cacheRegister($cache_key, $cache_result);
     }
 
     public static function loadLayout($pure_path)
@@ -100,14 +113,14 @@ class Qdmvc
     {
         require_once(static::getPluginDir($pure_path) . '.php');
     }
-
-    /*
-     * Internal use
-     */
-    protected static function getPluginDir($pure_path = '')
+    public static function getPluginDir($pure_path = '')
     {
         return plugin_dir_path(__FILE__) . $pure_path;
     }
+    /*
+     * Internal use
+     */
+
 
     protected static function getWidget($path = '')
     {

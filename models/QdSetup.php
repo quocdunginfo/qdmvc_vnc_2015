@@ -31,5 +31,14 @@ class QdSetup extends QdRootSetup
             ),
         ));
     }
+    public function fn_removecache()
+    {
+        //xoa het file trong qdmvc_caches
+        if(Qdmvc_Helper::cacheRemoveAll())
+        {
+            $this->pushValidateError('', 'Remove All Cache files done!', 'info');
+        }
+
+    }
 
 }

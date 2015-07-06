@@ -232,8 +232,8 @@ class Qdmvc_Layout_List
                             // update the grid and send a request to the server.
                             console.log('Send SORT to Server');
                             $("#jqxgrid").jqxGrid('updatebounddata', 'sort');
-                        }
-                        //
+                        },
+                        type: 'POST'//switch from GET to POST
                     };
 
                     var dataadapter = new $.jqx.dataAdapter(source);
@@ -254,7 +254,7 @@ class Qdmvc_Layout_List
                             virtualmode: true,
                             pagesize: 20,
                             sortable: true,/*May 19 2015*/
-                            pagesizeoptions: ['5', '10', '20', '50', '100', '999999'],
+                            pagesizeoptions: ['5', '10', '20', '50', '100', '200', '999999'],
                             /*Enable Inline Editing*/
                             /*editable: true,
                              editmode: "dblclick",*/

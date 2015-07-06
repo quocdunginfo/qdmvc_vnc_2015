@@ -15,7 +15,19 @@ class Qdmvc_Layout_CardSetup extends Qdmvc_Layout_Card
         <script>
             (function($){
                 $(document).ready(function(){
-                    MYAPP.setObj(<?=$this->obj_json?>);
+                    //MYAPP.setObj(<?=$this->obj_json?>);//may not compatible with cache
+                    MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+                    $.get(MYAPP.data_port)
+                        .done(function (data) {
+                            console.log(data);
+                            MYAPP.setObj(data.rows[0]);
+                        })
+                        .fail(function (data) {
+                            console.log(data);
+                        })
+                        .always(function () {
+                            MYAPP.ajax_loader.remove();
+                        });
                     $("#qdnew").hide();
                     $("#qdclone").hide();
                     $("#qddelete").hide();

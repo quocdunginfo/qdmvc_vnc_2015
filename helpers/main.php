@@ -309,6 +309,44 @@ class Qdmvc_Helper
         }
         return null;
     }
+    public static function cacheGetByKey($cache_key)
+    {
+        $cache_key = md5($cache_key);
+        $cache_key = Qdmvc::getPluginDir('caches/'.$cache_key.'.txt');
+
+        //check cache
+        if(file_exists($cache_key))
+        {
+            //read file content
+            $ttttt = file_get_contents($cache_key);
+            return $ttttt;
+        }
+        return false;
+    }
+    public static function cacheRegister($cache_key, $cache_result)
+    {
+        $cache_key = md5($cache_key);
+        $cache_key = Qdmvc::getPluginDir('caches/'.$cache_key.'.txt');
+        $re = file_put_contents($cache_key, $cache_result);
+        if($re===false)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static function cacheRemoveAll()
+    {
+        $folder = Qdmvc::getPluginDir('caches');
+        foreach(glob("{$folder}/*") as $file)
+        {
+            if(is_dir($file)) {
+                continue;
+            } else {
+                unlink($file);
+            }
+        }
+        return true;
+    }
 }
 
 function set_html_content_type() {
