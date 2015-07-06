@@ -317,7 +317,7 @@ class Qdmvc_Layout_Card
                 </iframe>
             </div>
         </div>
-        <div id="jqxwptexteditor" style="display: none">
+        <div id="jqxwptexteditor">
             <div id="windowHeader">
                     <span>
                         WYSIWYG Editor Window
@@ -383,7 +383,7 @@ class Qdmvc_Layout_Card
             })(jQuery);
         </script>
 
-        <div id="jqxdatepickerwin" style="display: none">
+        <div id="jqxdatepickerwin">
             <div id="windowHeader">
                     <span>
                         DatePicker Window
@@ -1097,7 +1097,7 @@ class Qdmvc_Layout_Card
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    $("#jqxNavigationBar").css("display", "block");
+                    $("#jqxNavigationBar").css("visibility", "visible");
                     //navigation bar
                     $("#jqxNavigationBar").jqxNavigationBar({
                         width: '100%',
@@ -1109,7 +1109,7 @@ class Qdmvc_Layout_Card
         </script>
 
         <div id='jqxWidget'>
-            <div id="jqxNavigationBar" style="display: none">
+            <div id="jqxNavigationBar" style="visibility: hidden">
                 <?= $this->Bars() ?>
             </div>
         </div>
