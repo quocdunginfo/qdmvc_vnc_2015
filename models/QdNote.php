@@ -16,7 +16,6 @@ class QdNote extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdNote();
-        $obj->content = 'Mặc định';
         return $obj;
     }
 
@@ -34,5 +33,4 @@ class QdNote extends QdRoot
             $this->pushValidateError($field_name, '"model_id" phải khác rỗng');
         }
     }
-
 }
