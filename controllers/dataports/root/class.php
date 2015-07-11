@@ -330,7 +330,7 @@ class Qdmvc_Dataport
                 $f_operator = isset($_REQUEST[$f_operator])?$_REQUEST[$f_operator]:'EQUAL';
                 if($f_operator=='LESS_THAN')
                 {
-                    $f_operator = 'CONTAINS';//quocdunginfo, Bug of JqWidget
+                    $f_operator = 'CONTAINS';//quocdunginfo, Bug of JqWidget, LESS_THAN not used in that time
                 }
                 $f_value = 'filtervalue'.$number;
 
