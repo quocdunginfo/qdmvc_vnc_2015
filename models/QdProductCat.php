@@ -20,7 +20,7 @@ class QdProductCat extends QdRoot
     public function getProducts2()
     {
         $record = new QdProBigSale();
-        $record->SETRANGE('group_id', $this->id, true);
+        $record->SETRANGE('group_id', $this->id);
 
         $re = array();
         foreach($record->GETLIST() as $item)

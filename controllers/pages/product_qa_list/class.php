@@ -18,7 +18,6 @@ class Qdmvc_Page_ProductQA_List extends Qdmvc_Page_Product_List
     {
         return 'product_qa_list';
     }
-
     protected function getCustomPageView()
     {
         return array(

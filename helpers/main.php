@@ -2,6 +2,15 @@
 
 class Qdmvc_Helper
 {
+    private static $operator_mapping = array(
+        'EQUAL' => '=',
+        'NOT_EQUAL' => '!=',
+        'GREATER_THAN_OR_EQUAL' => '>=',
+        'LESS_THAN_OR_EQUAL' => '<=',
+        'LESS_THAN' => '<',
+        'GREATER_THAN' => '>',
+        'CONTAINS' => 'LIKE'
+    );
     public static $data_type = array(
         'image' => 'image',
         'flowfield' => 'flowfield'
@@ -17,8 +26,16 @@ class Qdmvc_Helper
         if($pre_filter_arr!=null) {
             $count = 99;
             foreach ($pre_filter_arr as $key => $value) {
-                $value = $value === true ? 1 : ($value===false?0:$value);
-                $tmp .= "&filterdatafield{$count}={$key}&filtervalue{$count}={$value}";
+                $condition = 'EQUAL';
+                $f_value = $value;
+                $f_field = $key;
+                if(is_array($value))
+                {
+                    $f_value = $value['value'];
+                    $f_field = $value['field'];
+                }
+                $f_value = $f_value === true ? 1 : ($f_value===false?0:$f_value);
+                $tmp .= "&filterdatafield{$count}={$f_field}&filtervalue{$count}={$f_value}&filtercondition{$count}={$condition}";
                 $count++;
             }
         }
@@ -346,6 +363,14 @@ class Qdmvc_Helper
             }
         }
         return true;
+    }
+    public static function getOperator($mask = 'EQUAL')
+    {
+        if(isset(static::$operator_mapping[$mask]))
+        {
+            return static::$operator_mapping[$mask];
+        }
+        return '=';
     }
 }
 

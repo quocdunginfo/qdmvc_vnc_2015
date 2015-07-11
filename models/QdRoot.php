@@ -8,6 +8,14 @@
  */
 class QdRoot extends ActiveRecord\Model
 {
+    public static $OP_EQUAL = 'EQUAL';
+    public static $OP_LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL';
+    public static $OP_LESS_THAN = 'LESS_EQUAL';
+    public static $OP_NOT_EQUAL = 'NOT_EQUAL';
+    public static $OP_GREATER_THAN = 'GREATER_THAN';
+    public static $OP_GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL';
+    public static $OP_CONTAINS = 'CONTAINS';
+
     protected static $fields_config = array(
         //SAMPLE FIELD CONFIG
         'id' => array(
@@ -185,8 +193,8 @@ class QdRoot extends ActiveRecord\Model
     }
 
     protected $record_filter = array(
-        'filter_default' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'exact' => true, 'operator' => '='));
-        'filter' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'exact' => true, 'operator' => '='));
+        'filter_default' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'operator' => 'EQUAL'));
+        'filter' => array(),//array(array('field' => 'field_name', 'value' => 'value_filter', 'operator' => 'EQUAL'));
         'limit' => -1,
         'offset' => 0,
         'order' => array(//'id' => 'asc'
@@ -304,7 +312,7 @@ class QdRoot extends ActiveRecord\Model
         return $record;
     }
 
-    public function SETRANGE($field, $value, $exact = true, $operator = '=')
+    public function SETRANGE($field, $value, $operator = 'EQUAL')
     {
         //ignore filter on FLOWFIELD
         if (!static::ISFLOWFIELD($field)) {
@@ -313,7 +321,6 @@ class QdRoot extends ActiveRecord\Model
             }
             $tmp = array();
             $tmp['value'] = $value;
-            $tmp['exact'] = $exact;
             $tmp['operator'] = $operator;
             $tmp['field'] = $field;
 
@@ -424,12 +431,16 @@ class QdRoot extends ActiveRecord\Model
             $where = '';
             foreach ($record['filter'] as $config) {
                 $key = $config['field'];
-                $operator = isset($config['operator']) ? $config['operator'] : '=';
-                $exact = isset($config['exact']) ? $config['exact'] : true;
-                if ($exact == true) {
-                    $where .= "`{$key}` {$operator} '{$config['value']}' " . $record['filter_relation'] . " ";//quocdunginfo
-                } else {
+
+                $operator = '=';
+                if(isset($config['operator'])){
+                    $operator = Qdmvc_Helper::getOperator($config['operator']);
+                }
+
+                if ($operator == 'LIKE') {
                     $where .= "`{$key}` LIKE '%{$config['value']}%' " . $record['filter_relation'] . " ";//quocdunginfo
+                } else {
+                    $where .= "`{$key}` {$operator} '{$config['value']}' " . $record['filter_relation'] . " ";//quocdunginfo
                 }
             }
             if (strtoupper($record['filter_relation']) == 'AND') {

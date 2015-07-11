@@ -35,10 +35,17 @@ class Qdmvc_Page_Root
         $re = array();
         //passing page filter
         //pre filter
-        $count = 0;
-        while (isset($_REQUEST['filterdatafield' . $count])) {
-            $re[$_REQUEST['filterdatafield' . $count]] = $_REQUEST['filtervalue' . $count];
-            $count++;
+        foreach($_REQUEST as $key=>$value) {
+            if (strstr($key, 'filterdatafield') !== false) {
+                $number = substr($key, 15);
+                $f_condition = 'filtercondition'.$number;
+                $f_condition = isset($_REQUEST[$f_condition])?$_REQUEST[$f_condition]:'EQUAL';
+                $f_operator = '=';
+                $f_value = $_REQUEST['filtervalue'.$number];
+                $f_field = $_REQUEST[$key];
+
+                $re[$f_field] = $f_value;
+            }
         }
         return array_merge($this->getCustomPageView(), $re);
     }

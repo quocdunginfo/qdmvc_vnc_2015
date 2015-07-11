@@ -20,6 +20,6 @@ echo 'Page Main works!';
 //$list = $record->GETLIST();
 
 //$record = new QdBestChoiceItem();
-//$record->SETRANGE('code', 'a', false);
+//$record->SETRANGE('code', 'a', 'CONTAINS');
 //$obj = new QdTRootSetup();
 ?>

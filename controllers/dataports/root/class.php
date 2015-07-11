@@ -320,20 +320,23 @@ class Qdmvc_Dataport
         $c = static::$model;
         $record = new $c();
 
-        //pre filter
-        $count = 99;
-        while (isset($_REQUEST['filterdatafield' . $count])) {
-            //$this->filter[$_REQUEST['filterdatafield'.$count]] = $_REQUEST['filtervalue'.$count];
-            $record->SETRANGE($_REQUEST['filterdatafield' . $count], $_REQUEST['filtervalue' . $count], true);
-            $count++;
-        }
-        $count = 0;
-        while (isset($_REQUEST['filterdatafield' . $count])) {
-            //$this->filter[$_REQUEST['filterdatafield'.$count]] = $_REQUEST['filtervalue'.$count];
-            $record->SETRANGE($_REQUEST['filterdatafield' . $count], $_REQUEST['filtervalue' . $count], false);//quocdunginfo
-            $count++;
-        }
 
+        foreach($_REQUEST as $key=>$value)
+        {
+            if(strstr($key, 'filterdatafield')!==false)
+            {
+                $number = substr($key, 15);
+                $f_operator = 'filtercondition'.$number;
+                $f_operator = isset($_REQUEST[$f_operator])?$_REQUEST[$f_operator]:'EQUAL';
+                if($f_operator=='LESS_THAN')
+                {
+                    $f_operator = 'CONTAINS';//quocdunginfo, Bug of JqWidget
+                }
+                $f_value = 'filtervalue'.$number;
+
+                $record->SETRANGE($_REQUEST[$key], $_REQUEST[$f_value], $f_operator);
+            }
+        }
 
         $record->SETLIMIT($pagesize);
         $record->SETOFFSET($recordstartindex);

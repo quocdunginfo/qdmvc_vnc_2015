@@ -16,9 +16,9 @@ class Qdmvc_DataPort_Search {
         $re = array();
         $record = new QdProduct();
         $products = $record
-            ->SETRANGE('name', $this->key_word, false)
-            ->SETRANGE('model', $this->key_word, false)
-            ->SETRANGE('xuatxu', $this->key_word, false)
+            ->SETRANGE('name', $this->key_word, 'CONTAINS')
+            ->SETRANGE('model', $this->key_word, 'CONTAINS')
+            ->SETRANGE('xuatxu', $this->key_word, 'CONTAINS')
             ->SETFILTERRELATION('OR')
             ->SETLIMIT($this->limit)
             ->GETLIST();

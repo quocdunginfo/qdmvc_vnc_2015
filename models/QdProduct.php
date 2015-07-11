@@ -329,7 +329,7 @@ class QdProduct extends QdRoot
     {
         $re = array();
         $record = new QdPro2Pro();
-        $record->SETRANGE('product_id', $this->id, true);
+        $record->SETRANGE('product_id', $this->id);
         $tmp = $record->GETLIST();
         foreach($tmp as $item)
         {

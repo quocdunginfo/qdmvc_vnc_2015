@@ -21,7 +21,7 @@ class Qdmvc_View_Contact_Card extends Qdmvc_Layout_CardNavigate {
                         var province_id = $('#ctl_address_province_id').val();
                         if(province_id!='')
                         {
-                            lurl += '&filterdatafield0=provinceid&filtervalue0='+province_id;
+                            lurl += '&filterdatafield199=provinceid&filtervalue199='+province_id;
                         }
                         MYAPP.requestLookupWindow(lurl);
                     });
@@ -31,7 +31,7 @@ class Qdmvc_View_Contact_Card extends Qdmvc_Layout_CardNavigate {
                         var district_id = $('#ctl_address_district_id').val();
                         if(district_id!='')
                         {
-                            lurl += '&filterdatafield0=districtid&filtervalue0='+district_id;
+                            lurl += '&filterdatafield199=districtid&filtervalue199='+district_id;
                         }
                         MYAPP.requestLookupWindow(lurl);
                     });
