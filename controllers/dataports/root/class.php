@@ -18,6 +18,7 @@ class Qdmvc_Dataport
     protected $function_params = array();
     protected $manual_no = false;
     private $for_card = true;
+    private $fn_result = null;
 
     function __construct()
     {
@@ -55,7 +56,6 @@ class Qdmvc_Dataport
             //call service fn
             if ($this->function != '') {
                 $this->call_fn($this->function);
-
             } else if ($this->action == 'delete') {
                 $this->delete();
             } else if ($this->action == 'update') {
@@ -79,7 +79,8 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|call_fn";
         if (method_exists($this->obj, $function)) {
-            if ($this->obj->$function($location, $this->function_params)) {
+            $this->fn_result = $this->obj->$function($location, $this->function_params);
+            if ($this->fn_result!==false) {
                 $this->pushMsg('Call Fn OK, ID=' . $this->obj->id);
             }
             $this->pushMsg($this->obj->GETVALIDATION());
@@ -98,7 +99,6 @@ class Qdmvc_Dataport
         } else {
             $re['msg'] = $this->msg;
         }
-
         if ($result_array != null) {
             $re['rows'] = $c::toJSON($result_array);
         } else {
@@ -108,7 +108,7 @@ class Qdmvc_Dataport
 
         $re['total'] = $total;
         $re['working_mode'] = $this->working_mode;
-
+        $re['fn_result'] = $this->fn_result;
         echo json_encode($re);
         exit(0);
     }

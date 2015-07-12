@@ -33,6 +33,9 @@ class Qdmvc_Page_UserPersonalization extends Qdmvc_Page_Root {
                     'language' => array(
 
                     ),
+                    'active' => array(
+
+                    )
                 )
             )
         );

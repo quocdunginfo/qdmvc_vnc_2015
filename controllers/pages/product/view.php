@@ -32,7 +32,10 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate {
                 $(document).ready(function () {
                     $('#btn_active').click(function(){
                         MYAPP.callFn('fn_active', null, function(data){
-
+                            if(data.fn_result != false)
+                            {
+                                alert(data.fn_result.subinfo);
+                            }
                         });
                     });
 

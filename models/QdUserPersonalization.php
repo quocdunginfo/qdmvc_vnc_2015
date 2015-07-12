@@ -9,6 +9,9 @@ class QdUserPersonalization extends QdRoot
         return array_merge(parent::getFieldsConfig(), array(
             'username' => array(),
             'userid' => array(),
+            'active' => array(
+                'DataType' => 'Boolean'
+            ),
             'language' => array(
                 'DataType' => 'Option',
                 'Options' => array(
@@ -27,6 +30,7 @@ class QdUserPersonalization extends QdRoot
     {
         $obj = new QdUserPersonalization();
         $obj->language = Qdmvc_Config::$LANG_viVN;
+        $obj->active = true;
         return $obj;
     }
 

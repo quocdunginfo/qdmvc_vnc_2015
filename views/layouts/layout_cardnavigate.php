@@ -85,10 +85,26 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
     protected function onDeleteOK()
     {
         ?>
+        if(!MYAPP.formValidationError())
+        {
         MYAPP.updateGrid();
+        }
     <?php
         parent::onDeleteOK();
     }
+
+    protected function onCallFnOK()
+    {
+        ?>
+        if(!MYAPP.formValidationError())
+        {
+        MYAPP.updateGrid();
+        }
+
+        <?php
+        parent::onCallFnOK();
+    }
+
 
     protected function bindingField()
     {

@@ -86,5 +86,16 @@ class QdFeedback extends QdRoot
         }
         return parent::delete($location);
     }
+    public function fn_sendemail($location, $param)
+    {
+        if(is_array($param))
+        {
+            if(isset($param['subject']) && isset($param['content']))
+            {
+                return Qdmvc_Helper::sendEmail($this->customer_email, $param['subject'], $param['content']);
+            }
+        }
+        return true;
+    }
 
 }

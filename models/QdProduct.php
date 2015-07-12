@@ -324,6 +324,7 @@ class QdProduct extends QdRoot
         $this->active = true;
         $this->save(true, $location . '|'.$this->getCalledClassName() . '|fn_active');
         $this->pushValidateError('active', 'Active thành công', 'info');
+        return array('subinfo' => 'noi dung tra ve', 'subinfo2' => true);
     }
     public function getRProducts2()
     {

@@ -24,6 +24,7 @@ class Qdmvc_Config {
             {
                 $tmp = new QdUserPersonalization();
                 $tmp->SETRANGE('username', $username);
+                $tmp->SETRANGE('active', true);
                 $tmp = $tmp->GETLIST();
                 if(!Qdmvc_Helper::isNullOrEmpty($tmp))
                 {

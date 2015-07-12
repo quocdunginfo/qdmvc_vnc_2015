@@ -25,7 +25,8 @@ class Qdmvc_Page_UserPersonalization_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'username' => array(),
-                'language' => array()
+                'language' => array(),
+                'active' => array()
             ));
     }
 
