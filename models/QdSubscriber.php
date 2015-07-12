@@ -26,8 +26,9 @@ class QdSubscriber extends QdContact
         $tmp = parent::getInitObj();
 
         $obj = new QdSubscriber();
+        $obj->transferFieldsFrom($tmp);
         $obj->type = static::$TYPE_CUSTOMER;
-        $obj->active = $tmp->active;
+
         return $obj;
     }
 

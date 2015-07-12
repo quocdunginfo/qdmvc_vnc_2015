@@ -7,8 +7,7 @@ class QdProductCatGD extends QdProductCat
         $tmp = parent::getInitObj();
 
         $obj = new QdProductCatGD();
-        $obj->type = $tmp->type;
-        $obj->active = $tmp->active;
+        $obj->transferFieldsFrom($tmp);
 
         $obj->type2 = QdManufactorGD::$TYPE2_MANUFACTOR_GIAYDEP;
         return $obj;

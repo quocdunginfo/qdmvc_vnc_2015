@@ -15,8 +15,7 @@ class QdManufactorDF extends QdManufactor
         $tmp = parent::getInitObj();
 
         $obj = new QdManufactorDF();
-        $obj->type = $tmp->type;
-        $obj->active = $tmp->active;
+        $obj->transferFieldsFrom($tmp);
 
         $obj->type2 = static::$TYPE2_MANUFACTOR_DEFAULT;
         return $obj;

@@ -815,4 +815,15 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
+    public function transferFieldsFrom($source)
+    {
+        if($source!=null)
+        {
+            foreach($source::getFieldsConfig() as $key=>$config)
+            {
+                $this->{$key} = $source->{$key};
+            }
+        }
+        return true;
+    }
 }

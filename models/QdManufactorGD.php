@@ -15,9 +15,9 @@ class QdManufactorGD extends QdManufactor
         $tmp = parent::getInitObj();
 
         $obj = new QdManufactorGD();
-        $obj->type = $tmp->type;
+        $obj->transferFieldsFrom($tmp);
         $obj->type2 = static::$TYPE2_MANUFACTOR_GIAYDEP;
-        $obj->active = $tmp->active;
+
         return $obj;
     }
 

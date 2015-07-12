@@ -52,7 +52,7 @@ class QdProductDF extends QdProduct
         $tmp = parent::getInitObj();
 
         $obj = new QdProductDF();
-        $obj->description = $tmp->description;
+        $obj->transferFieldsFrom($tmp);
 
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
         return $obj;

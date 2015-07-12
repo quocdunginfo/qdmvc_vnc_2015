@@ -44,8 +44,9 @@ class QdShop extends QdContact
         $tmp = parent::getInitObj();
 
         $obj = new QdShop();
+        $obj->transferFieldsFrom($tmp);
         $obj->type = static::$TYPE_SHOP;
-        $obj->active = $tmp->active;
+
         return $obj;
     }
 

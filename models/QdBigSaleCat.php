@@ -8,8 +8,9 @@ class QdBigSaleCat extends QdProductCat
         $tmp = parent::getInitObj();
 
         $obj = new QdBigSaleCat();
+        $obj->transferFieldsFrom($tmp);
         $obj->type = static::$TYPE_BIGSALE;
-        $obj->active = $tmp->active;
+
         return $obj;
     }
 

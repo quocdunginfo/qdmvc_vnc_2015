@@ -16,9 +16,9 @@ class QdManufactorQA extends QdManufactor
         $tmp = parent::getInitObj();
 
         $obj = new QdManufactorQA();
-        $obj->type= $tmp->type;
+        $obj->transferFieldsFrom($tmp);
         $obj->type2 = static::$TYPE2_MANUFACTOR_QUANAO;
-        $obj->active = $tmp->active;
+
         return $obj;
     }
 

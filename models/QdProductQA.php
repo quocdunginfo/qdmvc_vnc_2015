@@ -52,7 +52,8 @@ class QdProductQA extends QdProduct
         $tmp = parent::getInitObj();
 
         $obj = new QdProductQA();
-        $obj->description = $tmp->description;
+        $obj->transferFieldsFrom($tmp);
+
 
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_QUANAO;
         return $obj;

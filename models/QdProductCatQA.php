@@ -7,8 +7,7 @@ class QdProductCatQA extends QdProductCat
         $tmp = parent::getInitObj();
 
         $obj = new QdProductCatQA();
-        $obj->type = $tmp->type;
-        $obj->active = $tmp->active;
+        $obj->transferFieldsFrom($tmp);
 
         $obj->type2 = QdManufactorQA::$TYPE2_MANUFACTOR_QUANAO;
         return $obj;

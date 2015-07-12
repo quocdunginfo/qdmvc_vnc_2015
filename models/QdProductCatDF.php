@@ -7,8 +7,7 @@ class QdProductCatDF extends QdProductCat
         $tmp = parent::getInitObj();
 
         $obj = new QdProductCatDF();
-        $obj->type = $tmp->type;
-        $obj->active = $tmp->active;
+        $obj->transferFieldsFrom($tmp);
 
         $obj->type2 = QdManufactorDF::$TYPE2_MANUFACTOR_DEFAULT;
         return $obj;

@@ -52,7 +52,7 @@ class QdProductGD extends QdProduct
         $tmp = parent::getInitObj();
 
         $obj = new QdProductGD();
-        $obj->description = $tmp->description;
+        $obj->transferFieldsFrom($tmp);
 
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP;
         return $obj;

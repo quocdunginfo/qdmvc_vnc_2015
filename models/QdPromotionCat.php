@@ -9,8 +9,9 @@ class QdPromotionCat extends QdProductCat
         $tmp = parent::getInitObj();
 
         $obj = new QdPromotionCat();
+        $obj->transferFieldsFrom($tmp);
         $obj->type = static::$TYPE_PROMOTION;
-        $obj->active = $tmp->active;
+
         return $obj;
     }
 
