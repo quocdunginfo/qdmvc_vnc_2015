@@ -51,7 +51,8 @@ class Qdmvc_Page_Root
                 );
             }
         }
-        return array_merge($this->getCustomPageView(), $re);
+        $ree = array_merge($this->getCustomPageView(), $re);
+        return $ree;
     }
 
     protected function getCustomPageView()
@@ -181,7 +182,14 @@ class Qdmvc_Page_Root
         //set pre filter
         $arr = static::getPageView();
         foreach ($arr as $field => $value) {
-            $obj->{$field} = $value;
+            if(!is_array($value))
+            {
+                $obj->{$field} = $value;
+            }
+            else
+            {
+                $obj->{$field} = $value['value'];
+            }
         }
         return $obj;
     }
@@ -229,7 +237,9 @@ class Qdmvc_Page_Root
      */
     public function getPageListURL()
     {
-        return Qdmvc_Helper::getCompactPageListLink($this->getPageList(), $this->getPageView());
+        $filter = $this->getPageView();
+
+        return Qdmvc_Helper::getCompactPageListLink($this->getPageList(), $filter);
     }
 
     /*

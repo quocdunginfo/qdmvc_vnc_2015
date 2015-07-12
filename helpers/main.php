@@ -58,9 +58,15 @@ class Qdmvc_Helper
     {
         $filter_string = '';
         $count=0;
+        $form = "&filterdatafield%s=%s&filtervalue%s=%s";
         foreach($filter_array as $key=>$value)
         {
-            $filter_string .= "&filterdatafield{$count}={$key}&filtervalue{$count}={$value}";
+            if(!is_array($value)) {
+                $filter_string .= sprintf($form, $count, $key, $count, $value);// "&filterdatafield{$count}={$key}&filtervalue{$count}={$value}";
+            }
+            else{
+                $filter_string .= sprintf($form, $count, $value['field'], $count, $value['value']);// "&filterdatafield{$count}={$key}&filtervalue{$count}={$value}";
+            }
             $count++;
         }
         return admin_url("admin.php?page={$page_name}&qdrole=navigate{$filter_string}");
