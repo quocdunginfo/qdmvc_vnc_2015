@@ -53,6 +53,10 @@ class Qdmvc_Layout_Card
 
                 })(jQuery);
             };
+            MYAPP.addDataPortFilter = function(url, index, field, value, operator){
+                if(operator==undefined) operator='EQUAL';
+                return url + '&filterdatafield' + index + '=' + field + '&filtervalue' + index + '=' + value + '&filtercondition' + index + '=' + operator;
+            };
             MYAPP.showMsg = function (msg) {
                 (function ($) {
                     //clear notification

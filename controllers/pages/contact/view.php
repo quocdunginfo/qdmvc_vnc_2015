@@ -21,7 +21,7 @@ class Qdmvc_View_Contact_Card extends Qdmvc_Layout_CardNavigate {
                         var province_id = $('#ctl_address_province_id').val();
                         if(province_id!='')
                         {
-                            lurl += '&filterdatafield199=provinceid&filtervalue199='+province_id;
+                            lurl = MYAPP.addDataPortFilter(lurl, 199, 'provinceid', province_id);// '&filterdatafield199=provinceid&filtervalue199='+province_id+'&filtercondition199=EQUAL';
                         }
                         MYAPP.requestLookupWindow(lurl);
                     });

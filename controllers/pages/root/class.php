@@ -40,11 +40,15 @@ class Qdmvc_Page_Root
                 $number = substr($key, 15);
                 $f_condition = 'filtercondition'.$number;
                 $f_condition = isset($_REQUEST[$f_condition])?$_REQUEST[$f_condition]:'EQUAL';
-                $f_operator = '=';
+
                 $f_value = $_REQUEST['filtervalue'.$number];
                 $f_field = $_REQUEST[$key];
 
-                $re[$f_field] = $f_value;
+                $re[$f_field] = array(
+                    'field' => $f_field,
+                    'value' => $f_value,
+                    'operator' => $f_condition
+                );
             }
         }
         return array_merge($this->getCustomPageView(), $re);
@@ -311,9 +315,12 @@ class Qdmvc_Page_Root
         $layout = static::getLayout();
         if(isset($layout[$tabid]) && isset($layout[$tabid][$meta]))
         {
-            if(isset($layout[$tabid][$meta][$lang]))
+            if(is_array($layout[$tabid][$meta]) && isset($layout[$tabid][$meta][$lang]))
             {
                 return $layout[$tabid][$meta][$lang];
+            }
+            else{
+                return $layout[$tabid][$meta];
             }
         }
         return '@'.$tabid;

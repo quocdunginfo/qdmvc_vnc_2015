@@ -33,6 +33,7 @@ class Qdmvc_Helper
                 {
                     $f_value = $value['value'];
                     $f_field = $value['field'];
+                    $condition = $value['operator'];
                 }
                 $f_value = $f_value === true ? 1 : ($f_value===false?0:$f_value);
                 $tmp .= "&filterdatafield{$count}={$f_field}&filtervalue{$count}={$f_value}&filtercondition{$count}={$condition}";
