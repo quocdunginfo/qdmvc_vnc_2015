@@ -518,6 +518,11 @@ class Qdmvc_Layout_Card
 
     private function generateFieldLookup($f_name, $f_val, $f_lku, $readonly = false)
     {
+        if($readonly)
+        {
+            $this->generateFieldText($f_name, $f_val, $readonly);
+            return;
+        }
         ?>
         <div class="qd-lookup-input">
             <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />

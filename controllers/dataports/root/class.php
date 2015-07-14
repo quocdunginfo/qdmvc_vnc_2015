@@ -73,8 +73,13 @@ class Qdmvc_Dataport
     {
         $c = static::$model;
         $this->obj = $c::GET($this->data["id"]);
-        $this->beforeCallFnAssign();
-        $this->assign();
+        if($this->obj!=null) {
+            $this->beforeCallFnAssign();
+            $this->assign();
+        }
+        else{
+            $this->obj = new $c();
+        }
 
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|call_fn";
@@ -174,6 +179,7 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|insert";
         if ($this->obj->save(true, $location)) {
+            $this->pushMsg($this->obj->GETVALIDATION());
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_insert_ok'), $this->obj->id));
             $this->working_mode = 'insert_ok';
             return true;
@@ -223,6 +229,7 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClass();
         $location = "|{$class_name}|update";
         if ($this->obj->save(true, $location)) {
+            $this->pushMsg($this->obj->GETVALIDATION());
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_update_ok'), $this->obj->id));
             $this->working_mode = 'update_ok';
             return true;

@@ -7,32 +7,27 @@
  */
 Qdmvc::loadPage('root_list');
 
-class Qdmvc_Page_UserPersonalization_List extends Qdmvc_Page_Root_List
+class Qdmvc_Page_User_List extends Qdmvc_Page_Root_List
 {
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_UserPersonalization_List';
+        return 'Qdmvc_View_User_List';
     }
 
     public static function getPage()
     {
-        return 'user_personalization_list';
+        return 'user_list';
     }
 
     protected static function initFields()
     {
-        $obj = array_merge(
+        return array_merge(
             parent::initFields(),
             array(
-                'userid' => array(
-
-                ),
                 'username' => array(),
-                'language' => array(),
-                'active' => array()
+                'displayname' => array(),
+                'status' => array(),
             ));
-        unset($obj['id']);
-        return $obj;
     }
 
 }

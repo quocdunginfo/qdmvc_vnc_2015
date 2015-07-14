@@ -6,9 +6,10 @@
  * Time: 10:03 PM
  */
 Qdmvc::loadDataPort('root');
-class Qdmvc_DataPort_VnProvince extends Qdmvc_Dataport
+class Qdmvc_DataPort_User extends Qdmvc_Dataport
 {
-    protected static $model = 'QdVnProvince';
+    protected static $model = 'QdUser';
+
     protected static function canInsert()
     {
         return false;
@@ -23,4 +24,6 @@ class Qdmvc_DataPort_VnProvince extends Qdmvc_Dataport
     {
         return false;
     }
+
+
 }

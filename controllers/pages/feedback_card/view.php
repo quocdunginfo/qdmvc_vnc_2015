@@ -7,7 +7,9 @@
  */
 //import libraries
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_Feedback_Card extends Qdmvc_Layout_CardNavigate {
+
+class Qdmvc_View_Feedback_Card extends Qdmvc_Layout_CardNavigate
+{
     protected function serverFunctions()
     {
         $obj = parent::serverFunctions();
@@ -65,20 +67,19 @@ class Qdmvc_View_Feedback_Card extends Qdmvc_Layout_CardNavigate {
         <script type="text/javascript">
             (function ($) {
                 $(document).ready(function () {
-                    $('#btn_composeemail').click(function(){
+                    $('#btn_composeemail').click(function () {
                         $('#btn_composeemail_dialog').modal('show');
                         $('#btn_composeemail_email').val(MYAPP.viewModel.customer_email());
                     });
-                    $('#btn_composeemail_send').click(function(){
+                    $('#btn_composeemail_send').click(function () {
                         var subject = $('#btn_composeemail_subject').val();
                         var content = $('#btn_composeemail_content').val();
-                        MYAPP.callFn('fn_sendemail', {subject: subject, content: content}, function(data){
-                            if(data.fn_result != false)
-                            {
+                        MYAPP.callFn('fn_sendemail', {subject: subject, content: content}, function (data) {
+                            if (data.fn_result != false) {
                                 alert(data.fn_result.info);
                                 //close form
                                 $('#btn_composeemail_dialog').modal('hide');
-                            }else{
+                            } else {
                                 alert('Send email Fail!');
                             }
                         });

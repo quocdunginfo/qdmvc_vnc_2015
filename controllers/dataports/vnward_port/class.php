@@ -9,4 +9,18 @@ Qdmvc::loadDataPort('root');
 class Qdmvc_DataPort_VnWard extends Qdmvc_Dataport
 {
     protected static $model = 'QdVnWard';
+    protected static function canInsert()
+    {
+        return false;
+    }
+
+    protected static function canEdit()
+    {
+        return false;
+    }
+
+    protected static function canDelete()
+    {
+        return false;
+    }
 }

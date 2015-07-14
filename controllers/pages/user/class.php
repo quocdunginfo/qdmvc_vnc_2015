@@ -6,15 +6,15 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_UserPersonalization extends Qdmvc_Page_Root {
+class Qdmvc_Page_User extends Qdmvc_Page_Root {
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_UserPersonalization';
+        return 'Qdmvc_View_User';
     }
 
     public static function getPage()
     {
-        return 'user_personalization';
+        return 'user';
     }
 
     protected static function initFields()
@@ -25,23 +25,18 @@ class Qdmvc_Page_UserPersonalization extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'Hidden' => true
-                    ),
-
-                    'userid' => array(
 
                     ),
                     'username' => array(
+                    ),
+                    'displayname' => array(
 
                     ),
-                    'language' => array(
-
-                    ),
-                    'active' => array(
-
+                    'status' => array(
                     )
                 )
             )
+
         );
     }
 

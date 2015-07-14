@@ -120,8 +120,10 @@ class QdRoot extends ActiveRecord\Model
     {
 
     }
-
-    public function VALIDATE()
+    /*
+     * Validate is exist on parent class (cause duplicate validate when sacing), use other Name
+     * */
+    protected function QDVALIDATE()
     {
         $tmp = static::getFieldsConfig();
         //call validate trigger on all fields and then return array of error
@@ -723,7 +725,7 @@ class QdRoot extends ActiveRecord\Model
             }
         }
         //do validate and save
-        if ($this->VALIDATE()) {
+        if ($this->QDVALIDATE()) {
             $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
             //assign no series before insert
             if ($this->id===null || $this->id===false || $this->id===0 || $this->id==='0') {
