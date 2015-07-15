@@ -321,6 +321,8 @@ class QdProduct extends QdRoot
     }
     public function fn_active($location, $params)
     {
+        if(!$this->checkPermission(__FUNCTION__)) return false;
+
         $this->active = true;
         $this->save(true, $location . '|'.$this->getCalledClassName() . '|fn_active');
         $this->pushValidateError('active', 'Active thành công', 'info');

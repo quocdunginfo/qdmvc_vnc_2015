@@ -219,6 +219,8 @@ class QdRoot extends ActiveRecord\Model
 
     public function delete($location = '')
     {
+        if(!$this->checkPermission(__FUNCTION__)) return false;
+
         $class_name = $this->getCalledClassName();
         if ($class_name != 'QdLog') {
             $location .= "|{$class_name}|delete";
@@ -666,12 +668,12 @@ class QdRoot extends ActiveRecord\Model
         return parent::__get($field_name);
     }
 
-    public function getCalledClassName()
+    protected function getCalledClassName()
     {
         return get_called_class();
     }
 
-    public function getClassName()
+    protected function getClassName()
     {
         return get_class($this);
     }
@@ -724,6 +726,9 @@ class QdRoot extends ActiveRecord\Model
                 $this->{$key} = str_replace("\\'", "'", $this->{$key});//quocdunginfo, need to find other approach
             }
         }
+        //check permission
+        if(!$this->checkPermission(__FUNCTION__)) return false;
+
         //do validate and save
         if ($this->QDVALIDATE()) {
             $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
@@ -824,6 +829,25 @@ class QdRoot extends ActiveRecord\Model
             foreach($source::getFieldsConfig() as $key=>$config)
             {
                 $this->{$key} = $source->{$key};
+            }
+        }
+        return true;
+    }
+    protected function checkPermission($method_name)
+    {
+        $class_name = $this->getCalledClassName();
+        //get Permissions
+        $u = QdUser::GET(get_current_user_id());
+        if($u!=null)
+        {
+            $ps = $u->getPermissions();
+            foreach($ps as $p)
+            {
+                if($p->classname == $class_name && $p->methodname==$method_name)
+                {
+                    $this->pushValidateError('', 'You are not allowed to call '.$class_name.'|'.$method_name);
+                    return false;
+                }
             }
         }
         return true;

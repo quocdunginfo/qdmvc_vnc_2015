@@ -18,7 +18,7 @@ class Qdmvc_Dataport
     protected $function_params = array();
     protected $manual_no = false;
     private $for_card = true;
-    private $fn_result = null;
+    private $fn_result = false;
 
     function __construct()
     {
@@ -81,9 +81,11 @@ class Qdmvc_Dataport
             $this->obj = new $c();
         }
 
-        $class_name = $this->getCalledClass();
+        $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|call_fn";
         if (method_exists($this->obj, $function)) {
+            if(!$this->checkPermission(__FUNCTION__)) return;
+
             $this->fn_result = $this->obj->$function($location, $this->function_params);
             if ($this->fn_result!==false) {
                 $this->pushMsg('Call Fn OK, ID=' . $this->obj->id);
@@ -176,7 +178,7 @@ class Qdmvc_Dataport
             return false;
         }
 
-        $class_name = $this->getCalledClass();
+        $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|insert";
         if ($this->obj->save(true, $location)) {
             $this->pushMsg($this->obj->GETVALIDATION());
@@ -192,7 +194,7 @@ class Qdmvc_Dataport
         }
     }
 
-    public function getCalledClass()
+    protected function getCalledClassName()
     {
         return get_called_class();
     }
@@ -226,7 +228,7 @@ class Qdmvc_Dataport
         }
         $this->beforeInsertAssign();
         $this->assign();
-        $class_name = $this->getCalledClass();
+        $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|update";
         if ($this->obj->save(true, $location)) {
             $this->pushMsg($this->obj->GETVALIDATION());
@@ -265,7 +267,7 @@ class Qdmvc_Dataport
             $this->working_mode = 'delete_fail';
             return;
         }
-        $class_name = $this->getCalledClass();
+        $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|delete";
         if ($this->obj->delete($location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_delete_ok'), $this->obj->id));
@@ -403,5 +405,29 @@ class Qdmvc_Dataport
     protected static function allowSubmitFields()
     {
         return array();
+    }
+    protected function checkPermission($method_name)
+    {
+        $class_name = $this->getCalledClassName();
+        //get Permissions
+        $u = QdUser::GET(get_current_user_id());
+        if($u!=null)
+        {
+            $ps = $u->getPermissions();
+            foreach($ps as $p)
+            {
+                if($p->classname == $class_name && $p->methodname==$method_name)
+                {
+                    $this->pushMsg('You are not allowed to call '.$class_name.'|'.$method_name, 'error');
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    protected function getClassName()
+    {
+        return get_class($this);
     }
 }

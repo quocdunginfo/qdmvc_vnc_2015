@@ -545,7 +545,6 @@ class Qdmvc_Layout_Card
         </div>
     <?php
     }
-
     private function generateFieldText($f_name, $value, $readonly = false)
     {
         ?>
@@ -922,6 +921,8 @@ class Qdmvc_Layout_Card
                                 }
 
                                 MYAPP.viewModel.id(0);
+                                MYAPP.is_insert = true;
+                                MYAPP.manual_no = false;
                                 $("#qdupdate").click();
 
                                 <?=$this->onCloneOK()?>

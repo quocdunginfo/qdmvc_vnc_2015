@@ -408,6 +408,81 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdUser',
             'DataPort' => 'user_port'
         ),
+        'usergroup' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_UserGroup',
+            'Caption' => array(
+                'en-US' => 'UserGroup',
+                'vi-VN' => 'UserGroup',
+            ),
+            'Model' => 'QdUserGroup',
+            'DataPort' => 'usergroup_port',
+            'PageList' => 'usergroup_list'
+        ),
+        'usergroup_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_UserGroup_List',
+            'Caption' => array(
+                'en-US' => 'UserGroup List',
+                'vi-VN' => 'UserGroup List',
+            ),
+            'Model' => 'QdUserGroup',
+            'DataPort' => 'usergroup_port'
+        ),
+        'permission' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_Permission',
+            'Caption' => array(
+                'en-US' => 'Permission',
+                'vi-VN' => 'Permission',
+            ),
+            'Model' => 'QdPermission',
+            'DataPort' => 'permission_port',
+            'PageList' => 'permission_list'
+        ),
+        'permission_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_Permission_List',
+            'Caption' => array(
+                'en-US' => 'Permission List',
+                'vi-VN' => 'Permission List',
+            ),
+            'Model' => 'QdPermission',
+            'DataPort' => 'permission_port'
+        ),
+        'useringroup' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_UserInGroup',
+            'Caption' => array(
+                'en-US' => 'UserInGroup',
+                'vi-VN' => 'UserInGroup',
+            ),
+            'Model' => 'QdUserInGroup',
+            'DataPort' => 'useringroup_port',
+            'PageList' => 'useringroup_list'
+        ),
+        'useringroup_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_UserInGroup_List',
+            'Caption' => array(
+                'en-US' => 'UserInGroup List',
+                'vi-VN' => 'UserInGroup List',
+            ),
+            'Model' => 'QdUserInGroup',
+            'DataPort' => 'useringroup_port'
+        ),
         'noseries' => array(
             'ParentId' => 'setup',
             'Active'=>true,
