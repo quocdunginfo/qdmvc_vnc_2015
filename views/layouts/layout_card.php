@@ -942,6 +942,10 @@ class Qdmvc_Layout_Card
                             $("#qdlines").bind("click", function (event) {
                                 MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_lines_url']);
                             });
+                            $("#qdreloadcard").bind("click", function (event) {
+                                MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+                                location.reload();
+                            });
 
 
                             $("#qddelete").bind("click", function (event) {
@@ -1045,8 +1049,15 @@ class Qdmvc_Layout_Card
                                     <?= $this->page->getFieldCaption('__sys_lines_url', $this->data['language']) ?>
                                 </button>
                             </span>
+                            <span>
+                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdreloadcard">
+                                    <?=Qdmvc_Message::getMsg('btn_reloadcard')?>
+                                </button>
+                            </span>
 
                             <?= $this->render_serverFunctions() ?>
+
+
                         </div>
                         <hr style="margin-top: 5px; margin-bottom: 5px ">
                         <!-- Content place Holder -->

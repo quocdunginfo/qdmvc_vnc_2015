@@ -101,7 +101,9 @@ class Qdmvc_Layout_Navigation
                     <li>Hidden</li>
                 </div>
                 <?php $tmp = wp_get_current_user(); echo $tmp->user_login; ?> |
-                <a onclick="return confirm('Are you sure ?')" href="<?=wp_logout_url(Qdmvc_Helper::getCompactPageListLink('navigation'))?>" >Logout</a>
+                <a onclick="return confirm('<?=Qdmvc_Message::getMsg('msg_confirm')?>')" href="<?=wp_logout_url(Qdmvc_Helper::getCompactPageListLink('navigation'))?>" >
+                    <?=Qdmvc_Message::getMsg('msg_logout')?>
+                </a>
             </div>
             <div id="ContentPanel">
                 <div id='jqxTabs' style="float: left;">

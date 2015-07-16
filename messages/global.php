@@ -10,6 +10,8 @@ class Qdmvc_Message {
         'msg_update_ok' => 'Cập nhật thành công, ID = %s',
         'msg_delete_ok' => 'Xóa thành công, ID = %s',
         'msg_insert_ok' => 'Thêm mới thành công, ID = %s',
+        'msg_confirm' => 'Bạn có chắc ?',
+        'msg_logout' => 'Đăng xuất',
 
         /*Layout card*/
         'btn_save' => 'Lưu',
@@ -20,12 +22,18 @@ class Qdmvc_Message {
         'btn_note' => 'Ghi chú',
         'btn_image' => 'Hình ảnh',
         'btn_function' => 'Chức năng',
+        'btn_reloadcard' => 'Tải lại',
+        'btn_print' => 'In',
+        'btn_exportexcel' => 'Xuất Excel',
+        'btn_showall' => 'Xem tất cả',
         /*END Layout card*/
     );
     private static $msg2 = array(
         'msg_update_ok' => 'Update OK, ID = %s',
         'msg_delete_ok' => 'Delete OK, ID = %s',
         'msg_insert_ok' => 'Insert OK, ID = %s',
+        'msg_confirm' => 'Are you sure ?',
+        'msg_logout' => 'Logout',
 
         /*Layout card*/
         'btn_save' => 'Save',
@@ -36,17 +44,21 @@ class Qdmvc_Message {
         'btn_note' => 'Notes',
         'btn_image' => 'Images',
         'btn_function' => 'Functions',
+        'btn_reloadcard' => 'Reload',
+        'btn_print' => 'Print',
+        'btn_exportexcel' => 'Export Excel',
+        'btn_showall' => 'Show All',
         /*END Layout card*/
     );
     public static function getMsg($key)
     {
         if(Qdmvc_Config::getLanguage()=='vi-VN')
         {
-            return static::$msg[$key];
+            return isset(static::$msg[$key])?static::$msg[$key]:'@'.$key;
         }
         else
         {
-            return static::$msg2[$key];
+            return isset(static::$msg2[$key])?static::$msg2[$key]:'@'.$key;
         }
     }
 }

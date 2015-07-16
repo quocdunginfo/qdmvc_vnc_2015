@@ -155,16 +155,24 @@ class Qdmvc_Layout_List
         <!-- General toolbar -->
         <span>
             <span>
-                <button class="btn btn-primary btn-xs qd-action-btn" id="qdshowall" type="button">Show All</button>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdshowall" type="button">
+                    <?=Qdmvc_Message::getMsg('btn_showall')?>
+                </button>
             </span>
             <span>
-                <button class="btn btn-primary btn-xs qd-action-btn" id="qdreload" type="button">Reload</button>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdreload" type="button">
+                    <?=Qdmvc_Message::getMsg('btn_reloadcard')?>
+                </button>
             </span>
             <span>
-                <button class="btn btn-primary btn-xs qd-action-btn" id="qdprint" type="button">Print</button>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdprint" type="button">
+                    <?=Qdmvc_Message::getMsg('btn_print')?>
+                </button>
             </span>
             <span>
-                <button class="btn btn-primary btn-xs qd-action-btn" id="qdexport" type="button">Export Excel</button>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdexport" type="button">
+                    <?=Qdmvc_Message::getMsg('btn_exportexcel')?>
+                </button>
             </span>
             <script type="text/javascript">
                 (function ($) {
