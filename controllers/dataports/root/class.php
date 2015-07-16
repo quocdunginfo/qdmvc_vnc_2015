@@ -83,9 +83,10 @@ class Qdmvc_Dataport
 
         $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|call_fn";
-        if (method_exists($this->obj, $function)) {
-            if(!$this->checkPermission(__FUNCTION__)) return;
 
+        if(!$this->checkPermission(__FUNCTION__)) return false;
+
+        if (method_exists($this->obj, $function)) {
             $this->fn_result = $this->obj->$function($location, $this->function_params);
             if ($this->fn_result!==false) {
                 $this->pushMsg('Call Fn OK, ID=' . $this->obj->id);
@@ -145,13 +146,16 @@ class Qdmvc_Dataport
     }
     protected function insert()
     {
+        $this->working_mode = 'insert_fail';
+
         if(!static::canInsert())
         {
             $this->pushMsg('Permission: Could not Insert!', 'error');
-            return;
+            return false;
         }
         //insert
         $c = static::$model;
+
         //check manual mode
         if($this->manual_no==true)
         {
@@ -161,25 +165,27 @@ class Qdmvc_Dataport
             if($tmp!=null && $tmp->manual_allowed==false)
             {
                 $this->pushMsg('Manual No are not allowed for this Model', 'error');
-                return;
+                return false;
             }
+        }
+
+        //check duplicate id
+        if($c::GET($this->data['id']))
+        {
+            $this->pushMsg(sprintf('Can not insert: Duplicate ID with record %s', $this->data['id']), 'error');
+            return false;
         }
 
         $this->obj = $c::getInitObj();
         $this->obj->id = $this->data['id'];//force assign id while manual mode
         $this->beforeInsertAssign();
         $this->assign();
+        if(!$this->checkPermission(__FUNCTION__)) return false;
 
-        //check duplicate id
-        if($c::GET($this->data['id']))
-        {
-            $this->pushMsg(sprintf('Can not insert: Duplicate ID with record %s', $this->data['id']), 'error');
-            $this->working_mode = 'insert_fail';
-            return false;
-        }
 
         $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|insert";
+
         if ($this->obj->save(true, $location)) {
             $this->pushMsg($this->obj->GETVALIDATION());
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_insert_ok'), $this->obj->id));
@@ -189,7 +195,6 @@ class Qdmvc_Dataport
         else
         {
             $this->pushMsg($this->obj->GETVALIDATION());
-            $this->working_mode = 'insert_fail';
             return false;
         }
     }
@@ -204,32 +209,36 @@ class Qdmvc_Dataport
     }
     protected function update()
     {
+        $this->working_mode = 'update_fail';
         if(!static::canEdit())
         {
             $this->pushMsg('Permission: Could not Edit!', 'error');
-            $this->working_mode = 'update_fail';
             return;
         }
         //prevent manual no
         if($this->manual_no==true)
         {
             $this->pushMsg('[Manual No] are not allowed in update mode', 'error');
-            $this->working_mode = 'update_fail';
             return;
         }
         //update
         $c = static::$model;
+
         $this->obj = $c::GET($this->data["id"]);
         if($this->obj==null)
         {
             $this->pushMsg('Record does not existed for update', 'error');
-            $this->working_mode = 'update_fail';
             return;
         }
+
         $this->beforeInsertAssign();
         $this->assign();
+
+        if(!$this->checkPermission(__FUNCTION__)) return false;
+
         $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|update";
+
         if ($this->obj->save(true, $location)) {
             $this->pushMsg($this->obj->GETVALIDATION());
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_update_ok'), $this->obj->id));
@@ -239,7 +248,6 @@ class Qdmvc_Dataport
         else
         {
             $this->pushMsg($this->obj->GETVALIDATION());
-            $this->working_mode = 'update_fail';
             return false;
         }
 
@@ -253,10 +261,10 @@ class Qdmvc_Dataport
     }
     protected function delete()
     {
+        $this->working_mode = 'delete_fail';
         if(!static::canDelete())
         {
             $this->pushMsg('Permission: Could not Delete!', 'error');
-            $this->working_mode = 'delete_fail';
             return;
         }
         $c = static::$model;
@@ -264,11 +272,13 @@ class Qdmvc_Dataport
         if($this->obj==null)
         {
             $this->pushMsg('Record does not existed for delete', 'error');
-            $this->working_mode = 'delete_fail';
             return;
         }
         $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|delete";
+
+        if(!$this->checkPermission(__FUNCTION__)) return false;
+
         if ($this->obj->delete($location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_delete_ok'), $this->obj->id));
             $this->working_mode = 'delete_ok';
@@ -276,7 +286,6 @@ class Qdmvc_Dataport
         }
         else {
             $this->pushMsg($this->obj->GETVALIDATION());
-            $this->working_mode = 'delete_fail';
             return false;
         }
     }
@@ -304,7 +313,7 @@ class Qdmvc_Dataport
 
     protected function list_return()
     {
-        if(!static::canView())
+        if(!static::canView() || !$this->checkPermission(__FUNCTION__))
         {
             $this->pushMsg('Permission: Could not View', 'error');
             $this->finish(null, array(), 0);
@@ -360,7 +369,7 @@ class Qdmvc_Dataport
         //assign value
         $c = static::$model;
         foreach ($c::getFieldsConfig() as $key => $value) {
-            if ($c::ISFLOWFIELD($key) || $c::ISSYSTEMFIELD($key)) {
+            if ($c::ISFLOWFIELD($key)/* || $c::ISSYSTEMFIELD($key)*/) {
                 continue;
             }
             //check allow submit field
@@ -399,6 +408,8 @@ class Qdmvc_Dataport
 
             if (isset($_POST['data'][$key])) {
                 $this->obj->$key = $_POST['data'][$key];
+                $this->obj->$key = str_replace('\\"', '"', $this->obj->$key);//quocdunginfo, need to find other approach
+                $this->obj->$key = str_replace("\\'", "'", $this->obj->$key);//quocdunginfo, need to find other approach
             }
         }
     }
@@ -411,16 +422,10 @@ class Qdmvc_Dataport
         $class_name = $this->getCalledClassName();
         //get Permissions
         $u = QdUser::GET(get_current_user_id());
-        if($u!=null)
-        {
-            $ps = $u->getPermissions();
-            foreach($ps as $p)
-            {
-                if($p->classname == $class_name && $p->methodname==$method_name)
-                {
-                    $this->pushMsg('You are not allowed to call '.$class_name.'|'.$method_name, 'error');
-                    return false;
-                }
+        if($u!=null) {
+            if (!$u->hasPermission($class_name, $method_name)) {
+                $this->pushMsg('You are not allowed to call ' . $class_name . '|' . $method_name, 'error');
+                return false;
             }
         }
         return true;

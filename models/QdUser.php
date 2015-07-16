@@ -38,6 +38,8 @@ class QdUser extends QdRoot
 
     public function fn_syncfromwp($location, $params = array())
     {
+        if(!$this->checkPermission(__FUNCTION__)) return false;
+
         //remove all
         QdUser::delete_all();
         //copy all from WP
@@ -82,5 +84,15 @@ class QdUser extends QdRoot
             return $g->getPermissions();
         }
         return array();
+    }
+    public function hasPermission($class_name, $method_name)
+    {
+        //get group
+        $g = $this->getUserGroupObj();
+        if($g!=null)
+        {
+            return $g->hasPermission($class_name, $method_name);
+        }
+        return false;
     }
 }

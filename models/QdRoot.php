@@ -718,14 +718,14 @@ class QdRoot extends ActiveRecord\Model
 
     public function save($validate = true, $location = '')
     {
-        //replace all \" to ", to prevent " loopback when saving
-        $config = static::getFieldsConfig();
+        //replace all \" to ", to prevent " loopback when saving (client->server " -> \")
+        /*$config = static::getFieldsConfig();
         foreach ($config as $key => $value) {
             if (!static::ISFLOWFIELD($key) && !static::ISSYSTEMFIELD($key)) {
                 $this->{$key} = str_replace('\\"', '"', $this->{$key});//quocdunginfo, need to find other approach
                 $this->{$key} = str_replace("\\'", "'", $this->{$key});//quocdunginfo, need to find other approach
             }
-        }
+        }*/
         //check permission
         if(!$this->checkPermission(__FUNCTION__)) return false;
 
@@ -840,14 +840,10 @@ class QdRoot extends ActiveRecord\Model
         $u = QdUser::GET(get_current_user_id());
         if($u!=null)
         {
-            $ps = $u->getPermissions();
-            foreach($ps as $p)
+            if(!$u->hasPermission($class_name, $method_name))
             {
-                if($p->classname == $class_name && $p->methodname==$method_name)
-                {
-                    $this->pushValidateError('', 'You are not allowed to call '.$class_name.'|'.$method_name);
-                    return false;
-                }
+                $this->pushValidateError('', 'You are not allowed to call '.$class_name.'|'.$method_name);
+                return false;
             }
         }
         return true;

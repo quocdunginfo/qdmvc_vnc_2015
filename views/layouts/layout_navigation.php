@@ -58,7 +58,7 @@ class Qdmvc_Layout_Navigation
                         name: 'text',
                         map: 'label'
                     }]);
-                    $('#jqxTree').jqxTree({source: records, height: '100%', width: '100%', incrementalSearch: true});
+                    $('#jqxTree').jqxTree({source: records, height: '90%', width: '100%', incrementalSearch: true});
                     $('#jqxTree').css('visibility', 'visible');
                     $('#jqxTree').jqxTree('expandAll');
                     $('#jqxTree').on('select', function (event) {
@@ -100,6 +100,7 @@ class Qdmvc_Layout_Navigation
                 <div style="visibility: hidden; border: none;" id='jqxTree'>
                     <li>Hidden</li>
                 </div>
+                <?php $tmp = wp_get_current_user(); echo $tmp->user_login; ?>
             </div>
             <div id="ContentPanel">
                 <div id='jqxTabs' style="float: left;">

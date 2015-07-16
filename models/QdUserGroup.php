@@ -29,4 +29,15 @@ class QdUserGroup extends QdRoot
         $tmp->SETRANGE('active', true);
         return $tmp->GETLIST();
     }
+    public function hasPermission($class_name, $method_name)
+    {
+        //find all in Permission
+        $tmp = new QdPermission();
+        $tmp->SETRANGE('usergroupid', $this->id);
+        $tmp->SETRANGE('active', true);
+        $tmp->SETRANGE('classname', $class_name);
+        $tmp->SETRANGE('methodname', $method_name);
+        $tmp = $tmp->GETLIST();
+        return empty($tmp);
+    }
 }
