@@ -100,7 +100,8 @@ class Qdmvc_Layout_Navigation
                 <div style="visibility: hidden; border: none;" id='jqxTree'>
                     <li>Hidden</li>
                 </div>
-                <?php $tmp = wp_get_current_user(); echo $tmp->user_login; ?>
+                <?php $tmp = wp_get_current_user(); echo $tmp->user_login; ?> |
+                <a onclick="return confirm('Are you sure ?')" href="<?=wp_logout_url(Qdmvc_Helper::getCompactPageListLink('navigation'))?>" >Logout</a>
             </div>
             <div id="ContentPanel">
                 <div id='jqxTabs' style="float: left;">
