@@ -29,7 +29,7 @@ class Qdmvc_Layout_Card
         ?>
         <script>
             MYAPP.formValidation = {};
-            MYAPP.formValidationError = function() {
+            MYAPP.formValidationError = function () {
                 for (i in MYAPP.formValidation) {
                     if (MYAPP.formValidation[i].type == 'error') {
                         return true;
@@ -53,8 +53,8 @@ class Qdmvc_Layout_Card
 
                 })(jQuery);
             };
-            MYAPP.addDataPortFilter = function(url, index, field, value, operator){
-                if(operator==undefined) operator='EQUAL';
+            MYAPP.addDataPortFilter = function (url, index, field, value, operator) {
+                if (operator == undefined) operator = 'EQUAL';
                 return url + '&filterdatafield' + index + '=' + field + '&filtervalue' + index + '=' + value + '&filtercondition' + index + '=' + operator;
             };
             MYAPP.showMsg = function (msg) {
@@ -94,7 +94,7 @@ class Qdmvc_Layout_Card
             }
         </script>
         <script>
-            MYAPP.requestLookupWindow = function(src) {
+            MYAPP.requestLookupWindow = function (src) {
                 //set window iframe source
                 //alert(src);
                 (function ($) {
@@ -103,27 +103,25 @@ class Qdmvc_Layout_Card
                     $('#jqxlookupwin').jqxWindow('open');
                 })(jQuery);
             };
-            MYAPP.addQueryToLookupURL = function(lurl, dynamic_filter_fields){
+            MYAPP.addQueryToLookupURL = function (lurl, dynamic_filter_fields) {
                 var i;
-                for(i=0;i<dynamic_filter_fields.length;i++)
-                {
-                    var tmp_id = $('#ctl_'+dynamic_filter_fields[i]).val();
-                    if(tmp_id!='')
-                    {
-                        lurl += '&filterdatafield'+i+'='+dynamic_filter_fields[i]+'&filtervalue'+i+'='+tmp_id;
+                for (i = 0; i < dynamic_filter_fields.length; i++) {
+                    var tmp_id = $('#ctl_' + dynamic_filter_fields[i]).val();
+                    if (tmp_id != '') {
+                        lurl += '&filterdatafield' + i + '=' + dynamic_filter_fields[i] + '&filtervalue' + i + '=' + tmp_id;
                     }
                 }
                 return lurl;
             };
             MYAPP.datepicker_tmp_return_id = null;
-            MYAPP.requestDatePickerWindow = function(return_id) {
+            MYAPP.requestDatePickerWindow = function (return_id) {
                 (function ($) {
                     MYAPP.datepicker_tmp_return_id = return_id;
                     $('#qddatepicker').val($('#' + return_id).val());
                     $('#jqxdatepickerwin').jqxWindow('open');
                 })(jQuery);
             };
-            MYAPP.requestFormValidate = function(rules_) {
+            MYAPP.requestFormValidate = function (rules_) {
                 (function ($) {
                     //register validate
                     $('#cardForm').jqxValidator({
@@ -345,7 +343,7 @@ class Qdmvc_Layout_Card
                             });
                         });
                     })(jQuery);
-                    MYAPP.requestEditorWindow = function(initVal, returnId) {
+                    MYAPP.requestEditorWindow = function (initVal, returnId) {
                         (function ($) {
                             MYAPP.wptexteditor_returnid = returnId;
                             console.log('WYSIWYG opened, returnId: ' + MYAPP.wptexteditor_returnid);
@@ -425,31 +423,31 @@ class Qdmvc_Layout_Card
     {
         ?>
         <script>
-            MYAPP.getObj = function() {
+            MYAPP.getObj = function () {
                 return ko.toJS(MYAPP.viewModel);
             };
             //gate way to comunicate with parent windows
-            MYAPP.setObj = function(obj) {//do not change func name
+            MYAPP.setObj = function (obj) {//do not change func name
                 /*(function ($) {
-                    //clear form validation mark but not error msg
-                    MYAPP.clearFormValidationMark();
-                    MYAPP.current_obj = obj;
-                    //fill data
-                    $("#cardForm").autofill(obj);
+                 //clear form validation mark but not error msg
+                 MYAPP.clearFormValidationMark();
+                 MYAPP.current_obj = obj;
+                 //fill data
+                 $("#cardForm").autofill(obj);
 
-                    $("#cardForm input").change();
-                    //$('#jqxNavigationBar').jqxNavigationBar('collapseAt', 0);
-                    console.log('layout_cardnavigate -> setObj: ');
-                    console.log(obj);
-                })(jQuery);*/
+                 $("#cardForm input").change();
+                 //$('#jqxNavigationBar').jqxNavigationBar('collapseAt', 0);
+                 console.log('layout_cardnavigate -> setObj: ');
+                 console.log(obj);
+                 })(jQuery);*/
                 MYAPP.is_insert = false;
                 MYAPP.manual_no = false;
                 MYAPP.clearFormValidationMark();
                 ko.mapping.fromJS(obj, MYAPP.viewModel);
             };
-            MYAPP.setLookupResult = function(value, txtId) {
+            MYAPP.setLookupResult = function (value, txtId) {
                 (function ($) {
-                    eval('MYAPP.viewModel.'+txtId)(value);
+                    eval('MYAPP.viewModel.' + txtId)(value);
                     //auto close window
                     $('#jqxlookupwin').jqxWindow('close');
                 })(jQuery);
@@ -518,14 +516,15 @@ class Qdmvc_Layout_Card
 
     private function generateFieldLookup($f_name, $f_val, $f_lku, $readonly = false)
     {
-        if($readonly)
-        {
+        if ($readonly) {
             $this->generateFieldText($f_name, $f_val, $readonly);
             return;
         }
         ?>
         <div class="qd-lookup-input">
-            <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
+            <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
+                                                              id='<?= static::$ctl_prefix . $f_name ?>'
+                                                              data-bind="jqxInput: {value: <?= $f_name ?>}"/>
             <button onclick='MYAPP.requestLookupWindow("<?= $f_lku ?>")'
                     data-lookupurl="<?= $f_lku ?>" id="lookup_cs_<?= $f_name ?>"
                     value="">...
@@ -534,42 +533,50 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldDate($f_name, $value, $readonly=false)
+    private function generateFieldDate($f_name, $value, $readonly = false)
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
+            <input class="text-input" type="text" id='<?= static::$ctl_prefix . $f_name ?>'
+                   data-bind="jqxInput: {value: <?= $f_name ?>}"/>
             <button onclick='MYAPP.requestDatePickerWindow("<?= static::$ctl_prefix . $f_name ?>")'
                     id="datepicker_cs_<?= $f_name ?>">...
             </button>
         </div>
     <?php
     }
+
     private function generateFieldText($f_name, $value, $readonly = false)
     {
         ?>
-        <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
+        <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
+                                                          id='<?= static::$ctl_prefix . $f_name ?>'
+                                                          data-bind="jqxInput: {value: <?= $f_name ?>}"/>
     <?php
     }
+
     private function generateFieldInteger($f_name, $value, $readonly = false)
     {
         ?>
-        <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
+        <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
+                                                          id='<?= static::$ctl_prefix . $f_name ?>'
+                                                          data-bind="jqxInput: {value: <?= $f_name ?>}"/>
     <?php
     }
 
-    private function generateFieldColor($f_name, $value, $readonly=false)
+    private function generateFieldColor($f_name, $value, $readonly = false)
     {
         ?>
         <input class="text-input color {hash:true}" type="text" name="<?= $f_name ?>"
-               id="<?= static::$ctl_prefix . $f_name ?>" data-bind="value: <?=$f_name?>">
+               id="<?= static::$ctl_prefix . $f_name ?>" data-bind="value: <?= $f_name ?>">
     <?php
     }
 
-    private function generateFieldHidden($f_name, $value, $readonly=false)
+    private function generateFieldHidden($f_name, $value, $readonly = false)
     {
         ?>
-        <input type="hidden" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="value: <?=$f_name?>" />
+        <input type="hidden" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>'
+               data-bind="value: <?= $f_name ?>"/>
     <?php
     }
 
@@ -577,7 +584,8 @@ class Qdmvc_Layout_Card
     {
         ?>
         <select class="qd-option-field" name="<?= $f_name ?>"
-                id="<?= static::$ctl_prefix . $f_name ?>" <?= $readonly ? 'disabled' : '' ?> data-bind="value: <?=$f_name?>">
+                id="<?= static::$ctl_prefix . $f_name ?>" <?= $readonly ? 'disabled' : '' ?>
+                data-bind="value: <?= $f_name ?>">
             <?php foreach ($options as $key => $caption): ?>
                 <option value="<?= $key ?>"><?= $caption ?></option>
             <?php endforeach; ?>
@@ -585,11 +593,12 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldImage($f_name, $value, $readonly=false)
+    private function generateFieldImage($f_name, $value, $readonly = false)
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
+            <input class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>'
+                   data-bind="jqxInput: {value: <?= $f_name ?>}"/>
 
             <button id="media_cs_<?= $f_name ?>" value="">...</button>
             <?php
@@ -619,15 +628,17 @@ class Qdmvc_Layout_Card
     {
         ?>
         <!--<input type="checkbox" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1">-->
-        <input type="checkbox" data-bind="checked: <?=$f_name?>" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1"/>
+        <input type="checkbox" data-bind="checked: <?= $f_name ?>" name="<?= $f_name ?>"
+               id="<?= static::$ctl_prefix . $f_name ?>" value="1"/>
     <?php
     }
 
-    private function generateFieldWYSIWYG($f_name, $value = 0, $readonly=false)
+    private function generateFieldWYSIWYG($f_name, $value = 0, $readonly = false)
     {
         ?>
         <div class="qd-lookup-input">
-            <input class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>' data-bind="jqxInput: {value: <?=$f_name?>}" />
+            <input class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>'
+                   data-bind="jqxInput: {value: <?= $f_name ?>}"/>
 
             <button id="editor_cs_<?= $f_name ?>" value="">...</button>
 
@@ -790,7 +801,7 @@ class Qdmvc_Layout_Card
                     MYAPP.viewModel = ko.mapping.fromJS(MYAPP.init_obj);
                     ko.applyBindings(MYAPP.viewModel); // This makes Knockout get to work
 
-                    $('#ctl_id').keyup(function(){
+                    $('#ctl_id').keyup(function () {
                         MYAPP.manual_no = true;
                     });
                 });
@@ -813,6 +824,7 @@ class Qdmvc_Layout_Card
     {
 
     }
+
     /*
     private function linesBar()
     {
@@ -861,7 +873,12 @@ class Qdmvc_Layout_Card
                                 //begin lock
                                 console.log(json);
                                 var action = MYAPP.is_insert ? "insert" : "update";
-                                var postdata = {submit: "submit", action: action, data: json, manual_no: MYAPP.manual_no};
+                                var postdata = {
+                                    submit: "submit",
+                                    action: action,
+                                    data: json,
+                                    manual_no: MYAPP.manual_no
+                                };
                                 console.log(postdata);
                                 $.post(MYAPP.data_port, postdata)
                                     .done(function (data) {
@@ -875,7 +892,7 @@ class Qdmvc_Layout_Card
 
                                         MYAPP.formValidation = data.msg;
                                         //tracking insert fail
-                                        if(data.working_mode == 'insert_fail'){
+                                        if (data.working_mode == 'insert_fail') {
                                             MYAPP.is_insert = true;//manual noseries insert but fail
                                         }
                                         //show error msg
@@ -1010,37 +1027,37 @@ class Qdmvc_Layout_Card
                             </style>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdupdate">
-                                    <?=Qdmvc_Message::getMsg('btn_save')?>
+                                    <?= Qdmvc_Message::getMsg('btn_save') ?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdnew">
-                                    <?=Qdmvc_Message::getMsg('btn_new')?>
+                                    <?= Qdmvc_Message::getMsg('btn_new') ?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qddelete">
-                                    <?=Qdmvc_Message::getMsg('btn_delete')?>
+                                    <?= Qdmvc_Message::getMsg('btn_delete') ?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdclone">
-                                    <?=Qdmvc_Message::getMsg('btn_clone')?>
+                                    <?= Qdmvc_Message::getMsg('btn_clone') ?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdnote">
-                                    <?=Qdmvc_Message::getMsg('btn_note')?>
+                                    <?= Qdmvc_Message::getMsg('btn_note') ?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdimage">
-                                    <?=Qdmvc_Message::getMsg('btn_image')?>
+                                    <?= Qdmvc_Message::getMsg('btn_image') ?>
                                 </button>
                             </span>
                             <span>
                                 <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdlog">
-                                    <?=Qdmvc_Message::getMsg('btn_log')?>
+                                    <?= Qdmvc_Message::getMsg('btn_log') ?>
                                 </button>
                             </span>
                             <span>
@@ -1051,7 +1068,7 @@ class Qdmvc_Layout_Card
                             </span>
                             <span>
                                 <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdreloadcard">
-                                    <?=Qdmvc_Message::getMsg('btn_reloadcard')?>
+                                    <?= Qdmvc_Message::getMsg('btn_reloadcard') ?>
                                 </button>
                             </span>
 
@@ -1231,7 +1248,7 @@ class Qdmvc_Layout_Card
         }
         ?>
         <script>
-            MYAPP.callFn = function(fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
+            MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
                 (function ($) {
                     //AJAX progress Bar
                     MYAPP.ajax_loader = new ajaxLoader("#cardForm");
@@ -1249,7 +1266,6 @@ class Qdmvc_Layout_Card
                             //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
 
 
-
                             console.log(data.rows[0]);
 
                             MYAPP.clearFormValidationMark();
@@ -1259,23 +1275,20 @@ class Qdmvc_Layout_Card
                             MYAPP.showMsg(data.msg);//must be called after setObj(...)
 
                             <?=$this->onCallFnOK()?>
-                            if(on_done_fn!=undefined)
-                            {
+                            if (on_done_fn != undefined) {
                                 on_done_fn(data);
                             }
                         })
                         .fail(function (data) {
                             console.log(data);
-                            if(on_fail_fn!=undefined)
-                            {
+                            if (on_fail_fn != undefined) {
                                 on_fail_fn(data);
                             }
                         })
                         .always(function (data) {
                             //release lock
                             MYAPP.ajax_loader.remove();
-                            if(on_final_fn!=undefined)
-                            {
+                            if (on_final_fn != undefined) {
                                 on_final_fn(data);
                             }
                         });
@@ -1286,29 +1299,29 @@ class Qdmvc_Layout_Card
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"
                     aria-expanded="false">
-                <?=Qdmvc_Message::getMsg('btn_function')?> <span class="caret"></span>
+                <?= Qdmvc_Message::getMsg('btn_function') ?> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
                 <?php
-                foreach ($this->serverFunctions() as $item=>$config) {
-                    $fn_label = isset($config['label'][$this->data['language']])?$config['label'][$this->data['language']]:'@'.$item;
+                foreach ($this->serverFunctions() as $item => $config) {
+                    $fn_label = isset($config['label'][$this->data['language']]) ? $config['label'][$this->data['language']] : '@' . $item;
                     ?>
                     <li><a id="<?= $item ?>"><?= $fn_label ?></a></li>
                 <?php
-                    if(!QdT_Library::isNullOrEmpty($config['fn_name']))
-                    {
-                        ?>
-                        <script>
-                            (function ($) {
-                                $(document).ready(function () {
-                                    $('#<?=$item?>').click(function(){
-                                        MYAPP.callFn('<?=$config['fn_name']?>');
-                                    });
+                if (!QdT_Library::isNullOrEmpty($config['fn_name']))
+                {
+                ?>
+                    <script>
+                        (function ($) {
+                            $(document).ready(function () {
+                                $('#<?=$item?>').click(function () {
+                                    MYAPP.callFn('<?=$config['fn_name']?>');
                                 });
-                            })(jQuery);
-                        </script>
-                    <?php
-                    }
+                            });
+                        })(jQuery);
+                    </script>
+                <?php
+                }
                 }
                 ?>
             </ul>
@@ -1319,10 +1332,19 @@ class Qdmvc_Layout_Card
     public function render()
     {
         ?>
+        <?= $this->style() ?>
+
+        <?php
+        if ($this->data['nopermission'] === true) {
+            $this->layout_nopermission();
+            return;
+        }
+        ?>
+
         <?= $this->preConfig() ?>
         <?= $this->internalGateway() ?>
         <?= $this->externalGateway() ?>
-        <?= $this->style() ?>
+
         <?= $this->formValidation() ?>
         <?= $this->progressSpinner() ?>
         <?= $this->lookupWindowLayout() ?>
@@ -1331,5 +1353,22 @@ class Qdmvc_Layout_Card
         <?= $this->msgPanelLayout() ?>
         <?= $this->onReadyHook() ?>
     <?php
+    }
+    private function layout_nopermission()
+    {
+        ?>
+        <div style="
+            display: inline-block;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100px;
+            margin: auto; text-align: center">
+            You are not allowed to view this Page
+        </div>
+        <?php
     }
 }

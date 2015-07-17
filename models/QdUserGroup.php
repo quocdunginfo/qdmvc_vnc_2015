@@ -29,14 +29,20 @@ class QdUserGroup extends QdRoot
         $tmp->SETRANGE('active', true);
         return $tmp->GETLIST();
     }
-    public function hasPermission($class_name, $method_name)
+    public function hasPermission($class_name=null, $method_name=null, $page_name=null)
     {
         //find all in Permission
         $tmp = new QdPermission();
         $tmp->SETRANGE('usergroupid', $this->id);
         $tmp->SETRANGE('active', true);
-        $tmp->SETRANGE('classname', $class_name);
-        $tmp->SETRANGE('methodname', $method_name);
+        if($class_name!==null && $method_name!==null) {
+            $tmp->SETRANGE('classname', $class_name);
+            $tmp->SETRANGE('methodname', $method_name);
+        }
+        else{
+            $tmp->SETRANGE('pagename', $page_name);
+        }
+
         $tmp = $tmp->GETLIST();
         return empty($tmp);
     }

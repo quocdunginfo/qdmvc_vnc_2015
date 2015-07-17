@@ -27,6 +27,8 @@ class Qdmvc_Page_Permission_List extends Qdmvc_Page_Root_List
                 'usergroupid' => array(),
                 'classname' => array(),
                 'methodname' => array(),
+                'pagename' => array(
+                ),
                 'active' => array(),
             ));
     }

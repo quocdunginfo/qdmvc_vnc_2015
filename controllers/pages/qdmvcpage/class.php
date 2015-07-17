@@ -6,15 +6,16 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_Permission extends Qdmvc_Page_Root {
+class Qdmvc_Page_QdmvcPage extends Qdmvc_Page_Root {
+
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_Permission';
+        return 'Qdmvc_View_QdmvcPage';
     }
 
     public static function getPage()
     {
-        return 'permission';
+        return 'qdmvcpage';
     }
 
     protected static function initFields()
@@ -25,20 +26,24 @@ class Qdmvc_Page_Permission extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                    ),
-                    'usergroupid' => array(
-                    ),
-                    'classname' => array(
-                    ),
-                    'methodname' => array(
-                    ),
-                    'pagename' => array(
-                    ),
-                    'active' => array(
+                        'SourceExpr' => 'id',
+
                     ),
                 )
             )
-
+            /* SAMPLE
+            ,
+            'Group2' => array(
+                'Type' => 'Part',
+                'Name' => 'Lines',
+                'PagePartID' => '',
+                'SubPageLink' => array(
+                    'Field' => '',
+                    'Type' => 'FIELD',//'CONST',
+                    'Value' => ''
+                )
+            )
+            */
         );
     }
 

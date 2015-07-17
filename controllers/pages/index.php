@@ -33,9 +33,13 @@ class Qdmvc_Page_Index {
     }
     public static function buildJSONTree($lang='en-US')
     {
+        $u = QdUser::GET(get_current_user_id());
+
         $re = array();
         foreach(static::getIndex() as $key=>$config)
         {
+            if(!$u->hasPermission(null, null, $key)) continue;//quocdunginfo, performance
+
             $tmp = array();
             $active = isset($config['Active'])?$config['Active']:true;
             $p_id = isset($config['ParentId'])?$config['ParentId']:-1;

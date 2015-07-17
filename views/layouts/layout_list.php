@@ -217,6 +217,7 @@ class Qdmvc_Layout_List
             Qdmvc_Helper::requestCompact();
         }
         ?>
+        <?php if($this->data['nopermission']===true){ $this->layout_nopermission(); return; } ?>
         <?= $this->preConfig() ?>
         <?= $this->externalGateway() ?>
         <?= $this->internalGateway() ?>
@@ -307,11 +308,18 @@ class Qdmvc_Layout_List
                             console.log(error);
                         }
                     });
+
                     $('#jqxgrid').on('rowdoubleclick', function (event) {
-                        rbindex = event.args.rowindex;
-                        obj = $(this).jqxGrid('getrowdata', rbindex);
-                        parent.MYAPP.doubleClickObj(obj);
+                        <?php if($this->data['role']==='navigate') { ?>
+                            rbindex = event.args.rowindex;
+                            obj = $(this).jqxGrid('getrowdata', rbindex);
+                            parent.MYAPP.doubleClickObj(obj);
+                        <?php } else if($this->data['role']==='lookup') { ?>
+                            $('#qdchoose').trigger('click');
+                        <?php } ?>
                     });
+
+
                     $("#jqxgrid").on("pagechanged", function (event) {
                         console.log('jqxgrid page changed');
                     });
@@ -354,6 +362,23 @@ class Qdmvc_Layout_List
         <?=$this->generalToolbar()?>
         <div id='jqxWidget'>
             <div id="jqxgrid"></div>
+        </div>
+    <?php
+    }
+    private function layout_nopermission()
+    {
+        ?>
+        <div style="
+            display: inline-block;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100px;
+            margin: auto; text-align: center">
+            You are not allowed to view this Page
         </div>
     <?php
     }

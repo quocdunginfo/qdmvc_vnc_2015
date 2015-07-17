@@ -85,13 +85,13 @@ class QdUser extends QdRoot
         }
         return array();
     }
-    public function hasPermission($class_name, $method_name)
+    public function hasPermission($class_name=null, $method_name=null, $page_name=null)
     {
         //get group
         $g = $this->getUserGroupObj();
         if($g!=null)
         {
-            return $g->hasPermission($class_name, $method_name);
+            return $g->hasPermission($class_name, $method_name, $page_name);
         }
         return false;
     }

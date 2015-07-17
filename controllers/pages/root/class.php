@@ -13,6 +13,14 @@ class Qdmvc_Page_Root
 
     function __construct()
     {
+        if(!$this->checkPermission())
+        {
+            $this->data['nopermission'] = true;
+        }
+        else{
+            $this->data['nopermission'] = false;
+        }
+
         $this->loadView();
         //build data_port value
         $this->data['data_port'] = Qdmvc_Helper::getDataPortPath(static::getDataPort(), $this->getPageView());
@@ -334,5 +342,18 @@ class Qdmvc_Page_Root
             }
         }
         return '@'.$tabid;
+    }
+    protected function checkPermission()
+    {
+        if ($this->getPage() !== 'nopermission') {
+            //get Permissions
+            $u = QdUser::GET(get_current_user_id());
+            if ($u != null) {
+                if (!$u->hasPermission(null, null, $this->getPage())) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

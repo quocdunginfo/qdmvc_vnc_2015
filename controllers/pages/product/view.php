@@ -23,6 +23,7 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate {
         return $obj;
     }
 
+
     protected function onReadyHook()
     {
         parent::onReadyHook();
