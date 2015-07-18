@@ -34,6 +34,7 @@ class Qdmvc_Page_Index {
     public static function buildJSONTree($lang='en-US')
     {
         $u = QdUser::GET(get_current_user_id());
+        $debug_mode = isset($_GET['debugmode'])?$_GET['debugmode']:0;
 
         $re = array();
         foreach(static::getIndex() as $key=>$config)
@@ -49,7 +50,7 @@ class Qdmvc_Page_Index {
             }
 
             $text = isset($config['Caption']) && isset($config['Caption'][$lang])?$config['Caption'][$lang]:$key;
-            $tmp['text'] = $text;
+            $tmp['text'] = $debug_mode==1?$key:$text;
             $tmp['id'] = $key;
             $tmp['parentid'] = $p_id;
             if(!Qdmvc_Helper::isNullOrEmpty($config['PageType']) && $config['PageType']=='Folder')
