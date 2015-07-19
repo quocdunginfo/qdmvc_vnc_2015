@@ -29,6 +29,8 @@ class Qdmvc_Page_UserGroup extends Qdmvc_Page_Root {
                     ),
                     'description' => array(
                     ),
+                    'parent_id' => array()
+                    ,
                     'active' => array(
 
                     ),

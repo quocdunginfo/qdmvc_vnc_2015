@@ -26,6 +26,15 @@ class Qdmvc_Layout_Navigation
             }
         </style>
         <script>
+            MYAPP = {};
+            MYAPP.openInNewTab = function(url){
+                if (window == window.parent)
+                {
+                    window.open(url, '_blank');
+                    return;
+                }
+                window.parent.MYAPP.openInNewTab(url);
+            };
             (function ($) {
                 $(document).ready(function () {
                     //height = $(window).height()-3;
@@ -100,7 +109,7 @@ class Qdmvc_Layout_Navigation
                 <div style="visibility: hidden; border: none;" id='jqxTree'>
                     <li>Hidden</li>
                 </div>
-                <?php $tmp = wp_get_current_user(); echo $tmp->user_login; ?> |
+                <a target="_blank" href="<?=admin_url('profile.php')?>"><?php $tmp = wp_get_current_user(); echo $tmp->user_login; ?> </a> |
                 <a onclick="return confirm('<?=Qdmvc_Message::getMsg('msg_confirm')?>')" href="<?=wp_logout_url(Qdmvc_Helper::getCompactPageListLink('navigation'))?>" >
                     <?=Qdmvc_Message::getMsg('msg_logout')?>
                 </a>

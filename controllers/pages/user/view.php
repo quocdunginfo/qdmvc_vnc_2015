@@ -17,7 +17,14 @@ class Qdmvc_View_User extends Qdmvc_Layout_CardNavigate {
                     'vi-VN' => 'Đồng bộ từ WP',
                     'en-US' => 'Sync from WP'
                 )
-            )
+            ),
+            'btn_openwpusereditor' => array(
+                //'fn_name' => 'fn_active',
+                'label' => array(
+                    'vi-VN' => 'Mở User bằng WP',
+                    'en-US' => 'View User in WP'
+                )
+            ),
         ));
         return $obj;
     }
@@ -29,6 +36,13 @@ class Qdmvc_View_User extends Qdmvc_Layout_CardNavigate {
         <script type="text/javascript">
             (function ($) {
                 $(document).ready(function () {
+                    var user_format = '<?=admin_url( 'user-edit.php?user_id=');?>';
+
+                    $('#btn_openwpusereditor').click(function(){
+                        var tmp = user_format + MYAPP.viewModel.id();
+                        MYAPP.openInNewTab(tmp);
+                    });
+
                     $('#btn_syncfromwp').click(function(){
                         MYAPP.callFn('fn_syncfromwp', null, function(data){
                             if(data.fn_result != false)

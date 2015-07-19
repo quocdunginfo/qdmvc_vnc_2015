@@ -128,7 +128,15 @@ class Qdmvc_Layout_Card
                         rules: rules_
                     });
                 })(jQuery);
-            }
+            };
+            MYAPP.openInNewTab = function(url){
+                if (window == window.parent)
+                {
+                    window.open(url, '_blank');
+                    return;
+                }
+                window.parent.MYAPP.openInNewTab(url);
+            };
         </script>
     <?php
     }

@@ -21,12 +21,15 @@ class Qdmvc_Page_UserGroup_List extends Qdmvc_Page_Root_List
 
     protected static function initFields()
     {
-        return array_merge(
+        $obj = array_merge(
             parent::initFields(),
             array(
                 'description' => array(),
+                'parent_id' => array(),
                 'active' => array(),
             ));
+        $obj['id']['Width'] = 150;
+        return $obj;
     }
 
 }

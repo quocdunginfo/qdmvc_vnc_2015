@@ -47,7 +47,8 @@ class Qdmvc_View_WpMenu extends Qdmvc_Layout_CardNavigate {
                     $('#btn_openwpmenueditor').click(function(){
 
                         var tmp = menu_format + MYAPP.viewModel.wpid();
-                        MYAPP.requestLookupWindow(tmp);
+                        //MYAPP.requestLookupWindow(tmp);
+                        MYAPP.openInNewTab(tmp);
                     });
                 });
             })(jQuery);

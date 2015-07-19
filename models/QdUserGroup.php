@@ -11,6 +11,17 @@ class QdUserGroup extends QdRoot
             'active' => array(
                 'DataType' => 'Boolean'
             ),
+            'parent_id' => array(
+                'DataType' => 'Code',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdUserGroup',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+
+                    )
+                )
+            )
         ));
         $obj['id']['ReadOnly'] = false;
         return $obj;
@@ -44,6 +55,22 @@ class QdUserGroup extends QdRoot
         }
 
         $tmp = $tmp->GETLIST();
-        return empty($tmp);
+        if(empty($tmp))
+        {
+            $po = $this->getParentObj();
+            if($po!=null)
+            {
+                return $po->hasPermission($class_name, $method_name, $page_name);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public function getParentObj()
+    {
+        return QdUserGroup::GET($this->parent_id);
     }
 }
