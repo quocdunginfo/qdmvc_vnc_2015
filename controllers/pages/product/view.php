@@ -18,7 +18,15 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate {
                     'vi-VN' => 'Kích hoạt',
                     'en-US' => 'Active'
                 )
-            )
+            ),
+            'btn_validate_all_struct_level' => array(
+                'fn_name' => 'fn_validate_all_struct_level',
+                'label' => array(
+                    'vi-VN' => 'Validate lại Struct Level',
+                    'en-US' => 'Validate all Struct Level'
+                )
+            ),
+
         ));
         return $obj;
     }

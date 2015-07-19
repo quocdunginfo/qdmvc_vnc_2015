@@ -279,8 +279,8 @@ class QdProduct extends QdRoot
     {
         if ($this->$field_name == '') {
             if ($this->name != null) {
-                $this->pushValidateError($field_name, 'Code tự động in hoa và bằng Name', 'info');
-                $this->$field_name = strtoupper($this->name);
+                $this->pushValidateError($field_name, 'Code tự động in hoa và bằng ID', 'info');
+                $this->$field_name = strtoupper($this->id);
             }
         }
     }
@@ -294,11 +294,33 @@ class QdProduct extends QdRoot
 
     protected function product_cat_idOnValidate($field_name)
     {
+        $format = "product_cat_lv%s_id";
+
         //check exit
-        if ($this->getProductCatObj() == null) {
+        $pc = $this->getProductCatObj();
+        if ($pc == null) {
             $this->pushValidateError($field_name, 'Product Cat không tồn tại!');
             if (!$this->is_new_record()) {
                 $this->$field_name = $this->xRec()->$field_name;
+            }
+        }
+        else
+        {
+            $struct_lv= sprintf($format, $pc->level);
+            $this->{$struct_lv} = $pc->id;
+
+            $pc2 = $pc->getParentObj();
+            if($pc2 != null)
+            {
+                $struct_lv= sprintf($format, $pc2->level);
+                $this->{$struct_lv} = $pc2->id;
+
+                $pc3 = $pc2->getParentObj();
+                if($pc3 !=null)
+                {
+                    $struct_lv= sprintf($format, $pc3->level);
+                    $this->{$struct_lv} = $pc3->id;
+                }
             }
         }
     }
@@ -360,5 +382,19 @@ class QdProduct extends QdRoot
         $setup = QdSetupProduct::GET();
         $this->noseries = $setup->product_noseries;
         return $setup->product_noseries;
+    }
+    public function fn_validate_all_struct_level($location, $params)
+    {
+        $tmp = new QdProduct();
+        $re = $tmp->GETLIST();
+        $count = 0;
+        foreach($re as $item)
+        {
+            if($item->save())
+            {
+                $count++;
+            }
+        }
+        $this->pushValidateError('', 'Total items validated: '.$count, 'info');
     }
 }

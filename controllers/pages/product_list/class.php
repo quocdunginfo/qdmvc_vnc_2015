@@ -21,7 +21,7 @@ class Qdmvc_Page_Product_List extends Qdmvc_Page_Root_List
 
     protected static function initFields()
     {
-        return array_merge(
+        $obj = array_merge(
             parent::initFields(),
             array(
                 'code' => array(
@@ -42,6 +42,8 @@ class Qdmvc_Page_Product_List extends Qdmvc_Page_Root_List
                 ),
             )
         );
+        $obj['id']['Width'] = 140;
+        return $obj;
     }
 
     public static function getPage()

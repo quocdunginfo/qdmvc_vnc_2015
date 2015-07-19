@@ -40,6 +40,9 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
                         'SourceExpr' => 'type2',
 
                     ),
+                    'level' => array(
+
+                    ),
                     'name' => array(
                         'SourceExpr' => 'name'
                     ),

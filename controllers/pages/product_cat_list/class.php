@@ -33,6 +33,7 @@ class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root_List
                 '_parent_name' => array(
                     'SourceExpr' => '_parent_name',
                 ),
+                'level' => array(),
             ));
     }
 

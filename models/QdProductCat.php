@@ -47,6 +47,9 @@ class QdProductCat extends QdRoot
             'order' => array(
                 'Caption' => array('vi-VN' => 'Thứ tự'),
             ),
+            'level' => array(
+                'DataType' => 'Integer'
+            ),
             '_parent_name' => array(
                 'Name' => '_parent_name',
                 'Caption' => array('en-US' => 'Parent Name', 'vi-VN' => 'Tên cha'),
@@ -157,7 +160,7 @@ class QdProductCat extends QdRoot
     public function getPermalink()
     {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        $query = add_query_arg(array('product-cat-id' => $this->id), $query);
+        $query = add_query_arg(array('product-cat-id' => $this->id, 'product-cat-level' => $this->level), $query);
         return $query;
         /*
         $query =  get_site_url();
@@ -189,7 +192,7 @@ class QdProductCat extends QdRoot
         $re = array();
         $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
         array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
-        array_push($re, array('name' => $this->name, 'url' => add_query_arg(array('product-cat-id' => $this->id), $product_search)));
+        array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
         return $re;
     }
 
@@ -213,6 +216,7 @@ class QdProductCat extends QdRoot
                 $this->pushValidateError($field_name, 'Không thể chọn cha là chính nó!');
             }
         }
+        $this->level = $this->getDeepLevel();
     }
 
     protected function avatarOnValidate($field_name)
@@ -225,17 +229,12 @@ class QdProductCat extends QdRoot
     }
     public function getDeepLevel()
     {
-        if($this->parent_id<=0)
+        $p = static::GET($this->parent_id);
+        if($p==null)
         {
-            return 0;
+            return 1;
         }else {
-            $p_obj = static::GET($this->parent_id);
-            if ($p_obj != null) {
-                return $p_obj->getDeepLevel() + 1;
-            }else
-            {
-                return 0;
-            }
+            return $p->getDeepLevel() + 1;
         }
     }
     public static function genObjectsToArray($list)
@@ -255,25 +254,24 @@ class QdProductCat extends QdRoot
         return $re;
     }
 
-    /*public function delete($location = '')
+    public function getParentObj()
     {
-        //Xóa hết Product
-        $class = $this->getCalledClassName();
-        $re = true;
-        $location .= "|{$class}|delete";
-        $objs = $this->getProducts();
-        $objs = $objs->GETLIST();
-
-        foreach ($objs as $item) {
-            if (!$item->delete($location)) {
-                $re = $re && false;
+        return QdProductCat::GET($this->parent_id);
+    }
+    public function fn_validate_all_level($loc, $params)
+    {
+        $tmp = new QdProductCat();
+        //$tmp->SETRANGE('type', static::$TYPE_PRODUCTCAT);
+        $count = 0;
+        foreach($tmp->GETLIST() as $item)
+        {
+            if($item->save())
+            {
+                $count++;
             }
         }
-
-        if ($re) {
-            return parent::delete('');
-        }
-        return false;
-    }*/
+        $this->pushValidateError('', 'Total items validated: '.$count, 'info');
+        return true;
+    }
 
 }
