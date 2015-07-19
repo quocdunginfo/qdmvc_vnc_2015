@@ -55,6 +55,7 @@ class Qdmvc_Page_Index {
             $tmp['parentid'] = $p_id;
             if(!Qdmvc_Helper::isNullOrEmpty($config['PageType']) && $config['PageType']=='Folder')
             {
+                $tmp['text'] = '['.$tmp['text'].']';
                 $tmp['value'] = '';
             }
             else

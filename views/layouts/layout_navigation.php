@@ -14,6 +14,7 @@ class Qdmvc_Layout_Navigation
     {
         $this->page = $page;
         $this->data = $page->getData();
+
     }
 
     public function render()
@@ -69,7 +70,11 @@ class Qdmvc_Layout_Navigation
                     }]);
                     $('#jqxTree').jqxTree({source: records, height: '90%', width: '100%', incrementalSearch: true});
                     $('#jqxTree').css('visibility', 'visible');
+
+                    <?php if($this->data['setup']->autoexpandmenu==true): ?>
                     $('#jqxTree').jqxTree('expandAll');
+                    <?php endif; ?>
+
                     $('#jqxTree').on('select', function (event) {
                         //$("#ContentPanel").html("<div style='margin: 10px;'>" + event.args.element.id + "</div>");
                         //add tab

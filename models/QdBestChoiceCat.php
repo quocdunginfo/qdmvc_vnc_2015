@@ -14,6 +14,7 @@ class QdBestChoiceCat extends QdPostCat
     {
         $obj = new QdBestChoiceCat();//init_obj trên page card sẽ không áp đúng __sys_note_url nếu chọn parent::
         $obj->type = static::$TYPE_BESTCHOICECAT;
+        $obj->active = true;
         return $obj;
     }
 

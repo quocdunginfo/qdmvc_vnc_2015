@@ -7,9 +7,9 @@
  */
 Qdmvc::loadPage('root');
 class Qdmvc_Page_Navigation extends Qdmvc_Page_Root {
-    public function run()
-    {
-        parent::run();
+    function __construct(){
+        parent::__construct();
+        $this->data['setup'] = QdSetup::GET();
     }
     protected static function getViewClass()
     {

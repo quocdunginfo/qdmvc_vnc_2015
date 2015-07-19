@@ -32,6 +32,7 @@ class Qdmvc_Page_Setup extends Qdmvc_Page_RootSetup {
                         'SourceExpr' => 'df_language',
 
                     ),
+                    'autoexpandmenu' => array()
                 )
             )
         );

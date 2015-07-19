@@ -8,8 +8,12 @@ class QdNote extends QdRoot
     {
         return array_merge(parent::getFieldsConfig(), array(
             'content' => array(),
-            'model' => array(),
-            'model_id' => array()
+            'model' => array(
+                'ReadOnly' => true
+            ),
+            'model_id' => array(
+                'ReadOnly' => true
+            )
         ));
     }
 

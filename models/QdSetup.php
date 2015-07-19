@@ -29,6 +29,11 @@ class QdSetup extends QdRootSetup
                     ),
                 )
             ),
+            'autoexpandmenu' => array(
+
+                'DataType' => 'Boolean',
+
+            ),
         ));
     }
     public function fn_removecache()
