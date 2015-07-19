@@ -7,7 +7,7 @@ class QdSubscriber extends QdContact
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            array('field' => 'type', 'value' => static::$TYPE_CUSTOMER, 'exact' => true, 'operator' => '=')
+            array('field' => 'type', 'value' => static::$TYPE_CUSTOMER, 'operator' => static::$OP_EQUAL)
         ));
     }
     public static function getFieldsConfig()

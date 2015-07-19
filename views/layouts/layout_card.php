@@ -610,7 +610,7 @@ class Qdmvc_Layout_Card
                         $("#<?=static::$ctl_prefix.$f_name?>").hover(function () {
                             var imgURL = $(this).val();
                             if (imgURL != "") {
-                                var content = '<img style="width: 300px;" src="' + imgURL + '" />';
+                                var content = '<img style="max-width: 150px; max-height: 150" src="' + imgURL + '" />';
                                 var selector = $("#<?=static::$ctl_prefix.$f_name?>");
                                 selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.8});
                                 selector.jqxTooltip('open');

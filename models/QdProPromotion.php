@@ -6,7 +6,7 @@ class QdProPromotion extends QdProGrp
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            array('field' => 'group_type', 'value' => QdPromotionCat::$TYPE_PROMOTION, 'exact' => true, 'operator' => '=')
+            array('field' => 'group_type', 'value' => QdPromotionCat::$TYPE_PROMOTION, 'operator' => static::$OP_EQUAL)
         ));
     }
 

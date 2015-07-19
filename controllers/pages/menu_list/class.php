@@ -24,13 +24,13 @@ class Qdmvc_Page_Menu_List extends Qdmvc_Page_WidgetNav_List
         $obj = array_merge(
             parent::initFields(),
             array(
-                'position_1' => array(
-                    'SourceExpr' => 'position_1',
-                ),
-                'position_2' => array(
-                    'SourceExpr' => 'position_2',
-                ),
+
             ));
+        unset($obj['path']);
+        unset($obj['button_text']);
+        unset($obj['target']);
+
+        unset($obj['group_id']);
         unset($obj['_group_name']);
         return $obj;
     }

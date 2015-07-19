@@ -8,7 +8,7 @@ class QdContact extends QdRoot
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            array('field' => 'type', 'value' => static::$TYPE_VNC, 'exact' => true, 'operator' => '=')
+            array('field' => 'type', 'value' => static::$TYPE_VNC, 'operator' => static::$OP_EQUAL)
         ));
     }
     public static function getFieldsConfig()

@@ -408,6 +408,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdQdmvcPage',
             'DataPort' => 'qdmvcpage_port'
         ),
+        'wpmenu' => array(
+            'ParentId' => 'setup',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_WpMenu',
+            'Caption' => array(
+                'en-US' => 'WP Menu',
+                'vi-VN' => 'WP Menu',
+            ),
+            'Model' => 'QdWpMenu',
+            'DataPort' => 'wpmenu_port',
+            'PageList' => 'wpmenu_list'
+        ),
+        'wpmenu_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_WpMenu_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdWpMenu',
+            'DataPort' => 'wpmenu_port'
+        ),
         'user' => array(
             'ParentId' => 'setup',
             'Active'=>true,

@@ -11,7 +11,7 @@ class QdManufactor extends QdProductCat
 	{
 		parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-			array('field' => 'type', 'value' => static::$TYPE_MANUFACTOR, 'exact' => true, 'operator' => '=')
+			array('field' => 'type', 'value' => static::$TYPE_MANUFACTOR, 'operator' => static::$OP_EQUAL)
 		));
 	}
 	public static function getInitObj()

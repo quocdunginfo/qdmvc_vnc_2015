@@ -156,8 +156,8 @@ class QdProductCat extends QdRoot
 
     public function getPermalink()
     {
-        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-cat.php'));
-        $query = add_query_arg(array('id' => $this->id), $query);
+        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        $query = add_query_arg(array('product-cat-id' => $this->id), $query);
         return $query;
         /*
         $query =  get_site_url();

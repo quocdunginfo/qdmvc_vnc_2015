@@ -25,11 +25,16 @@ if (!class_exists('qd_Custom_Nav')) {
 
                             <?php
                             $count = 1;
-                            foreach (QdProductCat::all() as $item): ?>
+                            $tmp = new QdProductCat();
+                            $tmp->SETRANGE('active', true);
+                            $tmp->SETRANGE('type', QdProductCat::$TYPE_PRODUCTCAT);
+                            $tmp->SETORDERBY('order', 'desc');
+                            $tmp = $tmp->GETLIST();
+                            foreach ($tmp as $item): ?>
                                 <label class="menu-item-title">
                                     <input type="checkbox" class="menu-item-checkbox"
                                            name="menu-item[-<?= $count ?>][menu-item-object-id]" value="-<?= $count ?>">
-                                    <?=$item->name?>
+                                    <?=$item->name . " ({$item->id})"?>
                                 </label>
                                 <input type="hidden" class="menu-item-type"
                                        name="menu-item[-<?= $count ?>][menu-item-type]" value="custom">
