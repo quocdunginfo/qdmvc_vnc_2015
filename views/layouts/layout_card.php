@@ -610,7 +610,7 @@ class Qdmvc_Layout_Card
 
             <button id="media_cs_<?= $f_name ?>" value="">...</button>
             <?php
-            Qdmvc_Helper::qd_media_choose("media_cs_{$f_name}", static::$ctl_prefix . $f_name, false);
+            Qdmvc_Helper::qd_media_choose("media_cs_{$f_name}", $f_name, false);
             ?>
             <script>
                 (function ($) {

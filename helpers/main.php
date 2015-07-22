@@ -183,9 +183,11 @@ class Qdmvc_Helper
 
                 // When an image is selected, run a callback.
                 <?=$btnID?>_file_frame.on('select', function () {
+                    //alert('<?=$txtID?>');
                     // We set multiple to false so only get one image from the uploader
                     attachment = <?=$btnID?>_file_frame.state().get('selection').first().toJSON();
-                    jQuery('#<?=$txtID?>').val(<?=$getID===true?'attachment.id':'attachment.url'?>).change();
+                    //jQuery('#<?=$txtID?>').val(<?=$getID===true?'attachment.id':'attachment.url'?>);
+                    eval('MYAPP.viewModel.' + '<?=$txtID?>')(<?=$getID===true?'attachment.id':'attachment.url'?>);
                     // Do something with attachment.id and/or attachment.url here
                 });
 
