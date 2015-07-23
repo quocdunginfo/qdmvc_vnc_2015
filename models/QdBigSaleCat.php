@@ -39,6 +39,22 @@ class QdBigSaleCat extends QdProductCat
                 'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Bán chạy'),
             ),
         );
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdProBigSale',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Condition' => array(
+                        'Field' => '',
+                        'Type' => 'CONST',//'FIELD'
+                        'Value' => ''
+                    ),
+                    'Field' => 'group_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                )
+            )
+        );
         return $obj;
     }
 }
