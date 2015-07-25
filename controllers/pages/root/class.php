@@ -299,6 +299,9 @@ class Qdmvc_Page_Root
         $c = static::getModel();
         return $c::getFieldOptions($f_name, $lang);
     }
+    public static function getFieldDataPort($f_name, $lang='en-US'){
+        return static::getFieldsConfig($f_name, 'DataPort');
+    }
     protected static function getFieldsConfig($f_name, $meta_name, $lang = 'en-US')
     {
         //check in Layout first

@@ -37,7 +37,7 @@ class Qdmvc_Layout_List
                 $c = $this->page->getModel();
                 foreach($c::getFieldsConfig() as $key=>$config) {
                     ?>
-                {name: '<?=$key?>'},
+                {name: '<?=$key?>', type: 'string'},
                 <?php
             }
             ?>

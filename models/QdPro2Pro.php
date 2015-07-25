@@ -49,7 +49,8 @@ class QdPro2Pro extends QdRoot
                             'Value' => QdProduct::
                         )*/
                     )
-                )
+                ),
+                'DataPort' => 'product_port'
             ),
             'order' => array(),
             '_r_product_name' => array(
@@ -112,7 +113,8 @@ class QdPro2Pro extends QdRoot
                             'Value' => QdProductCat::$TYPE_PRODUCTCAT
                         )*/
                     )
-                )
+                ),
+                'DataPort' => 'product_port'
             ),
         ));
     }

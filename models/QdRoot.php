@@ -684,7 +684,8 @@ class QdRoot extends ActiveRecord\Model
         foreach ($list as $item) {
             $arr = array();
             foreach (static::getFieldsConfig() as $key => $value) {
-                if (static::getDataType($key) == 'Date') {
+                $datatype = static::getDataType($key);
+                if ($datatype == 'Date') {
                     $dtmp0 = $item->$key;
                     //$dtmp = new DateTime($item->$key);
                     if ($dtmp0 != null) {
@@ -692,10 +693,13 @@ class QdRoot extends ActiveRecord\Model
                     } else {
                         $arr[$key] = '';
                     }
+                    continue;
 
-                } else {
+                } else if ($datatype == 'Boolean' || $datatype == 'Integer') {
                     $arr[$key] = $item->$key;
+                    continue;
                 }
+                $arr[$key] = (string) $item->$key;
             }
             array_push($tmp, $arr);
         }

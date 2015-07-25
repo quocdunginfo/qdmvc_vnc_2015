@@ -55,7 +55,8 @@ class QdProduct extends QdRoot
                             'Value' => 10
                         )*/
                     )
-                )
+                ),
+                'DataPort' => 'product_cat_port'
             ),
             '_manufacturer_name' => array(
                 'Name' => '_manufacturer_name',
@@ -99,7 +100,8 @@ class QdProduct extends QdRoot
                             'Value' => 10
                         )*/
 		            )
-	            )
+	            ),
+                'DataPort' => 'size_port'
             ),
             'manufacturer_id' => array(
                 'Name' => 'manufacturer_id',

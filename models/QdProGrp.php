@@ -49,7 +49,8 @@ class QdProGrp extends QdRoot
                             'Value' => QdProduct::
                         )*/
                     )
-                )
+                ),
+                'DataPort' => 'product_port'
             ),
             'order' => array(),
             'group_type' => array(

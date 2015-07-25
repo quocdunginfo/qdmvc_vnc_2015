@@ -129,9 +129,8 @@ class Qdmvc_Layout_Card
                     });
                 })(jQuery);
             };
-            MYAPP.openInNewTab = function(url){
-                if (window == window.parent)
-                {
+            MYAPP.openInNewTab = function (url) {
+                if (window == window.parent) {
                     window.open(url, '_blank');
                     return;
                 }
@@ -431,23 +430,19 @@ class Qdmvc_Layout_Card
     {
         ?>
         <script>
+            MYAPP.validateCardForm = function() {
+                //force knockout binding
+                (function ($) {
+                    $('#cardForm input').trigger('change');
+                })(jQuery);
+            };
             MYAPP.getObj = function () {
+                //validate change all field
+                MYAPP.validateCardForm();
                 return ko.toJS(MYAPP.viewModel);
             };
             //gate way to comunicate with parent windows
             MYAPP.setObj = function (obj) {//do not change func name
-                /*(function ($) {
-                 //clear form validation mark but not error msg
-                 MYAPP.clearFormValidationMark();
-                 MYAPP.current_obj = obj;
-                 //fill data
-                 $("#cardForm").autofill(obj);
-
-                 $("#cardForm input").change();
-                 //$('#jqxNavigationBar').jqxNavigationBar('collapseAt', 0);
-                 console.log('layout_cardnavigate -> setObj: ');
-                 console.log(obj);
-                 })(jQuery);*/
                 MYAPP.is_insert = false;
                 MYAPP.manual_no = false;
                 MYAPP.clearFormValidationMark();
@@ -522,7 +517,7 @@ class Qdmvc_Layout_Card
     <?php
     }
 
-    private function generateFieldLookup($f_name, $f_val, $f_lku, $readonly = false)
+    private function generateFieldLookup($f_name, $f_val, $f_lku, $f_dataport, $readonly = false)
     {
         if ($readonly) {
             $this->generateFieldText($f_name, $f_val, $readonly);
@@ -530,7 +525,7 @@ class Qdmvc_Layout_Card
         }
         ?>
         <div class="qd-lookup-input">
-            <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
+            <input data-qddataport="<?=$f_dataport?>" <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
                                                               id='<?= static::$ctl_prefix . $f_name ?>'
                                                               data-bind="jqxInput: {value: <?= $f_name ?>}"/>
             <button onclick='MYAPP.requestLookupWindow("<?= $f_lku ?>")'
@@ -538,6 +533,46 @@ class Qdmvc_Layout_Card
                     value="">...
             </button>
         </div>
+
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+
+                    $("#<?=static::$ctl_prefix.$f_name?>").on('input', function(){
+                        var datasource = [];
+                        //get data from data port
+                        var dpu = MYAPP.addDataPortFilter($(this).data('qddataport'),0,'id', $(this).val(),'CONTAINS');
+                        console.log(dpu);
+                        $.post(dpu, {})
+                            .done(function (data) {
+                                datasource = [];
+
+                                data.rows.forEach(function(entry) {
+                                    datasource.push(entry.id);
+                                });
+
+                                console.log(datasource);
+                                //map to source
+                                $("#<?=static::$ctl_prefix.$f_name?>").jqxInput({
+                                    placeHolder: "Live search...",
+                                    source: datasource
+                                });
+                            })
+                            .fail(function (data) {
+                                console.log(data);
+                            })
+                            .always(function () {
+
+                            });
+                        //port to array
+
+
+                    });
+                });
+            })(jQuery);
+
+        </script>
+
     <?php
     }
 
@@ -551,6 +586,7 @@ class Qdmvc_Layout_Card
                     id="datepicker_cs_<?= $f_name ?>">...
             </button>
         </div>
+
     <?php
     }
 
@@ -742,6 +778,8 @@ class Qdmvc_Layout_Card
                                     }
                                     $f_val = '';
                                     $f_lku = $tmp_page::getLookupURL($f_name);
+                                    $f_dataport = $tmp_page::getFieldDataPort($f_name);
+                                    $f_dataport = Qdmvc_Helper::getDataPortPath($f_dataport);
 
                                     if ($f_config['Hidden']) {
                                         $this->generateFieldHidden($f_name, $f_val);
@@ -772,7 +810,7 @@ class Qdmvc_Layout_Card
                                             } else if ($type == 'Option') {
                                                 $this->generateFieldCombobox($f_name, $f_val, $options, $readonly);
                                             } else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
-                                                $this->generateFieldLookup($f_name, $f_val, $f_lku, $readonly);
+                                                $this->generateFieldLookup($f_name, $f_val, $f_lku, $f_dataport, $readonly);
                                             } else {
                                                 $this->generateFieldText($f_name, $f_val, $readonly);
                                             }
@@ -1362,6 +1400,7 @@ class Qdmvc_Layout_Card
         <?= $this->onReadyHook() ?>
     <?php
     }
+
     private function layout_nopermission()
     {
         ?>
@@ -1377,6 +1416,6 @@ class Qdmvc_Layout_Card
             margin: auto; text-align: center">
             You are not allowed to view this Page
         </div>
-        <?php
+    <?php
     }
 }

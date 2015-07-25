@@ -60,7 +60,8 @@ class QdSetupProduct extends QdRootSetup
                     'TableFilter' => array(
                         
                     )
-                )
+                ),
+                'DataPort' => 'noseries_port'
             ),
             'product_qa_noseries' => array(
                 'Name' => 'product_qa_noseries',
@@ -77,7 +78,8 @@ class QdSetupProduct extends QdRootSetup
                     'TableFilter' => array(
 
                     )
-                )
+                ),
+                'DataPort' => 'noseries_port'
             ),
         ));
     }
