@@ -378,13 +378,6 @@ class QdProduct extends QdRoot
         }
         return parent::CALCFIELDS($flowfield_name);
     }
-    public function getNoSeries()
-    {
-        //assign no series
-        $setup = QdSetupProduct::GET();
-        $this->noseries = $setup->product_noseries;
-        return $setup->product_noseries;
-    }
     public function fn_validate_all_struct_level($location, $params)
     {
         $tmp = new QdProduct();

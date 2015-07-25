@@ -604,7 +604,12 @@ class QdRoot extends ActiveRecord\Model
     {
         try {
             $config = static::getFieldsConfig();
-            return (static::ISSYSTEMFIELD($f_name) || static::ISFLOWFIELD($f_name) || (!Qdmvc_Helper::isNullOrEmpty($config[$f_name]['ReadOnly'])));
+            if(static::ISSYSTEMFIELD($f_name) || static::ISFLOWFIELD($f_name) || (!Qdmvc_Helper::isNullOrEmpty($config[$f_name]['ReadOnly']))){
+                return true;
+            }
+            else{
+                return false;
+            }
         } catch (Exception $ex) {
             return false;
         }
@@ -717,6 +722,21 @@ class QdRoot extends ActiveRecord\Model
 
     public function getNoSeries()
     {
+        //check in NoSeriesMap
+        $record = new QdNoSeriesMap();
+        $record->SETRANGE('active', true);
+        $record->SETRANGE('model', $this->getCalledClassName());
+        $record = $record->GETLIST();
+        if(!empty($record))
+        {
+            $record = $record[0];
+            if($record->noseries!='')
+            {
+                return $record->noseries;
+            }
+        }
+
+        //by default dont use NoSeries
         return false;
     }
 

@@ -44,12 +44,13 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_RootSetup {
                         'SourceExpr' => 'bigsalecat_id',
 
                     ),
+                    /*
                     'product_noseries' => array(
 
                     ),
                     'product_qa_noseries' => array(
 
-                    ),
+                    ),*/
                 )
             )
         );

@@ -45,6 +45,7 @@ class QdSetupProduct extends QdRootSetup
                     )
                 )
             ),
+            /*
             'product_noseries' => array(
                 'Name' => 'product_noseries',
                 'Caption' => array('en-US' => 'Product Noseries', 'vi-VN' => 'SP Noseries'),
@@ -80,7 +81,7 @@ class QdSetupProduct extends QdRootSetup
                     )
                 ),
                 'DataPort' => 'noseries_port'
-            ),
+            ),*/
         ));
     }
 

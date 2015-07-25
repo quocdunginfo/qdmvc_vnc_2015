@@ -527,7 +527,7 @@ class Qdmvc_Layout_Card
         <div class="qd-lookup-input">
             <input data-qddataport="<?=$f_dataport?>" <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
                                                               id='<?= static::$ctl_prefix . $f_name ?>'
-                                                              data-bind="jqxInput: {value: <?= $f_name ?>}"/>
+                                                              data-bind="jqxInput: {value: <?= $f_name ?>, placeHolder: 'Press --> to search...'}"/>
             <button onclick='MYAPP.requestLookupWindow("<?= $f_lku ?>")'
                     data-lookupurl="<?= $f_lku ?>" id="lookup_cs_<?= $f_name ?>"
                     value="">...
@@ -535,37 +535,51 @@ class Qdmvc_Layout_Card
         </div>
 
         <script>
+            MYAPP.autoCompleteDone = false;
             (function ($) {
                 $(document).ready(function () {
 
                     $("#<?=static::$ctl_prefix.$f_name?>").on('keydown', function(e){
                         if(e.keyCode==39)
                         {
+                            if(MYAPP.autoCompleteDone==true)
+                            {
+                                MYAPP.autoCompleteDone = false;
+                                return;
+                            }
+
+                            MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+
                             var datasource = [];
                             //get data from data port
-                            var dpu = MYAPP.addDataPortFilter($(this).data('qddataport'),0,'id', $(this).val(),'CONTAINS');
+                            var keyword = $.trim($(this).val());
+                            var dpu = MYAPP.addDataPortFilter($(this).data('qddataport'),0,'id', keyword,'CONTAINS');
                             console.log(dpu);
                             $.post(dpu, {})
                                 .done(function (data) {
-                                    datasource = [];
+                                    try {
+                                        datasource = [];
 
-                                    data.rows.forEach(function(entry) {
-                                        datasource.push(entry.id);
-                                    });
+                                        data.rows.forEach(function (entry) {
+                                            datasource.push(entry.id);
+                                        });
 
-                                    console.log(datasource);
-                                    //map to source
-                                    $("#<?=static::$ctl_prefix.$f_name?>").jqxInput({
-                                        placeHolder: "Press --> to Search...",
-                                        source: datasource
-                                    });
-                                    $("#<?=static::$ctl_prefix.$f_name?>").trigger('change');
+                                        console.log(datasource);
+                                        //map to source
+                                        $("#<?=static::$ctl_prefix.$f_name?>").jqxInput({
+                                            source: datasource
+                                        });
+                                        MYAPP.autoCompleteDone = true;
+                                    }catch(error)
+                                    {
+                                        console.log(error);
+                                    }
                                 })
                                 .fail(function (data) {
                                     console.log(data);
                                 })
                                 .always(function () {
-
+                                    MYAPP.ajax_loader.remove();
                                 });
                         }
 

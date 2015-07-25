@@ -408,6 +408,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdQdmvcPage',
             'DataPort' => 'qdmvcpage_port'
         ),
+        'qdmvcmodel' => array(
+            'ParentId' => 'folder70',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_QdmvcModel',
+            'Caption' => array(
+                'en-US' => 'Qdmvc Model',
+                'vi-VN' => 'Qdmvc Model',
+            ),
+            'Model' => 'QdQdmvcModel',
+            'DataPort' => 'qdmvcmodel_port',
+            'PageList' => 'qdmvcmodel_list'
+        ),
+        'qdmvcmodel_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_QdmvcModel_List',
+            'Caption' => array(
+                'en-US' => 'User Personalization List',
+                'vi-VN' => 'User Personalization List',
+            ),
+            'Model' => 'QdQdmvcModel',
+            'DataPort' => 'qdmvcmodel_port'
+        ),
         'wpmenu' => array(
             'ParentId' => 'folder70',
             'Active'=>true,
@@ -557,6 +582,31 @@ class Qdmvc_Page_IndexMenu {
             ),
             'Model' => 'QdNoSeries',
             'DataPort' => 'noseries_port'
+        ),
+        'noseriesmap' => array(
+            'ParentId' => 'folder50',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_NoSeriesMap',
+            'Caption' => array(
+                'en-US' => 'NoSeries Map',
+                'vi-VN' => 'NoSeries Map',
+            ),
+            'Model' => 'QdNoSeriesMap',
+            'DataPort' => 'noseriesmap_port',
+            'PageList' => 'noseriesmap_list'
+        ),
+        'noseriesmap_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_NoSeriesMap_List',
+            'Caption' => array(
+                'en-US' => '',
+                'vi-VN' => '',
+            ),
+            'Model' => 'QdNoSeriesMap',
+            'DataPort' => 'noseriesmap_port'
         ),
         'setup' => array(
             'ParentId' => 'folder50',
@@ -1419,7 +1469,7 @@ class Qdmvc_Page_IndexMenu {
         ),
         'blank_page' => array(
             'ParentId' => '',
-            'Active'=>true,
+            'Active'=>false,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_DatabaseSvc',
             'Caption' => array(

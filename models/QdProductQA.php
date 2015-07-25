@@ -58,11 +58,4 @@ class QdProductQA extends QdProduct
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_QUANAO;
         return $obj;
     }
-    public function getNoSeries()
-    {
-        //assign no series
-        $setup = QdSetupProduct::GET();
-        $this->noseries = $setup->product_qa_noseries;//for back ref
-        return $setup->product_qa_noseries;
-    }
 }

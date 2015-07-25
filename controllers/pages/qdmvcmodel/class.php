@@ -6,15 +6,16 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_Note extends Qdmvc_Page_Root {
+class Qdmvc_Page_QdmvcModel extends Qdmvc_Page_Root {
+
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_Note';
+        return 'Qdmvc_View_QdmvcModel';
     }
 
     public static function getPage()
     {
-        return 'note';
+        return 'qdmvcmodel';
     }
 
     protected static function initFields()
@@ -25,20 +26,8 @@ class Qdmvc_Page_Note extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
 
                     ),
-                    'content' => array(
-                        'SourceExpr' => 'content'
-                    ),
-                    'model' => array(
-                        'SourceExpr' => 'model',
-
-                    ),
-                    'model_id' => array(
-                        'SourceExpr' => 'model_id',
-
-                    )
                 )
             )
             /* SAMPLE
