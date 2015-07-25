@@ -1417,6 +1417,19 @@ class Qdmvc_Page_IndexMenu {
             'DataPort' => 'note_port',
             'PageList' => 'note_list'
         ),
+        'blank_page' => array(
+            'ParentId' => '',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_DatabaseSvc',
+            'Caption' => array(
+                'en-US' => 'Database SVC',
+                'vi-VN' => 'Database SVC'
+            ),
+            'Model' => '',
+            'DataPort' => '',
+            'PageList' => ''
+        ),
         /*Folder*/
         'folder10' => array(
             'ParentId' => -1,

@@ -538,34 +538,36 @@ class Qdmvc_Layout_Card
             (function ($) {
                 $(document).ready(function () {
 
-                    $("#<?=static::$ctl_prefix.$f_name?>").on('input', function(){
-                        var datasource = [];
-                        //get data from data port
-                        var dpu = MYAPP.addDataPortFilter($(this).data('qddataport'),0,'id', $(this).val(),'CONTAINS');
-                        console.log(dpu);
-                        $.post(dpu, {})
-                            .done(function (data) {
-                                datasource = [];
+                    $("#<?=static::$ctl_prefix.$f_name?>").on('keydown', function(e){
+                        if(e.keyCode==39)
+                        {
+                            var datasource = [];
+                            //get data from data port
+                            var dpu = MYAPP.addDataPortFilter($(this).data('qddataport'),0,'id', $(this).val(),'CONTAINS');
+                            console.log(dpu);
+                            $.post(dpu, {})
+                                .done(function (data) {
+                                    datasource = [];
 
-                                data.rows.forEach(function(entry) {
-                                    datasource.push(entry.id);
+                                    data.rows.forEach(function(entry) {
+                                        datasource.push(entry.id);
+                                    });
+
+                                    console.log(datasource);
+                                    //map to source
+                                    $("#<?=static::$ctl_prefix.$f_name?>").jqxInput({
+                                        placeHolder: "Press --> to Search...",
+                                        source: datasource
+                                    });
+                                    $("#<?=static::$ctl_prefix.$f_name?>").trigger('change');
+                                })
+                                .fail(function (data) {
+                                    console.log(data);
+                                })
+                                .always(function () {
+
                                 });
-
-                                console.log(datasource);
-                                //map to source
-                                $("#<?=static::$ctl_prefix.$f_name?>").jqxInput({
-                                    placeHolder: "Live search...",
-                                    source: datasource
-                                });
-                            })
-                            .fail(function (data) {
-                                console.log(data);
-                            })
-                            .always(function () {
-
-                            });
-                        //port to array
-
+                        }
 
                     });
                 });
