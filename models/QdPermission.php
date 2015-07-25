@@ -29,7 +29,8 @@ class QdPermission extends QdRoot
                     'TableFilter' => array(
 
                     )
-                )
+                ),
+                'DataPort' => 'qdmvcpage_port'
             ),
             'active' => array(
                 'DataType' => 'Boolean'
