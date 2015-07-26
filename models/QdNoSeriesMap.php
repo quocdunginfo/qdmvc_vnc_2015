@@ -11,7 +11,7 @@ class QdNoSeriesMap extends QdRoot
                 'DataType' => 'Code',
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
-                    'Table' => 'QdNoseries',
+                    'Table' => 'QdNoSeries',
                     'Field' => 'id',
                     'TableFilter' => array(
                         /*array(

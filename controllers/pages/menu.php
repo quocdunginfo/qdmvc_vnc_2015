@@ -433,6 +433,18 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdQdmvcModel',
             'DataPort' => 'qdmvcmodel_port'
         ),
+        'setup_version' => array(
+            'ParentId' => 'folder70',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_SetupVersion',
+            'Caption' => array(
+                'en-US' => 'Version',
+                'vi-VN' => 'Version',
+            ),
+            'Model' => 'QdVersion',
+            'DataPort' => 'version_port'
+        ),
         'wpmenu' => array(
             'ParentId' => 'folder70',
             'Active'=>true,
