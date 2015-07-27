@@ -48,7 +48,8 @@ class QdProductCat extends QdRoot
                 'Caption' => array('vi-VN' => 'Thứ tự'),
             ),
             'level' => array(
-                'DataType' => 'Integer'
+                'DataType' => 'Integer',
+                'ReadOnly' => true
             ),
             '_parent_name' => array(
                 'Name' => '_parent_name',
