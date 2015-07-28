@@ -859,6 +859,9 @@ class Qdmvc_Layout_Card
                     <?php if($this->page->hasLines()): ?>
                     $("#qdlines").show();
                     <?php endif; ?>
+                    <?php if($this->page->hasSEOMetaLines()): ?>
+                    $("#qdseometa").show();
+                    <?php endif; ?>
 
                     MYAPP.viewModel = ko.mapping.fromJS(MYAPP.init_obj);
                     ko.applyBindings(MYAPP.viewModel); // This makes Knockout get to work
@@ -1021,6 +1024,9 @@ class Qdmvc_Layout_Card
                             $("#qdlines").bind("click", function (event) {
                                 MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_lines_url']);
                             });
+                            $("#qdseometa").bind("click", function (event) {
+                                MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_seometa_url']);
+                            });
                             $("#qdreloadcard").bind("click", function (event) {
                                 MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 location.reload();
@@ -1126,6 +1132,12 @@ class Qdmvc_Layout_Card
                                 <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdlines"
                                         style="display: none">
                                     <?= $this->page->getFieldCaption('__sys_lines_url', $this->data['language']) ?>
+                                </button>
+                            </span>
+                            <span>
+                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdseometa"
+                                        style="display: none">
+                                    <?= $this->page->getFieldCaption('__sys_seometa_url', $this->data['language']) ?>
                                 </button>
                             </span>
                             <span>

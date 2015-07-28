@@ -3,6 +3,7 @@
 class QdProduct extends QdRoot
 {
     static $table_name = 'mpd_product';
+
     public static function getFieldsConfig()
     {
         $obj = array_merge(parent::getFieldsConfig(), array(
@@ -43,8 +44,7 @@ class QdProduct extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProductCat',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -77,19 +77,18 @@ class QdProduct extends QdRoot
                 )
             ),
             'size_id' => array(
-	            'Name' => 'size_id',
-	            'Caption' => array('en-US' => 'Size ID', 'vi-VN' => 'Mã Size'),
-	            'DataType' => 'Code',
-	            'Numeric' => true,
-	            'Description' => '',
-	            'Editable' => true,
-	            'InitValue' => '0',
-	            'FieldClass' => 'Normal',//'FlowField'
-	            'TableRelation' => array(
-		            'Table' => 'QdSize',
-		            'Field' => 'id',
-		            'TableFilter' => array(
-			            /*array(
+                'Name' => 'size_id',
+                'Caption' => array('en-US' => 'Size ID', 'vi-VN' => 'Mã Size'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdSize',
+                    'Field' => 'id',
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -99,8 +98,8 @@ class QdProduct extends QdRoot
                             'Type' => 'FIELD',
                             'Value' => 10
                         )*/
-		            )
-	            ),
+                    )
+                ),
                 'DataPort' => 'size_port'
             ),
             'manufacturer_id' => array(
@@ -115,8 +114,7 @@ class QdProduct extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdManufactor',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -191,9 +189,7 @@ class QdProduct extends QdRoot
                 'Caption' => array('vi-VN' => 'Ngày cập nhật'),
                 'DataType' => 'Date',
             ),
-            'noseries' => array(
-
-            )
+            'noseries' => array()
         ));
         $obj['__sys_lines_url']['Caption'] = array('en-US' => 'Related Products', 'vi-VN' => 'SP liên kết');
         $obj['__sys_lines_url']['TableRelation'] = array(
@@ -212,6 +208,36 @@ class QdProduct extends QdRoot
                 )
             )
         );
+
+        $obj['__sys_seometa_url'] = array(
+            'FieldClass' => 'System',
+            'Caption' => array('en-US' => 'SEO Meta', 'vi-VN' => 'SEO Meta'),
+            'TableRelation' => array(
+                'Table' => 'QdSEOMeta',
+                'Field' => 'id',
+                'TableFilter' => array(
+                    array(
+                        'Condition' => array(
+                            'Field' => '',
+                            'Type' => 'CONST',//'FIELD'
+                            'Value' => ''
+                        ),
+                        'Field' => 'model_id',
+                        'Type' => 'FIELD',
+                        'Value' => 'id'
+                    ),
+                    array(
+                        'Condition' => array(
+                            'Field' => '',
+                            'Type' => 'CONST',//'FIELD'
+                            'Value' => ''
+                        ),
+                        'Field' => 'model',
+                        'Type' => 'CONST',
+                        'Value' => 'QdProduct'
+                    )
+                )
+        ));
         $obj['id']['ReadOnly'] = false;
         return $obj;
     }
@@ -305,22 +331,18 @@ class QdProduct extends QdRoot
             if (!$this->is_new_record()) {
                 $this->$field_name = $this->xRec()->$field_name;
             }
-        }
-        else
-        {
-            $struct_lv= sprintf($format, $pc->level);
+        } else {
+            $struct_lv = sprintf($format, $pc->level);
             $this->{$struct_lv} = $pc->id;
 
             $pc2 = $pc->getParentObj();
-            if($pc2 != null)
-            {
-                $struct_lv= sprintf($format, $pc2->level);
+            if ($pc2 != null) {
+                $struct_lv = sprintf($format, $pc2->level);
                 $this->{$struct_lv} = $pc2->id;
 
                 $pc3 = $pc2->getParentObj();
-                if($pc3 !=null)
-                {
-                    $struct_lv= sprintf($format, $pc3->level);
+                if ($pc3 != null) {
+                    $struct_lv = sprintf($format, $pc3->level);
                     $this->{$struct_lv} = $pc3->id;
                 }
             }
@@ -343,53 +365,53 @@ class QdProduct extends QdRoot
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
         return $obj;
     }
+
     public function fn_active($location, $params)
     {
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
         $this->active = true;
-        $this->save(true, $location . '|'.$this->getCalledClassName() . '|fn_active');
+        $this->save(true, $location . '|' . $this->getCalledClassName() . '|fn_active');
         $this->pushValidateError('active', 'Active thành công', 'info');
         return array('subinfo' => 'noi dung tra ve', 'subinfo2' => true);
     }
+
     public function getRProducts2()
     {
         $re = array();
         $record = new QdPro2Pro();
         $record->SETRANGE('product_id', $this->id);
         $tmp = $record->GETLIST();
-        foreach($tmp as $item)
-        {
+        foreach ($tmp as $item) {
             $tmp2 = QdProduct::GET($item->r_product_id);
-            if($tmp2!=null)
-            {
+            if ($tmp2 != null) {
                 array_push($re, $tmp2);
             }
         }
         return $re;
     }
+
     protected function CALCFIELDS($flowfield_name)
     {
         if ($flowfield_name == '_price_discount') {
 
-            $this->qd_cached_attr[$flowfield_name] = $this->price - ( $this->price * $this->discount_percent );
+            $this->qd_cached_attr[$flowfield_name] = $this->price - ($this->price * $this->discount_percent);
             //return
             return $this->qd_cached_attr[$flowfield_name];
         }
         return parent::CALCFIELDS($flowfield_name);
     }
+
     public function fn_validate_all_struct_level($location, $params)
     {
         $tmp = new QdProduct();
         $re = $tmp->GETLIST();
         $count = 0;
-        foreach($re as $item)
-        {
-            if($item->save())
-            {
+        foreach ($re as $item) {
+            if ($item->save()) {
                 $count++;
             }
         }
-        $this->pushValidateError('', 'Total items validated: '.$count, 'info');
+        $this->pushValidateError('', 'Total items validated: ' . $count, 'info');
     }
 }

@@ -175,6 +175,11 @@ class Qdmvc_Page_Root
         $c = static::getModel();
         return $c::hasLines();
     }
+    public static function hasSEOMetaLines()
+    {
+        $c = static::getModel();
+        return $c::hasSEOMetaLines();
+    }
 
     /*
      * json init object

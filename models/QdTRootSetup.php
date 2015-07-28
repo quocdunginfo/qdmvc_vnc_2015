@@ -10,6 +10,12 @@ class QdTRootSetup extends QdRootSetup
             'topleft_tuvan' => array(
                 'DataType' => 'WYSIWYG',
             ),
+            'seo_description_struct' => array(
+            ),
+            'seo_title_struct' => array(
+            ),
+            'seo_keywords_struct' => array(
+            ),
             'topcenter_promotion' => array(
                 'DataType' => 'WYSIWYG',
             ),
@@ -146,6 +152,7 @@ class QdTRootSetup extends QdRootSetup
                     )
                 )
             ),
+
         ));
     }
 

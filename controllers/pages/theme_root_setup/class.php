@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root_setup');
-class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
+
+class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
+{
 
     protected static function getViewClass()
     {
@@ -29,9 +31,7 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
                         'Hidden' => true
                     ),
 
-                    'banner_service_page' => array(
-
-                    ),
+                    'banner_service_page' => array(),
                     'partnergrp_id' => array(
                         'SourceExpr' => 'partnergrp_id',
 
@@ -101,7 +101,21 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup {
                     ),
                 )
             ),
-
+            'Tab3' => array(
+                'Type' => 'Group',
+                'Name' => array(
+                    'vi-VN' => 'SEO',
+                    'en-US' => 'SEO'
+                ),
+                'Fields' => array(
+                    'seo_description_struct' => array(
+                    ),
+                    'seo_title_struct' => array(
+                    ),
+                    'seo_keywords_struct' => array(
+                    ),
+                )
+            ),
         );
     }
 

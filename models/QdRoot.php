@@ -528,6 +528,30 @@ class QdRoot extends ActiveRecord\Model
         }
         return false;
     }
+    public static function hasSEOMetaLines()
+    {
+        $cfg = static::getFieldsConfig();
+        if (isset($cfg['__sys_seometa_url']['TableRelation']) && !empty($cfg['__sys_seometa_url']['TableRelation'])) {
+            return true;
+        }
+        return false;
+    }
+    public function getSEOMetaValue($meta_name='TITLE')
+    {
+        $record = new QdSEOMeta();
+        $c = $this->getCalledClassName();
+        $record->SETRANGE('model', $c);
+        $record->SETRANGE('model_id', $this->id);
+        $record->SETRANGE('meta_name', $meta_name);
+        $record->SETRANGE('active', true);
+
+        $record = $record->GETLIST();
+        if(!empty($record))
+        {
+            return $record[0]->meta_value;
+        }
+        return false;
+    }
 
     protected function getLinesURL($line_field = '')
     {
@@ -654,8 +678,6 @@ class QdRoot extends ActiveRecord\Model
                 return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('log', array('model' => $class_name, 'model_id' => $this->id));
             } else if ($field_name == '__sys_image_url') {
                 return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('image', array('model' => $class_name, 'model_id' => $this->id));
-            } else if ($field_name == '__sys_lines_url') {
-                return $this->getLinesURL($field_name);
             } else if ($field_name == '__lasteditor_name') {
                 if ($this->lasteditor_id > 0) {
                     $user_info = get_userdata($this->lasteditor_id);
@@ -668,6 +690,8 @@ class QdRoot extends ActiveRecord\Model
                     return $this->qd_cached_attr[$field_name] = $user_info->user_login;
                 }
                 return Qdmvc_Helper::getNoneText();
+            }else {// if ($field_name == '__sys_lines_url') {//Default system Lines Field
+                return $this->getLinesURL($field_name);
             }
         }
         return parent::__get($field_name);

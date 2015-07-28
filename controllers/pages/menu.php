@@ -657,6 +657,31 @@ class Qdmvc_Page_IndexMenu {
             'Model' => 'QdNote',
             'DataPort' => 'note_port'
         ),
+        'seometa' => array(
+            'ParentId' => 'folder70',
+            'Active'=>true,
+            'PageType' => 'Card',
+            'Class'=>'Qdmvc_Page_SEOMeta',
+            'Caption' => array(
+                'en-US' => 'SEO Meta',
+                'vi-VN' => 'SEO Meta'
+            ),
+            'Model' => 'QdSEOMeta',
+            'DataPort' => 'seometa_port',
+            'PageList' => 'seometa_list'
+        ),
+        'seometa_list' => array(
+            'ParentId' => -1,
+            'Active'=>false,
+            'PageType' => 'List',
+            'Class'=>'Qdmvc_Page_SEOMeta_list',
+            'Caption' => array(
+                'en-US' => 'SEOMeta List',
+                'vi-VN' => 'SEOMeta List'
+            ),
+            'Model' => 'QdSEOMeta',
+            'DataPort' => 'seometa_port'
+        ),
         'image' => array(
             'ParentId' => 'imggrp',
             'Active'=>true,

@@ -49,5 +49,14 @@ class QdShop extends QdContact
 
         return $obj;
     }
-
+    public function getPermalink()
+    {
+        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        $query = add_query_arg(array('shop-id' => $this->id), $query);
+        return $query;
+        /*
+        $query =  get_site_url();
+        $query .= sprintf('/loaisp/%s/%s', $this->id, Qdmvc_Helper::sanitize_title_with_dashes($this->name));
+        return $query;*/
+    }
 }
