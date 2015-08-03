@@ -53,6 +53,21 @@ class Qdmvc_Layout_Card
 
                 })(jQuery);
             };
+            MYAPP.getURIParam = function (uri, p_name) {
+
+                //var result = {};
+                var params = uri.split(/\?|\&/);
+                var found = '';
+                params.forEach(function (it) {
+                    if (it) {
+                        var param = it.split("=");
+                        if (param[0].toLowerCase() == p_name.toLowerCase()) found = param[1];
+                    }
+                });
+
+                return found;
+
+            };
             MYAPP.addDataPortFilter = function (url, index, field, value, operator) {
                 if (operator == undefined) operator = 'EQUAL';
                 return url + '&filterdatafield' + index + '=' + field + '&filtervalue' + index + '=' + value + '&filtercondition' + index + '=' + operator;
@@ -69,6 +84,7 @@ class Qdmvc_Layout_Card
 
                         if (msg[key].field != null && msg[key].field != '') {
                             var field = $("#cardForm input[name='" + msg[key].field + "']");
+
                             field.jqxTooltip({content: msg[key].msg, position: 'bottom', name: msg[key].field});
 
                             if (type == 'error') {
@@ -430,10 +446,11 @@ class Qdmvc_Layout_Card
     {
         ?>
         <script>
-            MYAPP.validateCardForm = function() {
+            MYAPP.validateCardForm = function () {
                 //force knockout binding
                 (function ($) {
                     $('#cardForm input').trigger('change');
+                    $('#cardForm select').trigger('change');
                 })(jQuery);
             };
             MYAPP.getObj = function () {
@@ -447,6 +464,7 @@ class Qdmvc_Layout_Card
                 MYAPP.manual_no = false;
                 MYAPP.clearFormValidationMark();
                 ko.mapping.fromJS(obj, MYAPP.viewModel);
+                MYAPP.validateCardForm();
             };
             MYAPP.setLookupResult = function (value, txtId) {
                 (function ($) {
@@ -525,9 +543,10 @@ class Qdmvc_Layout_Card
         }
         ?>
         <div class="qd-lookup-input">
-            <input data-qddataport="<?=$f_dataport?>" <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
-                                                              id='<?= static::$ctl_prefix . $f_name ?>'
-                                                              data-bind="jqxInput: {value: <?= $f_name ?>, placeHolder: 'Press --> to search...'}"/>
+            <input data-qddataport="<?= $f_dataport ?>" <?= $readonly == true ? 'readonly' : '' ?> class="text-input"
+                   type="text" name="<?= $f_name ?>"
+                   id='<?= static::$ctl_prefix . $f_name ?>'
+                   data-bind="jqxInput: {value: <?= $f_name ?>, placeHolder: 'Press --> to search...'}"/>
             <button onclick='MYAPP.requestLookupWindow("<?= $f_lku ?>")'
                     data-lookupurl="<?= $f_lku ?>" id="lookup_cs_<?= $f_name ?>"
                     value="">...
@@ -539,11 +558,9 @@ class Qdmvc_Layout_Card
             (function ($) {
                 $(document).ready(function () {
 
-                    $("#<?=static::$ctl_prefix.$f_name?>").on('keydown', function(e){
-                        if(e.keyCode==39)
-                        {
-                            if(MYAPP.autoCompleteDone==true)
-                            {
+                    $("#<?=static::$ctl_prefix.$f_name?>").on('keydown', function (e) {
+                        if (e.keyCode == 39) {
+                            if (MYAPP.autoCompleteDone == true) {
                                 MYAPP.autoCompleteDone = false;
                                 return;
                             }
@@ -553,7 +570,7 @@ class Qdmvc_Layout_Card
                             var datasource = [];
                             //get data from data port
                             var keyword = $.trim($(this).val());
-                            var dpu = MYAPP.addDataPortFilter($(this).data('qddataport'),0,'id', keyword,'CONTAINS');
+                            var dpu = MYAPP.addDataPortFilter($(this).data('qddataport'), 0, 'id', keyword, 'CONTAINS');
                             console.log(dpu);
                             $.post(dpu, {})
                                 .done(function (data) {
@@ -570,8 +587,7 @@ class Qdmvc_Layout_Card
                                             source: datasource
                                         });
                                         MYAPP.autoCompleteDone = true;
-                                    }catch(error)
-                                    {
+                                    } catch (error) {
                                         console.log(error);
                                     }
                                 })
@@ -859,9 +875,6 @@ class Qdmvc_Layout_Card
                     <?php if($this->page->hasLines()): ?>
                     $("#qdlines").show();
                     <?php endif; ?>
-                    <?php if($this->page->hasSEOMetaLines()): ?>
-                    $("#qdseometa").show();
-                    <?php endif; ?>
 
                     MYAPP.viewModel = ko.mapping.fromJS(MYAPP.init_obj);
                     ko.applyBindings(MYAPP.viewModel); // This makes Knockout get to work
@@ -1024,9 +1037,7 @@ class Qdmvc_Layout_Card
                             $("#qdlines").bind("click", function (event) {
                                 MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_lines_url']);
                             });
-                            $("#qdseometa").bind("click", function (event) {
-                                MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_seometa_url']);
-                            });
+
                             $("#qdreloadcard").bind("click", function (event) {
                                 MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 location.reload();
@@ -1113,33 +1124,36 @@ class Qdmvc_Layout_Card
                                     <?= Qdmvc_Message::getMsg('btn_clone') ?>
                                 </button>
                             </span>
-                            <span>
+
+                            <span id="qdsysbtns">
+
                                 <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdnote">
+                                    <span
+                                        data-bind="text: MYAPP.getURIParam($root.__sys_note_url(),'item_count')"></span>
                                     <?= Qdmvc_Message::getMsg('btn_note') ?>
                                 </button>
-                            </span>
-                            <span>
+
                                 <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdimage">
+                                    <span
+                                        data-bind="text: MYAPP.getURIParam($root.__sys_image_url(),'item_count')"></span>
                                     <?= Qdmvc_Message::getMsg('btn_image') ?>
                                 </button>
-                            </span>
-                            <span>
+
                                 <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdlog">
+                                    <span
+                                        data-bind="text: MYAPP.getURIParam($root.__sys_log_url(),'item_count')"></span>
                                     <?= Qdmvc_Message::getMsg('btn_log') ?>
                                 </button>
-                            </span>
-                            <span>
+
                                 <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdlines"
                                         style="display: none">
+                                    <span
+                                        data-bind="text: MYAPP.getURIParam($root.__sys_lines_url(),'item_count')"></span>
                                     <?= $this->page->getFieldCaption('__sys_lines_url', $this->data['language']) ?>
                                 </button>
                             </span>
-                            <span>
-                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdseometa"
-                                        style="display: none">
-                                    <?= $this->page->getFieldCaption('__sys_seometa_url', $this->data['language']) ?>
-                                </button>
-                            </span>
+
+
                             <span>
                                 <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdreloadcard">
                                     <?= Qdmvc_Message::getMsg('btn_reloadcard') ?>

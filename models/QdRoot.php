@@ -572,7 +572,17 @@ class QdRoot extends ActiveRecord\Model
             }
         }
 
-        return Qdmvc_Helper::getCompactPageListLink($df_lk_page, $filter_arr);
+        $tmp = Qdmvc_Helper::getCompactPageListLink($df_lk_page, $filter_arr);
+        //COUNT
+        $c = $tbrelation['Table'];
+        $record = new $c();
+        foreach($filter_arr as $key=>$value){
+            $record->SETRANGE($key, $value);
+        }
+
+        $count = $record->COUNTLIST();
+
+        return add_query_arg(array('item_count' => $count), $tmp);
     }
 
     public static function getLookupFields()
@@ -673,11 +683,32 @@ class QdRoot extends ActiveRecord\Model
             $class_name = $this->getCalledClassName();
             //system preserved field
             if ($field_name == '__sys_note_url') {
-                return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('note', array('model' => $class_name, 'model_id' => $this->id));
+                $tmp = $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('note', array('model' => $class_name, 'model_id' => $this->id));
+                //COUNT
+                $record = new QdNote();
+                $record->SETRANGE('model', $this->getCalledClassName());
+                $record->SETRANGE('model_id', $this->id);
+                $count = $record->COUNTLIST();
+
+                return add_query_arg(array('item_count' => $count), $tmp);
             } else if ($field_name == '__sys_log_url') {
-                return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('log', array('model' => $class_name, 'model_id' => $this->id));
+                $tmp = $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('log', array('model' => $class_name, 'model_id' => $this->id));
+                //COUNT
+                $record = new QdLog();
+                $record->SETRANGE('model', $this->getCalledClassName());
+                $record->SETRANGE('model_id', $this->id);
+                $count = $record->COUNTLIST();
+
+                return add_query_arg(array('item_count' => $count), $tmp);
             } else if ($field_name == '__sys_image_url') {
-                return $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('image', array('model' => $class_name, 'model_id' => $this->id));
+                $tmp = $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('image', array('model' => $class_name, 'model_id' => $this->id));
+                //COUNT
+                $record = new QdImage();
+                $record->SETRANGE('model', $this->getCalledClassName());
+                $record->SETRANGE('model_id', $this->id);
+                $count = $record->COUNTLIST();
+
+                return add_query_arg(array('item_count' => $count), $tmp);
             } else if ($field_name == '__lasteditor_name') {
                 if ($this->lasteditor_id > 0) {
                     $user_info = get_userdata($this->lasteditor_id);
@@ -895,5 +926,13 @@ class QdRoot extends ActiveRecord\Model
             }
         }
         return true;
+    }
+    public function getSEOMeta()
+    {
+        $tmp = new QdSEOMeta();
+        $tmp->SETRANGE('active', true);
+        $tmp->SETRANGE('model', $this->getCalledClassName());
+        $tmp->SETRANGE('model_id', $this->id);
+        return $tmp->GETLIST();
     }
 }

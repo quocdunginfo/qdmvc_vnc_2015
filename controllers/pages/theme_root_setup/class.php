@@ -108,9 +108,11 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     'en-US' => 'SEO'
                 ),
                 'Fields' => array(
-                    'seo_description_struct' => array(
-                    ),
                     'seo_title_struct' => array(
+                    ),
+                    'seo_title_struct_2' => array(
+                    ),
+                    'seo_description_struct' => array(
                     ),
                     'seo_keywords_struct' => array(
                     ),

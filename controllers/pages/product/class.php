@@ -99,6 +99,17 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
 
                     ),
                 )
+            ),
+            'Tab2' => array(
+                'Type' => 'Group',
+                'Name' => array(
+                    'vi-VN' => 'SEO',
+                    'en-US' => 'SEO'
+                ),
+                'Fields' => array(
+                    '_seo_title_preview' => array(),
+                    '_seo_description_preview' => array(),
+                )
             )
         );
     }

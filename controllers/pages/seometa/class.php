@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_SEOMeta extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_SEOMeta extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_SEOMeta';
@@ -24,23 +26,15 @@ class Qdmvc_Page_SEOMeta extends Qdmvc_Page_Root {
                 'Type' => 'Group',
                 'Name' => 'General',
                 'Fields' => array(
-                    'id' => array(
-
-                    ),
-                    'model' => array(
-
-                    ),
-                    'model_id' => array(
-
-                    ),
-                    'active' => array(
-
-                    ),
-
-                    'meta_name' => array(
-                    ),
-                    'meta_value' => array(
-                    ),
+                    'id' => array(),
+                    'model' => array(),
+                    'model_id' => array(),
+                    'active' => array(),
+                    'overwrite' => array(),
+                    'meta_name' => array(),
+                    'seo_tpl' => array(),
+                    'meta_value' => array(),
+                    '_meta_value_preview' => array(),
                 )
             )
             /* SAMPLE

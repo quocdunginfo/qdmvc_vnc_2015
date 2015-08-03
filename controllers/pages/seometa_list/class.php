@@ -26,10 +26,8 @@ class Qdmvc_Page_SEOMeta_List extends Qdmvc_Page_Root_List
             array(
                 'model' => array(),
                 'model_id' => array(),
-                'active' => array(
-
-                ),
-
+                'active' => array(),
+                'overwrite' => array(),
                 'meta_name' => array(),
                 'meta_value' => array(),
             ));

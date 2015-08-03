@@ -14,6 +14,8 @@ class QdTRootSetup extends QdRootSetup
             ),
             'seo_title_struct' => array(
             ),
+            'seo_title_struct_2' => array(
+            ),
             'seo_keywords_struct' => array(
             ),
             'topcenter_promotion' => array(
