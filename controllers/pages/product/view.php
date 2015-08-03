@@ -36,6 +36,7 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
 
     protected function onReadyHook()
     {
+        parent::onReadyHook();//must place at the end or knockout not binding to appended html
         ?>
         <script type="text/javascript">
             (function ($) {
@@ -61,7 +62,7 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
             })(jQuery);
         </script>
     <?php
-        parent::onReadyHook();//must place at the end or knockout not binding to appended html
+
     }
 
     private function genSEOMetaButton()

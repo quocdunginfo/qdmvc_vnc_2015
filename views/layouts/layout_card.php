@@ -876,6 +876,25 @@ class Qdmvc_Layout_Card
                     $("#qdlines").show();
                     <?php endif; ?>
 
+                    $('#ctl_id').keyup(function () {
+                        MYAPP.manual_no = true;
+                    });
+                });
+            })(jQuery);
+        </script>
+    <?php
+
+    }
+    private function applyKOBinding()
+    {
+        ?>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    <?php if($this->page->hasLines()): ?>
+                    $("#qdlines").show();
+                    <?php endif; ?>
+
                     MYAPP.viewModel = ko.mapping.fromJS(MYAPP.init_obj);
                     ko.applyBindings(MYAPP.viewModel); // This makes Knockout get to work
 
@@ -885,7 +904,7 @@ class Qdmvc_Layout_Card
                 });
             })(jQuery);
         </script>
-    <?php
+        <?php
     }
 
     protected function onDeleteOK()
@@ -1440,6 +1459,7 @@ class Qdmvc_Layout_Card
         <?= $this->Bar() ?>
         <?= $this->msgPanelLayout() ?>
         <?= $this->onReadyHook() ?>
+        <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element?>
     <?php
     }
 
