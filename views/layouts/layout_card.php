@@ -324,7 +324,13 @@ class Qdmvc_Layout_Card
                             //$('#window').jqxWindow('focus');
                         }
                     });
-
+                    //Auto TinyMCE Editor resize
+                    $('#jqxwptexteditor').on('resized', function (event) {
+                        wptexteditor_ifr.style.height = ($(this).height() - 220) + 'px';
+                    });
+                    $('#jqxwptexteditor').on('open', function (event) {
+                        wptexteditor_ifr.style.height = ($(this).height() - 220) + 'px';
+                    });
                 });
             })(jQuery);
         </script>
