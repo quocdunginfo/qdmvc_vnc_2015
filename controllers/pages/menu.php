@@ -808,7 +808,7 @@ class Qdmvc_Page_IndexMenu {
             'DataPort' => 'postcat_port'
         ),
         'post_card' => array(
-            'ParentId' => 'folder80',
+            'ParentId' => 'postcat_card',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_Post',
@@ -958,7 +958,7 @@ class Qdmvc_Page_IndexMenu {
             'DataPort' => 'progrp_port',
         ),*/
         'probigsale' => array(
-            'ParentId' => 'folder40',
+            'ParentId' => 'bigsalecat',
             'Active'=>true,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProBigSale_Card',
@@ -1009,7 +1009,7 @@ class Qdmvc_Page_IndexMenu {
         ),
         'propromotion' => array(
             'ParentId' => 'folder40',
-            'Active'=>true,
+            'Active'=>false,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_ProPromotion_Card',
             'Caption' => array(
@@ -1034,7 +1034,7 @@ class Qdmvc_Page_IndexMenu {
         ),
         'promotioncat' => array(
             'ParentId' => 'folder40',
-            'Active'=>true,
+            'Active'=>false,
             'PageType' => 'Card',
             'Class'=>'Qdmvc_Page_PromotionCat_Card',
             'Caption' => array(

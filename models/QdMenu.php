@@ -53,4 +53,13 @@ class QdMenu extends QdWidgetNav
         $obj->type = static::$TYPE_MENU;
         return $obj;
     }
+
+    protected function contentOnValidate($field_name)
+    {
+        $tmp = QdWpMenu::GET($this->$field_name);
+        if($tmp!=null) {
+            $this->position_1 = $tmp->wpid;
+        }
+    }
+
 }
