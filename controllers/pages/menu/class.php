@@ -22,6 +22,14 @@ class Qdmvc_Page_Menu extends Qdmvc_Page_WidgetNav
     protected static function initFields()
     {
         $obj = parent::initFields();
+        $obj['Group1']['Fields']['position_1'] = array(
+            'Caption' => array(
+                'en-US' => 'WP Menu ID',
+                'vi-VN' => 'WP Menu ID'
+            ),
+            'ReadOnly' => true
+        );
+
         unset($obj['Group1']['Fields']['path']);
         unset($obj['Group1']['Fields']['button_text']);
         unset($obj['Group1']['Fields']['target']);

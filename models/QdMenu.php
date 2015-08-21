@@ -47,7 +47,7 @@ class QdMenu extends QdWidgetNav
     {
         $obj = new QdMenu();
         $obj->active = true;
-        $obj->position_1 = 1;
+        $obj->position_1 = 0;
         $obj->position_2 = 0;
         $obj->target = static::$TARGET_BLANK;
         $obj->type = static::$TYPE_MENU;

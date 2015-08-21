@@ -68,6 +68,13 @@ class Qdmvc_Layout_Card
                 return found;
 
             };
+            MYAPP.showModalDialog = function (title, content) {
+                (function ($) {
+                    $('#qdMsgModalTitle').html(title);
+                    $('#qdMsgModalContent').html(content);
+                    $('#qdMsgModal').modal('show');
+                })(jQuery);
+            };
             MYAPP.addDataPortFilter = function (url, index, field, value, operator) {
                 if (operator == undefined) operator = 'EQUAL';
                 return url + '&filterdatafield' + index + '=' + field + '&filtervalue' + index + '=' + value + '&filtercondition' + index + '=' + operator;
@@ -153,6 +160,7 @@ class Qdmvc_Layout_Card
                 window.parent.MYAPP.openInNewTab(url);
             };
         </script>
+
     <?php
     }
 
@@ -334,7 +342,23 @@ class Qdmvc_Layout_Card
                 });
             })(jQuery);
         </script>
-
+        <!-- Modal -->
+        <div class="modal fade" id="qdMsgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="qdMsgModalTitle">Info</h4>
+                    </div>
+                    <div id="qdMsgModalContent" class="modal-body">
+                        [Not Set]
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="jqxlookupwin" style="display: none">
             <div id="windowHeader">
                     <span>
@@ -826,7 +850,7 @@ class Qdmvc_Layout_Card
                                     ?>
                                     <div class="col-md-6">
                                         <!-- Caption -->
-                                        <div
+                                        <div data-qddesc="<?=$this->page->getFieldDescription($f_name, $this->data['language'])?>"
                                             class="qd-field-caption pull-left"><?= $this->page->getFieldCaption($f_name, $this->data['language']) ?>
                                             :
                                         </div>
@@ -869,6 +893,17 @@ class Qdmvc_Layout_Card
 
             </div>
         </div>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    $('.qd-field-caption').dblclick(function(){
+                        var content = $(this).data('qddesc');
+                        var title = $(this).text();
+                        MYAPP.showModalDialog(title, content);
+                    });
+                });
+            })(jQuery);
+        </script>
     <?php
     }
 

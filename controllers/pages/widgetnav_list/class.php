@@ -26,6 +26,9 @@ class Qdmvc_Page_WidgetNav_List extends Qdmvc_Page_Root_List
             array(
                 'title' => array(
                     'SourceExpr' => 'title',
+                    /*'Caption' => array(
+                        'vi-VN' => 'Tiêu đề'
+                    )*/
                 ),
                 'content' => array(
                     'SourceExpr' => 'content',

@@ -107,7 +107,10 @@ class QdTRootSetup extends QdRootSetup
                 'Caption' => array('en-US' => 'Banner', 'vi-VN' => 'Banner'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
+                'Description' => array(
+                    'vi-VN' => 'Banner chạy chạy trên Trang chủ<br>Nằm dưới Menu',
+                    'en-US' => 'Main big Banner placed on Home Page'
+                ),
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'

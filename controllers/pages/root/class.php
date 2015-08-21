@@ -221,8 +221,61 @@ class Qdmvc_Page_Root
      */
     public function getFieldCaption($field_name, $lang = 'en-US')
     {
+        //check in Page Config first
+        foreach(static::getLayout() as $group=>$gconfig)
+        {
+            if(isset($gconfig['Type']) && $gconfig['Type']==='Group'){
+                //Page Card
+                //if(isset($gconfig['Fields'][$field_name]['Caption'])){
+                    //if(is_array($gconfig['Fields'][$field_name]['Caption'])){
+                        if(isset($gconfig['Fields'][$field_name]['Caption'][$lang])){
+                            return $gconfig['Fields'][$field_name]['Caption'][$lang];
+                        }
+                    //}
+                //}
+            }
+            else{
+                //Page List
+                if($group===$field_name)
+                {
+                    if(isset($gconfig['Caption'][$lang])){
+                        return $gconfig['Caption'][$lang];
+                    }
+                }
+            }
+        }
+        //look up in Model
         $c = static::getModel();
         return $c::getFieldCaption($field_name, $lang);
+    }
+    public function getFieldDescription($field_name, $lang = 'en-US')
+    {
+        //check in Page Config first
+        foreach(static::getLayout() as $group=>$gconfig)
+        {
+            if(isset($gconfig['Type']) && $gconfig['Type']==='Group'){
+                //Page Card
+                //if(isset($gconfig['Fields'][$field_name]['Caption'])){
+                //if(is_array($gconfig['Fields'][$field_name]['Caption'])){
+                if(isset($gconfig['Fields'][$field_name]['Description'][$lang])){
+                    return $gconfig['Fields'][$field_name]['Description'][$lang];
+                }
+                //}
+                //}
+            }
+            else{
+                //Page List
+                if($group===$field_name)
+                {
+                    if(isset($gconfig['Description'][$lang])){
+                        return $gconfig['Description'][$lang];
+                    }
+                }
+            }
+        }
+        //look up in Model
+        $c = static::getModel();
+        return $c::getFieldDescription($field_name, $lang);
     }
 
     public static function getLayout()

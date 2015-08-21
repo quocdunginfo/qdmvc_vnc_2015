@@ -615,6 +615,20 @@ class QdRoot extends ActiveRecord\Model
         }
 
     }
+    public static function getFieldDescription($field_name, $lang = 'en-US')
+    {
+        try {
+            $config = static::getFieldsConfig();
+            if (isset($config[$field_name]['Description'][$lang])) {
+                return $config[$field_name]['Description'][$lang];
+            }
+            return '@' . $field_name;
+        } catch (Exception $ex) {
+            return '@' . $field_name;
+            //return Qdmvc_Helper::getNoneText();
+        }
+
+    }
 
     public static function getFieldsConfig()
     {
