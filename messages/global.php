@@ -27,6 +27,11 @@ class Qdmvc_Message {
         'btn_exportexcel' => 'Xuất Excel',
         'btn_showall' => 'Xem tất cả',
         /*END Layout card*/
+
+        /*Field Description*/
+        'fd_seometa_field_title' => 'Tiêu đề Web hiển thị thực tế khi người dùng mở trang %s<br>Dùng chức năng SEO Meta để thay đổi',
+        'fd_seometa_field_description' => 'Mô tả Web hiển thị thực tế khi người dùng mở trang %s<br>Dùng chức năng SEO Meta để thay đổi'
+        /*END Field Description*/
     );
     private static $msg2 = array(
         'msg_update_ok' => 'Update OK, ID = %s',

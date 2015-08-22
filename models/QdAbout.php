@@ -72,4 +72,10 @@ class QdAbout extends QdPost
         return $obj;
     }
 
+    public function getPermalink()
+    {
+        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/about.php'));
+        return $query;
+    }
+
 }

@@ -11,15 +11,24 @@ class QdProduct extends QdRoot
             '_seo_title_preview' => array(
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
+                'Description' => array(
+                    'vi-VN' => sprintf(Qdmvc_Message::getMsg('fd_seometa_field_title'),'chi tiết SP')
+                )
             ),
             '_seo_description_preview' => array(
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
+                'Description' => array(
+                    'vi-VN' => sprintf(Qdmvc_Message::getMsg('fd_seometa_field_description'),'chi tiết SP')
+                )
             ),
             //SAMPLE FIELD CONFIG
             '_product_cat_name' => array(
                 'Name' => '_product_cat_name',
                 'Caption' => array('en-US' => 'Product Cat Name', 'vi-VN' => 'Tên loại SP'),
+                'Description' => array(
+                    //'vi-VN' => 'Tên loại SP ứng với mã SP'
+                ),
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
@@ -40,13 +49,18 @@ class QdProduct extends QdRoot
                 'Name' => '_price_discount',
                 'DataType' => 'Decimal',
                 'FieldClass' => 'FlowField',
+                'Description' => array(
+                    'vi-VN' => sprintf('Giá sau khi giảm - sửa Field \'discount_percent\' để thay đổi')
+                ),
             ),
             'product_cat_id' => array(
                 'Name' => 'product_cat_id',
                 'Caption' => array('en-US' => 'Product Cat ID', 'vi-VN' => 'Mã loại SP'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
+                'Description' => array(
+                    //'vi-VN' => sprintf('Mã SP')
+                ),
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
@@ -90,7 +104,9 @@ class QdProduct extends QdRoot
                 'Caption' => array('en-US' => 'Size ID', 'vi-VN' => 'Mã Size'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
+                'Description' => array(
+                    'vi-VN' => 'Chỉ áp dụng đối với lại sản phẩm \'Quần áo\' và \'Giày dép\''
+                ),
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
@@ -139,12 +155,17 @@ class QdProduct extends QdRoot
             'avatar' => array(
                 'Caption' => array('en-US' => 'Avatar', 'vi-VN' => 'Hình đại diện'),
                 'DataType' => 'Image',
-                'Description' => 'Hình đại diện',
+                'Description' => array(
+                    'vi-VN' => 'Hình đại diện hiển thị ở trang tìm kiếm SP hoặc những khu vực tương tự (hình đơn)<br>Muốn chọn nhiều hình cho trang chi tiết SP, dùng chức năng \'Hình ảnh\' để thêm hình'
+                ),
             ),
             'active' => array(
                 'Caption' => array('en-US' => 'Active', 'vi-VN' => 'Kích hoạt'),
                 'DataType' => 'Boolean',
                 'InitValue' => true,
+                'Description' => array(
+                    'vi-VN' => 'Có hiển thị ra ngoài Web hay không ?'
+                ),
             ),
             'name' => array(
                 'Caption' => array('vi-VN' => 'Tên SP'),
@@ -152,6 +173,9 @@ class QdProduct extends QdRoot
             ),
             'code' => array(
                 'Caption' => array('vi-VN' => 'Mã SP'),
+                'Description' => array(
+                    'vi-VN' => 'Mã SP hiển thị trên trang chi tiết SP'
+                ),
             ),
             'price' => array(
                 'Caption' => array('vi-VN' => 'Giá'),
@@ -159,22 +183,37 @@ class QdProduct extends QdRoot
             'description' => array(
                 'Caption' => array('vi-VN' => 'Mô tả'),
                 'DataType' => 'WYSIWYG',
+                'Description' => array(
+                    'vi-VN' => 'Tab thông tin thứ 1 của trang chi tiết SP'
+                ),
             ),
             'doitra_baohanh' => array(
                 'Caption' => array('vi-VN' => 'Đổi trả/Bảo hành'),
                 'DataType' => 'WYSIWYG',
+                'Description' => array(
+                    'vi-VN' => 'Tab thông tin thứ 2 của trang chi tiết SP'
+                ),
             ),
             'giaohang_thanhtoan' => array(
                 'Caption' => array('vi-VN' => 'Giao hàng/Thanh toán'),
                 'DataType' => 'WYSIWYG',
+                'Description' => array(
+                    'vi-VN' => 'Tab thông tin thứ 3 của trang chi tiết SP'
+                ),
             ),
             'temp_out_of_stock' => array(
                 'Caption' => array('vi-VN' => 'Tạm hết hàng'),
                 'DataType' => 'Boolean',
                 'InitValue' => false,
+                'Description' => array(
+                    'vi-VN' => 'Đánh dấu SP tạm hết hàng, nhưng vẫn hiển thị trên Web'
+                ),
             ),
             'discount_percent' => array(
                 'DataType' => 'Decimal',
+                'Description' => array(
+                    'vi-VN' => '% giảm giá so với Field \'price\', nhập số thập phân vd: 0.56'
+                ),
             ),
             'type' => array(
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
@@ -187,7 +226,7 @@ class QdProduct extends QdRoot
                         'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
-                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Gìay dép'),
+                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giày dép'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
@@ -198,8 +237,16 @@ class QdProduct extends QdRoot
                 'Caption' => array('vi-VN' => 'Ngày cập nhật'),
                 'DataType' => 'Date',
             ),
-            'noseries' => array()
+            'noseries' => array(),
+            '_permalink' => array(
+                'Name' => '_permalink',
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+            ),
         ));
+        $obj['id']['Description'] = array(
+            'vi-VN' => sprintf('Mã SP quản lý trong hệ thống, không hiển thị trên Web<br>Muốn hiển thị mã trên Web, dùng Field \'%s\'', $obj['code']['Caption']['vi-VN'])
+        );
         $obj['__sys_lines_url']['Caption'] = array('en-US' => 'Related Products', 'vi-VN' => 'SP liên kết');
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdPro2Pro',
@@ -402,6 +449,11 @@ class QdProduct extends QdRoot
 
     protected function CALCFIELDS($flowfield_name)
     {
+        if ($flowfield_name == '_permalink') {
+            $this->qd_cached_attr[$flowfield_name] = $this->getPermalink();
+            //return
+            return $this->qd_cached_attr[$flowfield_name];
+        }
         if ($flowfield_name == '_price_discount') {
 
             $this->qd_cached_attr[$flowfield_name] = $this->price - ($this->price * $this->discount_percent);

@@ -129,7 +129,12 @@ class QdProductCat extends QdRoot
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),
                     ),
                 )
-            )
+            ),
+            '_permalink' => array(
+                'Name' => '_permalink',
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+            ),
         ));
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdProduct',
@@ -161,7 +166,7 @@ class QdProductCat extends QdRoot
     public function getPermalink()
     {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        $query = add_query_arg(array('product-cat-id' => $this->id, 'product-cat-level' => $this->level), $query);
+        $query = add_query_arg(array('product-cat-id' => $this->id), $query);
         return $query;
         /*
         $query =  get_site_url();
@@ -273,6 +278,16 @@ class QdProductCat extends QdRoot
         }
         $this->pushValidateError('', 'Total items validated: '.$count, 'info');
         return true;
+    }
+    protected function CALCFIELDS($flowfield_name)
+    {
+        if ($flowfield_name == '_permalink') {
+            $this->qd_cached_attr[$flowfield_name] = $this->getPermalink();
+            //return
+            return $this->qd_cached_attr[$flowfield_name];
+        }
+
+        return parent::CALCFIELDS($flowfield_name);
     }
 
 }

@@ -990,6 +990,7 @@ class Qdmvc_Layout_Card
     private function cardBar()
     {
         ?>
+
         <div>
             <div style='margin-top: 2px;'>
                 <div style='margin-left: 4px; float: left;'>
@@ -1153,17 +1154,75 @@ class Qdmvc_Layout_Card
                 <form style="width: 100%" id="cardForm" action=""
                       onsubmit="return false">
                     <div>
-                        <div style="margin-top: 5px">
 
-                            <style>
-                                .qd-action-btn {
-                                    margin-right: 20px;
-                                }
+                        <hr style="margin-top: 5px; margin-bottom: 5px; display: none">
+                        <!-- Content place Holder -->
+                        <?= $this->generateFields() ?>
+                        <!-- End content place holder -->
 
-                                .glyphicon {
-                                    font-size: 18px;
-                                }
-                            </style>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <?php
+    }
+
+    protected function onSaveOK()
+    {
+
+    }
+
+    protected function onCallFnOK()
+    {
+
+    }
+
+    protected function Bars()
+    {
+        $this->cardBar();
+        return;
+        $tmp_page = $this->page;
+
+        //render Page Part from Page Setup
+        foreach ($tmp_page::getLayout() as $group => $config) :
+            if (isset($config['Type']) && $config['Type'] == 'Part'):
+                ?>
+                <div>
+                    <div style='margin-top: 2px;'>
+                        <div style='margin-left: 4px; float: left;'>
+                            Part
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="height: 520px; width: 100%">
+                        <iframe id="pagePart_<?= $group ?>" src="<?= $this->page->getPagePartURL() ?>" frameborder="0"
+                                marginwidth="0" marginheight="0" scrolling="auto"
+                                width="100%" height="100%">
+                            <p>Your browser does not support iframes</p>
+                        </iframe>
+                    </div>
+                </div>
+            <?php
+            endif;
+        endforeach;
+    }
+
+    private function Bar()
+    {
+        ?>
+
+        <div style="margin-top: 5px; margin-bottom: 5px">
+
+            <style>
+                .qd-action-btn {
+                    margin-right: 20px;
+                }
+
+                .glyphicon {
+                    font-size: 18px;
+                }
+            </style>
                             <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdupdate">
                                     <?= Qdmvc_Message::getMsg('btn_save') ?>
@@ -1220,66 +1279,15 @@ class Qdmvc_Layout_Card
                                 </button>
                             </span>
 
-                            <?= $this->render_serverFunctions() ?>
+            <?= $this->render_serverFunctions() ?>
 
 
-                        </div>
-                        <hr style="margin-top: 5px; margin-bottom: 5px ">
-                        <!-- Content place Holder -->
-                        <?= $this->generateFields() ?>
-                        <!-- End content place holder -->
-
-                    </div>
-                </form>
+        </div>
+        <div id='jqxWidget'>
+            <div id="jqxNavigationBar" style="visibility: hidden">
+                <?= $this->Bars() ?>
             </div>
         </div>
-    <?php
-    }
-
-    protected function onSaveOK()
-    {
-
-    }
-
-    protected function onCallFnOK()
-    {
-
-    }
-
-    protected function Bars()
-    {
-        $this->cardBar();
-        return;
-        $tmp_page = $this->page;
-
-        //render Page Part from Page Setup
-        foreach ($tmp_page::getLayout() as $group => $config) :
-            if (isset($config['Type']) && $config['Type'] == 'Part'):
-                ?>
-                <div>
-                    <div style='margin-top: 2px;'>
-                        <div style='margin-left: 4px; float: left;'>
-                            Part
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div style="height: 520px; width: 100%">
-                        <iframe id="pagePart_<?= $group ?>" src="<?= $this->page->getPagePartURL() ?>" frameborder="0"
-                                marginwidth="0" marginheight="0" scrolling="auto"
-                                width="100%" height="100%">
-                            <p>Your browser does not support iframes</p>
-                        </iframe>
-                    </div>
-                </div>
-            <?php
-            endif;
-        endforeach;
-    }
-
-    private function Bar()
-    {
-        ?>
         <script>
             (function ($) {
                 $(document).ready(function () {
@@ -1293,12 +1301,6 @@ class Qdmvc_Layout_Card
                 });
             })(jQuery);
         </script>
-
-        <div id='jqxWidget'>
-            <div id="jqxNavigationBar" style="visibility: hidden">
-                <?= $this->Bars() ?>
-            </div>
-        </div>
 
     <?php
     }

@@ -28,7 +28,13 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Validate all Struct Level'
                 )
             ),
-
+            'btn_view_in_frontend' => array(
+                //'fn_name' => 'btn_view_in_frontend',
+                'label' => array(
+                    'vi-VN' => 'Mở trang chi tiết SP',
+                    'en-US' => 'Open Front-End Product Page'
+                )
+            ),
         ));
         return $obj;
     }
@@ -57,6 +63,9 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                     );
                     $("#qdseometa").bind("click", function (event) {
                         MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_seometa_url']);
+                    });
+                    $('#btn_view_in_frontend').click(function () {
+                        MYAPP.openInNewTab(MYAPP.viewModel._permalink());
                     });
                 });
             })(jQuery);

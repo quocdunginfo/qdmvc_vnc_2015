@@ -95,6 +95,11 @@ class QdContact extends QdRoot
                     )
                 )
             ),
+            '_permalink' => array(
+                'Name' => '_permalink',
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+            ),
         ));
     }
 
@@ -128,5 +133,20 @@ class QdContact extends QdRoot
                 $this->address_district_idOnValidate('address_district_id');
             }
         }
+    }
+    public function getPermalink()
+    {
+        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/contact.php'));
+        return $query;
+    }
+    protected function CALCFIELDS($flowfield_name)
+    {
+        if ($flowfield_name == '_permalink') {
+            $this->qd_cached_attr[$flowfield_name] = $this->getPermalink();
+            //return
+            return $this->qd_cached_attr[$flowfield_name];
+        }
+
+        return parent::CALCFIELDS($flowfield_name);
     }
 }

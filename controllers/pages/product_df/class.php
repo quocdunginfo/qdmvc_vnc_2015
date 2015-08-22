@@ -17,4 +17,12 @@ class Qdmvc_Page_ProductDF_Card extends Qdmvc_Page_Product_Card
     {
         return 'product_df';
     }
+
+    protected static function initFields()
+    {
+        $obj = parent::initFields();
+        $obj['General']['Fields']['size_id']['ReadOnly'] = true;
+        return $obj;
+    }
+
 }

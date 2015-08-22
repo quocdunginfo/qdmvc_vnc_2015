@@ -80,6 +80,11 @@ class QdPost extends QdRoot
                     )
                 )
             ),
+            '_permalink' => array(
+                'Name' => '_permalink',
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+            ),
         ));
     }
 
@@ -105,5 +110,15 @@ class QdPost extends QdRoot
     public function getPostCatObj()
     {
         return QdPostCat::GET($this->post_cat_id);
+    }
+    protected function CALCFIELDS($flowfield_name)
+    {
+        if ($flowfield_name == '_permalink') {
+            $this->qd_cached_attr[$flowfield_name] = $this->getPermalink();
+            //return
+            return $this->qd_cached_attr[$flowfield_name];
+        }
+
+        return parent::CALCFIELDS($flowfield_name);
     }
 }

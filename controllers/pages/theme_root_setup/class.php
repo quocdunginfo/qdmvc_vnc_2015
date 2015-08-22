@@ -23,22 +23,7 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
     protected static function initFields()
     {
         return array(
-            'Group1' => array(
-                'Type' => 'Group',
-                'Fields' => array(
-                    'id' => array(
-                        'SourceExpr' => 'id',
-                        'Hidden' => true
-                    ),
 
-                    'banner_service_page' => array(),
-                    'partnergrp_id' => array(
-                        'SourceExpr' => 'partnergrp_id',
-
-
-                    ),
-                )
-            ),
             'Tab1' => array(
                 'Type' => 'Group',
                 'Name' => array(
@@ -116,6 +101,21 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     ),
                     'seo_keywords_struct' => array(
                     ),
+                )
+            ),
+            'Group1' => array(
+                'Type' => 'Group',
+                'Name' => array(
+                    'vi-VN' => 'Khác...',
+                    'en-US' => 'Other...'
+                ),
+                'Fields' => array(
+                    'id' => array(
+                        'SourceExpr' => 'id',
+                        'Hidden' => true
+                    ),
+
+                    'banner_service_page' => array(),
                 )
             ),
         );

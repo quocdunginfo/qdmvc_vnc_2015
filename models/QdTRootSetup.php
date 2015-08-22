@@ -38,7 +38,9 @@ class QdTRootSetup extends QdRootSetup
                 'Caption' => array('en-US' => 'Banner Service Page', 'vi-VN' => 'Banner trang DV'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
+                'Description' => array(
+                    'vi-VN' => 'Chọn Banner (1 nhóm các hình) cho trang Dịch vụ, Hướng dẫn, FAQs...<br>Định nghĩa Banner trong \'Widget Nav Cat\''
+                ),
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
@@ -55,7 +57,9 @@ class QdTRootSetup extends QdRootSetup
                 'Caption' => array('en-US' => 'Widget Nav Cat', 'vi-VN' => 'Widget Nav Cat'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
+                'Description' => array(
+                    'vi-VN' => 'Chọn Widget Nav Cat để hiển thị mục: Mua sắm, Ký gửi, Thu mua, Tài chính<br>Nằm ngay trên phần Nhận tin ưu đãi<br>Định nghĩa trong \'Widget Nav Cat\''
+                ),
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
@@ -81,7 +85,9 @@ class QdTRootSetup extends QdRootSetup
                 'Caption' => array('en-US' => 'Partner Group', 'vi-VN' => 'Nhóm Đối tác'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
+                'Description' => array(
+                    'vi-VN' => 'Chọn Banner để hiển thị Danh mục Đối tác<br>Nằm ngay trên Footer<br>Định nghĩa trong \'Widget Nav Cat\''
+                ),
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
@@ -108,7 +114,7 @@ class QdTRootSetup extends QdRootSetup
                 'DataType' => 'Code',
                 'Numeric' => true,
                 'Description' => array(
-                    'vi-VN' => 'Banner chạy chạy trên Trang chủ<br>Nằm dưới Menu',
+                    'vi-VN' => 'Banner chính chạy chạy trên Trang chủ<br>Nằm ngay dưới Menu chính',
                     'en-US' => 'Main big Banner placed on Home Page'
                 ),
                 'Editable' => true,
@@ -136,7 +142,9 @@ class QdTRootSetup extends QdRootSetup
                 'Caption' => array('en-US' => 'Social Icon', 'vi-VN' => 'Social Icon'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
+                'Description' => array(
+                    'vi-VN' => 'Chọn Widget Nav Cat để hiển thị kết nối mạng xã hội (cột thứ 4 trong Footer Menu)<br>Nằm ngay dưới phần Nhận tin ưu đãi<br>Định nghĩa trong \'Widget Nav Cat\''
+                ),
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
