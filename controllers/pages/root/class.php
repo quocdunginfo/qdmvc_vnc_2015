@@ -77,7 +77,7 @@ class Qdmvc_Page_Root
     {
         return array(
             'id' => array(
-                'SourceExpr' => 'id',
+                'Order' => 10,
 	            'ReadOnly' => true,
                 'Width' => 70
             )
@@ -282,8 +282,27 @@ class Qdmvc_Page_Root
     {
         if (static::$fields_show == null) {
             static::$fields_show = static::initFields();
+            //apply sorting
+            uasort(static::$fields_show, "static::compareArray");
+            foreach(static::$fields_show as $key=>&$config){
+                if($config['Type']=='Group' && isset($config['Fields'])) {
+                    uasort($config['Fields'], "static::compareArray");
+                }
+            }
+            //end apply sorting
         }
         return static::$fields_show;
+    }
+    private static function compareArray($a, $b)
+    {
+        if(isset($a['Order']) && isset($b['Order']))
+        {
+            if($a['Order']==$b['Order']){
+                return 0;
+            }
+            return $a['Order'] - $b['Order'];
+        }
+        return 0;
     }
 
     /*

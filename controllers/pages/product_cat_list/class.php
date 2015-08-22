@@ -20,20 +20,22 @@ class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'order' => array(
-                    'SourceExpr' => 'order',
+                    'Order' => 20,
                     'Width' => 100
                 ),
                 'name' => array(
-                    'SourceExpr' => 'name',
+                    'Order' => 30,
                 ),
                 'parent_id' => array(
-                    'SourceExpr' => 'parent_id',
+                    'Order' => 40,
                     'Width' => 100
                 ),
                 '_parent_name' => array(
-                    'SourceExpr' => '_parent_name',
+                    'Order' => 50,
                 ),
-                'level' => array(),
+                'level' => array(
+                    'Order' => 60,
+                ),
             ));
     }
 

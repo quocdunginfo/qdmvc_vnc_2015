@@ -30,16 +30,16 @@ class Qdmvc_Page_Size_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
             'type' => array(
-                'SourceExpr' => 'type',
+                'Order' => 20,
             ),
             'code' => array(
-	            'SourceExpr' => 'code'
+                'Order' => 30,
             ),
             'name' => array(
-	            'SourceExpr' => 'name',
+                'Order' => 40,
             ),
             'description' => array(
-	            'SourceExpr' => 'description',
+                'Order' => 50,
             )
         ));
     }

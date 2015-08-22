@@ -29,21 +29,21 @@ class Qdmvc_Page_Size extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'ReadOnly' => true
                     ),
                     'code' => array(
-                        'SourceExpr' => 'code'
+                        'Order' => 20,
                     ),
                     'name' => array(
-                        'SourceExpr' => 'name',
+                        'Order' => 30,
                     ),
                     'type' => array(
-	                    'SourceExpr' => 'type',
+                        'Order' => 40,
 
                     ),
                     'description' => array(
-                        'SourceExpr' => 'description',
+                        'Order' => 50,
 
                     )
                 )

@@ -28,56 +28,41 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
                 'Type' => 'Group',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'ReadOnly' => true
                     ),
 
                     'type' => array(
-                        'SourceExpr' => 'type',
-
+                        'Order' => 20,
                     ),
                     'type2' => array(
-                        'SourceExpr' => 'type2',
-
+                        'Order' => 30,
                     ),
                     'level' => array(
+                        'Order' => 40,
 
                     ),
                     'name' => array(
-                        'SourceExpr' => 'name'
+                        'Order' => 50,
                     ),
                     'avatar' => array(
-                        'SourceExpr' => 'avatar',
-
+                        'Order' => 60,
                     ),
                     'parent_id' => array(
-                        'SourceExpr' => 'parent_id',
+                        'Order' => 70,
                     ),
                     '_parent_name' => array(
-                        'SourceExpr' => '_parent_name',
-
-
+                        'Order' => 80,
                     ),
                     'order' => array(
-                        'SourceExpr' => 'order'
+                        'Order' => 90,
                     ),
                     'active' => array(
-                        'SourceExpr' => 'active',
-
+                        'Order' => 100,
                     )
                 )
             ),
-            /*
-            'Lines' => array(
-                'Type' => 'Part',
-                'SubType' => 'Page',
-                'PagePartID' => 'product_card',
-                'SubPageLink' => array(
-                    'Field' => 'product_cat_id',
-                    'Type' => 'FIELD',//'CONST'
-                    'Value' => 'id'
-                )
-            )//quocdunginfo*/
+
         );
     }
 }

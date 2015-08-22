@@ -16,99 +16,94 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
         return array(
             'General' => array(
                 'Type' => 'Group',
+                'Order' => 10,
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'ReadOnly' => false
                     ),
                     'type' => array(
-                        'SourceExpr' => 'type',
+                        'Order' => 20,
 
                     ),
                     'name' => array(
-                        'SourceExpr' => 'name',
+                        'Order' => 30,
 
                     ),
                     'product_cat_id' => array(
-                        'SourceExpr' => 'product_cat_id',
-
+                        'Order' => 40,
                     ),
                     '_product_cat_name' => array(
-                        'SourceExpr' => '_product_cat_name',
-
+                        'Order' => 50,
                     ),
                     'manufacturer_id' => array(
-                        'SourceExpr' => 'manufacturer_id',
-
+                        'Order' => 60,
                     ),
                     'size_id' => array(
-                        'SourceExpr' => 'size_id',
-
+                        'Order' => 70,
                     ),
                     '_manufacturer_name' => array(
-                        'SourceExpr' => '_manufacturer_name',
-
+                        'Order' => 80,
                     ),
                     'code' => array(
-                        'SourceExpr' => 'code'
+                        'Order' => 90,
                     ),
                     'price' => array(
-                        'SourceExpr' => 'price'
+                        'Order' => 100,
                     ),
                     'discount_percent' => array(
-                        'SourceExpr' => 'discount_percent',
-
+                        'Order' => 110,
                     ),
                     '_price_discount' => array(
-                        'SourceExpr' => '_price_discount',
+                        'Order' => 120,
                     ),
                     'active' => array(
-                        'SourceExpr' => 'active',
-
+                        'Order' => 130,
                     ),
                     'temp_out_of_stock' => array(
-                        'SourceExpr' => 'temp_out_of_stock',
+                        'Order' => 140,
                     ),
                 )
             ),
             'Tab1' => array(
                 'Type' => 'Group',
+                'Order' => 20,
                 'Name' => array(
                     'vi-VN' => 'Thông tin khác',
                     'en-US' => 'Sub info'
                 ),
                 'Fields' => array(
                     'avatar' => array(
-                        'SourceExpr' => 'avatar',
-
+                        'Order' => 10,
                     ),
                     'description' => array(
-                        'SourceExpr' => 'description',
-
+                        'Order' => 20,
                     ),
                     'doitra_baohanh' => array(
-                        'SourceExpr' => 'doitra_baohanh',
-
+                        'Order' => 30,
                     ),
                     'giaohang_thanhtoan' => array(
-                        'SourceExpr' => 'giaohang_thanhtoan',
-
+                        'Order' => 40,
                     ),
                     'date_modified' => array(
-                        'SourceExpr' => 'date_modified',
-
+                        'Order' => 50,
                     ),
                 )
             ),
             'Tab2' => array(
                 'Type' => 'Group',
+                'Order' => 30,
                 'Name' => array(
                     'vi-VN' => 'SEO',
                     'en-US' => 'SEO'
                 ),
                 'Fields' => array(
-                    '_seo_title_preview' => array(),
-                    '_seo_description_preview' => array(),
+                    '_seo_title_preview' => array(
+                        'Order' => 10,
+                    ),
+                    '_seo_description_preview' => array(
+                        'Order' => 20,
+                    ),
                 )
             )
         );
