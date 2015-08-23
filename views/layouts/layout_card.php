@@ -6,7 +6,8 @@
  * Date: 02/03/2015
  * Time: 12:59 PM
  */
-class Qdmvc_Layout_Card
+Qdmvc::loadLayout('layout_root');
+class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 {
     protected $obj = null;
     protected $obj_json = null;
@@ -53,21 +54,6 @@ class Qdmvc_Layout_Card
 
                 })(jQuery);
             };
-            MYAPP.getURIParam = function (uri, p_name) {
-
-                //var result = {};
-                var params = uri.split(/\?|\&/);
-                var found = '';
-                params.forEach(function (it) {
-                    if (it) {
-                        var param = it.split("=");
-                        if (param[0].toLowerCase() == p_name.toLowerCase()) found = param[1];
-                    }
-                });
-
-                return found;
-
-            };
             MYAPP.showModalDialog = function (title, content) {
                 (function ($) {
                     $('#qdMsgModalTitle').html(title);
@@ -75,10 +61,7 @@ class Qdmvc_Layout_Card
                     $('#qdMsgModal').modal('show');
                 })(jQuery);
             };
-            MYAPP.addDataPortFilter = function (url, index, field, value, operator) {
-                if (operator == undefined) operator = 'EQUAL';
-                return url + '&filterdatafield' + index + '=' + field + '&filtervalue' + index + '=' + value + '&filtercondition' + index + '=' + operator;
-            };
+
             MYAPP.showMsg = function (msg) {
                 (function ($) {
                     //clear notification
@@ -152,13 +135,7 @@ class Qdmvc_Layout_Card
                     });
                 })(jQuery);
             };
-            MYAPP.openInNewTab = function (url) {
-                if (window == window.parent) {
-                    window.open(url, '_blank');
-                    return;
-                }
-                window.parent.MYAPP.openInNewTab(url);
-            };
+
         </script>
 
     <?php
@@ -277,9 +254,9 @@ class Qdmvc_Layout_Card
 
     protected function preConfig()
     {
+        parent::preConfig();
         ?>
         <script>
-            var MYAPP = MYAPP || {};
             // prepare the data
             MYAPP.data_port = '<?=$this->data['data_port']?>';
             MYAPP.current_obj = null;
@@ -1284,14 +1261,16 @@ class Qdmvc_Layout_Card
 
         </div>
         <div id='jqxWidget'>
-            <div id="jqxNavigationBar" style="visibility: hidden">
+            <div id="jqxNavigationBar">
                 <?= $this->Bars() ?>
             </div>
         </div>
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    $("#jqxNavigationBar").css("visibility", "visible");
+                    $('#cardRootDiv').css('display', 'block');
+                    $('#cardLoadingImg').css('display', 'none');
+
                     //navigation bar
                     $("#jqxNavigationBar").jqxNavigationBar({
                         width: '100%',
@@ -1482,44 +1461,31 @@ class Qdmvc_Layout_Card
     public function render()
     {
         ?>
-        <?= $this->style() ?>
+        <div id="cardLoadingImg" style="width: 100%; height: 200px; text-align: center; background: url(<?=Qdmvc_Helper::getImgURL("ajax-loader_blue.gif")?>) no-repeat center center transparent">
+            <h4>Loading...</h4>
+        </div>
+        <div id="cardRootDiv" style="display: none;">
+            <?= $this->style() ?>
 
-        <?php
-        if ($this->data['nopermission'] === true) {
-            $this->layout_nopermission();
-            return;
-        }
-        ?>
+            <?php
+            if ($this->data['nopermission'] === true) {
+                $this->layout_nopermission();
+                return;
+            }
+            ?>
 
-        <?= $this->preConfig() ?>
-        <?= $this->internalGateway() ?>
-        <?= $this->externalGateway() ?>
+            <?= $this->preConfig() ?>
+            <?= $this->internalGateway() ?>
+            <?= $this->externalGateway() ?>
 
-        <?= $this->formValidation() ?>
-        <?= $this->progressSpinner() ?>
-        <?= $this->lookupWindowLayout() ?>
-        <?= $this->lookupDatePickerLayout() ?>
-        <?= $this->Bar() ?>
-        <?= $this->msgPanelLayout() ?>
-        <?= $this->onReadyHook() ?>
-        <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element?>
-    <?php
-    }
-
-    private function layout_nopermission()
-    {
-        ?>
-        <div style="
-            display: inline-block;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 100px;
-            margin: auto; text-align: center">
-            You are not allowed to view this Page
+            <?= $this->formValidation() ?>
+            <?= $this->progressSpinner() ?>
+            <?= $this->lookupWindowLayout() ?>
+            <?= $this->lookupDatePickerLayout() ?>
+            <?= $this->Bar() ?>
+            <?= $this->msgPanelLayout() ?>
+            <?= $this->onReadyHook() ?>
+            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element?>
         </div>
     <?php
     }

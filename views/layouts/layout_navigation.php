@@ -6,7 +6,8 @@
  * Date: 09/03/2015
  * Time: 7:08 PM
  */
-class Qdmvc_Layout_Navigation
+Qdmvc::loadLayout('layout_root');
+class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
 {
     protected $page = null;
     protected $data = null;
