@@ -25,49 +25,41 @@ class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'ReadOnly' => true
                     ),
                     'title' => array(
-                        'SourceExpr' => 'title',
+                        'Order' => 20,
                     ),
                     'content' => array(
-                        'SourceExpr' => 'content'
+                        'Order' => 30,
                     ),
                     'button_text' => array(
-                        'SourceExpr' => 'button_text',
+                        'Order' => 40,
                     ),
                     'path' => array(
-                        'SourceExpr' => 'path',
+                        'Order' => 50,
                     ),
                     'active' => array(
-                        'SourceExpr' => 'active',
-
+                        'Order' => 60,
                     ),
                     'order' => array(
-                        'SourceExpr' => 'order',
+                        'Order' => 70,
                     ),
                     'group_id' => array(
-                        'SourceExpr' => 'group_id',
-
-
+                        'Order' => 80,
                     ),
                     '_group_name' => array(
-                        'SourceExpr' => '_group_name',
-
-
+                        'Order' => 90,
                     ),
                     'type' => array(
-                        'SourceExpr' => 'type',
-
+                        'Order' => 90,
                     ),
                     'target' => array(
-                        'SourceExpr' => 'target',
-
+                        'Order' => 100,
                     ),
                     'avatar' => array(
-                        'SourceExpr' => 'avatar',
-
+                        'Order' => 110,
                     ),
                 )
             )

@@ -25,25 +25,22 @@ class Qdmvc_Page_WidgetNav_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'title' => array(
-                    'SourceExpr' => 'title',
-                    /*'Caption' => array(
-                        'vi-VN' => 'Tiêu đề'
-                    )*/
+                    'Order' => 20,
                 ),
                 'content' => array(
-                    'SourceExpr' => 'content',
+                    'Order' => 30,
                 ),
                 'button_text' => array(
-                    'SourceExpr' => 'button_text',
+                    'Order' => 40,
                 ),
                 'path' => array(
-                    'SourceExpr' => 'path',
+                    'Order' => 50,
                 ),
                 'order' => array(
-                    'SourceExpr' => 'order',
+                    'Order' => 60,
                 ),
                 '_group_name' => array(
-                    'SourceExpr' => '_group_name',
+                    'Order' => 70,
                 )
             ));
     }

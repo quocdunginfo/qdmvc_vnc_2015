@@ -35,6 +35,13 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Open Front-End Product Page'
                 )
             ),
+            'btn_view_qrcode' => array(
+                //'fn_name' => 'btn_view_in_frontend',
+                'label' => array(
+                    'vi-VN' => 'Tạo mã QR',
+                    'en-US' => 'Gen QR Code'
+                )
+            ),
         ));
         return $obj;
     }
@@ -66,6 +73,10 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                     });
                     $('#btn_view_in_frontend').click(function () {
                         MYAPP.openInNewTab(MYAPP.viewModel._permalink());
+                    });
+                    $('#btn_view_qrcode').click(function () {
+                        var qrlink = 'http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl='+MYAPP.viewModel.id()+'&choe=UTF-8&chld=L';
+                        MYAPP.openInNewTab(qrlink);
                     });
                 });
             })(jQuery);

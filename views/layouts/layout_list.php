@@ -89,6 +89,27 @@ class Qdmvc_Layout_List
                 })(jQuery);
 
             }
+            function addGridFilter(field_name, field_value){
+                (function ($) {
+                    var addfilter = function () {
+                        // create a filter group for the FirstName column.
+                        var fnameFilterGroup = new $.jqx.filter();
+                        // operator between the filters in the filter group. 1 is for OR. 0 is for AND.
+                        var filter_or_operator = 1;
+                        // create a string filter with 'contains' condition.
+                        var filtervalue = field_value;
+                        var filtercondition = 'contains';
+                        var fnameFilter1 = fnameFilterGroup.createfilter('stringfilter', filtervalue, filtercondition);
+                        // add the filters to the filter group.
+                        fnameFilterGroup.addfilter(filter_or_operator, fnameFilter1);
+                        // add the filter group to the 'firstname' column in the Grid.
+                        $("#jqxgrid").jqxGrid('addfilter', field_name, fnameFilterGroup);
+                        // apply the filters.
+                        $("#jqxgrid").jqxGrid('applyfilters');
+                    };
+                    addfilter();
+                })(jQuery);
+            }
         </script>
     <?php
     }
@@ -109,6 +130,24 @@ class Qdmvc_Layout_List
                 })(jQuery);
             }
         </script>
+        <!-- Modal -->
+        <div class="modal fade" id="qdMsgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="modal-title" id="qdMsgModalTitle">QR Code scanner</div>
+                    </div>
+                    <div id="qdMsgModalContent" class="modal-body" style="text-align: center">
+                        <canvas id="qdscanport"></canvas>
+                    </div>
+                    <!--
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
     <?php
     }
 
@@ -153,10 +192,15 @@ class Qdmvc_Layout_List
     {
         ?>
         <!-- General toolbar -->
-        <span>
+        <div style="margin-top: 5px; margin-bottom: 5px">
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdshowall" type="button">
                     <?=Qdmvc_Message::getMsg('btn_showall')?>
+                </button>
+            </span>
+            <span>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdclearfilter" type="button">
+                    <?=Qdmvc_Message::getMsg('btn_clearfilter')?>
                 </button>
             </span>
             <span>
@@ -174,10 +218,14 @@ class Qdmvc_Layout_List
                     <?=Qdmvc_Message::getMsg('btn_exportexcel')?>
                 </button>
             </span>
+            <span>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdscancode" type="button">
+                    <?=Qdmvc_Message::getMsg('btn_scancode')?>
+                </button>
+            </span>
             <script type="text/javascript">
                 (function ($) {
                     $(document).ready(function () {
-
                        $("#qdprint").click(function () {
                             var gridContent = $("#jqxgrid").jqxGrid('exportdata', 'html');
                             var newWindow = window.open('', '', 'width=800, height=500'),
@@ -203,10 +251,41 @@ class Qdmvc_Layout_List
                         $("#qdexport").click(function () {
                             $("#jqxgrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
                         });
+                        $("#qdclearfilter").click(function () {
+                            $('#jqxgrid').jqxGrid('clearfilters');
+                        });
+
+                        var scanner_decoder = null;
+                        $("#qdscancode").click(function () {
+                            $('#jqxgrid').jqxGrid('clearfilters');
+                            $("#qdMsgModal").modal('show');
+                            $('#qdMsgModal').on('hidden.bs.modal', function () {
+                                //alert('Stop');
+                                setTimeout(function(){
+                                    scanner_decoder.stop();//fail when stop immediately, need use time out
+                                }, 1000);
+                            });
+
+                            (function ($) {
+                                var arg = {
+                                    zoom: 1,
+                                    DecodeBarCodeRate: null,
+                                    beep: '<?=QdJqwidgets::getResourcePath('plugin/qr/beep.mp3')?>',
+                                    //flipHorizontal: true,
+                                    resultFunction: function(resText, lastImageSrc) {
+                                        addGridFilter('id', resText);
+                                        $("#qdMsgModal").modal('hide');
+                                    }
+                                };
+
+                                scanner_decoder = $("#qdscanport").WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery;
+                                scanner_decoder.play();
+                            })(jQuery);
+                        });
                     });
                 })(jQuery);
             </script>
-        </span>
+        </div>
 
     <?php
     }

@@ -194,6 +194,9 @@ class Qdmvc
     {
         return (isset($_GET['page']) && array_key_exists($_GET['page'], Qdmvc_Page_Index::getIndex()));
     }
+    public static function getResourcePath($r_path=''){
+        return plugins_url($r_path, __FILE__);
+    }
 }
 
 if (is_admin()) {

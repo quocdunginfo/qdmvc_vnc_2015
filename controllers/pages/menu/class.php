@@ -27,7 +27,8 @@ class Qdmvc_Page_Menu extends Qdmvc_Page_WidgetNav
                 'en-US' => 'WP Menu ID',
                 'vi-VN' => 'WP Menu ID'
             ),
-            'ReadOnly' => true
+            'ReadOnly' => true,
+            'Order' => 35
         );
 
         unset($obj['Group1']['Fields']['path']);
