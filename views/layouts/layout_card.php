@@ -11,14 +11,13 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 {
     protected $obj = null;
     protected $obj_json = null;
-    protected $page = null;
-    protected $data = null;
+
     protected static $ctl_prefix = 'ctl_';
 
     function __construct($page)
     {
-        $this->page = $page;
-        $this->data = $page->getData();
+        parent::__construct($page);
+
         if (isset($this->data['obj'])) {
             $this->obj = $this->data['obj'];
             $this->obj_json = json_encode($this->data['obj_json']);
@@ -886,6 +885,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
     protected function onReadyHook()
     {
+        parent::onReadyHook();
         ?>
         <script>
             (function ($) {
@@ -1268,9 +1268,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    $('#cardRootDiv').css('display', 'block');
-                    $('#cardLoadingImg').css('display', 'none');
-
                     //navigation bar
                     $("#jqxNavigationBar").jqxNavigationBar({
                         width: '100%',
@@ -1460,20 +1457,14 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
     public function render()
     {
+        if ($this->data['nopermission'] === true) {
+            $this->layout_nopermission();
+            return;
+        }
+        $this->style();
+        parent::render();
         ?>
-        <div id="cardLoadingImg" style="width: 100%; height: 200px; text-align: center; background: url(<?=Qdmvc_Helper::getImgURL("ajax-loader_blue.gif")?>) no-repeat center center transparent">
-            <h4>Loading...</h4>
-        </div>
-        <div id="cardRootDiv" style="display: none;">
-            <?= $this->style() ?>
-
-            <?php
-            if ($this->data['nopermission'] === true) {
-                $this->layout_nopermission();
-                return;
-            }
-            ?>
-
+        <div id="qdmvcRootDiv" style="display: none; width: inherit; height: inherit">
             <?= $this->preConfig() ?>
             <?= $this->internalGateway() ?>
             <?= $this->externalGateway() ?>

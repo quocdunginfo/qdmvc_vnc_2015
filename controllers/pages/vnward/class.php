@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_VnWard extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_VnWard extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_VnWard';
@@ -25,30 +27,28 @@ class Qdmvc_Page_VnWard extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-
+                        'Order' => 10,
                     ),
                     'name' => array(
-
+                        'Order' => 20,
                     ),
                     'type' => array(
-
+                        'Order' => 30,
                     ),
                     'location' => array(
-
-
+                        'Order' => 40,
                     ),
                     'districtid' => array(
-
-
+                        'Order' => 50,
                     ),
                     '_districtname' => array(
-
+                        'Order' => 60,
                     ),
                     '_provinceid' => array(
-
+                        'Order' => 70,
                     ),
                     '_provincename' => array(
-
+                        'Order' => 80,
                     )
                 )
             )

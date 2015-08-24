@@ -6,13 +6,15 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_Log extends Qdmvc_Layout_CardNavigate {
+
+class Qdmvc_View_Log extends Qdmvc_Layout_CardNavigate
+{
     protected function onReadyHook()
     {
         ?>
         <script>
-            (function($){
-                $(document).ready(function(){
+            (function ($) {
+                $(document).ready(function () {
                     $("#qdnew").hide();
                     $("#qdclone").hide();
                     $("#qddelete").hide();

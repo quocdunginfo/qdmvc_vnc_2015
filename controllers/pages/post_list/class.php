@@ -32,13 +32,13 @@ class Qdmvc_Page_Post_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'title' => array(
-                    'SourceExpr' => 'title'
+                    'Order' => 20
                 ),
                 'content' => array(
-                    'SourceExpr' => 'content'
+                    'Order' => 30
                 ),
                 'type' => array(
-                    'SourceExpr' => 'type',
+                    'Order' => 40
                 )
             ));
     }

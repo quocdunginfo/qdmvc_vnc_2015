@@ -6,6 +6,8 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadPageView('widgetnavcat');
-class Qdmvc_View_PartnerGrp extends Qdmvc_View_WidgetNavCat {
+
+class Qdmvc_View_PartnerGrp extends Qdmvc_View_WidgetNavCat
+{
 
 }

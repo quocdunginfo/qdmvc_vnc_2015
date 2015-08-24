@@ -24,9 +24,15 @@ class Qdmvc_Page_UserGroup_List extends Qdmvc_Page_Root_List
         $obj = array_merge(
             parent::initFields(),
             array(
-                'description' => array(),
-                'parent_id' => array(),
-                'active' => array(),
+                'description' => array(
+                    'Order' => 20,
+                ),
+                'parent_id' => array(
+                    'Order' => 30,
+                ),
+                'active' => array(
+                    'Order' => 40,
+                ),
             ));
         $obj['id']['Width'] = 150;
         return $obj;

@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root_setup');
-class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup {
+
+class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_SetupProductOrder';
@@ -22,75 +24,66 @@ class Qdmvc_Page_SetupProductOrder extends Qdmvc_Page_RootSetup {
         return array(
             'Group1' => array(
                 'Type' => 'Group',
+                'Order' => 10,
                 'Name' => array(
                     'vi-VN' => 'Thông tin chung',
                     'en-US' => 'General'
                 ),
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'Hidden' => true
                     ),
                     'btn_dathang' => array(
-                        'SourceExpr' => 'btn_dathang',
-
+                        'Order' => 20,
                     ),
                     'btn_goidathang' => array(
-                        'SourceExpr' => 'btn_goidathang',
-
+                        'Order' => 30,
                     ),
 
                 )
-            )
-            ,
+            ),
             'Tab1' => array(
                 'Type' => 'Group',
+                'Order' => 20,
                 'Name' => array(
                     'vi-VN' => 'Form đặt hàng',
                     'en-US' => 'Form order'
                 ),
                 'Fields' => array(
                     'advice_phone' => array(
-                        'SourceExpr' => 'advice_phone',
-
+                        'Order' => 10,
                     ),
                     'support_phone' => array(
-                        'SourceExpr' => 'support_phone',
-
+                        'Order' => 20,
                     ),
                     'order_form_title' => array(
-                        'SourceExpr' => 'order_form_title',
-
+                        'Order' => 30,
                     ),
                 )
-            )
-            ,
+            ),
             'Tab2' => array(
                 'Type' => 'Group',
+                'Order' => 30,
                 'Name' => array(
                     'vi-VN' => 'Đặt hàng thành công',
                     'en-US' => 'Message done'
                 ),
                 'Fields' => array(
-
                     'form_order_done_title' => array(
-                        'SourceExpr' => 'form_order_done_title',
-
+                        'Order' => 10,
                     ),
                     'form_order_done_tpl' => array(
-                        'SourceExpr' => 'form_order_done_tpl',
-
+                        'Order' => 20,
                     ),
                     'order_done_email_title' => array(
-                        'SourceExpr' => 'order_done_email_title',
+                        'Order' => 30,
                     ),
                     'order_done_email_tpl' => array(
-                        'SourceExpr' => 'order_done_email_tpl',
-
+                        'Order' => 40,
                     ),
                     'form_order_done_avatar' => array(
-                        'SourceExpr' => 'form_order_done_avatar',
-
+                        'Order' => 50,
                     ),
                 )
             )

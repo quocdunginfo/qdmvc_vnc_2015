@@ -29,14 +29,15 @@ class Qdmvc_Page_Feedback_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-            'customer_name' => array(
-                'SourceExpr' => 'customer_name'
-            ),
-            'customer_email' => array(
-                'SourceExpr' => 'customer_email'
-            )
-        ));
+                'customer_name' => array(
+                    'Order' => 20,
+                ),
+                'customer_email' => array(
+                    'Order' => 30,
+                )
+            ));
     }
+
     protected function getPageView()
     {
         return array(

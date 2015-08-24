@@ -20,19 +20,19 @@ class Qdmvc_Page_Pro2Pro_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'product_id' => array(
-                    'SourceExpr' => 'product_id',
+                    'Order' => 20,
                     'Width' => 100
                 ),
                 '_product_name' => array(
-                    'SourceExpr' => '_product_name',
+                    'Order' => 30,
                     'Width' => 200,
                 ),
                 'r_product_id' => array(
-                    'SourceExpr' => 'r_product_id',
+                    'Order' => 30,
                     'Width' => 100
                 ),
                 '_r_product_name' => array(
-                    'SourceExpr' => '_r_product_name',
+                    'Order' => 40,
                 )
             )
         );

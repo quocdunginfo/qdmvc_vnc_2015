@@ -24,8 +24,12 @@ class Qdmvc_Page_UserInGroup_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-                'userid' => array(),
-                'usergroupid' => array(),
+                'userid' => array(
+                    'Order' => 20,
+                ),
+                'usergroupid' => array(
+                    'Order' => 30,
+                ),
             ));
     }
 

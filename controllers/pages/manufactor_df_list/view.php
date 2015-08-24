@@ -8,6 +8,7 @@
 //Qdmvc_Helper::qd_media_choose('cavatar', 'avatar', false);
 
 Qdmvc::loadLayout('layout_list');
+
 class Qdmvc_View_ManufactorDF_List extends Qdmvc_Layout_List
 {
 

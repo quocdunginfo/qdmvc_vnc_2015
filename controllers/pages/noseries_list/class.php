@@ -25,27 +25,27 @@ class Qdmvc_Page_NoSeries_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'prefix' => array(
-
+                    'Order' => 20,
                 ),
                 'manual_allowed' => array(
-
+                    'Order' => 30,
                 ),
                 'from_no' => array(
-
+                    'Order' => 40,
                 ),
                 'to_no' => array(
-
+                    'Order' => 50,
                 ),
                 'last_no' => array(
+                    'Order' => 60,
                 ),
                 'active' => array(
-
+                    'Order' => 70,
                 ),
                 'fixed_length' => array(
-
+                    'Order' => 80,
                 ),
-
-        ));
+            ));
     }
 
 }

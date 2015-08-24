@@ -24,9 +24,15 @@ class Qdmvc_Page_User_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-                'username' => array(),
-                'displayname' => array(),
-                'status' => array(),
+                'username' => array(
+                    'Order' => 20,
+                ),
+                'displayname' => array(
+                    'Order' => 30,
+                ),
+                'status' => array(
+                    'Order' => 40,
+                ),
             ));
     }
 

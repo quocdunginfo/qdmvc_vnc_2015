@@ -7,6 +7,8 @@
  */
 //import libraries
 Qdmvc::loadPageView('product');
-class Qdmvc_View_ProductDF_Card extends Qdmvc_View_Product_Card {
+
+class Qdmvc_View_ProductDF_Card extends Qdmvc_View_Product_Card
+{
 
 }

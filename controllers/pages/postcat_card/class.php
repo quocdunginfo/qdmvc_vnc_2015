@@ -6,11 +6,14 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_PostCat extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_PostCat extends Qdmvc_Page_Root
+{
     public function run()
     {
         parent::run();
     }
+
     protected static function getViewClass()
     {
         return 'Qdmvc_View_PostCat';
@@ -29,37 +32,29 @@ class Qdmvc_Page_PostCat extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'ReadOnly' => true
                     ),
                     'title' => array(
-                        'SourceExpr' => 'title',
-
+                        'Order' => 20
                     ),
                     'description' => array(
-                        'SourceExpr' => 'description',
-
+                        'Order' => 30
                     ),
                     'avatar' => array(
-                        'SourceExpr' => 'avatar',
-
+                        'Order' => 30
                     ),
                     'order' => array(
-                        'SourceExpr' => 'order',
-
+                        'Order' => 40
                     ),
                     'active' => array(
-                        'SourceExpr' => 'active',
-
+                        'Order' => 50
                     ),
                     'type' => array(
-                        'SourceExpr' => 'type',
-
-
+                        'Order' => 60
                     ),
                     'parent_id' => array(
-                        'SourceExpr' => 'parent_id',
-
+                        'Order' => 70
                     ),
                 )
             )

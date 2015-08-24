@@ -24,10 +24,10 @@ class Qdmvc_Page_Note_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-            'content' => array(
-                'SourceExpr' => 'content',
-            )
-        ));
+                'content' => array(
+                    'Order' => 20,
+                )
+            ));
     }
 
 }

@@ -36,17 +36,17 @@ class Qdmvc_Page_ProductOrder_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-            '_product_name' => array(
-                'SourceExpr' => '_product_name',
-                'Width' => 100
-            ),
-            'customer_name' => array(
-                'SourceExpr' => 'customer_name'
-            ),
-            'count' => array(
-                'SourceExpr' => 'count',
-                'Width' => 100
-            )
-        ));
+                '_product_name' => array(
+                    'Order' => 20,
+                    'Width' => 100
+                ),
+                'customer_name' => array(
+                    'Order' => 30,
+                ),
+                'count' => array(
+                    'Order' => 40,
+                    'Width' => 100
+                )
+            ));
     }
 }

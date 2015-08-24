@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_UserPersonalization extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_UserPersonalization extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_UserPersonalization';
@@ -25,20 +27,20 @@ class Qdmvc_Page_UserPersonalization extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'Hidden' => true
+                        'Hidden' => true,
+                        'Order' => 10,
                     ),
-
                     'userid' => array(
-
+                        'Order' => 20,
                     ),
                     'username' => array(
-
+                        'Order' => 30,
                     ),
                     'language' => array(
-
+                        'Order' => 40,
                     ),
                     'active' => array(
-
+                        'Order' => 50,
                     )
                 )
             )

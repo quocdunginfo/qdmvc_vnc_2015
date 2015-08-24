@@ -11,7 +11,7 @@ class Qdmvc_Page_Size_List extends Qdmvc_Page_Root_List
 {
     public function run()
     {
-       parent::run();
+        parent::run();
     }
 
     protected static function getViewClass()
@@ -29,19 +29,19 @@ class Qdmvc_Page_Size_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-            'type' => array(
-                'Order' => 20,
-            ),
-            'code' => array(
-                'Order' => 30,
-            ),
-            'name' => array(
-                'Order' => 40,
-            ),
-            'description' => array(
-                'Order' => 50,
-            )
-        ));
+                'type' => array(
+                    'Order' => 20,
+                ),
+                'code' => array(
+                    'Order' => 30,
+                ),
+                'name' => array(
+                    'Order' => 40,
+                ),
+                'description' => array(
+                    'Order' => 50,
+                )
+            ));
     }
 
 }

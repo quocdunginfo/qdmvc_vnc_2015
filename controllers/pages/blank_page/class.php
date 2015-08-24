@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: quocd_000
@@ -14,6 +15,6 @@ class Qdmvc_Page_DatabaseSvc
         ?>
 
 
-        <?php
+    <?php
     }
 }

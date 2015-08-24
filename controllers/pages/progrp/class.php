@@ -6,6 +6,7 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('root');
+
 class Qdmvc_Page_ProGrp_Card extends Qdmvc_Page_Root
 {
     protected static $fields_show = null;
@@ -13,39 +14,33 @@ class Qdmvc_Page_ProGrp_Card extends Qdmvc_Page_Root
     protected static function initFields()
     {
         return array(
-                'General' => array(
-                    'Type' => 'Group',
-                    'Fields' => array(
-                        'id' => array(
-                            'SourceExpr' => 'id',
-
-                        ),
-                        'product_id' => array(
-                            'SourceExpr' => 'product_id',
-
-                        ),
-                        '_product_name' => array(
-                            'SourceExpr' => '_product_name',
-
-                        ),
-                        'group_id' => array(
-                            'SourceExpr' => 'group_id',
-
-                        ),
-                        '_group_name' => array(
-                            'SourceExpr' => '_group_name',
-
-                        ),
-                        'order' => array(
-                            'SourceExpr' => 'order',
-                        ),
-                        'group_type' => array(
-                            'SourceExpr' => 'group_type',
-
-                        ),
-                    )
+            'General' => array(
+                'Type' => 'Group',
+                'Fields' => array(
+                    'id' => array(
+                        'Order' => 10,
+                    ),
+                    'product_id' => array(
+                        'Order' => 20,
+                    ),
+                    '_product_name' => array(
+                        'Order' => 30,
+                    ),
+                    'group_id' => array(
+                        'Order' => 40,
+                    ),
+                    '_group_name' => array(
+                        'Order' => 50,
+                    ),
+                    'order' => array(
+                        'Order' => 60,
+                    ),
+                    'group_type' => array(
+                        'Order' => 70,
+                    ),
                 )
-            );
+            )
+        );
     }
 
     protected static function getViewClass()

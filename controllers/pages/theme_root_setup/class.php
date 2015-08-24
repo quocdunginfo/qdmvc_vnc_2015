@@ -33,26 +33,19 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                 ),
                 'Fields' => array(
                     'topleft_tuvan' => array(
-                        'SourceExpr' => 'topleft_tuvan',
-                        'Order' => 60
-
+                        'Order' => 10
                     ),
                     'topcenter_promotion' => array(
-                        'SourceExpr' => 'topcenter_promotion',
-                        'Order' => 50
+                        'Order' => 20
                     ),
                     'topright_navs' => array(
-                        'SourceExpr' => 'topright_navs',
-                        'Order' => 40
-                    ),
-                    'vnc_logo' => array(
-                        'SourceExpr' => 'vnc_logo',
                         'Order' => 30
                     ),
+                    'vnc_logo' => array(
+                        'Order' => 40
+                    ),
                     'img_slider' => array(
-                        'SourceExpr' => 'img_slider',
-                        'Order' => 20
-
+                        'Order' => 50
                     ),
                 )
             ),
@@ -65,26 +58,18 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                 ),
                 'Fields' => array(
                     'widgetnavcat_id' => array(
-                        'SourceExpr' => 'widgetnavcat_id',
-                        'Order' => 90
-
+                        'Order' => 10
                     ),
                     'partnergrp_id' => array(
-                        'SourceExpr' => 'partnergrp_id',
-                        'Order' => 80
-
+                        'Order' => 20
                     ),
                     'social_icon' => array(
-                        'SourceExpr' => 'social_icon',
-                        'Order' => 70
-
+                        'Order' => 30
                     ),
                     'bottomleft_footer_note' => array(
-                        'SourceExpr' => 'bottomleft_footer_note',
-                        'Order' => 60
+                        'Order' => 40
                     ),
                     'commercial_logo' => array(
-                        'SourceExpr' => 'commercial_logo',
                         'Order' => 50
                     ),
                 )
@@ -98,12 +83,16 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                 ),
                 'Fields' => array(
                     'seo_title_struct' => array(
+                        'Order' => 10,
                     ),
                     'seo_title_struct_2' => array(
+                        'Order' => 20,
                     ),
                     'seo_description_struct' => array(
+                        'Order' => 30,
                     ),
                     'seo_keywords_struct' => array(
+                        'Order' => 40,
                     ),
                 )
             ),
@@ -116,11 +105,12 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                 ),
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
-                        'Hidden' => true
+                        'Hidden' => true,
+                        'Order' => 10,
                     ),
-
-                    'banner_service_page' => array(),
+                    'banner_service_page' => array(
+                        'Order' => 20,
+                    ),
                 )
             ),
         );

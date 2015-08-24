@@ -6,6 +6,7 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('root');
+
 class Qdmvc_Page_ProductOrder_Card extends Qdmvc_Page_Root
 {
     protected static function getViewClass()
@@ -20,43 +21,38 @@ class Qdmvc_Page_ProductOrder_Card extends Qdmvc_Page_Root
                 'Type' => 'Group',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
-
+                        'Order' => 10,
                     ),
                     'product_id' => array(
-                        'SourceExpr' => 'product_id',
-
+                        'Order' => 20,
                     ),
                     '_product_name' => array(
-                        'SourceExpr' => '_product_name',
-
+                        'Order' => 30,
                     ),
                     'sex' => array(
-                        'SourceExpr' => 'sex',
-
+                        'Order' => 40,
                     ),
                     'customer_name' => array(
-                        'SourceExpr' => 'customer_name'
+                        'Order' => 50,
                     ),
                     'customer_phone' => array(
-                        'SourceExpr' => 'customer_phone'
+                        'Order' => 60,
                     ),
                     'customer_email' => array(
-                        'SourceExpr' => 'customer_email'
+                        'Order' => 70,
                     ),
                     'customer_address' => array(
-                        'SourceExpr' => 'customer_address'
+                        'Order' => 80,
                     ),
                     'count' => array(
-                        'SourceExpr' => 'count'
+                        'Order' => 90,
                     ),
                     'done' => array(
-                        'SourceExpr' => 'done',
-
+                        'Order' => 100,
                     ),
                     'mota' => array(
-                        'SourceExpr' => 'mota'
-                    )
+                        'Order' => 110,
+                    ),
                 )
             )
         );

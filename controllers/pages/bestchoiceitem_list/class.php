@@ -32,7 +32,7 @@ class Qdmvc_Page_BestChoiceItem_List extends Qdmvc_Page_Post_List
         unset($obj['content']);
         unset($obj['short_content']);
         $obj['_post_cat_desc'] = array(
-            'SourceExpr' => '_post_cat_desc'
+            'Order' => 50,
         );
         return $obj;
     }

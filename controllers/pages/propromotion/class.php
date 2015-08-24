@@ -6,6 +6,7 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('progrp');
+
 class Qdmvc_Page_ProPromotion_Card extends Qdmvc_Page_ProGrp_Card
 {
     protected static function getViewClass()
@@ -21,9 +22,6 @@ class Qdmvc_Page_ProPromotion_Card extends Qdmvc_Page_ProGrp_Card
     protected static function initFields()
     {
         $obj = parent::initFields();
-        $obj['General']['Fields']['group_id'] = array(
-            'SourceExpr' => 'group_id',
-        );
         return $obj;
     }
 

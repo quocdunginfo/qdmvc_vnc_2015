@@ -8,6 +8,7 @@
 //Qdmvc_Helper::qd_media_choose('cavatar', 'avatar', false);
 
 Qdmvc::loadPageView('contact_list');
+
 class Qdmvc_View_Subscriber_List extends Qdmvc_View_Contact_List
 {
 

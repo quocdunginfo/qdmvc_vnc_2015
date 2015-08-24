@@ -7,6 +7,7 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_cardnavigate');
+
 class Qdmvc_View_PromotionCat_Card extends Qdmvc_Layout_CardNavigate
 {
 

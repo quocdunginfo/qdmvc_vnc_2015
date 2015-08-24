@@ -24,16 +24,16 @@ class Qdmvc_Page_Contact_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-            'name' => array(
-                'SourceExpr' => 'name'
-            ),
-            'email' => array(
-                'SourceExpr' => 'email'
-            ),
-            'phone' => array(
-                'SourceExpr' => 'phone'
-            )
-        ));
+                'name' => array(
+                    'Order' => 20,
+                ),
+                'email' => array(
+                    'Order' => 30,
+                ),
+                'phone' => array(
+                    'Order' => 40,
+                )
+            ));
     }
 
     protected function getPageView()

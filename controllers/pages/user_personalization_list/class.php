@@ -25,11 +25,17 @@ class Qdmvc_Page_UserPersonalization_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'userid' => array(
-
+                    'Order' => 20,
                 ),
-                'username' => array(),
-                'language' => array(),
-                'active' => array()
+                'username' => array(
+                    'Order' => 30,
+                ),
+                'language' => array(
+                    'Order' => 40,
+                ),
+                'active' => array(
+                    'Order' => 50,
+                )
             ));
         unset($obj['id']);
         return $obj;

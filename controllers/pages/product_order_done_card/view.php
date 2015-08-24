@@ -7,6 +7,8 @@
  */
 //import libraries
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_ProductOrderDone_Card extends Qdmvc_Layout_CardNavigate {
+
+class Qdmvc_View_ProductOrderDone_Card extends Qdmvc_Layout_CardNavigate
+{
 
 }

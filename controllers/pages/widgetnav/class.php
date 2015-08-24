@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_WidgetNav';

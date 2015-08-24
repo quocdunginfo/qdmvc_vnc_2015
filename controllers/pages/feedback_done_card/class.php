@@ -7,12 +7,14 @@
  */
 Qdmvc::loadPage('root');
 Qdmvc::loadPage('feedback_card');
+
 class Qdmvc_Page_FeedbackDone_Card extends Qdmvc_Page_Feedback_Card
 {
     public static function getPage()
     {
         return 'feedback_done_card';
     }
+
     protected static function getViewClass()
     {
         return 'Qdmvc_View_FeedbackDone_Card';

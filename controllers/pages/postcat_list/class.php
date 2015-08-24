@@ -20,28 +20,28 @@ class Qdmvc_Page_PostCat_List extends Qdmvc_Page_Root_List
             'type' => QdPostCat::$TYPE_POSTCAT
         );
     }
+
     protected static function initFields()
     {
         return array_merge(
             parent::initFields(),
             array(
                 'parent_id' => array(
-                    'SourceExpr' => 'parent_id',
+                    'Order' => 20,
                     'Width' => 100
                 ),
                 'order' => array(
-                    'SourceExpr' => 'order',
+                    'Order' => 30,
                     'Width' => 100
                 ),
                 'title' => array(
-                    'SourceExpr' => 'title'
+                    'Order' => 40,
                 ),
                 'type' => array(
-                    'SourceExpr' => 'type',
-
+                    'Order' => 50,
                 ),
                 'active' => array(
-                    'SourceExpr' => 'active',
+                    'Order' => 60,
                     'Width' => 100
                 ),
             ));

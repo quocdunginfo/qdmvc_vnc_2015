@@ -28,6 +28,11 @@ class Qdmvc_Message {
         'btn_showall' => 'Xem tất cả',
         /*END Layout card*/
 
+        /*Layout List*/
+        'btn_clearfilter' => 'Gỡ bộ lọc',
+        'btn_scancode' => 'Quét mã QR',
+        /*END Layout List*/
+
         /*Field Description*/
         'fd_seometa_field_title' => 'Tiêu đề Web hiển thị thực tế khi người dùng mở trang %s<br>Dùng chức năng SEO Meta để thay đổi',
         'fd_seometa_field_description' => 'Mô tả Web hiển thị thực tế khi người dùng mở trang %s<br>Dùng chức năng SEO Meta để thay đổi'
@@ -54,6 +59,11 @@ class Qdmvc_Message {
         'btn_exportexcel' => 'Export Excel',
         'btn_showall' => 'Show All',
         /*END Layout card*/
+
+        /*Layout List*/
+        'btn_clearfilter' => 'Clear filter',
+        'btn_scancode' => 'Scan QR code'
+        /*END Layout List*/
     );
     public static function getMsg($key)
     {

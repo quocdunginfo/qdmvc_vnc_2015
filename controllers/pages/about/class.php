@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('post_card');
-class Qdmvc_Page_About extends Qdmvc_Page_Post {
+
+class Qdmvc_Page_About extends Qdmvc_Page_Post
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_About';
@@ -21,10 +23,10 @@ class Qdmvc_Page_About extends Qdmvc_Page_Post {
     {
         $obj = parent::initFields();
         $obj['Group1']['Fields']['_post_cat_desc'] = array(
-            'SourceExpr' => '_post_cat_desc',
+            'Order' => 100
         );
         $obj['Group1']['Fields']['tpl_type'] = array(
-            'SourceExpr' => 'tpl_type',
+            'Order' => 110
         );
         return $obj;
     }

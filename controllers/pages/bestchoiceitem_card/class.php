@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('post_card');
-class Qdmvc_Page_BestChoiceItem extends Qdmvc_Page_Post {
+
+class Qdmvc_Page_BestChoiceItem extends Qdmvc_Page_Post
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_BestChoiceItem';
@@ -21,13 +23,13 @@ class Qdmvc_Page_BestChoiceItem extends Qdmvc_Page_Post {
     {
         $obj = parent::initFields();
         $obj['Group1']['Fields']['_post_cat_desc'] = array(
-            'SourceExpr' => '_post_cat_desc',
+            'Order' => 100,
         );
         $obj['Group1']['Fields']['title_color'] = array(
-            'SourceExpr' => 'title_color',
+            'Order' => 110,
         );
         $obj['Group1']['Fields']['link'] = array(
-            'SourceExpr' => 'link',
+            'Order' => 120,
         );
         unset($obj['Group1']['Fields']['content']);
         unset($obj['Group1']['Fields']['short_content']);

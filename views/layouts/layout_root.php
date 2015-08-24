@@ -6,11 +6,18 @@
  * Time: 4:56 PM
  */
 class Qdmvc_Layout_Root {
-    function __construct(){
-
+    protected $page = null;
+    protected $data = null;
+    function __construct($page){
+        $this->page = $page;
+        $this->data = $page->getData();
     }
     public function render(){
-
+        ?>
+        <div id="cardLoadingImg" style="width: 100%; height: 200px; text-align: center; background: url(<?=Qdmvc_Helper::getImgURL("ajax-loader_blue.gif")?>) no-repeat center center transparent">
+            <h4>Loading...</h4>
+        </div>
+        <?php
     }
     protected function layout_nopermission()
     {
@@ -56,6 +63,22 @@ class Qdmvc_Layout_Root {
                 }
                 window.parent.MYAPP.openInNewTab(url);
             };
+        </script>
+        <?php
+    }
+    protected function onReadyHook(){
+        ?>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    if ( $('#qdmvcRootDiv').length ){
+                        $('#qdmvcRootDiv').css('display', 'block');
+                    }
+                    if ( $('#cardLoadingImg').length ){
+                        $('#cardLoadingImg').css('display', 'none');
+                    }
+                });
+            })(jQuery);
         </script>
         <?php
     }

@@ -6,7 +6,9 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_WpMenu extends Qdmvc_Layout_CardNavigate {
+
+class Qdmvc_View_WpMenu extends Qdmvc_Layout_CardNavigate
+{
     protected function serverFunctions()
     {
         $obj = parent::serverFunctions();
@@ -28,12 +30,13 @@ class Qdmvc_View_WpMenu extends Qdmvc_Layout_CardNavigate {
         ));
         return $obj;
     }
+
     protected function onReadyHook()
     {
         ?>
         <script>
-            (function($){
-                $(document).ready(function(){
+            (function ($) {
+                $(document).ready(function () {
                     $("#qdnew").hide();
                     $("#qdclone").hide();
                     $("#qddelete").hide();
@@ -44,7 +47,7 @@ class Qdmvc_View_WpMenu extends Qdmvc_Layout_CardNavigate {
 
                     //button
                     var menu_format = '<?=admin_url( 'nav-menus.php?action=edit&menu=');?>';
-                    $('#btn_openwpmenueditor').click(function(){
+                    $('#btn_openwpmenueditor').click(function () {
 
                         var tmp = menu_format + MYAPP.viewModel.wpid();
                         //MYAPP.requestLookupWindow(tmp);

@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root_setup');
-class Qdmvc_Page_ProductSetup extends Qdmvc_Page_RootSetup {
+
+class Qdmvc_Page_ProductSetup extends Qdmvc_Page_RootSetup
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_ProductSetup';
@@ -25,24 +27,20 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_RootSetup {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'Hidden' => true
                     ),
                     'df_pro_cat_avatar' => array(
-                        'SourceExpr' => 'df_pro_cat_avatar',
-
+                        'Order' => 20,
                     ),
                     'df_product_desc_tpl' => array(
-                        'SourceExpr' => 'df_product_desc_tpl',
-
+                        'Order' => 30,
                     ),
                     'df_pro_avatar' => array(
-                        'SourceExpr' => 'df_pro_avatar',
-
+                        'Order' => 40,
                     ),
                     'bigsalecat_id' => array(
-                        'SourceExpr' => 'bigsalecat_id',
-
+                        'Order' => 50,
                     ),
                     /*
                     'product_noseries' => array(

@@ -8,5 +8,7 @@
 //Qdmvc_Helper::qd_media_choose('cavatar', 'avatar', false);
 
 Qdmvc::loadPageView('product_list');
-class Qdmvc_View_ProductGD_List extends Qdmvc_View_Product_List {
+
+class Qdmvc_View_ProductGD_List extends Qdmvc_View_Product_List
+{
 }

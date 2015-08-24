@@ -7,6 +7,7 @@
  * Time: 11:34 PM
  */
 Qdmvc::loadPage('root');
+
 class Qdmvc_Page_Root_List extends Qdmvc_Page_Root
 {
     function __construct()
@@ -18,15 +19,13 @@ class Qdmvc_Page_Root_List extends Qdmvc_Page_Root
     {
         //check in Layout first
         $tmp_config = static::initFields();
-        if(!QdT_Library::isNullOrEmpty($tmp_config[$f_name][$meta_name]))
-        {
+        if (!QdT_Library::isNullOrEmpty($tmp_config[$f_name][$meta_name])) {
             return $tmp_config[$f_name][$meta_name];
         }
         //check in Model
         $c = static::getModel();
         $tmp = $c::getSingleFieldConfig($f_name, $meta_name, $lang);
-        if(QdT_Library::isNullOrEmpty($tmp) && $meta_name=='SourceExpr')
-        {
+        if (QdT_Library::isNullOrEmpty($tmp) && $meta_name == 'SourceExpr') {
             $tmp = $f_name;
         }
         return $tmp;

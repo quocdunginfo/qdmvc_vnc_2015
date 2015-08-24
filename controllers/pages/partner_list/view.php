@@ -8,6 +8,7 @@
 //Qdmvc_Helper::qd_media_choose('cavatar', 'avatar', false);
 
 Qdmvc::loadPageView('widgetnav_list');
+
 class Qdmvc_View_Partner_List extends Qdmvc_View_WidgetNav_List
 {
 

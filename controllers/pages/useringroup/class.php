@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_UserInGroup extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_UserInGroup extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_UserInGroup';
@@ -25,10 +27,13 @@ class Qdmvc_Page_UserInGroup extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
+                        'Order' => 10,
                     ),
                     'userid' => array(
+                        'Order' => 20,
                     ),
                     'usergroupid' => array(
+                        'Order' => 30,
                     ),
                 )
             )

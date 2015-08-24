@@ -26,30 +26,35 @@ class Qdmvc_Page_SEOMeta extends Qdmvc_Page_Root
                 'Type' => 'Group',
                 'Name' => 'General',
                 'Fields' => array(
-                    'id' => array(),
-                    'model' => array(),
-                    'model_id' => array(),
-                    'active' => array(),
-                    'overwrite' => array(),
-                    'meta_name' => array(),
-                    'seo_tpl' => array(),
-                    'meta_value' => array(),
-                    '_meta_value_preview' => array(),
+                    'id' => array(
+                        'Order' => 10,
+                    ),
+                    'model' => array(
+                        'Order' => 20,
+                    ),
+                    'model_id' => array(
+                        'Order' => 30,
+                    ),
+                    'active' => array(
+                        'Order' => 40,
+                    ),
+                    'overwrite' => array(
+                        'Order' => 50,
+                    ),
+                    'meta_name' => array(
+                        'Order' => 60,
+                    ),
+                    'seo_tpl' => array(
+                        'Order' => 70,
+                    ),
+                    'meta_value' => array(
+                        'Order' => 80,
+                    ),
+                    '_meta_value_preview' => array(
+                        'Order' => 90,
+                    ),
                 )
             )
-            /* SAMPLE
-            ,
-            'Group2' => array(
-                'Type' => 'Part',
-                'Name' => 'Lines',
-                'PagePartID' => '',
-                'SubPageLink' => array(
-                    'Field' => '',
-                    'Type' => 'FIELD',//'CONST',
-                    'Value' => ''
-                )
-            )
-            */
         );
     }
 

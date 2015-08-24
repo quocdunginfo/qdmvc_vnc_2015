@@ -6,6 +6,8 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_BestChoiceCat extends Qdmvc_Layout_CardNavigate {
+
+class Qdmvc_View_BestChoiceCat extends Qdmvc_Layout_CardNavigate
+{
 
 }

@@ -24,11 +24,16 @@ class Qdmvc_Page_NoSeriesMap_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-            'model' => array(
-            ),
-            'noseries' => array(),
-            'active' => array()
-        ));
+                'model' => array(
+                    'Order' => 20,
+                ),
+                'noseries' => array(
+                    'Order' => 30,
+                ),
+                'active' => array(
+                    'Order' => 40,
+                )
+            ));
     }
 
 }

@@ -6,6 +6,7 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('contact');
+
 class Qdmvc_Page_Shop_Card extends Qdmvc_Page_Contact_Card
 {
     protected static function getViewClass()

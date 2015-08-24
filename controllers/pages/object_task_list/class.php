@@ -25,32 +25,27 @@ class Qdmvc_Page_ObjectTask_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'layer' => array(
-                    'SourceExpr' => 'layer',
-
+                    'Order' => 20,
                 ),
                 'action' => array(
-                    'SourceExpr' => 'action',
-
+                    'Order' => 30,
                 ),
                 'object_type' => array(
-                    'SourceExpr' => 'object_type',
-
+                    'Order' => 40,
                 ),
                 'object_name' => array(
-                    'SourceExpr' => 'object_name',
+                    'Order' => 50,
                 ),
                 'version' => array(
-                    'SourceExpr' => 'version',
-
+                    'Order' => 60,
                 ),
                 'description' => array(
-                    'SourceExpr' => 'description',
-
+                    'Order' => 70,
                 ),
                 'compatible' => array(
-                    'SourceExpr' => 'compatible',
+                    'Order' => 80,
                 ),
-        ));
+            ));
     }
 
 }

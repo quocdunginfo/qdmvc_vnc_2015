@@ -24,11 +24,9 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                     ),
                     'type' => array(
                         'Order' => 20,
-
                     ),
                     'name' => array(
                         'Order' => 30,
-
                     ),
                     'product_cat_id' => array(
                         'Order' => 40,

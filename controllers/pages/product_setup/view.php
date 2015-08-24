@@ -6,6 +6,8 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_cardsetup');
-class Qdmvc_View_ProductSetup extends Qdmvc_Layout_CardSetup {
+
+class Qdmvc_View_ProductSetup extends Qdmvc_Layout_CardSetup
+{
 
 }

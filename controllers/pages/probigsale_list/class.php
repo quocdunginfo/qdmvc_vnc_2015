@@ -6,6 +6,7 @@
  * Time: 11:35 PM
  */
 Qdmvc::loadPage('progrp_list');
+
 class Qdmvc_Page_ProBigSale_List extends Qdmvc_Page_ProGrp_List
 {
     protected static function getViewClass()

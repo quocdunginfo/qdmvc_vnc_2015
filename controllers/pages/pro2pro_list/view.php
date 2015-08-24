@@ -8,6 +8,7 @@
 //Qdmvc_Helper::qd_media_choose('cavatar', 'avatar', false);
 
 Qdmvc::loadLayout('layout_list');
+
 class Qdmvc_View_Pro2Pro_List extends Qdmvc_Layout_List
 {
 }

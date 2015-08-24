@@ -23,9 +23,7 @@ class Qdmvc_Page_Menu_List extends Qdmvc_Page_WidgetNav_List
     {
         $obj = array_merge(
             parent::initFields(),
-            array(
-
-            ));
+            array());
         unset($obj['path']);
         unset($obj['button_text']);
         unset($obj['target']);
@@ -34,6 +32,7 @@ class Qdmvc_Page_Menu_List extends Qdmvc_Page_WidgetNav_List
         unset($obj['_group_name']);
         return $obj;
     }
+
     protected function getCustomPageView()
     {
         return array(

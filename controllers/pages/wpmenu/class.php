@@ -6,8 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_WpMenu extends Qdmvc_Page_Root {
 
+class Qdmvc_Page_WpMenu extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_WpMenu';
@@ -26,13 +27,14 @@ class Qdmvc_Page_WpMenu extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-
+                        'Order' => 10,
                     ),
-                    'count' => array()
+                    'count' => array(
+                        'Order' => 20,
+                    )
                 )
             )
 
         );
     }
-
 }

@@ -6,6 +6,8 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadPageView('manufactor');
-class Qdmvc_View_ManufactorDF extends Qdmvc_View_Manufactor {
+
+class Qdmvc_View_ManufactorDF extends Qdmvc_View_Manufactor
+{
 
 }

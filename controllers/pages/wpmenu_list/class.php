@@ -24,8 +24,9 @@ class Qdmvc_Page_WpMenu_List extends Qdmvc_Page_Root_List
         $obj = array_merge(
             parent::initFields(),
             array(
-                'count' => array()
-
+                'count' => array(
+                    'Order' => 20,
+                )
             ));
         $obj['id']['Width'] = 400;
         return $obj;

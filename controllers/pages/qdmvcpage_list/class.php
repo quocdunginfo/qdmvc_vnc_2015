@@ -23,9 +23,7 @@ class Qdmvc_Page_QdmvcPage_List extends Qdmvc_Page_Root_List
     {
         $obj = array_merge(
             parent::initFields(),
-            array(
-
-        ));
+            array());
         $obj['id']['Width'] = 500;
         return $obj;
     }

@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_ProductCat_Card';
@@ -16,11 +18,13 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
     {
         return 'product_cat_card';
     }
-    public function getPagePartURL($part_name='')
+
+    public function getPagePartURL($part_name = '')
     {
         return '';
         //return "http://localhost/mpd_2015/wp-admin/admin.php?page=product_card&qdrole=navigate&filterdatafield0=product_cat_id&filtervalue0=95";//quocdunginfo
     }
+
     protected static function initFields()
     {
         return array(
@@ -40,7 +44,6 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root {
                     ),
                     'level' => array(
                         'Order' => 40,
-
                     ),
                     'name' => array(
                         'Order' => 50,

@@ -26,13 +26,14 @@ class Qdmvc_Page_WidgetNavCat_List extends Qdmvc_Page_PostCat_List
     {
         return 'widgetnavcat_list';
     }
+
     protected static function initFields()
     {
         $obj = array_merge(
             parent::initFields(),
             array(
                 'description' => array(
-                    'SourceExpr' => 'description'
+                    'Order' => 70,
                 ),
             ));
         unset($obj['parent_id']);

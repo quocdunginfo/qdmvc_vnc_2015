@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root_setup');
-class Qdmvc_Page_SetupVersion extends Qdmvc_Page_RootSetup {
+
+class Qdmvc_Page_SetupVersion extends Qdmvc_Page_RootSetup
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_SetupVersion';
@@ -25,12 +27,15 @@ class Qdmvc_Page_SetupVersion extends Qdmvc_Page_RootSetup {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
+                        'Order' => 10,
                         'Hidden' => true
                     ),
                     'source_version' => array(
-
+                        'Order' => 20,
                     ),
-                    'db_version' => array()
+                    'db_version' => array(
+                        'Order' => 30,
+                    )
                 )
             )
         );

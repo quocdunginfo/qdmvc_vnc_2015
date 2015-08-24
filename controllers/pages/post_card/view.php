@@ -6,7 +6,9 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_Post extends Qdmvc_Layout_CardNavigate {
+
+class Qdmvc_View_Post extends Qdmvc_Layout_CardNavigate
+{
     protected function serverFunctions()
     {
         $obj = parent::serverFunctions();
@@ -22,6 +24,7 @@ class Qdmvc_View_Post extends Qdmvc_Layout_CardNavigate {
         ));
         return $obj;
     }
+
     protected function onReadyHook()
     {
         parent::onReadyHook();//must place at the end or knockout not binding to appended html

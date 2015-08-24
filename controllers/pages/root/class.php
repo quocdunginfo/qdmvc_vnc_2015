@@ -13,11 +13,9 @@ class Qdmvc_Page_Root
 
     function __construct()
     {
-        if(!$this->checkPermission())
-        {
+        if (!$this->checkPermission()) {
             $this->data['nopermission'] = true;
-        }
-        else{
+        } else {
             $this->data['nopermission'] = false;
         }
 
@@ -43,13 +41,13 @@ class Qdmvc_Page_Root
         $re = array();
         //passing page filter
         //pre filter
-        foreach($_REQUEST as $key=>$value) {
+        foreach ($_REQUEST as $key => $value) {
             if (strstr($key, 'filterdatafield') !== false) {
                 $number = substr($key, 15);
-                $f_condition = 'filtercondition'.$number;
-                $f_condition = isset($_REQUEST[$f_condition])?$_REQUEST[$f_condition]:'EQUAL';
+                $f_condition = 'filtercondition' . $number;
+                $f_condition = isset($_REQUEST[$f_condition]) ? $_REQUEST[$f_condition] : 'EQUAL';
 
-                $f_value = $_REQUEST['filtervalue'.$number];
+                $f_value = $_REQUEST['filtervalue' . $number];
                 $f_field = $_REQUEST[$key];
 
                 $re[$f_field] = array(
@@ -78,7 +76,7 @@ class Qdmvc_Page_Root
         return array(
             'id' => array(
                 'Order' => 10,
-	            'ReadOnly' => true,
+                'ReadOnly' => true,
                 'Width' => 70
             )
         );
@@ -131,11 +129,9 @@ class Qdmvc_Page_Root
     public static function getLookupURL($field_name)
     {
         $c = static::getModel();
-        if($c::ISLOOKUPFIELD($field_name))
-        {
+        if ($c::ISLOOKUPFIELD($field_name)) {
             $tbrelation = $c::getTableRelation($field_name);
-            if(!Qdmvc_Helper::isNullOrEmpty($tbrelation))
-            {
+            if (!Qdmvc_Helper::isNullOrEmpty($tbrelation)) {
                 $tbfilter = $tbrelation['TableFilter'];
 
                 $filter_arr = array();
@@ -175,6 +171,7 @@ class Qdmvc_Page_Root
         $c = static::getModel();
         return $c::hasLines();
     }
+
     public static function hasSEOMetaLines()
     {
         $c = static::getModel();
@@ -195,12 +192,9 @@ class Qdmvc_Page_Root
         //set pre filter
         $arr = static::getPageView();
         foreach ($arr as $field => $value) {
-            if(!is_array($value))
-            {
+            if (!is_array($value)) {
                 $obj->{$field} = $value;
-            }
-            else
-            {
+            } else {
                 $obj->{$field} = $value['value'];
             }
         }
@@ -222,23 +216,20 @@ class Qdmvc_Page_Root
     public function getFieldCaption($field_name, $lang = 'en-US')
     {
         //check in Page Config first
-        foreach(static::getLayout() as $group=>$gconfig)
-        {
-            if(isset($gconfig['Type']) && $gconfig['Type']==='Group'){
+        foreach (static::getLayout() as $group => $gconfig) {
+            if (isset($gconfig['Type']) && $gconfig['Type'] === 'Group') {
                 //Page Card
                 //if(isset($gconfig['Fields'][$field_name]['Caption'])){
-                    //if(is_array($gconfig['Fields'][$field_name]['Caption'])){
-                        if(isset($gconfig['Fields'][$field_name]['Caption'][$lang])){
-                            return $gconfig['Fields'][$field_name]['Caption'][$lang];
-                        }
-                    //}
+                //if(is_array($gconfig['Fields'][$field_name]['Caption'])){
+                if (isset($gconfig['Fields'][$field_name]['Caption'][$lang])) {
+                    return $gconfig['Fields'][$field_name]['Caption'][$lang];
+                }
                 //}
-            }
-            else{
+                //}
+            } else {
                 //Page List
-                if($group===$field_name)
-                {
-                    if(isset($gconfig['Caption'][$lang])){
+                if ($group === $field_name) {
+                    if (isset($gconfig['Caption'][$lang])) {
                         return $gconfig['Caption'][$lang];
                     }
                 }
@@ -248,26 +239,24 @@ class Qdmvc_Page_Root
         $c = static::getModel();
         return $c::getFieldCaption($field_name, $lang);
     }
+
     public function getFieldDescription($field_name, $lang = 'en-US')
     {
         //check in Page Config first
-        foreach(static::getLayout() as $group=>$gconfig)
-        {
-            if(isset($gconfig['Type']) && $gconfig['Type']==='Group'){
+        foreach (static::getLayout() as $group => $gconfig) {
+            if (isset($gconfig['Type']) && $gconfig['Type'] === 'Group') {
                 //Page Card
                 //if(isset($gconfig['Fields'][$field_name]['Caption'])){
                 //if(is_array($gconfig['Fields'][$field_name]['Caption'])){
-                if(isset($gconfig['Fields'][$field_name]['Description'][$lang])){
+                if (isset($gconfig['Fields'][$field_name]['Description'][$lang])) {
                     return $gconfig['Fields'][$field_name]['Description'][$lang];
                 }
                 //}
                 //}
-            }
-            else{
+            } else {
                 //Page List
-                if($group===$field_name)
-                {
-                    if(isset($gconfig['Description'][$lang])){
+                if ($group === $field_name) {
+                    if (isset($gconfig['Description'][$lang])) {
                         return $gconfig['Description'][$lang];
                     }
                 }
@@ -284,8 +273,8 @@ class Qdmvc_Page_Root
             static::$fields_show = static::initFields();
             //apply sorting
             uasort(static::$fields_show, "static::compareArray");
-            foreach(static::$fields_show as $key=>&$config){
-                if($config['Type']=='Group' && isset($config['Fields'])) {
+            foreach (static::$fields_show as $key => &$config) {
+                if ($config['Type'] == 'Group' && isset($config['Fields'])) {
                     uasort($config['Fields'], "static::compareArray");
                 }
             }
@@ -293,11 +282,11 @@ class Qdmvc_Page_Root
         }
         return static::$fields_show;
     }
+
     private static function compareArray($a, $b)
     {
-        if(isset($a['Order']) && isset($b['Order']))
-        {
-            if($a['Order']==$b['Order']){
+        if (isset($a['Order']) && isset($b['Order'])) {
+            if ($a['Order'] == $b['Order']) {
                 return 0;
             }
             return $a['Order'] - $b['Order'];
@@ -376,9 +365,12 @@ class Qdmvc_Page_Root
         $c = static::getModel();
         return $c::getFieldOptions($f_name, $lang);
     }
-    public static function getFieldDataPort($f_name, $lang='en-US'){
+
+    public static function getFieldDataPort($f_name, $lang = 'en-US')
+    {
         return static::getFieldsConfig($f_name, 'DataPort');
     }
+
     protected static function getFieldsConfig($f_name, $meta_name, $lang = 'en-US')
     {
         //check in Layout first
@@ -392,37 +384,35 @@ class Qdmvc_Page_Root
         //check in Model
         $c = static::getModel();
         $tmp = $c::getSingleFieldConfig($f_name, $meta_name, $lang);
-        if(QdT_Library::isNullOrEmpty($tmp) && $meta_name=='SourceExpr')
-        {
+        if (QdT_Library::isNullOrEmpty($tmp) && $meta_name == 'SourceExpr') {
             $tmp = $f_name;
         }
         return $tmp;
     }
+
     public static function getSourceExpr($f_name)
     {
         $re = static::getFieldsConfig($f_name, 'SourceExpr');
-        if(Qdmvc_Helper::isNullOrEmpty($re))
-        {
+        if (Qdmvc_Helper::isNullOrEmpty($re)) {
             $re = $f_name;
         }
         return $re;
     }
+
     /*Page Card only*/
-    public static function getTabConfig($tabid, $meta, $lang='en-US')
+    public static function getTabConfig($tabid, $meta, $lang = 'en-US')
     {
         $layout = static::getLayout();
-        if(isset($layout[$tabid]) && isset($layout[$tabid][$meta]))
-        {
-            if(is_array($layout[$tabid][$meta]) && isset($layout[$tabid][$meta][$lang]))
-            {
+        if (isset($layout[$tabid]) && isset($layout[$tabid][$meta])) {
+            if (is_array($layout[$tabid][$meta]) && isset($layout[$tabid][$meta][$lang])) {
                 return $layout[$tabid][$meta][$lang];
-            }
-            else{
+            } else {
                 return $layout[$tabid][$meta];
             }
         }
-        return '@'.$tabid;
+        return '@' . $tabid;
     }
+
     protected function checkPermission()
     {
         if ($this->getPage() !== 'nopermission') {

@@ -6,6 +6,7 @@
  * Time: 11:35 PM
  */
 Qdmvc::loadPage('product_cat_list');
+
 class Qdmvc_Page_PromotionCat_List extends Qdmvc_Page_ProductCat_List
 {
     protected static function getViewClass()

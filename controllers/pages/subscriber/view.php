@@ -7,6 +7,8 @@
  */
 //import libraries
 Qdmvc::loadPageView('contact');
-class Qdmvc_View_Subscriber_Card extends Qdmvc_View_Contact_Card {
+
+class Qdmvc_View_Subscriber_Card extends Qdmvc_View_Contact_Card
+{
 
 }

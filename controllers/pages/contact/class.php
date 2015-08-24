@@ -6,6 +6,7 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('root');
+
 class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
 {
     protected static function getViewClass()
@@ -18,52 +19,54 @@ class Qdmvc_Page_Contact_Card extends Qdmvc_Page_Root
         return array(
             'Group1' => array(
                 'Type' => 'Group',
+                'Order' => 10,
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                     ),
                     'type' => array(
-                        'SourceExpr' => 'type',
+                        'Order' => 20,
                     )
-                    ,
+                ,
                     'name' => array(
-                        'SourceExpr' => 'name'
+                        'Order' => 30,
                     ),
                     'email' => array(
-                        'SourceExpr' => 'email'
+                        'Order' => 40,
                     ),
                     'phone' => array(
-                        'SourceExpr' => 'phone',
+                        'Order' => 50,
                     ),
                     'website' => array(
-                        'SourceExpr' => 'website'
+                        'Order' => 60,
                     ),
                     'address' => array(
-                        'SourceExpr' => 'address'
+                        'Order' => 70,
                     ),
                     'active' => array(
-                        'SourceExpr' => 'active',
+                        'Order' => 80,
                     ),
                     'order' => array(
-                        'SourceExpr' => 'order',
+                        'Order' => 90,
                     ),
                     'description' => array(
-                        'SourceExpr' => 'description',
+                        'Order' => 100,
                     )
                 )
             ),
             'Tab1' => array(
                 'Type' => 'Group',
                 'Name' => array('vi-VN' => 'Vị trí', 'en-US' => 'Location'),
+                'Order' => 20,
                 'Fields' => array(
                     'address_province_id' => array(
-
+                        'Order' => 10,
                     ),
                     'address_district_id' => array(
-
+                        'Order' => 20,
                     ),
                     'address_ward_id' => array(
-
+                        'Order' => 30,
                     ),
                 )
             )

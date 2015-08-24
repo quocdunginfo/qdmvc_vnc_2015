@@ -6,6 +6,7 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('root');
+
 class Qdmvc_Page_Pro2Pro_Card extends Qdmvc_Page_Root
 {
     protected static $fields_show = null;
@@ -13,33 +14,30 @@ class Qdmvc_Page_Pro2Pro_Card extends Qdmvc_Page_Root
     protected static function initFields()
     {
         return array(
-                'General' => array(
-                    'Type' => 'Group',
-                    'Fields' => array(
-                        'id' => array(
-                            'SourceExpr' => 'id',
-                        ),
-                        'product_id' => array(
-                            'SourceExpr' => 'product_id',
-                        ),
-                        '_product_name' => array(
-                            'SourceExpr' => '_product_name',
-
-                        ),
-                        'r_product_id' => array(
-                            'SourceExpr' => 'r_product_id',
-
-                        ),
-                        '_r_product_name' => array(
-                            'SourceExpr' => '_r_product_name',
-
-                        ),
-                        'order' => array(
-                            'SourceExpr' => 'order',
-                        ),
-                    )
+            'General' => array(
+                'Type' => 'Group',
+                'Fields' => array(
+                    'id' => array(
+                        'Order' => 10,
+                    ),
+                    'product_id' => array(
+                        'Order' => 20,
+                    ),
+                    '_product_name' => array(
+                        'Order' => 30,
+                    ),
+                    'r_product_id' => array(
+                        'Order' => 40,
+                    ),
+                    '_r_product_name' => array(
+                        'Order' => 50,
+                    ),
+                    'order' => array(
+                        'Order' => 60,
+                    ),
                 )
-            );
+            )
+        );
     }
 
     protected static function getViewClass()

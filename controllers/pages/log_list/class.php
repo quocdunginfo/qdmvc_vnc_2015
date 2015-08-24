@@ -30,16 +30,16 @@ class Qdmvc_Page_Log_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'location' => array(
-                    'SourceExpr' => 'location',
+                    'Order' => 20,
                 ),
                 'owner_id' => array(
-                    'SourceExpr' => 'owner_id',
+                    'Order' => 30,
                 ),
                 'action' => array(
-                    'SourceExpr' => 'action',
+                    'Order' => 40,
                 ),
                 'ip' => array(
-                    'SourceExpr' => 'ip',
+                    'Order' => 50,
                     'Width' => 150
                 ),
             ));

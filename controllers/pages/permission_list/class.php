@@ -24,12 +24,21 @@ class Qdmvc_Page_Permission_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-                'usergroupid' => array(),
-                'classname' => array(),
-                'methodname' => array(),
-                'pagename' => array(
+                'usergroupid' => array(
+                    'Order' => 20,
                 ),
-                'active' => array(),
+                'classname' => array(
+                    'Order' => 30,
+                ),
+                'methodname' => array(
+                    'Order' => 40,
+                ),
+                'pagename' => array(
+                    'Order' => 50,
+                ),
+                'active' => array(
+                    'Order' => 60,
+                ),
             ));
     }
 

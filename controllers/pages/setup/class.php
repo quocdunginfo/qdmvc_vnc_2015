@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root_setup');
-class Qdmvc_Page_Setup extends Qdmvc_Page_RootSetup {
+
+class Qdmvc_Page_Setup extends Qdmvc_Page_RootSetup
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_Setup';
@@ -25,14 +27,15 @@ class Qdmvc_Page_Setup extends Qdmvc_Page_RootSetup {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                         'Hidden' => true
                     ),
                     'df_language' => array(
-                        'SourceExpr' => 'df_language',
-
+                        'Order' => 20,
                     ),
-                    'autoexpandmenu' => array()
+                    'autoexpandmenu' => array(
+                        'Order' => 30,
+                    )
                 )
             )
         );

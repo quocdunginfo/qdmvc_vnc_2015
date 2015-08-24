@@ -1,20 +1,23 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: quocd_000
  * Date: 03/05/2015
  * Time: 9:48 AM
  */
-class Qdmvc_Page_IndexMenu {
+class Qdmvc_Page_IndexMenu
+{
     public static function getIndex()
     {
         return static::$index;
     }
+
     private static $index = array(
         'main' => array(
             'ParentId' => -1,
-            'Active'=>false,
-            'Class'=>'Qdmvc_Page_Main',
+            'Active' => false,
+            'Class' => 'Qdmvc_Page_Main',
             'Caption' => array(
                 'en-US' => 'Page Main',
                 'vi-VN' => 'Trang chính',
@@ -24,9 +27,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product' => array(
             'ParentId' => 'folder10',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Product_Card',
+            'Class' => 'Qdmvc_Page_Product_Card',
             'Caption' => array(
                 'en-US' => 'Product (All)',
                 'vi-VN' => 'Sản phẩm (Tất cả)',
@@ -37,9 +40,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Product_List',
+            'Class' => 'Qdmvc_Page_Product_List',
             'Caption' => array(
                 'en-US' => 'Product List',
                 'vi-VN' => 'Product List'
@@ -49,9 +52,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_df' => array(
             'ParentId' => 'folder10',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductDF_Card',
+            'Class' => 'Qdmvc_Page_ProductDF_Card',
             'Caption' => array(
                 'en-US' => 'Product DF',
                 'vi-VN' => 'Sản phẩm DF',
@@ -62,9 +65,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_df_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductDF_List',
+            'Class' => 'Qdmvc_Page_ProductDF_List',
             'Caption' => array(
                 'en-US' => 'Product DF List',
                 'vi-VN' => 'Product DF List'
@@ -74,9 +77,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_qa' => array(
             'ParentId' => 'folder10',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductQA_Card',
+            'Class' => 'Qdmvc_Page_ProductQA_Card',
             'Caption' => array(
                 'en-US' => 'Product QA',
                 'vi-VN' => 'Sản phẩm QA',
@@ -87,9 +90,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_qa_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductQA_List',
+            'Class' => 'Qdmvc_Page_ProductQA_List',
             'Caption' => array(
                 'en-US' => 'Product QA List',
                 'vi-VN' => 'Product QA List'
@@ -99,9 +102,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_gd' => array(
             'ParentId' => 'folder10',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductGD_Card',
+            'Class' => 'Qdmvc_Page_ProductGD_Card',
             'Caption' => array(
                 'en-US' => 'Product GD',
                 'vi-VN' => 'Sản phẩm GD',
@@ -112,9 +115,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_gd_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductGD_List',
+            'Class' => 'Qdmvc_Page_ProductGD_List',
             'Caption' => array(
                 'en-US' => 'Product GD List',
                 'vi-VN' => 'Product GD List'
@@ -124,9 +127,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_card' => array(
             'ParentId' => 'folder20',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductCat_Card',
+            'Class' => 'Qdmvc_Page_ProductCat_Card',
             'Caption' => array(
                 'en-US' => 'Product Category (All)',
                 'vi-VN' => 'Loại sản phẩm (Tất cả)',
@@ -137,9 +140,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductCat_List',
+            'Class' => 'Qdmvc_Page_ProductCat_List',
             'Caption' => array(
                 'en-US' => 'Product Cat List',
                 'vi-VN' => 'Product Cat List',
@@ -149,9 +152,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_df' => array(
             'ParentId' => 'folder20',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductCatDF_Card',
+            'Class' => 'Qdmvc_Page_ProductCatDF_Card',
             'Caption' => array(
                 'en-US' => 'Product Cat DF',
                 'vi-VN' => 'Loại sản phẩm DF',
@@ -162,9 +165,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_df_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductCatDF_List',
+            'Class' => 'Qdmvc_Page_ProductCatDF_List',
             'Caption' => array(
                 'en-US' => 'Product Cat DF List',
                 'vi-VN' => 'Product Cat DF List',
@@ -174,9 +177,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_qa' => array(
             'ParentId' => 'folder20',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductCatQA_Card',
+            'Class' => 'Qdmvc_Page_ProductCatQA_Card',
             'Caption' => array(
                 'en-US' => 'Product Cat QA',
                 'vi-VN' => 'Loại sản phẩm QA',
@@ -187,9 +190,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_qa_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductCatQA_List',
+            'Class' => 'Qdmvc_Page_ProductCatQA_List',
             'Caption' => array(
                 'en-US' => 'Product Cat QA List',
                 'vi-VN' => 'Product Cat QA List',
@@ -199,9 +202,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_gd' => array(
             'ParentId' => 'folder20',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductCatGD_Card',
+            'Class' => 'Qdmvc_Page_ProductCatGD_Card',
             'Caption' => array(
                 'en-US' => 'Product Cat GD',
                 'vi-VN' => 'Loại sản phẩm GD',
@@ -212,9 +215,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_cat_gd_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductCatGD_List',
+            'Class' => 'Qdmvc_Page_ProductCatGD_List',
             'Caption' => array(
                 'en-US' => 'Product Cat GD List',
                 'vi-VN' => 'Product Cat GD List',
@@ -224,9 +227,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_order_card' => array(
             'ParentId' => 'folder100',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductOrder_Card',
+            'Class' => 'Qdmvc_Page_ProductOrder_Card',
             'Caption' => array(
                 'en-US' => 'Product Order',
                 'vi-VN' => 'Đơn đặt hàng (Open)',
@@ -237,9 +240,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_order_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductOrder_List',
+            'Class' => 'Qdmvc_Page_ProductOrder_List',
             'Caption' => array(
                 'en-US' => 'Product Order List',
                 'vi-VN' => 'Product Order List',
@@ -249,9 +252,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_order_done_card' => array(
             'ParentId' => 'product_order_card',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductOrderDone_Card',
+            'Class' => 'Qdmvc_Page_ProductOrderDone_Card',
             'Caption' => array(
                 'en-US' => 'Product Order Done',
                 'vi-VN' => 'Đơn đặt hàng (Done)',
@@ -262,9 +265,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_order_done_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProductOrderDone_List',
+            'Class' => 'Qdmvc_Page_ProductOrderDone_List',
             'Caption' => array(
                 'en-US' => 'Product Order Done List',
                 'vi-VN' => 'Product Order Done List'
@@ -274,9 +277,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'feedback_card' => array(
             'ParentId' => 'folder100',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Feedback_Card',
+            'Class' => 'Qdmvc_Page_Feedback_Card',
             'Caption' => array(
                 'en-US' => 'Feedback',
                 'vi-VN' => 'Phản hồi KH (Open)',
@@ -287,9 +290,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'feedback_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Feedback_List',
+            'Class' => 'Qdmvc_Page_Feedback_List',
             'Caption' => array(
                 'en-US' => 'Feedback List',
                 'vi-VN' => 'Feedback List'
@@ -299,9 +302,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'feedback_done_card' => array(
             'ParentId' => 'feedback_card',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_FeedbackDone_Card',
+            'Class' => 'Qdmvc_Page_FeedbackDone_Card',
             'Caption' => array(
                 'en-US' => 'Feedback Done',
                 'vi-VN' => 'Phản hồi KH (Done)',
@@ -312,9 +315,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'feedback_done_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_FeedbackDone_List',
+            'Class' => 'Qdmvc_Page_FeedbackDone_List',
             'Caption' => array(
                 'en-US' => 'Feedback Done List',
                 'vi-VN' => 'Feedback Done List'
@@ -324,9 +327,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'product_setup' => array(
             'ParentId' => 'folder50',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProductSetup',
+            'Class' => 'Qdmvc_Page_ProductSetup',
             'Caption' => array(
                 'en-US' => 'Product Setup',
                 'vi-VN' => 'Cấu hình Sản phẩm',
@@ -336,9 +339,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'setup_product_order' => array(
             'ParentId' => 'folder50',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_SetupProductOrder',
+            'Class' => 'Qdmvc_Page_SetupProductOrder',
             'Caption' => array(
                 'en-US' => 'Product Order Setup',
                 'vi-VN' => 'Cấu hình đặt hàng SP',
@@ -348,9 +351,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'theme_root_setup' => array(
             'ParentId' => 'folder50',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_TRootSetup',
+            'Class' => 'Qdmvc_Page_TRootSetup',
             'Caption' => array(
                 'en-US' => 'Theme Root Setup',
                 'vi-VN' => 'Theme Root Setup',
@@ -360,9 +363,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'user_personalization' => array(
             'ParentId' => 'folder50',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_UserPersonalization',
+            'Class' => 'Qdmvc_Page_UserPersonalization',
             'Caption' => array(
                 'en-US' => 'User Personalization',
                 'vi-VN' => 'User Personalization',
@@ -373,9 +376,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'user_personalization_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_UserPersonalization_List',
+            'Class' => 'Qdmvc_Page_UserPersonalization_List',
             'Caption' => array(
                 'en-US' => 'User Personalization List',
                 'vi-VN' => 'User Personalization List',
@@ -385,9 +388,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'qdmvcpage' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_QdmvcPage',
+            'Class' => 'Qdmvc_Page_QdmvcPage',
             'Caption' => array(
                 'en-US' => 'Qdmvc Page',
                 'vi-VN' => 'Qdmvc Page',
@@ -398,9 +401,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'qdmvcpage_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_QdmvcPage_List',
+            'Class' => 'Qdmvc_Page_QdmvcPage_List',
             'Caption' => array(
                 'en-US' => 'User Personalization List',
                 'vi-VN' => 'User Personalization List',
@@ -410,9 +413,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'qdmvcmodel' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_QdmvcModel',
+            'Class' => 'Qdmvc_Page_QdmvcModel',
             'Caption' => array(
                 'en-US' => 'Qdmvc Model',
                 'vi-VN' => 'Qdmvc Model',
@@ -423,9 +426,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'qdmvcmodel_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_QdmvcModel_List',
+            'Class' => 'Qdmvc_Page_QdmvcModel_List',
             'Caption' => array(
                 'en-US' => 'User Personalization List',
                 'vi-VN' => 'User Personalization List',
@@ -435,9 +438,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'setup_version' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_SetupVersion',
+            'Class' => 'Qdmvc_Page_SetupVersion',
             'Caption' => array(
                 'en-US' => 'Version',
                 'vi-VN' => 'Version',
@@ -447,9 +450,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'wpmenu' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_WpMenu',
+            'Class' => 'Qdmvc_Page_WpMenu',
             'Caption' => array(
                 'en-US' => 'WP Menu',
                 'vi-VN' => 'WP Menu',
@@ -460,9 +463,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'wpmenu_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_WpMenu_List',
+            'Class' => 'Qdmvc_Page_WpMenu_List',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List',
@@ -472,9 +475,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'user' => array(
             'ParentId' => 'folder60',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_User',
+            'Class' => 'Qdmvc_Page_User',
             'Caption' => array(
                 'en-US' => 'User',
                 'vi-VN' => 'User',
@@ -485,9 +488,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'user_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_User_List',
+            'Class' => 'Qdmvc_Page_User_List',
             'Caption' => array(
                 'en-US' => 'User List',
                 'vi-VN' => 'User List',
@@ -497,9 +500,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'usergroup' => array(
             'ParentId' => 'folder60',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_UserGroup',
+            'Class' => 'Qdmvc_Page_UserGroup',
             'Caption' => array(
                 'en-US' => 'UserGroup',
                 'vi-VN' => 'UserGroup',
@@ -510,9 +513,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'usergroup_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_UserGroup_List',
+            'Class' => 'Qdmvc_Page_UserGroup_List',
             'Caption' => array(
                 'en-US' => 'UserGroup List',
                 'vi-VN' => 'UserGroup List',
@@ -522,9 +525,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'permission' => array(
             'ParentId' => 'folder60',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Permission',
+            'Class' => 'Qdmvc_Page_Permission',
             'Caption' => array(
                 'en-US' => 'Permission',
                 'vi-VN' => 'Permission',
@@ -535,9 +538,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'permission_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Permission_List',
+            'Class' => 'Qdmvc_Page_Permission_List',
             'Caption' => array(
                 'en-US' => 'Permission List',
                 'vi-VN' => 'Permission List',
@@ -547,9 +550,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'useringroup' => array(
             'ParentId' => 'folder60',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_UserInGroup',
+            'Class' => 'Qdmvc_Page_UserInGroup',
             'Caption' => array(
                 'en-US' => 'UserInGroup',
                 'vi-VN' => 'UserInGroup',
@@ -560,9 +563,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'useringroup_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_UserInGroup_List',
+            'Class' => 'Qdmvc_Page_UserInGroup_List',
             'Caption' => array(
                 'en-US' => 'UserInGroup List',
                 'vi-VN' => 'UserInGroup List',
@@ -572,9 +575,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'noseries' => array(
             'ParentId' => 'folder50',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_NoSeries',
+            'Class' => 'Qdmvc_Page_NoSeries',
             'Caption' => array(
                 'en-US' => 'Noseries',
                 'vi-VN' => 'Noseries',
@@ -585,9 +588,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'noseries_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_NoSeries_List',
+            'Class' => 'Qdmvc_Page_NoSeries_List',
             'Caption' => array(
                 'en-US' => 'Noseries',
                 'vi-VN' => 'Noseries',
@@ -597,9 +600,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'noseriesmap' => array(
             'ParentId' => 'folder50',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_NoSeriesMap',
+            'Class' => 'Qdmvc_Page_NoSeriesMap',
             'Caption' => array(
                 'en-US' => 'NoSeries Map',
                 'vi-VN' => 'NoSeries Map',
@@ -610,9 +613,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'noseriesmap_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_NoSeriesMap_List',
+            'Class' => 'Qdmvc_Page_NoSeriesMap_List',
             'Caption' => array(
                 'en-US' => '',
                 'vi-VN' => '',
@@ -622,9 +625,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'setup' => array(
             'ParentId' => 'folder50',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Setup',
+            'Class' => 'Qdmvc_Page_Setup',
             'Caption' => array(
                 'en-US' => 'General Setup',
                 'vi-VN' => 'Cấu hình chung',
@@ -634,9 +637,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'note' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Note',
+            'Class' => 'Qdmvc_Page_Note',
             'Caption' => array(
                 'en-US' => 'Note',
                 'vi-VN' => 'Ghi chú'
@@ -647,9 +650,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'note_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Note_list',
+            'Class' => 'Qdmvc_Page_Note_list',
             'Caption' => array(
                 'en-US' => 'Note List',
                 'vi-VN' => 'Note List'
@@ -659,9 +662,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'seometa' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_SEOMeta',
+            'Class' => 'Qdmvc_Page_SEOMeta',
             'Caption' => array(
                 'en-US' => 'SEO Meta',
                 'vi-VN' => 'SEO Meta'
@@ -672,9 +675,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'seometa_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_SEOMeta_list',
+            'Class' => 'Qdmvc_Page_SEOMeta_list',
             'Caption' => array(
                 'en-US' => 'SEOMeta List',
                 'vi-VN' => 'SEOMeta List'
@@ -684,9 +687,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'image' => array(
             'ParentId' => 'imggrp',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Image',
+            'Class' => 'Qdmvc_Page_Image',
             'Caption' => array(
                 'en-US' => 'Image',
                 'vi-VN' => 'Hình ảnh'
@@ -697,9 +700,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'image_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Image_list',
+            'Class' => 'Qdmvc_Page_Image_list',
             'Caption' => array(
                 'en-US' => 'Image List',
                 'vi-VN' => 'Image List'
@@ -709,9 +712,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'log' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Log',
+            'Class' => 'Qdmvc_Page_Log',
             'Caption' => array(
                 'en-US' => 'Log',
                 'vi-VN' => 'Log'
@@ -722,9 +725,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'log_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Log_list',
+            'Class' => 'Qdmvc_Page_Log_list',
             'Caption' => array(
                 'en-US' => 'Log List',
                 'vi-VN' => 'Log List'
@@ -734,9 +737,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'bestchoiceitem_card' => array(
             'ParentId' => 'bestchoicecat_card',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_BestChoiceItem',
+            'Class' => 'Qdmvc_Page_BestChoiceItem',
             'Caption' => array(
                 'en-US' => 'Best Choice Item',
                 'vi-VN' => 'Best Choice Item'
@@ -747,9 +750,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'bestchoiceitem_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_BestChoiceItem_list',
+            'Class' => 'Qdmvc_Page_BestChoiceItem_list',
             'Caption' => array(
                 'en-US' => 'Best Choice Item List',
                 'vi-VN' => 'Best Choice Item List'
@@ -759,9 +762,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'bestchoicecat_card' => array(
             'ParentId' => 'folder110',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_BestChoiceCat',
+            'Class' => 'Qdmvc_Page_BestChoiceCat',
             'Caption' => array(
                 'en-US' => 'Best Choice Category',
                 'vi-VN' => 'Best Choice Cat'
@@ -772,9 +775,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'bestchoicecat_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_BestChoiceCat_list',
+            'Class' => 'Qdmvc_Page_BestChoiceCat_list',
             'Caption' => array(
                 'en-US' => 'Best Choice Cat List',
                 'vi-VN' => 'Best Choice Cat List'
@@ -784,9 +787,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'postcat_card' => array(
             'ParentId' => 'folder80',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_PostCat',
+            'Class' => 'Qdmvc_Page_PostCat',
             'Caption' => array(
                 'en-US' => 'Post Category',
                 'vi-VN' => 'Danh mục bài viết'
@@ -797,9 +800,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'postcat_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_PostCat_list',
+            'Class' => 'Qdmvc_Page_PostCat_list',
             'Caption' => array(
                 'en-US' => 'Post Cat List',
                 'vi-VN' => 'Post Cat List'
@@ -809,9 +812,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'post_card' => array(
             'ParentId' => 'postcat_card',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Post',
+            'Class' => 'Qdmvc_Page_Post',
             'Caption' => array(
                 'en-US' => 'General Post',
                 'vi-VN' => 'Bài viết chung'
@@ -822,9 +825,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'post_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_post_list',
+            'Class' => 'Qdmvc_Page_post_list',
             'Caption' => array(
                 'en-US' => 'Post List',
                 'vi-VN' => 'Post List'
@@ -834,9 +837,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'widgetnavcat' => array(
             'ParentId' => 'folder110',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_WidgetNavCat',
+            'Class' => 'Qdmvc_Page_WidgetNavCat',
             'Caption' => array(
                 'en-US' => 'Widget Nav Cat',
                 'vi-VN' => 'Widget Nav Cat'
@@ -847,9 +850,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'widgetnavcat_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_WidgetNavCat_list',
+            'Class' => 'Qdmvc_Page_WidgetNavCat_list',
             'Caption' => array(
                 'en-US' => 'Widget Nav Cat List',
                 'vi-VN' => 'Widget Nav Cat List'
@@ -859,9 +862,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'partnergrp' => array(
             'ParentId' => 'folder110',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_PartnerGrp',
+            'Class' => 'Qdmvc_Page_PartnerGrp',
             'Caption' => array(
                 'en-US' => 'Partner Group',
                 'vi-VN' => 'Nhóm Đối tác'
@@ -872,9 +875,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'partnergrp_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_PartnerGrp_list',
+            'Class' => 'Qdmvc_Page_PartnerGrp_list',
             'Caption' => array(
                 'en-US' => 'PartnerGrp List',
                 'vi-VN' => 'PartnerGrp List'
@@ -884,9 +887,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'partner' => array(
             'ParentId' => 'partnergrp',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Partner',
+            'Class' => 'Qdmvc_Page_Partner',
             'Caption' => array(
                 'en-US' => 'Partner',
                 'vi-VN' => 'Đối tác'
@@ -897,9 +900,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'partner_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Partner_list',
+            'Class' => 'Qdmvc_Page_Partner_list',
             'Caption' => array(
                 'en-US' => 'Partner List',
                 'vi-VN' => 'Partner List'
@@ -909,9 +912,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'widgetnav' => array(
             'ParentId' => 'widgetnavcat',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_WidgetNav',
+            'Class' => 'Qdmvc_Page_WidgetNav',
             'Caption' => array(
                 'en-US' => 'Widget Nav',
                 'vi-VN' => 'Widget Nav'
@@ -922,9 +925,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'widgetnav_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_WidgetNav_List',
+            'Class' => 'Qdmvc_Page_WidgetNav_List',
             'Caption' => array(
                 'en-US' => 'Widget Nav List',
                 'vi-VN' => 'Widget Nav List'
@@ -959,9 +962,9 @@ class Qdmvc_Page_IndexMenu {
         ),*/
         'probigsale' => array(
             'ParentId' => 'bigsalecat',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProBigSale_Card',
+            'Class' => 'Qdmvc_Page_ProBigSale_Card',
             'Caption' => array(
                 'en-US' => 'BigSale Products',
                 'vi-VN' => 'Các sản phẩm bán chạy'
@@ -972,9 +975,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'probigsale_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProBigSale_List',
+            'Class' => 'Qdmvc_Page_ProBigSale_List',
             'Caption' => array(
                 'en-US' => 'BigSale Products',
                 'vi-VN' => 'BigSale Products'
@@ -984,9 +987,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'bigsalecat' => array(
             'ParentId' => 'folder40',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_BigSaleCat_Card',
+            'Class' => 'Qdmvc_Page_BigSaleCat_Card',
             'Caption' => array(
                 'en-US' => 'BigSale Category',
                 'vi-VN' => 'Danh mục bán chạy',
@@ -997,9 +1000,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'bigsalecat_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_BigSaleCat_List',
+            'Class' => 'Qdmvc_Page_BigSaleCat_List',
             'Caption' => array(
                 'en-US' => 'BigSale Cat List',
                 'vi-VN' => 'BigSale Cat List',
@@ -1009,9 +1012,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'propromotion' => array(
             'ParentId' => 'folder40',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ProPromotion_Card',
+            'Class' => 'Qdmvc_Page_ProPromotion_Card',
             'Caption' => array(
                 'en-US' => 'Promotion Products',
                 'vi-VN' => 'Các sản phẩm KM'
@@ -1022,9 +1025,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'propromotion_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ProPromotion_List',
+            'Class' => 'Qdmvc_Page_ProPromotion_List',
             'Caption' => array(
                 'en-US' => 'Promotion Products',
                 'vi-VN' => 'Promotion Products'
@@ -1034,9 +1037,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'promotioncat' => array(
             'ParentId' => 'folder40',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_PromotionCat_Card',
+            'Class' => 'Qdmvc_Page_PromotionCat_Card',
             'Caption' => array(
                 'en-US' => 'Promotion Category',
                 'vi-VN' => 'Danh mục KM',
@@ -1047,9 +1050,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'promotioncat_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_PromotionCat_List',
+            'Class' => 'Qdmvc_Page_PromotionCat_List',
             'Caption' => array(
                 'en-US' => 'Promotion Cat List',
                 'vi-VN' => 'Promotion Cat List',
@@ -1059,9 +1062,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor' => array(
             'ParentId' => 'folder30',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Manufactor',
+            'Class' => 'Qdmvc_Page_Manufactor',
             'Caption' => array(
                 'en-US' => 'Manufactor (All)',
                 'vi-VN' => 'Hãng sản xuất (Tất cả)'
@@ -1072,9 +1075,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Manufactor_list',
+            'Class' => 'Qdmvc_Page_Manufactor_list',
             'Caption' => array(
                 'en-US' => 'Manufactor List',
                 'vi-VN' => 'Manufactor List'
@@ -1084,9 +1087,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor_df' => array(
             'ParentId' => 'folder30',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ManufactorDF',
+            'Class' => 'Qdmvc_Page_ManufactorDF',
             'Caption' => array(
                 'en-US' => 'Manufactor DF',
                 'vi-VN' => 'Hãng sản xuất DF'
@@ -1097,9 +1100,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor_df_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ManufactorDF_list',
+            'Class' => 'Qdmvc_Page_ManufactorDF_list',
             'Caption' => array(
                 'en-US' => 'Manufactor DF List',
                 'vi-VN' => 'Manufactor DF List'
@@ -1109,9 +1112,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor_qa' => array(
             'ParentId' => 'folder30',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ManufactorQA',
+            'Class' => 'Qdmvc_Page_ManufactorQA',
             'Caption' => array(
                 'en-US' => 'Manufactor QA',
                 'vi-VN' => 'Hãng sản xuất QA'
@@ -1122,9 +1125,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor_qa_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ManufactorQA_list',
+            'Class' => 'Qdmvc_Page_ManufactorQA_list',
             'Caption' => array(
                 'en-US' => 'Manufactor QA List',
                 'vi-VN' => 'Manufactor QA List'
@@ -1134,9 +1137,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor_gd' => array(
             'ParentId' => 'folder30',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ManufactorGD',
+            'Class' => 'Qdmvc_Page_ManufactorGD',
             'Caption' => array(
                 'en-US' => 'Manufactor GD',
                 'vi-VN' => 'Hãng sản xuất GD'
@@ -1147,9 +1150,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'manufactor_gd_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ManufactorGD_list',
+            'Class' => 'Qdmvc_Page_ManufactorGD_list',
             'Caption' => array(
                 'en-US' => 'Manufactor GD List',
                 'vi-VN' => 'Manufactor GD List'
@@ -1159,9 +1162,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'object_task' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ObjectTask',
+            'Class' => 'Qdmvc_Page_ObjectTask',
             'Caption' => array(
                 'en-US' => 'ObjectTask',
                 'vi-VN' => 'ObjectTask'
@@ -1172,9 +1175,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'object_task_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ObjectTask_list',
+            'Class' => 'Qdmvc_Page_ObjectTask_list',
             'Caption' => array(
                 'en-US' => 'ObjectTask List',
                 'vi-VN' => 'ObjectTask List'
@@ -1184,9 +1187,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'imggrp' => array(
             'ParentId' => 'folder110',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_ImgGrp',
+            'Class' => 'Qdmvc_Page_ImgGrp',
             'Caption' => array(
                 'en-US' => 'Img Group',
                 'vi-VN' => 'Danh mục hình ảnh',
@@ -1197,9 +1200,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'imggrp_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_ImgGrp_list',
+            'Class' => 'Qdmvc_Page_ImgGrp_list',
             'Caption' => array(
                 'en-US' => 'Img Group List',
                 'vi-VN' => 'Img Group List',
@@ -1208,35 +1211,35 @@ class Qdmvc_Page_IndexMenu {
             'DataPort' => 'imggrp_port',
         ),
         'size' => array(
-	        'ParentId' => 'folder20',
-	        'Active'=>true,
-	        'PageType' => 'Card',
-	        'Class'=>'Qdmvc_Page_Size',
-	        'Caption' => array(
-		        'en-US' => 'Size (QA & GD)',
-		        'vi-VN' => 'Size (QA & GD)'
-	        ),
-	        'Model' => 'QdSize',
-	        'DataPort' => 'size_port',
-	        'PageList' => 'size_list'
+            'ParentId' => 'folder20',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_Size',
+            'Caption' => array(
+                'en-US' => 'Size (QA & GD)',
+                'vi-VN' => 'Size (QA & GD)'
+            ),
+            'Model' => 'QdSize',
+            'DataPort' => 'size_port',
+            'PageList' => 'size_list'
         ),
         'size_list' => array(
-	        'ParentId' => -1,
-	        'Active'=>false,
-	        'PageType' => 'List',
-	        'Class'=>'Qdmvc_Page_Size_list',
-	        'Caption' => array(
-		        'en-US' => 'Size List',
-		        'vi-VN' => 'Size List'
-	        ),
-	        'Model' => 'QdSize',
-	        'DataPort' => 'size_port'
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_Size_list',
+            'Caption' => array(
+                'en-US' => 'Size List',
+                'vi-VN' => 'Size List'
+            ),
+            'Model' => 'QdSize',
+            'DataPort' => 'size_port'
         ),
         'about' => array(
             'ParentId' => 'folder80',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_About',
+            'Class' => 'Qdmvc_Page_About',
             'Caption' => array(
                 'en-US' => 'About Page',
                 'vi-VN' => 'Bài giới thiệu'
@@ -1247,9 +1250,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'about_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_About_list',
+            'Class' => 'Qdmvc_Page_About_list',
             'Caption' => array(
                 'en-US' => 'About List',
                 'vi-VN' => 'About List'
@@ -1259,9 +1262,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'menu' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Menu',
+            'Class' => 'Qdmvc_Page_Menu',
             'Caption' => array(
                 'en-US' => 'Main Menu',
                 'vi-VN' => 'Menu chính'
@@ -1272,9 +1275,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'menu_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Menu_list',
+            'Class' => 'Qdmvc_Page_Menu_list',
             'Caption' => array(
                 'en-US' => 'Menu List',
                 'vi-VN' => 'Menu List'
@@ -1284,9 +1287,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'pro2pro' => array(
             'ParentId' => 'product',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_Pro2Pro_Card',
+            'Class' => 'Qdmvc_Page_Pro2Pro_Card',
             'Caption' => array(
                 'en-US' => 'Linking Products',
                 'vi-VN' => 'SP liên kết'
@@ -1297,9 +1300,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'pro2pro_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_pro2pro_list',
+            'Class' => 'Qdmvc_Page_pro2pro_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1309,9 +1312,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'pro2shop' => array(
             'ParentId' => 'product',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_Pro2Shop_Card',
+            'Class' => 'Qdmvc_Page_Pro2Shop_Card',
             'Caption' => array(
                 'en-US' => 'Products in Shop',
                 'vi-VN' => 'SP thuộc cửa hàng'
@@ -1322,9 +1325,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'pro2shop_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_pro2shop_list',
+            'Class' => 'Qdmvc_Page_pro2shop_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1334,9 +1337,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'contact' => array(
             'ParentId' => 'folder90',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_Contact_Card',
+            'Class' => 'Qdmvc_Page_Contact_Card',
             'Caption' => array(
                 'en-US' => 'Contact',
                 'vi-VN' => 'Liên hệ'
@@ -1347,9 +1350,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'contact_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Contact_list',
+            'Class' => 'Qdmvc_Page_Contact_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1359,9 +1362,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'shop' => array(
             'ParentId' => 'folder90',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_Shop_Card',
+            'Class' => 'Qdmvc_Page_Shop_Card',
             'Caption' => array(
                 'en-US' => 'Shop',
                 'vi-VN' => 'Cửa hàng'
@@ -1372,9 +1375,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'shop_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Shop_list',
+            'Class' => 'Qdmvc_Page_Shop_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1384,9 +1387,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'subscriber' => array(
             'ParentId' => 'folder100',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_Subscriber_Card',
+            'Class' => 'Qdmvc_Page_Subscriber_Card',
             'Caption' => array(
                 'en-US' => 'Subscriber',
                 'vi-VN' => 'Đăng ký nhận tin'
@@ -1397,9 +1400,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'subscriber_list' => array(
             'ParentId' => -1,
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_Subscriber_list',
+            'Class' => 'Qdmvc_Page_Subscriber_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1409,7 +1412,7 @@ class Qdmvc_Page_IndexMenu {
         ),
         'csdl' => array(
             'ParentId' => 'folder70',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Folder',
             'Caption' => array(
                 'en-US' => 'CSDL Hành chính',
@@ -1418,9 +1421,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'vndistrict' => array(
             'ParentId' => 'csdl',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_VnDistrict_Card',
+            'Class' => 'Qdmvc_Page_VnDistrict_Card',
             'Caption' => array(
                 'en-US' => 'VnDistrict',
                 'vi-VN' => 'VnDistrict'
@@ -1431,9 +1434,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'vndistrict_list' => array(
             'ParentId' => 'csdl',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_VnDistrict_list',
+            'Class' => 'Qdmvc_Page_VnDistrict_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1443,9 +1446,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'vnprovince' => array(
             'ParentId' => 'csdl',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_VnProvince_Card',
+            'Class' => 'Qdmvc_Page_VnProvince_Card',
             'Caption' => array(
                 'en-US' => 'VnProvince',
                 'vi-VN' => 'VnProvince'
@@ -1456,9 +1459,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'vnprovince_list' => array(
             'ParentId' => 'csdl',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_VnProvince_list',
+            'Class' => 'Qdmvc_Page_VnProvince_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1468,9 +1471,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'vnward' => array(
             'ParentId' => 'csdl',
-            'Active'=>true,
+            'Active' => true,
             'PageType' => 'Card',
-            'Class'=> 'Qdmvc_Page_VnWard_Card',
+            'Class' => 'Qdmvc_Page_VnWard_Card',
             'Caption' => array(
                 'en-US' => 'VnWard',
                 'vi-VN' => 'VnWard'
@@ -1481,9 +1484,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'vnward_list' => array(
             'ParentId' => 'csdl',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'List',
-            'Class'=>'Qdmvc_Page_VnWard_list',
+            'Class' => 'Qdmvc_Page_VnWard_list',
             'Caption' => array(
                 'en-US' => 'List',
                 'vi-VN' => 'List'
@@ -1493,9 +1496,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'navigation' => array(
             'ParentId' => '',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_Navigation',
+            'Class' => 'Qdmvc_Page_Navigation',
             'Caption' => array(
                 'en-US' => 'Navigation',
                 'vi-VN' => 'Navigation'
@@ -1506,9 +1509,9 @@ class Qdmvc_Page_IndexMenu {
         ),
         'blank_page' => array(
             'ParentId' => '',
-            'Active'=>false,
+            'Active' => false,
             'PageType' => 'Card',
-            'Class'=>'Qdmvc_Page_DatabaseSvc',
+            'Class' => 'Qdmvc_Page_DatabaseSvc',
             'Caption' => array(
                 'en-US' => 'Database SVC',
                 'vi-VN' => 'Database SVC'

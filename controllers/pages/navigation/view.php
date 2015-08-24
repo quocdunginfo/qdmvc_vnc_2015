@@ -6,6 +6,8 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_navigation');
-class Qdmvc_View_Navigation extends Qdmvc_Layout_Navigation {
+
+class Qdmvc_View_Navigation extends Qdmvc_Layout_Navigation
+{
 
 }

@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('postcat_card');
-class Qdmvc_Page_ImgGrp extends Qdmvc_Page_PostCat {
+
+class Qdmvc_Page_ImgGrp extends Qdmvc_Page_PostCat
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_ImgGrp';
@@ -16,6 +18,7 @@ class Qdmvc_Page_ImgGrp extends Qdmvc_Page_PostCat {
     {
         return 'imggrp';
     }
+
     protected static function initFields()
     {
         $obj = parent::initFields();

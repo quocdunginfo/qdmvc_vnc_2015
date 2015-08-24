@@ -6,11 +6,14 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_Size extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_Size extends Qdmvc_Page_Root
+{
     public function run()
     {
         parent::run();
     }
+
     protected static function getViewClass()
     {
         return 'Qdmvc_View_Size';
@@ -48,19 +51,6 @@ class Qdmvc_Page_Size extends Qdmvc_Page_Root {
                     )
                 )
             )
-            /* SAMPLE
-            ,
-            'Group2' => array(
-                'Type' => 'Part',
-                'Name' => 'Lines',
-                'PagePartID' => '',
-                'SubPageLink' => array(
-                    'Field' => '',
-                    'Type' => 'FIELD',//'CONST',
-                    'Value' => ''
-                )
-            )
-            */
         );
     }
 

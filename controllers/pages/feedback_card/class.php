@@ -6,6 +6,7 @@
  * Time: 11:30 PM
  */
 Qdmvc::loadPage('root');
+
 class Qdmvc_Page_Feedback_Card extends Qdmvc_Page_Root
 {
     protected static function getViewClass()
@@ -21,25 +22,25 @@ class Qdmvc_Page_Feedback_Card extends Qdmvc_Page_Root
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
+                        'Order' => 10,
                     ),
                     'customer_name' => array(
-                        'SourceExpr' => 'customer_name'
+                        'Order' => 20,
                     ),
                     'customer_phone' => array(
-                        'SourceExpr' => 'customer_phone'
+                        'Order' => 30,
                     ),
                     'customer_email' => array(
-                        'SourceExpr' => 'customer_email'
+                        'Order' => 40,
                     ),
                     'done' => array(
-                        'SourceExpr' => 'done',
+                        'Order' => 50,
                     ),
                     'title' => array(
-                        'SourceExpr' => 'title'
+                        'Order' => 60,
                     ),
                     'content' => array(
-                        'SourceExpr' => 'content',
+                        'Order' => 70,
                     )
                 )
             )

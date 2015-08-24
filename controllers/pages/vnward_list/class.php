@@ -24,11 +24,21 @@ class Qdmvc_Page_VnWard_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-                'name' => array(),
-                'location' => array(),
-                'type' => array(),
-                'districtid' => array(),
-                '_districtname' => array()
+                'name' => array(
+                    'Order' => 20,
+                ),
+                'location' => array(
+                    'Order' => 30,
+                ),
+                'type' => array(
+                    'Order' => 40,
+                ),
+                'districtid' => array(
+                    'Order' => 50,
+                ),
+                '_districtname' => array(
+                    'Order' => 60,
+                )
             ));
     }
 

@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('widgetnav');
-class Qdmvc_Page_Partner extends Qdmvc_Page_WidgetNav {
+
+class Qdmvc_Page_Partner extends Qdmvc_Page_WidgetNav
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_Partner';

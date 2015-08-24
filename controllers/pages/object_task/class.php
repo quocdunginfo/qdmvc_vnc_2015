@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_ObjectTask extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_ObjectTask extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_ObjectTask';
@@ -25,51 +27,31 @@ class Qdmvc_Page_ObjectTask extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
-
+                        'Order' => 10,
                     ),
                     'layer' => array(
-                        'SourceExpr' => 'layer',
-
+                        'Order' => 20,
                     ),
                     'action' => array(
-                        'SourceExpr' => 'action',
-
+                        'Order' => 30,
                     ),
                     'object_type' => array(
-                        'SourceExpr' => 'object_type',
-
+                        'Order' => 40,
                     ),
                     'object_name' => array(
-                        'SourceExpr' => 'object_name',
+                        'Order' => 50,
                     ),
                     'version' => array(
-                        'SourceExpr' => 'version',
-
+                        'Order' => 60,
                     ),
                     'description' => array(
-                        'SourceExpr' => 'description',
-
+                        'Order' => 70,
                     ),
                     'compatible' => array(
-                        'SourceExpr' => 'compatible',
-
+                        'Order' => 80,
                     ),
                 )
             )
-            /* SAMPLE
-            ,
-            'Group2' => array(
-                'Type' => 'Part',
-                'Name' => 'Lines',
-                'PagePartID' => '',
-                'SubPageLink' => array(
-                    'Field' => '',
-                    'Type' => 'FIELD',//'CONST',
-                    'Value' => ''
-                )
-            )
-            */
         );
     }
 

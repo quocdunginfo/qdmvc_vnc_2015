@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('product_cat_card');
-class Qdmvc_Page_ProductCatQA_Card extends Qdmvc_Page_ProductCat_Card {
+
+class Qdmvc_Page_ProductCatQA_Card extends Qdmvc_Page_ProductCat_Card
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_ProductCatQA_Card';

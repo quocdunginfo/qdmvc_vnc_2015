@@ -30,10 +30,11 @@ class Qdmvc_Page_Image_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'order' => array(
-                    'SourceExpr' => 'order',
+                    'Order' => 20,
+                    'Width' => 100
                 ),
                 'path' => array(
-                    'SourceExpr' => 'path',
+                    'Order' => 30,
                 ),
             ));
     }

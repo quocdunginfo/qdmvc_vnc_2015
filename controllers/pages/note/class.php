@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_Note extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_Note extends Qdmvc_Page_Root
+{
     protected static function getViewClass()
     {
         return 'Qdmvc_View_Note';
@@ -25,35 +27,19 @@ class Qdmvc_Page_Note extends Qdmvc_Page_Root {
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'SourceExpr' => 'id',
-
+                        'Order' => 10,
                     ),
                     'content' => array(
-                        'SourceExpr' => 'content'
+                        'Order' => 20,
                     ),
                     'model' => array(
-                        'SourceExpr' => 'model',
-
+                        'Order' => 30,
                     ),
                     'model_id' => array(
-                        'SourceExpr' => 'model_id',
-
+                        'Order' => 40,
                     )
                 )
             )
-            /* SAMPLE
-            ,
-            'Group2' => array(
-                'Type' => 'Part',
-                'Name' => 'Lines',
-                'PagePartID' => '',
-                'SubPageLink' => array(
-                    'Field' => '',
-                    'Type' => 'FIELD',//'CONST',
-                    'Value' => ''
-                )
-            )
-            */
         );
     }
 

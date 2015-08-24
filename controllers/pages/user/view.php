@@ -6,7 +6,9 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_cardnavigate');
-class Qdmvc_View_User extends Qdmvc_Layout_CardNavigate {
+
+class Qdmvc_View_User extends Qdmvc_Layout_CardNavigate
+{
     protected function serverFunctions()
     {
         $obj = parent::serverFunctions();
@@ -38,15 +40,14 @@ class Qdmvc_View_User extends Qdmvc_Layout_CardNavigate {
                 $(document).ready(function () {
                     var user_format = '<?=admin_url( 'user-edit.php?user_id=');?>';
 
-                    $('#btn_openwpusereditor').click(function(){
+                    $('#btn_openwpusereditor').click(function () {
                         var tmp = user_format + MYAPP.viewModel.id();
                         MYAPP.openInNewTab(tmp);
                     });
 
-                    $('#btn_syncfromwp').click(function(){
-                        MYAPP.callFn('fn_syncfromwp', null, function(data){
-                            if(data.fn_result != false)
-                            {
+                    $('#btn_syncfromwp').click(function () {
+                        MYAPP.callFn('fn_syncfromwp', null, function (data) {
+                            if (data.fn_result != false) {
                                 MYAPP.updateGrid();
                             }
                         });

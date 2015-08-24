@@ -20,19 +20,19 @@ class Qdmvc_Page_ProGrp_List extends Qdmvc_Page_Root_List
             parent::initFields(),
             array(
                 'product_id' => array(
-                    'SourceExpr' => 'product_id',
+                    'Order' => 20,
                     'Width' => 100
                 ),
                 '_product_name' => array(
-                    'SourceExpr' => '_product_name',
+                    'Order' => 30,
                     'Width' => 200,
                 ),
                 'group_id' => array(
-                    'SourceExpr' => 'group_id',
+                    'Order' => 40,
                     'Width' => 100
                 ),
                 '_group_name' => array(
-                    'SourceExpr' => '_group_name',
+                    'Order' => 50,
                 )
             )
         );

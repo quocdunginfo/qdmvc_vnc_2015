@@ -24,8 +24,12 @@ class Qdmvc_Page_VnProvince_List extends Qdmvc_Page_Root_List
         return array_merge(
             parent::initFields(),
             array(
-                'name' => array(),
-                'type' => array(),
+                'name' => array(
+                    'Order' => 20,
+                ),
+                'type' => array(
+                    'Order' => 30,
+                ),
             ));
     }
 

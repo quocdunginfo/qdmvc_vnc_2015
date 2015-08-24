@@ -6,6 +6,7 @@
  * Time: 11:35 PM
  */
 Qdmvc::loadPage('feedback_list');
+
 class Qdmvc_Page_FeedbackDone_List extends Qdmvc_Page_Feedback_List
 {
     protected function getPageView()
@@ -19,6 +20,7 @@ class Qdmvc_Page_FeedbackDone_List extends Qdmvc_Page_Feedback_List
     {
         return 'Qdmvc_View_FeedbackDone_List';
     }
+
     public static function getPage()
     {
         return 'feedback_done_list';

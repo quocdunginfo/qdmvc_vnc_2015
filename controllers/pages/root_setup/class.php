@@ -6,7 +6,9 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('root');
-class Qdmvc_Page_RootSetup extends Qdmvc_Page_Root {
+
+class Qdmvc_Page_RootSetup extends Qdmvc_Page_Root
+{
     public function run()
     {
         $c = static::getModel();

@@ -6,11 +6,14 @@
  * Time: 11:36 PM
  */
 Qdmvc::loadPage('postcat_card');
-class Qdmvc_Page_WidgetNavCat extends Qdmvc_Page_PostCat {
+
+class Qdmvc_Page_WidgetNavCat extends Qdmvc_Page_PostCat
+{
     public function run()
     {
         parent::run();
     }
+
     protected static function getViewClass()
     {
         return 'Qdmvc_View_WidgetNavCat';
@@ -20,6 +23,7 @@ class Qdmvc_Page_WidgetNavCat extends Qdmvc_Page_PostCat {
     {
         return 'widgetnavcat';
     }
+
     protected static function initFields()
     {
         $obj = parent::initFields();
