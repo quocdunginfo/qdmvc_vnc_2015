@@ -23,7 +23,7 @@ class QdPartnerGrp extends QdWidgetNavCat
         //change parent_id filter
         $obj['parent_id']['TableRelation']['Table'] = 'QdPartnerGrp';
 
-        $obj['type']['Options']= array(
+        $obj['type']['Options'] = array(
             static::$TYPE_PARTNER => array(
                 'Caption' => array('en-US' => 'Partner Grp', 'vi-VN' => 'Partner Grp'),
             ),

@@ -40,8 +40,8 @@ class Qdmvc
 
     public static function loadJS()
     {
-        wp_register_script('qdmvc_js_msg-'.Qdmvc_Config::getLanguage(), plugins_url('/messages/js/msg-'.Qdmvc_Config::getLanguage().'.js', __FILE__));
-        wp_enqueue_script('qdmvc_js_msg-'.Qdmvc_Config::getLanguage());
+        wp_register_script('qdmvc_js_msg-' . Qdmvc_Config::getLanguage(), plugins_url('/messages/js/msg-' . Qdmvc_Config::getLanguage() . '.js', __FILE__));
+        wp_enqueue_script('qdmvc_js_msg-' . Qdmvc_Config::getLanguage());
     }
 
     public static function loadNative($pure_path)
@@ -113,10 +113,12 @@ class Qdmvc
     {
         require_once(static::getPluginDir($pure_path) . '.php');
     }
+
     public static function getPluginDir($pure_path = '')
     {
         return plugin_dir_path(__FILE__) . $pure_path;
     }
+
     /*
      * Internal use
      */
@@ -194,7 +196,9 @@ class Qdmvc
     {
         return (isset($_GET['page']) && array_key_exists($_GET['page'], Qdmvc_Page_Index::getIndex()));
     }
-    public static function getResourcePath($r_path=''){
+
+    public static function getResourcePath($r_path = '')
+    {
         return plugins_url($r_path, __FILE__);
     }
 }

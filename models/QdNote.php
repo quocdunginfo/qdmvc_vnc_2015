@@ -25,15 +25,14 @@ class QdNote extends QdRoot
 
     protected function modelOnValidate($field_name)
     {
-        if($this->{$field_name}=='')
-        {
+        if ($this->{$field_name} == '') {
             $this->pushValidateError($field_name, '"model" phải khác rỗng');
         }
     }
+
     protected function model_idOnValidate($field_name)
     {
-        if($this->{$field_name}=='')
-        {
+        if ($this->{$field_name} == '') {
             $this->pushValidateError($field_name, '"model_id" phải khác rỗng');
         }
     }

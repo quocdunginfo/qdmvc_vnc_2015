@@ -21,7 +21,7 @@ class QdWidgetNavCat extends QdPostCat
         //change parent_id filter
         $obj['parent_id']['TableRelation']['Table'] = 'QdWidgetNavCat';
 
-        $obj['type']['Options']= array(
+        $obj['type']['Options'] = array(
             static::$TYPE_WIDGETNAV => array(
                 'Caption' => array('en-US' => 'WidgetNavs Cat', 'vi-VN' => 'WidgetNavs Cat'),
             ),

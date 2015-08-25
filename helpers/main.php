@@ -15,62 +15,66 @@ class Qdmvc_Helper
         'image' => 'image',
         'flowfield' => 'flowfield'
     );
+
     public static function loadPHPDOMLibrary()
     {
         require('simple_html_dom.php');
     }
-    public static function getDataPortPath($name, $pre_filter_arr=null)
+
+    public static function getDataPortPath($name, $pre_filter_arr = null)
     {
         // .../?qd-api != ...?qd-api [VERY IMPORTANT SINCE AJAX POST NOT WORK]
         $tmp = '';
-        if($pre_filter_arr!=null) {
+        if ($pre_filter_arr != null) {
             $count = 99;
             foreach ($pre_filter_arr as $key => $value) {
                 $condition = 'EQUAL';
                 $f_value = $value;
                 $f_field = $key;
-                if(is_array($value))
-                {
+                if (is_array($value)) {
                     $f_value = $value['value'];
                     $f_field = $value['field'];
                     $condition = $value['operator'];
                 }
-                $f_value = $f_value === true ? 1 : ($f_value===false?0:$f_value);
+                $f_value = $f_value === true ? 1 : ($f_value === false ? 0 : $f_value);
                 $tmp .= "&filterdatafield{$count}={$f_field}&filtervalue{$count}={$f_value}&filtercondition{$count}={$condition}";
                 $count++;
             }
         }
-        return get_site_url()."/?qd-api={$name}".$tmp;
+        return get_site_url() . "/?qd-api={$name}" . $tmp;
     }
+
     function __construct()
     {
 
     }
+
     public static function getNoneText()
     {
         return '[Not set]';
     }
+
     public function callServerFn($class, $fn, $params)
     {
         return $class::$fn;
     }
-    public static function getCompactPageListLink($page_name, $filter_array=array())
+
+    public static function getCompactPageListLink($page_name, $filter_array = array())
     {
         $filter_string = '';
-        $count=0;
+        $count = 0;
         $form = "&filterdatafield%s=%s&filtervalue%s=%s";
-        foreach($filter_array as $key=>$value)
-        {
-            if(!is_array($value)) {
+        foreach ($filter_array as $key => $value) {
+            if (!is_array($value)) {
                 $filter_string .= sprintf($form, $count, $key, $count, $value);// "&filterdatafield{$count}={$key}&filtervalue{$count}={$value}";
-            }
-            else{
+            } else {
                 $filter_string .= sprintf($form, $count, $value['field'], $count, $value['value']);// "&filterdatafield{$count}={$key}&filtervalue{$count}={$value}";
             }
             $count++;
         }
         return admin_url("admin.php?page={$page_name}&qdrole=navigate{$filter_string}");
     }
+
     /*
     public static function getCompactPagePartLink($page_name, $filterfield, $filtervalue)
     {
@@ -81,32 +85,31 @@ class Qdmvc_Helper
     {
         return 'javascript:void(0)';
     }
-    public static function getLookupPath($page_list, $return_id, $prefilter=array(), $getfield='id', $multi=0)
+
+    public static function getLookupPath($page_list, $return_id, $prefilter = array(), $getfield = 'id', $multi = 0)
     {
         $filter = '';
-        $count=0;
-        foreach($prefilter as $key=>$val)
-        {
+        $count = 0;
+        foreach ($prefilter as $key => $val) {
             $filter .= "&filterdatafield{$count}={$key}&filtervalue{$count}={$val}";
             $count++;
         }
         return get_admin_url(null, "admin.php?page={$page_list}&qdrole=lookup&qdreturnid={$return_id}&qdgetfield={$getfield}&qdmulti={$multi}{$filter}");
     }
+
     public static function getSlider($metaslider_shortcode)
     {
         self::loadPHPDOMLibrary();
-        if($metaslider_shortcode!='')
-        {
+        if ($metaslider_shortcode != '') {
             $slider_html = do_shortcode($metaslider_shortcode);
             $html = str_get_html($slider_html);
             $ret = $html->find('img');
             return $ret;
-        }
-        else
-        {
+        } else {
             return array();
         }
     }
+
     public static function getPageIdByTemplate($template_path_from_theme)
     {
         $re = 0;
@@ -122,7 +125,7 @@ class Qdmvc_Helper
         );
         $the_query = new WP_Query($args);
         // The Loop
-        if ( $the_query->have_posts() ) {
+        if ($the_query->have_posts()) {
             $the_query->the_post();
             $re = get_the_ID();
         } else {
@@ -197,44 +200,49 @@ class Qdmvc_Helper
         </script>
     <?php
     }
+
     public static function getImgURL($path)
     {
-        return plugins_url( '../views/imgs/'.$path , __FILE__);
+        return plugins_url('../views/imgs/' . $path, __FILE__);
     }
+
     public static function sanitize_title_with_dashes($string)
     {
         //chuyen co dau thanh khong dau
         return sanitize_title_with_dashes(static::coDauThanhKhongDau($string));
     }
-    public static function coDauThanhKhongDau ( $string ) {
-        $trans = array ( 'à'=>'a','á'=>'a','ả'=>'a','ã'=>'a','ạ'=>'a',
-            'ă'=>'a','ằ'=>'a','ắ'=>'a','ẳ'=>'a','ẵ'=>'a','ặ'=>'a',
-            'â'=>'a','ầ'=>'a','ấ'=>'a','ẩ'=>'a','ẫ'=>'a','ậ'=>'a',
-            'À'=>'a','Á'=>'a','Ả'=>'a','Ã'=>'a','Ạ'=>'a',
-            'Ă'=>'a','Ằ'=>'a','Ắ'=>'a','Ẳ'=>'a','Ẵ'=>'a','Ặ'=>'a',
-            'Â'=>'a','Ầ'=>'a','Ấ'=>'a','Ẩ'=>'a','Ẫ'=>'a','Ậ'=>'a',
-            'đ'=>'d','Đ'=>'d',
-            'è'=>'e','é'=>'e','ẻ'=>'e','ẽ'=>'e','ẹ'=>'e',
-            'ê'=>'e','ề'=>'e','ế'=>'e','ể'=>'e','ễ'=>'e','ệ'=>'e',
-            'È'=>'e','É'=>'e','Ẻ'=>'e','Ẽ'=>'e','Ẹ'=>'e',
-            'Ê'=>'e','Ề'=>'e','Ế'=>'e','Ể'=>'e','Ễ'=>'e','Ệ'=>'e',
-            'ì'=>'i','í'=>'i','ỉ'=>'i','ĩ'=>'i','ị'=>'i',
-            'Ì'=>'i','Í'=>'i','Ỉ'=>'i','Ĩ'=>'i','Ị'=>'i',
-            'ò'=>'o','ó'=>'o','ỏ'=>'o','õ'=>'o','ọ'=>'o',
-            'ô'=>'o','ồ'=>'o','ố'=>'o','ổ'=>'o','ỗ'=>'o','ộ'=>'o',
-            'ơ'=>'o','ờ'=>'o','ớ'=>'o','ở'=>'o','ỡ'=>'o','ợ'=>'o',
-            'Ò'=>'o','Ó'=>'o','Ỏ'=>'o','Õ'=>'o','Ọ'=>'o',
-            'Ô'=>'o','Ồ'=>'o','Ố'=>'o','Ổ'=>'o','Ỗ'=>'o','Ộ'=>'o',
-            'Ơ'=>'o','Ờ'=>'o','Ớ'=>'o','Ở'=>'o','Ỡ'=>'o','Ợ'=>'o',
-            'ù'=>'u','ú'=>'u','ủ'=>'u','ũ'=>'u','ụ'=>'u',
-            'ư'=>'u','ừ'=>'u','ứ'=>'u','ử'=>'u','ữ'=>'u','ự'=>'u',
-            'Ù'=>'u','Ú'=>'u','Ủ'=>'u','Ũ'=>'u','Ụ'=>'u',
-            'Ư'=>'u','Ừ'=>'u','Ứ'=>'u','Ử'=>'u','Ữ'=>'u','Ự'=>'u',
-            'ỳ'=>'y','ý'=>'y','ỷ'=>'y','ỹ'=>'y','ỵ'=>'y',
-            'Y'=>'y','Ỳ'=>'y','Ý'=>'y','Ỷ'=>'y','Ỹ'=>'y','Ỵ'=>'y'
+
+    public static function coDauThanhKhongDau($string)
+    {
+        $trans = array('à' => 'a', 'á' => 'a', 'ả' => 'a', 'ã' => 'a', 'ạ' => 'a',
+            'ă' => 'a', 'ằ' => 'a', 'ắ' => 'a', 'ẳ' => 'a', 'ẵ' => 'a', 'ặ' => 'a',
+            'â' => 'a', 'ầ' => 'a', 'ấ' => 'a', 'ẩ' => 'a', 'ẫ' => 'a', 'ậ' => 'a',
+            'À' => 'a', 'Á' => 'a', 'Ả' => 'a', 'Ã' => 'a', 'Ạ' => 'a',
+            'Ă' => 'a', 'Ằ' => 'a', 'Ắ' => 'a', 'Ẳ' => 'a', 'Ẵ' => 'a', 'Ặ' => 'a',
+            'Â' => 'a', 'Ầ' => 'a', 'Ấ' => 'a', 'Ẩ' => 'a', 'Ẫ' => 'a', 'Ậ' => 'a',
+            'đ' => 'd', 'Đ' => 'd',
+            'è' => 'e', 'é' => 'e', 'ẻ' => 'e', 'ẽ' => 'e', 'ẹ' => 'e',
+            'ê' => 'e', 'ề' => 'e', 'ế' => 'e', 'ể' => 'e', 'ễ' => 'e', 'ệ' => 'e',
+            'È' => 'e', 'É' => 'e', 'Ẻ' => 'e', 'Ẽ' => 'e', 'Ẹ' => 'e',
+            'Ê' => 'e', 'Ề' => 'e', 'Ế' => 'e', 'Ể' => 'e', 'Ễ' => 'e', 'Ệ' => 'e',
+            'ì' => 'i', 'í' => 'i', 'ỉ' => 'i', 'ĩ' => 'i', 'ị' => 'i',
+            'Ì' => 'i', 'Í' => 'i', 'Ỉ' => 'i', 'Ĩ' => 'i', 'Ị' => 'i',
+            'ò' => 'o', 'ó' => 'o', 'ỏ' => 'o', 'õ' => 'o', 'ọ' => 'o',
+            'ô' => 'o', 'ồ' => 'o', 'ố' => 'o', 'ổ' => 'o', 'ỗ' => 'o', 'ộ' => 'o',
+            'ơ' => 'o', 'ờ' => 'o', 'ớ' => 'o', 'ở' => 'o', 'ỡ' => 'o', 'ợ' => 'o',
+            'Ò' => 'o', 'Ó' => 'o', 'Ỏ' => 'o', 'Õ' => 'o', 'Ọ' => 'o',
+            'Ô' => 'o', 'Ồ' => 'o', 'Ố' => 'o', 'Ổ' => 'o', 'Ỗ' => 'o', 'Ộ' => 'o',
+            'Ơ' => 'o', 'Ờ' => 'o', 'Ớ' => 'o', 'Ở' => 'o', 'Ỡ' => 'o', 'Ợ' => 'o',
+            'ù' => 'u', 'ú' => 'u', 'ủ' => 'u', 'ũ' => 'u', 'ụ' => 'u',
+            'ư' => 'u', 'ừ' => 'u', 'ứ' => 'u', 'ử' => 'u', 'ữ' => 'u', 'ự' => 'u',
+            'Ù' => 'u', 'Ú' => 'u', 'Ủ' => 'u', 'Ũ' => 'u', 'Ụ' => 'u',
+            'Ư' => 'u', 'Ừ' => 'u', 'Ứ' => 'u', 'Ử' => 'u', 'Ữ' => 'u', 'Ự' => 'u',
+            'ỳ' => 'y', 'ý' => 'y', 'ỷ' => 'y', 'ỹ' => 'y', 'ỵ' => 'y',
+            'Y' => 'y', 'Ỳ' => 'y', 'Ý' => 'y', 'Ỷ' => 'y', 'Ỹ' => 'y', 'Ỵ' => 'y'
         );
-        return strtr( $string , $trans ) ;
+        return strtr($string, $trans);
     }
+
     public static function requestCompact()
     {
         ?>
@@ -248,24 +256,26 @@ class Qdmvc_Helper
                 html.wp-toolbar {
                     padding: 0 !important;
                 }
+
                 /*jqspliter stretch width 100% not horizontal scroll bar => 19052015*/
                 #wpbody-content {
                     overflow-x: hidden !important;
                 }
+
                 /*jqspliter stretch height 100% => 19052015*/
-                html, body, #wpbody, #wpbody-content, #wpwrap, #wpcontent
-                {
+                html, body, #wpbody, #wpbody-content, #wpwrap, #wpcontent {
                     height: 100% !important;
                     width: 100% !important;
                     margin: 0 !important;
                     padding: 0 !important;
                 }
+
                 #wpwrap .screen-reader-shortcut {
                     display: none !important;
                 }
             }
         </style>
-        <?php
+    <?php
     }
 
     /**
@@ -275,18 +285,21 @@ class Qdmvc_Helper
      */
     public static function isNullOrEmpty($obj)
     {
-        return (!isset($obj) || $obj===null || $obj===false || $obj==='' || (is_array($obj) && empty($obj)));
+        return (!isset($obj) || $obj === null || $obj === false || $obj === '' || (is_array($obj) && empty($obj)));
     }
-    public static function sendEmail($email, $title, $content, $html=true)
+
+    public static function sendEmail($email, $title, $content, $html = true)
     {
         error_reporting(0);
-        if($html==true) {
+        if ($html == true) {
             add_filter('wp_mail_content_type', 'set_html_content_type');
         }
         $re = wp_mail($email, $title, $content);
         return $re;
     }
-    public static function getClientIP() {
+
+    public static function getClientIP()
+    {
         // check for shared internet/ISP IP
         if (!empty($_SERVER['HTTP_CLIENT_IP']) && validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
             return $_SERVER['HTTP_CLIENT_IP'];
@@ -318,54 +331,55 @@ class Qdmvc_Helper
         // return unreliable ip since all else failed
         return $_SERVER['REMOTE_ADDR'];
     }
-    public static function getFullURLFromAbsPath($abs_path='')
+
+    public static function getFullURLFromAbsPath($abs_path = '')
     {
-        $tmp = is_ssl()?'https':'http';
-        $tmp .='://';
+        $tmp = is_ssl() ? 'https' : 'http';
+        $tmp .= '://';
         $tmp .= $_SERVER['HTTP_HOST'];
         $tmp .= $abs_path;
         return $tmp;
     }
+
     public static function getCurrentUserName()
     {
         $current_user = wp_get_current_user();
-        if($current_user!=null)
-        {
+        if ($current_user != null) {
             return $current_user->user_login;
         }
         return null;
     }
+
     public static function cacheGetByKey($cache_key)
     {
         $cache_key = md5($cache_key);
-        $cache_key = Qdmvc::getPluginDir('caches/'.$cache_key.'.txt');
+        $cache_key = Qdmvc::getPluginDir('caches/' . $cache_key . '.txt');
 
         //check cache
-        if(file_exists($cache_key))
-        {
+        if (file_exists($cache_key)) {
             //read file content
             $ttttt = file_get_contents($cache_key);
             return $ttttt;
         }
         return false;
     }
+
     public static function cacheRegister($cache_key, $cache_result)
     {
         $cache_key = md5($cache_key);
-        $cache_key = Qdmvc::getPluginDir('caches/'.$cache_key.'.txt');
+        $cache_key = Qdmvc::getPluginDir('caches/' . $cache_key . '.txt');
         $re = file_put_contents($cache_key, $cache_result);
-        if($re===false)
-        {
+        if ($re === false) {
             return false;
         }
         return true;
     }
+
     public static function cacheRemoveAll()
     {
         $folder = Qdmvc::getPluginDir('caches');
-        foreach(glob("{$folder}/*") as $file)
-        {
-            if(is_dir($file)) {
+        foreach (glob("{$folder}/*") as $file) {
+            if (is_dir($file)) {
                 continue;
             } else {
                 unlink($file);
@@ -373,16 +387,17 @@ class Qdmvc_Helper
         }
         return true;
     }
+
     public static function getOperator($mask = 'EQUAL')
     {
-        if(isset(static::$operator_mapping[$mask]))
-        {
+        if (isset(static::$operator_mapping[$mask])) {
             return static::$operator_mapping[$mask];
         }
         return '=';
     }
 }
 
-function set_html_content_type() {
+function set_html_content_type()
+{
     return 'text/html';
 }

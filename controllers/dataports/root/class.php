@@ -73,22 +73,21 @@ class Qdmvc_Dataport
     {
         $c = static::$model;
         $this->obj = $c::GET($this->data["id"]);
-        if($this->obj!=null) {
+        if ($this->obj != null) {
             $this->beforeCallFnAssign();
             $this->assign();
-        }
-        else{
+        } else {
             $this->obj = new $c();
         }
 
         $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|call_fn";
 
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
         if (method_exists($this->obj, $function)) {
             $this->fn_result = $this->obj->$function($location, $this->function_params);
-            if ($this->fn_result!==false) {
+            if ($this->fn_result !== false) {
                 $this->pushMsg('Call Fn OK, ID=' . $this->obj->id);
             }
             $this->pushMsg($this->obj->GETVALIDATION());
@@ -140,16 +139,17 @@ class Qdmvc_Dataport
     {
 
     }
+
     protected static function canInsert()
     {
         return true;
     }
+
     protected function insert()
     {
         $this->working_mode = 'insert_fail';
 
-        if(!static::canInsert())
-        {
+        if (!static::canInsert()) {
             $this->pushMsg('Permission: Could not Insert!', 'error');
             return false;
         }
@@ -157,21 +157,18 @@ class Qdmvc_Dataport
         $c = static::$model;
 
         //check manual mode
-        if($this->manual_no==true)
-        {
+        if ($this->manual_no == true) {
             //get noseries
             $tmp = new $c();
             $tmp = QdNoSeries::GET($tmp->getNoSeries());
-            if($tmp!=null && $tmp->manual_allowed==false)
-            {
+            if ($tmp != null && $tmp->manual_allowed == false) {
                 $this->pushMsg('Manual No are not allowed for this Model', 'error');
                 return false;
             }
         }
 
         //check duplicate id
-        if($c::GET($this->data['id']))
-        {
+        if ($c::GET($this->data['id'])) {
             $this->pushMsg(sprintf('Can not insert: Duplicate ID with record %s', $this->data['id']), 'error');
             return false;
         }
@@ -180,7 +177,7 @@ class Qdmvc_Dataport
         $this->obj->id = $this->data['id'];//force assign id while manual mode
         $this->beforeInsertAssign();
         $this->assign();
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
 
         $class_name = $this->getCalledClassName();
@@ -191,9 +188,7 @@ class Qdmvc_Dataport
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_insert_ok'), $this->obj->id));
             $this->working_mode = 'insert_ok';
             return true;
-        }
-        else
-        {
+        } else {
             $this->pushMsg($this->obj->GETVALIDATION());
             return false;
         }
@@ -203,21 +198,21 @@ class Qdmvc_Dataport
     {
         return get_called_class();
     }
+
     protected static function canEdit()
     {
         return true;
     }
+
     protected function update()
     {
         $this->working_mode = 'update_fail';
-        if(!static::canEdit())
-        {
+        if (!static::canEdit()) {
             $this->pushMsg('Permission: Could not Edit!', 'error');
             return;
         }
         //prevent manual no
-        if($this->manual_no==true)
-        {
+        if ($this->manual_no == true) {
             $this->pushMsg('[Manual No] are not allowed in update mode', 'error');
             return;
         }
@@ -225,8 +220,7 @@ class Qdmvc_Dataport
         $c = static::$model;
 
         $this->obj = $c::GET($this->data["id"]);
-        if($this->obj==null)
-        {
+        if ($this->obj == null) {
             $this->pushMsg('Record does not existed for update', 'error');
             return;
         }
@@ -234,7 +228,7 @@ class Qdmvc_Dataport
         $this->beforeInsertAssign();
         $this->assign();
 
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
         $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|update";
@@ -244,47 +238,46 @@ class Qdmvc_Dataport
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_update_ok'), $this->obj->id));
             $this->working_mode = 'update_ok';
             return true;
-        }
-        else
-        {
+        } else {
             $this->pushMsg($this->obj->GETVALIDATION());
             return false;
         }
 
     }
+
     protected static function canView()
     {
         return true;
     }
-    protected static function canDelete(){
+
+    protected static function canDelete()
+    {
         return true;
     }
+
     protected function delete()
     {
         $this->working_mode = 'delete_fail';
-        if(!static::canDelete())
-        {
+        if (!static::canDelete()) {
             $this->pushMsg('Permission: Could not Delete!', 'error');
             return;
         }
         $c = static::$model;
         $this->obj = $c::GET($this->data['id']);
-        if($this->obj==null)
-        {
+        if ($this->obj == null) {
             $this->pushMsg('Record does not existed for delete', 'error');
             return;
         }
         $class_name = $this->getCalledClassName();
         $location = "|{$class_name}|delete";
 
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
         if ($this->obj->delete($location)) {
             $this->pushMsg(sprintf(Qdmvc_Message::getMsg('msg_delete_ok'), $this->obj->id));
             $this->working_mode = 'delete_ok';
             return true;
-        }
-        else {
+        } else {
             $this->pushMsg($this->obj->GETVALIDATION());
             return false;
         }
@@ -292,29 +285,24 @@ class Qdmvc_Dataport
 
     private function loadPostValue()
     {
-        $this->data = isset($_POST['data'])?$_POST['data']:array();
-        $this->function_params = isset($_POST['params'])?$_POST['params']:array();
-        $this->action = isset($_POST['action'])?$_POST['action']:'';
+        $this->data = isset($_POST['data']) ? $_POST['data'] : array();
+        $this->function_params = isset($_POST['params']) ? $_POST['params'] : array();
+        $this->action = isset($_POST['action']) ? $_POST['action'] : '';
 
-        if(isset($_POST['manual_no']))
-        {
-            if($_POST['manual_no']==='false' || $_POST['manual_no']===false || $_POST['manual_no']===0 || $_POST['manual_no']==='0')
-            {
+        if (isset($_POST['manual_no'])) {
+            if ($_POST['manual_no'] === 'false' || $_POST['manual_no'] === false || $_POST['manual_no'] === 0 || $_POST['manual_no'] === '0') {
                 //do not thing
-            }
-            else
-            {
+            } else {
                 $this->manual_no = true;
             }
         }
 
-        $this->function = isset($_POST['function'])?$_POST['function']:'';
+        $this->function = isset($_POST['function']) ? $_POST['function'] : '';
     }
 
     protected function list_return()
     {
-        if(!static::canView() || !$this->checkPermission(__FUNCTION__))
-        {
+        if (!static::canView() || !$this->checkPermission(__FUNCTION__)) {
             $this->pushMsg('Permission: Could not View', 'error');
             $this->finish(null, array(), 0);
             return;
@@ -324,13 +312,11 @@ class Qdmvc_Dataport
         $pagesize = isset($_REQUEST['pagesize']) ? $_REQUEST['pagesize'] : 10;
         //SORT => May 19, 2015
         $sort_field = 'date_created';
-        if(isset($_REQUEST['sortdatafield']) && $_REQUEST['sortdatafield']!='')
-        {
+        if (isset($_REQUEST['sortdatafield']) && $_REQUEST['sortdatafield'] != '') {
             $sort_field = $_REQUEST['sortdatafield'];
         }
         $sort_direction = 'desc';
-        if(isset($_REQUEST['sortorder']) && $_REQUEST['sortorder']!='')
-        {
+        if (isset($_REQUEST['sortorder']) && $_REQUEST['sortorder'] != '') {
             $sort_direction = $_REQUEST['sortorder'];
         }
         //END SORT
@@ -339,18 +325,15 @@ class Qdmvc_Dataport
         $record = new $c();
 
 
-        foreach($_REQUEST as $key=>$value)
-        {
-            if(strstr($key, 'filterdatafield')!==false)
-            {
+        foreach ($_REQUEST as $key => $value) {
+            if (strstr($key, 'filterdatafield') !== false) {
                 $number = substr($key, 15);
-                $f_operator = 'filtercondition'.$number;
-                $f_operator = isset($_REQUEST[$f_operator])?$_REQUEST[$f_operator]:'EQUAL';
-                if($f_operator=='LESS_THAN')
-                {
+                $f_operator = 'filtercondition' . $number;
+                $f_operator = isset($_REQUEST[$f_operator]) ? $_REQUEST[$f_operator] : 'EQUAL';
+                if ($f_operator == 'LESS_THAN') {
                     $f_operator = 'CONTAINS';//quocdunginfo, Bug of JqWidget, LESS_THAN not used in that time
                 }
-                $f_value = 'filtervalue'.$number;
+                $f_value = 'filtervalue' . $number;
 
                 $record->SETRANGE($_REQUEST[$key], $_REQUEST[$f_value], $f_operator);
             }
@@ -373,10 +356,8 @@ class Qdmvc_Dataport
                 continue;
             }
             //check allow submit field
-            if(!QdT_Library::isNullOrEmpty(static::allowSubmitFields()))
-            {
-                if(!in_array($key, static::allowSubmitFields()))
-                {
+            if (!QdT_Library::isNullOrEmpty(static::allowSubmitFields())) {
+                if (!in_array($key, static::allowSubmitFields())) {
                     continue;
                 }
             }
@@ -385,8 +366,7 @@ class Qdmvc_Dataport
             if (in_array($c::getDataType($key), array('Boolean'))) {
                 $this->obj->$key = 0;
                 if (isset($_POST['data'][$key])) {
-                    if($_POST['data'][$key]==='true' || $_POST['data'][$key]==='1' || $_POST['data'][$key]===1 || $_POST['data'][$key]===true)
-                    {
+                    if ($_POST['data'][$key] === 'true' || $_POST['data'][$key] === '1' || $_POST['data'][$key] === 1 || $_POST['data'][$key] === true) {
                         $this->obj->$key = 1;
                     }
                 }
@@ -394,12 +374,10 @@ class Qdmvc_Dataport
             }
             if ($c::getDataType($key) == 'Date') {
                 if (isset($_POST['data'][$key])) {
-                    $tmp = DateTime::createFromFormat(get_option( 'date_format', 'j/m/Y' ), $_POST['data'][$key]);//DateTime::createFromFormat('d/M/Y', "01/01/2015");//$_POST['data'][$key]);
-                    if($tmp==false)
-                    {
+                    $tmp = DateTime::createFromFormat(get_option('date_format', 'j/m/Y'), $_POST['data'][$key]);//DateTime::createFromFormat('d/M/Y', "01/01/2015");//$_POST['data'][$key]);
+                    if ($tmp == false) {
                         $this->obj->$key = null;
-                    }else
-                    {
+                    } else {
                         $this->obj->$key = $tmp;
                     }
                 }
@@ -413,16 +391,18 @@ class Qdmvc_Dataport
             }
         }
     }
+
     protected static function allowSubmitFields()
     {
         return array();
     }
+
     protected function checkPermission($method_name)
     {
         $class_name = $this->getCalledClassName();
         //get Permissions
         $u = QdUser::GET(get_current_user_id());
-        if($u!=null) {
+        if ($u != null) {
             if (!$u->hasPermission($class_name, $method_name)) {
                 $this->pushMsg('You are not allowed to call ' . $class_name . '|' . $method_name, 'error');
                 return false;

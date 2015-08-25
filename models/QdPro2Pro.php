@@ -37,8 +37,7 @@ class QdPro2Pro extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProduct',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -101,8 +100,7 @@ class QdPro2Pro extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProduct',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'

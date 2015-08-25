@@ -29,6 +29,7 @@ class QdFeedback extends QdRoot
             ),
         ));
     }
+
     /*
     protected function contentOnValidate($field_name)
     {
@@ -63,11 +64,10 @@ class QdFeedback extends QdRoot
     }
     */
 
-    public function save($validate = true, $location='')
+    public function save($validate = true, $location = '')
     {
-        if(!$this->is_new_record())
-        {
-            if($this->done) {
+        if (!$this->is_new_record()) {
+            if ($this->done) {
                 if ($this->xRec()->done) {
                     $this->pushValidateError('', 'Không thể sửa khi Done = true');
                     return false;
@@ -77,21 +77,19 @@ class QdFeedback extends QdRoot
         return parent::save($validate, $location);
     }
 
-    public function delete($location='')
+    public function delete($location = '')
     {
-        if($this->done)
-        {
+        if ($this->done) {
             $this->pushValidateError('', 'Không thể xóa khi Done = true');
             return false;
         }
         return parent::delete($location);
     }
+
     public function fn_sendemail($location, $param)
     {
-        if(is_array($param))
-        {
-            if(isset($param['subject']) && isset($param['content']))
-            {
+        if (is_array($param)) {
+            if (isset($param['subject']) && isset($param['content'])) {
                 return Qdmvc_Helper::sendEmail($this->customer_email, $param['subject'], $param['content']);
             }
         }

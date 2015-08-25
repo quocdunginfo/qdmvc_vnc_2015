@@ -75,8 +75,7 @@ class QdWidgetNav extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdWidgetNavCat',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'

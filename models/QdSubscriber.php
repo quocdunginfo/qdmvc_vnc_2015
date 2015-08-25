@@ -3,6 +3,7 @@
 class QdSubscriber extends QdContact
 {
     public static $TYPE_CUSTOMER = 10;
+
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
@@ -10,6 +11,7 @@ class QdSubscriber extends QdContact
             array('field' => 'type', 'value' => static::$TYPE_CUSTOMER, 'operator' => static::$OP_EQUAL)
         ));
     }
+
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();

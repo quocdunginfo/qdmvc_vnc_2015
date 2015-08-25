@@ -7,6 +7,7 @@ class Qdmvc_DataPort_FrontFeedback extends Qdmvc_DataPort_Feedback
     {
         return array('customer_name', 'customer_email', 'content', 'customer_phone', 'title');
     }
+
     protected static function canView()
     {
         return false;
@@ -21,6 +22,7 @@ class Qdmvc_DataPort_FrontFeedback extends Qdmvc_DataPort_Feedback
     {
         return false;
     }
+
     protected function checkSecurity()
     {
         return true;

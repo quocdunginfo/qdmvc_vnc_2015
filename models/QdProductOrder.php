@@ -26,8 +26,7 @@ class QdProductOrder extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProduct',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                    )
+                    'TableFilter' => array()
                 )
             ),
             //SAMPLE FIELD CONFIG
@@ -40,7 +39,7 @@ class QdProductOrder extends QdRoot
                     'Method' => 'Lookup',
                     'Table' => 'QdProduct',
                     'Field' => 'name',
-                    'TableFilter' =>  array(
+                    'TableFilter' => array(
                         0 => array(
                             'Field' => 'id',
                             'Type' => 'FIELD',
@@ -93,11 +92,10 @@ class QdProductOrder extends QdRoot
         //return $this->product_obj;
     }
 
-    public function save($validate = true, $location='')
+    public function save($validate = true, $location = '')
     {
-        if(!$this->is_new_record())
-        {
-            if($this->done) {
+        if (!$this->is_new_record()) {
+            if ($this->done) {
                 if ($this->xRec()->done) {
                     $this->pushValidateError('', 'Không thể sửa khi Done = true');
                     return false;
@@ -106,17 +104,17 @@ class QdProductOrder extends QdRoot
         }
         return parent::save($validate, $location);
     }
+
     protected function countOnValidate($field_name)
     {
-        if($this->count<=0)
-        {
+        if ($this->count <= 0) {
             $this->pushValidateError($field_name, 'Quantity phải lớn hơn 0', 'error', 'count');
         }
     }
+
     protected function customer_emailOnValidate($field_name)
     {
-        if($this->$field_name!='')
-        {
+        if ($this->$field_name != '') {
             if (!filter_var($this->$field_name, FILTER_VALIDATE_EMAIL)) {
                 $this->pushValidateError($field_name, 'Email không đúng định dạng', 'warning', $field_name);
             }
@@ -126,13 +124,10 @@ class QdProductOrder extends QdRoot
     protected function product_idOnValidate($field_name)
     {
         //check exit
-        if($this->$field_name>0)
-        {
-            if(QdProduct::GET($this->$field_name)==null)
-            {
+        if ($this->$field_name > 0) {
+            if (QdProduct::GET($this->$field_name) == null) {
                 $this->pushValidateError($field_name, 'Product không tồn tại!');
-                if(!$this->is_new_record())
-                {
+                if (!$this->is_new_record()) {
                     $this->$field_name = $this->xRec()->$field_name;
                 }
             }
@@ -141,49 +136,44 @@ class QdProductOrder extends QdRoot
 
     protected function motaOnValidate($field_name)
     {
-        if($this->$field_name=='')
-        {
+        if ($this->$field_name == '') {
             $this->$field_name = $this->customer_name;
             $this->pushValidateError($field_name, 'Mota tự động bằng Customer Name', 'info');
         }
     }
-    public function delete($location='')
+
+    public function delete($location = '')
     {
-        if($this->done)
-        {
+        if ($this->done) {
             $this->pushValidateError('', 'Không thể xóa khi Done = true');
             return false;
         }
         return parent::delete($location);
     }
+
     public function fn_send_email()
     {
-        if(!is_email($this->customer_email))
-        {
+        if (!is_email($this->customer_email)) {
             return false;
         }
         $pro = $this->getProduct();
         $pro_name = '';
         $pro_code = '';
-        if(!Qdmvc_Helper::isNullOrEmpty($pro))
-        {
+        if (!Qdmvc_Helper::isNullOrEmpty($pro)) {
             $pro_name = $pro->name;
             $pro_code = $pro->code;
-        }
-        else
-        {
+        } else {
             return false;
         }
 
         $p_order_setup = QdSetupProductOrder::GET();
-        if(Qdmvc_Helper::isNullOrEmpty($p_order_setup))
-        {
+        if (Qdmvc_Helper::isNullOrEmpty($p_order_setup)) {
             return false;
         }
 
         $tpl = $p_order_setup->order_done_email_tpl;
 
-        $sex_title = $this->sex==1?'Anh':'Chị';
+        $sex_title = $this->sex == 1 ? 'Anh' : 'Chị';
 
 
         $tpl = str_replace(array('{sex}', '{customer_name}', '{product_name}', '{product_code}'), array($sex_title, $this->customer_name, $pro_name, $pro_code), $tpl);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Registering meta boxes
  *
@@ -19,19 +20,23 @@ class Qdmvc_Metabox_TrangLienHe
      */
     // Better has an underscore as last sign
     private static $prefix = 'your_prefix_';
+
     // 1st meta box
     function __construct()
     {
         $this->init();
     }
+
     public static function getFieldName($field_name)
     {
-        return static::$prefix.$field_name;
+        return static::$prefix . $field_name;
     }
+
     private function init()
     {
         add_filter('rwmb_meta_boxes', array($this, 'register_meta_boxes'));
     }
+
     /**
      * Register meta boxes
      *
@@ -63,7 +68,7 @@ class Qdmvc_Metabox_TrangLienHe
                     // Field name - Will be used as label
                     'name' => __('Email', 'meta-box'),
                     // Field ID, i.e. the meta key
-                    'id' => static::$prefix."email",
+                    'id' => static::$prefix . "email",
                     // Field description (optional)
                     'desc' => __('Left panel email', 'meta-box'),
                     'type' => 'text',
@@ -75,4 +80,5 @@ class Qdmvc_Metabox_TrangLienHe
         return $meta_boxes;
     }
 }
+
 (new Qdmvc_Metabox_TrangLienHe());

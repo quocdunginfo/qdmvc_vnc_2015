@@ -13,8 +13,7 @@ class QdNoSeriesMap extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdNoSeries',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -34,8 +33,7 @@ class QdNoSeriesMap extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdQdmvcModel',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'

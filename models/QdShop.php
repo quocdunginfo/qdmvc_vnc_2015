@@ -3,6 +3,7 @@
 class QdShop extends QdContact
 {
     public static $TYPE_SHOP = 30;
+
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
@@ -10,6 +11,7 @@ class QdShop extends QdContact
             array('field' => 'type', 'value' => static::$TYPE_SHOP, 'operator' => static::$OP_EQUAL)
         ));
     }
+
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
@@ -49,6 +51,7 @@ class QdShop extends QdContact
 
         return $obj;
     }
+
     public function getPermalink()
     {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: quocd_000
@@ -15,7 +16,7 @@ class Qdmvc_Server_Fn_DataPort extends Qdmvc_Dataport
         $params = $this->data['params'];
 
         $re = Qdmvc_Helper::callServerFn($class_name, $function, $params);
-        $this->pushMsg($re,'info');
+        $this->pushMsg($re, 'info');
     }
 
 }

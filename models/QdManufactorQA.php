@@ -2,16 +2,17 @@
 
 class QdManufactorQA extends QdManufactor
 {
-	public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
-	{
-		parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+    public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
+    {
+        parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
 
-		$this->ADDFILTERDEFAULT(array(
-			array('field' => 'type2', 'value' => static::$TYPE2_MANUFACTOR_QUANAO, 'exact' => true, 'operator' => '=')
-		));
+        $this->ADDFILTERDEFAULT(array(
+            array('field' => 'type2', 'value' => static::$TYPE2_MANUFACTOR_QUANAO, 'exact' => true, 'operator' => '=')
+        ));
 
-	}
-	public static function getInitObj()
+    }
+
+    public static function getInitObj()
     {
         $tmp = parent::getInitObj();
 
@@ -29,8 +30,7 @@ class QdManufactorQA extends QdManufactor
         $obj['parent_id']['TableRelation'] = array(
             'Table' => 'QdManufactorQA',
             'Field' => 'id',
-            'TableFilter' => array(
-                /*array(
+            'TableFilter' => array(/*array(
                     'Condition' => array(
                         'Field' => '',
                         'Type' => 'CONST',//'FIELD'

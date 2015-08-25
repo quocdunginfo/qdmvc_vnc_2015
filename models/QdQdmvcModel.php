@@ -6,9 +6,7 @@ class QdQdmvcModel extends QdRoot
 
     public static function getFieldsConfig()
     {
-        return array_merge(parent::getFieldsConfig(), array(
-
-        ));
+        return array_merge(parent::getFieldsConfig(), array());
     }
 
     public static function getInitObj()
@@ -16,26 +14,24 @@ class QdQdmvcModel extends QdRoot
         $obj = new QdQdmvcModel();
         return $obj;
     }
+
     public function fn_genfromfolder($location, $params)
     {
         $folder = Qdmvc::getPluginDir('models');
-        $count=0;
+        $count = 0;
         $t = glob("{$folder}/*");
-        foreach(glob("{$folder}/*") as $file)
-        {
-            if($count==0)
-            {
+        foreach (glob("{$folder}/*") as $file) {
+            if ($count == 0) {
                 QdQdmvcModel::delete_all();
             }
 
-            if(is_file($file)) {
+            if (is_file($file)) {
                 $file_name = basename($file);
-                $file_name = str_replace(".php","", $file_name);
-                if(QdQdmvcModel::GET($file_name)==null)
-                {
+                $file_name = str_replace(".php", "", $file_name);
+                if (QdQdmvcModel::GET($file_name) == null) {
                     $tmp = new QdQdmvcModel();
                     $tmp->id = $file_name;
-                    if($tmp->save()){
+                    if ($tmp->save()) {
                         $count++;
                     }
                 }

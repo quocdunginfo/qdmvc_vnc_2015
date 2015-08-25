@@ -6,7 +6,7 @@ class QdUserGroup extends QdRoot
 
     public static function getFieldsConfig()
     {
-        $obj= array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             'description' => array(),
             'active' => array(
                 'DataType' => 'Boolean'
@@ -17,9 +17,7 @@ class QdUserGroup extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdUserGroup',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             )
         ));
@@ -32,6 +30,7 @@ class QdUserGroup extends QdRoot
         $obj = new QdUserGroup();
         return $obj;
     }
+
     public function getPermissions()
     {
         //find all in Permission
@@ -40,35 +39,32 @@ class QdUserGroup extends QdRoot
         $tmp->SETRANGE('active', true);
         return $tmp->GETLIST();
     }
-    public function hasPermission($class_name=null, $method_name=null, $page_name=null)
+
+    public function hasPermission($class_name = null, $method_name = null, $page_name = null)
     {
         //find all in Permission
         $tmp = new QdPermission();
         $tmp->SETRANGE('usergroupid', $this->id);
         $tmp->SETRANGE('active', true);
-        if($class_name!==null && $method_name!==null) {
+        if ($class_name !== null && $method_name !== null) {
             $tmp->SETRANGE('classname', $class_name);
             $tmp->SETRANGE('methodname', $method_name);
-        }
-        else{
+        } else {
             $tmp->SETRANGE('pagename', $page_name);
         }
 
         $tmp = $tmp->GETLIST();
-        if(empty($tmp))
-        {
+        if (empty($tmp)) {
             $po = $this->getParentObj();
-            if($po!=null)
-            {
+            if ($po != null) {
                 return $po->hasPermission($class_name, $method_name, $page_name);
             }
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
+
     public function getParentObj()
     {
         return QdUserGroup::GET($this->parent_id);

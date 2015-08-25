@@ -6,6 +6,7 @@
  * Time: 10:03 PM
  */
 Qdmvc::loadDataPort('subscriber_port');
+
 class Qdmvc_DataPort_FrontSubscriber extends Qdmvc_DataPort_Subscriber
 {
     protected static function allowSubmitFields()

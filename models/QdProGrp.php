@@ -37,8 +37,7 @@ class QdProGrp extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProduct',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -63,7 +62,7 @@ class QdProGrp extends QdRoot
                     QdBigSaleCat::$TYPE_BIGSALE => array(
                         'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Bán chạy'),
                     ),
-                    QdPromotionCat::$TYPE_PROMOTION=> array(
+                    QdPromotionCat::$TYPE_PROMOTION => array(
                         'Caption' => array('en-US' => 'Promotion', 'vi-VN' => 'Khuyến mãi'),
                     ),
                 )

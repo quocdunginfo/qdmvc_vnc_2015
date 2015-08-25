@@ -9,9 +9,7 @@ class QdPost extends QdRoot
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
-            'order' => array(
-
-            ),
+            'order' => array(),
             'content' => array(
                 'Caption' => array('en-US' => 'Content', 'vi-VN' => 'Nội dung'),
                 'DataType' => 'WYSIWYG',
@@ -94,23 +92,27 @@ class QdPost extends QdRoot
         $obj->type = static::$TYPE_POST;
         return $obj;
     }
+
     public function getPermalink()
     {
         /*$query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/service.php'));
         $query = add_query_arg(array('id' => $this->id, 'title' => $this->name), $query);*/
-        $query = site_url(sprintf('%s/%s-%s.html',Qdmvc_Helper::sanitize_title_with_dashes($this->getPostCatObj()->title) ,Qdmvc_Helper::sanitize_title_with_dashes($this->title), $this->id));
+        $query = site_url(sprintf('%s/%s-%s.html', Qdmvc_Helper::sanitize_title_with_dashes($this->getPostCatObj()->title), Qdmvc_Helper::sanitize_title_with_dashes($this->title), $this->id));
         return $query;
     }
+
     public function getBreadcrumbs()
     {
         $re = $this->getPostCatObj()->getBreadcrumbs();
         array_push($re, array('name' => $this->title, 'url' => $this->getPermalink()));
         return $re;
     }
+
     public function getPostCatObj()
     {
         return QdPostCat::GET($this->post_cat_id);
     }
+
     protected function CALCFIELDS($flowfield_name)
     {
         if ($flowfield_name == '_permalink') {

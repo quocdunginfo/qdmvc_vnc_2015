@@ -10,9 +10,7 @@ class QdWpMenu extends QdRoot
             'count' => array(
                 'DataType' => 'Integer'
             ),
-            'wpid' => array(
-
-            )
+            'wpid' => array()
         ));
     }
 
@@ -21,16 +19,15 @@ class QdWpMenu extends QdRoot
         $obj = new QdWpMenu();
         return $obj;
     }
+
     public function fn_syncfromwp($location, $params)
     {
 
-        $menus = get_terms( 'nav_menu', array( 'hide_empty' => false ) );
+        $menus = get_terms('nav_menu', array('hide_empty' => false));
 
-        $count=0;
-        foreach($menus as $item)
-        {
-            if($count==0)
-            {
+        $count = 0;
+        foreach ($menus as $item) {
+            if ($count == 0) {
                 QdWpMenu::delete_all();
             }
 
@@ -38,7 +35,7 @@ class QdWpMenu extends QdRoot
             $tmp->id = $item->slug;
             $tmp->wpid = $item->term_id;
             $tmp->count = $item->count;
-            if($tmp->save()){
+            if ($tmp->save()) {
                 $count++;
             }
         }

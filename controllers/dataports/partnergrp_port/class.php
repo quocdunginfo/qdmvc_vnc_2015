@@ -6,6 +6,7 @@
  * Time: 10:03 PM
  */
 Qdmvc::loadDataPort('widgetnavcat_port');
+
 class Qdmvc_DataPort_PartnerGrp extends Qdmvc_DataPort_WidgetNavCat
 {
     protected static $model = 'QdPartnerGrp';

@@ -51,13 +51,12 @@ class QdUserPersonalization extends QdRoot
         $c = new QdUserPersonalization();
         $c->SETRANGE('userid', $this->$field_name);
         $c = $c->GETLIST();
-        $c = empty($c)?null:$c[0];
+        $c = empty($c) ? null : $c[0];
 
         if ($u == null) {
-            $this->pushValidateError($field_name, $field_name.' không tồn tại trong QdUser', 'error');
+            $this->pushValidateError($field_name, $field_name . ' không tồn tại trong QdUser', 'error');
         } else {
-            if(($this->is_new_record() && $c != null) || ($c!=null && $c->id != $this->id))
-            {
+            if (($this->is_new_record() && $c != null) || ($c != null && $c->id != $this->id)) {
                 $this->pushValidateError('userid', 'UserID đã tồn tại trong bảng', 'error');
                 return false;
             }
@@ -69,8 +68,7 @@ class QdUserPersonalization extends QdRoot
 
     public function delete($location = '')
     {
-        if($this->active == true)
-        {
+        if ($this->active == true) {
             $this->pushValidateError('active', 'Không thể xóa khi Active = true', 'error');
             return false;
         }

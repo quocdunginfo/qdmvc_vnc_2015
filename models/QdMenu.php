@@ -30,9 +30,7 @@ class QdMenu extends QdWidgetNav
             'TableRelation' => array(
                 'Table' => 'QdWpMenu',
                 'Field' => 'id',
-                'TableFilter' => array(
-
-                )
+                'TableFilter' => array()
             )
         );
         $obj['type']['Options'] = array(
@@ -57,7 +55,7 @@ class QdMenu extends QdWidgetNav
     protected function contentOnValidate($field_name)
     {
         $tmp = QdWpMenu::GET($this->$field_name);
-        if($tmp!=null) {
+        if ($tmp != null) {
             $this->position_1 = $tmp->wpid;
         }
     }

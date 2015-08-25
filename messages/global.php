@@ -1,11 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: quocd_000
  * Date: 27/05/2015
  * Time: 10:20 PM
  */
-class Qdmvc_Message {
+class Qdmvc_Message
+{
     private static $msg = array(
         'msg_update_ok' => 'Cập nhật thành công, ID = %s',
         'msg_delete_ok' => 'Xóa thành công, ID = %s',
@@ -65,15 +67,13 @@ class Qdmvc_Message {
         'btn_scancode' => 'Scan QR code'
         /*END Layout List*/
     );
+
     public static function getMsg($key)
     {
-        if(Qdmvc_Config::getLanguage()=='vi-VN')
-        {
-            return isset(static::$msg[$key])?static::$msg[$key]:'@'.$key;
-        }
-        else
-        {
-            return isset(static::$msg2[$key])?static::$msg2[$key]:'@'.$key;
+        if (Qdmvc_Config::getLanguage() == 'vi-VN') {
+            return isset(static::$msg[$key]) ? static::$msg[$key] : '@' . $key;
+        } else {
+            return isset(static::$msg2[$key]) ? static::$msg2[$key] : '@' . $key;
         }
     }
 }

@@ -40,41 +40,36 @@ class QdNoSeries extends QdRoot
         $obj = new QdNoSeries();
         $obj->from_no = 1;
         $obj->to_no = 99999;
-        $obj->last_no = $obj->from_no-1;
+        $obj->last_no = $obj->from_no - 1;
         $obj->fixed_length = false;
         $obj->manual_allowed = false;
-        $obj->active=true;
+        $obj->active = true;
 
         return $obj;
     }
+
     public function getNextNo()
     {
         //check active
-        if($this->active==false)
-        {
+        if ($this->active == false) {
             $this->pushValidateError('', 'No Series is not active', 'error');
             return false;
         }
 
         $this->last_no++;
-        if($this->last_no>$this->to_no)
-        {
-            $this->pushValidateError('', 'No Series reach maximum of '.($this->last_no-1), 'error');
+        if ($this->last_no > $this->to_no) {
+            $this->pushValidateError('', 'No Series reach maximum of ' . ($this->last_no - 1), 'error');
             return false;
         }
 
         $tmp = $this->prefix;
-        if($this->fixed_length==true)
-        {
+        if ($this->fixed_length == true) {
             $tmp .= str_pad($this->last_no, strlen($this->to_no), '0', STR_PAD_LEFT);
-        }
-        else
-        {
+        } else {
             $tmp .= $this->last_no;
         }
 
-        if($this->save(false, '|QdNoSeries|getNextNo'))
-        {
+        if ($this->save(false, '|QdNoSeries|getNextNo')) {
             return $tmp;
         }
         return false;

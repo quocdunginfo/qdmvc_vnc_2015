@@ -6,16 +6,14 @@ class QdUserInGroup extends QdRoot
 
     public static function getFieldsConfig()
     {
-        $obj= array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             'usergroupid' => array(
                 'DataType' => 'Code',
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
                     'Table' => 'QdUserGroup',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             ),
             'userid' => array(
@@ -24,9 +22,7 @@ class QdUserInGroup extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdUser',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             ),
         ));

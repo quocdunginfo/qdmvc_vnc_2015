@@ -30,22 +30,21 @@ class QdUser extends QdRoot
 
     protected function idOnValidate($field_name)
     {
-        if($this->{$field_name}=='')
-        {
+        if ($this->{$field_name} == '') {
             $this->pushValidateError($field_name, '"model" phải khác rỗng');
         }
     }
 
     public function fn_syncfromwp($location, $params = array())
     {
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
         //remove all
         QdUser::delete_all();
         //copy all from WP
         $users = get_users();
         $count = 0;
-        foreach ( $users as $user ) {
+        foreach ($users as $user) {
             $tmp = new QdUser();
             $tmp->id = $user->ID;
             $tmp->username = $user->user_login;
@@ -53,44 +52,43 @@ class QdUser extends QdRoot
             $tmp->status = $user->user_status;
             $tmp->email = $user->user_email;
             $location .= sprintf('|%s|%s', $this->getCalledClassName(), 'fn_syncfromwp');
-            if($tmp->save($location))
-            {
+            if ($tmp->save($location)) {
                 $count++;
             }
         }
         $this->pushValidateError('', 'Total Users: ' . $count, 'info');
         return $count > 0;
     }
+
     public function getUserGroupObj()
     {
         $tmp = new QdUserInGroup();
         $tmp->SETRANGE('userid', $this->id);
         $tmp = $tmp->GETLIST();
-        $tmp = empty($tmp)?null:$tmp[0];
-        if($tmp!=null)
-        {
+        $tmp = empty($tmp) ? null : $tmp[0];
+        if ($tmp != null) {
             $g = QdUserGroup::GET($tmp->usergroupid);
-            if($g!=null && $g->active==true)
+            if ($g != null && $g->active == true)
                 return $g;
         }
         return null;
     }
+
     public function getPermissions()
     {
         //get group
         $g = $this->getUserGroupObj();
-        if($g!=null)
-        {
+        if ($g != null) {
             return $g->getPermissions();
         }
         return array();
     }
-    public function hasPermission($class_name=null, $method_name=null, $page_name=null)
+
+    public function hasPermission($class_name = null, $method_name = null, $page_name = null)
     {
         //get group
         $g = $this->getUserGroupObj();
-        if($g!=null)
-        {
+        if ($g != null) {
             return $g->hasPermission($class_name, $method_name, $page_name);
         }
         return false;

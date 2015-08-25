@@ -10,14 +10,10 @@ class QdTRootSetup extends QdRootSetup
             'topleft_tuvan' => array(
                 'DataType' => 'WYSIWYG',
             ),
-            'seo_description_struct' => array(
-            ),
-            'seo_title_struct' => array(
-            ),
-            'seo_title_struct_2' => array(
-            ),
-            'seo_keywords_struct' => array(
-            ),
+            'seo_description_struct' => array(),
+            'seo_title_struct' => array(),
+            'seo_title_struct_2' => array(),
+            'seo_keywords_struct' => array(),
             'topcenter_promotion' => array(
                 'DataType' => 'WYSIWYG',
             ),
@@ -47,9 +43,7 @@ class QdTRootSetup extends QdRootSetup
                 'TableRelation' => array(
                     'Table' => 'QdWidgetNavCat',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             ),
             'widgetnavcat_id' => array(
@@ -66,8 +60,7 @@ class QdTRootSetup extends QdRootSetup
                 'TableRelation' => array(
                     'Table' => 'QdWidgetNavCat',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -94,8 +87,7 @@ class QdTRootSetup extends QdRootSetup
                 'TableRelation' => array(
                     'Table' => 'QdPartnerGrp',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -123,8 +115,7 @@ class QdTRootSetup extends QdRootSetup
                 'TableRelation' => array(
                     'Table' => 'QdImgGrp',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
@@ -151,8 +142,7 @@ class QdTRootSetup extends QdRootSetup
                 'TableRelation' => array(
                     'Table' => 'QdWidgetNavCat',
                     'Field' => 'id',
-                    'TableFilter' => array(
-                        /*array(
+                    'TableFilter' => array(/*array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'

@@ -7,6 +7,7 @@
  * Time: 12:59 PM
  */
 Qdmvc::loadLayout('layout_root');
+
 class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 {
     protected $obj = null;
@@ -323,7 +324,8 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="qdMsgModalTitle">Info</h4>
                     </div>
                     <div id="qdMsgModalContent" class="modal-body">
@@ -826,7 +828,8 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                     ?>
                                     <div class="col-md-6">
                                         <!-- Caption -->
-                                        <div data-qddesc="<?=$this->page->getFieldDescription($f_name, $this->data['language'])?>"
+                                        <div
+                                            data-qddesc="<?= $this->page->getFieldDescription($f_name, $this->data['language']) ?>"
                                             class="qd-field-caption pull-left"><?= $this->page->getFieldCaption($f_name, $this->data['language']) ?>
                                             :
                                         </div>
@@ -872,7 +875,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    $('.qd-field-caption').dblclick(function(){
+                    $('.qd-field-caption').dblclick(function () {
                         var content = $(this).data('qddesc');
                         var title = $(this).text();
                         MYAPP.showModalDialog(title, content);
@@ -903,6 +906,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     <?php
 
     }
+
     private function applyKOBinding()
     {
         ?>
@@ -922,7 +926,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 });
             })(jQuery);
         </script>
-        <?php
+    <?php
     }
 
     protected function onDeleteOK()
@@ -1476,7 +1480,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <?= $this->Bar() ?>
             <?= $this->msgPanelLayout() ?>
             <?= $this->onReadyHook() ?>
-            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element?>
+            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element ?>
         </div>
     <?php
     }

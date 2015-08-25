@@ -28,12 +28,13 @@ class QdImgGrp extends QdPostCat
         );
         return $obj;
     }
+
     public function getImgs()
     {
         $record = new QdImage();
         $record->SETFILTERDEFAULT(array(
             array('field' => 'model', 'value' => $this->getCalledClassName(), 'exact' => true, 'operator' => '='),
-            array('field' => 'model_id','value' => $this->id, 'exact' => true, 'operator' => '='),
+            array('field' => 'model_id', 'value' => $this->id, 'exact' => true, 'operator' => '='),
         ));
         return $record;
     }

@@ -6,6 +6,7 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_card');
+
 class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
 {
     protected function getPageListURL()
@@ -19,7 +20,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         <script>
             //update grid
-            MYAPP.updateGrid = function() {
+            MYAPP.updateGrid = function () {
                 try {
                     document.getElementById('list').contentWindow.updateGrid();
                 } catch (error) {
@@ -27,7 +28,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
                 }
             }
         </script>
-    <?php
+        <?php
         parent::internalGateway();
     }
 
@@ -36,7 +37,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         <script>
             //gate way to comunicate with parent windows
-            MYAPP.doubleClickObj = function(obj) {//do not change func name
+            MYAPP.doubleClickObj = function (obj) {//do not change func name
                 (function ($) {
                     $('#jqxNavigationBar').jqxNavigationBar('expandAt', 0);
                     //set obj too
@@ -44,7 +45,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
                 })(jQuery);
             }
         </script>
-    <?php
+        <?php
         parent::externalGateway();
     }
 
@@ -54,7 +55,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         <?= $this->bindingField() ?>
 
-        <?php
+    <?php
     }
 
 
@@ -68,20 +69,22 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
                 });
             })(jQuery);
         </script>
-    <?php
+        <?php
         parent::onReadyHook();
     }
+
     protected function onSaveOK()
     {
         ?>
         if(!MYAPP.formValidationError())
         {
-            MYAPP.updateGrid();
+        MYAPP.updateGrid();
         }
 
         <?php
         parent::onSaveOK();
     }
+
     protected function onDeleteOK()
     {
         ?>
@@ -89,7 +92,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         {
         MYAPP.updateGrid();
         }
-    <?php
+        <?php
         parent::onDeleteOK();
     }
 

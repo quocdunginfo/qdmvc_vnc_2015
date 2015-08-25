@@ -6,9 +6,11 @@
  * Time: 10:03 PM
  */
 Qdmvc::loadDataPort('root');
+
 class Qdmvc_DataPort_VnDistrict extends Qdmvc_Dataport
 {
     protected static $model = 'QdVnDistrict';
+
     protected static function canInsert()
     {
         return false;

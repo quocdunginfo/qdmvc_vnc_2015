@@ -22,8 +22,7 @@ class QdPromotionCat extends QdProductCat
         $obj['parent_id']['TableRelation'] = array(
             'Table' => 'QdPromotionCat',
             'Field' => 'id',
-            'TableFilter' => array(
-                /*array(
+            'TableFilter' => array(/*array(
                     'Condition' => array(
                         'Field' => '',
                         'Type' => 'CONST',//'FIELD'

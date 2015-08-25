@@ -7,8 +7,7 @@ class QdSetup extends QdRootSetup
     public function save($validate = true)
     {
         $re = parent::save($validate);
-        if($re)
-        {
+        if ($re) {
             $this->pushValidateError('', 'Cần tải lại trang Web để có hiệu lực', 'warning');
         }
         return $re;
@@ -36,11 +35,11 @@ class QdSetup extends QdRootSetup
             ),
         ));
     }
+
     public function fn_removecache()
     {
         //xoa het file trong qdmvc_caches
-        if(Qdmvc_Helper::cacheRemoveAll())
-        {
+        if (Qdmvc_Helper::cacheRemoveAll()) {
             $this->pushValidateError('', 'Remove All Cache files done!', 'info');
         }
 

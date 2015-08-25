@@ -3,6 +3,7 @@
 class QdBigSaleCat extends QdProductCat
 {
     public static $TYPE_BIGSALE = 100;
+
     public static function getInitObj()
     {
         $tmp = parent::getInitObj();
@@ -21,8 +22,7 @@ class QdBigSaleCat extends QdProductCat
         $obj['parent_id']['TableRelation'] = array(
             'Table' => 'QdBigSaleCat',
             'Field' => 'id',
-            'TableFilter' => array(
-                /*array(
+            'TableFilter' => array(/*array(
                     'Condition' => array(
                         'Field' => '',
                         'Type' => 'CONST',//'FIELD'

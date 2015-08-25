@@ -6,6 +6,7 @@
  * Time: 7:08 PM
  */
 Qdmvc::loadLayout('layout_card');
+
 class Qdmvc_Layout_CardSetup extends Qdmvc_Layout_Card
 {
     protected function onReadyHook()
@@ -13,8 +14,8 @@ class Qdmvc_Layout_CardSetup extends Qdmvc_Layout_Card
         parent::onReadyHook();
         ?>
         <script>
-            (function($){
-                $(document).ready(function(){
+            (function ($) {
+                $(document).ready(function () {
                     //MYAPP.setObj(<?=$this->obj_json?>);//may not compatible with cache
                     MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                     $.get(MYAPP.data_port)
@@ -36,6 +37,6 @@ class Qdmvc_Layout_CardSetup extends Qdmvc_Layout_Card
                 });
             })(jQuery);
         </script>
-        <?php
+    <?php
     }
 }

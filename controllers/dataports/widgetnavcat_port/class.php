@@ -6,6 +6,7 @@
  * Time: 10:03 PM
  */
 Qdmvc::loadDataPort('postcat_port');
+
 class Qdmvc_DataPort_WidgetNavCat extends Qdmvc_DataPort_PostCat
 {
     protected static $model = 'QdWidgetNavCat';

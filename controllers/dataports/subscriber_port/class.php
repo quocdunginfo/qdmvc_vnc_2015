@@ -6,6 +6,7 @@
  * Time: 10:03 PM
  */
 Qdmvc::loadDataPort('contact_port');
+
 class Qdmvc_DataPort_Subscriber extends Qdmvc_DataPort_Contact
 {
     protected static $model = 'QdSubscriber';

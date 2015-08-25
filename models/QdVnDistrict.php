@@ -3,6 +3,7 @@
 class QdVnDistrict extends QdRoot
 {
     static $table_name = 'mpd_vn_district';
+
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(

@@ -6,16 +6,14 @@ class QdPermission extends QdRoot
 
     public static function getFieldsConfig()
     {
-        $obj= array_merge(parent::getFieldsConfig(), array(
+        $obj = array_merge(parent::getFieldsConfig(), array(
             'usergroupid' => array(
                 'DataType' => 'Code',
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
                     'Table' => 'QdUserGroup',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             ),
             'classname' => array(),
@@ -26,9 +24,7 @@ class QdPermission extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdQdmvcPage',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 ),
                 'DataPort' => 'qdmvcpage_port'
             ),
@@ -48,13 +44,10 @@ class QdPermission extends QdRoot
     protected function usergroupidOnValidate($field_name)
     {
         $u = QdUser::GET(get_current_user_id());
-        if($u!=null)
-        {
+        if ($u != null) {
             $g = $u->getUserGroupObj();
-            if($g!=null)
-            {
-                if($g->id == $this->{$field_name})
-                {
+            if ($g != null) {
+                if ($g->id == $this->{$field_name}) {
                     $this->pushValidateError($field_name, 'You can not set Permission by your self!', 'error');
                 }
             }

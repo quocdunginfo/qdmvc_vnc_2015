@@ -6,6 +6,7 @@
  * Time: 11:32 PM
  */
 Qdmvc::loadLayout('layout_root');
+
 class Qdmvc_Layout_List extends Qdmvc_Layout_Root
 {
     function __construct($page)
@@ -79,13 +80,13 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     {
         ?>
         <script>
-            MYAPP.updateGrid = function() {
+            MYAPP.updateGrid = function () {
                 //update databound
                 (function ($) {
                     jQuery('#jqxgrid').jqxGrid('updatebounddata');
                 })(jQuery);
             };
-            MYAPP.addGridFilter = function(field_name, field_value){
+            MYAPP.addGridFilter = function (field_name, field_value) {
                 (function ($) {
                     var addfilter = function () {
                         // create a filter group for the FirstName column.
@@ -113,7 +114,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     protected function internalGateway()
     {
         ?>
-        <?=$this->qrCodeScript()?>
+        <?= $this->qrCodeScript() ?>
         <script>
             function gridGetSelectedRow() {//not work
                 (function ($) {
@@ -132,7 +133,8 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <div class="modal-title" id="qdMsgModalTitle">QR Code scanner</div>
                     </div>
                     <div id="qdMsgModalContent" class="modal-body" style="text-align: center">
@@ -185,6 +187,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
 
     <?php
     }
+
     protected function generalToolbar()
     {
         ?>
@@ -192,38 +195,38 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
         <div style="margin-top: 5px; margin-bottom: 5px">
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdshowall" type="button">
-                    <?=Qdmvc_Message::getMsg('btn_showall')?>
+                    <?= Qdmvc_Message::getMsg('btn_showall') ?>
                 </button>
             </span>
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdclearfilter" type="button">
-                    <?=Qdmvc_Message::getMsg('btn_clearfilter')?>
+                    <?= Qdmvc_Message::getMsg('btn_clearfilter') ?>
                 </button>
             </span>
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdreload" type="button">
-                    <?=Qdmvc_Message::getMsg('btn_reloadcard')?>
+                    <?= Qdmvc_Message::getMsg('btn_reloadcard') ?>
                 </button>
             </span>
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdprint" type="button">
-                    <?=Qdmvc_Message::getMsg('btn_print')?>
+                    <?= Qdmvc_Message::getMsg('btn_print') ?>
                 </button>
             </span>
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdexport" type="button">
-                    <?=Qdmvc_Message::getMsg('btn_exportexcel')?>
+                    <?= Qdmvc_Message::getMsg('btn_exportexcel') ?>
                 </button>
             </span>
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdscancode" type="button">
-                    <?=Qdmvc_Message::getMsg('btn_scancode')?>
+                    <?= Qdmvc_Message::getMsg('btn_scancode') ?>
                 </button>
             </span>
             <script type="text/javascript">
                 (function ($) {
                     $(document).ready(function () {
-                       $("#qdprint").click(function () {
+                        $("#qdprint").click(function () {
                             var gridContent = $("#jqxgrid").jqxGrid('exportdata', 'html');
                             var newWindow = window.open('', '', 'width=800, height=500'),
                                 document = newWindow.document.open(),
@@ -258,7 +261,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             $("#qdMsgModal").modal('show');
                             $('#qdMsgModal').on('hidden.bs.modal', function () {
                                 //alert('Stop');
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     scanner_decoder.stop();//fail when stop immediately, need use time out
                                 }, 1000);
                             });
@@ -272,7 +275,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                                     DecodeBarCodeRate: null,
                                     beep: '<?=QdJqwidgets::getResourcePath('plugin/qr/beep.mp3')?>',
                                     //flipHorizontal: true,//not supported
-                                    resultFunction: function(resText, lastImageSrc) {
+                                    resultFunction: function (resText, lastImageSrc) {
                                         //$('#jqxgrid').jqxGrid('clearfilters');
                                         MYAPP.addGridFilter('id', resText);
                                         //$("#qdMsgModal").modal('hide');
@@ -296,156 +299,159 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
         if ($this->data['view_style'] == 'compact') {
             Qdmvc_Helper::requestCompact();
         }
-        if($this->data['nopermission']===true){ $this->layout_nopermission(); return; }
+        if ($this->data['nopermission'] === true) {
+            $this->layout_nopermission();
+            return;
+        }
         parent::render();
         ?>
         <div id="qdmvcRootDiv" style="display: none; width: inherit; height: inherit">
-        <?=$this->onReadyHook()?>
-        <?= $this->preConfig() ?>
-        <?= $this->externalGateway() ?>
-        <?= $this->internalGateway() ?>
-        <?= $this->generateFields() ?>
+            <?= $this->onReadyHook() ?>
+            <?= $this->preConfig() ?>
+            <?= $this->externalGateway() ?>
+            <?= $this->internalGateway() ?>
+            <?= $this->generateFields() ?>
 
-        <script type="text/javascript">
-            (function ($) {
-                $(document).ready(function () {
-                    var theme = 'classic';
-                    var source =
-                    {
-                        datatype: "json",
-                        datafields: dataSourceDefine,
-                        url: MYAPP.data_port,
-                        root: 'rows',
-                        beforeprocessing: function (data) {
-                            source.totalrecords = data.total;
-                        },
-                        //Server side sorting May 19, 2015
-                        sort: function () {
-                            // update the grid and send a request to the server.
-                            console.log('Send SORT to Server');
-                            $("#jqxgrid").jqxGrid('updatebounddata', 'sort');
-                        },
-                        type: 'POST'//switch from GET to POST
-                    };
-
-                    var dataadapter = new $.jqx.dataAdapter(source);
-
-                    // initialize jqxGrid
-                    $("#jqxgrid").jqxGrid(
+            <script type="text/javascript">
+                (function ($) {
+                    $(document).ready(function () {
+                        var theme = 'classic';
+                        var source =
                         {
-                            width: '100%',
-                            height: '100%',
-                            source: dataadapter,
-                            theme: theme,
-                            autoheight: false,
-                            pageable: true,
-                            showfilterrow: true,
-                            filterable: true,
-                            showgroupsheader: true,
-                            groupable: true,
-                            virtualmode: true,
-                            pagesize: 20,
-                            sortable: true,/*May 19 2015*/
-                            pagesizeoptions: ['5', '10', '20', '50', '100', '200', '999999'],
-                            /*Enable Inline Editing*/
-                            /*editable: true,
-                             editmode: "dblclick",*/
-                            columnsresize: true,
-                            //scrollmode: 'deferred',
-                            rendergridrows: function () {
-                                return dataadapter.records;
+                            datatype: "json",
+                            datafields: dataSourceDefine,
+                            url: MYAPP.data_port,
+                            root: 'rows',
+                            beforeprocessing: function (data) {
+                                source.totalrecords = data.total;
                             },
-                            columns: dataGridDefine,
-                            /*
-                             columns: [
-                             { text: 'Ship Name', datafield: 'parent_id', columntype: 'combobox' }
-                             ]*/
-                            ready: function () {
+                            //Server side sorting May 19, 2015
+                            sort: function () {
+                                // update the grid and send a request to the server.
+                                console.log('Send SORT to Server');
+                                $("#jqxgrid").jqxGrid('updatebounddata', 'sort');
+                            },
+                            type: 'POST'//switch from GET to POST
+                        };
 
+                        var dataadapter = new $.jqx.dataAdapter(source);
+
+                        // initialize jqxGrid
+                        $("#jqxgrid").jqxGrid(
+                            {
+                                width: '100%',
+                                height: '100%',
+                                source: dataadapter,
+                                theme: theme,
+                                autoheight: false,
+                                pageable: true,
+                                showfilterrow: true,
+                                filterable: true,
+                                showgroupsheader: true,
+                                groupable: true,
+                                virtualmode: true,
+                                pagesize: 20,
+                                sortable: true, /*May 19 2015*/
+                                pagesizeoptions: ['5', '10', '20', '50', '100', '200', '999999'],
+                                /*Enable Inline Editing*/
+                                /*editable: true,
+                                 editmode: "dblclick",*/
+                                columnsresize: true,
+                                //scrollmode: 'deferred',
+                                rendergridrows: function () {
+                                    return dataadapter.records;
+                                },
+                                columns: dataGridDefine,
+                                /*
+                                 columns: [
+                                 { text: 'Ship Name', datafield: 'parent_id', columntype: 'combobox' }
+                                 ]*/
+                                ready: function () {
+
+                                }
+                            });
+
+                        //event
+                        $("#jqxgrid").on("filter", function (event) {
+                            $('#jqxgrid').jqxGrid('updatebounddata');//refresh grid when typing in filter box
+                        });
+                        $('#jqxgrid').on('rowselect', function (event) {
+                            // event arguments.
+                            var args = event.args;
+                            var row = args.row;
+                            // row's bound index.
+                            //var rowBoundIndex = args.rowindex;
+                            // row's data. The row's data object or null(when all rows are being selected or unselected with a single action). If you have a datafield called "firstName", to access the row's firstName, use var firstName = rowData.firstName;
+                            //formObj = args.row;
+
+                            //call pass obj to CARD
+                            try {
+                                <?php
+                                if($this->data['role']=='navigate')
+                                {
+                                    echo 'parent.MYAPP.clearFormValidationMark();';
+                                    echo 'parent.MYAPP.setObj(args.row, true);';
+                                }
+                                ?>
+                            } catch (error) {
+                                console.log(error);
                             }
                         });
 
-                    //event
-                    $("#jqxgrid").on("filter", function (event) {
-                        $('#jqxgrid').jqxGrid('updatebounddata');//refresh grid when typing in filter box
-                    });
-                    $('#jqxgrid').on('rowselect', function (event) {
-                        // event arguments.
-                        var args = event.args;
-                        var row = args.row;
-                        // row's bound index.
-                        //var rowBoundIndex = args.rowindex;
-                        // row's data. The row's data object or null(when all rows are being selected or unselected with a single action). If you have a datafield called "firstName", to access the row's firstName, use var firstName = rowData.firstName;
-                        //formObj = args.row;
-
-                        //call pass obj to CARD
-                        try {
-                            <?php
-                            if($this->data['role']=='navigate')
-                            {
-                                echo 'parent.MYAPP.clearFormValidationMark();';
-                                echo 'parent.MYAPP.setObj(args.row, true);';
-                            }
-                            ?>
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    });
-
-                    $('#jqxgrid').on('rowdoubleclick', function (event) {
-                        <?php if($this->data['role']==='navigate') { ?>
+                        $('#jqxgrid').on('rowdoubleclick', function (event) {
+                            <?php if($this->data['role']==='navigate') { ?>
                             rbindex = event.args.rowindex;
                             obj = $(this).jqxGrid('getrowdata', rbindex);
                             parent.MYAPP.doubleClickObj(obj);
-                        <?php } else if($this->data['role']==='lookup') { ?>
+                            <?php } else if($this->data['role']==='lookup') { ?>
                             $('#qdchoose').trigger('click');
-                        <?php } ?>
+                            <?php } ?>
+                        });
+
+
+                        $("#jqxgrid").on("pagechanged", function (event) {
+                            console.log('jqxgrid page changed');
+                        });
+                        $("#jqxgrid").on("bindingcomplete", function (event) {
+                            console.log('jqxgrid binding complete');
+                            try {
+                                //auto select first row
+                                /*
+                                 var index = $('#jqxgrid').jqxGrid('getrowboundindex', 0);
+                                 $('#jqxgrid').jqxGrid('selectrow', index);
+                                 */
+                                /*
+                                 var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
+                                 if (getselectedrowindexes.length > 0)
+                                 {
+                                 // returns the selected row's data.
+
+                                 var selectedRowData = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
+                                 console.log(selectedRowData);
+
+                                 }
+                                 */
+                                //select 1st row on screen
+                                var visiblerows = $("#jqxgrid").jqxGrid('getloadedrows');
+                                $("#jqxgrid").jqxGrid('selectrow', visiblerows[0].boundindex);
+
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        });
                     });
+                })(jQuery);
+            </script>
 
-
-                    $("#jqxgrid").on("pagechanged", function (event) {
-                        console.log('jqxgrid page changed');
-                    });
-                    $("#jqxgrid").on("bindingcomplete", function (event) {
-                        console.log('jqxgrid binding complete');
-                        try {
-                            //auto select first row
-                            /*
-                             var index = $('#jqxgrid').jqxGrid('getrowboundindex', 0);
-                             $('#jqxgrid').jqxGrid('selectrow', index);
-                             */
-                            /*
-                             var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                             if (getselectedrowindexes.length > 0)
-                             {
-                             // returns the selected row's data.
-
-                             var selectedRowData = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
-                             console.log(selectedRowData);
-
-                             }
-                             */
-                            //select 1st row on screen
-                            var visiblerows = $("#jqxgrid").jqxGrid('getloadedrows');
-                            $("#jqxgrid").jqxGrid('selectrow', visiblerows[0].boundindex);
-
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    });
-                });
-            })(jQuery);
-        </script>
-
-        <?php
-        if ($this->data['role'] == 'lookup') {
-            $this->lookupToolbar();
-        }
-        ?>
-        <?=$this->generalToolbar()?>
-        <div id='jqxWidget'>
-            <div id="jqxgrid"></div>
-        </div>
+            <?php
+            if ($this->data['role'] == 'lookup') {
+                $this->lookupToolbar();
+            }
+            ?>
+            <?= $this->generalToolbar() ?>
+            <div id='jqxWidget'>
+                <div id="jqxgrid"></div>
+            </div>
         </div>
     <?php
     }
@@ -454,10 +460,11 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     {
         parent::onReadyHook(); // TODO: Change the autogenerated stub
         ?>
-        <?php
+    <?php
     }
 
-    private function qrCodeScript(){
+    private function qrCodeScript()
+    {
         ?>
         <script>
             /*!
@@ -467,24 +474,24 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
              * email: atandrastoth@gmail.com
              * Licensed under the MIT license
              */
-            (function($, window, document, undefined) {
+            (function ($, window, document, undefined) {
                 'use strict';
                 var pluginName = 'WebCodeCamJQuery';
                 var mediaDevices = navigator.mediaDevices || ((navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
-                        getUserMedia: function(c) {
-                            return new Promise(function(y, n) {
+                        getUserMedia: function (c) {
+                            return new Promise(function (y, n) {
                                 (navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia).call(navigator, c, y, n);
                             });
                         },
-                        enumerateDevices: function(c) {
-                            return new Promise(function(c, y, n) {
+                        enumerateDevices: function (c) {
+                            return new Promise(function (c, y, n) {
                                 (MediaStreamTrack.getSources).call(navigator, c, y, n);
                             });
                         }
                     } : null);
-                HTMLVideoElement.prototype.streamSrc = ('srcObject' in HTMLVideoElement.prototype) ? function(stream) {
+                HTMLVideoElement.prototype.streamSrc = ('srcObject' in HTMLVideoElement.prototype) ? function (stream) {
                     this.srcObject = !!stream ? stream : null;
-                } : function(stream) {
+                } : function (stream) {
                     this.src = !!stream ? (window.URL || window.webkitURL).createObjectURL(stream) : new String();
                 };
                 var Self, display, videoSelect, lastImageSrc, con, beepSound, w, h,
@@ -523,22 +530,22 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                         contrast: 0,
                         threshold: 0,
                         sharpness: [],
-                        resultFunction: function(resText, lastImageSrc) {
+                        resultFunction: function (resText, lastImageSrc) {
                             console.log(resText);
                         },
-                        cameraSuccess: function(stream) {
+                        cameraSuccess: function (stream) {
                             console.log('cameraSuccess');
                         },
-                        canPlayFunction: function() {
+                        canPlayFunction: function () {
                             console.log('canPlayFunction');
                         },
-                        getDevicesError: function(error) {
+                        getDevicesError: function (error) {
                             console.log(error);
                         },
-                        getUserMediaError: function(error) {
+                        getUserMediaError: function (error) {
                             console.log(error);
                         },
-                        cameraError: function(error) {
+                        cameraError: function (error) {
                             console.log(error);
                         }
                     };
@@ -559,7 +566,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     h = Self.options.height;
                     var constraints = changeConstraints();
                     try {
-                        mediaDevices.getUserMedia(constraints).then(cameraSuccess).catch(function(error) {
+                        mediaDevices.getUserMedia(constraints).then(cameraSuccess).catch(function (error) {
                             Self.options.cameraError(error);
                             return false;
                         });
@@ -576,7 +583,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     }
                     delayBool = true;
                     video.play();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         delayBool = false;
                         if (Self.options.decodeBarCodeRate) {
                             tryParseBarCode();
@@ -618,7 +625,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                 }
 
                 function setEventListeners() {
-                    $(video).on('canplay', function(e) {
+                    $(video).on('canplay', function (e) {
                         if (!isStreaming) {
                             if (video.videoWidth > 0) {
                                 h = video.videoHeight / (video.videoWidth / w);
@@ -639,8 +646,8 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             }
                         }
                     });
-                    $(video).on('play', function() {
-                        setInterval(function() {
+                    $(video).on('play', function () {
+                        setInterval(function () {
                             if (video.paused || video.ended) {
                                 return;
                             }
@@ -671,7 +678,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                 }
 
                 function setCallBack() {
-                    DecodeWorker.onmessage = function(e) {
+                    DecodeWorker.onmessage = function (e) {
                         if (delayBool || video.paused) {
                             return;
                         }
@@ -679,7 +686,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             beepSound.play();
                             delayBool = true;
                             delay();
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 Self.options.resultFunction(e.data.result[0], lastImageSrc);
                             }, 0);
                         } else {
@@ -689,14 +696,14 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             }
                         }
                     };
-                    qrcode.callback = function(a) {
+                    qrcode.callback = function (a) {
                         if (delayBool || video.paused) {
                             return;
                         }
                         beepSound.play();
                         delayBool = true;
                         delay();
-                        setTimeout(function() {
+                        setTimeout(function () {
                             Self.options.resultFunction(a, lastImageSrc);
                         }, 0);
                     };
@@ -855,12 +862,12 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     videoSelect.html('');
                     try {
                         if (mediaDevices && mediaDevices.enumerateDevices) {
-                            mediaDevices.enumerateDevices().then(function(devices) {
-                                devices.forEach(function(device) {
+                            mediaDevices.enumerateDevices().then(function (devices) {
+                                devices.forEach(function (device) {
                                     gotSources(device);
                                 });
                                 videoSelect.children('option:first').prop('selected', true);
-                            }).catch(function(error) {
+                            }).catch(function (error) {
                                 Self.options.getDevicesError(error);
                             });
                         } else if (mediaDevices && !mediaDevices.enumerateDevices) {
@@ -909,9 +916,10 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     this.name = 'NotSupportError';
                     this.message = (message || '');
                 }
+
                 NotSupportError.prototype = Error.prototype;
                 $.extend(Plugin.prototype, {
-                    init: function() {
+                    init: function () {
                         if (!initialized) {
                             if (!display || display.tagName.toLowerCase() !== 'canvas') {
                                 console.log('Element type must be canvas!');
@@ -928,35 +936,35 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                         }
                         return this;
                     },
-                    play: function() {
+                    play: function () {
                         this.init();
                         play();
                         return this;
                     },
-                    stop: function() {
+                    stop: function () {
                         stop();
                         return this;
                     },
-                    pause: function() {
+                    pause: function () {
                         pause();
                         return this;
                     },
-                    buildSelectMenu: function(selector) {
+                    buildSelectMenu: function (selector) {
                         buildSelectMenu(selector);
                         return this;
                     },
-                    getOptimalZoom: function() {
+                    getOptimalZoom: function () {
                         return optimalZoom();
                     },
-                    getLastImageSrc: function() {
+                    getLastImageSrc: function () {
                         return display.toDataURL();
                     },
-                    isInitialized: function() {
+                    isInitialized: function () {
                         return initialized;
                     }
                 });
-                $.fn[pluginName] = function(options) {
-                    return this.each(function() {
+                $.fn[pluginName] = function (options) {
+                    return this.each(function () {
                         if (!$.data(this, 'plugin_' + pluginName)) {
                             $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
                         }
@@ -964,6 +972,6 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                 }
             })(jQuery, window, document);
         </script>
-        <?php
+    <?php
     }
 }

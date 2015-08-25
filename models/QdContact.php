@@ -4,6 +4,7 @@ class QdContact extends QdRoot
 {
     static $table_name = 'mpd_contact';
     public static $TYPE_VNC = 0;
+
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
@@ -11,33 +12,22 @@ class QdContact extends QdRoot
             array('field' => 'type', 'value' => static::$TYPE_VNC, 'operator' => static::$OP_EQUAL)
         ));
     }
+
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
-            'name' => array(
-
-            ),
+            'name' => array(),
             'description' => array(
                 'DataType' => 'WYSIWYG'
             ),
-            'email' => array(
-
-            ),
-            'phone' => array(
-
-            ),
-            'website' => array(
-
-            ),
-            'address' => array(
-
-            ),
+            'email' => array(),
+            'phone' => array(),
+            'website' => array(),
+            'address' => array(),
             'active' => array(
                 'DataType' => 'Boolean'
             ),
-            'order' => array(
-
-            ),
+            'order' => array(),
             'type' => array(
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
@@ -58,9 +48,7 @@ class QdContact extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdVnProvince',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             ),
             'address_district_id' => array(
@@ -74,9 +62,7 @@ class QdContact extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdVnDistrict',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             ),
             'address_ward_id' => array(
@@ -90,9 +76,7 @@ class QdContact extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdVnWard',
                     'Field' => 'id',
-                    'TableFilter' => array(
-
-                    )
+                    'TableFilter' => array()
                 )
             ),
             '_permalink' => array(
@@ -113,32 +97,31 @@ class QdContact extends QdRoot
 
     protected function address_district_idOnValidate($field_name)
     {
-        if($this->address_province_id=='')
-        {
+        if ($this->address_province_id == '') {
             $tmp = QdVnDistrict::GET($this->$field_name);
-            if($tmp!=null)
-            {
+            if ($tmp != null) {
                 $this->address_province_id = $tmp->provinceid;
             }
         }
     }
+
     protected function address_ward_idOnValidate($field_name)
     {
-        if($this->address_district_id=='')
-        {
+        if ($this->address_district_id == '') {
             $tmp = QdVnWard::GET($this->$field_name);
-            if($tmp!=null)
-            {
+            if ($tmp != null) {
                 $this->address_district_id = $tmp->districtid;
                 $this->address_district_idOnValidate('address_district_id');
             }
         }
     }
+
     public function getPermalink()
     {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/contact.php'));
         return $query;
     }
+
     protected function CALCFIELDS($flowfield_name)
     {
         if ($flowfield_name == '_permalink') {

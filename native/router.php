@@ -1,11 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: quocd_000
  * Date: 10/02/2015
  * Time: 12:31 AM
  */
-class Qdmvc_Router {
+class Qdmvc_Router
+{
 
     /**
      * PHP5 constructor method.
@@ -17,13 +19,15 @@ class Qdmvc_Router {
      * @access    public
      * @since     2.0
      */
-    public function __construct() {
+    public function __construct()
+    {
 
     }
+
     public function run()
     {
         //register query var
-        add_filter( 'query_vars', 'qd_addnew_query_vars', 10, 1 );
+        add_filter('query_vars', 'qd_addnew_query_vars', 10, 1);
         function qd_addnew_query_vars($vars)
         {
             $vars[] = 'qd-api'; // for data port
@@ -35,10 +39,10 @@ class Qdmvc_Router {
 
 
         //redirect to wanted controller
-        add_action( 'parse_request', 'qd_wpse9870_parse_request' );
-        function qd_wpse9870_parse_request( &$wp )
+        add_action('parse_request', 'qd_wpse9870_parse_request');
+        function qd_wpse9870_parse_request(&$wp)
         {
-            if ( array_key_exists( 'qd-api', $wp->query_vars ) ) {
+            if (array_key_exists('qd-api', $wp->query_vars)) {
 
                 Qdmvc::runDataPort($wp->query_vars['qd-api']);
                 exit(0);
@@ -48,5 +52,6 @@ class Qdmvc_Router {
     }
 
 }
+
 $obj = new Qdmvc_Router();
 $obj->run();

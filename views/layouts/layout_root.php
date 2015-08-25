@@ -1,24 +1,32 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: mac
  * Date: 8/23/15
  * Time: 4:56 PM
  */
-class Qdmvc_Layout_Root {
+class Qdmvc_Layout_Root
+{
     protected $page = null;
     protected $data = null;
-    function __construct($page){
+
+    function __construct($page)
+    {
         $this->page = $page;
         $this->data = $page->getData();
     }
-    public function render(){
+
+    public function render()
+    {
         ?>
-        <div id="cardLoadingImg" style="width: 100%; height: 200px; text-align: center; background: url(<?=Qdmvc_Helper::getImgURL("ajax-loader_blue.gif")?>) no-repeat center center transparent">
+        <div id="cardLoadingImg"
+             style="width: 100%; height: 200px; text-align: center; background: url(<?= Qdmvc_Helper::getImgURL("ajax-loader_blue.gif") ?>) no-repeat center center transparent">
             <h4>Loading...</h4>
         </div>
-        <?php
+    <?php
     }
+
     protected function layout_nopermission()
     {
         ?>
@@ -36,7 +44,9 @@ class Qdmvc_Layout_Root {
         </div>
     <?php
     }
-    protected function preConfig(){
+
+    protected function preConfig()
+    {
         ?>
         <script>
             var MYAPP = MYAPP || {};
@@ -64,22 +74,24 @@ class Qdmvc_Layout_Root {
                 window.parent.MYAPP.openInNewTab(url);
             };
         </script>
-        <?php
+    <?php
     }
-    protected function onReadyHook(){
+
+    protected function onReadyHook()
+    {
         ?>
         <script>
             (function ($) {
                 $(document).ready(function () {
-                    if ( $('#qdmvcRootDiv').length ){
+                    if ($('#qdmvcRootDiv').length) {
                         $('#qdmvcRootDiv').css('display', 'block');
                     }
-                    if ( $('#cardLoadingImg').length ){
+                    if ($('#cardLoadingImg').length) {
                         $('#cardLoadingImg').css('display', 'none');
                     }
                 });
             })(jQuery);
         </script>
-        <?php
+    <?php
     }
 }

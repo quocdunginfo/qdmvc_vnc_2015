@@ -86,12 +86,9 @@ class QdRoot extends ActiveRecord\Model
 
     protected function pushValidateError($field_name = '', $msg = '', $type = 'error')
     {
-        if(is_array($field_name))
-        {
+        if (is_array($field_name)) {
             $this->fields_validation = array_merge($this->fields_validation, $field_name);
-        }
-        else
-        {
+        } else {
             $hash = md5($field_name . $msg . $type);
             $this->fields_validation[$hash] = array('field' => $field_name, 'msg' => $msg, 'type' => $type);
         }
@@ -120,6 +117,7 @@ class QdRoot extends ActiveRecord\Model
     {
 
     }
+
     /*
      * Validate is exist on parent class (cause duplicate validate when sacing), use other Name
      * */
@@ -219,7 +217,7 @@ class QdRoot extends ActiveRecord\Model
 
     public function delete($location = '')
     {
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
         $class_name = $this->getCalledClassName();
         if ($class_name != 'QdLog') {
@@ -437,7 +435,7 @@ class QdRoot extends ActiveRecord\Model
                 $key = $config['field'];
 
                 $operator = '=';
-                if(isset($config['operator'])){
+                if (isset($config['operator'])) {
                     $operator = Qdmvc_Helper::getOperator($config['operator']);
                 }
 
@@ -528,6 +526,7 @@ class QdRoot extends ActiveRecord\Model
         }
         return false;
     }
+
     public static function hasSEOMetaLines()
     {
         $cfg = static::getFieldsConfig();
@@ -536,7 +535,8 @@ class QdRoot extends ActiveRecord\Model
         }
         return false;
     }
-    public function getSEOMetaValue($meta_name='TITLE')
+
+    public function getSEOMetaValue($meta_name = 'TITLE')
     {
         $record = new QdSEOMeta();
         $c = $this->getCalledClassName();
@@ -546,8 +546,7 @@ class QdRoot extends ActiveRecord\Model
         $record->SETRANGE('active', true);
 
         $record = $record->GETLIST();
-        if(!empty($record))
-        {
+        if (!empty($record)) {
             return $record[0]->meta_value;
         }
         return false;
@@ -576,7 +575,7 @@ class QdRoot extends ActiveRecord\Model
         //COUNT
         $c = $tbrelation['Table'];
         $record = new $c();
-        foreach($filter_arr as $key=>$value){
+        foreach ($filter_arr as $key => $value) {
             $record->SETRANGE($key, $value);
         }
 
@@ -615,6 +614,7 @@ class QdRoot extends ActiveRecord\Model
         }
 
     }
+
     public static function getFieldDescription($field_name, $lang = 'en-US')
     {
         try {
@@ -652,10 +652,9 @@ class QdRoot extends ActiveRecord\Model
     {
         try {
             $config = static::getFieldsConfig();
-            if(static::ISSYSTEMFIELD($f_name) || static::ISFLOWFIELD($f_name) || (!Qdmvc_Helper::isNullOrEmpty($config[$f_name]['ReadOnly']))){
+            if (static::ISSYSTEMFIELD($f_name) || static::ISFLOWFIELD($f_name) || (!Qdmvc_Helper::isNullOrEmpty($config[$f_name]['ReadOnly']))) {
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
         } catch (Exception $ex) {
@@ -735,7 +734,7 @@ class QdRoot extends ActiveRecord\Model
                     return $this->qd_cached_attr[$field_name] = $user_info->user_login;
                 }
                 return Qdmvc_Helper::getNoneText();
-            }else {// if ($field_name == '__sys_lines_url') {//Default system Lines Field
+            } else {// if ($field_name == '__sys_lines_url') {//Default system Lines Field
                 return $this->getLinesURL($field_name);
             }
         }
@@ -773,7 +772,7 @@ class QdRoot extends ActiveRecord\Model
                     $arr[$key] = $item->$key;
                     continue;
                 }
-                $arr[$key] = (string) $item->$key;
+                $arr[$key] = (string)$item->$key;
             }
             array_push($tmp, $arr);
         }
@@ -796,11 +795,9 @@ class QdRoot extends ActiveRecord\Model
         $record->SETRANGE('active', true);
         $record->SETRANGE('model', $this->getCalledClassName());
         $record = $record->GETLIST();
-        if(!empty($record))
-        {
+        if (!empty($record)) {
             $record = $record[0];
-            if($record->noseries!='')
-            {
+            if ($record->noseries != '') {
                 return $record->noseries;
             }
         }
@@ -820,20 +817,17 @@ class QdRoot extends ActiveRecord\Model
             }
         }*/
         //check permission
-        if(!$this->checkPermission(__FUNCTION__)) return false;
+        if (!$this->checkPermission(__FUNCTION__)) return false;
 
         //do validate and save
         if ($this->QDVALIDATE()) {
             $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
             //assign no series before insert
-            if ($this->id===null || $this->id===false || $this->id===0 || $this->id==='0') {
+            if ($this->id === null || $this->id === false || $this->id === 0 || $this->id === '0') {
                 $use_noseries = $this->getNoSeries();
-                if( $use_noseries === false)
-                {
+                if ($use_noseries === false) {
                     //do not use noseries
-                }
-                else
-                {
+                } else {
                     //use no series
                     $tmpnose = $this->getNoFromNoSeries($use_noseries);
                     if ($tmpnose === false) {
@@ -915,32 +909,31 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
+
     public function transferFieldsFrom($source)
     {
-        if($source!=null)
-        {
-            foreach($source::getFieldsConfig() as $key=>$config)
-            {
+        if ($source != null) {
+            foreach ($source::getFieldsConfig() as $key => $config) {
                 $this->{$key} = $source->{$key};
             }
         }
         return true;
     }
+
     protected function checkPermission($method_name)
     {
         $class_name = $this->getCalledClassName();
         //get Permissions
         $u = QdUser::GET(get_current_user_id());
-        if($u!=null)
-        {
-            if(!$u->hasPermission($class_name, $method_name))
-            {
-                $this->pushValidateError('', 'You are not allowed to call '.$class_name.'|'.$method_name);
+        if ($u != null) {
+            if (!$u->hasPermission($class_name, $method_name)) {
+                $this->pushValidateError('', 'You are not allowed to call ' . $class_name . '|' . $method_name);
                 return false;
             }
         }
         return true;
     }
+
     public function getSEOMeta()
     {
         $tmp = new QdSEOMeta();

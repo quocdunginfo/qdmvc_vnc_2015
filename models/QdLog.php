@@ -38,7 +38,7 @@ class QdLog extends QdNote
         ));
     }
 
-    public static function getInitObj($model='', $model_id='', $action=0, $location='', $ip='')
+    public static function getInitObj($model = '', $model_id = '', $action = 0, $location = '', $ip = '')
     {
         $obj = new QdLog();
         $obj->model = $model;

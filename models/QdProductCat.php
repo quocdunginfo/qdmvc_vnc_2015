@@ -5,6 +5,7 @@ class QdProductCat extends QdRoot
     static $table_name = 'mpd_product_cat';
     public static $TYPE_PRODUCTCAT = 0;
     public static $TYPE_MANUFACTOR = 215;
+
     /*
     static $has_many = array(
         array('product_list', 'class_name' => 'QdProduct', 'primary_key' => 'id', 'foreign_key' => 'product_cat_id')
@@ -17,14 +18,14 @@ class QdProductCat extends QdRoot
         $obj->active = true;
         return $obj;
     }
+
     public function getProducts2()
     {
         $record = new QdProBigSale();
         $record->SETRANGE('group_id', $this->id);
 
         $re = array();
-        foreach($record->GETLIST() as $item)
-        {
+        foreach ($record->GETLIST() as $item) {
             array_push($re, QdProduct::GET($item->product_id));
         }
         return $re;
@@ -159,7 +160,7 @@ class QdProductCat extends QdRoot
     public function getProducts()
     {
         $obj = new QdProduct();
-        $obj->SETFILTERDEFAULT(array(array('field' => 'product_cat_id','value' => $this->id, 'exact' => true, 'operator' => '=')));
+        $obj->SETFILTERDEFAULT(array(array('field' => 'product_cat_id', 'value' => $this->id, 'exact' => true, 'operator' => '=')));
         return $obj;
     }
 
@@ -218,7 +219,7 @@ class QdProductCat extends QdRoot
                 if (!$this->is_new_record()) {
                     $this->$field_name = $this->xRec()->$field_name;
                 }
-            }else if($this->$field_name == $this->id){
+            } else if ($this->$field_name == $this->id) {
                 $this->pushValidateError($field_name, 'Không thể chọn cha là chính nó!');
             }
         }
@@ -233,21 +234,21 @@ class QdProductCat extends QdRoot
             $this->pushValidateError($field_name, 'Tự động gán Avatar mặc định cho Product Cat', 'info');
         }
     }
+
     public function getDeepLevel()
     {
         $p = static::GET($this->parent_id);
-        if($p==null)
-        {
+        if ($p == null) {
             return 1;
-        }else {
+        } else {
             return $p->getDeepLevel() + 1;
         }
     }
+
     public static function genObjectsToArray($list)
     {
         $re = array();
-        foreach($list as $item)
-        {
+        foreach ($list as $item) {
             array_push($re, array(
                 'id' => $item->id,
                 'title' => $item->name,
@@ -264,21 +265,21 @@ class QdProductCat extends QdRoot
     {
         return QdProductCat::GET($this->parent_id);
     }
+
     public function fn_validate_all_level($loc, $params)
     {
         $tmp = new QdProductCat();
         //$tmp->SETRANGE('type', static::$TYPE_PRODUCTCAT);
         $count = 0;
-        foreach($tmp->GETLIST() as $item)
-        {
-            if($item->save())
-            {
+        foreach ($tmp->GETLIST() as $item) {
+            if ($item->save()) {
                 $count++;
             }
         }
-        $this->pushValidateError('', 'Total items validated: '.$count, 'info');
+        $this->pushValidateError('', 'Total items validated: ' . $count, 'info');
         return true;
     }
+
     protected function CALCFIELDS($flowfield_name)
     {
         if ($flowfield_name == '_permalink') {

@@ -25,8 +25,7 @@ class QdBestChoiceCat extends QdPostCat
         $obj['parent_id']['TableRelation'] = array(
             'Table' => 'QdBestChoiceCat',
             'Field' => 'id',
-            'TableFilter' => array(
-                /*array(
+            'TableFilter' => array(/*array(
                     'Condition' => array(
                         'Field' => '',
                         'Type' => 'CONST',//'FIELD'
@@ -63,6 +62,7 @@ class QdBestChoiceCat extends QdPostCat
         );
         return $obj;
     }
+
     public function getBestChoiceItems()
     {
         $record = new QdBestChoiceItem();

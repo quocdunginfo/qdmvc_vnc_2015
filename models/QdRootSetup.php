@@ -14,12 +14,10 @@ class QdRootSetup extends QdRoot
         return false;
     }
 
-    public function save($validate = true, $location='')
+    public function save($validate = true, $location = '')
     {
-        if($this->is_new_record())
-        {
-            if($this->GET()!=null)
-            {
+        if ($this->is_new_record()) {
+            if ($this->GET() != null) {
                 $this->pushValidateError('', 'Setup Page không cho phép thêm mới');
                 return false;
             }

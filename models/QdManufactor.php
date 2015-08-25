@@ -7,14 +7,15 @@ class QdManufactor extends QdProductCat
     public static $TYPE2_MANUFACTOR_GIAYDEP = 2153;
     public static $TYPE2_MANUFACTOR_OTHER = 2154;
 
-	public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
-	{
-		parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+    public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
+    {
+        parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-			array('field' => 'type', 'value' => static::$TYPE_MANUFACTOR, 'operator' => static::$OP_EQUAL)
-		));
-	}
-	public static function getInitObj()
+            array('field' => 'type', 'value' => static::$TYPE_MANUFACTOR, 'operator' => static::$OP_EQUAL)
+        ));
+    }
+
+    public static function getInitObj()
     {
         $obj = new QdManufactor();
         $obj->type = static::$TYPE_MANUFACTOR;
@@ -66,6 +67,7 @@ class QdManufactor extends QdProductCat
 
         return $obj;
     }
+
     public function getPermalink()
     {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
