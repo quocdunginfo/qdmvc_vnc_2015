@@ -22,7 +22,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
             //update grid
             MYAPP.updateGrid = function () {
                 try {
-                    document.getElementById('list').contentWindow.updateGrid();
+                    document.getElementById('list').contentWindow.MYAPP.updateGrid();
                 } catch (error) {
                     console.log(error);
                 }
