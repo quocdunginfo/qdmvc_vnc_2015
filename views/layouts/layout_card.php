@@ -668,7 +668,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     private function generateFieldColor($f_name, $value, $readonly = false)
     {
         ?>
-        <input class="text-input color {hash:true}" type="text" name="<?= $f_name ?>"
+        <input class="text-input color {hash:true, required:false}" type="text" name="<?= $f_name ?>"
                id="<?= static::$ctl_prefix . $f_name ?>" data-bind="value: <?= $f_name ?>">
         <script>
             (function ($) {
