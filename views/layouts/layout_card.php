@@ -636,6 +636,23 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
                                                           id='<?= static::$ctl_prefix . $f_name ?>'
                                                           data-bind="jqxInput: {value: <?= $f_name ?>}"/>
+        <?php if(true || $readonly): ?>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    $("#<?=static::$ctl_prefix.$f_name?>").hover(function () {
+                        var lv = $(this).val();
+                        if (lv != "") {
+                            var content = '<div style="max-width: 150px; max-height: 150px"/>'+lv+'</div>';
+                            var selector = $(this);
+                            selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.8});
+                            selector.jqxTooltip('open');
+                        }
+                    });
+                });
+            })(jQuery);
+        </script>
+        <?php endif; ?>
     <?php
     }
 
@@ -653,6 +670,16 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         ?>
         <input class="text-input color {hash:true}" type="text" name="<?= $f_name ?>"
                id="<?= static::$ctl_prefix . $f_name ?>" data-bind="value: <?= $f_name ?>">
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    $("#<?=static::$ctl_prefix.$f_name?>").on('change', function () {
+                        this.color.fromString(this.value);
+                    });
+                });
+            })(jQuery);
+        </script>
+
     <?php
     }
 
