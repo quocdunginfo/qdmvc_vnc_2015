@@ -46,7 +46,10 @@ class Qdmvc_Page_Log extends Qdmvc_Page_Root
                     ),
                     'model_id' => array(
                         'Order' => 70,
-                    )
+                    ),
+                    'date_created' => array(
+                        'Order' => 80,
+                    ),
                 )
             )
         );

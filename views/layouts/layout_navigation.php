@@ -102,7 +102,61 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                             $('#jqxTabs').jqxTabs('addLast', label, '<iframe id="pagepart" src="' + url + '" width="100%" height="99%" scrolling="yes" frameborder="0"><p>Your browser does not support iframes</p> </iframe>');
                         });
                         //Tabs
-                        $('#jqxTabs').jqxTabs({height: '100%', width: '100%', showCloseButtons: true});
+                        $('#jqxTabs').jqxTabs({height: '100%', width: '100%', showCloseButtons: true, reorder: true});
+
+                        /*Handle Tab Panel Context Menu*/
+                        var contextMenu = $("#jqxMenu").jqxMenu({ width: '120px', height: '80px', autoOpenPopup: false, mode: 'popup'});
+                        $("#jqxMenu").bind('itemclick', function(event)
+                        {
+                            var item = $(event.args).text();
+                            var tabS = $('#jqxTabs');
+                            switch (item)
+                            {
+                                case "Close Others":
+                                    var currentIndex = tabS.jqxTabs('selectedItem');
+                                    var currentTabTitle = tabS.jqxTabs('getTitleAt', currentIndex);
+                                    for(var kk=currentIndex+1;kk<tabS.jqxTabs('length');kk++)
+                                    {
+                                        tabS.jqxTabs('removeAt', kk);
+                                    }
+                                    while(tabS.jqxTabs('length') > 1){
+                                        tabS.jqxTabs('removeFirst');
+                                    }
+                                    break;
+                                case "Close All":
+
+                                    while(tabS.jqxTabs('length') > 0){
+                                        tabS.jqxTabs('removeLast');
+                                    }
+                                    break;
+                            }
+                        });
+                        // open the context menu when the user presses the mouse right button.
+                        $("#jqxTabs").bind('mousedown', function (event) {
+                            var rightClick = isRightClick(event);
+                            if (rightClick) {
+                                var scrollTop = $(window).scrollTop();
+                                var scrollLeft = $(window).scrollLeft();
+
+                                contextMenu.jqxMenu('open', parseInt(event.clientX) + 5 + scrollLeft, parseInt(event.clientY) + 5 + scrollTop);
+                                return false;
+                            }
+                        });
+
+                        // disable the default browser's context menu.
+                        $(document).bind('contextmenu', function (e) {
+                            return false;
+                        });
+
+                        function isRightClick(event) {
+                            var rightclick;
+                            if (!event) var event = window.event;
+                            if (event.which) rightclick = (event.which == 3);
+                            else if (event.button) rightclick = (event.button == 2);
+                            return rightclick;
+                        }
+                        /*Handle Context Menu*/
+
                     });
                 })(jQuery);
             </script>
@@ -119,6 +173,12 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                     </a>
                 </div>
                 <div id="ContentPanel">
+                    <div id='jqxMenu'>
+                        <ul>
+                            <li>Close Others</li>
+                            <li>Close All</li>
+                        </ul>
+                    </div>
                     <div id='jqxTabs' style="float: left;">
                         <ul style="margin-left: 30px;" id="unorderedList">
                             <li>Home</li>
@@ -135,6 +195,8 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                         $('#panelContentpaneljqxTree li').click(function () {
                             //alert('wtf');
                         });
+
+
                     });
                 })(jQuery);
             </script>

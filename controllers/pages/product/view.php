@@ -17,8 +17,8 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
             'btn_active' => array(
                 //'fn_name' => 'fn_active',
                 'label' => array(
-                    'vi-VN' => 'Kích hoạt',
-                    'en-US' => 'Active'
+                    'vi-VN' => '[Not set]',
+                    'en-US' => '[Not set]'
                 )
             ),
             'btn_validate_all_struct_level' => array(
@@ -54,10 +54,18 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
         <script type="text/javascript">
             (function ($) {
                 $(document).ready(function () {
+                    var btn_active_label = '<?=Qdmvc_Message::getMsg('btn_active')?>';
+                    var btn_deactive_label = '<?=Qdmvc_Message::getMsg('btn_deactive')?>';
+                    //Change Button label
+                    $('#cardForm input[name=active]').on('change', function(){
+                        var label = this.checked?btn_deactive_label:btn_active_label;
+                        $('#btn_active').html(label);
+                    });
+                    //
                     $('#btn_active').click(function () {
                         MYAPP.callFn('fn_active', null, function (data) {
                             if (data.fn_result != false) {
-                                alert(data.fn_result.subinfo);
+                                console.log(data.fn_result.subinfo);
                             }
                         });
                     });

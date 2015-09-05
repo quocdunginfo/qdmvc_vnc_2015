@@ -28,6 +28,8 @@ class Qdmvc_Message
         'btn_print' => 'In',
         'btn_exportexcel' => 'Xuất Excel',
         'btn_showall' => 'Xem tất cả',
+        'btn_active' => 'Kích hoạt',
+        'btn_deactive' => 'Ngưng kích hoạt',
         /*END Layout card*/
 
         /*Layout List*/
@@ -60,6 +62,8 @@ class Qdmvc_Message
         'btn_print' => 'Print',
         'btn_exportexcel' => 'Export Excel',
         'btn_showall' => 'Show All',
+        'btn_active' => 'Active',
+        'btn_deactive' => 'Deactive',
         /*END Layout card*/
 
         /*Layout List*/

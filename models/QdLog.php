@@ -27,13 +27,21 @@ class QdLog extends QdNote
                     static::$ACTION_DELETE => array(
                         'Caption' => array('en-US' => 'Delete', 'vi-VN' => 'Xóa'),
                     ),
-                )
+                ),
+                'ReadOnly' => true
             ),
             'location' => array(
                 'Caption' => array('en-US' => 'Location', 'vi-VN' => 'Nơi phát sinh'),
+                'ReadOnly' => true
             ),
             'ip' => array(
                 'Caption' => array('en-US' => 'IP', 'vi-VN' => 'IP'),
+                'ReadOnly' => true
+            ),
+            'date_created' => array(
+                'Caption' => array('vi-VN' => 'Ngày tạo'),
+                'DataType' => 'Date',
+                'ReadOnly' => true
             ),
         ));
     }

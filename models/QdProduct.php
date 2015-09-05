@@ -164,6 +164,7 @@ class QdProduct extends QdRoot
                 'Description' => array(
                     'vi-VN' => 'Có hiển thị ra ngoài Web hay không ?'
                 ),
+                'ReadOnly'=> true
             ),
             'name' => array(
                 'Caption' => array('vi-VN' => 'Tên SP'),
@@ -424,10 +425,10 @@ class QdProduct extends QdRoot
     {
         if (!$this->checkPermission(__FUNCTION__)) return false;
 
-        $this->active = true;
+        $this->active = !$this->active;
         $this->save(true, $location . '|' . $this->getCalledClassName() . '|fn_active');
         $this->pushValidateError('active', 'Active thành công', 'info');
-        return array('subinfo' => 'noi dung tra ve', 'subinfo2' => true);
+        return array('subinfo' => 'Tiến trình hoàn tất!', 'subinfo2' => true);
     }
 
     public function getRProducts2()

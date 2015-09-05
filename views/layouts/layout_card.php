@@ -618,6 +618,10 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
     private function generateFieldDate($f_name, $value, $readonly = false)
     {
+        if($readonly==true){
+            $this->generateFieldText($f_name, $value, $readonly);
+            return;
+        }
         ?>
         <div class="qd-lookup-input">
             <input class="text-input" type="text" id='<?= static::$ctl_prefix . $f_name ?>'
@@ -626,7 +630,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     id="datepicker_cs_<?= $f_name ?>">...
             </button>
         </div>
-
     <?php
     }
 
@@ -737,10 +740,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
     private function generateFieldBoolean($f_name, $value = 0, $readonly = false)
     {
+        $ros = $readonly?'onclick="return false;"':'';
         ?>
         <!--<input type="checkbox" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1">-->
         <input type="checkbox" data-bind="checked: <?= $f_name ?>" name="<?= $f_name ?>"
-               id="<?= static::$ctl_prefix . $f_name ?>" value="1"/>
+               id="<?= static::$ctl_prefix . $f_name ?>" value="1" <?=$ros?> />
     <?php
     }
 
