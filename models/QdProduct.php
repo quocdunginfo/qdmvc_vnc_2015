@@ -164,7 +164,7 @@ class QdProduct extends QdRoot
                 'Description' => array(
                     'vi-VN' => 'Có hiển thị ra ngoài Web hay không ?'
                 ),
-                'ReadOnly'=> true
+                'ReadOnly' => true
             ),
             'name' => array(
                 'Caption' => array('vi-VN' => 'Tên SP'),
@@ -232,10 +232,6 @@ class QdProduct extends QdRoot
                     ),
                 )
             ),
-            'date_modified' => array(
-                'Caption' => array('vi-VN' => 'Ngày cập nhật'),
-                'DataType' => 'Date',
-            ),
             'noseries' => array(),
             '_permalink' => array(
                 'Name' => '_permalink',
@@ -294,6 +290,26 @@ class QdProduct extends QdRoot
                 )
             ));
         $obj['id']['ReadOnly'] = false;
+        $obj['__sys_lines_url'] = array(
+            'FieldClass' => 'System',
+            'Caption' => array('en-US' => 'UOM', 'vi-VN' => 'Đơn vị tính'),
+            'TableRelation' => array(
+                'Table' => 'QdProUOM',
+                'Field' => 'id',
+                'TableFilter' => array(
+                    array(
+                        'Condition' => array(
+                            'Field' => '',
+                            'Type' => 'CONST',//'FIELD'
+                            'Value' => ''
+                        ),
+                        'Field' => 'product_id',
+                        'Type' => 'FIELD',
+                        'Value' => 'id'
+                    )
+                )
+            )
+        );
         return $obj;
     }
 
@@ -423,11 +439,15 @@ class QdProduct extends QdRoot
 
     public function fn_active($location, $params)
     {
+        //static::connection()->transaction();
+
         if (!$this->checkPermission(__FUNCTION__)) return false;
 
         $this->active = !$this->active;
         $this->save(true, $location . '|' . $this->getCalledClassName() . '|fn_active');
         $this->pushValidateError('active', 'Active thành công', 'info');
+
+        //static::connection()->rollback();
         return array('subinfo' => 'Tiến trình hoàn tất!', 'subinfo2' => true);
     }
 

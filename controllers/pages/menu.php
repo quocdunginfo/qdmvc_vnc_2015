@@ -1494,6 +1494,156 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdVnWard',
             'DataPort' => 'vnward_port'
         ),
+        'dg_request' => array(
+            'ParentId' => 'folder120',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_DgRequest',
+            'Caption' => array(
+                'en-US' => 'Request (Open)',
+                'vi-VN' => 'Yêu cầu (Mở)'
+            ),
+            'Model' => 'QdDgRequest',
+            'DataPort' => 'dg_request_port',
+            'PageList' => 'dg_request_list'
+        ),
+        'dg_request_list' => array(
+            'ParentId' => 'folder120',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_DgRequest_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdDgRequest',
+            'DataPort' => 'dg_request_port'
+        ),
+        'dg_request_close' => array(
+            'ParentId' => 'dg_request',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_DgRequestClose',
+            'Caption' => array(
+                'en-US' => 'Request (Close)',
+                'vi-VN' => 'Yêu cầu (Đóng)'
+            ),
+            'Model' => 'QdDgRequest',
+            'DataPort' => 'dg_request_port',
+            'PageList' => 'dg_request_close_list'
+        ),
+        'dg_request_close_list' => array(
+            'ParentId' => 'folder120',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_DgRequestClose_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdDgRequest',
+            'DataPort' => 'dg_request_port'
+        ),
+        'dg_instock' => array(
+            'ParentId' => 'folder120',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_DgInStock',
+            'Caption' => array(
+                'en-US' => 'In Stock',
+                'vi-VN' => 'In Stock'
+            ),
+            'Model' => 'QdDgInStock',
+            'DataPort' => 'dg_instock_port',
+            'PageList' => 'dg_instock_list'
+        ),
+        'dg_instock_list' => array(
+            'ParentId' => 'folder120',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_DgInStock_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdDgInStock',
+            'DataPort' => 'dg_instock_port'
+        ),
+        'dg_history' => array(
+            'ParentId' => 'folder120',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_DgHistory',
+            'Caption' => array(
+                'en-US' => 'History',
+                'vi-VN' => 'Lịch sử'
+            ),
+            'Model' => 'QdDgHistory',
+            'DataPort' => 'dg_history_port',
+            'PageList' => 'dg_history_list'
+        ),
+        'dg_history_list' => array(
+            'ParentId' => 'folder120',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_DgHistory_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdDgHistory',
+            'DataPort' => 'dg_history_port'
+        ),
+        'unit_of_measure' => array(
+            'ParentId' => 'folder130',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_UnitOfMeasure',
+            'Caption' => array(
+                'en-US' => 'Unit Of Measure',
+                'vi-VN' => 'Đơn vị tính'
+            ),
+            'Model' => 'QdUnitOfMeasure',
+            'DataPort' => 'unit_of_measure_port',
+            'PageList' => 'unit_of_measure_list'
+        ),
+        'unit_of_measure_list' => array(
+            'ParentId' => 'folder130',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_UnitOfMeasure_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdUnitOfMeasure',
+            'DataPort' => 'unit_of_measure_port'
+        ),
+        'pro_uom' => array(
+            'ParentId' => 'folder130',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProUOM',
+            'Caption' => array(
+                'en-US' => 'Product UOM',
+                'vi-VN' => 'SP - ĐVT'
+            ),
+            'Model' => 'QdProUOM',
+            'DataPort' => 'pro_uom_port',
+            'PageList' => 'pro_uom_list'
+        ),
+        'pro_uom_list' => array(
+            'ParentId' => 'folder130',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProUOM_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdProUOM',
+            'DataPort' => 'pro_uom_port'
+        ),
         'navigation' => array(
             'ParentId' => '',
             'Active' => false,
@@ -1520,6 +1670,8 @@ class Qdmvc_Page_IndexMenu
             'DataPort' => '',
             'PageList' => ''
         ),
+
+
         /*Folder*/
         'folder10' => array(
             'ParentId' => -1,
@@ -1618,6 +1770,24 @@ class Qdmvc_Page_IndexMenu
             'Caption' => array(
                 'vi-VN' => 'Khác',
                 'en-US' => 'Other'
+            )
+        ),
+        'folder120' => array(
+            'ParentId' => -1,
+            'PageType' => 'Folder',
+            'Active' => true,
+            'Caption' => array(
+                'vi-VN' => 'Định giá',
+                'en-US' => 'Định giá'
+            )
+        ),
+        'folder130' => array(
+            'ParentId' => -1,
+            'PageType' => 'Folder',
+            'Active' => true,
+            'Caption' => array(
+                'vi-VN' => 'Kho bãi',
+                'en-US' => 'Warehouse Mgmt'
             )
         ),
     );

@@ -38,11 +38,6 @@ class QdLog extends QdNote
                 'Caption' => array('en-US' => 'IP', 'vi-VN' => 'IP'),
                 'ReadOnly' => true
             ),
-            'date_created' => array(
-                'Caption' => array('vi-VN' => 'Ngày tạo'),
-                'DataType' => 'Date',
-                'ReadOnly' => true
-            ),
         ));
     }
 

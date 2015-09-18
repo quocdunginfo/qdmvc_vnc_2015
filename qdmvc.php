@@ -23,6 +23,7 @@ class Qdmvc
     //dependency plugins
     private static $dependencies = array('phpactiverecords', 'jqwidgets');
 
+    private static $connection = null;
     function __construct()
     {
 
@@ -171,15 +172,19 @@ class Qdmvc
         Qdmvc::loadIndex('index');//quocdunginfo, performance
 
         //Phpactive record init
-        $connection = QdPhpactiverecords::getCon();
-        ActiveRecord\Config::initialize(function ($cfg) use ($connection) {
+        static::$connection = QdPhpactiverecords::getCon();
+        $tmp_con = static::$connection;
+        ActiveRecord\Config::initialize(function ($cfg) use ($tmp_con) {
             $model_dir = Qdmvc::getModel();
             $cfg->set_model_directory($model_dir);
-            $cfg->set_connections($connection);
+            $cfg->set_connections($tmp_con);
 
             # default connection is now production
             $cfg->set_default_connection('production');
         });
+    }
+    public static function getCon(){
+        return static::$connection;
     }
 
     public static function load($pure_path)

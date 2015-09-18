@@ -50,6 +50,18 @@ class QdRoot extends ActiveRecord\Model
             'DataType' => 'Text',
             'FieldClass' => 'System',
         ),
+        'date_created' => array(
+            'Name' => 'date_created',
+            'Caption' => array('en-US' => 'Date created', 'vi-VN' => 'Ngày tạo'),
+            'DataType' => 'Date',
+            'ReadOnly' => true
+        ),
+        'date_modified' => array(
+            'Name' => 'date_modified',
+            'Caption' => array('en-US' => 'Date modified', 'vi-VN' => 'Ngày sửa cuối'),
+            'DataType' => 'Date',
+            'ReadOnly' => true
+        )
     );
     static $primary_key = 'id';
 
@@ -86,12 +98,17 @@ class QdRoot extends ActiveRecord\Model
 
     protected function pushValidateError($field_name = '', $msg = '', $type = 'error')
     {
+        //notify
         if (is_array($field_name)) {
             $this->fields_validation = array_merge($this->fields_validation, $field_name);
         } else {
             $hash = md5($field_name . $msg . $type);
             $this->fields_validation[$hash] = array('field' => $field_name, 'msg' => $msg, 'type' => $type);
         }
+        //rollback
+        //if ($type === 'error') {
+        //    static::connection()->rollback();
+        //}
     }
 
     private $_xRec = null;

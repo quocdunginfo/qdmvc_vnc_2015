@@ -23,7 +23,6 @@ class QdQdmvcPage extends QdRoot
             if ($count == 0) {
                 QdQdmvcPage::delete_all();
             }
-
             if (is_dir($file)) {
                 $folder_name = basename($file);
                 if (QdQdmvcPage::GET($folder_name) == null) {
