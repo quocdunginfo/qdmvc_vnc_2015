@@ -329,13 +329,32 @@ class Qdmvc_Dataport
             if (strstr($key, 'filterdatafield') !== false) {
                 $number = substr($key, 15);
                 $f_operator = 'filtercondition' . $number;
-                $f_operator = isset($_REQUEST[$f_operator]) ? $_REQUEST[$f_operator] : 'EQUAL';
-                if ($f_operator == 'LESS_THAN') {
-                    $f_operator = 'CONTAINS';//quocdunginfo, Bug of JqWidget, LESS_THAN not used in that time
+                $f_operator = 'CONTAINS';//isset($_REQUEST[$f_operator]) ? $_REQUEST[$f_operator] : 'EQUAL';
+                $f_value = $_REQUEST['filtervalue' . $number];
+                $key = $_REQUEST[$key];
+                if(strstr($f_value,'*')){
+                    $f_value = str_replace('*', '', $f_value);
+                    $f_operator = 'CONTAINS';
+                }else if(strstr($f_value,'!=')){
+                    $f_value = str_replace('!=', '', $f_value);
+                    $f_operator = 'NOT_EQUAL';
+                }else if(strstr($f_value,'>=')){
+                    $f_value = str_replace('>=', '', $f_value);
+                    $f_operator = 'GREATER_THAN_OR_EQUAL';
+                }else if(strstr($f_value,'<=')){
+                    $f_value = str_replace('<=', '', $f_value);
+                    $f_operator = 'LESS_THAN_OR_EQUAL';
+                }else if(strstr($f_value,'=')){
+                    $f_value = str_replace('=', '', $f_value);
+                    $f_operator = 'EQUAL';
+                }else if(strstr($f_value,'<')){
+                    $f_value = str_replace('<', '', $f_value);
+                    $f_operator = 'LESS_THAN';
+                }else if(strstr($f_value,'>')){
+                    $f_value = str_replace('>', '', $f_value);
+                    $f_operator = 'GREATER_THAN';
                 }
-                $f_value = 'filtervalue' . $number;
-
-                $record->SETRANGE($_REQUEST[$key], $_REQUEST[$f_value], $f_operator);
+                $record->SETRANGE($key, $f_value, $f_operator);
             }
         }
 
