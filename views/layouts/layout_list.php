@@ -80,10 +80,27 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     {
         ?>
         <script>
-            MYAPP.updateGrid = function () {
+            MYAPP.getGrid = function(){
+                return jQuery('#jqxgrid');
+            };
+            MYAPP.TmpVar = {};
+            MYAPP.updateGrid = function (keepIndex) {
                 //update databound
                 (function ($) {
-                    jQuery('#jqxgrid').jqxGrid('updatebounddata');
+                    //Reset tmp var
+                    MYAPP.TmpVar.id = undefined;
+                    MYAPP.TmpVar.keepIndex = keepIndex;
+                    //1. get selected row
+                    var grid = MYAPP.getGrid();
+                    var rowindex = grid.jqxGrid('getselectedrowindex');
+                    if(rowindex>=0){
+                        var row = grid.jqxGrid('getrowdata', rowindex);
+                        if(row!=undefined && row!=null){
+                            MYAPP.TmpVar.id = row.id;
+                        }
+                    }
+                    //2. reload grid
+                    grid.jqxGrid('updatebounddata');
                 })(jQuery);
             };
             MYAPP.addGridFilter = function (field_name, field_value) {
@@ -243,7 +260,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             newWindow.print();
                         });
                         $("#qdreload").click(function () {
-                            MYAPP.updateGrid();
+                            MYAPP.updateGrid(true);
                         });
                         $("#qdshowall").click(function () {
                             $("#jqxgrid").jqxGrid({pagesize: 999999});
@@ -415,26 +432,29 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                         $("#jqxgrid").on("bindingcomplete", function (event) {
                             console.log('jqxgrid binding complete');
                             try {
-                                //auto select first row
-                                /*
-                                 var index = $('#jqxgrid').jqxGrid('getrowboundindex', 0);
-                                 $('#jqxgrid').jqxGrid('selectrow', index);
-                                 */
-                                /*
-                                 var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                                 if (getselectedrowindexes.length > 0)
-                                 {
-                                 // returns the selected row's data.
+                                var paging = $(this).jqxGrid('getpaginginformation');
+                                var offset = paging.pagenum*paging.pagesize;
+                                //reselect row if exist
+                                if(MYAPP.TmpVar.keepIndex!==false && MYAPP.TmpVar.id!=undefined && MYAPP.TmpVar.id!=null){
+                                    var index = 0;
+                                    var rows = $(this).jqxGrid('getrows');
 
-                                 var selectedRowData = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
-                                 console.log(selectedRowData);
-
-                                 }
-                                 */
-                                //select 1st row on screen
-                                var visiblerows = $("#jqxgrid").jqxGrid('getloadedrows');
-                                $("#jqxgrid").jqxGrid('selectrow', visiblerows[0].boundindex);
-
+                                    for(var i=0;i<rows.length;i++){
+                                        if(rows[i].id==MYAPP.TmpVar.id){
+                                            $(this).jqxGrid('selectrow', offset+i);
+                                            break;
+                                        }
+                                        if(i==rows.length-1){
+                                            $(this).jqxGrid('selectrow', offset);
+                                        }
+                                    }
+                                }
+                                else{
+                                    //var rowindex = $(this).jqxGrid('getselectedrowindex');
+                                    $(this).jqxGrid('selectrow', offset);
+                                }
+                                //reset keep Index
+                                MYAPP.TmpVar.keepIndex = true;
                             } catch (error) {
                                 console.log(error);
                             }

@@ -352,7 +352,7 @@ class Qdmvc_Dataport
         //assign value
         $c = static::$model;
         foreach ($c::getFieldsConfig() as $key => $value) {
-            if ($c::ISFLOWFIELD($key)/* || $c::ISSYSTEMFIELD($key)*/) {
+            if ($c::ISFLOWFIELD($key) || $c::ISSYSTEMFIELD($key)) {
                 continue;
             }
             //check allow submit field

@@ -66,9 +66,8 @@ class QdDgRequest extends QdRoot
             $tmp = new QdDgInStock();
             $tmp = $tmp->SETRANGE('keyword', mb_strtolower($this->keyword), 'EQUAL');
             $tmp = $tmp->SETRANGE('cat_id', $this->cat_id, 'EQUAL');
-            $tmp = $tmp->SETLIMIT(1);
-            $tmp = $tmp->GETLIST();
-            if(count($tmp)==0){
+            $tmp = $tmp->FINDFIRST();
+            if($tmp==null){
                 $tmp=QdDgInStock::getInitObj();
                 $tmp->keyword = mb_strtolower($this->keyword);
                 $tmp->price = $this->price;
@@ -80,12 +79,12 @@ class QdDgRequest extends QdRoot
                 $tmp->makeHistory();
             }
             else{
-                $tmp[0]->price = $this->price;
-                $tmp[0]->suggest_price = $this->suggest_price;
-                $tmp[0]->seq_no++;
-                $tmp[0]->req_id = $this->id;
-                $tmp[0]->save();
-                $tmp[0]->makeHistory();
+                $tmp->price = $this->price;
+                $tmp->suggest_price = $this->suggest_price;
+                $tmp->seq_no++;
+                $tmp->req_id = $this->id;
+                $tmp->save();
+                $tmp->makeHistory();
             }
 
         }
@@ -96,9 +95,10 @@ class QdDgRequest extends QdRoot
     public function fn_release($location, $params = array()){
         if($this->status==static::$STATUS_OPEN) {
             $this->status = static::$STATUS_RELEASE;
-            $this->save(true, $location);
+            return $this->save(true, $location);
         }else{
             $this->pushValidateError('', 'Trạng thái phải là Open', 'error');
+            return false;
         }
     }
     public function fn_reopen($location, $params = array()){

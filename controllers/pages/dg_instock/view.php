@@ -9,5 +9,34 @@ Qdmvc::loadLayout('layout_cardnavigate');
 
 class Qdmvc_View_DgInStock extends Qdmvc_Layout_CardNavigate
 {
+    protected function serverFunctions()
+    {
+        $obj = parent::serverFunctions();
+        $obj = array_merge($obj, array(
+            'btn_makerequest' => array(
+                'fn_name' => 'fn_makerequest',
+                'label' => array(
+                    'vi-VN' => 'Thẩm định lại',
+                    'en-US' => 'Make Request'
+                )
+            ),
+        ));
+        return $obj;
+    }
 
+
+    protected function onReadyHook()
+    {
+        parent::onReadyHook();//must place at the end or knockout not binding to appended html
+        ?>
+        <script type="text/javascript">
+            (function ($) {
+                $(document).ready(function () {
+
+                });
+            })(jQuery);
+        </script>
+    <?php
+
+    }
 }

@@ -54,4 +54,24 @@ class QdDgInStock extends QdRoot
         $tmp->save();
     }
 
+    public function fn_makerequest($location, $params = array())
+    {
+        $tmp = new QdDgRequest();
+        $tmp->SETRANGE('keyword', mb_strtolower($this->keyword));
+        $tmp->SETRANGE('cat_id', $this->cat_id);
+        $tmp->SETRANGE('status', QdDgRequest::$STATUS_CLOSE, 'NOT_EQUAL');
+        $tmp = $tmp->FINDFIRST();
+        if($tmp==null){
+            $tmp = QdDgRequest::getInitObj();
+            $tmp->keyword = $this->keyword;
+            $tmp->cat_id = $this->cat_id;
+            $tmp->suggest_price = $this->price;
+            if($tmp->save()){
+                if($tmp->fn_release($location))
+                    $this->pushValidateError('', 'Tạo yêu cầu thành công, ID='.$tmp->id, 'info');
+            }
+        }else{
+            $this->pushValidateError('', sprintf('Đã có sẵn yêu cầu (ID=%s) với keyword="%s" !', $tmp->id, $this->keyword), 'warning');
+        }
+    }
 }

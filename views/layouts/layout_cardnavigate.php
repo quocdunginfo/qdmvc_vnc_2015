@@ -20,9 +20,9 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         <script>
             //update grid
-            MYAPP.updateGrid = function () {
+            MYAPP.updateGrid = function (keepIndex) {
                 try {
-                    document.getElementById('list').contentWindow.MYAPP.updateGrid();
+                    document.getElementById('list').contentWindow.MYAPP.updateGrid(keepIndex);
                 } catch (error) {
                     console.log(error);
                 }
@@ -78,7 +78,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         if(!MYAPP.formValidationError())
         {
-        MYAPP.updateGrid();
+            MYAPP.updateGrid(true);
         }
 
         <?php
@@ -90,7 +90,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         if(!MYAPP.formValidationError())
         {
-        MYAPP.updateGrid();
+            MYAPP.updateGrid(false);
         }
         <?php
         parent::onDeleteOK();
@@ -101,7 +101,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         if(!MYAPP.formValidationError())
         {
-        MYAPP.updateGrid();
+            MYAPP.updateGrid(true);
         }
 
         <?php

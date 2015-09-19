@@ -61,14 +61,24 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     $('#qdMsgModal').modal('show');
                 })(jQuery);
             };
-
-            MYAPP.showMsg = function (msg) {
+            MYAPP.AllError = [];
+            MYAPP.showMsgHistory = function(limit){
+                if(limit==undefined){
+                    limit = 7;
+                }
+                MYAPP.showMsg(MYAPP.AllError[MYAPP.AllError.length-1], false);
+            };
+            MYAPP.showMsg = function (msg, reghistory) {
                 (function ($) {
-                    //clear notification
-                    $('#jqxMsg').jqxNotification('closeAll');
-                    //dis[lay new validation mark and msg bus
-
+                    //clear notification => do not useful
+                    //$('#jqxMsg').jqxNotification('closeAll');
+                    //reg in History
+                    if(reghistory!==false) {
+                        MYAPP.AllError.push(msg);
+                    }
+                    //display new validation mark and msg bus
                     for (key in msg) {
+
                         var type = msg[key].type;
                         var template = type == '' ? 'success' : type;
 
@@ -499,7 +509,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         autoOpen: false,
                         animationOpenDelay: 300,
                         autoClose: true,
-                        autoCloseDelay: 3000,
+                        autoCloseDelay: 5000,
                         template: "info",
                         appendContainer: "#jqxMsgContainer"
                     });
@@ -522,10 +532,15 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         $("#qdmsgclear").bind("click", function (event) {
                             $('#jqxMsg').jqxNotification('closeAll');
                         });
+                        $("#qdmsghistory").bind("click", function (event) {
+                            MYAPP.showMsgHistory();
+                        });
                     });
                 })(jQuery);
             </script>
-            <button style="opacity: 0.8;" id="qdmsgclear" class="btn btn-info btn-xs pull-right">MSG</button>
+
+            <button style="opacity: 0.8;" id="qdmsgclear" class="btn btn-info btn-xs pull-right">Hide</button>
+            <button style="opacity: 0.8; margin-right: 10px" id="qdmsghistory" class="btn btn-info btn-xs pull-right">MSG</button>
 
             <!-- Single button
             <div class="btn-group dropup pull-right">

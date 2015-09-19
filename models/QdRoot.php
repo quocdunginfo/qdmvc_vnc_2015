@@ -22,7 +22,8 @@ class QdRoot extends ActiveRecord\Model
             'ReadOnly' => true
         ),
         'owner_id' => array(
-            'ReadOnly' => true
+            'ReadOnly' => true,
+            'FieldClass' => 'System'
         ),
         '__sys_note_url' => array(
             'FieldClass' => 'System'
@@ -54,12 +55,14 @@ class QdRoot extends ActiveRecord\Model
             'Name' => 'date_created',
             'Caption' => array('en-US' => 'Date created', 'vi-VN' => 'Ngày tạo'),
             'DataType' => 'Date',
+            'FieldClass' => 'System',
             'ReadOnly' => true
         ),
         'date_modified' => array(
             'Name' => 'date_modified',
             'Caption' => array('en-US' => 'Date modified', 'vi-VN' => 'Ngày sửa cuối'),
             'DataType' => 'Date',
+            'FieldClass' => 'System',
             'ReadOnly' => true
         )
     );
@@ -330,7 +333,16 @@ class QdRoot extends ActiveRecord\Model
         $record->SETRANGE('model_id', $this->id);
         return $record;
     }
-
+    public function FINDFIRST(){
+        $this->SETLIMIT(1);
+        $tmp = $this->GETLIST();
+        $this->REMOVELIMIT();
+        if(count($tmp)>0){
+            return $tmp[0];
+        }else{
+            return null;
+        }
+    }
     public function SETRANGE($field, $value, $operator = 'EQUAL')
     {
         //ignore filter on FLOWFIELD
@@ -751,7 +763,10 @@ class QdRoot extends ActiveRecord\Model
                     return $this->qd_cached_attr[$field_name] = $user_info->user_login;
                 }
                 return Qdmvc_Helper::getNoneText();
-            } else {// if ($field_name == '__sys_lines_url') {//Default system Lines Field
+            }
+            else if ($field_name == 'date_created' || $field_name == 'date_modified' || $field_name=='owner_id') {
+                return parent::__get($field_name);
+            }else {// if ($field_name == '__sys_lines_url') {//Default system Lines Field
                 return $this->getLinesURL($field_name);
             }
         }
@@ -799,7 +814,12 @@ class QdRoot extends ActiveRecord\Model
     public function __set($name, $value)
     {
         //prevent set ERROR on 2 special type
-        if (static::ISFLOWFIELD($name) || static::ISSYSTEMFIELD($name)) {
+        if (static::ISFLOWFIELD($name)) {
+            return $value;
+        }else if (static::ISSYSTEMFIELD($name)){
+            if($name=='date_created' || $name=='date_modified' || $name=='owner_id'){
+                return parent::__set($name, $value);
+            }
             return $value;
         }
         return parent::__set($name, $value);
