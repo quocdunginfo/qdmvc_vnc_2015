@@ -328,33 +328,17 @@ class Qdmvc_Dataport
         foreach ($_REQUEST as $key => $value) {
             if (strstr($key, 'filterdatafield') !== false) {
                 $number = substr($key, 15);
-                $f_operator = 'filtercondition' . $number;
-                $f_operator = 'CONTAINS';//isset($_REQUEST[$f_operator]) ? $_REQUEST[$f_operator] : 'EQUAL';
+                //$f_operator = 'filtercondition' . $number;
+                //$f_operator = 'CONTAINS';//isset($_REQUEST[$f_operator]) ? $_REQUEST[$f_operator] : 'EQUAL';
                 $f_value = $_REQUEST['filtervalue' . $number];
                 $key = $_REQUEST[$key];
-                if(strstr($f_value,'*')){
-                    $f_value = str_replace('*', '', $f_value);
-                    $f_operator = 'CONTAINS';
-                }else if(strstr($f_value,'!=')){
-                    $f_value = str_replace('!=', '', $f_value);
-                    $f_operator = 'NOT_EQUAL';
-                }else if(strstr($f_value,'>=')){
-                    $f_value = str_replace('>=', '', $f_value);
-                    $f_operator = 'GREATER_THAN_OR_EQUAL';
-                }else if(strstr($f_value,'<=')){
-                    $f_value = str_replace('<=', '', $f_value);
-                    $f_operator = 'LESS_THAN_OR_EQUAL';
-                }else if(strstr($f_value,'=')){
-                    $f_value = str_replace('=', '', $f_value);
-                    $f_operator = 'EQUAL';
-                }else if(strstr($f_value,'<')){
-                    $f_value = str_replace('<', '', $f_value);
-                    $f_operator = 'LESS_THAN';
-                }else if(strstr($f_value,'>')){
-                    $f_value = str_replace('>', '', $f_value);
-                    $f_operator = 'GREATER_THAN';
+                if(strstr($f_value, '&&')){
+                    $value = explode('&&', $f_value);
+                    $record = $this->SETFILTER($record, $key, $value[0]);
+                    $record = $this->SETFILTER($record, $key, $value[1]);
+                }else{
+                    $record = $this->SETFILTER($record, $key, $f_value);
                 }
-                $record->SETRANGE($key, $f_value, $f_operator);
             }
         }
 
@@ -364,6 +348,33 @@ class Qdmvc_Dataport
 
         $this->pushMsg('List Card Return');
         $this->finish(null, $record->GETLIST(), $record->COUNTLIST());
+    }
+    private function SETFILTER($record, $key, $f_value){
+        $f_operator = 'CONTAINS';
+        if(strstr($f_value,'*')){
+            $f_value = str_replace('*', '', $f_value);
+            $f_operator = 'CONTAINS';
+        }else if(strstr($f_value,'!=')){
+            $f_value = str_replace('!=', '', $f_value);
+            $f_operator = 'NOT_EQUAL';
+        }else if(strstr($f_value,'>=')){
+            $f_value = str_replace('>=', '', $f_value);
+            $f_operator = 'GREATER_THAN_OR_EQUAL';
+        }else if(strstr($f_value,'<=')){
+            $f_value = str_replace('<=', '', $f_value);
+            $f_operator = 'LESS_THAN_OR_EQUAL';
+        }else if(strstr($f_value,'=')){
+            $f_value = str_replace('=', '', $f_value);
+            $f_operator = 'EQUAL';
+        }else if(strstr($f_value,'<')){
+            $f_value = str_replace('<', '', $f_value);
+            $f_operator = 'LESS_THAN';
+        }else if(strstr($f_value,'>')){
+            $f_value = str_replace('>', '', $f_value);
+            $f_operator = 'GREATER_THAN';
+        }
+        $record->SETRANGE($key, $f_value, $f_operator);
+        return $record;
     }
 
     protected function assign()
