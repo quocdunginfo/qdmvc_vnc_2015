@@ -24,7 +24,7 @@ class Qdmvc_Page_DgRequest_List extends Qdmvc_Page_Root_List
         return array(
             'status' => array(
                 'field' => 'status',
-                'value' => 'CLOSE',
+                'value' => QdDgRequest::$STATUS_CLOSE,
                 'operator' => 'NOT_EQUAL'
             )
         );

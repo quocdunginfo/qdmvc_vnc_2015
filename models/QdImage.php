@@ -39,7 +39,6 @@ class QdImage extends QdNote
             $this->{$field_name} = $this->GETIMAGEMAX($field_name) + 10;
             $this->pushValidateError($field_name, 'Thứ tự được gán tự động RANGE +10', 'info');
         }
-
     }
 
     public function GETIMAGEMAX($field)

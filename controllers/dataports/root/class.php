@@ -324,20 +324,20 @@ class Qdmvc_Dataport
         $c = static::$model;
         $record = new $c();
 
-
         foreach ($_REQUEST as $key => $value) {
             if (strstr($key, 'filterdatafield') !== false) {
                 $number = substr($key, 15);
-                //$f_operator = 'filtercondition' . $number;
-                //$f_operator = 'CONTAINS';//isset($_REQUEST[$f_operator]) ? $_REQUEST[$f_operator] : 'EQUAL';
+                $f_operator = 'filtercondition' . $number;
+                $f_operator = isset($_REQUEST[$f_operator]) ? $_REQUEST[$f_operator] : null;
+
                 $f_value = $_REQUEST['filtervalue' . $number];
                 $key = $_REQUEST[$key];
                 if(strstr($f_value, '&&')){
                     $value = explode('&&', $f_value);
-                    $record = $this->SETFILTER($record, $key, $value[0]);
-                    $record = $this->SETFILTER($record, $key, $value[1]);
+                    $record = $this->SETFILTER($record, $key, $value[0], $f_operator);
+                    $record = $this->SETFILTER($record, $key, $value[1], $f_operator);
                 }else{
-                    $record = $this->SETFILTER($record, $key, $f_value);
+                    $record = $this->SETFILTER($record, $key, $f_value, $f_operator);
                 }
             }
         }
@@ -349,8 +349,9 @@ class Qdmvc_Dataport
         $this->pushMsg('List Card Return');
         $this->finish(null, $record->GETLIST(), $record->COUNTLIST());
     }
-    private function SETFILTER($record, $key, $f_value){
-        $f_operator = 'CONTAINS';
+    private function SETFILTER($record, $key, $f_value, $f_operator_2=null){
+        //*, = higher priority than CONTAINS, EQUAL
+        $f_operator = null;
         if(strstr($f_value,'*')){
             $f_value = str_replace('*', '', $f_value);
             $f_operator = 'CONTAINS';
@@ -372,6 +373,9 @@ class Qdmvc_Dataport
         }else if(strstr($f_value,'>')){
             $f_value = str_replace('>', '', $f_value);
             $f_operator = 'GREATER_THAN';
+        }
+        if($f_operator===null){
+            $f_operator = $f_operator_2;
         }
         $record->SETRANGE($key, $f_value, $f_operator);
         return $record;
