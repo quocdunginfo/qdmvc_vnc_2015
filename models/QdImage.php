@@ -36,26 +36,23 @@ class QdImage extends QdNote
                 $this->pushValidateError($field_name, 'Thứ tự phải lớn hơn 0');
             }
         } else {
-            $this->{$field_name} = $this->GETMAX($field_name) + 10;
+            $this->{$field_name} = $this->GETIMAGEMAX($field_name) + 10;
             $this->pushValidateError($field_name, 'Thứ tự được gán tự động RANGE +10', 'info');
         }
 
     }
 
-    public function GETMAX($field)
+    public function GETIMAGEMAX($field)
     {
-        //$query = array_merge(static::_generateQuery($this->record_filter), array('select' => "max(`{$field}`)"));
         $record = new QdImage();
         $record->SETRANGE('model', $this->model);
         $record->SETRANGE('model_id', $this->model_id);
-        $list = $record->GETLIST();
-        $max = 0;
-        foreach ($list as $item) {
-            if ($item->{$field} >= $max) {
-                $max = $item->{$field};
-            }
+        $max = $record->SELECTMAX($field);
+        if($max!==false){
+            return $max;
+        }else{
+            return 0;
         }
-        return $max;
     }
 
 }

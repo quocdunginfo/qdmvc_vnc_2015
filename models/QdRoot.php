@@ -343,6 +343,25 @@ class QdRoot extends ActiveRecord\Model
             return null;
         }
     }
+    public function SELECTMAX($f_name){
+        return $this->SELECTAGR($f_name, 'max');
+    }
+    public function SELECTMIN($f_name){
+        return $this->SELECTAGR($f_name, 'min');
+    }
+    public function SELECTSUM($f_name){
+        return $this->SELECTAGR($f_name, 'sum');
+    }
+    private function SELECTAGR($f_name, $agr){
+        $tmp = static::_generateQuery($this->record_filter);
+        $tmp = array_merge($tmp, array('select' => "$agr(`$f_name`) as `$f_name`"));
+        $agr_value = static::find($tmp);
+        if($agr!=null){
+            $agr_value = $agr_value->{$f_name};
+            return $agr_value;
+        }
+        return false;
+    }
     public function SETRANGE($field, $value, $operator = 'EQUAL')
     {
         //ignore filter on FLOWFIELD
@@ -485,27 +504,27 @@ class QdRoot extends ActiveRecord\Model
     }
 
     /**
-     * @param $record
+     * @param $rec_filter
      * @return array
      */
-    protected static function _generateQuery($record)
+    protected static function _generateQuery($rec_filter)
     {
         $re = array();
-        if (is_array($record)) {
-            if (is_array($record['filter']) && count($record['filter']) > 0) {
-                $re['conditions'] = static::_generateConditionsArray($record);
+        if (is_array($rec_filter)) {
+            if (is_array($rec_filter['filter']) && count($rec_filter['filter']) > 0) {
+                $re['conditions'] = static::_generateConditionsArray($rec_filter);
             }
-            if ($record['limit'] > 0) {
-                $re['limit'] = $record['limit'];
+            if ($rec_filter['limit'] > 0) {
+                $re['limit'] = $rec_filter['limit'];
             }
-            if ($record['offset'] > 0) {
-                $re['offset'] = $record['offset'];
+            if ($rec_filter['offset'] > 0) {
+                $re['offset'] = $rec_filter['offset'];
             }
             //BEGIN ORDER
             $order_s = '';
             $count = 0;
-            if (is_array($record['order']) && count($record['order']) > 0) {
-                foreach ($record['order'] as $order_k => $order_v) {
+            if (is_array($rec_filter['order']) && count($rec_filter['order']) > 0) {
+                foreach ($rec_filter['order'] as $order_k => $order_v) {
                     if ($count > 0) {
                         $order_s .= ', ';
                     }
