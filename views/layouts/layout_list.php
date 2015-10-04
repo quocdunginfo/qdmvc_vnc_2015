@@ -209,7 +209,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     {
         ?>
         <!-- General toolbar -->
-        <div style="margin-top: 5px; margin-bottom: 5px">
+        <div style="margin-bottom: 5px">
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdshowall" type="button">
                     <?= Qdmvc_Message::getMsg('btn_showall') ?>
@@ -245,6 +245,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     $(document).ready(function () {
                         $("#qdprint").click(function () {
                             var gridContent = $("#jqxgrid").jqxGrid('exportdata', 'html');
+                            /*
                             var newWindow = window.open('', '', 'width=800, height=500'),
                                 document = newWindow.document.open(),
                                 pageContent =
@@ -258,6 +259,8 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             document.write(pageContent);
                             document.close();
                             newWindow.print();
+                            */
+                            MYAPP.printDoc(gridContent, 800, 500);
                         });
                         $("#qdreload").click(function () {
                             MYAPP.updateGrid(true);

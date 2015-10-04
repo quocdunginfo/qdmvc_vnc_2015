@@ -44,21 +44,23 @@ class Qdmvc_Page_Index
             $tmp = array();
             $active = isset($config['Active']) ? $config['Active'] : true;
             $p_id = isset($config['ParentId']) ? $config['ParentId'] : -1;
+
             if (!$active) {
                 continue;
             }
 
             $text = isset($config['Caption']) && isset($config['Caption'][$lang]) ? $config['Caption'][$lang] : $key;
-            $tmp['text'] = $debug_mode == 1 ? $key : $text;
-            $tmp['id'] = $key;
+            $tmp['title'] = $debug_mode == 1 ? $key : $text;
+            $tmp['key'] = $key;
             $tmp['parentid'] = $p_id;
+
             if (!Qdmvc_Helper::isNullOrEmpty($config['PageType']) && $config['PageType'] == 'Folder') {
-                $tmp['text'] = '[' . $tmp['text'] . ']';
+                $tmp['title'] = '[' . $tmp['title'] . ']';
                 $tmp['value'] = '';
+                $tmp['folder'] = true;
             } else {
                 $tmp['value'] = Qdmvc_Helper::getCompactPageListLink($key);
             }
-
 
             array_push($re, $tmp);
         }

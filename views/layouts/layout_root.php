@@ -62,6 +62,50 @@ class Qdmvc_Layout_Root
                 });
                 return found;
             };
+            MYAPP.getQRCodeLink = function(text, width, height){
+                if(width===undefined){
+                    width = 300;
+                }
+                if(height===undefined){
+                    height = 300;
+                }
+                var qrlink = 'http://chart.apis.google.com/chart?cht=qr&chs='+width+'x'+height+'&chl=' + text + '&choe=UTF-8&chld=L';
+                return qrlink;
+            };
+            MYAPP.printDoc = function(divHtml, pageWidth, pageHeight, preview){
+                var document = null;
+                var newWindow = window.open('', '', 'width='+pageWidth+', height='+pageHeight);
+                var document = newWindow.document.open();
+                var pageContent =
+                        '<!DOCTYPE html>'
+                        + '<html>'
+                        + '<head>'
+                        + '<meta charset="utf-8" />'
+                        + '<title>Print Preview</title>'
+                        + '</head>'
+                        + '<body>'
+                        + '<script>'
+                        + '    var qdPrint = function(){'
+                        + '        var link = document.getElementById("toolpanel");'
+                        + '        link.style.display = "none";'
+                        //+ '        window.onunload = function(){alert("ddd")};'
+                        + '        window.print();'
+                        + '    };'
+                        + '<\/script>'
+                        + '<div id="toolpanel">'
+                        + '<button id="qdprint" onclick="qdPrint()">Print</button>'
+                        +'<hr></div>'
+                        + divHtml
+                        + '</body></html>';
+                document.write(pageContent);
+                document.close();
+                if(preview==undefined || preview===false){
+                    newWindow.qdPrint();
+                }
+            };
+            MYAPP.printDocPreview = function(divHtml, pageWidth, pageHeight){
+                MYAPP.printDoc(divHtml, pageWidth, pageHeight, true);
+            };
             MYAPP.addDataPortFilter = function (url, index, field, value, operator) {
                 if (operator == undefined) operator = 'EQUAL';
                 return url + '&filterdatafield' + index + '=' + field + '&filtervalue' + index + '=' + value + '&filtercondition' + index + '=' + operator;

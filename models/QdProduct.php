@@ -290,6 +290,7 @@ class QdProduct extends QdRoot
                 )
             ));
         $obj['id']['ReadOnly'] = false;
+        /*
         $obj['__sys_lines_url'] = array(
             'FieldClass' => 'System',
             'Caption' => array('en-US' => 'UOM', 'vi-VN' => 'Đơn vị tính'),
@@ -309,7 +310,7 @@ class QdProduct extends QdRoot
                     )
                 )
             )
-        );
+        );*/
         return $obj;
     }
 
@@ -336,9 +337,12 @@ class QdProduct extends QdRoot
 
     public function getBreadcrumbs()
     {
-        $re = $this->getProductCatObj()->getBreadcrumbs();
-        array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
-        return $re;
+        if($this->getProductCatObj()!=null){
+            $re = $this->getProductCatObj()->getBreadcrumbs();
+            array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
+            return $re;
+        }
+        return array();
     }
 
     /*

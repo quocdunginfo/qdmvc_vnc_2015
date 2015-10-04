@@ -83,7 +83,7 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                         MYAPP.openInNewTab(MYAPP.viewModel._permalink());
                     });
                     $('#btn_view_qrcode').click(function () {
-                        var qrlink = 'http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=' + MYAPP.viewModel.id() + '&choe=UTF-8&chld=L';
+                        var qrlink = MYAPP.getQRCodeLink(MYAPP.viewModel.id());
                         MYAPP.openInNewTab(qrlink);
                     });
                 });
@@ -91,13 +91,6 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
         </script>
     <?php
 
-    }
-
-    private function genSEOMetaButton()
-    {
-        ?>
-
-    <?php
     }
 
 }

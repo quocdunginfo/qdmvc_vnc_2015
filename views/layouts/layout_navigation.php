@@ -13,6 +13,20 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
     function __construct($page)
     {
         parent::__construct($page);
+        //jquery ui
+        QdJqwidgets::loadSinglePluginJS('jquery-ui/jquery-ui.js');
+        QdJqwidgets::loadSinglePluginCSS('jquery-ui/jquery-ui.css');
+        //jquery fancytree
+        QdJqwidgets::loadSinglePluginJS('fancytree/jquery.fancytree.js');
+        QdJqwidgets::loadSinglePluginJS('fancytree/jquery.fancytree.filter.js');
+        QdJqwidgets::loadSinglePluginCSS('fancytree/ui.fancytree.css');
+        //underscore
+        QdJqwidgets::loadSinglePluginJS('underscore-min.js');
+
+
+    }
+    public function render2(){
+
     }
 
     public function render()
@@ -36,75 +50,99 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                     }
                     window.parent.MYAPP.openInNewTab(url);
                 };
+                MYAPP.TreeUnflatten = function( array, parent, tree ){
+
+                    tree = typeof tree !== 'undefined' ? tree : [];
+                    parent = typeof parent !== 'undefined' ? parent : { key: -1 };
+
+                    var children = _.filter( array, function(child){ return child.parentid == parent.key; });
+
+                    if( !_.isEmpty( children )  ){
+                        if( parent.key == -1 ){
+                            tree = children;
+                        }else{
+                            parent['children'] = children
+                        }
+                        _.each( children, function( child ){ MYAPP.TreeUnflatten( array, child ) } );
+                    }
+
+                    return tree;
+                };
+
                 (function ($) {
                     $(document).ready(function () {
                         //height = $(window).height()-3;
 
                         $("#splitter").jqxSplitter({width: '100%', height: '100%', panels: [{size: 230}]});
+                        $("#splitter2").jqxSplitter({orientation: 'horizontal', width: '100%', height: '100%', panels: [{size: '90%'}]});
+
                         // Create jqxTree
                         Array.prototype.insert = function (index, item) {
                             this.splice(index, 0, item);
                         };
-                        var data = <?=Qdmvc_Page_Index::buildJSONTree($this->data['language'])?>;
-                        data.insert(0, {id: 'hidden', text: 'hidden', parrent: -1, value: ''});
-                        // prepare the data
-                        var source =
-                        {
-                            datatype: "json",
-                            datafields: [
-                                {name: 'id'},
-                                {name: 'parentid'},
-                                {name: 'text'},
-                                {name: 'value'}
-                            ],
-                            id: 'id',
-                            localdata: data
-                        };
-                        // create data adapter.
-                        var dataAdapter = new $.jqx.dataAdapter(source);
-                        // perform Data Binding.
-                        dataAdapter.dataBind();
-                        var records = dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{
-                            name: 'text',
-                            map: 'label'
-                        }]);
-                        $('#jqxTree').jqxTree({source: records, height: '90%', width: '100%', incrementalSearch: true});
-                        $('#jqxTree').css('visibility', 'visible');
 
+                        var data = <?=Qdmvc_Page_Index::buildJSONTree($this->data['language'])?>;
+                        data = MYAPP.TreeUnflatten(data);
+                        var autoexpand = false;
                         <?php if($this->data['setup']->autoexpandmenu==true): ?>
-                        $('#jqxTree').jqxTree('expandAll');
+                        autoexpand = true;
                         <?php endif; ?>
 
-                        $('#jqxTree').on('select', function (event) {
-                            //$("#ContentPanel").html("<div style='margin: 10px;'>" + event.args.element.id + "</div>");
-                            //add tab
-                            var args = event.args;
-                            var item = $(this).jqxTree('getItem', args.element);
-                            console.log(item);
-                            var label = item.label;
-                            var url = item.value;
-                            if (url == '') {
-                                return;//ignore folder
-                            }
-                            //unselect all
-                            $('#jqxTree').jqxTree('selectItem', $("#jqxTree").find('li:first')[0]);
-                            //check existed
-                            var totaltab = $('#jqxTabs').jqxTabs('length');
-                            var i = 0;
-                            for (i = 0; i < totaltab; i++) {
-                                var title = $('#jqxTabs').jqxTabs('getTitleAt', i);
-                                if (title == label) {
-                                    $('#jqxTabs').jqxTabs('select', i);//switch to tab
-                                    return;//ignore duplicate tab
+                        $("#jqxTree").fancytree({
+                            extensions: ["filter"],
+                            quicksearch: true,
+                            checkbox: false,
+                            source: data,
+                            autoScroll: true,
+                            filter: {
+                                autoApply: true,  // Re-apply last filter if lazy data is loaded
+                                counter: true,  // Show a badge with number of matching child nodes near parent icons
+                                fuzzy: false,  // Match single characters in order, e.g. 'fb' will match 'FooBar'
+                                hideExpandedCounter: true,  // Hide counter badge, when parent is expanded
+                                highlight: true,  // Highlight matches by wrapping inside <mark> tags
+                                mode: "hide"  // Grayout unmatched nodes (pass "hide" to remove unmatched node instead)
+                            },
+                            activate: function(event, data) {
+                                var node = data.node;
+                                //add tab
+                                var args = event.args;
+
+                                var label = node.title;
+                                var url = node.data.value;
+                                if (url == '') {
+                                    return;//ignore folder
+                                }
+
+                                //check existed
+                                var totaltab = $('#jqxTabs').jqxTabs('length');
+                                var i = 0;
+                                for (i = 0; i < totaltab; i++) {
+                                    var title = $('#jqxTabs').jqxTabs('getTitleAt', i);
+                                    if (title == label) {
+                                        $('#jqxTabs').jqxTabs('select', i);//switch to tab
+                                        return;//ignore duplicate tab
+                                    }
+                                }
+
+                                $('#jqxTabs').jqxTabs('addLast', label, '<iframe id="pagepart" src="' + url + '" width="100%" height="99%" scrolling="yes" frameborder="0"><p>Your browser does not support iframes</p> </iframe>');
+                            },
+                            create: function(event, data){
+                                //alert('create done');
+                            },
+                            init: function(event, data){
+                                if(autoexpand!=undefined && autoexpand==true) {
+                                    $("#jqxTree").fancytree("getRootNode").visit(function (node) {
+                                        node.setExpanded(true);
+                                    });
                                 }
                             }
-
-                            $('#jqxTabs').jqxTabs('addLast', label, '<iframe id="pagepart" src="' + url + '" width="100%" height="99%" scrolling="yes" frameborder="0"><p>Your browser does not support iframes</p> </iframe>');
                         });
+
                         //Tabs
                         $('#jqxTabs').jqxTabs({height: '100%', width: '100%', showCloseButtons: true, reorder: true});
 
-                        /*Handle Tab Panel Context Menu*/
+
+                        /*Handle Tab Panel Context Menu
                         var contextMenu = $("#jqxMenu").jqxMenu({ width: '120px', height: '80px', autoOpenPopup: false, mode: 'popup'});
                         $("#jqxMenu").bind('itemclick', function(event)
                         {
@@ -131,6 +169,7 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                                     break;
                             }
                         });
+                        */
                         // open the context menu when the user presses the mouse right button.
                         $("#jqxTabs").bind('mousedown', function (event) {
                             var rightClick = isRightClick(event);
@@ -142,11 +181,13 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                                 return false;
                             }
                         });
+                        /*
 
                         // disable the default browser's context menu.
                         $(document).bind('contextmenu', function (e) {
-                            return false;
+                            //return false;
                         });
+                        */
 
                         function isRightClick(event) {
                             var rightclick;
@@ -156,29 +197,55 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                             return rightclick;
                         }
                         /*Handle Context Menu*/
+                        $("#searchbox").keyup(function(e){
+                            var match = $(this).val();
+                            var tree = $("#jqxTree").fancytree("getTree");
+                            if(e && e.which === $.ui.keyCode.ESCAPE || $.trim(match) === ""){
+                                //reset filter
+                                tree.clearFilter();
+                                return;
+                            }
+
+                            // Pass text as filter string (will be matched as substring in the node title)
+                            var n = tree.filterNodes(match, {autoExpand: true});
+                        }).focus();
 
                     });
                 })(jQuery);
             </script>
             <div id="splitter">
                 <div>
-                    <div style="visibility: hidden; border: none;" id='jqxTree'>
-                        <li>Hidden</li>
+                    <div id="splitter2">
+                        <div>
+                            <div style="width: 100%;">
+                                <div style="float: left;">Search:</div>
+                                <input id="searchbox" style="float: left;" />
+                                <div style="clear: both"></div>
+                            </div>
+
+                            <div id='jqxTree' style="height: 95%; overflow: auto;">
+
+                            </div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="<?= admin_url('profile.php') ?>"><?php $tmp = wp_get_current_user();
+                                echo $tmp->user_login; ?> </a> |
+                            <a onclick="return confirm('<?= Qdmvc_Message::getMsg('msg_confirm') ?>')"
+                               href="<?= wp_logout_url(Qdmvc_Helper::getCompactPageListLink('navigation')) ?>">
+                                <?= Qdmvc_Message::getMsg('msg_logout') ?>
+                            </a>
+                        </div>
                     </div>
-                    <a target="_blank" href="<?= admin_url('profile.php') ?>"><?php $tmp = wp_get_current_user();
-                        echo $tmp->user_login; ?> </a> |
-                    <a onclick="return confirm('<?= Qdmvc_Message::getMsg('msg_confirm') ?>')"
-                       href="<?= wp_logout_url(Qdmvc_Helper::getCompactPageListLink('navigation')) ?>">
-                        <?= Qdmvc_Message::getMsg('msg_logout') ?>
-                    </a>
+
                 </div>
                 <div id="ContentPanel">
+                    <!--
                     <div id='jqxMenu'>
                         <ul>
                             <li>Close Others</li>
                             <li>Close All</li>
                         </ul>
-                    </div>
+                    </div>-->
                     <div id='jqxTabs' style="float: left;">
                         <ul style="margin-left: 30px;" id="unorderedList">
                             <li>Home</li>

@@ -94,7 +94,6 @@ class Qdmvc_Dataport
         } else {
             $this->pushMsg("Function  \"{$function}\" not exists", 'error');
         }
-
     }
 
     protected function finish($msg_array = null, $result_array = null, $total = 0, $id = 0)

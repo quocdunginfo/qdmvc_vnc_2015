@@ -337,6 +337,18 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdSetupProduct',
             'DataPort' => 'product_setup_port'
         ),
+        'setup_other' => array(
+            'ParentId' => 'folder50',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_SetupOther',
+            'Caption' => array(
+                'en-US' => 'Other Setup',
+                'vi-VN' => 'Cấu hình khác',
+            ),
+            'Model' => 'QdSetupOther',
+            'DataPort' => 'setup_other_port'
+        ),
         'setup_product_order' => array(
             'ParentId' => 'folder50',
             'Active' => true,
@@ -1643,6 +1655,56 @@ class Qdmvc_Page_IndexMenu
             ),
             'Model' => 'QdProUOM',
             'DataPort' => 'pro_uom_port'
+        ),
+        'pbhanh' => array(
+            'ParentId' => 'folder130',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_PBHanh',
+            'Caption' => array(
+                'en-US' => 'Phiếu bảo hành (Nhân Viên)',
+                'vi-VN' => 'Phiếu bảo hành (Nhân Viên)'
+            ),
+            'Model' => 'QdPBHanh',
+            'DataPort' => 'pbhanh_port',
+            'PageList' => 'pbhanh_list'
+        ),
+        'pbhanh_list' => array(
+            'ParentId' => 'folder130',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_PBHanh_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdPBHanh',
+            'DataPort' => 'pbhanh_port'
+        ),
+        'pbhanh_shipped' => array(
+            'ParentId' => 'folder130',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_PBHanh_Shipped',
+            'Caption' => array(
+                'en-US' => 'Phiếu bảo hành (Admin)',
+                'vi-VN' => 'Phiếu bảo hành (Admin)'
+            ),
+            'Model' => 'QdPBHanh',
+            'DataPort' => 'pbhanh_port',
+            'PageList' => 'pbhanh_shipped_list'
+        ),
+        'pbhanh_shipped_list' => array(
+            'ParentId' => 'folder130',
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_PBHanh_Shipped_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdPBHanh',
+            'DataPort' => 'pbhanh_port'
         ),
         'navigation' => array(
             'ParentId' => '',

@@ -353,7 +353,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         Lookup Window
                     </span>
             </div>
-            <div style="overflow: hidden;" id="windowContent">
+            <div style="overflow: hidden;">
                 <iframe id="windowFrame" src="" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto"
                         width="100%" height="100%">
                     <p>Your browser does not support iframes</p>
@@ -1479,8 +1479,9 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             </button>
             <ul class="dropdown-menu" role="menu">
                 <?php
-                foreach ($this->serverFunctions() as $item => $config) {
+                foreach ($this->serverFunctions() as $item => $config) :
                     $fn_label = isset($config['label'][$this->data['language']]) ? $config['label'][$this->data['language']] : '@' . $item;
+                    $fn_confirm = (!QdT_Library::isNullOrEmpty($config['confirm'])) && $config['confirm']==true;
                     ?>
                     <li><a id="<?= $item ?>"><?= $fn_label ?></a></li>
                 <?php
@@ -1491,6 +1492,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         (function ($) {
                             $(document).ready(function () {
                                 $('#<?=$item?>').click(function () {
+                                    <?php if($fn_confirm) echo sprintf('if(confirm("%s"))', Qdmvc_Message::getMsg('msg_confirm')); ?>
                                     MYAPP.callFn('<?=$config['fn_name']?>');
                                 });
                             });
@@ -1498,7 +1500,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     </script>
                 <?php
                 }
-                }
+                endforeach;
                 ?>
             </ul>
         </div>
