@@ -343,7 +343,9 @@ class Qdmvc_Dataport
 
         $record->SETLIMIT($pagesize);
         $record->SETOFFSET($recordstartindex);
-        $record->SETORDERBY($sort_field, $sort_direction);
+        if($record::ISFLOWFIELD($sort_field)===false){
+            $record->SETORDERBY($sort_field, $sort_direction);
+        }
 
         $this->pushMsg('List Card Return');
         $this->finish(null, $record->GETLIST(), $record->COUNTLIST());
