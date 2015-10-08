@@ -908,6 +908,7 @@ class QdRoot extends ActiveRecord\Model
                 return $re;
             } catch (Exception $ex) {
                 //$this->id = 0;
+                $this->pushValidateError('', $ex, 'error');
                 return false;
             }
 
@@ -965,12 +966,16 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
-
+    /*
+     * Bug transfer field null, could not insert if not declare full properties
+     * */
     public function transferFieldsFrom($source)
     {
         if ($source != null) {
             foreach ($source::getFieldsConfig() as $key => $config) {
-                $this->{$key} = $source->{$key};
+                if($source->{$key}!==null) {//PHPActiveRecord tracking field assign, so pure init != (set field value = null)
+                    $this->{$key} = $source->{$key};
+                }
             }
         }
         return true;
