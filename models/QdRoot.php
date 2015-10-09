@@ -687,6 +687,8 @@ class QdRoot extends ActiveRecord\Model
     {
         if ($meta_name == 'ReadOnly') {
             return static::ISREADONLY($f_name);
+        } else if ($meta_name == 'MultiValue') {
+            return static::ISMULTIVALUE($f_name);
         } else {
             $config = static::getFieldsConfig();
             if (!Qdmvc_Helper::isNullOrEmpty($config[$f_name][$meta_name])) {
@@ -702,6 +704,19 @@ class QdRoot extends ActiveRecord\Model
             $config = static::getFieldsConfig();
             if (static::ISSYSTEMFIELD($f_name) || static::ISFLOWFIELD($f_name) || (!Qdmvc_Helper::isNullOrEmpty($config[$f_name]['ReadOnly']))) {
                 return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+    public static function ISMULTIVALUE($f_name)
+    {
+        try {
+            $config = static::getFieldsConfig();
+            if (!Qdmvc_Helper::isNullOrEmpty($config[$f_name]['MultiValue'])) {
+                return $config[$f_name]['MultiValue'];
             } else {
                 return false;
             }

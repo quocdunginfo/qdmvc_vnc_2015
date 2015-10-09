@@ -11,7 +11,17 @@ class QdDgRequest extends QdRoot
     public static function getFieldsConfig()
     {
         return array_merge(parent::getFieldsConfig(), array(
-            'keyword' => array(),
+            'keyword' => array(
+                'MultiValue' => true,
+                'MultiValue_Field' => 'name',
+                'MultiValue_DataPort' => Qdmvc_Helper::getDataPortPath('mytags_port', array(
+                    array(
+                        'field' => 'type',
+                        'value' => QdMyTags::$TYPE_SP,
+                        'operator' => 'EQUAL'
+                    )
+                )),
+            ),
             'description' => array(
                 'DataType' => 'WYSIWYG'
             ),

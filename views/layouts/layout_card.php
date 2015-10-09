@@ -62,18 +62,18 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 })(jQuery);
             };
             MYAPP.AllError = [];
-            MYAPP.showMsgHistory = function(limit){
-                if(limit==undefined){
+            MYAPP.showMsgHistory = function (limit) {
+                if (limit == undefined) {
                     limit = 7;
                 }
-                MYAPP.showMsg(MYAPP.AllError[MYAPP.AllError.length-1], false);
+                MYAPP.showMsg(MYAPP.AllError[MYAPP.AllError.length - 1], false);
             };
             MYAPP.showMsg = function (msg, reghistory) {
                 (function ($) {
                     //clear notification => do not useful
                     //$('#jqxMsg').jqxNotification('closeAll');
                     //reg in History
-                    if(reghistory!==false) {
+                    if (reghistory !== false) {
                         MYAPP.AllError.push(msg);
                     }
                     //display new validation mark and msg bus
@@ -540,7 +540,9 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             </script>
 
             <button style="opacity: 0.8;" id="qdmsgclear" class="btn btn-info btn-xs pull-right">Hide</button>
-            <button style="opacity: 0.8; margin-right: 10px" id="qdmsghistory" class="btn btn-info btn-xs pull-right">MSG</button>
+            <button style="opacity: 0.8; margin-right: 10px" id="qdmsghistory" class="btn btn-info btn-xs pull-right">
+                MSG
+            </button>
 
             <!-- Single button
             <div class="btn-group dropup pull-right">
@@ -555,6 +557,74 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             </div> -->
             <div style="clear: both"></div>
         </div>
+    <?php
+    }
+
+    private function generateFieldTextMultiValue($f_name, $f_val, $f_dataport, $f_multivaluefield='id', $readonly = false)
+    {
+        ?>
+
+        <input data-qddataport="<?= $f_dataport ?>" <?= $readonly == true ? 'readonly' : '' ?> class="text-input"
+               type="text" name="<?= $f_name ?>"
+               id='<?= static::$ctl_prefix . $f_name ?>'
+               data-bind="jqxInput: {value: <?= $f_name ?>}"/>
+        <script>
+            (function ($) {
+                if (MYAPP.MultiValueSource_<?=$f_name?> === undefined) {
+                    MYAPP.MultiValueSource_<?=$f_name?> = new Array();
+                }
+
+                $(document).ready(function () {
+                    // prepare the data
+                    var source =
+                    {
+                        datatype: "json",
+                        datafields: [
+                            {name: '<?=$f_multivaluefield?>'}
+                        ],
+                        url: '<?=$f_dataport?>'
+                    };
+
+                    var dataAdapter = new $.jqx.dataAdapter(source, {
+                        autoBind: true, loadComplete: function (data) {
+                            for (var i = 0; i < data.rows.length; i++) {
+                                MYAPP.MultiValueSource_<?=$f_name?>.push(data.rows[i].<?=$f_multivaluefield?>);
+                            }
+                        }
+                    });
+
+                    // Create a jqxInput
+                    $("#ctl_<?=$f_name?>").jqxInput({
+                        source: dataAdapter,
+                        source: function (query, response) {
+                            var item = query.split(/,\s*/).pop();
+                            if(item.trim().length < 1){
+                                // update the search query.
+                                $("#ctl_<?=$f_name?>").jqxInput({query: new Date()});
+                            }
+                            else{
+                                // update the search query.
+                                $("#ctl_<?=$f_name?>").jqxInput({query: item});
+                            }
+
+                            response(MYAPP.MultiValueSource_<?=$f_name?>);
+                        },
+                        renderer: function (itemValue, inputValue) {
+                            var terms = inputValue.split(/,\s*/);
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push(itemValue);
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push("");
+                            return terms.join(", ");
+                        },
+                        placeHolder: 'Auto complete field...'
+                    });
+                });
+            })(jQuery);
+
+        </script>
     <?php
     }
 
@@ -575,7 +645,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     value="">...
             </button>
         </div>
-
         <script>
             MYAPP.autoCompleteDone = false;
             (function ($) {
@@ -627,13 +696,12 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             })(jQuery);
 
         </script>
-
     <?php
     }
 
     private function generateFieldDate($f_name, $value, $readonly = false)
     {
-        if($readonly==true){
+        if ($readonly == true) {
             $this->generateFieldText($f_name, $value, $readonly);
             return;
         }
@@ -654,14 +722,14 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         <input <?= $readonly == true ? 'readonly' : '' ?> class="text-input" type="text" name="<?= $f_name ?>"
                                                           id='<?= static::$ctl_prefix . $f_name ?>'
                                                           data-bind="jqxInput: {value: <?= $f_name ?>}"/>
-        <?php if(true || $readonly): ?>
+        <?php if (true || $readonly): ?>
         <script>
             (function ($) {
                 $(document).ready(function () {
                     $("#<?=static::$ctl_prefix.$f_name?>").hover(function () {
                         var lv = $(this).val();
                         if (lv != "") {
-                            var content = '<div style="max-width: 150px; max-height: 150px"/>'+lv+'</div>';
+                            var content = '<div style="max-width: 150px; max-height: 150px"/>' + lv + '</div>';
                             var selector = $(this);
                             selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.8});
                             selector.jqxTooltip('open');
@@ -755,11 +823,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
     private function generateFieldBoolean($f_name, $value = 0, $readonly = false)
     {
-        $ros = $readonly?'onclick="return false;"':'';
+        $ros = $readonly ? 'onclick="return false;"' : '';
         ?>
         <!--<input type="checkbox" name="<?= $f_name ?>" id="<?= static::$ctl_prefix . $f_name ?>" value="1">-->
         <input type="checkbox" data-bind="checked: <?= $f_name ?>" name="<?= $f_name ?>"
-               id="<?= static::$ctl_prefix . $f_name ?>" value="1" <?=$ros?> />
+               id="<?= static::$ctl_prefix . $f_name ?>" value="1" <?= $ros ?> />
     <?php
     }
 
@@ -867,6 +935,12 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                     $f_dataport = $tmp_page::getFieldDataPort($f_name);
                                     $f_dataport = Qdmvc_Helper::getDataPortPath($f_dataport);
 
+                                    $f_multivalue = $tmp_page::isMultiValue($key);
+                                    if($f_multivalue){
+                                        $f_multivaluefield = $tmp_page::getMultiValueField($f_name);
+                                        $f_multivaluedataport = $tmp_page::getMultiValueDataPort($f_name);
+                                    }
+
                                     if ($f_config['Hidden']) {
                                         $this->generateFieldHidden($f_name, $f_val);
                                         continue;
@@ -896,8 +970,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                                 $this->generateFieldWYSIWYG($f_name, $f_val, $readonly);
                                             } else if ($type == 'Option') {
                                                 $this->generateFieldCombobox($f_name, $f_val, $options, $readonly);
-                                            } else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
-                                                $this->generateFieldLookup($f_name, $f_val, $f_lku, $f_dataport, $readonly);
+                                            } else if ($f_multivalue) {
+                                                $this->generateFieldTextMultiValue($f_name, $f_val, $f_multivaluedataport, $f_multivaluefield, $readonly);
+                                            }
+                                            else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
+                                                $this->generateFieldLookup($f_name, $f_val, $f_lku, $f_dataport, $f_multivalue, $readonly);
                                             } else {
                                                 $this->generateFieldText($f_name, $f_val, $readonly);
                                             }
@@ -1481,7 +1558,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 <?php
                 foreach ($this->serverFunctions() as $item => $config) :
                     $fn_label = isset($config['label'][$this->data['language']]) ? $config['label'][$this->data['language']] : '@' . $item;
-                    $fn_confirm = (!QdT_Library::isNullOrEmpty($config['confirm'])) && $config['confirm']==true;
+                    $fn_confirm = (!QdT_Library::isNullOrEmpty($config['confirm'])) && $config['confirm'] == true;
                     ?>
                     <li><a id="<?= $item ?>"><?= $fn_label ?></a></li>
                 <?php
@@ -1528,7 +1605,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <?= $this->Bar() ?>
             <?= $this->msgPanelLayout() ?>
             <?= $this->onReadyHook() ?>
-            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element ?>
+            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element   ?>
         </div>
     <?php
     }

@@ -120,6 +120,12 @@ class Qdmvc_Page_Root
         //return $c::ISREADONLY($f_name);
         return static::getFieldsConfig($f_name, 'ReadOnly');
     }
+    public static function isMultiValue($f_name)
+    {
+        //$c = static::getModel();
+        //return $c::ISREADONLY($f_name);
+        return static::getFieldsConfig($f_name, 'MultiValue');
+    }
 
     public static function getDataType($field_name)
     {
@@ -365,8 +371,15 @@ class Qdmvc_Page_Root
         $c = static::getModel();
         return $c::getFieldOptions($f_name, $lang);
     }
-
-    public static function getFieldDataPort($f_name, $lang = 'en-US')
+    public static function getMultiValueField($f_name)
+    {
+        return static::getFieldsConfig($f_name, 'MultiValue_Field');
+    }
+    public static function getMultiValueDataPort($f_name)
+    {
+        return static::getFieldsConfig($f_name, 'MultiValue_DataPort');
+    }
+    public static function getFieldDataPort($f_name)
     {
         return static::getFieldsConfig($f_name, 'DataPort');
     }

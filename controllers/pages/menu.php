@@ -448,6 +448,31 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdQdmvcModel',
             'DataPort' => 'qdmvcmodel_port'
         ),
+        'mytags' => array(
+            'ParentId' => 'folder70',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_MyTags',
+            'Caption' => array(
+                'en-US' => 'My Tags',
+                'vi-VN' => 'My Tags',
+            ),
+            'Model' => 'QdMyTags',
+            'DataPort' => 'mytags_port',
+            'PageList' => 'mytags_list'
+        ),
+        'mytags_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_MyTags_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdMyTags',
+            'DataPort' => 'mytags_port'
+        ),
         'setup_version' => array(
             'ParentId' => 'folder70',
             'Active' => true,
