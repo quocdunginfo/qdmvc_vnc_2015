@@ -32,6 +32,9 @@ class Qdmvc_Page_DgRequest extends Qdmvc_Page_Root
                     'keyword' => array(
                         'Order' => 20,
                     ),
+                    'tags' => array(
+                        'Order' => 22,
+                    ),
                     'description' => array(
                         'Order' => 25,
                     ),

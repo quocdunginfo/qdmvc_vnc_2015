@@ -14,6 +14,7 @@ class Qdmvc_Message
         'msg_insert_ok' => 'Thêm mới thành công, ID = %s',
         'msg_confirm' => 'Bạn có chắc ?',
         'msg_logout' => 'Đăng xuất',
+        'msg_confirm_deletion' => 'Xác nhận xóa',
 
         /*Layout card*/
         'btn_save' => 'Lưu',
@@ -30,6 +31,10 @@ class Qdmvc_Message
         'btn_showall' => 'Xem tất cả',
         'btn_active' => 'Kích hoạt',
         'btn_deactive' => 'Ngưng kích hoạt',
+        'btn_multiselection' => 'Bật chọn nhiều',
+        'btn_multiselection_guide' => 'Dùng kết hợp các phím Ctrl, Shift, Lên, Xuống: để chọn nhiều dòng',
+        'btn_singleselection' => 'Tắt chọn nhiều',
+        'btn_selectallrows' => 'Chọn tất cả',
         /*END Layout card*/
 
         /*Layout List*/
@@ -48,6 +53,7 @@ class Qdmvc_Message
         'msg_insert_ok' => 'Insert OK, ID = %s',
         'msg_confirm' => 'Are you sure ?',
         'msg_logout' => 'Logout',
+        'msg_confirm_deletion' => 'Confirm deletion',
 
         /*Layout card*/
         'btn_save' => 'Save',
@@ -64,6 +70,10 @@ class Qdmvc_Message
         'btn_showall' => 'Show All',
         'btn_active' => 'Active',
         'btn_deactive' => 'Deactive',
+        'btn_multiselection' => 'Turn on multi-select',
+        'btn_multiselection_guide' => 'Use Ctrl, Shift, Up, Down keys in combination to implement multi rows selection',
+        'btn_singleselection' => 'Turn off multi-select',
+        'btn_selectallrows' => 'Select all',
         /*END Layout card*/
 
         /*Layout List*/

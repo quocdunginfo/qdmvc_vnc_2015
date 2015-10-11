@@ -32,6 +32,9 @@ class Qdmvc_Page_DgInStock extends Qdmvc_Page_Root
                     'keyword' => array(
                         'Order' => 20,
                     ),
+                    'tags' => array(
+                        'Order' => 22,
+                    ),
                     'cat_id' => array(
                         'Order' => 25,
                     ),

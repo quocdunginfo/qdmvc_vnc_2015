@@ -15,6 +15,79 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         return $c->getPageListURL();
     }
 
+    protected function btnDeleteAction()
+    {
+        //Multi item deletion
+        ?>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    $("#qddelete").bind("click", function (event) {
+                        //get Grid
+                        var gridf = MYAPP.getGridFrame();
+                        var grid = gridf.MYAPP.getGrid();
+                        var msg_confirm = '<?=Qdmvc_Message::getMsg('msg_confirm_deletion')?>';
+
+                        if (gridf.MYAPP.isMultiSelection()) {
+                            var list_ids = gridf.MYAPP.getSelectedRowsId();
+                            if (!confirm(msg_confirm + " "+list_ids+" ?")) {
+                                return false;
+                            }
+                            //AJAX loader
+                            MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+
+                            if(list_ids.length > 0){
+                                $.post(MYAPP.data_port, {submit: "submit", action: "delete_multi", data: {id: list_ids}})
+                                    .done(function (data) {
+
+
+                                        //....
+                                        MYAPP.showMsg(data.msg);
+
+                                        <?=$this->OnDeleteOK()?>
+                                    })
+                                    .fail(function (data) {
+                                        console.log("FAIL:" + data);
+                                    })
+                                    .always(function () {
+                                        //release lock
+                                        MYAPP.ajax_loader.remove();
+                                    });
+                            }
+                        } else {
+                            var id_ = MYAPP.viewModel.id();
+                            if (!confirm(msg_confirm + " "+id_+"?")) {
+                                return false;
+                            }
+                            //AJAX loader
+                            MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+
+                            $.post(MYAPP.data_port, {submit: "submit", action: "delete", data: {id: id_}})
+                                .done(function (data) {
+                                    //data JSON
+                                    //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
+
+                                    //....
+                                    MYAPP.showMsg(data.msg);
+
+                                    <?=$this->OnDeleteOK()?>
+                                })
+                                .fail(function (data) {
+                                    console.log("FAIL:" + data);
+                                })
+                                .always(function () {
+                                    //release lock
+                                    MYAPP.ajax_loader.remove();
+                                });
+                        }
+                    });
+                })
+            })(jQuery);
+
+        </script>
+    <?php
+    }
+
     protected function internalGateway()
     {
         ?>
@@ -26,7 +99,10 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
                 } catch (error) {
                     console.log(error);
                 }
-            }
+            };
+            MYAPP.getGridFrame = function () {
+                return document.getElementById('list').contentWindow;
+            };
         </script>
         <?php
         parent::internalGateway();
@@ -78,7 +154,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         if(!MYAPP.formValidationError())
         {
-            MYAPP.updateGrid(true);
+        MYAPP.updateGrid(true);
         }
 
         <?php
@@ -90,7 +166,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         if(!MYAPP.formValidationError())
         {
-            MYAPP.updateGrid(false);
+        MYAPP.updateGrid(false);
         }
         <?php
         parent::onDeleteOK();
@@ -101,7 +177,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         ?>
         if(!MYAPP.formValidationError())
         {
-            MYAPP.updateGrid(true);
+        MYAPP.updateGrid(true);
         }
 
         <?php

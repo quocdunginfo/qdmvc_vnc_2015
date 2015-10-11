@@ -10,6 +10,9 @@ class QdDgInStock extends QdRoot
             'keyword' => array(
                 'ReadOnly' => true
             ),
+            'tags' => array(
+
+            ),
 
             'suggest_price' => array(
                 'DataType' => 'Decimal',
@@ -66,6 +69,7 @@ class QdDgInStock extends QdRoot
             $tmp->keyword = $this->keyword;
             $tmp->cat_id = $this->cat_id;
             $tmp->suggest_price = $this->price;
+            $tmp->tags = $this->tags;
             if($tmp->save()){
                 if($tmp->fn_release($location))
                     $this->pushValidateError('', 'Tạo yêu cầu thành công, ID='.$tmp->id, 'info');
@@ -73,5 +77,21 @@ class QdDgInStock extends QdRoot
         }else{
             $this->pushValidateError('', sprintf('Đã có sẵn yêu cầu (ID=%s) với keyword="%s" !', $tmp->id, $this->keyword), 'warning');
         }
+    }
+    public function fn_search($location, $params = array())
+    {
+        //split keyword by words
+        $words = explode(' ', $params['keyword']);
+        //search: like
+        foreach($words as $item){
+            $item = trim($item);
+            $tmp = new QdDgInStock();
+            $tmp->SETRANGE('tags', $item, static::$OP_CONTAINS);
+        }
+        $tmp = $tmp->FINDFIRST();
+        if($tmp!=null){
+            return array('rec_id' => $tmp->id);
+        }
+        return false;
     }
 }

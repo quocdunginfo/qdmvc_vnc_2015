@@ -40,7 +40,7 @@ class Qdmvc_View_Feedback_Card extends Qdmvc_Layout_CardNavigate
                         <h4 class="modal-title">Email compose</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form onsubmit="return false">
                             <div class="form-group">
                                 <label for="btn_composeemail_email">Email address</label>
                                 <input type="email" class="form-control" id="btn_composeemail_email">

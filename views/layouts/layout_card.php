@@ -582,7 +582,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         datafields: [
                             {name: '<?=$f_multivaluefield?>'}
                         ],
-                        url: '<?=$f_dataport?>'
+                        url: '<?=$f_dataport?>' + '&recordstartindex=0&recordendindex=9999&pagesize=9999'
                     };
 
                     var dataAdapter = new $.jqx.dataAdapter(source, {
@@ -598,11 +598,15 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         source: dataAdapter,
                         source: function (query, response) {
                             var item = query.split(/,\s*/).pop();
-                            if(item.trim().length < 1){
+
+                            if(item.trim() ==='*'){
+                                // update the search query.
+                                $("#ctl_<?=$f_name?>").jqxInput({query: ''});
+                            }
+                            else if(item.trim().length < 1){
                                 // update the search query.
                                 $("#ctl_<?=$f_name?>").jqxInput({query: new Date()});
-                            }
-                            else{
+                            } else {
                                 // update the search query.
                                 $("#ctl_<?=$f_name?>").jqxInput({query: item});
                             }
@@ -624,6 +628,21 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 });
             })(jQuery);
 
+        </script>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    $("#<?=static::$ctl_prefix.$f_name?>").hover(function () {
+                        var lv = $(this).val();
+                        if (lv != "") {
+                            var content = '<div style="max-width: 150px; max-height: 150px"/>' + lv + '</div>';
+                            var selector = $(this);
+                            selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.9});
+                            selector.jqxTooltip('open');
+                        }
+                    });
+                });
+            })(jQuery);
         </script>
     <?php
     }
@@ -731,7 +750,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         if (lv != "") {
                             var content = '<div style="max-width: 150px; max-height: 150px"/>' + lv + '</div>';
                             var selector = $(this);
-                            selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.8});
+                            selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.9});
                             selector.jqxTooltip('open');
                         }
                     });
@@ -1176,7 +1195,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
                             //card button event
                             $("#qdclone").bind("click", function (event) {
-                                if (!confirm("Xác nhận ?")) {
+                                if (!confirm("<?=Qdmvc_Message::getMsg('msg_confirm')?>")) {
                                     return false;
                                 }
 
@@ -1208,35 +1227,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                 location.reload();
                             });
 
-
-                            $("#qddelete").bind("click", function (event) {
-                                if (!confirm("Xác nhận ?")) {
-                                    return false;
-                                }
-                                //AJAX loader
-                                MYAPP.ajax_loader = new ajaxLoader("#cardForm");
-                                //begin lock
-                                var id_ = MYAPP.viewModel.id();
-                                console.log(id_);
-                                $.post(MYAPP.data_port, {submit: "submit", action: "delete", data: {id: id_}})
-                                    .done(function (data) {
-                                        //data JSON
-                                        //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
-
-                                        //....
-                                        MYAPP.showMsg(data.msg);
-
-                                        <?=$this->OnDeleteOK()?>
-                                    })
-                                    .fail(function (data) {
-                                        console.log("FAIL:" + data);
-                                    })
-                                    .always(function () {
-                                        //release lock
-                                        MYAPP.ajax_loader.remove();
-                                    });
-                            });
-
                             //prevent form enter key
                             $("#cardForm").keypress(function (e) {
                                 if (e.which == 13) { // Checks for the enter key
@@ -1255,6 +1245,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         });
                     })(jQuery);
                 </script>
+                <?=$this->btnDeleteAction()?>
                 <form style="width: 100%" id="cardForm" action=""
                       onsubmit="return false">
                     <div>
@@ -1269,6 +1260,44 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             </div>
         </div>
     <?php
+    }
+    protected function btnDeleteAction(){
+        ?>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    $("#qddelete").bind("click", function (event) {
+                        if (!confirm("Xác nhận ?")) {
+                            return false;
+                        }
+                        //AJAX loader
+                        MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+                        //begin lock
+                        var id_ = MYAPP.viewModel.id();
+                        console.log(id_);
+                        $.post(MYAPP.data_port, {submit: "submit", action: "delete", data: {id: id_}})
+                            .done(function (data) {
+                                //data JSON
+                                //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
+
+                                //....
+                                MYAPP.showMsg(data.msg);
+
+                                <?=$this->OnDeleteOK()?>
+                            })
+                            .fail(function (data) {
+                                console.log("FAIL:" + data);
+                            })
+                            .always(function () {
+                                //release lock
+                                MYAPP.ajax_loader.remove();
+                            });
+                    });
+                })
+            })(jQuery);
+
+        </script>
+        <?php
     }
 
     protected function onSaveOK()
@@ -1509,7 +1538,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     var json = MYAPP.getObj();//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                     //begin lock
 
-                    console.log(json);
                     var postdata = {submit: "submit", action: '', function: fn_name, data: json, params: params};
                     console.log(postdata);
                     $.post(MYAPP.data_port, postdata)
@@ -1517,9 +1545,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                             //data JSON
                             console.log(data);
                             //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
-
-
-                            console.log(data.rows[0]);
 
                             MYAPP.clearFormValidationMark();
                             MYAPP.setObj(data.rows[0]);

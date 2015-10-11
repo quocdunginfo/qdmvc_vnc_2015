@@ -57,7 +57,9 @@ class Qdmvc_Dataport
             if ($this->function != '') {
                 $this->call_fn($this->function);
             } else if ($this->action == 'delete') {
-                $this->delete();
+                $this->delete($this->data['id']);
+            } else if ($this->action == 'delete_multi') {
+                $this->delete_multi($this->data['id']);
             } else if ($this->action == 'update') {
                 $this->update();
             } else if ($this->action == 'insert') {
@@ -254,7 +256,7 @@ class Qdmvc_Dataport
         return true;
     }
 
-    protected function delete()
+    protected function delete($id)
     {
         $this->working_mode = 'delete_fail';
         if (!static::canDelete()) {
@@ -262,9 +264,9 @@ class Qdmvc_Dataport
             return;
         }
         $c = static::$model;
-        $this->obj = $c::GET($this->data['id']);
+        $this->obj = $c::GET($id);
         if ($this->obj == null) {
-            $this->pushMsg('Record does not existed for delete', 'error');
+            $this->pushMsg('Record does not existed for delete, ID='.$id, 'error');
             return;
         }
         $class_name = $this->getCalledClassName();
@@ -279,6 +281,12 @@ class Qdmvc_Dataport
         } else {
             $this->pushMsg($this->obj->GETVALIDATION());
             return false;
+        }
+    }
+    protected function delete_multi($ids)
+    {
+        foreach($ids as $id){
+            $this->delete($id);
         }
     }
 
