@@ -41,6 +41,9 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
                     'type2' => array(
                         'Order' => 35,
                     ),
+                    'price_range_type' => array(
+                        'Order' => 37,
+                    ),
                     'level' => array(
                         'Order' => 40,
                     ),

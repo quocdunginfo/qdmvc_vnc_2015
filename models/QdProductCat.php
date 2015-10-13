@@ -9,6 +9,11 @@ class QdProductCat extends QdRoot
     public static $PROPERTY_G3 = 'PG3';
     public static $TYPE3_DCN = 'DCN';
     public static $TYPE3_XE = 'XE';
+    public static $PRICE_RANGE_1 = 'PR1';
+    public static $PRICE_RANGE_2 = 'PR2';
+    public static $PRICE_RANGE_3 = 'PR3';
+    public static $PRICE_RANGE_4 = 'PR4';
+
 
     /*
     static $has_many = array(
@@ -19,6 +24,7 @@ class QdProductCat extends QdRoot
         $obj = new QdProductCat();
         $obj->type = static::$TYPE_PRODUCTCAT;
         $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
+        $obj->price_range_type=static::$PRICE_RANGE_1;
         $obj->active = true;
         return $obj;
     }
@@ -145,6 +151,25 @@ class QdProductCat extends QdRoot
                     static::$TYPE3_XE => array(
                         'Caption' => array('en-US' => 'Xe', 'vi-VN' => 'Xe'),
                     )
+                )
+            ),
+            'price_range_type' => array(
+                'Caption' => array('en-US' => 'Property Group', 'vi-VN' => 'Nhóm thuộc tính'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    static::$PRICE_RANGE_1 => array(
+                        'Caption' => array('en-US' => 'Price range 1', 'vi-VN' => 'Mức giá 1'),
+                    ),
+                    static::$PRICE_RANGE_2 => array(
+                        'Caption' => array('en-US' => 'Price range 2', 'vi-VN' => 'Mức giá 2'),
+                    ),
+                    static::$PRICE_RANGE_3 => array(
+                        'Caption' => array('en-US' => 'Price range 3', 'vi-VN' => 'Mức giá 3'),
+                    ),
+                    static::$PRICE_RANGE_4 => array(
+                        'Caption' => array('en-US' => 'Price range 4', 'vi-VN' => 'Mức giá 4'),
+                    ),
+
                 )
             ),
             'property_grp_type' => array(
@@ -317,6 +342,42 @@ class QdProductCat extends QdRoot
         }
 
         return parent::CALCFIELDS($flowfield_name);
+    }
+    public static function getPriceRanges($range_id){
+        switch($range_id){
+            case static::$PRICE_RANGE_1:
+                return array(
+                    array(
+                        0,10000000
+                    ),
+                    array(
+                        10000000,20000000
+                    ),
+                    array(
+                        20000000,-1
+                    ),
+                );
+                break;
+            case static::$PRICE_RANGE_2:
+                return array(
+                    array(
+                        20000000,50000000
+                    ),
+                    array(
+                        50000000,100000000
+                    ),
+                    array(
+                        100000000,-1
+                    ),
+                );
+                break;
+            case static::$PRICE_RANGE_3:
+
+                break;
+            default:
+
+                break;
+        }
     }
 
 }

@@ -235,6 +235,9 @@ class QdProduct extends QdRoot
             'type3' => array(
 
             ),
+            'price_range_type' => array(
+
+            ),
             'noseries' => array(),
             '_permalink' => array(
                 'Name' => '_permalink',
@@ -442,6 +445,7 @@ class QdProduct extends QdRoot
             //validate other mark field
             $this->property_grp_type = $pc->property_grp_type;
             $this->type3 = $pc->type3;
+            $this->price_range_type = $pc->price_range_type;
         }
     }
 
