@@ -19,12 +19,6 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
         return 'product_cat_card';
     }
 
-    public function getPagePartURL($part_name = '')
-    {
-        return '';
-        //return "http://localhost/mpd_2015/wp-admin/admin.php?page=product_card&qdrole=navigate&filterdatafield0=product_cat_id&filtervalue0=95";//quocdunginfo
-    }
-
     protected static function initFields()
     {
         return array(
@@ -35,12 +29,17 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
                         'Order' => 10,
                         'ReadOnly' => true
                     ),
-
                     'type' => array(
                         'Order' => 20,
                     ),
+                    'property_grp_type' => array(
+                        'Order' => 25
+                    ),
+                    'type3' => array(
+                        'Order' => 30
+                    ),
                     'type2' => array(
-                        'Order' => 30,
+                        'Order' => 35,
                     ),
                     'level' => array(
                         'Order' => 40,
@@ -62,7 +61,7 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
                     ),
                     'active' => array(
                         'Order' => 100,
-                    )
+                    ),
                 )
             ),
 

@@ -15,6 +15,104 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         return $c->getPageListURL();
     }
 
+    protected function callFnAction()
+    {
+        ?>
+        <script>
+            MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
+                (function ($) {
+                    //get Grid
+                    var gridf = MYAPP.getGridFrame();
+                    var grid = gridf.MYAPP.getGrid();
+                    var msg_confirm = '<?=Qdmvc_Message::getMsg('msg_confirm_callfn')?>';
+
+                    if (gridf.MYAPP.isMultiSelection()) {
+                        var list_ids = gridf.MYAPP.getSelectedRowsId();
+                        if (!confirm(msg_confirm + " "+list_ids+" ?")) {
+                            return false;
+                        }
+                        //AJAX progress Bar
+                        MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+
+                        var postdata = {submit: "submit", action: 'call_fn_multi', function: fn_name, data: {id: list_ids}, params: params};
+                        console.log(postdata);
+                        $.post(MYAPP.data_port, postdata)
+                            .done(function (data) {
+                                //data JSON
+                                console.log(data);
+                                //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
+
+                                MYAPP.clearFormValidationMark();
+                                MYAPP.setObj(data.rows[0]);
+
+                                MYAPP.formValidation = data.msg;
+                                MYAPP.showMsg(data.msg);//must be called after setObj(...)
+
+                                <?=$this->onCallFnOK()?>
+                                if (on_done_fn != undefined) {
+                                    on_done_fn(data);
+                                }
+                            })
+                            .fail(function (data) {
+                                console.log(data);
+                                if (on_fail_fn != undefined) {
+                                    on_fail_fn(data);
+                                }
+                            })
+                            .always(function (data) {
+                                //release lock
+                                MYAPP.ajax_loader.remove();
+                                if (on_final_fn != undefined) {
+                                    on_final_fn(data);
+                                }
+                            });
+                    }else{
+                        //build data
+                        var id_ = MYAPP.viewModel.id();
+                        //begin lock
+                        MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+
+                        var postdata = {submit: "submit", action: 'call_fn', function: fn_name, data: {id: id_}, params: params};
+                        console.log(postdata);
+                        $.post(MYAPP.data_port, postdata)
+                            .done(function (data) {
+                                //data JSON
+                                console.log(data);
+                                //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
+
+                                MYAPP.clearFormValidationMark();
+                                MYAPP.setObj(data.rows[0]);
+
+                                MYAPP.formValidation = data.msg;
+                                MYAPP.showMsg(data.msg);//must be called after setObj(...)
+
+                                <?=$this->onCallFnOK()?>
+                                if (on_done_fn != undefined) {
+                                    on_done_fn(data);
+                                }
+                            })
+                            .fail(function (data) {
+                                console.log(data);
+                                if (on_fail_fn != undefined) {
+                                    on_fail_fn(data);
+                                }
+                            })
+                            .always(function (data) {
+                                //release lock
+                                MYAPP.ajax_loader.remove();
+                                if (on_final_fn != undefined) {
+                                    on_final_fn(data);
+                                }
+                            });
+                    }
+
+                })(jQuery);
+            }
+        </script>
+        <?php
+    }
+
+
     protected function btnDeleteAction()
     {
         //Multi item deletion

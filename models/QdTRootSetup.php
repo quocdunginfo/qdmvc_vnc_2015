@@ -155,6 +155,18 @@ class QdTRootSetup extends QdRootSetup
                     )
                 )
             ),
+            'latest_product_label' => array(
+                'Caption' => array('en-US' => 'Latest Product Label', 'vi-VN' => 'SP Mới nhất Label'),
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Label cho mục \'SP mới nhất\' ở trang chủ'
+                ),
+            ),
+            'latest_product_segment' => array(
+                'Caption' => array('en-US' => 'Latest Product Segment', 'vi-VN' => 'SL SP Mới nhất'),
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình số lượng SP cần hiển thị cho mục \'SP mới nhất\' ở trang chủ'
+                ),
+            ),
 
         ));
     }

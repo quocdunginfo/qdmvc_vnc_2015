@@ -5,6 +5,10 @@ class QdProductCat extends QdRoot
     static $table_name = 'mpd_product_cat';
     public static $TYPE_PRODUCTCAT = 0;
     public static $TYPE_MANUFACTOR = 215;
+    public static $PROPERTY_G2 = 'PG2';
+    public static $PROPERTY_G3 = 'PG3';
+    public static $TYPE3_DCN = 'DCN';
+    public static $TYPE3_XE = 'XE';
 
     /*
     static $has_many = array(
@@ -128,6 +132,30 @@ class QdProductCat extends QdRoot
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),
+                    ),
+                )
+            ),
+            'type3' => array(
+                'Caption' => array('en-US' => 'Type 3', 'vi-VN' => 'Type 3'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    static::$TYPE3_DCN => array(
+                        'Caption' => array('en-US' => 'Đồ công nghệ', 'vi-VN' => 'Đồ công nghệ'),
+                    ),
+                    static::$TYPE3_XE => array(
+                        'Caption' => array('en-US' => 'Xe', 'vi-VN' => 'Xe'),
+                    )
+                )
+            ),
+            'property_grp_type' => array(
+                'Caption' => array('en-US' => 'Property Group', 'vi-VN' => 'Nhóm thuộc tính'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    static::$PROPERTY_G2 => array(
+                        'Caption' => array('en-US' => '2 properties', 'vi-VN' => '2 thuộc tính'),
+                    ),
+                    static::$PROPERTY_G3 => array(
+                        'Caption' => array('en-US' => '3 properties', 'vi-VN' => '3 thuộc tính'),
                     ),
                 )
             ),

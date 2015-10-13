@@ -54,8 +54,12 @@ class Qdmvc_Dataport
         if ($this->for_card) {
             $this->loadPostValue();
             //call service fn
-            if ($this->function != '') {
-                $this->call_fn($this->function);
+            if ($this->action=='call_fn') {
+                if($this->function != '')
+                    $this->call_fn($this->data['id'], $this->function);
+            }if ($this->action=='call_fn_multi') {
+                if($this->function != '')
+                    $this->call_fn_multi($this->data['id'], $this->function);
             } else if ($this->action == 'delete') {
                 $this->delete($this->data['id']);
             } else if ($this->action == 'delete_multi') {
@@ -70,14 +74,18 @@ class Qdmvc_Dataport
             $this->list_return();
         }
     }
-
-    protected function call_fn($function)
+    protected function call_fn_multi($ids, $function){
+        foreach($ids as $id){
+            $this->call_fn($id, $function);
+        }
+    }
+    protected function call_fn($id, $function)
     {
         $c = static::$model;
-        $this->obj = $c::GET($this->data["id"]);
+        $this->obj = $c::GET($id);
         if ($this->obj != null) {
             $this->beforeCallFnAssign();
-            $this->assign();
+            //$this->assign();//call Fn do not auto save because of multi-objs
         } else {
             $this->obj = new $c();
         }
@@ -94,7 +102,7 @@ class Qdmvc_Dataport
             }
             $this->pushMsg($this->obj->GETVALIDATION());
         } else {
-            $this->pushMsg("Function  \"{$function}\" not exists", 'error');
+            $this->pushMsg("Function \"{$function}\" not exists", 'error');
         }
     }
 

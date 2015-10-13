@@ -28,6 +28,14 @@ if (!class_exists('qd_Custom_Nav')) {
                 'side',
                 'low'
             );
+            add_meta_box(
+                'wl_login_nav_link_4',
+                __('Qdmvc Product Cat Struct Lv1'),
+                array($this, 'nav_menu_link_4'),
+                'nav-menus',
+                'side',
+                'low'
+            );
         }
 
         public function nav_menu_link()
@@ -91,6 +99,23 @@ if (!class_exists('qd_Custom_Nav')) {
                 array_push($re, $tmp_obj);
             }
             $this->genItemsNav(3, $re);
+        }
+        public function nav_menu_link_4()
+        {
+            $re = array();
+            $options = QdProductCat::getFieldOptions('type3', Qdmvc_Config::getLanguage());
+            array_push($re, array(
+                'title' => $options[QdProductCat::$TYPE3_DCN],
+                'url' => get_site_url(null, 'do-cong-nghe.html'),
+                'id' => QdProductCat::$TYPE3_DCN
+            ));
+            array_push($re, array(
+                'title' => $options[QdProductCat::$TYPE3_XE],
+                'url' => get_site_url(null, 'xe.html'),
+                'id' => QdProductCat::$TYPE3_XE
+            ));
+
+            $this->genItemsNav(4, $re);
         }
 
         public function genItemsNav($id, $list_obj)

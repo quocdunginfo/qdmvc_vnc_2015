@@ -15,6 +15,7 @@ class Qdmvc_Message
         'msg_confirm' => 'Bạn có chắc ?',
         'msg_logout' => 'Đăng xuất',
         'msg_confirm_deletion' => 'Xác nhận xóa',
+        'msg_confirm_callfn' => 'Xác nhận thực thi cho',
 
         /*Layout card*/
         'btn_save' => 'Lưu',
@@ -54,6 +55,7 @@ class Qdmvc_Message
         'msg_confirm' => 'Are you sure ?',
         'msg_logout' => 'Logout',
         'msg_confirm_deletion' => 'Confirm deletion',
+        'msg_confirm_callfn' => 'Confirm execution for',
 
         /*Layout card*/
         'btn_save' => 'Save',

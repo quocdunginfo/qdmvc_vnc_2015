@@ -1522,23 +1522,20 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     {
         return array();
     }
-
-    private function render_serverFunctions()
-    {
-        if (count($this->serverFunctions()) <= 0) {
-            return;
-        }
+    protected function callFnAction(){
         ?>
         <script>
             MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
                 (function ($) {
                     //AJAX progress Bar
                     MYAPP.ajax_loader = new ajaxLoader("#cardForm");
+
+
                     //build data
                     var json = MYAPP.getObj();//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                     //begin lock
 
-                    var postdata = {submit: "submit", action: '', function: fn_name, data: json, params: params};
+                    var postdata = {submit: "submit", action: 'call_fn', function: fn_name, data: json, params: params};
                     console.log(postdata);
                     $.post(MYAPP.data_port, postdata)
                         .done(function (data) {
@@ -1573,6 +1570,15 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 })(jQuery);
             }
         </script>
+        <?php
+    }
+    private function render_serverFunctions()
+    {
+        if (count($this->serverFunctions()) <= 0) {
+            return;
+        }
+        ?>
+        <?=$this->callFnAction()?>
         <!-- Single button -->
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"

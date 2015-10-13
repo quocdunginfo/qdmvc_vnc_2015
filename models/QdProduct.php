@@ -232,11 +232,28 @@ class QdProduct extends QdRoot
                     ),
                 )
             ),
+            'type3' => array(
+
+            ),
             'noseries' => array(),
             '_permalink' => array(
                 'Name' => '_permalink',
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
+            ),
+            'property_grp_type' => array(
+                /*'Caption' => array('en-US' => 'Property Group', 'vi-VN' => 'Nhóm thuộc tính'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    QdProductCat::$PROPERTY_G2 => array(
+                        'Caption' => array('en-US' => '2 properties', 'vi-VN' => '2 thuộc tính'),
+                    ),
+                    QdProductCat::$PROPERTY_G3 => array(
+                        'Caption' => array('en-US' => '3 properties', 'vi-VN' => '3 thuộc tính'),
+                    ),
+                ),
+                'ReadOnly' => true
+                */
             ),
         ));
         $obj['id']['Description'] = array(
@@ -421,6 +438,10 @@ class QdProduct extends QdRoot
                     $this->{$struct_lv} = $pc3->id;
                 }
             }
+
+            //validate other mark field
+            $this->property_grp_type = $pc->property_grp_type;
+            $this->type3 = $pc->type3;
         }
     }
 

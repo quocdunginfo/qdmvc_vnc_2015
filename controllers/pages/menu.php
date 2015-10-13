@@ -50,6 +50,108 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdProduct',
             'DataPort' => 'product_port'
         ),
+        /*
+        'product_pg2' => array(
+            'ParentId' => 'folder10',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_Product_PG2_Card',
+            'Caption' => array(
+                'en-US' => 'Product (PG2)',
+                'vi-VN' => 'Sản phẩm (PG2)',
+            ),
+            'Model' => 'QdProductPG2',
+            'DataPort' => 'product_pg2_port',
+            'PageList' => 'product_pg2_list'
+        ),
+        'product_pg2_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_Product_PG2_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdProductPG2',
+            'DataPort' => 'product_pg2_port'
+        ),
+        */
+        'product_pg2_dcn' => array(
+            'ParentId' => 'folder10',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_Product_PG2_DCN_Card',
+            'Caption' => array(
+                'en-US' => 'SP Đồ công nghệ (PG2)',
+                'vi-VN' => 'SP Đồ công nghệ (PG2)',
+            ),
+            'Model' => 'QdProductPG2DCN',
+            'DataPort' => 'product_pg2_dcn_port',
+            'PageList' => 'product_pg2_dcn_list'
+        ),
+        'product_pg2_dcn_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_Product_PG2_DCN_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdProductPG2DCN',
+            'DataPort' => 'product_pg2_dcn_port'
+        ),
+        'product_pg2_xe' => array(
+            'ParentId' => 'folder10',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_Product_PG2_XE_Card',
+            'Caption' => array(
+                'en-US' => 'SP Xe (PG2)',
+                'vi-VN' => 'SP Xe (PG2)',
+            ),
+            'Model' => 'QdProductPG2XE',
+            'DataPort' => 'product_pg2_xe_port',
+            'PageList' => 'product_pg2_xe_list'
+        ),
+        'product_pg2_xe_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_Product_PG2_XE_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdProductPG2XE',
+            'DataPort' => 'product_pg2_xe_port'
+        ),
+        'product_pg3' => array(
+            'ParentId' => 'folder10',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_Product_PG3_Card',
+            'Caption' => array(
+                'en-US' => 'Product (PG3)',
+                'vi-VN' => 'Sản phẩm (PG3)',
+            ),
+            'Model' => 'QdProductPG3',
+            'DataPort' => 'product_pg3_port',
+            'PageList' => 'product_pg3_list'
+        ),
+        'product_pg3_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_Product_PG3_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdProductPG3',
+            'DataPort' => 'product_pg3_port'
+        ),
         'product_df' => array(
             'ParentId' => 'folder10',
             'Active' => true,
@@ -150,6 +252,109 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdProductCat',
             'DataPort' => 'product_cat_port'
         ),
+        'product_cat_pg2_dcn_card' => array(
+            'ParentId' => 'folder20',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductCat_PG2_DCN_Card',
+            'Caption' => array(
+                'en-US' => 'LSP Đồ công nghệ (PG2)',
+                'vi-VN' => 'LSP Đồ công nghệ (PG2)',
+            ),
+            'Model' => 'QdProductCatPG2DCN',
+            'DataPort' => 'product_cat_pg2_dcn_port',
+            'PageList' => 'product_cat_pg2_dcn_list'
+        ),
+        'product_cat_pg2_dcn_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductCat_PG2_DCN_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdProductCatPG2DCN',
+            'DataPort' => 'product_cat_pg2_dcn_port'
+        ),
+        'product_cat_pg2_xe_card' => array(
+            'ParentId' => 'folder20',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductCat_PG2_XE_Card',
+            'Caption' => array(
+                'en-US' => 'LSP Xe (PG2)',
+                'vi-VN' => 'LSP Xe (PG2)',
+            ),
+            'Model' => 'QdProductCatPG2XE',
+            'DataPort' => 'product_cat_pg2_xe_port',
+            'PageList' => 'product_cat_pg2_xe_list'
+        ),
+        'product_cat_pg2_xe_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductCat_PG2_XE_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdProductCatPG2XE',
+            'DataPort' => 'product_cat_pg2_xe_port'
+        ),
+        /*
+        'product_cat_pg2_card' => array(
+            'ParentId' => 'folder20',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductCat_PG2_Card',
+            'Caption' => array(
+                'en-US' => 'Product Category (PG2)',
+                'vi-VN' => 'Loại sản phẩm (PG2)',
+            ),
+            'Model' => 'QdProductCatPG2',
+            'DataPort' => 'product_cat_pg2_port',
+            'PageList' => 'product_cat_pg2_list'
+        ),
+        'product_cat_pg2_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductCat_PG2_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdProductCatPG2',
+            'DataPort' => 'product_cat_pg2_port'
+        ),
+        */
+        'product_cat_pg3_card' => array(
+            'ParentId' => 'folder20',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductCat_PG3_Card',
+            'Caption' => array(
+                'en-US' => 'Product Category (PG3)',
+                'vi-VN' => 'Loại sản phẩm (PG3)',
+            ),
+            'Model' => 'QdProductCatPG3',
+            'DataPort' => 'product_cat_pg3_port',
+            'PageList' => 'product_cat_pg3_list'
+        ),
+        'product_cat_pg3_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductCat_PG3_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdProductCatPG3',
+            'DataPort' => 'product_cat_pg3_port'
+        ),
+        
         'product_cat_df' => array(
             'ParentId' => 'folder20',
             'Active' => true,

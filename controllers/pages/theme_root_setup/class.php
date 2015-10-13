@@ -74,6 +74,22 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     ),
                 )
             ),
+            'Ta102' => array(
+                'Type' => 'Group',
+                'Order' => 25,
+                'Name' => array(
+                    'vi-VN' => 'SP mới nhất',
+                    'en-US' => 'Latest product'
+                ),
+                'Fields' => array(
+                    'latest_product_label' => array(
+                        'Order' => 100
+                    ),
+                    'latest_product_segment' => array(
+                        'Order' => 200
+                    ),
+                )
+            ),
             'Tab3' => array(
                 'Type' => 'Group',
                 'Order' => 30,
