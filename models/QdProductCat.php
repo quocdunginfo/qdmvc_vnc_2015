@@ -380,4 +380,20 @@ class QdProductCat extends QdRoot
         }
     }
 
+    public function GETRTABLES()
+    {
+        return array(
+            'QdProduct' => array(
+                'product_cat_id'
+            )
+        );
+    }
+
+    protected function TABLECAPTION()
+    {
+        return array(
+            'vi-VN' => 'Loại SP',
+            'en-US' => 'Product Cat'
+        );
+    }
 }

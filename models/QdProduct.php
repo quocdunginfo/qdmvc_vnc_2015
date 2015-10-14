@@ -578,5 +578,12 @@ class QdProduct extends QdRoot
         }
         return $obj;
     }
+    protected function TABLECAPTION()
+    {
+        return array(
+            'vi-VN' => 'Sản phẩm',
+            'en-US' => 'Product'
+        );
+    }
 
 }

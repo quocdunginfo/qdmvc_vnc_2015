@@ -201,6 +201,23 @@ class QdRoot extends ActiveRecord\Model
         }
 
     }
+    protected function TABLECAPTION(){
+        return array(
+            //'vi-VN' => 'QdRoot',
+            //'en-US' => 'QdRoot'
+        );
+    }
+    public function GETTABLECAPTION($lang=''){
+        if($lang===''){
+            $lang = Qdmvc_Config::getLanguage();
+        }
+        $tmp = static::TABLECAPTION();
+        if(isset($tmp[$lang])){
+            return $tmp[$lang];
+        }else{
+            return $this->getCalledClassName();
+        }
+    }
 
     public static function getTableRelation($field_name)
     {
@@ -235,7 +252,7 @@ class QdRoot extends ActiveRecord\Model
         return $this->SETFILTER($filter);
     }
 
-    public function delete($location = '')
+    public function delete($location = '', $validate=true)
     {
         if (!$this->checkPermission(__FUNCTION__)) return false;
 
@@ -246,9 +263,30 @@ class QdRoot extends ActiveRecord\Model
             //write log
             $this->writeLog($action, $location);//quocdunginfo
         }
-
-        $re = parent::delete();
-        return $re;
+        $is_fail = false;
+        if($validate){
+            $tmp = $this->GETRTABLES();
+            $msg = Qdmvc_Message::getMsg('msg_fk_constrain');
+            foreach($tmp as $_model => $_fields){
+                $c = new $_model();
+                foreach($_fields as $field) {
+                    $c->SETRANGE($field, $this->id);
+                    if($c->COUNTLIST() > 0){
+                        $c2 = $c->GETLIST();
+                        foreach($c2 as $item){
+                            $this->pushValidateError('', sprintf($msg, $this->GETTABLECAPTION(), $this->id, $c->GETTABLECAPTION(), $item->id), 'error');
+                            $is_fail = true;
+                        }
+                    }
+                }
+            }
+        }
+        if(!$is_fail) {
+            $re = parent::delete();
+            return $re;
+        }else{
+            return false;
+        }
     }
 
     public function REMOVEFILTERDEFAULT()
@@ -1017,5 +1055,8 @@ class QdRoot extends ActiveRecord\Model
         $tmp->SETRANGE('model', $this->getCalledClassName());
         $tmp->SETRANGE('model_id', $this->id);
         return $tmp->GETLIST();
+    }
+    public function GETRTABLES(){
+        return array();
     }
 }

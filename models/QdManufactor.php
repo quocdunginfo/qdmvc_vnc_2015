@@ -78,4 +78,24 @@ class QdManufactor extends QdProductCat
         $query .= sprintf('/loaisp/%s/%s', $this->id, Qdmvc_Helper::sanitize_title_with_dashes($this->name));
         return $query;*/
     }
+
+    public function GETRTABLES()
+    {
+        return array(
+            'QdProduct' =>array(
+                'manufacturer_id'
+            )
+        );
+    }
+
+    protected function TABLECAPTION()
+    {
+        return array(
+            'vi-VN' => 'Hãng SX',
+            'en-US' => 'Manufacturer'
+        );
+    }
+    
+
+
 }

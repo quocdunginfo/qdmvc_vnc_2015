@@ -16,6 +16,7 @@ class Qdmvc_Message
         'msg_logout' => 'Đăng xuất',
         'msg_confirm_deletion' => 'Xác nhận xóa',
         'msg_confirm_callfn' => 'Xác nhận thực thi cho',
+        'msg_fk_constrain' => '%s mã %s đã được gán cho %s mã %s',
 
         /*Layout card*/
         'btn_save' => 'Lưu',
@@ -56,6 +57,7 @@ class Qdmvc_Message
         'msg_logout' => 'Logout',
         'msg_confirm_deletion' => 'Confirm deletion',
         'msg_confirm_callfn' => 'Confirm execution for',
+        'msg_fk_constrain' => '%s with ID %s was assigned to %s with ID %s',
 
         /*Layout card*/
         'btn_save' => 'Save',
