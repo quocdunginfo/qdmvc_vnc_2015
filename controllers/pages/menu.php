@@ -578,6 +578,18 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdTRootSetup',
             'DataPort' => 'theme/root_setup_port'
         ),
+        'theme_root_setup_mobile' => array(
+            'ParentId' => 'theme_root_setup',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_TRootSetupMobile',
+            'Caption' => array(
+                'en-US' => 'Theme Root Setup (Mobile)',
+                'vi-VN' => 'Theme Root Setup (Mobile)',
+            ),
+            'Model' => 'QdTRootSetupMobile',
+            'DataPort' => 'theme/root_setup_mobile_port'
+        ),
         'user_personalization' => array(
             'ParentId' => 'folder50',
             'Active' => true,

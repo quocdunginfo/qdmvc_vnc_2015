@@ -13,6 +13,7 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
     function __construct($page)
     {
         parent::__construct($page);
+        // Moved to qdmvc because of files caches
         //jquery ui
         QdJqwidgets::loadSinglePluginJS('jquery-ui/jquery-ui.js');
         QdJqwidgets::loadSinglePluginCSS('jquery-ui/jquery-ui.css');
@@ -22,7 +23,6 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
         QdJqwidgets::loadSinglePluginCSS('fancytree/ui.fancytree.css');
         //underscore
         QdJqwidgets::loadSinglePluginJS('underscore-min.js');
-
 
     }
     public function render2(){

@@ -39,9 +39,6 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_RootSetup
                     'df_pro_avatar' => array(
                         'Order' => 40,
                     ),
-                    'bigsalecat_id' => array(
-                        'Order' => 50,
-                    ),
                     /*
                     'product_noseries' => array(
 

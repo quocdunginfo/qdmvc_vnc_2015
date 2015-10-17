@@ -1059,4 +1059,16 @@ class QdRoot extends ActiveRecord\Model
     public function GETRTABLES(){
         return array();
     }
+    public function getMediaUrl($field, $size='full', $icon=false){
+        //split to get id
+        $arr = explode('?id=', $this->{$field});
+        if(isset($arr[1]))
+        {
+            $tmp = wp_get_attachment_image_src($arr[1], $size, $icon);
+            if(is_array($tmp)){
+                return $tmp[0];
+            }
+        }
+        return $this->{$field};
+    }
 }

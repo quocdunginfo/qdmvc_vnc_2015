@@ -10,24 +10,55 @@ class QdTRootSetup extends QdRootSetup
             'topleft_tuvan' => array(
                 'DataType' => 'WYSIWYG',
             ),
-            'seo_description_struct' => array(),
-            'seo_title_struct' => array(),
-            'seo_title_struct_2' => array(),
-            'seo_keywords_struct' => array(),
+            'seo_description_struct' => array(
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Template cho mô tả trang Web'
+                ),
+            ),
+            'seo_title_struct' => array(
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang Web - Template 1'
+                ),
+            ),
+            'seo_title_struct_2' => array(
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang Web - Template 2'
+                ),
+            ),
+            'seo_keywords_struct' => array(
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Keywork cho trang Web'
+                ),
+            ),
             'topcenter_promotion' => array(
                 'DataType' => 'WYSIWYG',
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình dòng chữ góc trên bên trái của Theme'
+                ),
             ),
             'topright_navs' => array(
                 'DataType' => 'WYSIWYG',
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình dòng chữ góc trên bên phải của Theme'
+                ),
             ),
             'bottomleft_footer_note' => array(
                 'DataType' => 'WYSIWYG',
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình dòng chữ giới thiệu cho Footer (góc dưới bên trái)'
+                ),
             ),
             'vnc_logo' => array(
                 'DataType' => 'Image',
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Logo chính giữa của Theme'
+                ),
             ),
             'commercial_logo' => array(
                 'DataType' => 'Image',
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Logo đã đăng ký với Bộ công thương (góc dưới bên phải) - dòng Footer note'
+                ),
             ),
             'banner_service_page' => array(
                 'Name' => 'banner_service_page',
@@ -166,6 +197,32 @@ class QdTRootSetup extends QdRootSetup
                 'Description' => array(
                     'vi-VN' => 'Cấu hình số lượng SP cần hiển thị cho mục \'SP mới nhất\' ở trang chủ'
                 ),
+            ),
+            'bigsalecat_id' => array(
+                'Name' => 'bigsalecat_id',
+                'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Big Sale'),
+                'DataType' => 'Code',
+                'Numeric' => true,
+                'Description' => '',
+                'Editable' => true,
+                'InitValue' => '0',
+                'FieldClass' => 'Normal',//'FlowField'
+                'TableRelation' => array(
+                    'Table' => 'QdProductCat',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'type',
+                            'Type' => 'FIELD',
+                            'Value' => QdBigSaleCat::$TYPE_BIGSALE
+                        )
+                    )
+                )
             ),
 
         ));

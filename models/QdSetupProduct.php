@@ -19,32 +19,6 @@ class QdSetupProduct extends QdRootSetup
                 'Caption' => array('en-US' => 'DF Product Desc Tpl', 'vi-VN' => 'DF Product Desc Tpl'),
                 'DataType' => 'WYSIWYG'
             ),
-            'bigsalecat_id' => array(
-                'Name' => 'bigsalecat_id',
-                'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Big Sale'),
-                'DataType' => 'Code',
-                'Numeric' => true,
-                'Description' => '',
-                'Editable' => true,
-                'InitValue' => '0',
-                'FieldClass' => 'Normal',//'FlowField'
-                'TableRelation' => array(
-                    'Table' => 'QdProductCat',
-                    'Field' => 'id',
-                    'TableFilter' => array(
-                        array(
-                            'Condition' => array(
-                                'Field' => '',
-                                'Type' => 'CONST',//'FIELD'
-                                'Value' => ''
-                            ),
-                            'Field' => 'type',
-                            'Type' => 'FIELD',
-                            'Value' => QdBigSaleCat::$TYPE_BIGSALE
-                        )
-                    )
-                )
-            ),
             /*
             'product_noseries' => array(
                 'Name' => 'product_noseries',

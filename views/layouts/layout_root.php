@@ -119,6 +119,7 @@ class Qdmvc_Layout_Root
             };
         </script>
     <?php
+        $this->WP_Media_Selector();//need to move out of files cache
     }
 
     protected function onReadyHook()
@@ -137,5 +138,45 @@ class Qdmvc_Layout_Root
             })(jQuery);
         </script>
     <?php
+    }
+    protected function WP_Media_Selector(){
+        wp_enqueue_media();//moved to qdmvc.php, using cache files
+        ?>
+        <script>
+            MYAPP.MediaSelector = {};
+            MYAPP.MediaSelector.open = function(btnID, txtID, getID){
+                if(getID==undefined){
+                    getID = false;
+                }
+                MYAPP.MediaSelector.globalBtnID = btnID;
+                MYAPP.MediaSelector.globalTxtID = txtID;
+                MYAPP.MediaSelector.globalGetID = getID;
+                MYAPP.MediaSelector.globalFrame.open();
+            };
+            (function ($) {
+                $(document).ready(function () {
+                    // Create the media frame.
+                    MYAPP.MediaSelector.globalFrame = wp.media.frames.globalFrame = wp.media({
+                        title: $(this).data('uploader_title'),
+                        button: {
+                            text: $(this).data('uploader_button_text')
+                        },
+                        multiple: false  // Set to true to allow multiple files to be selected
+                    });
+
+                    // When an image is selected, run a callback.
+                    MYAPP.MediaSelector.globalFrame.on('select', function () {
+                        // We set multiple to false so only get one image from the uploader
+                        attachment = MYAPP.MediaSelector.globalFrame.state().get('selection').first().toJSON();
+                        var url = attachment.url + '?id=' + attachment.id;
+                        //alert(attachment.url);
+                        eval('MYAPP.viewModel.' + MYAPP.MediaSelector.globalTxtID + '(' + (MYAPP.MediaSelector.globalGetID===true?'attachment.id':'url') + ')');//knockout issue
+                    });
+                });
+            })(jQuery);
+
+        </script>
+
+        <?php
     }
 }

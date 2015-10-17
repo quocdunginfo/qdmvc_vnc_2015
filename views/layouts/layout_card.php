@@ -816,13 +816,17 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <input class="text-input" type="text" name="<?= $f_name ?>" id='<?= static::$ctl_prefix . $f_name ?>'
                    data-bind="jqxInput: {value: <?= $f_name ?>}"/>
 
-            <button id="media_cs_<?= $f_name ?>" value="">...</button>
-            <?php
-            Qdmvc_Helper::qd_media_choose("media_cs_{$f_name}", $f_name, false);
-            ?>
+            <button type="button" id="media_cs_<?= $f_name ?>" value="">...</button>
+
             <script>
                 (function ($) {
                     $(document).ready(function () {
+                        //register media chooser
+                        $('#media_cs_<?=$f_name?>').live('click', function(event){
+                            //event.preventDefault();
+                            MYAPP.MediaSelector.open('media_cs_<?=$f_name?>', '<?=$f_name?>');
+                        });
+                        //hover effect
                         $("#<?=static::$ctl_prefix.$f_name?>").hover(function () {
                             var imgURL = $(this).val();
                             if (imgURL != "") {
@@ -905,7 +909,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             }
 
             .qd-lookup-input input {
-                padding-right: 35px;
+                padding-right: 35px !important;
             }
 
             .qd-lookup-input button {

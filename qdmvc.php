@@ -65,14 +65,18 @@ class Qdmvc
 
     public static function runPage($name)
     {
-        /*$cache_key = $_SERVER['REQUEST_URI'].get_current_user_id().Qdmvc_Config::getLanguage();
+        //wp_enqueue_media();//must place outside cache area (static::loadPage()) because of WP random security code
+
+        /*
+        $cache_key = $_SERVER['REQUEST_URI'].get_current_user_id().Qdmvc_Config::getLanguage();
         $cache_result = Qdmvc_Helper::cacheGetByKey($cache_key);
         if($cache_result!==false)
         {
             echo $cache_result;
             return;
         }
-        ob_start();*/
+        ob_start();
+        */
 
         //MAIN fn: load class
         static::loadPage($name);
@@ -81,7 +85,9 @@ class Qdmvc
         //END Main fn
         /*
         $cache_result = ob_get_contents();
-        Qdmvc_Helper::cacheRegister($cache_key, $cache_result);*/
+        Qdmvc_Helper::cacheRegister($cache_key, $cache_result);
+        */
+
     }
 
     public static function loadLayout($pure_path)

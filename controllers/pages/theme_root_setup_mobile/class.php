@@ -5,19 +5,19 @@
  * Date: 05/03/2015
  * Time: 11:36 PM
  */
-Qdmvc::loadPage('root_setup');
+Qdmvc::loadPage('theme_root_setup');
 
-class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
+class Qdmvc_Page_TRootSetupMobile extends Qdmvc_Page_TRootSetup
 {
 
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_TRootSetup';
+        return 'Qdmvc_View_TRootSetupMobile';
     }
 
     public static function getPage()
     {
-        return 'theme_root_setup';
+        return 'theme_root_setup_mobile';
     }
 
     protected static function initFields()
@@ -34,20 +34,21 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                 'Fields' => array(
                     /*'topleft_tuvan' => array(
                         'Order' => 10
-                    ),
-                    */
+                    ),*/
                     'topcenter_promotion' => array(
                         'Order' => 20
                     ),
                     'topright_navs' => array(
                         'Order' => 30
                     ),
+                    /*
                     'vnc_logo' => array(
                         'Order' => 40
                     ),
                     'img_slider' => array(
                         'Order' => 50
                     ),
+                    */
                 )
             ),
             'Tab2' => array(
@@ -58,6 +59,7 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     'en-US' => 'Footer'
                 ),
                 'Fields' => array(
+                    /*
                     'widgetnavcat_id' => array(
                         'Order' => 10
                     ),
@@ -67,15 +69,18 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     'social_icon' => array(
                         'Order' => 30
                     ),
+                    */
                     'bottomleft_footer_note' => array(
                         'Order' => 40
                     ),
+                    /*
                     'commercial_logo' => array(
                         'Order' => 50
                     ),
                     'bigsalecat_id' => array(
                         'Order' => 70
                     )
+                    */
                 )
             ),
             'Ta102' => array(
@@ -86,14 +91,16 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     'en-US' => 'Latest product'
                 ),
                 'Fields' => array(
-                    'latest_product_label' => array(
+                    /*'latest_product_label' => array(
                         'Order' => 100
                     ),
+                    */
                     'latest_product_segment' => array(
                         'Order' => 200
                     ),
                 )
             ),
+            /*
             'Tab3' => array(
                 'Type' => 'Group',
                 'Order' => 30,
@@ -116,6 +123,7 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     ),
                 )
             ),
+
             'Group1' => array(
                 'Type' => 'Group',
                 'Order' => 90,
@@ -133,6 +141,7 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                     ),
                 )
             ),
+            */
         );
     }
 

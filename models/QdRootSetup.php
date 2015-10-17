@@ -30,4 +30,11 @@ class QdRootSetup extends QdRoot
         $this->id = 1;
         parent::on_before_create();
     }
+    public function getSetupValue($field, $default=null){
+        if($default!=null && ($this->{$field}==='' || $this->{$field}===0)){
+            return $default;
+        }else{
+            return $this->{$field};
+        }
+    }
 }
