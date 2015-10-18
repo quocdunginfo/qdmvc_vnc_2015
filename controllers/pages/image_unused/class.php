@@ -5,23 +5,18 @@
  * Date: 05/03/2015
  * Time: 11:36 PM
  */
-Qdmvc::loadPage('root');
+Qdmvc::loadPage('image');
 
-class Qdmvc_Page_Image extends Qdmvc_Page_Root
+class Qdmvc_Page_ImageUnused extends Qdmvc_Page_Image
 {
-    public function run()
-    {
-        parent::run();
-    }
-
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_Image';
+        return 'Qdmvc_View_ImageUnused';
     }
 
     public static function getPage()
     {
-        return 'image';
+        return 'image_unused';
     }
 
     protected static function initFields()
@@ -33,24 +28,16 @@ class Qdmvc_Page_Image extends Qdmvc_Page_Root
                 'Fields' => array(
                     'id' => array(
                         'Order' => 10,
+                        'Hidden' => true
+                    ),
+                    'type' => array(
+                        'Order' => 25,
                     ),
                     'path' => array(
                         'Order' => 20,
                     ),
                     '_path_preview' => array(
-                        'Order' => 25
-                    ),
-                    'active' => array(
-                        'Order' => 30,
-                    ),
-                    'order' => array(
-                        'Order' => 40,
-                    ),
-                    'model' => array(
-                        'Order' => 50,
-                    ),
-                    'model_id' => array(
-                        'Order' => 60,
+                        'Order' => 5
                     )
                 )
             )

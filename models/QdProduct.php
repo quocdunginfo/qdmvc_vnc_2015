@@ -157,6 +157,12 @@ class QdProduct extends QdRoot
                     'vi-VN' => 'Hình đại diện hiển thị ở trang tìm kiếm SP hoặc những khu vực tương tự (hình đơn)<br>Muốn chọn nhiều hình cho trang chi tiết SP, dùng chức năng \'Hình ảnh\' để thêm hình'
                 ),
             ),
+            '_avatar_preview' => array(
+                'Caption' => array('en-US' => 'Image Preview', 'vi-VN' => 'Xem trước'),
+                'DataType' => 'ImagePreview',
+                'FieldClass' => 'System',
+                'ImagePreviewField' => 'avatar'
+            ),
             'active' => array(
                 'Caption' => array('en-US' => 'Active', 'vi-VN' => 'Kích hoạt'),
                 'DataType' => 'Boolean',

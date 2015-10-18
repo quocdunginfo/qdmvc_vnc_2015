@@ -72,6 +72,9 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                 ),
                 'Fields' => array(
                     'avatar' => array(
+                        'Order' => 15,
+                    ),
+                    '_avatar_preview' => array(
                         'Order' => 10,
                     ),
                     'description' => array(

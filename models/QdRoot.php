@@ -929,7 +929,7 @@ class QdRoot extends ActiveRecord\Model
         if (!$this->checkPermission(__FUNCTION__)) return false;
 
         //do validate and save
-        if ($this->QDVALIDATE()) {
+        if (!$validate || $this->QDVALIDATE()) {
             $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
             //assign no series before insert
             if ($this->id === null || $this->id === false || $this->id === 0 || $this->id === '0') {
@@ -1059,16 +1059,40 @@ class QdRoot extends ActiveRecord\Model
     public function GETRTABLES(){
         return array();
     }
-    public function getMediaUrl($field, $size='full', $icon=false){
+    public function getMediaID($field){
         //split to get id
         $arr = explode('?id=', $this->{$field});
         if(isset($arr[1]))
         {
-            $tmp = wp_get_attachment_image_src($arr[1], $size, $icon);
+            return $arr[1];
+        }
+        return null;
+    }
+
+    public function getMediaUrl($field, $size='full', $icon=false){
+        //split to get id
+        $id = $this->getMediaID($field);
+        if($id!=null)
+        {
+            $tmp = wp_get_attachment_image_src($id, $size, $icon);
             if(is_array($tmp)){
                 return $tmp[0];
             }
         }
         return $this->{$field};
+    }
+    public static function getImageFields(){
+        $re = array();
+        $layout = static::getFieldsConfig();
+        foreach($layout as $key=>$config){
+            $dt = static::getDataType($key);
+            if($dt==='Image'){
+                array_push($re, $key);
+            }
+        }
+        return $re;
+    }
+    public static function getFieldImagePreview($field_name){
+        return static::getSingleFieldConfig($field_name, 'ImagePreviewField');
     }
 }

@@ -843,6 +843,16 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
     <?php
     }
+    private function generateFieldImagePreview($f_name, $value, $previewfield, $readonly = false)
+    {
+        ?>
+        <div class="qd-image-preview">
+            <img id='<?= static::$ctl_prefix . $f_name ?>'
+                   data-bind="attr:{src: <?= $previewfield ?>}"/>
+        </div>
+
+    <?php
+    }
 
     private function generateFieldBoolean($f_name, $value = 0, $readonly = false)
     {
@@ -903,6 +913,19 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
             }
+            .qd-card-grid .qd-image-preview{
+                width: 250px;
+                height: 100px;
+                text-align: center;
+                vertical-align: middle;
+            }
+            .qd-card-grid .qd-image-preview img{
+                display: block;
+                max-height: 100px;
+                max-width: 250px;
+                margin: 0 auto;
+                border: solid black 1px;
+            }
 
             .qd-lookup-input {
                 position: relative;
@@ -953,6 +976,9 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                     if ($type == 'Option') {
                                         $options = $tmp_page::getFieldOptions($f_name, $this->data['language']);
                                     }
+                                    if ($type == 'ImagePreview') {
+                                        $imagepreviewfield = $tmp_page::getImagePreview($key);
+                                    }
                                     $f_val = '';
                                     $f_lku = $tmp_page::getLookupURL($f_name);
                                     $f_dataport = $tmp_page::getFieldDataPort($f_name);
@@ -985,6 +1011,8 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                                 $this->generateFieldBoolean($f_name, $f_val, $readonly);
                                             } else if ($type == 'Image') {
                                                 $this->generateFieldImage($f_name, $f_val, $readonly);
+                                            } else if ($type == 'ImagePreview') {
+                                                $this->generateFieldImagePreview($f_name, $f_val, $imagepreviewfield, $readonly);
                                             } else if ($type == 'Integer') {
                                                 $this->generateFieldInteger($f_name, $f_val, $readonly);
                                             } else if ($type == 'Date') {

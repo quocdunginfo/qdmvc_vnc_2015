@@ -126,6 +126,10 @@ class Qdmvc_Page_Root
         //return $c::ISREADONLY($f_name);
         return static::getFieldsConfig($f_name, 'MultiValue');
     }
+    public static function getImagePreview($field_name)
+    {
+        return static::getFieldsConfig($field_name, 'ImagePreviewField');
+    }
 
     public static function getDataType($field_name)
     {

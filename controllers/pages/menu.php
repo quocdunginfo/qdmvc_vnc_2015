@@ -964,6 +964,31 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdImage',
             'DataPort' => 'image_port'
         ),
+        'image_unused' => array(
+            'ParentId' => 'image',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ImageUnused',
+            'Caption' => array(
+                'en-US' => 'Image (Unused)',
+                'vi-VN' => 'Hình ảnh (Rác)'
+            ),
+            'Model' => 'QdImage',
+            'DataPort' => 'image_port',
+            'PageList' => 'image_unused_list'
+        ),
+        'image_unused_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ImageUnused_list',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdImage',
+            'DataPort' => 'image_port'
+        ),
         'log' => array(
             'ParentId' => 'folder70',
             'Active' => true,
