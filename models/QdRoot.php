@@ -393,6 +393,11 @@ class QdRoot extends ActiveRecord\Model
         return $this->SELECTAGR($f_name, 'max');
     }
 
+    public function SELECTAVG($f_name)
+    {
+        return $this->SELECTAGR($f_name, 'avg');
+    }
+
     public function SELECTMIN($f_name)
     {
         return $this->SELECTAGR($f_name, 'min');
@@ -410,7 +415,11 @@ class QdRoot extends ActiveRecord\Model
         $agr_value = static::find($tmp);
         if ($agr != null) {
             $agr_value = $agr_value->{$f_name};
-            return $agr_value;
+            if($agr_value===null || $agr_value===false || $agr_value === ''){
+                return 0;
+            }else{
+                return $agr_value;
+            }
         }
         return false;
     }
@@ -530,7 +539,33 @@ class QdRoot extends ActiveRecord\Model
                 $this->qd_cached_attr[$flowfield_name] = $tmp;
                 //return
                 return $this->qd_cached_attr[$flowfield_name];
+            } else if ($ff_config['Method'] == 'Sum') {
+                //cache
+                $tmp = $c->SELECTSUM($ff_config['Field']);
+                $this->qd_cached_attr[$flowfield_name] = $tmp;
+                //return
+                return $this->qd_cached_attr[$flowfield_name];
+            } else if ($ff_config['Method'] == 'Min') {
+                //cache
+                $tmp = $c->SELECTMIN($ff_config['Field']);
+                $this->qd_cached_attr[$flowfield_name] = $tmp;
+                //return
+                return $this->qd_cached_attr[$flowfield_name];
+            } else if ($ff_config['Method'] == 'Max') {
+                //cache
+                $tmp = $c->SELECTMAX($ff_config['Field']);
+                $this->qd_cached_attr[$flowfield_name] = $tmp;
+                //return
+                return $this->qd_cached_attr[$flowfield_name];
+            } else if ($ff_config['Method'] == 'Avg') {
+                //cache
+                $tmp = $c->SELECTAVG($ff_config['Field']);
+                $this->qd_cached_attr[$flowfield_name] = $tmp;
+                //return
+                return $this->qd_cached_attr[$flowfield_name];
             }
+        }else{
+            return $this->qd_cached_attr[$flowfield_name];
         }
     }
 

@@ -81,13 +81,13 @@ class QdProductCat extends QdRoot
                 )
             ),
             '_product_count' => array(
-                'Caption' => array('en-US' => 'SL SP', 'vi-VN' => 'SP SP'),
+                'Caption' => array('en-US' => 'SL SP', 'vi-VN' => 'SL SP'),
                 'DataType' => 'Integer',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
-                    'Method' => 'Count',
+                    'Method' => 'Sum',
                     'Table' => 'QdProduct',
-                    'Field' => 'id',
+                    'Field' => 'price',
                     'TableFilter' => array(
                         array(
                             'Field' => 'product_cat_id',
