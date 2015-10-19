@@ -80,6 +80,28 @@ class QdProductCat extends QdRoot
                     )
                 )
             ),
+            '_product_count' => array(
+                'Caption' => array('en-US' => 'SL SP', 'vi-VN' => 'SP SP'),
+                'DataType' => 'Integer',
+                'FieldClass' => 'FlowField',
+                'FieldClass_FlowField' => array(
+                    'Method' => 'Count',
+                    'Table' => 'QdProduct',
+                    'Field' => 'id',
+                    'TableFilter' => array(
+                        array(
+                            'Field' => 'product_cat_id',
+                            'Type' => 'FIELD',
+                            'Value' => 'id'
+                        ),
+                        array(
+                            'Field' => 'active',
+                            'Type' => 'FILTER',
+                            'Value' => '=1',
+                        )
+                    )
+                )
+            ),
             'parent_id' => array(
                 'Name' => 'parent_id',
                 'Caption' => array('en-US' => 'Parent ID', 'vi-VN' => 'Mã LSP cha'),
@@ -375,7 +397,7 @@ class QdProductCat extends QdRoot
 
                 break;
             default:
-
+                return array();
                 break;
         }
     }

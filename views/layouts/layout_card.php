@@ -560,7 +560,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     <?php
     }
 
-    private function generateFieldTextMultiValue($f_name, $f_val, $f_dataport, $f_multivaluefield='id', $readonly = false)
+    private function generateFieldTextMultiValue($f_name, $f_val, $f_dataport, $f_multivaluefield = 'id', $readonly = false)
     {
         ?>
 
@@ -599,11 +599,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         source: function (query, response) {
                             var item = query.split(/,\s*/).pop();
 
-                            if(item.trim() ==='*'){
+                            if (item.trim() === '*') {
                                 // update the search query.
                                 $("#ctl_<?=$f_name?>").jqxInput({query: ''});
                             }
-                            else if(item.trim().length < 1){
+                            else if (item.trim().length < 1) {
                                 // update the search query.
                                 $("#ctl_<?=$f_name?>").jqxInput({query: new Date()});
                             } else {
@@ -757,7 +757,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 });
             })(jQuery);
         </script>
-        <?php endif; ?>
+    <?php endif; ?>
     <?php
     }
 
@@ -822,7 +822,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 (function ($) {
                     $(document).ready(function () {
                         //register media chooser
-                        $('#media_cs_<?=$f_name?>').live('click', function(event){
+                        $('#media_cs_<?=$f_name?>').live('click', function (event) {
                             //event.preventDefault();
                             MYAPP.MediaSelector.open('media_cs_<?=$f_name?>', '<?=$f_name?>');
                         });
@@ -843,12 +843,13 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
     <?php
     }
+
     private function generateFieldImagePreview($f_name, $value, $previewfield, $readonly = false)
     {
         ?>
         <div class="qd-image-preview">
             <img id='<?= static::$ctl_prefix . $f_name ?>'
-                   data-bind="attr:{src: <?= $previewfield ?>}"/>
+                 data-bind="attr:{src: <?= $previewfield ?>}"/>
         </div>
 
     <?php
@@ -913,13 +914,15 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
             }
-            .qd-card-grid .qd-image-preview{
+
+            .qd-card-grid .qd-image-preview {
                 width: 250px;
                 height: 100px;
                 text-align: center;
                 vertical-align: middle;
             }
-            .qd-card-grid .qd-image-preview img{
+
+            .qd-card-grid .qd-image-preview img {
                 display: block;
                 max-height: 100px;
                 max-width: 250px;
@@ -985,7 +988,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                     $f_dataport = Qdmvc_Helper::getDataPortPath($f_dataport);
 
                                     $f_multivalue = $tmp_page::isMultiValue($key);
-                                    if($f_multivalue){
+                                    if ($f_multivalue) {
                                         $f_multivaluefield = $tmp_page::getMultiValueField($f_name);
                                         $f_multivaluedataport = $tmp_page::getMultiValueDataPort($f_name);
                                     }
@@ -1023,8 +1026,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                                 $this->generateFieldCombobox($f_name, $f_val, $options, $readonly);
                                             } else if ($f_multivalue) {
                                                 $this->generateFieldTextMultiValue($f_name, $f_val, $f_multivaluedataport, $f_multivaluefield, $readonly);
-                                            }
-                                            else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
+                                            } else if (!Qdmvc_Helper::isNullOrEmpty($f_lku)) {
                                                 $this->generateFieldLookup($f_name, $f_val, $f_lku, $f_dataport, $f_multivalue, $readonly);
                                             } else {
                                                 $this->generateFieldText($f_name, $f_val, $readonly);
@@ -1277,7 +1279,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         });
                     })(jQuery);
                 </script>
-                <?=$this->btnDeleteAction()?>
+                <?= $this->btnDeleteAction() ?>
                 <form style="width: 100%" id="cardForm" action=""
                       onsubmit="return false">
                     <div>
@@ -1293,7 +1295,9 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         </div>
     <?php
     }
-    protected function btnDeleteAction(){
+
+    protected function btnDeleteAction()
+    {
         ?>
         <script>
             (function ($) {
@@ -1329,7 +1333,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             })(jQuery);
 
         </script>
-        <?php
+    <?php
     }
 
     protected function onSaveOK()
@@ -1554,7 +1558,9 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     {
         return array();
     }
-    protected function callFnAction(){
+
+    protected function callFnAction()
+    {
         ?>
         <script>
             MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
@@ -1602,15 +1608,16 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 })(jQuery);
             }
         </script>
-        <?php
+    <?php
     }
+
     private function render_serverFunctions()
     {
         if (count($this->serverFunctions()) <= 0) {
             return;
         }
         ?>
-        <?=$this->callFnAction()?>
+        <?= $this->callFnAction() ?>
         <!-- Single button -->
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"
@@ -1667,9 +1674,33 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <?= $this->lookupDatePickerLayout() ?>
             <?= $this->Bar() ?>
             <?= $this->msgPanelLayout() ?>
+            <?= $this->progressLoader() ?>
             <?= $this->onReadyHook() ?>
-            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element   ?>
+            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element    ?>
         </div>
     <?php
+    }
+
+    private function progressLoader()
+    {
+        return;
+        ?>
+        <div id="jqxloader"></div>
+            <script>
+
+                MYAPP.openLoader = function(){
+                    jQuery('#jqxloader').jqxLoader('open');
+                };
+                MYAPP.stopLoader = function(){
+                    jQuery('#jqxloader').jqxLoader('close');
+                };
+                (function ($) {
+$(document).ready(function () {
+                        $("#jqxloader").jqxLoader({isModal: true, width: '100', height: '60', imagePosition: 'top'});
+                    });
+
+                })(jQuery);
+            </script>
+        <?php
     }
 }

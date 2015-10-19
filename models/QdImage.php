@@ -151,7 +151,7 @@ class QdImage extends QdNote
             $id = $this->getMediaID('path');
             //delete wp media too
             if($id!=null)
-                wp_delete_attachment($id);
+                wp_delete_attachment($id, true);
         }
         return parent::delete($location, $validate);
     }

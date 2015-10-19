@@ -36,6 +36,9 @@ class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root_List
                 'level' => array(
                     'Order' => 60,
                 ),
+                '_product_count' => array(
+                    'Order' => 70
+                )
             ));
     }
 

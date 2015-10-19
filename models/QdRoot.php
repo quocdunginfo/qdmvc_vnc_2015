@@ -201,20 +201,24 @@ class QdRoot extends ActiveRecord\Model
         }
 
     }
-    protected function TABLECAPTION(){
+
+    protected function TABLECAPTION()
+    {
         return array(
             //'vi-VN' => 'QdRoot',
             //'en-US' => 'QdRoot'
         );
     }
-    public function GETTABLECAPTION($lang=''){
-        if($lang===''){
+
+    public function GETTABLECAPTION($lang = '')
+    {
+        if ($lang === '') {
             $lang = Qdmvc_Config::getLanguage();
         }
         $tmp = static::TABLECAPTION();
-        if(isset($tmp[$lang])){
+        if (isset($tmp[$lang])) {
             return $tmp[$lang];
-        }else{
+        } else {
             return $this->getCalledClassName();
         }
     }
@@ -252,7 +256,7 @@ class QdRoot extends ActiveRecord\Model
         return $this->SETFILTER($filter);
     }
 
-    public function delete($location = '', $validate=true)
+    public function delete($location = '', $validate = true)
     {
         if (!$this->checkPermission(__FUNCTION__)) return false;
 
@@ -264,16 +268,16 @@ class QdRoot extends ActiveRecord\Model
             $this->writeLog($action, $location);//quocdunginfo
         }
         $is_fail = false;
-        if($validate){
+        if ($validate) {
             $tmp = $this->GETRTABLES();
             $msg = Qdmvc_Message::getMsg('msg_fk_constrain');
-            foreach($tmp as $_model => $_fields){
+            foreach ($tmp as $_model => $_fields) {
                 $c = new $_model();
-                foreach($_fields as $field) {
+                foreach ($_fields as $field) {
                     $c->SETRANGE($field, $this->id);
-                    if($c->COUNTLIST() > 0){
+                    if ($c->COUNTLIST() > 0) {
                         $c2 = $c->GETLIST();
-                        foreach($c2 as $item){
+                        foreach ($c2 as $item) {
                             $this->pushValidateError('', sprintf($msg, $this->GETTABLECAPTION(), $this->id, $c->GETTABLECAPTION(), $item->id), 'error');
                             $is_fail = true;
                         }
@@ -281,10 +285,10 @@ class QdRoot extends ActiveRecord\Model
                 }
             }
         }
-        if(!$is_fail) {
+        if (!$is_fail) {
             $re = parent::delete();
             return $re;
-        }else{
+        } else {
             return false;
         }
     }
@@ -371,35 +375,46 @@ class QdRoot extends ActiveRecord\Model
         $record->SETRANGE('model_id', $this->id);
         return $record;
     }
-    public function FINDFIRST(){
+
+    public function FINDFIRST()
+    {
         $this->SETLIMIT(1);
         $tmp = $this->GETLIST();
         $this->REMOVELIMIT();
-        if(count($tmp)>0){
+        if (count($tmp) > 0) {
             return $tmp[0];
-        }else{
+        } else {
             return null;
         }
     }
-    public function SELECTMAX($f_name){
+
+    public function SELECTMAX($f_name)
+    {
         return $this->SELECTAGR($f_name, 'max');
     }
-    public function SELECTMIN($f_name){
+
+    public function SELECTMIN($f_name)
+    {
         return $this->SELECTAGR($f_name, 'min');
     }
-    public function SELECTSUM($f_name){
+
+    public function SELECTSUM($f_name)
+    {
         return $this->SELECTAGR($f_name, 'sum');
     }
-    private function SELECTAGR($f_name, $agr){
+
+    private function SELECTAGR($f_name, $agr)
+    {
         $tmp = static::_generateQuery($this->record_filter);
         $tmp = array_merge($tmp, array('select' => "$agr(`$f_name`) as `$f_name`"));
         $agr_value = static::find($tmp);
-        if($agr!=null){
+        if ($agr != null) {
             $agr_value = $agr_value->{$f_name};
             return $agr_value;
         }
         return false;
     }
+
     public function SETRANGE($field, $value, $operator = 'EQUAL')
     {
         //ignore filter on FLOWFIELD
@@ -432,6 +447,24 @@ class QdRoot extends ActiveRecord\Model
     public function SETFILTER($where_array)
     {
         $this->record_filter['filter'] = $where_array;
+        return $this;
+    }
+
+    public function SETFIELDFILTER($field, $filterstring, $second_long_operator = 'EQUAL')
+    {
+        //ignore filter on FLOWFIELD
+        if (!static::ISFLOWFIELD($field)) {
+            if (static::ISPK($field)) {
+                //$exact = true;//force filter exact on PK field//Disable this auto convention since NoSeries
+            }
+            $tmp = array();
+            $tmp['value'] = $filterstring;
+            $tmp['operator'] = $second_long_operator;
+            $tmp['field'] = $field;
+            $tmp['filterkind'] = 'invalue';
+
+            array_push($this->record_filter['filter'], $tmp);
+        }
         return $this;
     }
 
@@ -469,20 +502,35 @@ class QdRoot extends ActiveRecord\Model
     {
         $config = static::getFieldsConfig();
         $ff_config = $config[$flowfield_name]['FieldClass_FlowField'];
-        if ($ff_config['Method'] == 'Lookup') {
-            $ff_config_tf = $ff_config['TableFilter'];
-            $c = new $ff_config['Table'];//init new object
-
+        $ff_config_tf = $ff_config['TableFilter'];
+        $c = new $ff_config['Table'];//init new object
+        if (is_array($ff_config_tf) && !empty($ff_config_tf)) {
+            //SET FILTER
             foreach ($ff_config_tf as $filter_item) {
                 if ($filter_item['Type'] == 'FIELD') {
                     $c->SETRANGE($filter_item['Field'], $this->{$filter_item['Value']});
+                } else if ($filter_item['Type'] == 'CONST') {
+                    $c->SETRANGE($filter_item['Field'], $filter_item['Value']);
+                } else if ($filter_item['Type'] == 'FILTER') {
+                    $c->SETFIELDFILTER($filter_item['Field'], $filter_item['Value']);
                 }
             }
-            //cache
-            $tmp = $c->GETLIST();
-            $this->qd_cached_attr[$flowfield_name] = $tmp[0]->{$ff_config['Field']};
-            //return
-            return $this->qd_cached_attr[$flowfield_name];
+            //DO ACTION
+            if ($ff_config['Method'] == 'Lookup') {
+                //cache
+                $tmp = $c->FINDFIRST();
+                if ($tmp != null) {
+                    $this->qd_cached_attr[$flowfield_name] = $tmp->{$ff_config['Field']};
+                }
+                //return
+                return $this->qd_cached_attr[$flowfield_name];
+            } else if ($ff_config['Method'] == 'Count') {
+                //cache
+                $tmp = $c->COUNTLIST();
+                $this->qd_cached_attr[$flowfield_name] = $tmp;
+                //return
+                return $this->qd_cached_attr[$flowfield_name];
+            }
         }
     }
 
@@ -492,7 +540,8 @@ class QdRoot extends ActiveRecord\Model
      */
     public function COUNTLIST()
     {
-        return static::count(array('conditions' => static::_generateConditionsArray($this->record_filter)));
+        $t = static::_generateConditionsArray($this->record_filter);
+        return static::count(array('conditions' => $t));
     }
 
     /**
@@ -517,28 +566,80 @@ class QdRoot extends ActiveRecord\Model
     {
         if (is_array($record['filter']) && count($record['filter']) > 0) {
             $where = '';
+            $relation = $record['filter_relation'];
             foreach ($record['filter'] as $config) {
                 $key = $config['field'];
-
+                $value = $config['value'];
+                //get direct operator
                 $operator = '=';
                 if (isset($config['operator'])) {
                     $operator = Qdmvc_Helper::getOperator($config['operator']);
                 }
-
-                if ($operator == 'LIKE') {
-                    $where .= "`{$key}` LIKE '%{$config['value']}%' " . $record['filter_relation'] . " ";//quocdunginfo
-                } else {
-                    $where .= "`{$key}` {$operator} '{$config['value']}' " . $record['filter_relation'] . " ";//quocdunginfo
+                //filter invalue
+                if (isset($config['filterkind']) && $config['filterkind'] == 'invalue') {
+                    $where .= static::_genSingleWhereClause($key, $value, $relation, $operator);
+                } //filter by indicated operator
+                else {
+                    $where .= static::_genSingleWhereClause($key, $value, $relation, $operator);
                 }
             }
-            if (strtoupper($record['filter_relation']) == 'AND') {
-                $where .= '1=1';//trick to avoid SQL fail
+            if (strtoupper($relation) == 'AND') {
+                $where .= '1=1';//trick to avoid SQL exception
             } else {
-                $where .= '1=2';//trick to avoid SQL fail
+                $where .= '1=2';//trick to avoid SQL exception
             }
             return array($where);
         }
         return array();
+    }
+
+    private static function _genSingleWhereClause($key, $filter_string, $relation = 'AND', $second_direct_operator = null)
+    {
+        $values[0] = $filter_string;
+        $re = '';
+        $multi = false;
+        if (strstr($filter_string, '&&')) {
+            $values = explode('&&', $filter_string);
+            $multi = true;
+        }
+        foreach ($values as $f_value) {
+            $f_operator = null;
+            if (strstr($f_value, '*')) {
+                $f_value = str_replace('*', '', $f_value);
+                $f_operator = 'LIKE';
+            } else if (strstr($f_value, '!=')) {
+                $f_value = str_replace('!=', '', $f_value);
+                $f_operator = '!=';
+            } else if (strstr($f_value, '>=')) {
+                $f_value = str_replace('>=', '', $f_value);
+                $f_operator = '>=';
+            } else if (strstr($f_value, '<=')) {
+                $f_value = str_replace('<=', '', $f_value);
+                $f_operator = '<=';
+            } else if (strstr($f_value, '=')) {
+                $f_value = str_replace('=', '', $f_value);
+                $f_operator = '=';
+            } else if (strstr($f_value, '<')) {
+                $f_value = str_replace('<', '', $f_value);
+                $f_operator = '<';
+            } else if (strstr($f_value, '>')) {
+                $f_value = str_replace('>', '', $f_value);
+                $f_operator = '>';
+            }
+            if ($f_operator === null) {
+                if ($multi) {
+                    $f_operator = '=';
+                } else {
+                    $f_operator = $second_direct_operator;
+                }
+            }
+            if ($f_operator == 'LIKE') {
+                $re .= "`{$key}` {$f_operator} '%{$f_value}%' {$relation} ";
+            } else {
+                $re .= "`{$key}` {$f_operator} '{$f_value}' {$relation} ";
+            }
+        }
+        return $re;
     }
 
     /**
@@ -749,6 +850,7 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
+
     public static function ISMULTIVALUE($f_name)
     {
         try {
@@ -835,10 +937,9 @@ class QdRoot extends ActiveRecord\Model
                     return $this->qd_cached_attr[$field_name] = $user_info->user_login;
                 }
                 return Qdmvc_Helper::getNoneText();
-            }
-            else if ($field_name == 'date_created' || $field_name == 'date_modified' || $field_name=='owner_id') {
+            } else if ($field_name == 'date_created' || $field_name == 'date_modified' || $field_name == 'owner_id') {
                 return parent::__get($field_name);
-            }else {// if ($field_name == '__sys_lines_url') {//Default system Lines Field
+            } else {// if ($field_name == '__sys_lines_url') {//Default system Lines Field
                 return $this->getLinesURL($field_name);
             }
         }
@@ -888,8 +989,8 @@ class QdRoot extends ActiveRecord\Model
         //prevent set ERROR on 2 special type
         if (static::ISFLOWFIELD($name)) {
             return $value;
-        }else if (static::ISSYSTEMFIELD($name)){
-            if($name=='date_created' || $name=='date_modified' || $name=='owner_id'){
+        } else if (static::ISSYSTEMFIELD($name)) {
+            if ($name == 'date_created' || $name == 'date_modified' || $name == 'owner_id') {
                 return parent::__set($name, $value);
             }
             return $value;
@@ -1019,14 +1120,12 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
-    /*
-     * Bug transfer field null, could not insert if not declare full properties
-     * */
+
     public function transferFieldsFrom($source)
     {
         if ($source != null) {
             foreach ($source::getFieldsConfig() as $key => $config) {
-                if($source->{$key}!==null) {//PHPActiveRecord tracking field assign, so pure init != (set field value = null)
+                if ($source->{$key} !== null) {//PHPActiveRecord tracking field assign, so pure init != (set field value = null)
                     $this->{$key} = $source->{$key};
                 }
             }
@@ -1056,43 +1155,50 @@ class QdRoot extends ActiveRecord\Model
         $tmp->SETRANGE('model_id', $this->id);
         return $tmp->GETLIST();
     }
-    public function GETRTABLES(){
+
+    public function GETRTABLES()
+    {
         return array();
     }
-    public function getMediaID($field){
+
+    public function getMediaID($field)
+    {
         //split to get id
         $arr = explode('?id=', $this->{$field});
-        if(isset($arr[1]))
-        {
+        if (isset($arr[1])) {
             return $arr[1];
         }
         return null;
     }
 
-    public function getMediaUrl($field, $size='full', $icon=false){
+    public function getMediaUrl($field, $size = 'full', $icon = false)
+    {
         //split to get id
         $id = $this->getMediaID($field);
-        if($id!=null)
-        {
+        if ($id != null) {
             $tmp = wp_get_attachment_image_src($id, $size, $icon);
-            if(is_array($tmp)){
+            if (is_array($tmp)) {
                 return $tmp[0];
             }
         }
         return $this->{$field};
     }
-    public static function getImageFields(){
+
+    public static function getImageFields()
+    {
         $re = array();
         $layout = static::getFieldsConfig();
-        foreach($layout as $key=>$config){
+        foreach ($layout as $key => $config) {
             $dt = static::getDataType($key);
-            if($dt==='Image'){
+            if ($dt === 'Image') {
                 array_push($re, $key);
             }
         }
         return $re;
     }
-    public static function getFieldImagePreview($field_name){
+
+    public static function getFieldImagePreview($field_name)
+    {
         return static::getSingleFieldConfig($field_name, 'ImagePreviewField');
     }
 }
