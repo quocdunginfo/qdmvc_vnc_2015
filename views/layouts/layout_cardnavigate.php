@@ -243,7 +243,12 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         <script type="text/javascript">
             (function ($) {
                 $(document).ready(function () {
-
+                    <?php if($this->data['role']=='lookup'):?>
+                        $("#qdchoose").bind("click", function(event){
+                            var value = MYAPP.viewModel.<?=$this->data['getfield']?>();
+                            parent.MYAPP.setLookupResult(value, "<?=$this->data['returnid']?>");
+                        });
+                    <?php endif; ?>
                 });
             })(jQuery);
         </script>

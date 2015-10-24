@@ -1209,10 +1209,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                             $("#qdupdate").bind("click", function (event) {
                                 $("#cardForm").jqxValidator("validate");
                             });
-                            $("#qdchoose").bind("click", function(event){
-                                var value = MYAPP.viewModel.<?=$this->data['getfield']?>();
-                                parent.MYAPP.setLookupResult(value, "<?=$this->data['returnid']?>");
-                            });
 
                             //card button event
                             $("#qdnew").bind("click", function (event) {
