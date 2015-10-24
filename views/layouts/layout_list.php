@@ -129,7 +129,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     return re;
                 })(jQuery);
             };
-            MYAPP.addGridFilter = function (field_name, field_value) {
+            MYAPP.addGridFilter = function (field_name, field_value, operator) {
                 (function ($) {
                     // create a filter group for the FirstName column.
                     var fnameFilterGroup = new $.jqx.filter();
@@ -140,7 +140,12 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     var filtercondition = 'contains';
                     var fnameFilter1 = fnameFilterGroup.createfilter('stringfilter', filtervalue, filtercondition);
                     // add the filters to the filter group.
-                    fnameFilterGroup.addfilter(filter_or_operator, fnameFilter1);
+                    if(operator!=undefined){
+                        fnameFilterGroup.addfilter(filter_or_operator, fnameFilter1, operator);
+                    }else{
+                        fnameFilterGroup.addfilter(filter_or_operator, fnameFilter1);
+                    }
+
                     // add the filter group to the 'firstname' column in the Grid.
                     $("#jqxgrid").jqxGrid('addfilter', field_name, fnameFilterGroup);
                     // apply the filters.
@@ -532,7 +537,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                                 if(parent!=undefined && parent!=null) {
                                     if (parent.MYAPP.LookupMode.isSetLookupFilterForFirstTime == false && parent.MYAPP.LookupMode.lookupid != '') {
                                         setTimeout(function(){
-                                            MYAPP.addGridFilter('id', parent.MYAPP.LookupMode.lookupid);
+                                            MYAPP.addGridFilter('id', '=' + parent.MYAPP.LookupMode.lookupid);
                                             parent.MYAPP.LookupMode.isSetLookupFilterForFirstTime = true;
                                         }, 500);
                                     }

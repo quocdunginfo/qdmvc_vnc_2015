@@ -208,19 +208,10 @@ class QdTRootSetup extends QdRootSetup
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
-                    'Table' => 'QdProductCat',
+                    'Table' => 'QdBigSaleCat',
                     'Field' => 'id',
                     'TableFilter' => array(
-                        array(
-                            'Condition' => array(
-                                'Field' => '',
-                                'Type' => 'CONST',//'FIELD'
-                                'Value' => ''
-                            ),
-                            'Field' => 'type',
-                            'Type' => 'FIELD',
-                            'Value' => QdBigSaleCat::$TYPE_BIGSALE
-                        )
+
                     )
                 )
             ),
