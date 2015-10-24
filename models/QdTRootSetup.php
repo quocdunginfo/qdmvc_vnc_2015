@@ -211,7 +211,12 @@ class QdTRootSetup extends QdRootSetup
                     'Table' => 'QdBigSaleCat',
                     'Field' => 'id',
                     'TableFilter' => array(
-
+                        /*array(
+                            'Field' => 'active',
+                            'Type' => 'CONST',
+                            'Value' => true
+                        )
+                        */
                     )
                 )
             ),
