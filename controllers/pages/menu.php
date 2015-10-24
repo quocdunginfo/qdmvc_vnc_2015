@@ -877,6 +877,31 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdNoSeriesMap',
             'DataPort' => 'noseriesmap_port'
         ),
+        'template' => array(
+            'ParentId' => 'folder50',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_Template',
+            'Caption' => array(
+                'en-US' => 'Template',
+                'vi-VN' => 'Template',
+            ),
+            'Model' => 'QdTemplate',
+            'DataPort' => 'template_port',
+            'PageList' => 'template_list'
+        ),
+        'template_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_Template_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdTemplate',
+            'DataPort' => 'template_port'
+        ),
         'setup' => array(
             'ParentId' => 'folder50',
             'Active' => true,

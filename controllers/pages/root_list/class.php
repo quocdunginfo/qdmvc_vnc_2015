@@ -13,6 +13,7 @@ class Qdmvc_Page_Root_List extends Qdmvc_Page_Root
     function __construct()
     {
         parent::__construct();
+        $this->data['page_navigate'] = Qdmvc_Helper::getCompactPageNavigateLink(Qdmvc_Page_Index::getNavigatePage(static::getPage()), array(), 'lookup', $this->data['returnid'], $this->data['getfield'], $this->data['lookupid']);
     }
 
     protected static function getFieldsConfig($f_name, $meta_name, $lang = 'en-US')

@@ -24,8 +24,9 @@ class Qdmvc_Page_Root
         $this->data['data_port'] = Qdmvc_Helper::getDataPortPath(static::getDataPort(), $this->getPageView());
         //pre value for page List
         $this->data['role'] = isset($_GET['qdrole']) ? $_GET['qdrole'] : '';//lookup, navigate
-        $this->data['returnid'] = isset($_GET['qdreturnid']) ? $_GET['qdreturnid'] : '';
-        $this->data['getfield'] = isset($_GET['qdgetfield']) ? $_GET['qdgetfield'] : 'id';//id
+        $this->data['lookupid'] = isset($_GET['qdlookupid']) ? $_GET['qdlookupid'] : null;
+        $this->data['returnid'] = isset($_GET['qdreturnid']) ? $_GET['qdreturnid'] : null;
+        $this->data['getfield'] = isset($_GET['qdgetfield']) ? $_GET['qdgetfield'] : null;
         $this->data['view_style'] = 'normal';
         $this->data['language'] = Qdmvc_Config::getLanguage();
         $this->data['init_obj'] = $this->getInitObjJSON();

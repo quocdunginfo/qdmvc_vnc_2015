@@ -276,6 +276,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             MYAPP.viewModel = {};
             MYAPP.is_insert = true;
             MYAPP.manual_no = true;
+            MYAPP.page_choose_mode = '<?=$this->data['role']?>';
         </script>
     <?php
     }
@@ -563,7 +564,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     private function generateFieldTextMultiValue($f_name, $f_val, $f_dataport, $f_multivaluefield = 'id', $readonly = false)
     {
         ?>
-
         <input data-qddataport="<?= $f_dataport ?>" <?= $readonly == true ? 'readonly' : '' ?> class="text-input"
                type="text" name="<?= $f_name ?>"
                id='<?= static::$ctl_prefix . $f_name ?>'
@@ -1209,6 +1209,10 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                             $("#qdupdate").bind("click", function (event) {
                                 $("#cardForm").jqxValidator("validate");
                             });
+                            $("#qdchoose").bind("click", function(event){
+                                var value = MYAPP.viewModel.<?=$this->data['getfield']?>();
+                                parent.MYAPP.setLookupResult(value, "<?=$this->data['returnid']?>");
+                            });
 
                             //card button event
                             $("#qdnew").bind("click", function (event) {
@@ -1392,7 +1396,14 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     font-size: 18px;
                 }
             </style>
-                            <span>
+            <?php if($this->data['role']=='lookup'):?>
+            <span>
+                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdchoose">
+                                    <?= Qdmvc_Message::getMsg('btn_choose') ?>
+                                </button>
+                            </span>
+            <?php endif; ?>
+            <span>
                                 <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdupdate">
                                     <?= Qdmvc_Message::getMsg('btn_save') ?>
                                 </button>
@@ -1676,7 +1687,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <?= $this->msgPanelLayout() ?>
             <?= $this->progressLoader() ?>
             <?= $this->onReadyHook() ?>
-            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element    ?>
+            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element     ?>
         </div>
     <?php
     }
@@ -1686,21 +1697,21 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         return;
         ?>
         <div id="jqxloader"></div>
-            <script>
+        <script>
 
-                MYAPP.openLoader = function(){
-                    jQuery('#jqxloader').jqxLoader('open');
-                };
-                MYAPP.stopLoader = function(){
-                    jQuery('#jqxloader').jqxLoader('close');
-                };
-                (function ($) {
-$(document).ready(function () {
-                        $("#jqxloader").jqxLoader({isModal: true, width: '100', height: '60', imagePosition: 'top'});
-                    });
+            MYAPP.openLoader = function () {
+                jQuery('#jqxloader').jqxLoader('open');
+            };
+            MYAPP.stopLoader = function () {
+                jQuery('#jqxloader').jqxLoader('close');
+            };
+            (function ($) {
+                $(document).ready(function () {
+                    $("#jqxloader").jqxLoader({isModal: true, width: '100', height: '60', imagePosition: 'top'});
+                });
 
-                })(jQuery);
-            </script>
-        <?php
+            })(jQuery);
+        </script>
+    <?php
     }
 }

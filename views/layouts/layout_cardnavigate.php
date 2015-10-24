@@ -228,7 +228,11 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
         parent::preConfig();
         ?>
         <?= $this->bindingField() ?>
-
+        <script>
+            MYAPP.LookupMode = {};
+            MYAPP.LookupMode.lookupid = '<?=$this->data['lookupid']?>';
+            MYAPP.LookupMode.isSetLookupFilterForFirstTime = false;
+        </script>
     <?php
     }
 

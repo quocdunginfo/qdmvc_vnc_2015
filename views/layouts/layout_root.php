@@ -110,12 +110,18 @@ class Qdmvc_Layout_Root
                 if (operator == undefined) operator = 'EQUAL';
                 return url + '&filterdatafield' + index + '=' + field + '&filtervalue' + index + '=' + value + '&filtercondition' + index + '=' + operator;
             };
+            MYAPP.appendParam = function (url, field, value) {
+                return url + '&' + field + '=' + value;
+            };
             MYAPP.openInNewTab = function (url) {
                 if (window == window.parent) {
                     window.open(url, '_blank');
                     return;
                 }
                 window.parent.MYAPP.openInNewTab(url);
+            };
+            MYAPP.gotoURL = function(url, returnUrl){
+                window.location.href = url;
             };
         </script>
     <?php

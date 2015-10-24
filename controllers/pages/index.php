@@ -22,6 +22,13 @@ class Qdmvc_Page_Index
             }
         }
     }
+    public static function getNavigatePage($page_list){
+        foreach (static::getIndex() as $page => $config) {
+            if ($config['PageType'] == 'Card' && $config['PageList'] == $page_list) {
+                return $page;
+            }
+        }
+    }
 
     public static function getDefaultNavigatePage($model)
     {

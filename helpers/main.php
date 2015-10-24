@@ -60,8 +60,11 @@ class Qdmvc_Helper
     {
         return $class::$fn;
     }
+    public static function getCompactPageNavigateLink($page_name, $filter_array=array(), $mode = 'navigate', $return_id=null, $getfield=null, $lookupid=null){
+        return static::getCompactPageListLink($page_name, $filter_array, $mode, $return_id, $getfield, $lookupid);
+    }
 
-    public static function getCompactPageListLink($page_name, $filter_array = array())
+    public static function getCompactPageListLink($page_name, $filter_array = array(), $mode='navigate', $return_id=null, $getfield=null, $lookupid=null)
     {
         $filter_string = '';
         $count = 0;
@@ -74,7 +77,14 @@ class Qdmvc_Helper
             }
             $count++;
         }
-        return admin_url("admin.php?page={$page_name}&qdrole=navigate{$filter_string}");
+        $tmp = admin_url("admin.php?page={$page_name}&qdrole={$mode}{$filter_string}");
+        if($return_id!=null && $getfield!=null){
+            $tmp .= "&qdreturnid={$return_id}&qdgetfield={$getfield}";
+        }
+        if($lookupid!=null){
+            $tmp .= "&qdlookupid={$lookupid}";
+        }
+        return $tmp;
     }
 
     /*

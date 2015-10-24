@@ -15,14 +15,14 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
         parent::__construct($page);
         // Moved to qdmvc because of files caches
         //jquery ui
-        QdJqwidgets::loadSinglePluginJS('jquery-ui/jquery-ui.js');
-        QdJqwidgets::loadSinglePluginCSS('jquery-ui/jquery-ui.css');
+        QdJqwidgets::loadSinglePluginJS('jquery-ui/jquery-ui.js', false);
+        QdJqwidgets::loadSinglePluginCSS('jquery-ui/jquery-ui.css', false);
         //jquery fancytree
-        QdJqwidgets::loadSinglePluginJS('fancytree/jquery.fancytree.js');
-        QdJqwidgets::loadSinglePluginJS('fancytree/jquery.fancytree.filter.js');
-        QdJqwidgets::loadSinglePluginCSS('fancytree/ui.fancytree.css');
+        QdJqwidgets::loadSinglePluginJS('fancytree/jquery.fancytree.js', false);
+        QdJqwidgets::loadSinglePluginJS('fancytree/jquery.fancytree.filter.js', false);
+        QdJqwidgets::loadSinglePluginCSS('fancytree/ui.fancytree.css', false);
         //underscore
-        QdJqwidgets::loadSinglePluginJS('underscore-min.js');
+        QdJqwidgets::loadSinglePluginJS('underscore-min.js', false);
 
     }
     public function render2(){
