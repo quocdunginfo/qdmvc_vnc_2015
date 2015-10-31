@@ -57,7 +57,10 @@ class Qdmvc_Dataport
             if ($this->action=='call_fn') {
                 if($this->function != '')
                     $this->call_fn($this->data['id'], $this->function);
-            }if ($this->action=='call_fn_multi') {
+            }if ($this->action=='call_fn_passing') {
+                if($this->function != '')
+                    $this->call_fn($this->data['id'], $this->function, true);
+            } else if ($this->action=='call_fn_multi') {
                 if($this->function != '')
                     $this->call_fn_multi($this->data['id'], $this->function);
             } else if ($this->action == 'delete') {
@@ -79,15 +82,19 @@ class Qdmvc_Dataport
             $this->call_fn($id, $function);
         }
     }
-    protected function call_fn($id, $function)
+    protected function call_fn($id, $function, $passing_obj=false)
     {
         $c = static::$model;
         $this->obj = $c::GET($id);
         if ($this->obj != null) {
-            $this->beforeCallFnAssign();
-            //$this->assign();//call Fn do not auto save because of multi-objs
+
         } else {
             $this->obj = new $c();
+        }
+
+        $this->beforeCallFnAssign();
+        if($passing_obj===true) {
+            $this->assign();//call Fn do not auto save because of multi-objs
         }
 
         $class_name = $this->getCalledClassName();

@@ -17,11 +17,10 @@ class QdProductCatPG2XE extends QdProductCatPG2
     {
         $obj = parent::getFieldsConfig();
         $obj['type3']['Options'] = array(
-            static::$TYPE3_XE => array(
-                'Caption' => array('en-US' => 'Xe', 'vi-VN' => 'Xe'),
-            ),
+            static::$TYPE3_XE => $obj['type3']['Options'][static::$TYPE3_XE]
         );
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatPG2XE';
+        $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductPG2XE';
 
         return $obj;
     }

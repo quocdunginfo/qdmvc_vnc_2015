@@ -17,11 +17,12 @@ class QdProductCatPG2 extends QdProductCat
     {
         $obj = parent::getFieldsConfig();
         $obj['property_grp_type']['Options'] = array(
-            static::$PROPERTY_G2 => array(
-                'Caption' => array('en-US' => '2 properties', 'vi-VN' => '2 thuộc tính'),
-            ),
+            static::$PROPERTY_G2 => $obj['property_grp_type']['Options'][static::$PROPERTY_G2]
         );
+        $obj['property_grp_type']['ReadOnly'] = true;
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatPG2';
+
+        $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductPG2';
 
         return $obj;
     }

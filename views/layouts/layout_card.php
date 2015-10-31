@@ -28,6 +28,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     protected function internalGateway()
     {
         ?>
+        <?= $this->callFnAction() ?>
         <script>
             MYAPP.formValidation = {};
             MYAPP.formValidationError = function () {
@@ -68,6 +69,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 }
                 MYAPP.showMsg(MYAPP.AllError[MYAPP.AllError.length - 1], false);
             };
+
             MYAPP.showMsg = function (msg, reghistory) {
                 (function ($) {
                     //clear notification => do not useful
@@ -322,12 +324,33 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     });
                     //Auto TinyMCE Editor resize
                     $('#jqxwptexteditor').on('resized', function (event) {
-                        wptexteditor_ifr.style.height = ($(this).height() - 220) + 'px';
+                        setTimeout(MYAPP.WPEditor.resize, 500, undefined, $(this).height() - 220);
                     });
                     $('#jqxwptexteditor').on('open', function (event) {
-                        wptexteditor_ifr.style.height = ($(this).height() - 220) + 'px';
+                        setTimeout(MYAPP.WPEditor.resize, 500, undefined, $(this).height() - 220);
                     });
+
                 });
+                MYAPP.WPEditor = {};
+                MYAPP.WPEditor.resize = function(width, height){
+                    if(wptexteditor_ifr!=undefined) {
+                        if(height!=undefined) {
+                            wptexteditor_ifr.style.height = (height) + 'px';//quocdunginfo
+                        }
+                        if(width!=undefined) {
+                            wptexteditor_ifr.style.width = (width) + 'px';//quocdunginfo
+                        }
+                    }
+                    else{
+                        console.log('ERROR: wptexteditor_ifr is not defined');
+                    }
+                };
+                MYAPP.WPEditor.setContent = function(initVal){
+                    var ins = tinyMCE.get('wptexteditor');
+                    if(ins!=undefined){
+                        tinyMCE.get('wptexteditor').setContent(initVal);
+                    }
+                }
             })(jQuery);
         </script>
         <!-- Modal -->
@@ -369,9 +392,14 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             </div>
             <div style="overflow: hidden;" id="wptexteditor_wrapper">
                 <div>
-                    <button type="button" id="wptexteditor_done">Done</button>
+                    <button type="button" id="wptexteditor_done" class="btn btn-primary btn-xs qd-action-btn">
+                        <?=Qdmvc_Message::getMsg('btn_wpeditordone')?>
+                    </button>
                 </div>
-                <?php wp_editor('', 'wptexteditor', $settings = array()); ?>
+                <div style="margin-top: 10px">
+                    <?php wp_editor('', 'wptexteditor', $settings = array()); ?>
+                </div>
+
                 <script>
                     MYAPP.wptexteditor_returnid = 'notset';
                     (function ($) {
@@ -390,8 +418,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                             MYAPP.wptexteditor_returnid = returnId;
                             console.log('WYSIWYG opened, returnId: ' + MYAPP.wptexteditor_returnid);
                             $('#jqxwptexteditor').jqxWindow('open');
-
-                            tinyMCE.get('wptexteditor').setContent(initVal);
+                            setTimeout(MYAPP.WPEditor.setContent, 200, initVal);
                         })(jQuery);
                     }
                 </script>
@@ -1315,7 +1342,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                             .done(function (data) {
                                 //data JSON
                                 //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
-
+                                MYAPP.formValidation = data.msg;
                                 //....
                                 MYAPP.showMsg(data.msg);
 
@@ -1454,6 +1481,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                     <?= Qdmvc_Message::getMsg('btn_reloadcard') ?>
                                 </button>
                             </span>
+            <span>
+                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdviewreport" style="display: none">
+                                    <?= Qdmvc_Message::getMsg('btn_viewreport') ?>
+                                </button>
+                            </span>
 
             <?= $this->render_serverFunctions() ?>
 
@@ -1570,17 +1602,22 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     {
         ?>
         <script>
-            MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
+            MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn, passing_obj) {
                 (function ($) {
                     //AJAX progress Bar
                     MYAPP.ajax_loader = new ajaxLoader("#cardForm");
 
 
                     //build data
-                    var json = MYAPP.getObj();//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
+                    var json = {id: MYAPP.viewModel.id()};//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                     //begin lock
+                    var action = 'call_fn';
+                    if(passing_obj===true){
+                        action = 'call_fn_passing';
+                        json = MYAPP.getObj();
+                    }
 
-                    var postdata = {submit: "submit", action: 'call_fn', function: fn_name, data: json, params: params};
+                    var postdata = {submit: "submit", action: action, function: fn_name, data: json, params: params};
                     console.log(postdata);
                     $.post(MYAPP.data_port, postdata)
                         .done(function (data) {
@@ -1624,7 +1661,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             return;
         }
         ?>
-        <?= $this->callFnAction() ?>
         <!-- Single button -->
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"

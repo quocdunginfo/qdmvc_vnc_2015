@@ -22,7 +22,7 @@ class Qdmvc_Page_ProductQA_List extends Qdmvc_Page_Product_List
     protected function getCustomPageView()
     {
         return array(
-            'type' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
+            'type' => QdManufactor::$TYPE2_MANUFACTOR_THOITRANG
         );
     }
 

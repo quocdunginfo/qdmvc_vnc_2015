@@ -7,7 +7,7 @@ class QdProductQA extends QdProduct
         $obj = parent::getFieldsConfig();
 
         $obj['type']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
+            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
                 'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
             ),
         );
@@ -20,7 +20,7 @@ class QdProductQA extends QdProduct
                 ),
                 'Field' => 'type',
                 'Type' => 'CONST',
-                'Value' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
+                'Value' => QdManufactor::$TYPE2_MANUFACTOR_THOITRANG
             )
         );
 
@@ -55,7 +55,7 @@ class QdProductQA extends QdProduct
         $obj->transferFieldsFrom($tmp);
 
 
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_QUANAO;
+        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_THOITRANG;
         return $obj;
     }
 }

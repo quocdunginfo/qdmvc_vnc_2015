@@ -22,9 +22,9 @@ class Qdmvc_Page_ProductCat_PG2_List extends Qdmvc_Page_ProductCat_List
 
     protected function getCustomPageView()
     {
-        return array(
+        return array_merge(parent::getCustomPageView(), array(
             'property_grp_type' => QdProductCat::$PROPERTY_G2
-        );
+        ));
     }
 
 }

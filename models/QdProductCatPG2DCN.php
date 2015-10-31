@@ -21,6 +21,11 @@ class QdProductCatPG2DCN extends QdProductCatPG2
                 'Caption' => array('en-US' => 'Đồ công nghệ', 'vi-VN' => 'Đồ công nghệ'),
             ),
         );
+        $obj['type3']['Options'] = array(
+            QdManufactor::$TYPE3_DCN => $obj['type3']['Options'][QdManufactor::$TYPE3_DCN]
+        );
+        $obj['type3']['ReadOnly'] = true;
+
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatPG2DCN';
 
         return $obj;

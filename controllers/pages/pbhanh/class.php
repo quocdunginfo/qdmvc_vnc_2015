@@ -52,6 +52,12 @@ class Qdmvc_Page_PBHanh extends Qdmvc_Page_Root
                     'guarantee_exp_date' => array(
                         'Order' => 150,
                     ),
+                    'days_of_warranty' => array(
+                        'Order' => 155
+                    ),
+                    'free_days_exchange' => array(
+                        'Order' => 160
+                    ),
                     /*
                     'stock_out_date' => array(
                         'Order' => 150,
@@ -68,7 +74,8 @@ class Qdmvc_Page_PBHanh extends Qdmvc_Page_Root
                     'date_modified' => array(
                         'Order' => 230,
                         'ReadOnly' => true
-                    )
+                    ),
+
                 )
             ),
             'CustInfo' => array(

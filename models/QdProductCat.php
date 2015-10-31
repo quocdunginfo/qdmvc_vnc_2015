@@ -5,10 +5,13 @@ class QdProductCat extends QdRoot
     static $table_name = 'mpd_product_cat';
     public static $TYPE_PRODUCTCAT = 0;
     public static $TYPE_MANUFACTOR = 215;
-    public static $PROPERTY_G2 = 'PG2';
-    public static $PROPERTY_G3 = 'PG3';
+    public static $PROPERTY_G2 = 'PG2';//loai, hang sx
+    public static $PROPERTY_G3 = 'PG3';//loai, hang sx, size
     public static $TYPE3_DCN = 'DCN';
     public static $TYPE3_XE = 'XE';
+    public static $TYPE3_DOHIEU = 'DOHIEU';
+    public static $TYPE3_THIETBI = 'THIETBI';
+    public static $TYPE3_OTHER = 'OTHER';
     public static $PRICE_RANGE_1 = 'PR1';
     public static $PRICE_RANGE_2 = 'PR2';
     public static $PRICE_RANGE_3 = 'PR3';
@@ -23,7 +26,7 @@ class QdProductCat extends QdRoot
     {
         $obj = new QdProductCat();
         $obj->type = static::$TYPE_PRODUCTCAT;
-        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
+        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI;
         $obj->price_range_type=static::$PRICE_RANGE_1;
         $obj->active = true;
         return $obj;
@@ -85,7 +88,7 @@ class QdProductCat extends QdRoot
                 'DataType' => 'Integer',
                 'FieldClass' => 'FlowField',
                 'FieldClass_FlowField' => array(
-                    'Method' => 'Sum',
+                    'Method' => 'Count',
                     'Table' => 'QdProduct',
                     'Field' => 'price',
                     'TableFilter' => array(
@@ -94,11 +97,13 @@ class QdProductCat extends QdRoot
                             'Type' => 'FIELD',
                             'Value' => 'id'
                         ),
+                        /*
                         array(
                             'Field' => 'active',
                             'Type' => 'FILTER',
                             'Value' => '=1',
                         )
+                        */
                     )
                 )
             ),
@@ -139,24 +144,36 @@ class QdProductCat extends QdRoot
                     static::$TYPE_PRODUCTCAT => array(
                         'Caption' => array('en-US' => 'Product Cat', 'vi-VN' => 'Product Cat'),
                     ),
-                    /*
-                    static::$TYPE_MANUFACTOR => array(
-                        'Caption' => array('en-US' => 'Manufactor', 'vi-VN' => 'Hãng SX'),
-                    )*/
-                )
+                ),
+                'ReadOnly' => true
             ),
             'type2' => array(
                 'Caption' => array('en-US' => 'Type2', 'vi-VN' => 'Dòng SP'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_DEFAULT => array(
-                        'Caption' => array('en-US' => 'Product Cat DF', 'vi-VN' => 'Loại SP DF'),
+                    QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => array(
+                        'Caption' => array('en-US' => 'Product Cat Phone', 'vi-VN' => 'LSP Điện thoại'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_MTB => array(
+                        'Caption' => array('en-US' => 'Product Cat Tablet', 'vi-VN' => 'LSP Máy tính bảng'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => array(
+                        'Caption' => array('en-US' => 'Product Cat Laptop', 'vi-VN' => 'LSP Laptop'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => array(
+                        'Caption' => array('en-US' => 'Product Cat PK', 'vi-VN' => 'LSP Phụ kiện'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_XEDAP => array(
+                        'Caption' => array('en-US' => 'Product Cat Bicycle', 'vi-VN' => 'LSP Xe đạp'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_XEMAY => array(
+                        'Caption' => array('en-US' => 'Product Cat Moto', 'vi-VN' => 'LSP Xe máy'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_OTO => array(
+                        'Caption' => array('en-US' => 'Product Cat Car', 'vi-VN' => 'LSP Xe ôtô'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
                         'Caption' => array('en-US' => 'Product Cat GD', 'vi-VN' => 'Loại SP GD'),
-                    ),
-                    QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
-                        'Caption' => array('en-US' => 'Product Cat QA', 'vi-VN' => 'Loại SP QA'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),
@@ -172,6 +189,12 @@ class QdProductCat extends QdRoot
                     ),
                     static::$TYPE3_XE => array(
                         'Caption' => array('en-US' => 'Xe', 'vi-VN' => 'Xe'),
+                    ),
+                    static::$TYPE3_DOHIEU => array(
+                        'Caption' => array('en-US' => 'Luxury', 'vi-VN' => 'Đồ hiệu'),
+                    ),
+                    static::$TYPE3_THIETBI => array(
+                        'Caption' => array('en-US' => 'Device', 'vi-VN' => 'Thiết bị'),
                     )
                 )
             ),

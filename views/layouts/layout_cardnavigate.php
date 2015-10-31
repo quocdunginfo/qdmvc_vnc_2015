@@ -19,7 +19,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
     {
         ?>
         <script>
-            MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn) {
+            MYAPP.callFn = function (fn_name, params, on_done_fn, on_fail_fn, on_final_fn, passing_obj) {
                 (function ($) {
                     //get Grid
                     var gridf = MYAPP.getGridFrame();
@@ -72,7 +72,14 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
                         //begin lock
                         MYAPP.ajax_loader = new ajaxLoader("#cardForm");
 
-                        var postdata = {submit: "submit", action: 'call_fn', function: fn_name, data: {id: id_}, params: params};
+                        var action = 'call_fn';
+                        var json = {id: id_};
+                        if(passing_obj===true){
+                            action = 'call_fn_passing';
+                            json = MYAPP.getObj();
+                        }
+
+                        var postdata = {submit: "submit", action: action, function: fn_name, data: json, params: params};
                         console.log(postdata);
                         $.post(MYAPP.data_port, postdata)
                             .done(function (data) {
@@ -138,7 +145,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
                                 $.post(MYAPP.data_port, {submit: "submit", action: "delete_multi", data: {id: list_ids}})
                                     .done(function (data) {
 
-
+                                        MYAPP.formValidation = data.msg;
                                         //....
                                         MYAPP.showMsg(data.msg);
 
@@ -164,7 +171,7 @@ class Qdmvc_Layout_CardNavigate extends Qdmvc_Layout_Card
                                 .done(function (data) {
                                     //data JSON
                                     //var obj = data;//"ok";//jQuery.parseJSON( data );//may throw error if data aldreay JSON format
-
+                                    MYAPP.formValidation = data.msg;
                                     //....
                                     MYAPP.showMsg(data.msg);
 

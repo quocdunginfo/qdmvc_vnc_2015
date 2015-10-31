@@ -34,22 +34,14 @@ class QdPro2Pro extends QdRoot
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
-                'TableRelation' => array(
-                    'Table' => 'QdProduct',
-                    'Field' => 'id',
-                    'TableFilter' => array(/*array(
-                            'Condition' => array(
-                                'Field' => '',
-                                'Type' => 'CONST',//'FIELD'
-                                'Value' => ''
-                            ),
-                            'Field' => 'type',
-                            'Type' => 'FIELD',
-                            'Value' => QdProduct::
-                        )*/
-                    )
-                ),
-                'DataPort' => 'product_port'
+                //'TableRelation' => array(
+                //    'Table' => 'QdProduct',
+                //    'Field' => 'id',
+                //    'TableFilter' => array(
+                //    )
+                //),
+                //'DataPort' => 'product_port',
+                'ReadOnly' => true
             ),
             'order' => array(),
             '_r_product_name' => array(
@@ -74,14 +66,11 @@ class QdPro2Pro extends QdRoot
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_DEFAULT => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => array(
                         'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
                         'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
-                    ),
-                    QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
-                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Gìay dép'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
@@ -100,16 +89,7 @@ class QdPro2Pro extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProduct',
                     'Field' => 'id',
-                    'TableFilter' => array(/*array(
-                            'Condition' => array(
-                                'Field' => '',
-                                'Type' => 'CONST',//'FIELD'
-                                'Value' => ''
-                            ),
-                            'Field' => 'type',
-                            'Type' => 'FIELD',
-                            'Value' => QdProductCat::$TYPE_PRODUCTCAT
-                        )*/
+                    'TableFilter' => array(
                     )
                 ),
                 'DataPort' => 'product_port'

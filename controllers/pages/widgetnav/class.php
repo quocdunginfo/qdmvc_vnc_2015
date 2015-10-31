@@ -63,6 +63,9 @@ class Qdmvc_Page_WidgetNav extends Qdmvc_Page_Root
                     'avatar' => array(
                         'Order' => 110,
                     ),
+                    '_avatar_preview' => array(
+                        'Order' => 150,
+                    ),
                 )
             )
             /* SAMPLE

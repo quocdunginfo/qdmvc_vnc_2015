@@ -8,7 +8,31 @@
  */
 class Qdmvc_Page_DatabaseSvc
 {
-    public function run()
+    public function run(){
+
+    }
+    public function run3(){
+        Qdmvc::loadHelper('class.Diff');
+        $diff = Diff::compare('Ngay do', 'Ngay mua', true);
+        echo Diff::toHTML($diff, '');
+        return;
+        foreach($diff as $item){
+            if($item[1]==Diff::DELETED){
+                echo $item[0];
+            }
+        }
+        echo '<br>';
+        foreach($diff as $item){
+            if($item[1]==Diff::INSERTED){
+                echo $item[0];
+            }
+        }
+        ?>
+
+
+        <?php
+    }
+    public function run2()
     {
         Qdmvc_Helper::requestCompact();
         echo 'blank page!'

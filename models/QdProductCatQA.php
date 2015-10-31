@@ -9,7 +9,7 @@ class QdProductCatQA extends QdProductCat
         $obj = new QdProductCatQA();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type2 = QdManufactorQA::$TYPE2_MANUFACTOR_QUANAO;
+        $obj->type2 = QdManufactorQA::$TYPE2_MANUFACTOR_THOITRANG;
         return $obj;
     }
 
@@ -17,7 +17,7 @@ class QdProductCatQA extends QdProductCat
     {
         $obj = parent::getFieldsConfig();
         $obj['type2']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
+            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
                 'Caption' => array('en-US' => 'Product Cat QA', 'vi-VN' => 'Loại SP QA'),
             )
         );

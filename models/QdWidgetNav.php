@@ -51,6 +51,12 @@ class QdWidgetNav extends QdRoot
                 'DataType' => 'Image',
                 'Description' => 'Hình đại diện',
             ),
+            '_avatar_preview' => array(
+                'Caption' => array('en-US' => 'Avatar Preview', 'vi-VN' => 'Xem trước'),
+                'DataType' => 'ImagePreview',
+                'FieldClass' => 'System',
+                'ImagePreviewField' => 'avatar'
+            ),
             'active' => array(
                 'DataType' => 'Boolean',
             ),

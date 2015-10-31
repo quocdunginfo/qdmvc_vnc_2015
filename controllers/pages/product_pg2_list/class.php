@@ -18,6 +18,7 @@ class Qdmvc_Page_Product_PG2_List extends Qdmvc_Page_Product_List
     {
         return 'product_pg2_list';
     }
+
     protected function getCustomPageView()
     {
         return array(

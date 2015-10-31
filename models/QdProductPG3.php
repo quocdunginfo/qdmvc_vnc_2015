@@ -13,25 +13,7 @@ class QdProductPG3 extends QdProduct
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        /*
-        $obj['type']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
-                'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
-            ),
-        );
-        $obj['size_id']['TableRelation']['TableFilter'] = array(
-            array(
-                'Condition' => array(
-                    'Field' => '',
-                    'Type' => 'CONST',//'FIELD'
-                    'Value' => ''
-                ),
-                'Field' => 'type',
-                'Type' => 'CONST',
-                'Value' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
-            )
-        );
-        */
+
 
         $obj['product_cat_id']['TableRelation']['Table'] = 'QdProductCatPG3';
         /*

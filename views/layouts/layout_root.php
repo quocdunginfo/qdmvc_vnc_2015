@@ -15,6 +15,7 @@ class Qdmvc_Layout_Root
     {
         $this->page = $page;
         $this->data = $page->getData();
+        wp_enqueue_media();//use for both Media and Tinymce
     }
 
     public function render()
@@ -146,7 +147,7 @@ class Qdmvc_Layout_Root
     <?php
     }
     protected function WP_Media_Selector(){
-        wp_enqueue_media();//moved to qdmvc.php, using cache files
+        //wp_enqueue_media();//moved to constructor
         ?>
         <script>
             MYAPP.MediaSelector = {};

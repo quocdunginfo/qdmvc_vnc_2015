@@ -23,7 +23,7 @@ class Qdmvc_Page_ProductCatQA_List extends Qdmvc_Page_ProductCat_List
     {
         return array(
             'type' => QdProductCat::$TYPE_PRODUCTCAT,
-            'type2' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
+            'type2' => QdManufactor::$TYPE2_MANUFACTOR_THOITRANG
         );
     }
 

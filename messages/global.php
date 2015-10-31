@@ -19,10 +19,12 @@ class Qdmvc_Message
         'msg_fk_constrain' => '%s mã %s đã được gán cho %s mã %s',
 
         /*Layout card*/
+        'btn_viewreport' => 'Xem báo cáo',
         'btn_save' => 'Lưu',
         'btn_delete' => 'Xóa',
         'btn_new' => 'Tạo mới',
         'btn_clone' => 'Sao chép',
+        'btn_wpeditordone' => 'Hoàn tất',
         'btn_choose' => 'Chọn',
         'btn_gotopagenavigate' => 'Bật chế độ chỉnh sửa',
         'btn_log' => 'Nhật ký',
@@ -62,10 +64,12 @@ class Qdmvc_Message
         'msg_fk_constrain' => '%s with ID %s was assigned to %s with ID %s',
 
         /*Layout card*/
+        'btn_viewreport' => 'View report',
         'btn_save' => 'Save',
         'btn_delete' => 'Delete',
         'btn_new' => 'New',
         'btn_clone' => 'Clone',
+        'btn_wpeditordone' => 'Done',
         'btn_choose' => 'Choose',
         'btn_gotopagenavigate' => 'Open editor',
         'btn_log' => 'Logs',

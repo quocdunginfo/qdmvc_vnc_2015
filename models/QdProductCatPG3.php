@@ -23,6 +23,8 @@ class QdProductCatPG3 extends QdProductCat
         );
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatPG3';
 
+        $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductPG3';
+
         return $obj;
     }
 }

@@ -16,11 +16,8 @@ class QdSize extends QdRoot
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
+                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
                         'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
-                    ),
-                    QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
-                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giáy dép'),
                     ),
                 )
             ),
@@ -56,7 +53,7 @@ class QdSize extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdSize();
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_QUANAO;
+        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_THOITRANG;
         return $obj;
     }
 

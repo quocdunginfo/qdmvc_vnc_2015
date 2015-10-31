@@ -13,6 +13,13 @@ class Qdmvc_View_PBHanh extends Qdmvc_Layout_CardNavigate
     {
         $obj = parent::serverFunctions();
         $obj = array_merge($obj, array(
+            'btn_reopen' => array(
+                'label' => array(
+                    'vi-VN' => 'Mở lại',
+                    'en-US' => 'Reopen'
+                ),
+                'fn_name' => 'fn_reopen',
+            ),
             'btn_print_doc_preview' => array(
                 'label' => array(
                     'vi-VN' => 'Xem trước khi in',

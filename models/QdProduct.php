@@ -137,16 +137,7 @@ class QdProduct extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdManufactor',
                     'Field' => 'id',
-                    'TableFilter' => array(/*array(
-                            'Condition' => array(
-                                'Field' => '',
-                                'Type' => 'CONST',//'FIELD'
-                                'Value' => ''
-                            ),
-                            'Field' => 'order',
-                            'Type' => 'FIELD',
-                            'Value' => 10
-                        )*/
+                    'TableFilter' => array(
                     )
                 )
             ),
@@ -224,14 +215,17 @@ class QdProduct extends QdRoot
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_DEFAULT => array(
-                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => array(
+                        'Caption' => array('en-US' => 'Phone', 'vi-VN' => 'Điện thoại'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
-                        'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
+                    QdManufactor::$TYPE2_MANUFACTOR_MTB => array(
+                        'Caption' => array('en-US' => 'Tablet', 'vi-VN' => 'Máy tính bảng'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_GIAYDEP => array(
-                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giày dép'),
+                    QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => array(
+                        'Caption' => array('en-US' => 'Laptop', 'vi-VN' => 'laptop'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => array(
+                        'Caption' => array('en-US' => 'PK', 'vi-VN' => 'Phụ kiện'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
@@ -337,6 +331,17 @@ class QdProduct extends QdRoot
                 )
             )
         );*/
+        $obj['__sys_lines_url']['TableRelation'] = array(
+            'Table' => 'QdPro2Pro',
+            'Field' => 'id',
+            'TableFilter' => array(
+                array(
+                    'Field' => 'product_id',
+                    'Type' => 'FIELD',
+                    'Value' => 'id'
+                ),
+            )
+        );
         return $obj;
     }
 
@@ -468,7 +473,7 @@ class QdProduct extends QdRoot
     {
         $obj = new QdProduct();
         $obj->description = Qdmvc_Config::getProductSetup()->df_product_desc_tpl;
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DEFAULT;
+        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI;
         return $obj;
     }
 

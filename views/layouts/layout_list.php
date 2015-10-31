@@ -201,9 +201,9 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     {
         ?>
         <!-- Lookup toolbar -->
-        <span>
+        <div style="margin-bottom: 5px">
             <span>
-                <button class="btn btn-primary btn-xs" id="qdchoose" type="button">
+                <button class="btn btn-primary btn-xs" id="qdchoose" type="button" style="width: 100px">
                     <?= Qdmvc_Message::getMsg('btn_choose') ?>
                 </button>
             </span>
@@ -245,7 +245,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     });
                 })(jQuery);
             </script>
-        </span>
+        </div>
 
     <?php
     }

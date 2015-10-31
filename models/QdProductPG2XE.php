@@ -2,6 +2,13 @@
 
 class QdProductPG2XE extends QdProductPG2
 {
+    public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
+    {
+        parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+        $this->SETFILTERDEFAULT(array(
+            array('field' => 'type3', 'value' => QdProductCat::$TYPE3_XE, 'operator' => static::$OP_EQUAL)
+        ));
+    }
     public static function getInitObj()
     {
         $obj = new QdProductPG2XE();
@@ -13,47 +20,10 @@ class QdProductPG2XE extends QdProductPG2
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        /*
-        $obj['type']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_QUANAO => array(
-                'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
-            ),
-        );
-        $obj['size_id']['TableRelation']['TableFilter'] = array(
-            array(
-                'Condition' => array(
-                    'Field' => '',
-                    'Type' => 'CONST',//'FIELD'
-                    'Value' => ''
-                ),
-                'Field' => 'type',
-                'Type' => 'CONST',
-                'Value' => QdManufactor::$TYPE2_MANUFACTOR_QUANAO
-            )
-        );
-        */
 
         $obj['product_cat_id']['TableRelation']['Table'] = 'QdProductCatPG2XE';
-        /*
-        $obj['manufacturer_id']['TableRelation']['Table'] = 'QdManufactorQA';
+        $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdPro2ProPG2XE';
 
-        $obj['__sys_lines_url']['TableRelation'] = array(
-            'Table' => 'QdPro2Pro',
-            'Field' => 'id',
-            'TableFilter' => array(
-                array(
-                    'Condition' => array(
-                        'Field' => '',
-                        'Type' => 'CONST',//'FIELD'
-                        'Value' => ''
-                    ),
-                    'Field' => 'product_id',
-                    'Type' => 'FIELD',
-                    'Value' => 'id'
-                ),
-            )
-        );
-        */
         return $obj;
     }
 }

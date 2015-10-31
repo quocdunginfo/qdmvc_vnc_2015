@@ -12,7 +12,7 @@ class Qdmvc_View_PBHanh_Shipped extends Qdmvc_View_PBHanh
     protected function serverFunctions()
     {
         $obj = parent::serverFunctions();
-        unset($obj['btn_ship']);
+        //unset($obj['btn_ship']);
         return $obj;
     }
 }

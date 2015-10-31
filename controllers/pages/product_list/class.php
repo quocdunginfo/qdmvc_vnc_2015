@@ -9,11 +9,6 @@ Qdmvc::loadPage('root_list');
 
 class Qdmvc_Page_Product_List extends Qdmvc_Page_Root_List
 {
-    public function run()
-    {
-        parent::run();
-    }
-
     protected static function getViewClass()
     {
         return 'Qdmvc_View_Product_List';
