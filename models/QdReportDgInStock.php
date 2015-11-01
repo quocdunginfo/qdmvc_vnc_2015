@@ -23,7 +23,7 @@ class QdReportDgInStock extends QdRootReport
 
     protected function getReportURL()
     {
-        return 'https://www.google.com/?gws_rd=ssl#safe=off&q='.$this->keyword;
+        return 'http://127.0.0.1:52242/viewer/frameset?__report=%2FUsers%2Fmac%2FDocuments%2Fworkspace%2Fqdmvc%2Fnew_report.rptdesign&__format=html&__svg=true&__locale=en_US&__timezone=VST&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=%2FUsers%2Fmac%2FDocuments%2Fworkspace%2Fqdmvc&1638172103&ID='.$this->keyword.'&token=jnshy637dhyue872hsb';
     }
 
 }

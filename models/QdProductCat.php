@@ -5,6 +5,8 @@ class QdProductCat extends QdRoot
     static $table_name = 'mpd_product_cat';
     public static $TYPE_PRODUCTCAT = 0;
     public static $TYPE_MANUFACTOR = 215;
+    //public static $TYPE_BIGSALE = 100;//Use in child class
+
     public static $PROPERTY_G2 = 'PG2';//loai, hang sx
     public static $PROPERTY_G3 = 'PG3';//loai, hang sx, size
     public static $TYPE3_DCN = 'DCN';
@@ -17,7 +19,13 @@ class QdProductCat extends QdRoot
     public static $PRICE_RANGE_3 = 'PR3';
     public static $PRICE_RANGE_4 = 'PR4';
 
-
+    public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
+    {
+        parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+        $this->SETFILTERDEFAULT(array(
+            array('field' => 'type', 'value' => static::$TYPE_PRODUCTCAT, 'operator' => static::$OP_EQUAL)
+        ));
+    }
     /*
     static $has_many = array(
         array('product_list', 'class_name' => 'QdProduct', 'primary_key' => 'id', 'foreign_key' => 'product_cat_id')
@@ -90,9 +98,9 @@ class QdProductCat extends QdRoot
                 'FieldClass_FlowField' => array(
                     'Method' => 'Count',
                     'Table' => 'QdProduct',
-                    'Field' => 'price',
+                    'Field' => 'id',
                     'TableFilter' => array(
-                        array(
+                        'product_cat_id' => array(
                             'Field' => 'product_cat_id',
                             'Type' => 'FIELD',
                             'Value' => 'id'
@@ -234,6 +242,16 @@ class QdProductCat extends QdRoot
                 'DataType' => 'Text',
                 'FieldClass' => 'FlowField',
             ),
+            '_permalink_search_page_struct_lv1' => array(
+                'Name' => '_permalink_search_page_struct_lv1',
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+            ),
+            '_permalink_search_page_struct_lv2' => array(
+                'Name' => '_permalink_search_page_struct_lv2',
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+            )
         ));
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdProduct',
@@ -294,9 +312,14 @@ class QdProductCat extends QdRoot
 
     public function getBreadcrumbs()
     {
+        $StructLv1Dic = $this->_structLv1LevelDictionary();
+        $StructLv2Dic = $this->_structLv2LevelDictionary();
+
         $re = array();
         $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
         array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
+        array_push($re, array('name' => $StructLv1Dic[$this->type3], 'url' => $this->_permalink_search_page_struct_lv1));
+        array_push($re, array('name' => $StructLv2Dic[$this->type2], 'url' => $this->_permalink_search_page_struct_lv2));
         array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
         return $re;
     }
@@ -378,10 +401,29 @@ class QdProductCat extends QdRoot
         return true;
     }
 
+    protected function getPermalinkSearchPageStructLv1(){
+        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        $query = add_query_arg(array('product-cat-lv1-id' => $this->type3), $query);
+        return $query;
+    }
+    protected function getPermalinkSearchPageStructLv2(){
+        $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        $query = add_query_arg(array('product-cat-lv2-id' => $this->type2), $query);
+        return $query;
+    }
+
     protected function CALCFIELDS($flowfield_name)
     {
         if ($flowfield_name == '_permalink') {
             $this->qd_cached_attr[$flowfield_name] = $this->getPermalink();
+            //return
+            return $this->qd_cached_attr[$flowfield_name];
+        } else if ($flowfield_name == '_permalink_search_page_struct_lv1') {
+            $this->qd_cached_attr[$flowfield_name] = $this->getPermalinkSearchPageStructLv1();
+            //return
+            return $this->qd_cached_attr[$flowfield_name];
+        } else if ($flowfield_name == '_permalink_search_page_struct_lv2') {
+            $this->qd_cached_attr[$flowfield_name] = $this->getPermalinkSearchPageStructLv2();
             //return
             return $this->qd_cached_attr[$flowfield_name];
         }
@@ -439,6 +481,36 @@ class QdProductCat extends QdRoot
         return array(
             'vi-VN' => 'Loại SP',
             'en-US' => 'Product Cat'
+        );
+    }
+    protected function getStructLv1Caption($type3){
+
+    }
+    protected function getStructLv2Caption($type2){
+
+    }
+    private function _structLv1LevelDictionary(){
+        return array(
+            static::$TYPE3_DCN => 'Đồ công nghệ',
+            static::$TYPE3_XE => 'Xe',
+            static::$TYPE3_DOHIEU => 'Đồ hiệu',
+            static::$TYPE3_THIETBI => 'Thiết bị',
+        );
+    }
+    private function _structLv2LevelDictionary(){
+        return array(
+            QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => 'Điện thoại',
+            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => 'Thời trang',
+            QdManufactor::$TYPE2_MANUFACTOR_XEDAP => 'Xe đạp',
+            QdManufactor::$TYPE2_MANUFACTOR_MTB => 'Máy tính bảng',
+            QdManufactor::$TYPE2_MANUFACTOR_DODUNG => 'Đồ dùng',
+            QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => 'Laptop',
+            QdManufactor::$TYPE2_MANUFACTOR_XEMAY => 'Xe máy',
+            QdManufactor::$TYPE2_MANUFACTOR_OTO => 'Xe hơi',
+            QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => 'Đồng hồ - Mắt kính',
+            QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => 'Nước hoa',
+            QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => 'Sưu tập',
+            QdManufactor::$TYPE2_MANUFACTOR_OTHER => 'Khác',
         );
     }
 }

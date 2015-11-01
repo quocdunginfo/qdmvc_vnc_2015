@@ -21,13 +21,28 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Validate all Level'
                 )
             ),
+            'btn_view_fe_searchpage_lv1' => array(
+                //'fn_name' => 'btn_view_in_frontend',
+                'label' => array(
+                    'vi-VN' => 'Mở trang SP Struct Lv1',
+                    'en-US' => 'Open Front-End Lv1 Page'
+                )
+            ),
+            'btn_view_fe_searchpage_lv2' => array(
+                //'fn_name' => 'btn_view_in_frontend',
+                'label' => array(
+                    'vi-VN' => 'Mở trang SP Struct Lv2',
+                    'en-US' => 'Open Front-End Lv2 Page'
+                )
+            ),
             'btn_view_in_frontend' => array(
                 //'fn_name' => 'btn_view_in_frontend',
                 'label' => array(
-                    'vi-VN' => 'Mở trang Tìm kiếm LSP',
-                    'en-US' => 'Open Front-End Search Page'
+                    'vi-VN' => 'Mở trang SP Struct Lv3',
+                    'en-US' => 'Open Front-End Lv3 Page'
                 )
             ),
+
         ));
         return $obj;
     }
@@ -41,6 +56,12 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                 $(document).ready(function () {
                     $('#btn_view_in_frontend').click(function () {
                         MYAPP.openInNewTab(MYAPP.viewModel._permalink());
+                    });
+                    $('#btn_view_fe_searchpage_lv1').click(function () {
+                        MYAPP.openInNewTab(MYAPP.viewModel._permalink_search_page_struct_lv1());
+                    });
+                    $('#btn_view_fe_searchpage_lv2').click(function () {
+                        MYAPP.openInNewTab(MYAPP.viewModel._permalink_search_page_struct_lv2());
                     });
                 });
             })(jQuery);

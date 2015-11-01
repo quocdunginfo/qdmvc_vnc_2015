@@ -58,6 +58,7 @@ class QdManufactor extends QdProductCat
                 'Caption' => array('en-US' => 'Manufactor', 'vi-VN' => 'Hãng SX'),
             )
         );
+        $obj['_product_count']['FieldClass_FlowField']['TableFilter']['product_cat_id']['Field'] = 'manufacturer_id';
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdProduct',
             'Field' => 'id',
@@ -74,6 +75,8 @@ class QdManufactor extends QdProductCat
                 )
             )
         );
+        unset($obj['_permalink_search_page_struct_lv1']);
+        unset($obj['_permalink_search_page_struct_lv2']);
 
         return $obj;
     }

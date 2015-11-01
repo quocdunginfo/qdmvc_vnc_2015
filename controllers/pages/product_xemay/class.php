@@ -7,15 +7,15 @@
  */
 Qdmvc::loadPage('product_pg2_xe');
 
-class Qdmvc_Page_ProductXEDAP_Card extends Qdmvc_Page_Product_PG2_XE_Card
+class Qdmvc_Page_ProductXEMAY_Card extends Qdmvc_Page_Product_PG2_XE_Card
 {
     protected static function getViewClass()
     {
-        return 'Qdmvc_View_ProductXEDAP_Card';
+        return 'Qdmvc_View_ProductXEMAY_Card';
     }
 
     public static function getPage()
     {
-        return 'product_xedap';
+        return 'product_xemay';
     }
 }

@@ -16,6 +16,7 @@ class QdProductCatPG2DCN extends QdProductCatPG2
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
+
         $obj['type3']['Options'] = array(
             static::$TYPE3_DCN => array(
                 'Caption' => array('en-US' => 'Đồ công nghệ', 'vi-VN' => 'Đồ công nghệ'),

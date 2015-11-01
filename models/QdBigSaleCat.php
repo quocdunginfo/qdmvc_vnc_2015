@@ -4,6 +4,14 @@ class QdBigSaleCat extends QdProductCat
 {
     public static $TYPE_BIGSALE = 100;
 
+    public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
+    {
+        parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+        $this->SETFILTERDEFAULT(array(
+            array('field' => 'type', 'value' => static::$TYPE_BIGSALE, 'operator' => static::$OP_EQUAL)
+        ));
+    }
+
     public static function getInitObj()
     {
         $tmp = parent::getInitObj();

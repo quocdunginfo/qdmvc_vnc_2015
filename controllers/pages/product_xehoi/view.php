@@ -8,7 +8,7 @@
 //import libraries
 Qdmvc::loadPageView('product_pg2_xe');
 
-class Qdmvc_View_ProductXEDAP_Card extends Qdmvc_View_Product_PG2_XE_Card
+class Qdmvc_View_ProductXEHOI_Card extends Qdmvc_View_Product_PG2_XE_Card
 {
 
 }

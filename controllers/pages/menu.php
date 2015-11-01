@@ -32,7 +32,7 @@ class Qdmvc_Page_IndexMenu
             'Class' => 'Qdmvc_Page_Product_Card',
             'Caption' => array(
                 'en-US' => 'Product (All)',
-                'vi-VN' => 'Sản phẩm (Tất cả)',
+                'vi-VN' => 'SP (Tất cả)',
             ),
             'Model' => 'QdProduct',
             'DataPort' => 'product_port',
@@ -159,7 +159,7 @@ class Qdmvc_Page_IndexMenu
             'Class' => 'Qdmvc_Page_ProductDT_Card',
             'Caption' => array(
                 'en-US' => 'Product DT',
-                'vi-VN' => 'Sản phẩm Điện thoại',
+                'vi-VN' => 'SP Điện thoại',
             ),
             'Model' => 'QdProductDT',
             'DataPort' => 'product_dt_port',
@@ -252,6 +252,56 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdProductXEDAP',
             'DataPort' => 'product_xedap_port'
         ),
+        'product_xemay' => array(
+            'ParentId' => 'product_pg2_xe',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductXEMAY_Card',
+            'Caption' => array(
+                'en-US' => 'Product XEMAY',
+                'vi-VN' => 'SP Xe máy',
+            ),
+            'Model' => 'QdProductXEMAY',
+            'DataPort' => 'product_xemay_port',
+            'PageList' => 'product_xemay_list'
+        ),
+        'product_xemay_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductXEMAY_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdProductXEMAY',
+            'DataPort' => 'product_xemay_port'
+        ),
+        'product_xehoi' => array(
+            'ParentId' => 'product_pg2_xe',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductXEHOI_Card',
+            'Caption' => array(
+                'en-US' => 'Product XEHOI',
+                'vi-VN' => 'SP Xe hơi',
+            ),
+            'Model' => 'QdProductXEHOI',
+            'DataPort' => 'product_xehoi_port',
+            'PageList' => 'product_xehoi_list'
+        ),
+        'product_xehoi_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductXEHOI_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List'
+            ),
+            'Model' => 'QdProductXEHOI',
+            'DataPort' => 'product_xehoi_port'
+        ),
         'product_qa' => array(
             'ParentId' => 'folder10',
             'Active' => true,
@@ -309,7 +359,7 @@ class Qdmvc_Page_IndexMenu
             'Class' => 'Qdmvc_Page_ProductCat_Card',
             'Caption' => array(
                 'en-US' => 'Product Category (All)',
-                'vi-VN' => 'Loại sản phẩm (Tất cả)',
+                'vi-VN' => 'LSP (Tất cả)',
             ),
             'Model' => 'QdProductCat',
             'DataPort' => 'product_cat_port',
@@ -437,7 +487,7 @@ class Qdmvc_Page_IndexMenu
             'Class' => 'Qdmvc_Page_ProductCatDT_Card',
             'Caption' => array(
                 'en-US' => 'Product Cat Phone',
-                'vi-VN' => 'Loại SP Điện thoại',
+                'vi-VN' => 'LSP Điện thoại',
             ),
             'Model' => 'QdProductCatDT',
             'DataPort' => 'product_cat_dt_port',
@@ -604,6 +654,31 @@ class Qdmvc_Page_IndexMenu
             ),
             'Model' => 'QdProductCatXEMAY',
             'DataPort' => 'product_cat_xemay_port'
+        ),
+        'product_cat_xehoi' => array(
+            'ParentId' => 'product_cat_pg2_xe_card',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductCatXEHOI_Card',
+            'Caption' => array(
+                'en-US' => 'Product Cat XEHOI',
+                'vi-VN' => 'LSP Xe hơi',
+            ),
+            'Model' => 'QdProductCatXEHOI',
+            'DataPort' => 'product_cat_xehoi_port',
+            'PageList' => 'product_cat_xehoi_list'
+        ),
+        'product_cat_xehoi_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductCatXEHOI_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdProductCatXEHOI',
+            'DataPort' => 'product_cat_xehoi_port'
         ),
         'product_order_card' => array(
             'ParentId' => 'folder100',

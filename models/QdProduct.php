@@ -222,10 +222,19 @@ class QdProduct extends QdRoot
                         'Caption' => array('en-US' => 'Tablet', 'vi-VN' => 'Máy tính bảng'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => array(
-                        'Caption' => array('en-US' => 'Laptop', 'vi-VN' => 'laptop'),
+                        'Caption' => array('en-US' => 'Laptop', 'vi-VN' => 'Laptop'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => array(
                         'Caption' => array('en-US' => 'PK', 'vi-VN' => 'Phụ kiện'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_XEDAP => array(
+                        'Caption' => array('en-US' => 'Bicycle', 'vi-VN' => 'Xe đạp'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_XEMAY => array(
+                        'Caption' => array('en-US' => 'Moto', 'vi-VN' => 'Xe máy'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_OTO => array(
+                        'Caption' => array('en-US' => 'CAR', 'vi-VN' => 'Xe hơi'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
@@ -456,6 +465,7 @@ class QdProduct extends QdRoot
             //validate other mark field
             $this->property_grp_type = $pc->property_grp_type;
             $this->type3 = $pc->type3;
+            $this->type = $pc->type2;
             $this->price_range_type = $pc->price_range_type;
         }
     }
