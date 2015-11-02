@@ -377,7 +377,7 @@ class Qdmvc_Dataport
                 continue;
             }
             //check allow submit field
-            if (!QdT_Library::isNullOrEmpty(static::allowSubmitFields())) {
+            if (!Qdmvc_Helper::isNullOrEmpty(static::allowSubmitFields())) {
                 if (!in_array($key, static::allowSubmitFields())) {
                     continue;
                 }

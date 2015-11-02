@@ -127,7 +127,7 @@ class QdPostCat extends QdRoot
     public function getBreadcrumbs()
     {
         return array(
-            array('name' => $this->title, 'url' => QdT_Library::getNoneLink())
+            array('name' => $this->title, 'url' => Qdmvc_Helper::getNoneLink())
         );
     }
 

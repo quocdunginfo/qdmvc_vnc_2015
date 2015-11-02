@@ -402,7 +402,7 @@ class Qdmvc_Page_Root
         //check in Model
         $c = static::getModel();
         $tmp = $c::getSingleFieldConfig($f_name, $meta_name, $lang);
-        if (QdT_Library::isNullOrEmpty($tmp) && $meta_name == 'SourceExpr') {
+        if (Qdmvc_Helper::isNullOrEmpty($tmp) && $meta_name == 'SourceExpr') {
             $tmp = $f_name;
         }
         return $tmp;

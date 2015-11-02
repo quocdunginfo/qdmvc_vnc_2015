@@ -1000,7 +1000,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                     $type = $tmp_page::getDataType($key);
 
                                     $readonly = $tmp_page::isReadOnly($key);
-                                    $readonly = QdT_Library::isNullOrEmpty($readonly) ? false : true;
+                                    $readonly = Qdmvc_Helper::isNullOrEmpty($readonly) ? false : true;
 
                                     $f_name = $tmp_page::getSourceExpr($key);
                                     if ($type == 'Option') {
@@ -1671,11 +1671,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 <?php
                 foreach ($this->serverFunctions() as $item => $config) :
                     $fn_label = isset($config['label'][$this->data['language']]) ? $config['label'][$this->data['language']] : '@' . $item;
-                    $fn_confirm = (!QdT_Library::isNullOrEmpty($config['confirm'])) && $config['confirm'] == true;
+                    $fn_confirm = (!Qdmvc_Helper::isNullOrEmpty($config['confirm'])) && $config['confirm'] == true;
                     ?>
                     <li><a id="<?= $item ?>"><?= $fn_label ?></a></li>
                 <?php
-                if (!QdT_Library::isNullOrEmpty($config['fn_name']))
+                if (!Qdmvc_Helper::isNullOrEmpty($config['fn_name']))
                 {
                 ?>
                     <script>
