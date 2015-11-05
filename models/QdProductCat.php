@@ -8,6 +8,7 @@ class QdProductCat extends QdRoot
     //public static $TYPE_BIGSALE = 100;//Use in child class
 
     public static $PROPERTY_G2 = 'PG2';//loai, hang sx
+    public static $PROPERTY_GDF = 'PGDF';//loai, hang sx
     public static $PROPERTY_G3 = 'PG3';//loai, hang sx, size
     public static $TYPE3_DCN = 'DCN';
     public static $TYPE3_XE = 'XE';
@@ -180,6 +181,9 @@ class QdProductCat extends QdRoot
                     QdManufactor::$TYPE2_MANUFACTOR_OTO => array(
                         'Caption' => array('en-US' => 'Product Cat Car', 'vi-VN' => 'LSP Xe ôtô'),
                     ),
+                    QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => array(
+                        'Caption' => array('en-US' => 'Product Cat NUOCHOA', 'vi-VN' => 'LSP Nước hoa'),
+                    ),
                     QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
                         'Caption' => array('en-US' => 'Product Cat GD', 'vi-VN' => 'Loại SP GD'),
                     ),
@@ -229,6 +233,9 @@ class QdProductCat extends QdRoot
                 'Caption' => array('en-US' => 'Property Group', 'vi-VN' => 'Nhóm thuộc tính'),
                 'DataType' => 'Option',
                 'Options' => array(
+                    static::$PROPERTY_GDF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
                     static::$PROPERTY_G2 => array(
                         'Caption' => array('en-US' => '2 properties', 'vi-VN' => '2 thuộc tính'),
                     ),

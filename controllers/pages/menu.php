@@ -427,6 +427,31 @@ class Qdmvc_Page_IndexMenu
             'Model' => 'QdProductCatPG2XE',
             'DataPort' => 'product_cat_pg2_xe_port'
         ),
+        'product_cat_dohieu' => array(
+            'ParentId' => 'folder20',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductCat_DOHIEU_Card',
+            'Caption' => array(
+                'en-US' => 'LSP Đồ hiệu',
+                'vi-VN' => 'LSP Đồ hiệu',
+            ),
+            'Model' => 'QdProductCatDOHIEU',
+            'DataPort' => 'product_cat_dohieu_port',
+            'PageList' => 'product_cat_dohieu_list'
+        ),
+        'product_cat_dohieu_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductCat_DOHIEU_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdProductCatDOHIEU',
+            'DataPort' => 'product_cat_dohieu_port'
+        ),
         /*
         'product_cat_pg2_card' => array(
             'ParentId' => 'folder20',
@@ -679,6 +704,31 @@ class Qdmvc_Page_IndexMenu
             ),
             'Model' => 'QdProductCatXEHOI',
             'DataPort' => 'product_cat_xehoi_port'
+        ),
+        'product_cat_nuochoa' => array(
+            'ParentId' => 'product_cat_dohieu',
+            'Active' => true,
+            'PageType' => 'Card',
+            'Class' => 'Qdmvc_Page_ProductCatNUOCHOA_Card',
+            'Caption' => array(
+                'en-US' => 'Product Cat NUOCHOA',
+                'vi-VN' => 'LSP Nước hoa',
+            ),
+            'Model' => 'QdProductCatNUOCHOA',
+            'DataPort' => 'product_cat_nuochoa_port',
+            'PageList' => 'product_cat_nuochoa_list'
+        ),
+        'product_cat_nuochoa_list' => array(
+            'ParentId' => -1,
+            'Active' => false,
+            'PageType' => 'List',
+            'Class' => 'Qdmvc_Page_ProductCatNUOCHOA_List',
+            'Caption' => array(
+                'en-US' => 'List',
+                'vi-VN' => 'List',
+            ),
+            'Model' => 'QdProductCatNUOCHOA',
+            'DataPort' => 'product_cat_nuochoa_port'
         ),
         'product_order_card' => array(
             'ParentId' => 'folder100',
