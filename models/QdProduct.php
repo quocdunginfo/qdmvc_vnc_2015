@@ -225,7 +225,7 @@ class QdProduct extends QdRoot
                         'Caption' => array('en-US' => 'Laptop', 'vi-VN' => 'Laptop'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => array(
-                        'Caption' => array('en-US' => 'PK', 'vi-VN' => 'Phụ kiện'),
+                        'Caption' => array('en-US' => 'Accessories', 'vi-VN' => 'Phụ kiện'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_XEDAP => array(
                         'Caption' => array('en-US' => 'Bicycle', 'vi-VN' => 'Xe đạp'),
@@ -234,7 +234,10 @@ class QdProduct extends QdRoot
                         'Caption' => array('en-US' => 'Moto', 'vi-VN' => 'Xe máy'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTO => array(
-                        'Caption' => array('en-US' => 'CAR', 'vi-VN' => 'Xe hơi'),
+                        'Caption' => array('en-US' => 'Car & Auto', 'vi-VN' => 'Xe hơi'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => array(
+                        'Caption' => array('en-US' => 'Perfume', 'vi-VN' => 'Nước hoa'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),

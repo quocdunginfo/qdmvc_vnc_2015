@@ -5,6 +5,7 @@
  * User: quocd_000
  * Date: 09/02/2015
  * Time: 10:45 PM
+ * Version: 151106.001
  */
 class QdRoot extends ActiveRecord\Model
 {
@@ -1080,6 +1081,9 @@ class QdRoot extends ActiveRecord\Model
                         return false;
                     } else {
                         $this->id = $tmpnose;
+                        if(static::hasFieldName('noseries')){
+                            $this->noseries = $use_noseries;
+                        }
                     }
                 }
             } else {
@@ -1104,6 +1108,10 @@ class QdRoot extends ActiveRecord\Model
         } else {
             return false;
         }
+    }
+    public static function hasFieldName($fname){
+        $cf = static::getFieldsConfig();
+        return isset($cf[$fname]);
     }
 
     protected function writeLog($action = 0, $location = '')
