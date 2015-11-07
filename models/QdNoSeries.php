@@ -41,8 +41,8 @@ class QdNoSeries extends QdRoot
         $obj->from_no = 1;
         $obj->to_no = 99999;
         $obj->last_no = $obj->from_no - 1;
-        $obj->fixed_length = false;
-        $obj->manual_allowed = false;
+        $obj->fixed_length = true;
+        $obj->manual_allowed = true;
         $obj->active = true;
 
         return $obj;
