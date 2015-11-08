@@ -484,6 +484,31 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductNUOCHOA',
                 'DataPort' => 'product_nuochoa_port'
             ),
+            'product_thoitrang' => array(
+                'ParentId' => 'product_dohieu',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductTHOITRANG_Card',
+                'Caption' => array(
+                    'en-US' => 'Product THOITRANG',
+                    'vi-VN' => 'SP Thời trang',
+                ),
+                'Model' => 'QdProductTHOITRANG',
+                'DataPort' => 'product_thoitrang_port',
+                'PageList' => 'product_thoitrang_list'
+            ),
+            'product_thoitrang_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductTHOITRANG_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductTHOITRANG',
+                'DataPort' => 'product_thoitrang_port'
+            ),
             'product_qa' => array(
                 'ParentId' => 'folder10',
                 'Active' => true,
@@ -911,6 +936,31 @@ class Qdmvc_Page_IndexMenu
                 ),
                 'Model' => 'QdProductCatNUOCHOA',
                 'DataPort' => 'product_cat_nuochoa_port'
+            ),
+            'product_cat_thoitrang' => array(
+                'ParentId' => 'product_cat_dohieu',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductCatTHOITRANG_Card',
+                'Caption' => array(
+                    'en-US' => 'Product Cat THOITRANG',
+                    'vi-VN' => 'LSP Thời trang',
+                ),
+                'Model' => 'QdProductCatTHOITRANG',
+                'DataPort' => 'product_cat_thoitrang_port',
+                'PageList' => 'product_cat_thoitrang_list'
+            ),
+            'product_cat_thoitrang_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductCatTHOITRANG_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List',
+                ),
+                'Model' => 'QdProductCatTHOITRANG',
+                'DataPort' => 'product_cat_thoitrang_port'
             ),
             'product_order_card' => array(
                 'ParentId' => 'folder100',

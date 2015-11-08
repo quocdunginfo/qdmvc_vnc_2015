@@ -185,7 +185,7 @@ class QdProductCat extends QdRoot
                         'Caption' => array('en-US' => 'Product Cat NUOCHOA', 'vi-VN' => 'LSP Nước hoa'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
-                        'Caption' => array('en-US' => 'Product Cat GD', 'vi-VN' => 'Loại SP GD'),
+                        'Caption' => array('en-US' => 'Product Cat THOITRANG', 'vi-VN' => 'LSP Thời trang'),
                     ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),

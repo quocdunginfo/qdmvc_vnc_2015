@@ -239,6 +239,9 @@ class QdProduct extends QdRoot
                     QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => array(
                         'Caption' => array('en-US' => 'Perfume', 'vi-VN' => 'Nước hoa'),
                     ),
+                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
+                        'Caption' => array('en-US' => 'Fashion', 'vi-VN' => 'Thời trang'),
+                    ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
                     ),
