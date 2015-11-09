@@ -187,6 +187,12 @@ class QdProductCat extends QdRoot
                     QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
                         'Caption' => array('en-US' => 'Product Cat THOITRANG', 'vi-VN' => 'LSP Thời trang'),
                     ),
+                    QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => array(
+                        'Caption' => array('en-US' => 'Product Cat Watch - Glass', 'vi-VN' => 'LSP Đồng hồ - Mắt kính'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_DODUNG => array(
+                        'Caption' => array('en-US' => 'Product Cat Furniture', 'vi-VN' => 'LSP Đồ dùng'),
+                    ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),
                     ),

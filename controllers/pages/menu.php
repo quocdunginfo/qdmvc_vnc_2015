@@ -259,6 +259,7 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductPG2XE',
                 'DataPort' => 'product_pg2_xe_port'
             ),
+            /*
             'product_pg3' => array(
                 'ParentId' => 'folder10',
                 'Active' => true,
@@ -284,6 +285,7 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductPG3',
                 'DataPort' => 'product_pg3_port'
             ),
+            */
             'product_dt' => array(
                 'ParentId' => 'product_pg2_dcn',
                 'Active' => true,
@@ -459,6 +461,31 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductDOHIEU',
                 'DataPort' => 'product_dohieu_port'
             ),
+            'product_pg2_thietbi' => array(
+                'ParentId' => 'folder10',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_Product_PG2_THIETBI_Card',
+                'Caption' => array(
+                    'en-US' => 'SP Thiết bị (PG2)',
+                    'vi-VN' => 'SP Thiết bị (PG2)',
+                ),
+                'Model' => 'QdProductPG2THIETBI',
+                'DataPort' => 'product_pg2_thietbi_port',
+                'PageList' => 'product_pg2_thietbi_list'
+            ),
+            'product_pg2_thietbi_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_Product_PG2_THIETBI_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductPG2THIETBI',
+                'DataPort' => 'product_pg2_thietbi_port'
+            ),
             'product_nuochoa' => array(
                 'ParentId' => 'product_dohieu',
                 'Active' => true,
@@ -508,6 +535,56 @@ class Qdmvc_Page_IndexMenu
                 ),
                 'Model' => 'QdProductTHOITRANG',
                 'DataPort' => 'product_thoitrang_port'
+            ),
+            'product_dodung' => array(
+                'ParentId' => 'product_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductDODUNG_Card',
+                'Caption' => array(
+                    'en-US' => 'Product DODUNG',
+                    'vi-VN' => 'SP Đồ dùng',
+                ),
+                'Model' => 'QdProductDODUNG',
+                'DataPort' => 'product_dodung_port',
+                'PageList' => 'product_dodung_list'
+            ),
+            'product_dodung_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductDODUNG_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductDODUNG',
+                'DataPort' => 'product_dodung_port'
+            ),
+            'product_dhmk' => array(
+                'ParentId' => 'product_dohieu',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductDHMK_Card',
+                'Caption' => array(
+                    'en-US' => 'Product DHMK',
+                    'vi-VN' => 'SP Đồng hồ -  Mắt kính',
+                ),
+                'Model' => 'QdProductDHMK',
+                'DataPort' => 'product_dhmk_port',
+                'PageList' => 'product_dhmk_list'
+            ),
+            'product_dhmk_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductDHMK_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductDHMK',
+                'DataPort' => 'product_dhmk_port'
             ),
             'product_qa' => array(
                 'ParentId' => 'folder10',
@@ -659,6 +736,31 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductCatDOHIEU',
                 'DataPort' => 'product_cat_dohieu_port'
             ),
+            'product_cat_pg2_thietbi' => array(
+                'ParentId' => 'folder20',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductCat_PG2_THIETBI_Card',
+                'Caption' => array(
+                    'en-US' => 'LSP Thiết bị (PG2)',
+                    'vi-VN' => 'LSP Thiết bị (PG2)',
+                ),
+                'Model' => 'QdProductCatPG2THIETBI',
+                'DataPort' => 'product_cat_pg2_thietbi_port',
+                'PageList' => 'product_cat_pg2_thietbi_list'
+            ),
+            'product_cat_pg2_thietbi_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductCat_PG2_THIETBI_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List',
+                ),
+                'Model' => 'QdProductCatPG2THIETBI',
+                'DataPort' => 'product_cat_pg2_thietbi_port'
+            ),
             /*
             'product_cat_pg2_card' => array(
                 'ParentId' => 'folder20',
@@ -686,7 +788,7 @@ class Qdmvc_Page_IndexMenu
                 'DataPort' => 'product_cat_pg2_port'
             ),
             */
-            'product_cat_pg3_card' => array(
+            /*'product_cat_pg3_card' => array(
                 'ParentId' => 'folder20',
                 'Active' => true,
                 'PageType' => 'Card',
@@ -711,7 +813,7 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductCatPG3',
                 'DataPort' => 'product_cat_pg3_port'
             ),
-
+            */
             'product_cat_dt' => array(
                 'ParentId' => 'product_cat_pg2_dcn_card',
                 'Active' => true,
@@ -961,6 +1063,31 @@ class Qdmvc_Page_IndexMenu
                 ),
                 'Model' => 'QdProductCatTHOITRANG',
                 'DataPort' => 'product_cat_thoitrang_port'
+            ),
+            'product_cat_dhmk' => array(
+                'ParentId' => 'product_cat_dohieu',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductCatDHMK_Card',
+                'Caption' => array(
+                    'en-US' => 'Product Cat DHMK',
+                    'vi-VN' => 'LSP Đồng hồ - Mắt kính',
+                ),
+                'Model' => 'QdProductCatDHMK',
+                'DataPort' => 'product_cat_dhmk_port',
+                'PageList' => 'product_cat_dhmk_list'
+            ),
+            'product_cat_dhmk_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductCatDHMK_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List',
+                ),
+                'Model' => 'QdProductCatDHMK',
+                'DataPort' => 'product_cat_dhmk_port'
             ),
             'product_order_card' => array(
                 'ParentId' => 'folder100',
@@ -2145,6 +2272,31 @@ class Qdmvc_Page_IndexMenu
                 ),
                 'Model' => 'QdPro2ProPG2XE',
                 'DataPort' => 'pro2pro_pg2_xe_port'
+            ),
+            'pro2pro_pg2_thietbi' => array(
+                'ParentId' => 'product',
+                'Active' => false,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_Pro2Pro_PG2_THIETBI_Card',
+                'Caption' => array(
+                    'en-US' => 'Linking Products',
+                    'vi-VN' => 'SP liên kết'
+                ),
+                'Model' => 'QdPro2ProPG2THIETBI',
+                'DataPort' => 'pro2pro_pg2_thietbi_port',
+                'PageList' => 'pro2pro_pg2_thietbi_list'
+            ),
+            'pro2pro_pg2_thietbi_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_Pro2Pro_PG2_THIETBI_list',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdPro2ProPG2THIETBI',
+                'DataPort' => 'pro2pro_pg2_thietbi_port'
             ),
             'pro2shop' => array(
                 'ParentId' => 'product',
