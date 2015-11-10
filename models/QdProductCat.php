@@ -193,6 +193,12 @@ class QdProductCat extends QdRoot
                     QdManufactor::$TYPE2_MANUFACTOR_DODUNG => array(
                         'Caption' => array('en-US' => 'Product Cat Furniture', 'vi-VN' => 'LSP Đồ dùng'),
                     ),
+                    QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => array(
+                        'Caption' => array('en-US' => 'Product Cat Souvenir', 'vi-VN' => 'LSP Phong thủy - Sưu tập'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
+                        'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'LSP Khác'),
+                    ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),
                     ),

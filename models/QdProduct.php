@@ -248,6 +248,12 @@ class QdProduct extends QdRoot
                     QdManufactor::$TYPE2_MANUFACTOR_DODUNG => array(
                         'Caption' => array('en-US' => 'Furniture', 'vi-VN' => 'Đồ dùng'),
                     ),
+                    QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => array(
+                        'Caption' => array('en-US' => 'Souvenir', 'vi-VN' => 'Phong thủy - Sưu tập'),
+                    ),
+                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
+                        'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
+                    ),
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
                     ),

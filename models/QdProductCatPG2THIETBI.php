@@ -19,6 +19,8 @@ class QdProductCatPG2THIETBI extends QdProductCatPG2
         $obj['type3']['Options'] = array(
             static::$TYPE3_THIETBI => $obj['type3']['Options'][static::$TYPE3_THIETBI]
         );
+        $obj['type3']['ReadOnly'] = true;
+
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatPG2THIETBI';
         $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductPG2THIETBI';
 

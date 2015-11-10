@@ -561,6 +561,56 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductDODUNG',
                 'DataPort' => 'product_dodung_port'
             ),
+            'product_ptst' => array(
+                'ParentId' => 'product_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductPTST_Card',
+                'Caption' => array(
+                    'en-US' => 'Product PTST',
+                    'vi-VN' => 'SP Phong thủy - Sưu tập',
+                ),
+                'Model' => 'QdProductPTST',
+                'DataPort' => 'product_ptst_port',
+                'PageList' => 'product_ptst_list'
+            ),
+            'product_ptst_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductPTST_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductPTST',
+                'DataPort' => 'product_ptst_port'
+            ),
+            'product_other' => array(
+                'ParentId' => 'product_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductOTHER_Card',
+                'Caption' => array(
+                    'en-US' => 'Product OTHER',
+                    'vi-VN' => 'SP Khác',
+                ),
+                'Model' => 'QdProductOTHER',
+                'DataPort' => 'product_other_port',
+                'PageList' => 'product_other_list'
+            ),
+            'product_other_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductOTHER_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductOTHER',
+                'DataPort' => 'product_other_port'
+            ),
             'product_dhmk' => array(
                 'ParentId' => 'product_dohieu',
                 'Active' => true,
@@ -585,31 +635,6 @@ class Qdmvc_Page_IndexMenu
                 ),
                 'Model' => 'QdProductDHMK',
                 'DataPort' => 'product_dhmk_port'
-            ),
-            'product_qa' => array(
-                'ParentId' => 'folder10',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductQA_Card',
-                'Caption' => array(
-                    'en-US' => 'Product QA',
-                    'vi-VN' => 'Sản phẩm QA',
-                ),
-                'Model' => 'QdProductQA',
-                'DataPort' => 'product_qa_port',
-                'PageList' => 'product_qa_list'
-            ),
-            'product_qa_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductQA_List',
-                'Caption' => array(
-                    'en-US' => 'Product QA List',
-                    'vi-VN' => 'Product QA List'
-                ),
-                'Model' => 'QdProductQA',
-                'DataPort' => 'product_qa_port'
             ),
             'product_mtb' => array(
                 'ParentId' => 'product_pg2_dcn',
@@ -839,31 +864,6 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdProductCatDT',
                 'DataPort' => 'product_cat_dt_port'
             ),
-            'product_cat_qa' => array(
-                'ParentId' => 'folder20',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductCatQA_Card',
-                'Caption' => array(
-                    'en-US' => 'Product Cat QA',
-                    'vi-VN' => 'Loại sản phẩm QA',
-                ),
-                'Model' => 'QdProductCatQA',
-                'DataPort' => 'product_cat_qa_port',
-                'PageList' => 'product_cat_qa_list'
-            ),
-            'product_cat_qa_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductCatQA_List',
-                'Caption' => array(
-                    'en-US' => 'Product Cat QA List',
-                    'vi-VN' => 'Product Cat QA List',
-                ),
-                'Model' => 'QdProductCatQA',
-                'DataPort' => 'product_cat_qa_port'
-            ),
             'product_cat_mtb' => array(
                 'ParentId' => 'product_cat_pg2_dcn_card',
                 'Active' => true,
@@ -1088,6 +1088,81 @@ class Qdmvc_Page_IndexMenu
                 ),
                 'Model' => 'QdProductCatDHMK',
                 'DataPort' => 'product_cat_dhmk_port'
+            ),
+            'product_cat_dodung' => array(
+                'ParentId' => 'product_cat_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductCatDODUNG_Card',
+                'Caption' => array(
+                    'en-US' => 'Product Cat DODUNG',
+                    'vi-VN' => 'LSP Đồ dùng',
+                ),
+                'Model' => 'QdProductCatDODUNG',
+                'DataPort' => 'product_cat_dodung_port',
+                'PageList' => 'product_cat_dodung_list'
+            ),
+            'product_cat_dodung_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductCatDODUNG_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List',
+                ),
+                'Model' => 'QdProductCatDODUNG',
+                'DataPort' => 'product_cat_dodung_port'
+            ),
+            'product_cat_ptst' => array(
+                'ParentId' => 'product_cat_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductCatPTST_Card',
+                'Caption' => array(
+                    'en-US' => 'Product Cat PTST',
+                    'vi-VN' => 'LSP Phong thủy - Sưu tập',
+                ),
+                'Model' => 'QdProductCatPTST',
+                'DataPort' => 'product_cat_ptst_port',
+                'PageList' => 'product_cat_ptst_list'
+            ),
+            'product_cat_ptst_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductCatPTST_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List',
+                ),
+                'Model' => 'QdProductCatPTST',
+                'DataPort' => 'product_cat_ptst_port'
+            ),
+            'product_cat_other' => array(
+                'ParentId' => 'product_cat_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductCatOTHER_Card',
+                'Caption' => array(
+                    'en-US' => 'Product Cat OTHER',
+                    'vi-VN' => 'LSP Khác',
+                ),
+                'Model' => 'QdProductCatOTHER',
+                'DataPort' => 'product_cat_other_port',
+                'PageList' => 'product_cat_other_list'
+            ),
+            'product_cat_other_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductCatOTHER_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List',
+                ),
+                'Model' => 'QdProductCatOTHER',
+                'DataPort' => 'product_cat_other_port'
             ),
             'product_order_card' => array(
                 'ParentId' => 'folder100',

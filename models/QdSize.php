@@ -17,7 +17,7 @@ class QdSize extends QdRoot
                 'DataType' => 'Option',
                 'Options' => array(
                     QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
-                        'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
+                        'Caption' => array('en-US' => 'Fashion', 'vi-VN' => 'Thời trang'),
                     ),
                 )
             ),
