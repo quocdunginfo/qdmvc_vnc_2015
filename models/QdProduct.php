@@ -624,5 +624,113 @@ class QdProduct extends QdRoot
             'en-US' => 'Product'
         );
     }
+    public function fn_validate_procat2manu($location, $params = array())
+    {
+        //Loop through ProductCat
+        $count = 0;
+        $pcat = new QdProductCat();
+        $pcatmanu = new QdProcat2Manu();
+        $manu = new QdManufactor();
+        //gen struct_level_3
+        $pcats = $pcat->GETLIST();
+        $count += $this->genManuByProcat($pcats);
+        //gen struct_level_1
+        foreach($pcat->_structLv1LevelDictionary() as $key=>$config){
+            $pcat->REMOVEFILTER();
+            $pcat->SETRANGE('type3', $key);
+            $pcats = $pcat->GETLIST();
+            $count += $this->genManuByStructLv($pcats, 1, $key);
+        }
 
+        //gen struct_level_2
+        foreach($pcat->_structLv2LevelDictionary() as $key=>$config){
+            $pcat->REMOVEFILTER();
+            $pcat->SETRANGE('type2', $key);
+            $pcats = $pcat->GETLIST();
+            $count += $this->genManuByStructLv($pcats, 2, $key);
+        }
+
+        $this->pushValidateError('', 'Totals Manufactor generated = ' . $count, 'info');
+
+        return true;
+    }
+    private function genManuByProcat($pcat_list){
+        $tmp_procat2manu_list = array();
+        $pcatmanu = new QdProcat2Manu();
+        $manu = new QdManufactor();
+        $count = 0;
+        foreach($pcat_list as $catitem){
+            $plist = $catitem->getProducts()->GETLIST();
+            $tmp_procat2manu_list[$catitem->id] = array();
+            //Loop all its Products
+            foreach($plist as $pitem){
+                if($pitem->manufacturer_id > 0){
+                    if(!in_array($pitem->manufacturer_id, $tmp_procat2manu_list[$catitem->id])){
+                        array_push($tmp_procat2manu_list[$catitem->id], $pitem->manufacturer_id);
+                    }
+                }
+            }
+            //Register ProductCat vs Manufactor
+            //S1: Remove all Procat2Manu links for this Procat
+            $pcatmanu->REMOVEFILTER();
+            $pcatmanu->SETRANGE('productcat_id', $catitem->id);
+            $pcatmanu->SETRANGE('struct_level', 3);
+            $tmppcatmanu = $pcatmanu->GETLIST();
+            foreach($tmppcatmanu as $pcatmanuitem){
+                $pcatmanuitem->delete();
+            }
+            //
+            foreach($tmp_procat2manu_list[$catitem->id] as $linkitem){
+                if($manu->GET($linkitem)!=null){
+                    $pcatmanu = new QdProcat2Manu();
+                    $pcatmanu->productcat_id = $catitem->id;
+                    $pcatmanu->manufactor_id = $linkitem;
+                    $pcatmanu->struct_level = 3;
+                    if($pcatmanu->save()){
+                        $count++;
+                    }
+                }
+            }
+        }
+        return $count;
+    }
+    private function genManuByStructLv($pcat_list, $struct_level, $struct_level_id){
+        $tmp_structlv12manu_list = array();
+        $pcatmanu = new QdProcat2Manu();
+        $manu = new QdManufactor();
+        $count = 0;
+        foreach($pcat_list as $catitem){
+            $plist = $catitem->getProducts()->GETLIST();
+            //Loop all its Products
+            foreach($plist as $pitem){
+                if($pitem->manufacturer_id > 0){
+                    if(!in_array($pitem->manufacturer_id, $tmp_structlv12manu_list)){
+                        array_push($tmp_structlv12manu_list, $pitem->manufacturer_id);
+                    }
+                }
+            }
+            //Register ProductCat vs Manufactor
+            //S1: Remove all Procat2Manu links for this Procat
+            $pcatmanu->REMOVEFILTER();
+            $pcatmanu->SETRANGE('productcat_id', $struct_level_id);
+            $pcatmanu->SETRANGE('struct_level', $struct_level);
+            $tmppcatmanu = $pcatmanu->GETLIST();
+            foreach($tmppcatmanu as $pcatmanuitem){
+                $pcatmanuitem->delete();
+            }
+        }
+        //Make new links
+        foreach($tmp_structlv12manu_list as $linkitem){
+            if($manu->GET($linkitem)!=null){
+                $pcatmanu = new QdProcat2Manu();
+                $pcatmanu->productcat_id = $struct_level_id;
+                $pcatmanu->manufactor_id = $linkitem;
+                $pcatmanu->struct_level = $struct_level;
+                if($pcatmanu->save()){
+                    $count++;
+                }
+            }
+        }
+        return $count;
+    }
 }

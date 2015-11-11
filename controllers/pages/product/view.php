@@ -28,6 +28,13 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Validate all Struct Level by Cat'
                 )
             ),
+            'btn_validate_procat2manu' => array(
+                'fn_name' => 'fn_validate_procat2manu',
+                'label' => array(
+                    'vi-VN' => 'Validate lại Cấu trúc Hãng SX',
+                    'en-US' => 'Validate lại Cấu trúc Hãng SX'
+                )
+            ),
             'btn_view_in_frontend' => array(
                 //'fn_name' => 'btn_view_in_frontend',
                 'label' => array(

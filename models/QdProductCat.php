@@ -420,14 +420,14 @@ class QdProductCat extends QdRoot
         return true;
     }
 
-    protected function getPermalinkSearchPageStructLv1(){
+    protected static function getPermalinkSearchPageStructLv1($struct_id){
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        $query = add_query_arg(array('product-cat-lv1-id' => $this->type3), $query);
+        $query = add_query_arg(array('product-cat-lv1-id' => $struct_id), $query);
         return $query;
     }
-    protected function getPermalinkSearchPageStructLv2(){
+    protected static function getPermalinkSearchPageStructLv2($struct_id){
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        $query = add_query_arg(array('product-cat-lv2-id' => $this->type2), $query);
+        $query = add_query_arg(array('product-cat-lv2-id' => $struct_id), $query);
         return $query;
     }
 
@@ -438,11 +438,11 @@ class QdProductCat extends QdRoot
             //return
             return $this->qd_cached_attr[$flowfield_name];
         } else if ($flowfield_name == '_permalink_search_page_struct_lv1') {
-            $this->qd_cached_attr[$flowfield_name] = $this->getPermalinkSearchPageStructLv1();
+            $this->qd_cached_attr[$flowfield_name] = static::getPermalinkSearchPageStructLv1($this->type3);
             //return
             return $this->qd_cached_attr[$flowfield_name];
         } else if ($flowfield_name == '_permalink_search_page_struct_lv2') {
-            $this->qd_cached_attr[$flowfield_name] = $this->getPermalinkSearchPageStructLv2();
+            $this->qd_cached_attr[$flowfield_name] = static::getPermalinkSearchPageStructLv2($this->type2);
             //return
             return $this->qd_cached_attr[$flowfield_name];
         }
@@ -508,7 +508,7 @@ class QdProductCat extends QdRoot
     protected function getStructLv2Caption($type2){
 
     }
-    private function _structLv1LevelDictionary(){
+    public function _structLv1LevelDictionary(){
         return array(
             static::$TYPE3_DCN => 'Đồ công nghệ',
             static::$TYPE3_XE => 'Xe',
@@ -516,20 +516,92 @@ class QdProductCat extends QdRoot
             static::$TYPE3_THIETBI => 'Thiết bị',
         );
     }
-    private function _structLv2LevelDictionary(){
+    public function _structLv1Lv2Dictionary(){
+        return array(
+            static::$TYPE3_DCN => array(
+                QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI,
+                QdManufactor::$TYPE2_MANUFACTOR_MTB,
+                QdManufactor::$TYPE2_MANUFACTOR_LAPTOP,
+                QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN
+            ),
+            static::$TYPE3_XE => array(
+                QdManufactor::$TYPE2_MANUFACTOR_XEDAP,
+                QdManufactor::$TYPE2_MANUFACTOR_XEMAY,
+                QdManufactor::$TYPE2_MANUFACTOR_OTO,
+            ),
+            static::$TYPE3_DOHIEU => array(
+                QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA,
+                QdManufactor::$TYPE2_MANUFACTOR_THOITRANG,
+                QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK,
+            ),
+            static::$TYPE3_THIETBI => array(
+                QdManufactor::$TYPE2_MANUFACTOR_DODUNG,
+                QdManufactor::$TYPE2_MANUFACTOR_SUUTAP,
+                QdManufactor::$TYPE2_MANUFACTOR_OTHER,
+            ),
+        );
+    }
+    public function _structLv2Lv1Dictionary(){
+        return array(
+            QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => static::$TYPE3_DCN,
+            QdManufactor::$TYPE2_MANUFACTOR_MTB => static::$TYPE3_DCN,
+            QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => static::$TYPE3_DCN,
+            QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => static::$TYPE3_DCN,
+
+            QdManufactor::$TYPE2_MANUFACTOR_XEDAP => static::$TYPE3_XE,
+            QdManufactor::$TYPE2_MANUFACTOR_XEMAY => static::$TYPE3_XE,
+            QdManufactor::$TYPE2_MANUFACTOR_OTO => static::$TYPE3_XE,
+
+            QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => static::$TYPE3_DOHIEU,
+            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => static::$TYPE3_DOHIEU,
+            QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => static::$TYPE3_DOHIEU,
+
+            QdManufactor::$TYPE2_MANUFACTOR_DODUNG => static::$TYPE3_THIETBI,
+            QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => static::$TYPE3_THIETBI,
+            QdManufactor::$TYPE2_MANUFACTOR_OTHER => static::$TYPE3_THIETBI,
+        );
+    }
+    public function _structLv2LevelDictionary(){
         return array(
             QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => 'Điện thoại',
-            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => 'Thời trang',
-            QdManufactor::$TYPE2_MANUFACTOR_XEDAP => 'Xe đạp',
             QdManufactor::$TYPE2_MANUFACTOR_MTB => 'Máy tính bảng',
-            QdManufactor::$TYPE2_MANUFACTOR_DODUNG => 'Đồ dùng',
             QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => 'Laptop',
+            QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => 'Phụ kiện',
+
+            QdManufactor::$TYPE2_MANUFACTOR_XEDAP => 'Xe đạp',
             QdManufactor::$TYPE2_MANUFACTOR_XEMAY => 'Xe máy',
             QdManufactor::$TYPE2_MANUFACTOR_OTO => 'Xe hơi',
-            QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => 'Đồng hồ - Mắt kính',
+
             QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => 'Nước hoa',
-            QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => 'Sưu tập',
+            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => 'Thời trang',
+            QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => 'Đồng hồ - Mắt kính',
+
+            QdManufactor::$TYPE2_MANUFACTOR_DODUNG => 'Đồ dùng',
+            QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => 'Phong thủy - Sưu tập',
             QdManufactor::$TYPE2_MANUFACTOR_OTHER => 'Khác',
         );
+    }
+    public static function getBreadcrumsStructLv2($struct_lv_id){
+        $StructLv2Lv1Dic = static::_structLv2Lv1Dictionary();
+        $StructLv2Dic = static::_structLv2LevelDictionary();
+        $StructLv1Dic = static::_structLv1LevelDictionary();
+
+        $re = array();
+        $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
+        array_push($re, array('name' => $StructLv1Dic[$StructLv2Lv1Dic[$struct_lv_id]], 'url' => static::getPermalinkSearchPageStructLv1($StructLv2Lv1Dic[$struct_lv_id])));
+        array_push($re, array('name' => $StructLv2Dic[$struct_lv_id], 'url' => static::getPermalinkSearchPageStructLv2($struct_lv_id)));
+        return $re;
+    }
+    public static function getBreadcrumsStructLv1($struct_lv_id){
+        $StructLv2Lv1Dic = static::_structLv2Lv1Dictionary();
+        $StructLv2Dic = static::_structLv2LevelDictionary();
+        $StructLv1Dic = static::_structLv1LevelDictionary();
+
+        $re = array();
+        $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
+        array_push($re, array('name' => $StructLv1Dic[$struct_lv_id], 'url' => static::getPermalinkSearchPageStructLv1($struct_lv_id)));
+        return $re;
     }
 }
