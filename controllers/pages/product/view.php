@@ -35,6 +35,13 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Validate lại Cấu trúc Hãng SX'
                 )
             ),
+            'btn_validate_procat2size' => array(
+                'fn_name' => 'fn_validate_procat2size',
+                'label' => array(
+                    'vi-VN' => 'Validate lại Cấu trúc Size',
+                    'en-US' => 'Validate lại Cấu trúc Size'
+                )
+            ),
             'btn_view_in_frontend' => array(
                 //'fn_name' => 'btn_view_in_frontend',
                 'label' => array(

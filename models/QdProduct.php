@@ -654,6 +654,53 @@ class QdProduct extends QdRoot
 
         return true;
     }
+    public function fn_validate_procat2size($location, $params = array())
+    {
+        //Loop through ProductCat
+        $count = 0;
+        $pcat = new QdProductCat();
+        $pcat->SETRANGE('property_grp_type', QdProductCat::$PROPERTY_G3);
+
+        $pcatsize = new QdProcat2Size();
+        $size = new QdSize();
+        //gen struct_level_3
+        $pcats = $pcat->GETLIST();
+        $tmp_procat2size_list = array();
+
+        foreach($pcats as $catitem){
+            $plist = $catitem->getProducts()->GETLIST();
+            $tmp_procat2size_list[$catitem->id] = array();
+            //Loop all its Products
+            foreach($plist as $pitem){
+                if($pitem->size_id > 0){
+                    if(!in_array($pitem->size_id, $tmp_procat2size_list[$catitem->id])){
+                        array_push($tmp_procat2size_list[$catitem->id], $pitem->size_id);
+                    }
+                }
+            }
+            //Register ProductCat vs Manufactor
+            //S1: Remove all Procat2Manu links for this Procat
+            $pcatsize->REMOVEFILTER();
+            $pcatsize->SETRANGE('productcat_id', $catitem->id);
+            $tmppcatmanu = $pcatsize->GETLIST();
+            foreach($tmppcatmanu as $pcatmanuitem){
+                $pcatmanuitem->delete();
+            }
+            //
+            foreach($tmp_procat2size_list[$catitem->id] as $linkitem){
+                if($size->GET($linkitem)!=null){
+                    $pcatmanu = new QdProcat2Size();
+                    $pcatmanu->productcat_id = $catitem->id;
+                    $pcatmanu->size_id = $linkitem;
+                    if($pcatmanu->save()){
+                        $count++;
+                    }
+                }
+            }
+        }
+        $this->pushValidateError('', 'Totals Size generated = ' . $count, 'info');
+        return true;
+    }
     private function genManuByProcat($pcat_list){
         $tmp_procat2manu_list = array();
         $pcatmanu = new QdProcat2Manu();

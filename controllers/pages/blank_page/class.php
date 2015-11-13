@@ -9,6 +9,66 @@
 class Qdmvc_Page_DatabaseSvc
 {
     public function run(){
+        //Qdmvc::loadHelper('PHPExcel/PHPExcel');
+
+        $fpath = plugin_dir_path( __FILE__ ).'../../../excel_tpl/rpt_1/';
+
+        $tmpdir = md5(rand());
+
+        $tmppath = $fpath . $tmpdir;
+
+        wp_mkdir_p($tmppath);
+
+        $tmppath .= '/';
+
+        copy($fpath . 'layout.xls', $tmppath. 'layout.xls');
+
+        //write to data.txt file
+        $file = fopen($tmppath . 'data.txt', "w");
+
+
+        fwrite($file,"Hello World. Testing!");
+        fwrite($file,"\t");
+        fwrite($file,"1");
+        fwrite($file,"\t");
+        fwrite($file,"A1");
+
+        fclose($file);
+
+        //zip
+        $zip = new ZipArchive();
+        $zip->open($tmppath . 'package.zip', ZipArchive::CREATE);
+        $zip->addFile($tmppath . 'layout.xls', '/layout.xls');
+        $zip->addFile($tmppath . 'data.txt', '/data.txt');
+        $zip->close();
+
+        return;
+
+        $objReader = PHPExcel_IOFactory::createReader('Excel2007');
+//  Tell the reader to include charts when it loads a file
+        $objReader->setIncludeCharts(TRUE);
+//  Load the file
+        $PHPExcel = $objReader->load($fpath);
+
+        // Bước 3: Khởi tạo đối tượng mới và xử lý
+        //$PHPExcel = PHPExcel_IOFactory::load($fpath);
+
+// Bước 4: Chọn sheet - sheet bắt đầu từ 0
+        $PHPExcel->setActiveSheetIndex(0);
+
+// Bước 5: Tạo tiêu đề cho sheet hiện tại
+        //$PHPExcel->getActiveSheet()->setTitle('Email List');
+
+// Bước 6: Tạo tiêu đề cho từng cell excel,
+// Các cell của từng row bắt đầu từ A1 B1 C1 ...
+        for($i=0;$i<10;$i++){
+            $PHPExcel->getActiveSheet()->setCellValue('A'.$i, 'STT');
+            $PHPExcel->getActiveSheet()->setCellValue('B'.$i, 'Email');
+            $PHPExcel->getActiveSheet()->setCellValue('C'.$i, 'Fullname');
+        }
+
+        $objWriter = new PHPExcel_Writer_Excel2007($PHPExcel);
+        $objWriter->save($fpath.'.xlsx');
 
     }
     public function run3(){
