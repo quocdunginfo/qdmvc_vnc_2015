@@ -77,6 +77,7 @@ class QdImage extends QdNote
 
     public function fn_get_unused($location, $params = array())
     {
+        $ignore = array('QdRoot', 'QdRootReport', 'QdRootSetup');
         //delete all previous
         $r = new QdImage();
         $r->SETRANGE('type', static::$TYPE_UNUSED);
@@ -100,7 +101,7 @@ class QdImage extends QdNote
             $found = false;
             foreach($model_list as $item){
                 $c = $item->id;
-                if($c==='QdRoot' || $c==='QdRootSetup'){
+                if(in_array($c, $ignore)){
                     continue;
                 }
                 $m = new $c();
