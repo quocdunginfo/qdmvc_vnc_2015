@@ -9,7 +9,7 @@
 class Qdmvc_Page_DatabaseSvc
 {
     public function run(){
-        
+        $obj = new QdLog();
     }
     public function run67(){
         //Qdmvc::loadHelper('PHPExcel/PHPExcel');

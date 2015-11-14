@@ -81,9 +81,7 @@ class QdImage extends QdNote
         //delete all previous
         $r = new QdImage();
         $r->SETRANGE('type', static::$TYPE_UNUSED);
-        foreach($r->GETLIST() as $item){
-            $item->delete('', false);
-        }
+        $r->DELETEALL();
         //get unused list
         $media_query = new WP_Query(
             array(

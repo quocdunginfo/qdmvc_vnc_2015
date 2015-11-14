@@ -682,10 +682,7 @@ class QdProduct extends QdRoot
             //S1: Remove all Procat2Manu links for this Procat
             $pcatsize->REMOVEFILTER();
             $pcatsize->SETRANGE('productcat_id', $catitem->id);
-            $tmppcatmanu = $pcatsize->GETLIST();
-            foreach($tmppcatmanu as $pcatmanuitem){
-                $pcatmanuitem->delete();
-            }
+            $pcatsize->DELETEALL();
             //
             foreach($tmp_procat2size_list[$catitem->id] as $linkitem){
                 if($size->GET($linkitem)!=null){
@@ -761,10 +758,7 @@ class QdProduct extends QdRoot
             $pcatmanu->REMOVEFILTER();
             $pcatmanu->SETRANGE('productcat_id', $struct_level_id);
             $pcatmanu->SETRANGE('struct_level', $struct_level);
-            $tmppcatmanu = $pcatmanu->GETLIST();
-            foreach($tmppcatmanu as $pcatmanuitem){
-                $pcatmanuitem->delete();
-            }
+            $pcatmanu->DELETEALL();
         }
         //Make new links
         foreach($tmp_structlv12manu_list as $linkitem){

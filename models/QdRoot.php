@@ -256,9 +256,21 @@ class QdRoot extends ActiveRecord\Model
         $this->record_filter['filter_default'] = array_merge($filter);
         return $this->SETFILTER($filter);
     }
-    public function DELETEALL(){
-        $t = static::_generateConditionsArray($this->record_filter);
-        return static::delete_all(array('conditions' => $t));
+    public function DELETEALL($validate=false, $continueonfail=false){
+        if(!$validate) {
+            $t = static::_generateConditionsArray($this->record_filter);
+            return static::delete_all(array('conditions' => $t));
+        }else{
+            $list = $this->GETLIST();
+            $re = true;
+            foreach($list as $item){
+                $re = $item->delete() && $re;
+                if(!$continueonfail){
+                    return $re;
+                }
+            }
+            return $re;
+        }
     }
 
     public function delete($location = '', $validate = true)
@@ -596,6 +608,19 @@ class QdRoot extends ActiveRecord\Model
         }
 
         return static::all($query);
+    }
+    public function GETLISTID($include_obj = false){
+        $t = static::_generateConditionsArray($this->record_filter);
+        $ids = static::all(array('conditions' => $t, 'select' => 'id'));
+        if(!$include_obj){
+            $re = array();
+            foreach($ids as $item){
+                array_push($re, $item->id);
+            }
+            return $re;
+        }else{
+            return $ids;
+        }
     }
 
     /**
