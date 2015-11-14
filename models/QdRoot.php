@@ -256,6 +256,10 @@ class QdRoot extends ActiveRecord\Model
         $this->record_filter['filter_default'] = array_merge($filter);
         return $this->SETFILTER($filter);
     }
+    public function DELETEALL(){
+        $t = static::_generateConditionsArray($this->record_filter);
+        return static::delete_all(array('conditions' => $t));
+    }
 
     public function delete($location = '', $validate = true)
     {

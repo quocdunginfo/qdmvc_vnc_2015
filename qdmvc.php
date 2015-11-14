@@ -131,7 +131,7 @@ class Qdmvc
      */
 
 
-    protected static function getWidget($path = '')
+    public static function getWidget($path = '')
     {
         return Qdmvc::getPluginDir('widgets/' . $path);
     }

@@ -1,14 +1,14 @@
 <?php
 
-//add_action('wp_dashboard_setup', array('My_Dashboard_Widget','init') );
+add_action('wp_dashboard_setup', array('QdmvcNativeWidget_Pages_Info','init') );
 
-class My_Dashboard_Widget
+class QdmvcNativeWidget_Pages_Info
 {
 
     /**
      * The id of this widget.
      */
-    const wid = 'my_widget_example';
+    const wid = 'qdmvcnativewidget_pages_info';
 
     /**
      * Hook to wp_dashboard_setup to add the widget.
@@ -28,9 +28,9 @@ class My_Dashboard_Widget
         //Register the widget...
         wp_add_dashboard_widget(
             self::wid,                                  //A unique slug/ID
-            __('QD HOCSINH WIDGET', 'nouveau'),//Visible name for the widget
-            array('My_Dashboard_Widget', 'widget'),      //Callback for the main widget content
-            array('My_Dashboard_Widget', 'config')       //Optional callback for widget configuration content
+            __('QD PAGES INFO', 'nouveau'),//Visible name for the widget
+            array('QdmvcNativeWidget_Pages_Info', 'widget'),      //Callback for the main widget content
+            array('QdmvcNativeWidget_Pages_Info', 'config')       //Optional callback for widget configuration content
         );
     }
 
@@ -39,13 +39,22 @@ class My_Dashboard_Widget
      */
     public static function widget()
     {
+        $args = array(
+            'sort_order' => 'asc',
+            'sort_column' => 'post_title',
+            'post_type' => 'page',
+            'post_status' => 'publish'
+        );
+        $pages = get_pages($args);
+        foreach($pages as $item):
         ?>
-        Số lượng học sinh: <?= Hocsinh::count() ?>
-        <br/>
-        Số lượng lớp: <?= Lop::count() ?>
-        <br/>
-        Số lượng học sinh chưa có avatar: <?= Hocsinh::count() ?>
-    <?php
+            <div>
+                <span>
+                    <?=$item->post_title . ' (' . $item->post_name . ')'?>
+                </span>
+            </div>
+        <?php
+        endforeach;
     }
 
     /**

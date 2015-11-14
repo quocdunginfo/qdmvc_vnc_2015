@@ -9,6 +9,9 @@
 class Qdmvc_Page_DatabaseSvc
 {
     public function run(){
+        
+    }
+    public function run67(){
         //Qdmvc::loadHelper('PHPExcel/PHPExcel');
 
         $fpath = plugin_dir_path( __FILE__ ).'../../../excel_tpl/rpt_1/';
