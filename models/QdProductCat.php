@@ -223,20 +223,20 @@ class QdProductCat extends QdRoot
                 )
             ),
             'price_range_type' => array(
-                'Caption' => array('en-US' => 'Property Group', 'vi-VN' => 'Nhóm thuộc tính'),
+                'Caption' => array('en-US' => 'Price Group', 'vi-VN' => 'Mức giá'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$PRICE_RANGE_1 => array(
-                        'Caption' => array('en-US' => 'Price range 1', 'vi-VN' => 'Mức giá 1'),
+                        'Caption' => array('en-US' => 'Price range 1', 'vi-VN' => 'Mức 1 (5tr)'),
                     ),
                     static::$PRICE_RANGE_2 => array(
-                        'Caption' => array('en-US' => 'Price range 2', 'vi-VN' => 'Mức giá 2'),
+                        'Caption' => array('en-US' => 'Price range 2', 'vi-VN' => 'Mức 2 (50tr)'),
                     ),
                     static::$PRICE_RANGE_3 => array(
-                        'Caption' => array('en-US' => 'Price range 3', 'vi-VN' => 'Mức giá 3'),
+                        'Caption' => array('en-US' => 'Price range 3', 'vi-VN' => 'Mức 3 (500tr)'),
                     ),
                     static::$PRICE_RANGE_4 => array(
-                        'Caption' => array('en-US' => 'Price range 4', 'vi-VN' => 'Mức giá 4'),
+                        'Caption' => array('en-US' => 'Price range 4', 'vi-VN' => 'Mức 4 (5 tỉ)'),
                     ),
 
                 )
@@ -454,35 +454,98 @@ class QdProductCat extends QdRoot
             case static::$PRICE_RANGE_1:
                 return array(
                     array(
-                        0,10000000
+                        0,1000000
+                    ),
+                    array(
+                        1000000,2000000
+                    ),
+                    array(
+                        2000000,3000000
+                    ),
+                    array(
+                        3000000,4000000
+                    ),
+                    array(
+                        4000000,5000000
+                    ),
+                    array(
+                        5000000,-1
+                    ),
+                );
+            case static::$PRICE_RANGE_2:
+                return array(
+                    array(
+                        0,5000000
+                    ),
+                    array(
+                        5000000,10000000
                     ),
                     array(
                         10000000,20000000
                     ),
                     array(
-                        20000000,-1
+                        20000000,30000000
+                    ),
+                    array(
+                        30000000,40000000
+                    ),
+                    array(
+                        40000000,50000000
+                    ),
+                    array(
+                        50000000,-1
                     ),
                 );
-                break;
-            case static::$PRICE_RANGE_2:
+            case static::$PRICE_RANGE_3:
                 return array(
                     array(
-                        20000000,50000000
+                        0,50000000
                     ),
                     array(
                         50000000,100000000
                     ),
                     array(
-                        100000000,-1
+                        100000000,200000000
+                    ),
+                    array(
+                        200000000,300000000
+                    ),
+                    array(
+                        300000000,400000000
+                    ),
+                    array(
+                        400000000,500000000
+                    ),
+                    array(
+                        500000000,-1
                     ),
                 );
-                break;
-            case static::$PRICE_RANGE_3:
-
-                break;
+            case static::$PRICE_RANGE_4:
+                return array(
+                    array(
+                        0,500000000
+                    ),
+                    array(
+                        500000000,1000000000
+                    ),
+                    array(
+                        1000000000,2000000000
+                    ),
+                    array(
+                        2000000000,3000000000
+                    ),
+                    array(
+                        3000000000,4000000000
+                    ),
+                    array(
+                        4000000000,5000000000
+                    ),
+                    array(
+                        5000000000,-1
+                    ),
+                );
             default:
                 return array();
-                break;
         }
     }
 
