@@ -256,16 +256,18 @@ class QdRoot extends ActiveRecord\Model
         $this->record_filter['filter_default'] = array_merge($filter);
         return $this->SETFILTER($filter);
     }
-    public function DELETEALL($validate=false, $continueonfail=false){
-        if(!$validate) {
+
+    public function DELETEALL($validate = false, $continueonfail = false)
+    {
+        if (!$validate) {
             $t = static::_generateConditionsArray($this->record_filter);
             return static::delete_all(array('conditions' => $t));
-        }else{
+        } else {
             $list = $this->GETLIST();
             $re = true;
-            foreach($list as $item){
+            foreach ($list as $item) {
                 $re = $item->delete() && $re;
-                if(!$continueonfail){
+                if (!$continueonfail) {
                     return $re;
                 }
             }
@@ -432,9 +434,9 @@ class QdRoot extends ActiveRecord\Model
         $agr_value = static::find($tmp);
         if ($agr != null) {
             $agr_value = $agr_value->{$f_name};
-            if($agr_value===null || $agr_value===false || $agr_value === ''){
+            if ($agr_value === null || $agr_value === false || $agr_value === '') {
                 return 0;
-            }else{
+            } else {
                 return $agr_value;
             }
         }
@@ -581,7 +583,7 @@ class QdRoot extends ActiveRecord\Model
                 //return
                 return $this->qd_cached_attr[$flowfield_name];
             }
-        }else{
+        } else {
             return $this->qd_cached_attr[$flowfield_name];
         }
     }
@@ -609,16 +611,18 @@ class QdRoot extends ActiveRecord\Model
 
         return static::all($query);
     }
-    public function GETLISTID($include_obj = false){
+
+    public function GETLISTID($include_obj = false)
+    {
         $t = static::_generateConditionsArray($this->record_filter);
         $ids = static::all(array('conditions' => $t, 'select' => 'id'));
-        if(!$include_obj){
+        if (!$include_obj) {
             $re = array();
-            foreach($ids as $item){
+            foreach ($ids as $item) {
                 array_push($re, $item->id);
             }
             return $re;
-        }else{
+        } else {
             return $ids;
         }
     }
@@ -1097,6 +1101,9 @@ class QdRoot extends ActiveRecord\Model
         //do validate and save
         if (!$validate || $this->QDVALIDATE()) {
             $action = $this->is_new_record() ? QdLog::$ACTION_INSERT : QdLog::$ACTION_MODIFY;
+            if (!$this->checkMandatory()) {
+                return false;
+            }
             //assign no series before insert
             if ($this->id === null || $this->id === false || $this->id === 0 || $this->id === '0') {
                 $use_noseries = $this->getNoSeries();
@@ -1110,7 +1117,7 @@ class QdRoot extends ActiveRecord\Model
                         return false;
                     } else {
                         $this->id = $tmpnose;
-                        if(static::hasFieldName('noseries')){
+                        if (static::hasFieldName('noseries')) {
                             $this->noseries = $use_noseries;
                         }
                     }
@@ -1138,7 +1145,40 @@ class QdRoot extends ActiveRecord\Model
             return false;
         }
     }
-    public static function hasFieldName($fname){
+
+    public static function ISMANDATORY($f_name)
+    {
+        $cf = static::getFieldsConfig();
+        if (isset($cf[$f_name]['Require']) && $cf[$f_name]['Require'] === true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private function checkMandatory()
+    {
+        $cf = static::getFieldsConfig();
+        $re = true;
+        foreach ($cf as $key => $config) {
+            if (Qdmvc_Helper::isNullOrEmpty($this->{$key})) {
+                if (static::ISMANDATORY($key)) {
+                    $this->pushValidateError($key,
+                        sprintf(
+                            Qdmvc_Message::getMsg('msg_field_mandatory'),
+                            $this->id,
+                            static::getFieldCaption($key, Qdmvc_Config::getLanguage())
+                        ), 'error'
+                    );
+                    $re = false;
+                }
+            }
+        }
+        return $re;
+    }
+
+    public static function hasFieldName($fname)
+    {
         $cf = static::getFieldsConfig();
         return isset($cf[$fname]);
     }
