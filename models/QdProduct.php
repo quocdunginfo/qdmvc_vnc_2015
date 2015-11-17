@@ -147,6 +147,7 @@ class QdProduct extends QdRoot
                 'Description' => array(
                     'vi-VN' => 'Hình đại diện hiển thị ở trang tìm kiếm SP hoặc những khu vực tương tự (hình đơn)<br>Muốn chọn nhiều hình cho trang chi tiết SP, dùng chức năng \'Hình ảnh\' để thêm hình'
                 ),
+                'Require' => true
             ),
             '_avatar_preview' => array(
                 'Caption' => array('en-US' => 'Image Preview', 'vi-VN' => 'Xem trước'),
@@ -165,7 +166,7 @@ class QdProduct extends QdRoot
             ),
             'name' => array(
                 'Caption' => array('vi-VN' => 'Tên SP'),
-                //'DataType' => 'Color',
+                'Require' => true
             ),
             'code' => array(
                 'Caption' => array('vi-VN' => 'Mã SP'),
@@ -182,6 +183,7 @@ class QdProduct extends QdRoot
                 'Description' => array(
                     'vi-VN' => 'Tab thông tin thứ 1 của trang chi tiết SP'
                 ),
+                'Require' => true
             ),
             'doitra_baohanh' => array(
                 'Caption' => array('vi-VN' => 'Đổi trả/Bảo hành'),
@@ -409,18 +411,7 @@ class QdProduct extends QdRoot
      */
     protected function nameOnValidate($field_name)
     {
-        if ($this->$field_name == '') {
-            $this->pushValidateError($field_name, 'Name bắt buộc');
-        }
-        /*
-        if($this->active==1)
-        {
-            if($this->name!=$this->xRec()->name)
-            {
-                $this->pushValidateError($field_name, 'Không thể sửa Name khi Active=1');
-            }
-        }
-        */
+
     }
 
     protected function activeOnValidate($field_name)
@@ -487,15 +478,22 @@ class QdProduct extends QdRoot
             $this->price_range_type = $pc->price_range_type;
         }
     }
-
+    /*
     protected function avatarOnValidate($field_name)
     {
         if ($this->$field_name == '') {
-            $pro_setup = QdSetupProduct::GET();
-            $this->$field_name = $pro_setup->df_pro_avatar;
-            $this->pushValidateError($field_name, 'Tự động gán Avatar mặc định cho Product', 'info');
+            //$pro_setup = QdSetupProduct::GET();
+            //$this->$field_name = $pro_setup->df_pro_avatar;
+            //$this->pushValidateError($field_name, 'Tự động gán Avatar mặc định cho Product', 'info');
+            $this->pushValidateError($field_name, 'Hình đại diện bắt buộc phải nhập', 'error');
         }
     }
+    protected function descriptionOnValidate($field_name){
+        if ($this->$field_name == '') {
+            $this->pushValidateError($field_name, 'Mô tả bắt buộc phải nhập', 'error');
+        }
+    }
+    */
 
     public static function getInitObj()
     {

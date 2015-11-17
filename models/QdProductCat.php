@@ -454,22 +454,22 @@ class QdProductCat extends QdRoot
             case static::$PRICE_RANGE_1:
                 return array(
                     array(
-                        0,1000000
+                        0,100000
                     ),
                     array(
-                        1000000,2000000
+                        100000,200000
                     ),
                     array(
-                        2000000,3000000
+                        200000,300000
                     ),
                     array(
-                        3000000,4000000
+                        300000,400000
                     ),
                     array(
-                        4000000,5000000
+                        400000,500000
                     ),
                     array(
-                        5000000,-1
+                        500000,-1
                     ),
                 );
             case static::$PRICE_RANGE_2:

@@ -36,22 +36,26 @@ class QdPBHanh extends QdRoot
             'cust_name' => array(
                 'Caption' => array(
                     'vi-VN' => 'Tên KH'
-                )
+                ),
+                'Require' => true
             ),
             'cust_addr' => array(
                 'Caption' => array(
                     'vi-VN' => 'Địa chỉ KH'
-                )
+                ),
+                'Require' => true
             ),
             'cust_phone' => array(
                 'Caption' => array(
                     'vi-VN' => 'SĐT KH'
-                )
+                ),
+                'Require' => true
             ),
             'cust_email' => array(
                 'Caption' => array(
                     'vi-VN' => 'Email KH'
-                )
+                ),
+                'Require' => true
             ),
             'purchase_date' => array(
                 'DataType' => 'Date',
@@ -163,8 +167,8 @@ class QdPBHanh extends QdRoot
         $obj->status = static::$STATUS_OPEN;
         $obj->purchase_date = new DateTime();
         $obj->stock_out_date = $obj->purchase_date;
-        $obj->cust_email = '@';
-        $obj->cust_phone = '(+84)';
+        //$obj->cust_email = '@';
+        //$obj->cust_phone = '(+84)';
         return $obj;
     }
 
