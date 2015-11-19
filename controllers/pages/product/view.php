@@ -100,11 +100,28 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                         var qrlink = MYAPP.getQRCodeLink(MYAPP.viewModel.id());
                         MYAPP.openInNewTab(qrlink);
                     });
+                    $('#lookup_cs_manufacturer_id').click(function () {
+                        var lurl = $(this).data('lookupurl');
+                        var product_cat_id = $('#ctl_product_cat_id').val();
+                        if (product_cat_id != '') {
+                            lurl = MYAPP.addDataPortFilter(lurl, 199, 'productcat_id', product_cat_id);
+                        }
+                        MYAPP.requestLookupWindow(lurl);
+                    });
+                    if($('#lookup_cs_size_id').length > 0){
+                        $('#lookup_cs_size_id').click(function () {
+                            var lurl = $(this).data('lookupurl');
+                            var type4 = MYAPP.viewModel.type4();
+                            if (type4 != '') {
+                                lurl = MYAPP.addDataPortFilter(lurl, 199, 'type', type4);
+                            }
+                            MYAPP.requestLookupWindow(lurl);
+                        });
+                    }
                 });
             })(jQuery);
         </script>
     <?php
 
     }
-
 }

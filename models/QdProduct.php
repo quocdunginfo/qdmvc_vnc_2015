@@ -3,6 +3,11 @@
 class QdProduct extends QdRoot
 {
     static $table_name = 'mpd_product';
+    public static $STOCK_DF = '';
+    public static $STOCK_TAMHET = 'TAMHET';
+    public static $STOCK_SAPCO = 'SAPCO';
+    public static $STOCK_SAPHET = 'SAPHET';
+    public static $STOCK_NGUNG = 'NGUNG';
 
     public static function getFieldsConfig()
     {
@@ -130,16 +135,17 @@ class QdProduct extends QdRoot
                 'Caption' => array('en-US' => 'Manufactor ID', 'vi-VN' => 'Mã Hãng SX'),
                 'DataType' => 'Code',
                 'Numeric' => true,
-                'Description' => '',
                 'Editable' => true,
                 'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
-                    'Table' => 'QdManufactor',
-                    'Field' => 'id',
+                    'Table' => 'QdProcat2ManuSel',
+                    'Field' => 'manufactor_id',
                     'TableFilter' => array(
+
                     )
-                )
+                ),
+                'Description' => array('vi-VN' => 'Tự động bật bộ lọc filter khi đã chọn Loại SP')
             ),
             'avatar' => array(
                 'Caption' => array('en-US' => 'Avatar', 'vi-VN' => 'Hình đại diện'),
@@ -199,19 +205,51 @@ class QdProduct extends QdRoot
                     'vi-VN' => 'Tab thông tin thứ 3 của trang chi tiết SP'
                 ),
             ),
-            'temp_out_of_stock' => array(
-                'Caption' => array('vi-VN' => 'Tạm hết hàng'),
-                'DataType' => 'Boolean',
-                'InitValue' => false,
+            'stock_status' => array(
+                'Caption' => array('vi-VN' => 'Tình trạng kho'),
+                'DataType' => 'Option',
                 'Description' => array(
-                    'vi-VN' => 'Đánh dấu SP tạm hết hàng, nhưng vẫn hiển thị trên Web'
+                    'vi-VN' => 'Đánh dấu tình trạng kho của SP'
                 ),
+                'Options' => array(
+                    static::$STOCK_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN'=> 'Mặc định')
+                    ),
+                    static::$STOCK_TAMHET => array(
+                        'Caption' => array('en-US' => 'TAMHET', 'vi-VN'=> 'Tạm hết hàng')
+                    ),
+                    static::$STOCK_SAPCO => array(
+                        'Caption' => array('en-US' => 'SAPCO', 'vi-VN'=> 'Sắp có hàng')
+                    ),
+                    static::$STOCK_SAPHET => array(
+                        'Caption' => array('en-US' => 'SAPHET', 'vi-VN'=> 'Sắp hết hàng')
+                    ),
+                    static::$STOCK_NGUNG => array(
+                        'Caption' => array('en-US' => 'NGUNG', 'vi-VN'=> 'Ngưng kinh doanh')
+                    )
+                )
             ),
             'discount_percent' => array(
                 'DataType' => 'Decimal',
                 'Description' => array(
                     'vi-VN' => '% giảm giá so với Field \'price\', nhập số thập phân vd: 0.56'
                 ),
+            ),
+            'type4' => array(
+                'Caption' => array('en-US' => 'Fashion Type', 'vi-VN' => 'Phân loại thời trang'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    QdProductCat::$TYPE4_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
+                    QdProductCat::$TYPE4_QUANAO => array(
+                        'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
+                    ),
+                    QdProductCat::$TYPE4_GIAYDEP => array(
+                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giày dép'),
+                    ),
+                ),
+                'ReadOnly' => true,
             ),
             'type' => array(
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
@@ -259,7 +297,9 @@ class QdProduct extends QdRoot
                     QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
                     ),
-                )
+                ),
+                'ReadOnly' => true,
+                'Description' => array('vi-VN' => 'Tự động validate theo Loại SP')
             ),
             'type3' => array(
 
@@ -474,6 +514,7 @@ class QdProduct extends QdRoot
             //validate other mark field
             $this->property_grp_type = $pc->property_grp_type;
             $this->type3 = $pc->type3;
+            $this->type4 = $pc->type4;
             $this->type = $pc->type2;
             $this->price_range_type = $pc->price_range_type;
         }
@@ -500,6 +541,7 @@ class QdProduct extends QdRoot
         $obj = new QdProduct();
         $obj->description = Qdmvc_Config::getProductSetup()->df_product_desc_tpl;
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI;
+        $obj->stock_status = static::$STOCK_DF;
         return $obj;
     }
 
@@ -717,6 +759,7 @@ class QdProduct extends QdRoot
             $pcatmanu->REMOVEFILTER();
             $pcatmanu->SETRANGE('productcat_id', $catitem->id);
             $pcatmanu->SETRANGE('struct_level', 3);
+            $pcatmanu->SETRANGE('selection', false);
             $tmppcatmanu = $pcatmanu->GETLIST();
             foreach($tmppcatmanu as $pcatmanuitem){
                 $pcatmanuitem->delete();
@@ -756,6 +799,7 @@ class QdProduct extends QdRoot
             $pcatmanu->REMOVEFILTER();
             $pcatmanu->SETRANGE('productcat_id', $struct_level_id);
             $pcatmanu->SETRANGE('struct_level', $struct_level);
+            $pcatmanu->SETRANGE('selection', false);
             $pcatmanu->DELETEALL();
         }
         //Make new links

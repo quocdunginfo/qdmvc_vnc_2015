@@ -58,7 +58,7 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                     'active' => array(
                         'Order' => 130,
                     ),
-                    'temp_out_of_stock' => array(
+                    'stock_status' => array(
                         'Order' => 140,
                     ),
                 )

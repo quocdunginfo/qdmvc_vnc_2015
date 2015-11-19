@@ -18,4 +18,12 @@ class Qdmvc_Page_ProductCatTHOITRANG_Card extends Qdmvc_Page_ProductCat_PG3_Card
     {
         return 'product_cat_thoitrang';
     }
+
+    protected static function initFields()
+    {
+        $obj = parent::initFields();
+        $obj['General']['Fields']['type4']['Hidden'] = false;
+        return $obj;
+    }
+
 }

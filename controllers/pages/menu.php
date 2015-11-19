@@ -2198,6 +2198,31 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdSize',
                 'DataPort' => 'size_port'
             ),
+            'procat2manusel' => array(
+                'ParentId' => 'folder20',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_Procat2ManuSel_Card',
+                'Caption' => array(
+                    'en-US' => 'Product Cat - Manufactor',
+                    'vi-VN' => 'LSP - Hãng SX'
+                ),
+                'Model' => 'QdProcat2ManuSel',
+                'DataPort' => 'procat2manusel_port',
+                'PageList' => 'procat2manusel_list'
+            ),
+            'procat2manusel_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_Procat2ManuSel_list',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProcat2ManuSel',
+                'DataPort' => 'procat2manusel_port'
+            ),
             'about' => array(
                 'ParentId' => 'folder80',
                 'Active' => true,

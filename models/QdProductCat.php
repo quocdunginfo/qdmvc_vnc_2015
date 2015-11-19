@@ -15,6 +15,11 @@ class QdProductCat extends QdRoot
     public static $TYPE3_DOHIEU = 'DOHIEU';
     public static $TYPE3_THIETBI = 'THIETBI';
     public static $TYPE3_OTHER = 'OTHER';
+
+    public static $TYPE4_DF = '';
+    public static $TYPE4_QUANAO = 'QUANAO';
+    public static $TYPE4_GIAYDEP = 'GIAYDEP';
+
     public static $PRICE_RANGE_1 = 'PR1';
     public static $PRICE_RANGE_2 = 'PR2';
     public static $PRICE_RANGE_3 = 'PR3';
@@ -27,6 +32,7 @@ class QdProductCat extends QdRoot
             array('field' => 'type', 'value' => static::$TYPE_PRODUCTCAT, 'operator' => static::$OP_EQUAL)
         ));
     }
+
     /*
     static $has_many = array(
         array('product_list', 'class_name' => 'QdProduct', 'primary_key' => 'id', 'foreign_key' => 'product_cat_id')
@@ -36,7 +42,7 @@ class QdProductCat extends QdRoot
         $obj = new QdProductCat();
         $obj->type = static::$TYPE_PRODUCTCAT;
         $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI;
-        $obj->price_range_type=static::$PRICE_RANGE_1;
+        $obj->price_range_type = static::$PRICE_RANGE_1;
         $obj->active = true;
         return $obj;
     }
@@ -222,6 +228,21 @@ class QdProductCat extends QdRoot
                     )
                 )
             ),
+            'type4' => array(
+                'Caption' => array('en-US' => 'Fashion Type', 'vi-VN' => 'Phân loại thời trang'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    static::$TYPE4_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
+                    static::$TYPE4_QUANAO => array(
+                        'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
+                    ),
+                    static::$TYPE4_GIAYDEP => array(
+                        'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giày dép'),
+                    ),
+                ),
+            ),
             'price_range_type' => array(
                 'Caption' => array('en-US' => 'Price Group', 'vi-VN' => 'Mức giá'),
                 'DataType' => 'Option',
@@ -285,6 +306,36 @@ class QdProductCat extends QdRoot
                     'Field' => 'product_cat_id',
                     'Type' => 'FIELD',
                     'Value' => 'id'
+                )
+            )
+        );
+        $obj['__sys_link_manufactors_url'] = array(
+            'FieldClass' => 'System',
+            'Caption' => array('en-US' => 'Manufactor Links', 'vi-VN' => 'Hãng SX liên kết'),
+            'TableRelation' => array(
+                'Table' => 'QdProcat2ManuSel',
+                'Field' => 'id',
+                'TableFilter' => array(
+                    array(
+                        'Condition' => array(
+                            'Field' => '',
+                            'Type' => 'CONST',//'FIELD'
+                            'Value' => ''
+                        ),
+                        'Field' => 'productcat_id',
+                        'Type' => 'FIELD',
+                        'Value' => 'id'
+                    ),
+                    array(
+                        'Condition' => array(
+                            'Field' => '',
+                            'Type' => 'CONST',//'FIELD'
+                            'Value' => ''
+                        ),
+                        'Field' => 'selection',
+                        'Type' => 'CONST',
+                        'Value' => true
+                    )
                 )
             )
         );
@@ -420,12 +471,15 @@ class QdProductCat extends QdRoot
         return true;
     }
 
-    protected static function getPermalinkSearchPageStructLv1($struct_id){
+    protected static function getPermalinkSearchPageStructLv1($struct_id)
+    {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
         $query = add_query_arg(array('product-cat-lv1-id' => $struct_id), $query);
         return $query;
     }
-    protected static function getPermalinkSearchPageStructLv2($struct_id){
+
+    protected static function getPermalinkSearchPageStructLv2($struct_id)
+    {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
         $query = add_query_arg(array('product-cat-lv2-id' => $struct_id), $query);
         return $query;
@@ -449,87 +503,89 @@ class QdProductCat extends QdRoot
 
         return parent::CALCFIELDS($flowfield_name);
     }
-    public static function getPriceRanges($range_id){
-        switch($range_id){
+
+    public static function getPriceRanges($range_id)
+    {
+        switch ($range_id) {
             case static::$PRICE_RANGE_1:
                 return array(
                     array(
-                        0,100000
+                        0, 100000
                     ),
                     array(
-                        100000,200000
+                        100000, 200000
                     ),
                     array(
-                        200000,300000
+                        200000, 300000
                     ),
                     array(
-                        300000,400000
+                        300000, 400000
                     ),
                     array(
-                        400000,500000
+                        400000, 500000
                     ),
                     array(
-                        500000,-1
+                        500000, -1
                     ),
                 );
             case static::$PRICE_RANGE_2:
                 return array(
                     array(
-                        0,1000000
+                        0, 1000000
                     ),
                     array(
-                        1000000,2000000
+                        1000000, 2000000
                     ),
                     array(
-                        2000000,3000000
+                        2000000, 3000000
                     ),
                     array(
-                        3000000,4000000
+                        3000000, 4000000
                     ),
                     array(
-                        4000000,5000000
+                        4000000, 5000000
                     ),
                     array(
-                        5000000,-1
+                        5000000, -1
                     ),
                 );
             case static::$PRICE_RANGE_3:
                 return array(
                     array(
-                        0,10000000
+                        0, 10000000
                     ),
                     array(
-                        10000000,20000000
+                        10000000, 20000000
                     ),
                     array(
-                        20000000,30000000
+                        20000000, 30000000
                     ),
                     array(
-                        30000000,40000000
+                        30000000, 40000000
                     ),
                     array(
-                        40000000,50000000
+                        40000000, 50000000
                     ),
                     array(
-                        50000000,-1
+                        50000000, -1
                     ),
                 );
             case static::$PRICE_RANGE_4:
                 return array(
                     array(
-                        0,500000000
+                        0, 500000000
                     ),
                     array(
-                        500000000,1000000000
+                        500000000, 1000000000
                     ),
                     array(
-                        1000000000,2000000000
+                        1000000000, 2000000000
                     ),
                     array(
-                        2000000000,3000000000
+                        2000000000, 3000000000
                     ),
                     array(
-                        3000000000,-1
+                        3000000000, -1
                     ),
                 );
             default:
@@ -553,13 +609,19 @@ class QdProductCat extends QdRoot
             'en-US' => 'Product Cat'
         );
     }
-    protected function getStructLv1Caption($type3){
+
+    protected function getStructLv1Caption($type3)
+    {
 
     }
-    protected function getStructLv2Caption($type2){
+
+    protected function getStructLv2Caption($type2)
+    {
 
     }
-    public function _structLv1LevelDictionary(){
+
+    public function _structLv1LevelDictionary()
+    {
         return array(
             static::$TYPE3_DCN => 'Đồ công nghệ',
             static::$TYPE3_XE => 'Xe',
@@ -567,7 +629,9 @@ class QdProductCat extends QdRoot
             static::$TYPE3_THIETBI => 'Thiết bị',
         );
     }
-    public function _structLv1Lv2Dictionary(){
+
+    public function _structLv1Lv2Dictionary()
+    {
         return array(
             static::$TYPE3_DCN => array(
                 QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI,
@@ -592,7 +656,9 @@ class QdProductCat extends QdRoot
             ),
         );
     }
-    public function _structLv2Lv1Dictionary(){
+
+    public function _structLv2Lv1Dictionary()
+    {
         return array(
             QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => static::$TYPE3_DCN,
             QdManufactor::$TYPE2_MANUFACTOR_MTB => static::$TYPE3_DCN,
@@ -612,7 +678,9 @@ class QdProductCat extends QdRoot
             QdManufactor::$TYPE2_MANUFACTOR_OTHER => static::$TYPE3_THIETBI,
         );
     }
-    public function _structLv2LevelDictionary(){
+
+    public function _structLv2LevelDictionary()
+    {
         return array(
             QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => 'Điện thoại',
             QdManufactor::$TYPE2_MANUFACTOR_MTB => 'Máy tính bảng',
@@ -632,7 +700,9 @@ class QdProductCat extends QdRoot
             QdManufactor::$TYPE2_MANUFACTOR_OTHER => 'Khác',
         );
     }
-    public static function getBreadcrumsStructLv2($struct_lv_id){
+
+    public static function getBreadcrumsStructLv2($struct_lv_id)
+    {
         $StructLv2Lv1Dic = static::_structLv2Lv1Dictionary();
         $StructLv2Dic = static::_structLv2LevelDictionary();
         $StructLv1Dic = static::_structLv1LevelDictionary();
@@ -644,7 +714,9 @@ class QdProductCat extends QdRoot
         array_push($re, array('name' => $StructLv2Dic[$struct_lv_id], 'url' => static::getPermalinkSearchPageStructLv2($struct_lv_id)));
         return $re;
     }
-    public static function getBreadcrumsStructLv1($struct_lv_id){
+
+    public static function getBreadcrumsStructLv1($struct_lv_id)
+    {
         $StructLv2Lv1Dic = static::_structLv2Lv1Dictionary();
         $StructLv2Dic = static::_structLv2LevelDictionary();
         $StructLv1Dic = static::_structLv1LevelDictionary();
