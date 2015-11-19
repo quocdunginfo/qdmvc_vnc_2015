@@ -3,6 +3,8 @@
 class QdSize extends QdRoot
 {
     static $table_name = 'mpd_size';
+    public static $TYPE_QUANAO = 'QUANAO';
+    public static $TYPE_GIAYDEP = 'GIAYDEP';
 
     public static function getFieldsConfig()
     {
@@ -16,8 +18,11 @@ class QdSize extends QdRoot
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
-                        'Caption' => array('en-US' => 'Fashion', 'vi-VN' => 'Thời trang'),
+                    static::$TYPE_QUANAO => array(
+                        'Caption' => array('en-US' => 'Quần áo', 'vi-VN' => 'Quần áo'),
+                    ),
+                    static::$TYPE_GIAYDEP => array(
+                        'Caption' => array('en-US' => 'Giày dép', 'vi-VN' => 'Giày dép'),
                     ),
                 )
             ),
