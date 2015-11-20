@@ -64,8 +64,7 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                         MYAPP.openInNewTab(MYAPP.viewModel._permalink_search_page_struct_lv2());
                     });
                     //register button
-                    var r= $('<button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdmanufactors"><span data-bind="text: MYAPP.getURIParam($root.__sys_link_manufactors_url(),\'item_count\'"></span>Hãng SX</button>');
-                    $("#qdsysbtns").append(r);
+                    MYAPP.addSysBtn('qdmanufactors', 'Hãng SX', '');
                     $("#qdmanufactors").bind("click", function (event) {
                         MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_link_manufactors_url']);
                     });
@@ -73,6 +72,5 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
             })(jQuery);
         </script>
     <?php
-
     }
 }

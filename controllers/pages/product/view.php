@@ -84,7 +84,7 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                         });
                     });
 
-                    $('#qdsysbtns').append(
+                    $('#qdsysbtn').append(
                         '<button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdseometa" style="display: inline-block">' +
                         '<span data-bind="text: MYAPP.getURIParam($root.__sys_seometa_url(),\'item_count\')"></span>' +
                         ' <?= $this->page->getFieldCaption("__sys_seometa_url", $this->data["language"]) ?>' +

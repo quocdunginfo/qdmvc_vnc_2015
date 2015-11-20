@@ -69,6 +69,12 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 }
                 MYAPP.showMsg(MYAPP.AllError[MYAPP.AllError.length - 1], false);
             };
+            MYAPP.addSysBtn = function (btnid, label, data_bind_formular) {
+                (function ($) {
+                    var tmpbtn = $('<button class="btn btn-info btn-xs qd-action-btn" type="button" id="' + btnid + '"><span data-bind="' + data_bind_formular + '"></span>' + label + '</button>');
+                    $('#qdsysbtn').append(tmpbtn);
+                })(jQuery);
+            };
 
             MYAPP.showMsg = function (msg, reghistory) {
                 (function ($) {
@@ -332,22 +338,22 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
                 });
                 MYAPP.WPEditor = {};
-                MYAPP.WPEditor.resize = function(width, height){
-                    if(wptexteditor_ifr!=undefined) {
-                        if(height!=undefined) {
+                MYAPP.WPEditor.resize = function (width, height) {
+                    if (wptexteditor_ifr != undefined) {
+                        if (height != undefined) {
                             wptexteditor_ifr.style.height = (height) + 'px';//quocdunginfo
                         }
-                        if(width!=undefined) {
+                        if (width != undefined) {
                             wptexteditor_ifr.style.width = (width) + 'px';//quocdunginfo
                         }
                     }
-                    else{
+                    else {
                         console.log('ERROR: wptexteditor_ifr is not defined');
                     }
                 };
-                MYAPP.WPEditor.setContent = function(initVal){
+                MYAPP.WPEditor.setContent = function (initVal) {
                     var ins = tinyMCE.get('wptexteditor');
-                    if(ins!=undefined){
+                    if (ins != undefined) {
                         tinyMCE.get('wptexteditor').setContent(initVal);
                     }
                 }
@@ -393,7 +399,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <div style="overflow: hidden;" id="wptexteditor_wrapper">
                 <div>
                     <button type="button" id="wptexteditor_done" class="btn btn-primary btn-xs qd-action-btn">
-                        <?=Qdmvc_Message::getMsg('btn_wpeditordone')?>
+                        <?= Qdmvc_Message::getMsg('btn_wpeditordone') ?>
                     </button>
                 </div>
                 <div style="margin-top: 10px">
@@ -1419,73 +1425,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     font-size: 18px;
                 }
             </style>
-            <?php if($this->data['role']=='lookup'):?>
-            <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdchoose">
-                                    <?= Qdmvc_Message::getMsg('btn_choose') ?>
-                                </button>
-                            </span>
-            <?php endif; ?>
-            <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdupdate">
-                                    <?= Qdmvc_Message::getMsg('btn_save') ?>
-                                </button>
-                            </span>
-                            <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdnew">
-                                    <?= Qdmvc_Message::getMsg('btn_new') ?>
-                                </button>
-                            </span>
-                            <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qddelete">
-                                    <?= Qdmvc_Message::getMsg('btn_delete') ?>
-                                </button>
-                            </span>
-                            <span>
-                                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="qdclone">
-                                    <?= Qdmvc_Message::getMsg('btn_clone') ?>
-                                </button>
-                            </span>
-
-                            <span id="qdsysbtns">
-
-                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdnote">
-                                    <span
-                                        data-bind="text: MYAPP.getURIParam($root.__sys_note_url(),'item_count')"></span>
-                                    <?= Qdmvc_Message::getMsg('btn_note') ?>
-                                </button>
-
-                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdimage">
-                                    <span
-                                        data-bind="text: MYAPP.getURIParam($root.__sys_image_url(),'item_count')"></span>
-                                    <?= Qdmvc_Message::getMsg('btn_image') ?>
-                                </button>
-
-                                <button class="btn btn-success btn-xs qd-action-btn" type="button" id="qdlog">
-                                    <span
-                                        data-bind="text: MYAPP.getURIParam($root.__sys_log_url(),'item_count')"></span>
-                                    <?= Qdmvc_Message::getMsg('btn_log') ?>
-                                </button>
-
-                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdlines"
-                                        style="display: none">
-                                    <span
-                                        data-bind="text: MYAPP.getURIParam($root.__sys_lines_url(),'item_count')"></span>
-                                    <?= $this->page->getFieldCaption('__sys_lines_url', $this->data['language']) ?>
-                                </button>
-                            </span>
-
-
-                            <span>
-                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdreloadcard">
-                                    <?= Qdmvc_Message::getMsg('btn_reloadcard') ?>
-                                </button>
-                            </span>
-            <span>
-                                <button class="btn btn-info btn-xs qd-action-btn" type="button" id="qdviewreport" style="display: none">
-                                    <?= Qdmvc_Message::getMsg('btn_viewreport') ?>
-                                </button>
-                            </span>
+            <?=$this->generateToolbar()?>
 
             <?= $this->render_serverFunctions() ?>
 
@@ -1612,7 +1552,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     var json = {id: MYAPP.viewModel.id()};//form2js("cardForm", ".", false, null, true);//skip empty some time cause lack field
                     //begin lock
                     var action = 'call_fn';
-                    if(passing_obj===true){
+                    if (passing_obj === true) {
                         action = 'call_fn_passing';
                         json = MYAPP.getObj();
                     }
@@ -1719,7 +1659,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <?= $this->msgPanelLayout() ?>
             <?= $this->progressLoader() ?>
             <?= $this->onReadyHook() ?>
-            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element     ?>
+            <?= $this->applyKOBinding()//must place after onReadyHook or KO not binding to new added DOM Element      ?>
         </div>
     <?php
     }
@@ -1745,5 +1685,222 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             })(jQuery);
         </script>
     <?php
+    }
+
+    protected function getToolbar()
+    {
+        $obj = array(
+            'qdchoose' => array(
+                'Order' => 0,
+                'Label' => Qdmvc_Message::getMsg('btn_choose'),
+                'Hidden' => ($this->data['role'] !== 'lookup')
+            ),
+            'qdupdate' => array(
+                'Order' => 100,
+                'Label' => Qdmvc_Message::getMsg('btn_save')
+            ),
+            'qdnew' => array(
+                'Order' => 200,
+                'Label' => Qdmvc_Message::getMsg('btn_new')
+            ),
+            'qddelete' => array(
+                'Order' => 300,
+                'Label' => Qdmvc_Message::getMsg('btn_delete')
+            ),
+            'qdclone' => array(
+                'Order' => 400,
+                'Label' => Qdmvc_Message::getMsg('btn_clone')
+            ),
+            'qdsysbtn' => array(
+                'Type' => 'Container',
+                'Order' => 500,
+                'Style' => 'Flat',//'Group',
+                'Childs' => array(
+                    'qdnote' => array(
+                        'Order' => 500,
+                        'Label' => array(
+                            array(
+                                'Type' => 'Binding',
+                                'Formula' => 'text: MYAPP.getURIParam($root.__sys_note_url(),\'item_count\')'
+                            ),
+                            array(
+                                'Type' => 'Text',
+                                'Formula' => Qdmvc_Message::getMsg('btn_note')
+                            )
+                        )
+                    ),
+                    'qdimage' => array(
+                        'Order' => 600,
+                        'Label' => array(
+                            array(
+                                'Type' => 'Binding',
+                                'Formula' => 'text: MYAPP.getURIParam($root.__sys_image_url(),\'item_count\')'
+                            ),
+                            array(
+                                'Type' => 'Text',
+                                'Formula' => Qdmvc_Message::getMsg('btn_image')
+                            )
+                        )
+                    ),
+                    'qdlog' => array(
+                        'Order' => 600,
+                        'Label' => array(
+                            array(
+                                'Type' => 'Binding',
+                                'Formula' => 'text: MYAPP.getURIParam($root.__sys_log_url(),\'item_count\')'
+                            ),
+                            array(
+                                'Type' => 'Text',
+                                'Formula' => Qdmvc_Message::getMsg('btn_log')
+                            )
+                        )
+                    ),
+                )
+            ),
+            'qdreloadcard' => array(
+                'Order' => 600,
+                'Label' => Qdmvc_Message::getMsg('btn_reloadcard')
+            ),
+            'qdsysbtn2' => array(
+                'Type' => 'Container',
+                'Order' => 700,
+                'Style' => 'Flat',//'Group',
+                'Label' => 'Tiện ích',
+                'Childs' => array(
+                    'qdlines' => array(
+                        'Order' => 100,
+                        'Label' => array(
+                            array(
+                                'Type' => 'Binding',
+                                'Formula' => 'text: MYAPP.getURIParam($root.__sys_lines_url(),\'item_count\')'
+                            ),
+                            array(
+                                'Type' => 'Text',
+                                'Formula' => $this->page->getFieldCaption('__sys_lines_url', $this->data['language'])
+                            )
+                        ),
+                        'Hidden' => true
+                    ),
+                    'qdviewreport' => array(
+                        'Order' => 200,
+                        'Label' => Qdmvc_Message::getMsg('btn_viewreport'),
+                        'Hidden' => true
+                    ),
+                )
+            ),
+            'qdpagebtn' => array(
+                'Type' => 'Container',
+                'Order' => 800,
+                'Style' => 'Flat',
+                'Childs' => array()
+            )
+        );
+        return $obj;
+    }
+
+    private function generateToolbar()
+    {
+
+        //SORT
+        $layout = $this->getToolbar();
+        //apply sorting
+        uasort($layout, "static::compareArray");
+        foreach ($layout as $key => &$config) {
+            if ($config['Type'] == 'Container' && isset($config['Childs'])) {
+                uasort($config['Childs'], "static::compareArray");
+            }
+        }
+        //end apply sorting
+        foreach($layout as $key=>$config2){
+            $this->genToolbarElement($key, $config2);
+        }
+        //END SORT
+    }
+
+    private static function compareArray($a, $b)
+    {
+        if (isset($a['Order']) && isset($b['Order'])) {
+            if ($a['Order'] == $b['Order']) {
+                return 0;
+            }
+            return $a['Order'] - $b['Order'];
+        }
+        return 0;
+    }
+    private function genToolbarElementLabel($key, $config){
+        if (is_array($config)) {
+            foreach ($config as $lbitem) {
+                if (isset($lbitem['Type'])) {
+                    if ($lbitem['Type'] === 'Text') {
+                        echo $lbitem['Formula'];
+                    } else if ($lbitem['Type'] === 'Binding') {
+                        ?>
+                        <span
+                            data-bind="<?= $lbitem['Formula'] ?>">
+
+                                                            </span>
+                    <?php
+                    }
+                }
+            }
+        } else {
+            echo $config;
+        }
+    }
+    private function genToolbarElement($rootkey, $layout)
+    {
+        //Container
+        if (isset($layout['Type']) && $layout['Type'] === 'Container') {
+            if (isset($layout['Style'])) {
+                //Group
+                if ($layout['Style'] === 'Group') {
+                    ?>
+                    <div class="btn-group" id="">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="false">
+                            <?= $layout['Label'] ?> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <?php foreach ($layout['Childs'] as $key => $config): ?>
+                                <li style="<?php if (isset($layout['Hidden']) && $layout['Hidden']===true) echo 'display:none;' ?>">
+                                    <a id="<?= $key ?>">
+                                        <?php
+                                        if (isset($config['Label'])) {
+                                            $this->genToolbarElementLabel($key, $config['Label']);
+                                        }
+                                        ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php
+                } //Flat
+                else {
+                    ?>
+                    <span id="<?= $rootkey ?>">
+                        <?php foreach ($layout['Childs'] as $key => $config): ?>
+                            <button class="btn btn-success btn-xs qd-action-btn" type="button" id="<?= $key ?>" style="<?php if (isset($config['Hidden']) && $config['Hidden']===true) echo 'display:none;' ?>">
+                                <?php
+                                if (isset($config['Label'])) {
+                                    $this->genToolbarElementLabel($key, $config['Label']);
+                                }
+                                ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </span>
+                <?php
+                }
+            }
+        } //Button
+        else {
+            ?>
+            <span style="<?php if (isset($layout['Hidden']) && $layout['Hidden']===true) echo 'display:none;' ?>">
+                <button class="btn btn-primary btn-xs qd-action-btn" type="button" id="<?=$rootkey?>">
+                    <?=$this->genToolbarElementLabel($rootkey, $layout['Label'])?>
+                </button>
+            </span>
+            <?php
+        }
     }
 }
