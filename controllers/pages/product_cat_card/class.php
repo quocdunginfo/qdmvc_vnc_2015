@@ -43,7 +43,7 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
                     ),
                     'type4' => array(
                         'Order' => 36,
-                        'Hidden' => true
+                        'Hidden' => false
                     ),
                     'price_range_type' => array(
                         'Order' => 37,

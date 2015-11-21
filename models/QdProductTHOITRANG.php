@@ -24,6 +24,7 @@ class QdProductTHOITRANG extends QdProduct
         $obj->transferFieldsFrom($tmp);
 
         $obj->type = QdManufactor::$TYPE2_MANUFACTOR_THOITRANG;
+        $obj->type4 = QdProductCat::$TYPE4_QUANAO;
         return $obj;
     }
 

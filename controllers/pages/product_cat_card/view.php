@@ -64,7 +64,6 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                         MYAPP.openInNewTab(MYAPP.viewModel._permalink_search_page_struct_lv2());
                     });
                     //register button
-                    MYAPP.addSysBtn('qdmanufactors', 'Hãng SX', '');
                     $("#qdmanufactors").bind("click", function (event) {
                         MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_link_manufactors_url']);
                     });
@@ -73,4 +72,24 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
         </script>
     <?php
     }
+
+    protected function getToolbar()
+    {
+        $obj = parent::getToolbar();
+        $obj['qdpagebtn']['Childs']['qdmanufactors'] = array(
+            'Order' => 100,
+            'Label' => array(
+                array(
+                    'Type' => 'Binding',
+                    'Formula' => 'text: MYAPP.getURIParam($root.__sys_link_manufactors_url(),\'item_count\')'
+                ),
+                array(
+                    'Type' => 'Text',
+                    'Formula' => $this->page->getFieldCaption('__sys_link_manufactors_url', $this->data['language'])
+                )
+            ),
+        );
+        return $obj;
+    }
+
 }

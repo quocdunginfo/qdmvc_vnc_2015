@@ -11,6 +11,7 @@ class QdProductCatTHOITRANG extends QdProductCatDOHIEU
 
         $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_THOITRANG;
         $obj->property_grp_type = static::$PROPERTY_G3;
+        $obj->type4 = QdProductCat::$TYPE4_QUANAO;
         return $obj;
     }
 
@@ -20,6 +21,8 @@ class QdProductCatTHOITRANG extends QdProductCatDOHIEU
         $obj['type2']['Options'] = array(
             QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => $obj['type2']['Options'][QdManufactor::$TYPE2_MANUFACTOR_THOITRANG]
         );
+        unset($obj['type4']['Options'][QdProductCat::$TYPE4_DF]);
+
         $obj['type2']['ReadOnly'] = true;
 
         $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatTHOITRANG';

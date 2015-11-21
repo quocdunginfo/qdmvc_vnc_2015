@@ -22,9 +22,7 @@ class Qdmvc_Page_ProductTHOITRANG_Card extends Qdmvc_Page_Product_PG3_Card
     protected static function initFields()
     {
         $obj = parent::initFields();
-        $obj['General']['Fields']['type4'] = array(
-            'Order' => 25
-        );
+
         return $obj;
     }
 

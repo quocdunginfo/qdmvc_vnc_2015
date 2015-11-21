@@ -250,6 +250,7 @@ class QdProduct extends QdRoot
                     ),
                 ),
                 'ReadOnly' => true,
+                'Description' => array('vi-VN' => 'Tự động validate theo Loại SP')
             ),
             'type' => array(
                 'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
