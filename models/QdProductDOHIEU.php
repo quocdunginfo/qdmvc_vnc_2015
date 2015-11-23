@@ -6,7 +6,7 @@ class QdProductDOHIEU extends QdProduct
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            array('field' => 'type3', 'value' => QdProductCat::$TYPE3_DOHIEU, 'operator' => static::$OP_EQUAL)
+            array('field' => 'struct_lv_1', 'value' => QdProductCat::$LV1_DOHIEU, 'operator' => static::$OP_EQUAL)
         ));
     }
     public static function getInitObj()
@@ -14,7 +14,7 @@ class QdProductDOHIEU extends QdProduct
         $obj = new QdProductDOHIEU();
         $tmp = parent::getInitObj();
         $obj->transferFieldsFrom($tmp);
-        $obj->type3 = QdProductCat::$TYPE3_DOHIEU;
+        $obj->struct_lv_1 = QdProductCat::$LV1_DOHIEU;
         return $obj;
     }
     public static function getFieldsConfig()

@@ -20,7 +20,7 @@ class QdProductCatPG2 extends QdProductCat
             static::$PROPERTY_G2 => $obj['property_grp_type']['Options'][static::$PROPERTY_G2]
         );
         $obj['property_grp_type']['ReadOnly'] = true;
-        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatPG2';
+        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCat';
 
         $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductPG2';
 

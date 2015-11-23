@@ -6,12 +6,11 @@ class QdProductDHMK extends QdProduct
     {
         $obj = parent::getFieldsConfig();
 
-        $obj['type']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => $obj['type']['Options'][QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK]
+        $obj['struct_lv_2']['Options'] = array(
+            QdProductCat::$LV2_MANUFACTOR_PKTT => $obj['struct_lv_2']['Options'][QdProductCat::$LV2_MANUFACTOR_PKTT]
         );
 
         $obj['product_cat_id']['TableRelation']['Table'] = 'QdProductCatDHMK';
-        $obj['manufacturer_id']['TableRelation']['Table'] = 'QdManufactor';
 
         return $obj;
     }
@@ -23,7 +22,7 @@ class QdProductDHMK extends QdProduct
         $obj = new QdProductDHMK();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK;
+        $obj->struct_lv_2 = QdManufactor::$LV2_MANUFACTOR_PKTT;
         return $obj;
     }
 

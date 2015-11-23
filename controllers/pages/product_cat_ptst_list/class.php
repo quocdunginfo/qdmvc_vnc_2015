@@ -22,7 +22,8 @@ class Qdmvc_Page_ProductCatPTST_List extends Qdmvc_Page_ProductCat_PG2_THIETBI_L
     protected function getCustomPageView()
     {
         return array_merge(parent::getCustomPageView(), array(
-            'type2' => QdManufactor::$TYPE2_MANUFACTOR_SUUTAP
+            'struct_lv_2' => QdProductCat::$LV2_MANUFACTOR_SUUTAP,
+            'level'=>3
         ));
     }
 

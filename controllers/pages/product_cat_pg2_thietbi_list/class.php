@@ -24,7 +24,8 @@ class Qdmvc_Page_ProductCat_PG2_THIETBI_List extends Qdmvc_Page_ProductCat_PG2_L
     {
         $obj = array_merge(parent::getCustomPageView(),
             array(
-                'type3' => QdProductCat::$TYPE3_THIETBI
+                'struct_lv_1' => QdProductCat::$LV1_THIETBI,
+                'level'=>3
             ));
         return $obj;
     }

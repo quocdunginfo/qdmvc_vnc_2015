@@ -27,8 +27,8 @@ class Qdmvc_Page_Manufactor extends Qdmvc_Page_ProductCat_Card
         unset($obj['General']['Fields']['level']);
         unset($obj['General']['Fields']['price_range_type']);
         unset($obj['General']['Fields']['property_grp_type']);
-        unset($obj['General']['Fields']['type2']);
-        unset($obj['General']['Fields']['type3']);
+        //unset($obj['General']['Fields']['type2']);
+        //unset($obj['General']['Fields']['type3']);
         return $obj;
     }
 

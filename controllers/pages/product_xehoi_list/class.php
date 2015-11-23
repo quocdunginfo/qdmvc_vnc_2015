@@ -22,7 +22,7 @@ class Qdmvc_Page_ProductXEHOI_List extends Qdmvc_Page_Product_PG2_XE_List
     protected function getCustomPageView()
     {
         return array_merge(parent::getCustomPageView(), array(
-            'type' => QdManufactor::$TYPE2_MANUFACTOR_OTO
+            'struct_lv_2' => QdManufactor::$LV2_MANUFACTOR_OTO
         ));
     }
 

@@ -8,13 +8,66 @@
  */
 class Qdmvc_Page_DatabaseSvc
 {
-    public function run(){
-        $obj = new QdLog();
+    public function run()
+    {
+        //load viewer
+        Qdmvc::loadController('/pages/' . static::getPage() . '/' . 'view');
+        //load View and render
+        $c = static::getViewClass();
+        if ($c != '') {
+            $tmp = new $c($this);
+            $tmp->render();
+        }
     }
-    public function run67(){
+    public function getDataSet(){
+        $re = array();
+        $tmp = new QdProductPG2DCN();
+        $re[0] = array(
+            'Table' => 'Đồ công nghệ',
+            'Count' => $tmp->COUNTLIST(),
+        );
+
+        $tmp = new QdProductPG2XE();
+        $re[1] = array(
+            'Table' => 'Xe',
+            'Count' => $tmp->COUNTLIST(),
+        );
+
+        $tmp = new QdProductDOHIEU();
+        $re[2] = array(
+            'Table' => 'Đồ hiệu',
+            'Count' => $tmp->COUNTLIST(),
+        );
+
+        $tmp = new QdProductPG2THIETBI();
+        $re[3] = array(
+            'Table' => 'Thiết bị',
+            'Count' => $tmp->COUNTLIST(),
+        );
+        return $re;
+    }
+    public static function getPage(){
+        return 'blank_page';
+    }
+    public static function getData(){
+        return array();
+    }
+    public static function getViewClass(){
+        return 'Qdmvc_Page_DatabaseSvc_View';
+    }
+
+    public function ddd()
+    {
+        ?>
+
+    <?php
+    }
+
+    public function run67()
+    {
         //Qdmvc::loadHelper('PHPExcel/PHPExcel');
 
-        $fpath = plugin_dir_path( __FILE__ ).'../../../excel_tpl/rpt_1/';
+        $fpath = plugin_dir_path(__FILE__) . '../../../excel_tpl/rpt_1/';
 
         $tmpdir = md5(rand());
 
@@ -24,17 +77,17 @@ class Qdmvc_Page_DatabaseSvc
 
         $tmppath .= '/';
 
-        copy($fpath . 'layout.xls', $tmppath. 'layout.xls');
+        copy($fpath . 'layout.xls', $tmppath . 'layout.xls');
 
         //write to data.txt file
         $file = fopen($tmppath . 'data.txt', "w");
 
 
-        fwrite($file,"Hello World. Testing!");
-        fwrite($file,"\t");
-        fwrite($file,"1");
-        fwrite($file,"\t");
-        fwrite($file,"A1");
+        fwrite($file, "Hello World. Testing!");
+        fwrite($file, "\t");
+        fwrite($file, "1");
+        fwrite($file, "\t");
+        fwrite($file, "A1");
 
         fclose($file);
 
@@ -64,37 +117,40 @@ class Qdmvc_Page_DatabaseSvc
 
 // Bước 6: Tạo tiêu đề cho từng cell excel,
 // Các cell của từng row bắt đầu từ A1 B1 C1 ...
-        for($i=0;$i<10;$i++){
-            $PHPExcel->getActiveSheet()->setCellValue('A'.$i, 'STT');
-            $PHPExcel->getActiveSheet()->setCellValue('B'.$i, 'Email');
-            $PHPExcel->getActiveSheet()->setCellValue('C'.$i, 'Fullname');
+        for ($i = 0; $i < 10; $i++) {
+            $PHPExcel->getActiveSheet()->setCellValue('A' . $i, 'STT');
+            $PHPExcel->getActiveSheet()->setCellValue('B' . $i, 'Email');
+            $PHPExcel->getActiveSheet()->setCellValue('C' . $i, 'Fullname');
         }
 
         $objWriter = new PHPExcel_Writer_Excel2007($PHPExcel);
-        $objWriter->save($fpath.'.xlsx');
+        $objWriter->save($fpath . '.xlsx');
 
     }
-    public function run3(){
+
+    public function run3()
+    {
         Qdmvc::loadHelper('class.Diff');
         $diff = Diff::compare('Ngay do', 'Ngay mua', true);
         echo Diff::toHTML($diff, '');
         return;
-        foreach($diff as $item){
-            if($item[1]==Diff::DELETED){
+        foreach ($diff as $item) {
+            if ($item[1] == Diff::DELETED) {
                 echo $item[0];
             }
         }
         echo '<br>';
-        foreach($diff as $item){
-            if($item[1]==Diff::INSERTED){
+        foreach ($diff as $item) {
+            if ($item[1] == Diff::INSERTED) {
                 echo $item[0];
             }
         }
         ?>
 
 
-        <?php
+    <?php
     }
+
     public function run2()
     {
         Qdmvc_Helper::requestCompact();

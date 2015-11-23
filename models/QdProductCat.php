@@ -3,23 +3,41 @@
 class QdProductCat extends QdRoot
 {
     static $table_name = 'mpd_product_cat';
-    public static $TYPE_PRODUCTCAT = 0;
-    public static $TYPE_MANUFACTOR = 215;
+    public static $TYPE_PRODUCTCAT = 'LOAISP';
+    public static $TYPE_MANUFACTOR = 'HANGSX';
     //public static $TYPE_BIGSALE = 100;//Use in child class
 
     public static $PROPERTY_G2 = 'PG2';//loai, hang sx
-    public static $PROPERTY_GDF = 'PGDF';//loai, hang sx
+    public static $PROPERTY_GDF = '';//loai, hang sx
     public static $PROPERTY_G3 = 'PG3';//loai, hang sx, size
-    public static $TYPE3_DCN = 'DCN';
-    public static $TYPE3_XE = 'XE';
-    public static $TYPE3_DOHIEU = 'DOHIEU';
-    public static $TYPE3_THIETBI = 'THIETBI';
-    public static $TYPE3_OTHER = 'OTHER';
 
-    public static $TYPE4_DF = '';
-    public static $TYPE4_QUANAO = 'QUANAO';
-    public static $TYPE4_GIAYDEP = 'GIAYDEP';
+    public static $LV1_DF = '';
+    public static $LV1_DCN = 'DCN';
+    public static $LV1_XE = 'XE';
+    public static $LV1_DOHIEU = 'DOHIEU';
+    public static $LV1_THIETBI = 'THIETBI';
+    public static $LV1_OTHER = 'OTHER';
 
+    public static $LV2_MANUFACTOR_DF = '';
+    public static $LV2_MANUFACTOR_DIENTHOAI = 'DIENTHOAI';
+    public static $LV2_MANUFACTOR_SUUTAP = 'SUUTAP';
+    public static $LV2_MANUFACTOR_DODUNG = 'DODUNG';
+    public static $LV2_MANUFACTOR_MTB = 'MTB';
+    public static $LV2_MANUFACTOR_LAPTOP = 'LAPTOP';
+    public static $LV2_MANUFACTOR_PHUKIEN = 'PHUKIEN';
+    public static $LV2_MANUFACTOR_XEDAP = 'XEDAP';
+    public static $LV2_MANUFACTOR_XEMAY = 'XEMAY';
+    public static $LV2_MANUFACTOR_OTO = 'OTO';
+    public static $LV2_MANUFACTOR_NUOCHOA = 'NUOCHOA';
+    public static $LV2_MANUFACTOR_QUANAO = 'QUANAO';
+    public static $LV2_MANUFACTOR_PKTT = 'PKTT';
+    public static $LV2_MANUFACTOR_OTHER = 'OTHER';
+
+    public static $LV4_DF = '';
+    public static $LV4_QUANAO = 'QUANAO';
+    public static $LV4_GIAYDEP = 'GIAYDEP';
+
+    public static $PRICE_RANGE_DF = '';
     public static $PRICE_RANGE_1 = 'PR1';
     public static $PRICE_RANGE_2 = 'PR2';
     public static $PRICE_RANGE_3 = 'PR3';
@@ -41,7 +59,6 @@ class QdProductCat extends QdRoot
     {
         $obj = new QdProductCat();
         $obj->type = static::$TYPE_PRODUCTCAT;
-        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI;
         $obj->price_range_type = static::$PRICE_RANGE_1;
         $obj->active = true;
         return $obj;
@@ -72,6 +89,9 @@ class QdProductCat extends QdRoot
             ),
             'active' => array(
                 'DataType' => 'Boolean',
+            ),
+            'type' => array(
+                'Caption' => array('vi-VN' => 'Phân loại'),
             ),
             'order' => array(
                 'Caption' => array('vi-VN' => 'Thứ tự'),
@@ -126,119 +146,102 @@ class QdProductCat extends QdRoot
                 'Name' => 'parent_id',
                 'Caption' => array('en-US' => 'Parent ID', 'vi-VN' => 'Mã LSP cha'),
                 'DataType' => 'Code',
-                'Numeric' => true,
                 'Description' => '',
                 'Editable' => true,
-                'InitValue' => '0',
                 'FieldClass' => 'Normal',//'FlowField'
                 'TableRelation' => array(
                     'Table' => 'QdProductCat',
                     'Field' => 'id',
-                    'TableFilter' => array(/*0 => array(
-                            'Condition' => array(
-                                'Field' => '',
-                                'Type' => 'CONST',//'FIELD'
-                                'Value' => ''
-                            ),
-                            'Field' => 'is_leaf',
-                            'Type' => 'FIELD',
-                            'Value' => true
-                        )*/
+                    'TableFilter' => array(
                     )
                 )
             ),
-            /*
-            'is_leaf' => array(
-                'Caption' => array('en-US' => 'Is leaf', 'vi-VN' => 'Nút lá'),
-                'DataType' => 'Boolean'
-            ),*/
-            'type' => array(
-                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
-                'DataType' => 'Option',
-                'Options' => array(
-                    static::$TYPE_PRODUCTCAT => array(
-                        'Caption' => array('en-US' => 'Product Cat', 'vi-VN' => 'Product Cat'),
-                    ),
-                ),
-                'ReadOnly' => true
+            'struct_lv_3' => array(
+
             ),
-            'type2' => array(
-                'Caption' => array('en-US' => 'Type2', 'vi-VN' => 'Dòng SP'),
+            'struct_lv_2' => array(
+                'Caption' => array('en-US' => 'Struct Lv2', 'vi-VN' => 'Struct Lv2'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => array(
+                    static::$LV2_MANUFACTOR_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
+                    static::$LV2_MANUFACTOR_DIENTHOAI => array(
                         'Caption' => array('en-US' => 'Product Cat Phone', 'vi-VN' => 'LSP Điện thoại'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_MTB => array(
+                    static::$LV2_MANUFACTOR_MTB => array(
                         'Caption' => array('en-US' => 'Product Cat Tablet', 'vi-VN' => 'LSP Máy tính bảng'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => array(
+                    static::$LV2_MANUFACTOR_LAPTOP => array(
                         'Caption' => array('en-US' => 'Product Cat Laptop', 'vi-VN' => 'LSP Laptop'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => array(
+                    static::$LV2_MANUFACTOR_PHUKIEN => array(
                         'Caption' => array('en-US' => 'Product Cat PK', 'vi-VN' => 'LSP Phụ kiện'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_XEDAP => array(
+                    static::$LV2_MANUFACTOR_XEDAP => array(
                         'Caption' => array('en-US' => 'Product Cat Bicycle', 'vi-VN' => 'LSP Xe đạp'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_XEMAY => array(
+                    static::$LV2_MANUFACTOR_XEMAY => array(
                         'Caption' => array('en-US' => 'Product Cat Moto', 'vi-VN' => 'LSP Xe máy'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_OTO => array(
+                    static::$LV2_MANUFACTOR_OTO => array(
                         'Caption' => array('en-US' => 'Product Cat Car', 'vi-VN' => 'LSP Xe ôtô'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => array(
+                    static::$LV2_MANUFACTOR_NUOCHOA => array(
                         'Caption' => array('en-US' => 'Product Cat NUOCHOA', 'vi-VN' => 'LSP Nước hoa'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
-                        'Caption' => array('en-US' => 'Product Cat THOITRANG', 'vi-VN' => 'LSP Thời trang'),
+                    static::$LV2_MANUFACTOR_QUANAO => array(
+                        'Caption' => array('en-US' => 'Product Cat QUANAO', 'vi-VN' => 'LSP Quần áo'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => array(
-                        'Caption' => array('en-US' => 'Product Cat Watch - Glass', 'vi-VN' => 'LSP Đồng hồ - Mắt kính'),
+                    static::$LV2_MANUFACTOR_PKTT => array(
+                        'Caption' => array('en-US' => 'Accessories', 'vi-VN' => 'LSP Phụ kiện thời trang'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_DODUNG => array(
+                    static::$LV2_MANUFACTOR_DODUNG => array(
                         'Caption' => array('en-US' => 'Product Cat Furniture', 'vi-VN' => 'LSP Đồ dùng'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => array(
+                    static::$LV2_MANUFACTOR_SUUTAP => array(
                         'Caption' => array('en-US' => 'Product Cat Souvenir', 'vi-VN' => 'LSP Phong thủy - Sưu tập'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
+                    static::$LV2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'LSP Khác'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
+                    static::$LV2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Product Cat Other', 'vi-VN' => 'Loại SP Other'),
                     ),
                 )
             ),
-            'type3' => array(
-                'Caption' => array('en-US' => 'Type 3', 'vi-VN' => 'Type 3'),
+            'struct_lv_1' => array(
+                'Caption' => array('en-US' => 'Struct Lv1', 'vi-VN' => 'Struct Lv1'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    static::$TYPE3_DCN => array(
+                    static::$LV1_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
+                    static::$LV1_DCN => array(
                         'Caption' => array('en-US' => 'Đồ công nghệ', 'vi-VN' => 'Đồ công nghệ'),
                     ),
-                    static::$TYPE3_XE => array(
+                    static::$LV1_XE => array(
                         'Caption' => array('en-US' => 'Xe', 'vi-VN' => 'Xe'),
                     ),
-                    static::$TYPE3_DOHIEU => array(
+                    static::$LV1_DOHIEU => array(
                         'Caption' => array('en-US' => 'Luxury', 'vi-VN' => 'Đồ hiệu'),
                     ),
-                    static::$TYPE3_THIETBI => array(
+                    static::$LV1_THIETBI => array(
                         'Caption' => array('en-US' => 'Device', 'vi-VN' => 'Thiết bị'),
                     )
                 )
             ),
-            'type4' => array(
-                'Caption' => array('en-US' => 'Fashion Type', 'vi-VN' => 'Phân loại thời trang'),
+            'struct_lv_4' => array(
+                'Caption' => array('en-US' => 'Struct Lv4', 'vi-VN' => 'Struct Lv4'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    static::$TYPE4_DF => array(
-                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    static::$LV4_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định (không có)'),
                     ),
-                    static::$TYPE4_QUANAO => array(
+                    static::$LV4_QUANAO => array(
                         'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
                     ),
-                    static::$TYPE4_GIAYDEP => array(
+                    static::$LV4_GIAYDEP => array(
                         'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giày dép'),
                     ),
                 ),
@@ -247,6 +250,9 @@ class QdProductCat extends QdRoot
                 'Caption' => array('en-US' => 'Price Group', 'vi-VN' => 'Mức giá'),
                 'DataType' => 'Option',
                 'Options' => array(
+                    static::$PRICE_RANGE_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
                     static::$PRICE_RANGE_1 => array(
                         'Caption' => array('en-US' => 'Price range 1', 'vi-VN' => 'Mức 1 (500k)'),
                     ),
@@ -309,6 +315,7 @@ class QdProductCat extends QdRoot
                 )
             )
         );
+        $obj['id']['ReadOnly'] = false;
         $obj['__sys_link_manufactors_url'] = array(
             'FieldClass' => 'System',
             'Caption' => array('en-US' => 'Manufactor Links', 'vi-VN' => 'Hãng SX liên kết'),
@@ -382,14 +389,9 @@ class QdProductCat extends QdRoot
 
     public function getBreadcrumbs()
     {
-        $StructLv1Dic = $this->_structLv1LevelDictionary();
-        $StructLv2Dic = $this->_structLv2LevelDictionary();
-
         $re = array();
         $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
         array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
-        array_push($re, array('name' => $StructLv1Dic[$this->type3], 'url' => $this->_permalink_search_page_struct_lv1));
-        array_push($re, array('name' => $StructLv2Dic[$this->type2], 'url' => $this->_permalink_search_page_struct_lv2));
         array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
         return $re;
     }
@@ -404,14 +406,18 @@ class QdProductCat extends QdRoot
     protected function parent_idOnValidate($field_name)
     {
         //check exit
-        if ($this->$field_name > 0) {
-            if (QdProductCat::GET($this->$field_name) == null) {
+        if ($this->$field_name != '') {
+            $p = QdProductCat::GET($this->$field_name);
+            if ( $p == null) {
                 $this->pushValidateError($field_name, 'Product Cat không tồn tại!');
                 if (!$this->is_new_record()) {
                     $this->$field_name = $this->xRec()->$field_name;
                 }
-            } else if ($this->$field_name == $this->id) {
+                return false;
+            }
+            if($this->$field_name == $this->id) {
                 $this->pushValidateError($field_name, 'Không thể chọn cha là chính nó!');
+                return false;
             }
         }
         $this->level = $this->getDeepLevel();
@@ -492,11 +498,11 @@ class QdProductCat extends QdRoot
             //return
             return $this->qd_cached_attr[$flowfield_name];
         } else if ($flowfield_name == '_permalink_search_page_struct_lv1') {
-            $this->qd_cached_attr[$flowfield_name] = static::getPermalinkSearchPageStructLv1($this->type3);
+            $this->qd_cached_attr[$flowfield_name] = static::getPermalinkSearchPageStructLv1($this->struct_lv_1);
             //return
             return $this->qd_cached_attr[$flowfield_name];
         } else if ($flowfield_name == '_permalink_search_page_struct_lv2') {
-            $this->qd_cached_attr[$flowfield_name] = static::getPermalinkSearchPageStructLv2($this->type2);
+            $this->qd_cached_attr[$flowfield_name] = static::getPermalinkSearchPageStructLv2($this->struct_lv_2);
             //return
             return $this->qd_cached_attr[$flowfield_name];
         }
@@ -610,121 +616,190 @@ class QdProductCat extends QdRoot
         );
     }
 
-    protected function getStructLv1Caption($type3)
-    {
 
+    public function fn_genstructure($location, $params = array())
+    {
+        $obj = new QdProductCat();
+        //delete all
+        $obj->DELETEALL(false);
+        //restruct
+
+        //LV1
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_1 = static::$LV1_DCN;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Đồ công nghệ';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_1 = static::$LV1_XE;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Xe';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_1 = static::$LV1_DOHIEU;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_GDF;
+        $obj->name = 'Đồ hiệu';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_1 = static::$LV1_THIETBI;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Thiết bị';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        //LV2 - DCN
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_DIENTHOAI;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DCN;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Điện thoại';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_MTB;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DCN;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Máy tính bảng';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_LAPTOP;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DCN;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Laptop';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_PHUKIEN;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DCN;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Phụ kiện';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+        //END LV2 - DCN
+
+        //LV2 - XE
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_XEDAP;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_XE;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Xe đạp';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_XEMAY;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_XE;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Xe máy';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_OTO;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_XE;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Ô tô';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+        //END LV2 - XE
+
+        //LV2 - DOHIEU
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_NUOCHOA;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DOHIEU;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Nước hoa';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_QUANAO;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DOHIEU;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G3;
+        $obj->name = 'Quần áo';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_PKTT;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DOHIEU;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_GDF;
+        $obj->name = 'Phụ kiện thời trang';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        //END LV2 - DOHIEU
+
+        //LV2 - THIETBI
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_DODUNG;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_THIETBI;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Đồ dùng';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_SUUTAP;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_THIETBI;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Phong thủy - Sưu tập';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+
+        $obj = new QdProductCat();
+        $obj->id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_OTHER;
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_THIETBI;
+        $obj->type = static::$TYPE_PRODUCTCAT;
+        $obj->property_grp_type = static::$PROPERTY_G2;
+        $obj->name = 'Sản phẩm khác';
+        $obj->order = 10;
+        $obj->active = true;
+        $obj->save();
+        //END LV2 - THIETBI
+        return true;
     }
 
-    protected function getStructLv2Caption($type2)
-    {
-
-    }
-
-    public function _structLv1LevelDictionary()
-    {
-        return array(
-            static::$TYPE3_DCN => 'Đồ công nghệ',
-            static::$TYPE3_XE => 'Xe',
-            static::$TYPE3_DOHIEU => 'Đồ hiệu',
-            static::$TYPE3_THIETBI => 'Thiết bị',
-        );
-    }
-
-    public function _structLv1Lv2Dictionary()
-    {
-        return array(
-            static::$TYPE3_DCN => array(
-                QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI,
-                QdManufactor::$TYPE2_MANUFACTOR_MTB,
-                QdManufactor::$TYPE2_MANUFACTOR_LAPTOP,
-                QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN
-            ),
-            static::$TYPE3_XE => array(
-                QdManufactor::$TYPE2_MANUFACTOR_XEDAP,
-                QdManufactor::$TYPE2_MANUFACTOR_XEMAY,
-                QdManufactor::$TYPE2_MANUFACTOR_OTO,
-            ),
-            static::$TYPE3_DOHIEU => array(
-                QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA,
-                QdManufactor::$TYPE2_MANUFACTOR_THOITRANG,
-                QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK,
-            ),
-            static::$TYPE3_THIETBI => array(
-                QdManufactor::$TYPE2_MANUFACTOR_DODUNG,
-                QdManufactor::$TYPE2_MANUFACTOR_SUUTAP,
-                QdManufactor::$TYPE2_MANUFACTOR_OTHER,
-            ),
-        );
-    }
-
-    public function _structLv2Lv1Dictionary()
-    {
-        return array(
-            QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => static::$TYPE3_DCN,
-            QdManufactor::$TYPE2_MANUFACTOR_MTB => static::$TYPE3_DCN,
-            QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => static::$TYPE3_DCN,
-            QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => static::$TYPE3_DCN,
-
-            QdManufactor::$TYPE2_MANUFACTOR_XEDAP => static::$TYPE3_XE,
-            QdManufactor::$TYPE2_MANUFACTOR_XEMAY => static::$TYPE3_XE,
-            QdManufactor::$TYPE2_MANUFACTOR_OTO => static::$TYPE3_XE,
-
-            QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => static::$TYPE3_DOHIEU,
-            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => static::$TYPE3_DOHIEU,
-            QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => static::$TYPE3_DOHIEU,
-
-            QdManufactor::$TYPE2_MANUFACTOR_DODUNG => static::$TYPE3_THIETBI,
-            QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => static::$TYPE3_THIETBI,
-            QdManufactor::$TYPE2_MANUFACTOR_OTHER => static::$TYPE3_THIETBI,
-        );
-    }
-
-    public function _structLv2LevelDictionary()
-    {
-        return array(
-            QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => 'Điện thoại',
-            QdManufactor::$TYPE2_MANUFACTOR_MTB => 'Máy tính bảng',
-            QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => 'Laptop',
-            QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => 'Phụ kiện',
-
-            QdManufactor::$TYPE2_MANUFACTOR_XEDAP => 'Xe đạp',
-            QdManufactor::$TYPE2_MANUFACTOR_XEMAY => 'Xe máy',
-            QdManufactor::$TYPE2_MANUFACTOR_OTO => 'Xe hơi',
-
-            QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => 'Nước hoa',
-            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => 'Thời trang',
-            QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => 'Đồng hồ - Mắt kính',
-
-            QdManufactor::$TYPE2_MANUFACTOR_DODUNG => 'Đồ dùng',
-            QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => 'Phong thủy - Sưu tập',
-            QdManufactor::$TYPE2_MANUFACTOR_OTHER => 'Khác',
-        );
-    }
-
-    public static function getBreadcrumsStructLv2($struct_lv_id)
-    {
-        $StructLv2Lv1Dic = static::_structLv2Lv1Dictionary();
-        $StructLv2Dic = static::_structLv2LevelDictionary();
-        $StructLv1Dic = static::_structLv1LevelDictionary();
-
-        $re = array();
-        $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
-        array_push($re, array('name' => $StructLv1Dic[$StructLv2Lv1Dic[$struct_lv_id]], 'url' => static::getPermalinkSearchPageStructLv1($StructLv2Lv1Dic[$struct_lv_id])));
-        array_push($re, array('name' => $StructLv2Dic[$struct_lv_id], 'url' => static::getPermalinkSearchPageStructLv2($struct_lv_id)));
-        return $re;
-    }
-
-    public static function getBreadcrumsStructLv1($struct_lv_id)
-    {
-        $StructLv2Lv1Dic = static::_structLv2Lv1Dictionary();
-        $StructLv2Dic = static::_structLv2LevelDictionary();
-        $StructLv1Dic = static::_structLv1LevelDictionary();
-
-        $re = array();
-        $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
-        array_push($re, array('name' => $StructLv1Dic[$struct_lv_id], 'url' => static::getPermalinkSearchPageStructLv1($struct_lv_id)));
-        return $re;
-    }
 }

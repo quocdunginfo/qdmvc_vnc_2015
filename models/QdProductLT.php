@@ -6,12 +6,11 @@ class QdProductLT extends QdProductPG2DCN
     {
         $obj = parent::getFieldsConfig();
 
-        $obj['type']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => $obj['type']['Options'][QdManufactor::$TYPE2_MANUFACTOR_LAPTOP]
+        $obj['struct_lv_2']['Options'] = array(
+            QdProductCat::$LV2_MANUFACTOR_LAPTOP => $obj['struct_lv_2']['Options'][QdProductCat::$LV2_MANUFACTOR_LAPTOP]
         );
 
         $obj['product_cat_id']['TableRelation']['Table'] = 'QdProductCatLT';
-        $obj['manufacturer_id']['TableRelation']['Table'] = 'QdManufactor';
 
         return $obj;
     }
@@ -23,7 +22,7 @@ class QdProductLT extends QdProductPG2DCN
         $obj = new QdProductLT();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_LAPTOP;
+        $obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_LAPTOP;
         return $obj;
     }
 

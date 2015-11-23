@@ -22,7 +22,8 @@ class Qdmvc_Page_ProductCatLT_List extends Qdmvc_Page_ProductCat_PG2_DCN_List
     protected function getCustomPageView()
     {
         return array_merge(parent::getCustomPageView(), array(
-            'type2' => QdManufactor::$TYPE2_MANUFACTOR_LAPTOP
+            'struct_lv_2' => QdProductCat::$LV2_MANUFACTOR_LAPTOP,
+            'level' => 3
         ));
     }
 

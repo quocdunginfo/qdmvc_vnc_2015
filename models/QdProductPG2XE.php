@@ -6,7 +6,7 @@ class QdProductPG2XE extends QdProductPG2
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
         $this->SETFILTERDEFAULT(array(
-            array('field' => 'type3', 'value' => QdProductCat::$TYPE3_XE, 'operator' => static::$OP_EQUAL)
+            array('field' => 'struct_lv_1', 'value' => QdProductCat::$LV1_XE, 'operator' => static::$OP_EQUAL)
         ));
     }
     public static function getInitObj()
@@ -14,7 +14,7 @@ class QdProductPG2XE extends QdProductPG2
         $obj = new QdProductPG2XE();
         $tmp = parent::getInitObj();
         $obj->transferFieldsFrom($tmp);
-        $obj->type3 = QdProductCat::$TYPE3_XE;
+        $obj->struct_lv_1 = QdProductCat::$LV1_XE;
         return $obj;
     }
     public static function getFieldsConfig()

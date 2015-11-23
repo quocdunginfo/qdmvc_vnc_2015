@@ -17,6 +17,20 @@ class Qdmvc_Layout_Root
         $this->data = $page->getData();
         wp_enqueue_media();//use for both Media and Tinymce
     }
+    protected function style()
+    {
+        //var_dump($this->data);
+        if ($this->data['view_style'] == 'compact') {
+            Qdmvc_Helper::requestCompact();
+        }
+        ?>
+        <style>
+            #wpfooter {
+                display: none;
+            }
+        </style>
+    <?php
+    }
 
     public function render()
     {

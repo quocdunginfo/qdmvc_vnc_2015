@@ -9,19 +9,20 @@ class QdProductCatMTB extends QdProductCatPG2DCN
         $obj = new QdProductCatMTB();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_MTB;
+        $obj->parent_id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_MTB;
+
         return $obj;
     }
 
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        $obj['type2']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_MTB => $obj['type2']['Options'][QdManufactor::$TYPE2_MANUFACTOR_MTB]
+        $obj['struct_lv_2']['Options'] = array(
+            static::$LV2_MANUFACTOR_MTB => $obj['struct_lv_2']['Options'][static::$LV2_MANUFACTOR_MTB]
         );
-        $obj['type2']['ReadOnly'] = true;
+        $obj['struct_lv_2']['ReadOnly'] = true;
 
-        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatMTB';
+        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCat';
 
         $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductMTB';
 

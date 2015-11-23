@@ -13,6 +13,8 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
     function __construct($page)
     {
         parent::__construct($page);
+        $this->data['view_style'] = 'compact';
+
         // Moved to qdmvc because of files caches
         //jquery ui
         QdJqwidgets::loadSinglePluginJS('jquery-ui/jquery-ui.js', false);
@@ -25,13 +27,10 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
         QdJqwidgets::loadSinglePluginJS('underscore-min.js', false);
 
     }
-    public function render2(){
-
-    }
 
     public function render()
     {
-        Qdmvc_Helper::requestCompact();
+        $this->style();
         parent::render();
         $this->onReadyHook();
         ?>

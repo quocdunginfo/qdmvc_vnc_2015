@@ -58,7 +58,7 @@ class QdSize extends QdRoot
     public static function getInitObj()
     {
         $obj = new QdSize();
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_THOITRANG;
+        $obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_QUANAO;
         return $obj;
     }
 

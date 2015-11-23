@@ -26,48 +26,52 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
                 'Type' => 'Group',
                 'Fields' => array(
                     'id' => array(
-                        'Order' => 10,
-                        'ReadOnly' => true
+                        'Order' => 100,
+                        'ReadOnly' => false
                     ),
                     'type' => array(
-                        'Order' => 20,
+                        'Order' => 200,
                     ),
                     'property_grp_type' => array(
-                        'Order' => 25
+                        'Order' => 300
                     ),
-                    'type3' => array(
-                        'Order' => 30
+                    'struct_lv_1' => array(
+                        'Order' => 400
                     ),
-                    'type2' => array(
-                        'Order' => 35,
+                    'struct_lv_2' => array(
+                        'Order' => 500,
                     ),
-                    'type4' => array(
-                        'Order' => 36,
+                    'struct_lv_3' => array(
+                        'Order' => 600,
+                        'Hidden' => false
+                    ),
+                    'struct_lv_4' => array(
+                        'Order' => 700,
                         'Hidden' => false
                     ),
                     'price_range_type' => array(
-                        'Order' => 37,
+                        'Order' => 800,
                     ),
                     'level' => array(
-                        'Order' => 40,
+                        'Order' => 900,
                     ),
                     'name' => array(
-                        'Order' => 50,
+                        'Order' => 1000,
                     ),
                     'avatar' => array(
-                        'Order' => 60,
+                        'Order' => 1100,
                     ),
                     'parent_id' => array(
-                        'Order' => 70,
+                        'Order' => 1200,
                     ),
                     '_parent_name' => array(
-                        'Order' => 80,
+                        'Order' => 1300,
                     ),
                     'order' => array(
-                        'Order' => 90,
+                        'Order' => 1400,
                     ),
                     'active' => array(
-                        'Order' => 100,
+                        'Order' => 1500,
                     ),
                 )
             ),

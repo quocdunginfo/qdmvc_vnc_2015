@@ -1452,21 +1452,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     <?php
     }
 
-    protected function style()
-    {
-        //var_dump($this->data);
-        if ($this->data['view_style'] == 'compact') {
-            Qdmvc_Helper::requestCompact();
-        }
-        ?>
-        <style>
-            #wpfooter {
-                display: none;
-            }
-        </style>
-    <?php
-    }
-
     protected function getHelpTourPipes()
     {
         return array(

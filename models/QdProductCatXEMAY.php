@@ -9,19 +9,19 @@ class QdProductCatXEMAY extends QdProductCatPG2XE
         $obj = new QdProductCatXEMAY();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_XEMAY;
+        $obj->parent_id = $obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_XEMAY;
         return $obj;
     }
 
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        $obj['type2']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_XEMAY => $obj['type2']['Options'][QdManufactor::$TYPE2_MANUFACTOR_XEMAY]
+        $obj['struct_lv_2']['Options'] = array(
+            QdProductCat::$LV2_MANUFACTOR_XEMAY => $obj['struct_lv_2']['Options'][QdProductCat::$LV2_MANUFACTOR_XEMAY]
         );
-        $obj['type2']['ReadOnly'] = true;
+        $obj['struct_lv_2']['ReadOnly'] = true;
 
-        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatXEMAY';
+        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCat';
 
         $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductXEMAY';
 

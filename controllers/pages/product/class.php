@@ -22,10 +22,16 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                         'Order' => 10,
                         'ReadOnly' => false
                     ),
-                    'type' => array(
+                    'struct_lv_1' => array(
                         'Order' => 20,
                     ),
-                    'type4' => array(
+                    'struct_lv_2' => array(
+                        'Order' => 25
+                    ),
+                    'struct_lv_3' => array(
+                        'Order' => 20,
+                    ),
+                    'struct_lv_4' => array(
                         'Order' => 25
                     ),
                     'name' => array(

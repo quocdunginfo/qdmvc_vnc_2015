@@ -24,7 +24,8 @@ class Qdmvc_Page_ProductCat_PG2_XE_List extends Qdmvc_Page_ProductCat_PG2_List
     {
         $obj = array_merge(parent::getCustomPageView(),
             array(
-                'type3' => QdProductCat::$TYPE3_XE
+                'struct_lv_1' => QdProductCat::$LV1_XE,
+                'level' => 3
             ));
         return $obj;
     }

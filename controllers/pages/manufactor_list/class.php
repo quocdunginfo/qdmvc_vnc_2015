@@ -22,7 +22,7 @@ class Qdmvc_Page_Manufactor_List extends Qdmvc_Page_ProductCat_List
     protected function getCustomPageView()
     {
         return array(
-            'type' => QdManufactor::$TYPE_MANUFACTOR
+            'type' => QdProductCat::$TYPE_MANUFACTOR
         );
     }
 

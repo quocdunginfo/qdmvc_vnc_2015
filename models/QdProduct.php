@@ -235,74 +235,77 @@ class QdProduct extends QdRoot
                     'vi-VN' => '% giảm giá so với Field \'price\', nhập số thập phân vd: 0.56'
                 ),
             ),
-            'type4' => array(
+            'struct_lv_4' => array(
                 'Caption' => array('en-US' => 'Fashion Type', 'vi-VN' => 'Phân loại thời trang'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdProductCat::$TYPE4_DF => array(
-                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    QdProductCat::$LV4_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định (không có)'),
                     ),
-                    QdProductCat::$TYPE4_QUANAO => array(
+                    QdProductCat::$LV4_QUANAO => array(
                         'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
                     ),
-                    QdProductCat::$TYPE4_GIAYDEP => array(
+                    QdProductCat::$LV4_GIAYDEP => array(
                         'Caption' => array('en-US' => 'Shoes', 'vi-VN' => 'Giày dép'),
                     ),
                 ),
                 'ReadOnly' => true,
                 'Description' => array('vi-VN' => 'Tự động validate theo Loại SP')
             ),
-            'type' => array(
-                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
+            'struct_lv_3' => array(
+
+            ),
+            'struct_lv_2' => array(
+                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Dòng SP'),
                 'DataType' => 'Option',
                 'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => array(
+                    QdProductCat::$LV2_MANUFACTOR_DIENTHOAI => array(
                         'Caption' => array('en-US' => 'Phone', 'vi-VN' => 'Điện thoại'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_MTB => array(
+                    QdProductCat::$LV2_MANUFACTOR_MTB => array(
                         'Caption' => array('en-US' => 'Tablet', 'vi-VN' => 'Máy tính bảng'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => array(
+                    QdProductCat::$LV2_MANUFACTOR_LAPTOP => array(
                         'Caption' => array('en-US' => 'Laptop', 'vi-VN' => 'Laptop'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_PHUKIEN => array(
+                    QdProductCat::$LV2_MANUFACTOR_PHUKIEN => array(
                         'Caption' => array('en-US' => 'Accessories', 'vi-VN' => 'Phụ kiện'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_XEDAP => array(
+                    QdProductCat::$LV2_MANUFACTOR_XEDAP => array(
                         'Caption' => array('en-US' => 'Bicycle', 'vi-VN' => 'Xe đạp'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_XEMAY => array(
+                    QdProductCat::$LV2_MANUFACTOR_XEMAY => array(
                         'Caption' => array('en-US' => 'Moto', 'vi-VN' => 'Xe máy'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_OTO => array(
+                    QdProductCat::$LV2_MANUFACTOR_OTO => array(
                         'Caption' => array('en-US' => 'Car & Auto', 'vi-VN' => 'Xe hơi'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => array(
+                    QdProductCat::$LV2_MANUFACTOR_NUOCHOA => array(
                         'Caption' => array('en-US' => 'Perfume', 'vi-VN' => 'Nước hoa'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
-                        'Caption' => array('en-US' => 'Fashion', 'vi-VN' => 'Thời trang'),
+                    QdProductCat::$LV2_MANUFACTOR_QUANAO => array(
+                        'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK => array(
-                        'Caption' => array('en-US' => 'Watch - Glass', 'vi-VN' => 'Đồng hồ - Mắt kính'),
+                    QdProductCat::$LV2_MANUFACTOR_PKTT => array(
+                        'Caption' => array('en-US' => 'Accessories', 'vi-VN' => 'Phụ kiện thời trang'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_DODUNG => array(
+                    QdProductCat::$LV2_MANUFACTOR_DODUNG => array(
                         'Caption' => array('en-US' => 'Furniture', 'vi-VN' => 'Đồ dùng'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_SUUTAP => array(
+                    QdProductCat::$LV2_MANUFACTOR_SUUTAP => array(
                         'Caption' => array('en-US' => 'Souvenir', 'vi-VN' => 'Phong thủy - Sưu tập'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
+                    QdProductCat::$LV2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
                     ),
-                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
+                    QdProductCat::$LV2_MANUFACTOR_OTHER => array(
                         'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
                     ),
                 ),
                 'ReadOnly' => true,
                 'Description' => array('vi-VN' => 'Tự động validate theo Loại SP')
             ),
-            'type3' => array(
+            'struct_lv_1' => array(
 
             ),
             'price_range_type' => array(
@@ -487,7 +490,7 @@ class QdProduct extends QdRoot
 
     protected function product_cat_idOnValidate($field_name)
     {
-        $format = "product_cat_lv%s_id";
+        $format = "struct_lv_%s";
 
         //check exit
         $pc = $this->getProductCatObj();
@@ -514,9 +517,11 @@ class QdProduct extends QdRoot
 
             //validate other mark field
             $this->property_grp_type = $pc->property_grp_type;
-            $this->type3 = $pc->type3;
-            $this->type4 = $pc->type4;
-            $this->type = $pc->type2;
+            $this->struct_lv_1 = $pc->struct_lv_1;
+            $this->struct_lv_2 = $pc->struct_lv_2;
+            $this->struct_lv_3 = $pc->struct_lv_3;
+            $this->struct_lv_4 = $pc->struct_lv_4;
+
             $this->price_range_type = $pc->price_range_type;
         }
     }
@@ -541,7 +546,7 @@ class QdProduct extends QdRoot
     {
         $obj = new QdProduct();
         $obj->description = Qdmvc_Config::getProductSetup()->df_product_desc_tpl;
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI;
+        $obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_DIENTHOAI;
         $obj->stock_status = static::$STOCK_DF;
         return $obj;
     }
@@ -664,157 +669,5 @@ class QdProduct extends QdRoot
             'vi-VN' => 'Sản phẩm',
             'en-US' => 'Product'
         );
-    }
-    public function fn_validate_procat2manu($location, $params = array())
-    {
-        //Loop through ProductCat
-        $count = 0;
-        $pcat = new QdProductCat();
-        $pcatmanu = new QdProcat2Manu();
-        $manu = new QdManufactor();
-        //gen struct_level_3
-        $pcats = $pcat->GETLIST();
-        $count += $this->genManuByProcat($pcats);
-        //gen struct_level_1
-        foreach($pcat->_structLv1LevelDictionary() as $key=>$config){
-            $pcat->REMOVEFILTER();
-            $pcat->SETRANGE('type3', $key);
-            $pcats = $pcat->GETLIST();
-            $count += $this->genManuByStructLv($pcats, 1, $key);
-        }
-
-        //gen struct_level_2
-        foreach($pcat->_structLv2LevelDictionary() as $key=>$config){
-            $pcat->REMOVEFILTER();
-            $pcat->SETRANGE('type2', $key);
-            $pcats = $pcat->GETLIST();
-            $count += $this->genManuByStructLv($pcats, 2, $key);
-        }
-
-        $this->pushValidateError('', 'Totals Manufactor generated = ' . $count, 'info');
-
-        return true;
-    }
-    public function fn_validate_procat2size($location, $params = array())
-    {
-        //Loop through ProductCat
-        $count = 0;
-        $pcat = new QdProductCat();
-        $pcat->SETRANGE('property_grp_type', QdProductCat::$PROPERTY_G3);
-
-        $pcatsize = new QdProcat2Size();
-        $size = new QdSize();
-        //gen struct_level_3
-        $pcats = $pcat->GETLIST();
-        $tmp_procat2size_list = array();
-
-        foreach($pcats as $catitem){
-            $plist = $catitem->getProducts()->GETLIST();
-            $tmp_procat2size_list[$catitem->id] = array();
-            //Loop all its Products
-            foreach($plist as $pitem){
-                if($pitem->size_id > 0){
-                    if(!in_array($pitem->size_id, $tmp_procat2size_list[$catitem->id])){
-                        array_push($tmp_procat2size_list[$catitem->id], $pitem->size_id);
-                    }
-                }
-            }
-            //Register ProductCat vs Manufactor
-            //S1: Remove all Procat2Manu links for this Procat
-            $pcatsize->REMOVEFILTER();
-            $pcatsize->SETRANGE('productcat_id', $catitem->id);
-            $pcatsize->DELETEALL();
-            //
-            foreach($tmp_procat2size_list[$catitem->id] as $linkitem){
-                if($size->GET($linkitem)!=null){
-                    $pcatmanu = new QdProcat2Size();
-                    $pcatmanu->productcat_id = $catitem->id;
-                    $pcatmanu->size_id = $linkitem;
-                    if($pcatmanu->save()){
-                        $count++;
-                    }
-                }
-            }
-        }
-        $this->pushValidateError('', 'Totals Size generated = ' . $count, 'info');
-        return true;
-    }
-    private function genManuByProcat($pcat_list){
-        $tmp_procat2manu_list = array();
-        $pcatmanu = new QdProcat2Manu();
-        $manu = new QdManufactor();
-        $count = 0;
-        foreach($pcat_list as $catitem){
-            $plist = $catitem->getProducts()->GETLIST();
-            $tmp_procat2manu_list[$catitem->id] = array();
-            //Loop all its Products
-            foreach($plist as $pitem){
-                if($pitem->manufacturer_id > 0){
-                    if(!in_array($pitem->manufacturer_id, $tmp_procat2manu_list[$catitem->id])){
-                        array_push($tmp_procat2manu_list[$catitem->id], $pitem->manufacturer_id);
-                    }
-                }
-            }
-            //Register ProductCat vs Manufactor
-            //S1: Remove all Procat2Manu links for this Procat
-            $pcatmanu->REMOVEFILTER();
-            $pcatmanu->SETRANGE('productcat_id', $catitem->id);
-            $pcatmanu->SETRANGE('struct_level', 3);
-            $pcatmanu->SETRANGE('selection', false);
-            $tmppcatmanu = $pcatmanu->GETLIST();
-            foreach($tmppcatmanu as $pcatmanuitem){
-                $pcatmanuitem->delete();
-            }
-            //
-            foreach($tmp_procat2manu_list[$catitem->id] as $linkitem){
-                if($manu->GET($linkitem)!=null){
-                    $pcatmanu = new QdProcat2Manu();
-                    $pcatmanu->productcat_id = $catitem->id;
-                    $pcatmanu->manufactor_id = $linkitem;
-                    $pcatmanu->struct_level = 3;
-                    if($pcatmanu->save()){
-                        $count++;
-                    }
-                }
-            }
-        }
-        return $count;
-    }
-    private function genManuByStructLv($pcat_list, $struct_level, $struct_level_id){
-        $tmp_structlv12manu_list = array();
-        $pcatmanu = new QdProcat2Manu();
-        $manu = new QdManufactor();
-        $count = 0;
-        foreach($pcat_list as $catitem){
-            $plist = $catitem->getProducts()->GETLIST();
-            //Loop all its Products
-            foreach($plist as $pitem){
-                if($pitem->manufacturer_id > 0){
-                    if(!in_array($pitem->manufacturer_id, $tmp_structlv12manu_list)){
-                        array_push($tmp_structlv12manu_list, $pitem->manufacturer_id);
-                    }
-                }
-            }
-            //Register ProductCat vs Manufactor
-            //S1: Remove all Procat2Manu links for this Procat
-            $pcatmanu->REMOVEFILTER();
-            $pcatmanu->SETRANGE('productcat_id', $struct_level_id);
-            $pcatmanu->SETRANGE('struct_level', $struct_level);
-            $pcatmanu->SETRANGE('selection', false);
-            $pcatmanu->DELETEALL();
-        }
-        //Make new links
-        foreach($tmp_structlv12manu_list as $linkitem){
-            if($manu->GET($linkitem)!=null){
-                $pcatmanu = new QdProcat2Manu();
-                $pcatmanu->productcat_id = $struct_level_id;
-                $pcatmanu->manufactor_id = $linkitem;
-                $pcatmanu->struct_level = $struct_level;
-                if($pcatmanu->save()){
-                    $count++;
-                }
-            }
-        }
-        return $count;
     }
 }

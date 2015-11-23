@@ -9,22 +9,23 @@ class QdProductCatLT extends QdProductCatPG2DCN
         $obj = new QdProductCatLT();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_LAPTOP;
+        $obj->parent_id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_LAPTOP;
         return $obj;
     }
 
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        $obj['type2']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_LAPTOP => $obj['type2']['Options'][QdManufactor::$TYPE2_MANUFACTOR_LAPTOP]
+        $obj['struct_lv_2']['Options'] = array(
+            static::$LV2_MANUFACTOR_LAPTOP => $obj['struct_lv_2']['Options'][static::$LV2_MANUFACTOR_LAPTOP]
         );
-        $obj['type2']['ReadOnly'] = true;
+        $obj['struct_lv_2']['ReadOnly'] = true;
 
-        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatLT';
+        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCat';
 
         $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductLT';
 
         return $obj;
     }
+
 }

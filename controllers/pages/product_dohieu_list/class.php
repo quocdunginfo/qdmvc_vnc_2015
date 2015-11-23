@@ -21,7 +21,7 @@ class Qdmvc_Page_Product_DOHIEU_List extends Qdmvc_Page_Product_List
     protected function getCustomPageView()
     {
         $obj = array_merge(parent::getCustomPageView() ,array(
-            'type3' => QdProductCat::$TYPE3_DOHIEU
+            'struct_lv_1' => QdProductCat::$LV1_DOHIEU
         ));
         return $obj;
     }

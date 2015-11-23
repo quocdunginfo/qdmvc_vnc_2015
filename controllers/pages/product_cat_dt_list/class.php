@@ -22,7 +22,8 @@ class Qdmvc_Page_ProductCatDT_List extends Qdmvc_Page_ProductCat_List
     protected function getCustomPageView()
     {
         return array_merge(parent::getCustomPageView(), array(
-            'type2' => QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI
+            'struct_lv_2' => QdProductCat::$LV2_MANUFACTOR_DIENTHOAI,
+            'level' => 3
         ));
     }
 

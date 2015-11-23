@@ -9,7 +9,7 @@ class QdProductCatPG2DCN extends QdProductCatPG2
         $obj = new QdProductCatPG2DCN();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type3 = static::$TYPE3_DCN;
+        $obj->struct_lv_1 = static::$LV1_DCN;
         return $obj;
     }
 
@@ -17,17 +17,12 @@ class QdProductCatPG2DCN extends QdProductCatPG2
     {
         $obj = parent::getFieldsConfig();
 
-        $obj['type3']['Options'] = array(
-            static::$TYPE3_DCN => array(
-                'Caption' => array('en-US' => 'Đồ công nghệ', 'vi-VN' => 'Đồ công nghệ'),
-            ),
+        $obj['struct_lv_1']['Options'] = array(
+            static::$LV1_DCN => $obj['struct_lv_1']['Options'][static::$LV1_DCN]
         );
-        $obj['type3']['Options'] = array(
-            QdManufactor::$TYPE3_DCN => $obj['type3']['Options'][QdManufactor::$TYPE3_DCN]
-        );
-        $obj['type3']['ReadOnly'] = true;
+        $obj['struct_lv_1']['ReadOnly'] = true;
 
-        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatPG2DCN';
+        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCat';
 
         return $obj;
     }

@@ -8,6 +8,7 @@ class QdProductCatDOHIEU extends QdProductCat
 
         $obj = new QdProductCatDOHIEU();
         $obj->transferFieldsFrom($tmp);
+        $obj->parent_id = $obj->struct_lv_1 = static::$LV1_DOHIEU;
 
         return $obj;
     }
@@ -15,11 +16,11 @@ class QdProductCatDOHIEU extends QdProductCat
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        $obj['type3']['Options'] = array(
-            static::$TYPE3_DOHIEU => $obj['type3']['Options'][static::$TYPE3_DOHIEU]
+        $obj['struct_lv_1']['Options'] = array(
+            static::$LV1_DOHIEU => $obj['struct_lv_1']['Options'][static::$LV1_DOHIEU]
         );
-        $obj['type3']['ReadOnly'] = true;
-        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatDOHIEU';
+        $obj['struct_lv_1']['ReadOnly'] = true;
+        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCat';
         $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductDOHIEU';
         return $obj;
     }

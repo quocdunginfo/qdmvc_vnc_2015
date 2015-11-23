@@ -2,20 +2,6 @@
 
 class QdManufactor extends QdProductCat
 {
-    public static $TYPE2_MANUFACTOR_DIENTHOAI = 'DIENTHOAI';
-    public static $TYPE2_MANUFACTOR_SUUTAP = 'SUUTAP';
-    public static $TYPE2_MANUFACTOR_DODUNG = 'DODUNG';
-    public static $TYPE2_MANUFACTOR_MTB = 'MTB';
-    public static $TYPE2_MANUFACTOR_LAPTOP = 'LAPTOP';
-    public static $TYPE2_MANUFACTOR_PHUKIEN = 'PHUKIEN';
-    public static $TYPE2_MANUFACTOR_XEDAP = 'XEDAP';
-    public static $TYPE2_MANUFACTOR_XEMAY = 'XEMAY';
-    public static $TYPE2_MANUFACTOR_OTO = 'OTO';
-    public static $TYPE2_MANUFACTOR_NUOCHOA = 'NUOCHOA';
-    public static $TYPE2_MANUFACTOR_THOITRANG = 'THOITRANG';
-    public static $TYPE2_MANUFACTOR_DONGHO_MK = 'DONGHO_MK';
-    public static $TYPE2_MANUFACTOR_OTHER = 'OTHER';
-
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);

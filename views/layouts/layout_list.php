@@ -239,6 +239,8 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             var ids = MYAPP.getSelectedRowsId();
                             if(ids.length===1){
                                 MYAPP.gotoURL(MYAPP.appendParam(MYAPP.page_navigate, 'qdlookupid', ids[0]));
+                            }else if(ids.length===0){
+                                MYAPP.gotoURL(MYAPP.page_navigate);
                             }
                         });
 
@@ -389,13 +391,11 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     public
     function render()
     {
-        if ($this->data['view_style'] == 'compact') {
-            Qdmvc_Helper::requestCompact();
-        }
         if ($this->data['nopermission'] === true) {
             $this->layout_nopermission();
             return;
         }
+        $this->style();
         parent::render();
         ?>
         <div id="qdmvcRootDiv" style="display: none; width: inherit; height: inherit">

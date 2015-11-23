@@ -42,6 +42,14 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Open Front-End Lv3 Page'
                 )
             ),
+            'btn_genstructure' => array(
+                'fn_name' => 'fn_genstructure',
+                'label' => array(
+                    'vi-VN' => 'Tạo lại cấu trúc LSP',
+                    'en-US' => 'Re-gen Structure'
+                ),
+                'confirm' => true
+            ),
 
         ));
         return $obj;

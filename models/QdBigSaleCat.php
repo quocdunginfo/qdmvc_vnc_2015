@@ -2,7 +2,7 @@
 
 class QdBigSaleCat extends QdProductCat
 {
-    public static $TYPE_BIGSALE = 100;
+    public static $TYPE_BIGSALE = 'BIGSALE';
 
     public function __construct(array $attributes = array(), $guard_attributes = true, $instantiating_via_find = false, $new_record = true)
     {
@@ -30,16 +30,7 @@ class QdBigSaleCat extends QdProductCat
         $obj['parent_id']['TableRelation'] = array(
             'Table' => 'QdBigSaleCat',
             'Field' => 'id',
-            'TableFilter' => array(/*array(
-                    'Condition' => array(
-                        'Field' => '',
-                        'Type' => 'CONST',//'FIELD'
-                        'Value' => ''
-                    ),
-                    'Field' => 'type',
-                    'Type' => 'FIELD',
-                    'Value' => static::$TYPE_BIGSALE
-                )*/
+            'TableFilter' => array(
             )
         );
         $obj['type']['Options'] = array(

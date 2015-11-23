@@ -63,19 +63,7 @@ class QdPro2Pro extends QdRoot
                 )
             ),
             'r_product_type' => array(
-                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Phân loại'),
-                'DataType' => 'Option',
-                'Options' => array(
-                    QdManufactor::$TYPE2_MANUFACTOR_DIENTHOAI => array(
-                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
-                    ),
-                    QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => array(
-                        'Caption' => array('en-US' => 'Clothes', 'vi-VN' => 'Quần áo'),
-                    ),
-                    QdManufactor::$TYPE2_MANUFACTOR_OTHER => array(
-                        'Caption' => array('en-US' => 'Other', 'vi-VN' => 'Khác'),
-                    ),
-                )
+
             ),
             'r_product_id' => array(
                 'Name' => 'r_product_id',

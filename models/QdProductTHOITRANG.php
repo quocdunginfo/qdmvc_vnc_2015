@@ -6,12 +6,11 @@ class QdProductTHOITRANG extends QdProduct
     {
         $obj = parent::getFieldsConfig();
 
-        $obj['type']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_THOITRANG => $obj['type']['Options'][QdManufactor::$TYPE2_MANUFACTOR_THOITRANG]
+        $obj['struct_lv_2']['Options'] = array(
+            QdProductCat::$LV2_MANUFACTOR_QUANAO => $obj['struct_lv_2']['Options'][QdProductCat::$LV2_MANUFACTOR_QUANAO]
         );
 
         $obj['product_cat_id']['TableRelation']['Table'] = 'QdProductCatTHOITRANG';
-        $obj['manufacturer_id']['TableRelation']['Table'] = 'QdManufactor';
 
         return $obj;
     }
@@ -23,8 +22,8 @@ class QdProductTHOITRANG extends QdProduct
         $obj = new QdProductTHOITRANG();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type = QdManufactor::$TYPE2_MANUFACTOR_THOITRANG;
-        $obj->type4 = QdProductCat::$TYPE4_QUANAO;
+        $obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_QUANAO;
+        $obj->struct_lv_4 = QdProductCat::$LV4_QUANAO;
         return $obj;
     }
 

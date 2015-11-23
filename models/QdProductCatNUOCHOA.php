@@ -9,7 +9,7 @@ class QdProductCatNUOCHOA extends QdProductCatDOHIEU
         $obj = new QdProductCatNUOCHOA();
         $obj->transferFieldsFrom($tmp);
 
-        $obj->type2 = QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA;
+        $obj->parent_id = $obj->struct_lv_2 = static::$LV2_MANUFACTOR_NUOCHOA;
         $obj->property_grp_type = static::$PROPERTY_G2;
         return $obj;
     }
@@ -17,12 +17,12 @@ class QdProductCatNUOCHOA extends QdProductCatDOHIEU
     public static function getFieldsConfig()
     {
         $obj = parent::getFieldsConfig();
-        $obj['type2']['Options'] = array(
-            QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA => $obj['type2']['Options'][QdManufactor::$TYPE2_MANUFACTOR_NUOCHOA]
+        $obj['struct_lv_2']['Options'] = array(
+            static::$LV2_MANUFACTOR_NUOCHOA => $obj['struct_lv_2']['Options'][static::$LV2_MANUFACTOR_NUOCHOA]
         );
-        $obj['type2']['ReadOnly'] = true;
+        $obj['struct_lv_2']['ReadOnly'] = true;
 
-        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCatNUOCHOA';
+        $obj['parent_id']['TableRelation']['Table'] = 'QdProductCat';
 
         $obj['__sys_lines_url']['TableRelation']['Table'] = 'QdProductNUOCHOA';
 

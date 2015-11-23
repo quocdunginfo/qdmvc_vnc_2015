@@ -22,7 +22,8 @@ class Qdmvc_Page_ProductCatDHMK_List extends Qdmvc_Page_ProductCat_PG2_List
     protected function getCustomPageView()
     {
         return array_merge(parent::getCustomPageView(), array(
-            'type2' => QdManufactor::$TYPE2_MANUFACTOR_DONGHO_MK
+            'struct_lv_2' => QdProductCat::$LV2_MANUFACTOR_PKTT,
+            'level' => 3
         ));
     }
 

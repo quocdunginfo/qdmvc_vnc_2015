@@ -21,7 +21,7 @@ class Qdmvc_Page_Product_PG2_DCN_List extends Qdmvc_Page_Product_PG2_List
     protected function getCustomPageView()
     {
         $obj = array_merge(parent::getCustomPageView() ,array(
-            'type3' => QdProductCat::$TYPE3_DCN
+            'struct_lv_1' => QdProductCat::$LV1_DCN,
         ));
         return $obj;
     }

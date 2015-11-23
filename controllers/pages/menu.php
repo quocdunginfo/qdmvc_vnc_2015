@@ -517,8 +517,8 @@ class Qdmvc_Page_IndexMenu
                 'PageType' => 'Card',
                 'Class' => 'Qdmvc_Page_ProductTHOITRANG_Card',
                 'Caption' => array(
-                    'en-US' => 'Product THOITRANG',
-                    'vi-VN' => 'SP Thời trang',
+                    'en-US' => 'Product Clothes',
+                    'vi-VN' => 'SP Quần áo',
                 ),
                 'Model' => 'QdProductTHOITRANG',
                 'DataPort' => 'product_thoitrang_port',
@@ -618,7 +618,7 @@ class Qdmvc_Page_IndexMenu
                 'Class' => 'Qdmvc_Page_ProductDHMK_Card',
                 'Caption' => array(
                     'en-US' => 'Product DHMK',
-                    'vi-VN' => 'SP Đồng hồ -  Mắt kính',
+                    'vi-VN' => 'SP Phụ kiện thời trang',
                 ),
                 'Model' => 'QdProductDHMK',
                 'DataPort' => 'product_dhmk_port',
@@ -1046,7 +1046,7 @@ class Qdmvc_Page_IndexMenu
                 'Class' => 'Qdmvc_Page_ProductCatTHOITRANG_Card',
                 'Caption' => array(
                     'en-US' => 'Product Cat THOITRANG',
-                    'vi-VN' => 'LSP Thời trang',
+                    'vi-VN' => 'LSP Quần áo',
                 ),
                 'Model' => 'QdProductCatTHOITRANG',
                 'DataPort' => 'product_cat_thoitrang_port',
@@ -1071,7 +1071,7 @@ class Qdmvc_Page_IndexMenu
                 'Class' => 'Qdmvc_Page_ProductCatDHMK_Card',
                 'Caption' => array(
                     'en-US' => 'Product Cat DHMK',
-                    'vi-VN' => 'LSP Đồng hồ - Mắt kính',
+                    'vi-VN' => 'LSP Phụ kiện thời trang',
                 ),
                 'Model' => 'QdProductCatDHMK',
                 'DataPort' => 'product_cat_dhmk_port',
