@@ -142,11 +142,17 @@ class Qdmvc_Page_Root
         $c = static::getModel();
         if ($c::ISLOOKUPFIELD($field_name)) {
             $tbrelation = $c::getTableRelation($field_name);
+            $clkp = $c::getLookupPage($field_name);
+
             if (!Qdmvc_Helper::isNullOrEmpty($tbrelation)) {
                 $tbfilter = $tbrelation['TableFilter'];
 
                 $filter_arr = array();
-                $df_lk_page = static::getDefaultLookupPage($tbrelation['Table']);
+                if($clkp==='') {
+                    $df_lk_page = static::getDefaultLookupPage($tbrelation['Table']);
+                }else{
+                    $df_lk_page = $clkp;
+                }
                 $getfield = $tbrelation['Field'];
 
                 foreach ($tbfilter as $item) {

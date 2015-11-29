@@ -30,6 +30,7 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                     ),
                     'struct_lv_3' => array(
                         'Order' => 20,
+                        'Hidden' => true
                     ),
                     'struct_lv_4' => array(
                         'Order' => 25
@@ -46,11 +47,14 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                     'manufacturer_id' => array(
                         'Order' => 60,
                     ),
+                    '_manufacturer_name' => array(
+                        'Order' => 65,
+                    ),
                     'size_id' => array(
                         'Order' => 70,
                     ),
-                    '_manufacturer_name' => array(
-                        'Order' => 80,
+                    '_size_name' => array(
+                        'Order' => 75,
                     ),
                     'code' => array(
                         'Order' => 90,
@@ -60,6 +64,9 @@ class Qdmvc_Page_Product_Card extends Qdmvc_Page_Root
                     ),
                     'discount_percent' => array(
                         'Order' => 110,
+                    ),
+                    'manual_discount_amt' => array(
+                        'Order' => 115,
                     ),
                     '_price_discount' => array(
                         'Order' => 120,

@@ -16,12 +16,11 @@ class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root_List
 
     protected static function initFields()
     {
-        return array_merge(
+        $obj = array_merge(
             parent::initFields(),
             array(
                 'order' => array(
                     'Order' => 20,
-                    'Width' => 100
                 ),
                 'name' => array(
                     'Order' => 30,
@@ -40,6 +39,8 @@ class Qdmvc_Page_ProductCat_List extends Qdmvc_Page_Root_List
                     'Order' => 70
                 )
             ));
+        $obj['id']['Width'] = 200;
+        return $obj;
     }
 
     public static function getPage()

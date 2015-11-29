@@ -88,18 +88,30 @@ class Qdmvc_View_Product_Card extends Qdmvc_Layout_CardNavigate
                     });
                     $('#lookup_cs_manufacturer_id').click(function () {
                         var lurl = $(this).data('lookupurl');
-                        var product_cat_id = $('#ctl_product_cat_id').val();
-                        if (product_cat_id != '') {
-                            lurl = MYAPP.addDataPortFilter(lurl, 199, 'productcat_id', product_cat_id);
+                        var struct_lv_2 = MYAPP.viewModel.struct_lv_2();
+                        if (struct_lv_2 != '') {
+                            lurl = MYAPP.addDataPortFilter(lurl, 199, 'struct_lv_2', struct_lv_2);
                         }
                         MYAPP.requestLookupWindow(lurl);
                     });
+
+                    $('#lookup_cs_product_cat_id').click(function () {
+                        var lurl = $(this).data('lookupurl');
+                        MYAPP.requestLookupWindow(lurl, function(obj){
+                            //set struct value
+                            MYAPP.viewModel.struct_lv_1(obj[0].struct_lv_1);
+                            MYAPP.viewModel.struct_lv_2(obj[0].struct_lv_2);
+                            MYAPP.viewModel.struct_lv_3(obj[0].struct_lv_3);
+                            MYAPP.viewModel.struct_lv_4(obj[0].struct_lv_4);
+                        });
+                    });
+
                     if($('#lookup_cs_size_id').length > 0){
                         $('#lookup_cs_size_id').click(function () {
                             var lurl = $(this).data('lookupurl');
-                            var type4 = MYAPP.viewModel.type4();
-                            if (type4 != '') {
-                                lurl = MYAPP.addDataPortFilter(lurl, 199, 'type', type4);
+                            var struct_lv_4 = MYAPP.viewModel.struct_lv_4();
+                            if (struct_lv_4 != '') {
+                                lurl = MYAPP.addDataPortFilter(lurl, 199, 'type', struct_lv_4);
                             }
                             MYAPP.requestLookupWindow(lurl);
                         });

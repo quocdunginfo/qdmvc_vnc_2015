@@ -38,6 +38,9 @@ class QdBigSaleCat extends QdProductCat
                 'Caption' => array('en-US' => 'Big Sale', 'vi-VN' => 'Bán chạy'),
             ),
         );
+        $obj['name']['Caption'] = array(
+            'vi-VN' => 'Tên danh mục', 'en-US' => 'Name'
+        );
         $obj['__sys_lines_url']['TableRelation'] = array(
             'Table' => 'QdProBigSale',
             'Field' => 'id',

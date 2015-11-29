@@ -839,6 +839,9 @@ class QdRoot extends ActiveRecord\Model
 
         return add_query_arg(array('item_count' => $count), $tmp);
     }
+    public static function getLookupPage($f_name){
+        return static::getSingleFieldConfig($f_name, 'LookupPage');
+    }
 
     public static function getLookupFields()
     {

@@ -129,6 +129,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     return re;
                 })(jQuery);
             };
+            MYAPP.selectedQueue = [];
             MYAPP.addGridFilter = function (field_name, field_value, operator) {
                 (function ($) {
                     // create a filter group for the FirstName column.
@@ -223,13 +224,35 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             //$('#jqxgrid').jqxGrid('addrow', null, {});
 
                             var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                            if (getselectedrowindexes.length > 0) {
+                            var i;
+                            var rows = [];
+                            var row;
+                            if(MYAPP.selectedQueue.length > 0){
+                                rows = MYAPP.selectedQueue;
+                            }else{
+                                if (getselectedrowindexes.length > 0) {
+                                    for(i=0;i<getselectedrowindexes.length;i++) {
+                                        row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[i]);
+                                        rows.push(row);
+                                    }
+                                }
+                            }
+                            if (rows.length > 0) {
                                 // returns the selected row's data.
-
-                                var row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
+                                var re = '';
+                                row;
+                                for(i=0;i<rows.length;i++) {
+                                    row = rows[i];
+                                    re += row.<?=$this->data['getfield']?>;
+                                    if(i < rows.length-1){
+                                        re += '|';
+                                    }
+                                }
                                 try {
-                                    parent.MYAPP.setLookupResult(row.<?=$this->data['getfield']?>, "<?=$this->data['returnid']?>");
-
+                                    parent.MYAPP.setLookupResult(re, "<?=$this->data['returnid']?>");
+                                    if(parent.MYAPP.onLookupDone != undefined){
+                                        parent.MYAPP.onLookupDone(rows);
+                                    }
                                 } catch (error) {
                                     console.log(error);
                                 }
@@ -290,8 +313,15 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
             </span>
         <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdselectionmode"
-                        style="<?= $this->data['role'] == 'lookup' ? 'display: none' : '' ?>" type="button">
+                         type="button">
                     <?= Qdmvc_Message::getMsg('btn_multiselection') ?>
+                </button>
+            </span>
+            <span>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdaddtosel"
+                        type="button">
+                    <span id="selectedqueuecount"></span>
+                    <?= Qdmvc_Message::getMsg('btn_addtosel') ?>
                 </button>
             </span>
 
@@ -326,6 +356,15 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                                 $('#jqxgrid').jqxGrid('selectallrows');
                             }
                         });
+                        $("#qdaddtosel").click(function () {
+                            var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
+                            for(var i=0;i<getselectedrowindexes.length;i++) {
+                                row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[i]);
+                                MYAPP.selectedQueue.push(row);
+                            }
+                            $('#selectedqueuecount').html(MYAPP.selectedQueue.length);
+                        });
+
 
                         $("#qdselectionmode").click(function () {
                             var grid = $('#jqxgrid');

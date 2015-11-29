@@ -16,7 +16,18 @@ class QdProcat2Manu extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProductCat',
                     'Field' => 'id',
-                    'TableFilter' => array()
+                    'TableFilter' => array(
+                        array(
+                            'Condition' => array(
+                                'Field' => '',
+                                'Type' => 'CONST',//'FIELD'
+                                'Value' => ''
+                            ),
+                            'Field' => 'level',
+                            'Type' => 'CONST',
+                            'Value' => 2
+                        ),
+                    )
                 ),
             ),
             'manufactor_id' => array(
@@ -28,7 +39,9 @@ class QdProcat2Manu extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdManufactor',
                     'Field' => 'id',
-                    'TableFilter' => array()
+                    'TableFilter' => array(
+
+                    )
                 )
             ),
             'order' => array(
@@ -36,6 +49,14 @@ class QdProcat2Manu extends QdRoot
             ),
             'struct_level' => array(
                 'DataType' => 'Integer'
+            ),
+            'struct_lv_1' => array(
+            ),
+            'struct_lv_2' => array(
+            ),
+            'struct_lv_3' => array(
+            ),
+            'struct_lv_4' => array(
             ),
             'selection' => array(
                 'DataType' => 'Boolean'
@@ -48,5 +69,16 @@ class QdProcat2Manu extends QdRoot
         $obj = new QdProcat2Manu();
         $obj->selection = false;
         return $obj;
+    }
+
+    protected function productcat_idOnValidate($field_name)
+    {
+        $pc = QdProductCat::GET($this->$field_name);
+        if($pc != null){
+            $this->struct_lv_1 = $pc->struct_lv_1;
+            $this->struct_lv_2 = $pc->struct_lv_2;
+            $this->struct_lv_3 = $pc->struct_lv_3;
+            $this->struct_lv_4 = $pc->struct_lv_4;
+        }
     }
 }

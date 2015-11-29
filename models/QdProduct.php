@@ -70,16 +70,17 @@ class QdProduct extends QdRoot
                 'TableRelation' => array(
                     'Table' => 'QdProductCat',
                     'Field' => 'id',
-                    'TableFilter' => array(/*array(
+                    'TableFilter' => array(
+                        array(
                             'Condition' => array(
                                 'Field' => '',
                                 'Type' => 'CONST',//'FIELD'
                                 'Value' => ''
                             ),
-                            'Field' => 'order',
-                            'Type' => 'FIELD',
-                            'Value' => 10
-                        )*/
+                            'Field' => 'level',
+                            'Type' => 'CONST',
+                            'Value' => 3
+                        )
                     )
                 ),
                 'DataPort' => 'product_cat_port'
@@ -98,6 +99,24 @@ class QdProduct extends QdRoot
                             'Field' => 'id',
                             'Type' => 'FIELD',
                             'Value' => 'manufacturer_id'
+                        )
+                    )
+                )
+            ),
+            '_size_name' => array(
+                'Name' => '_size_name',
+                'Caption' => array('en-US' => 'Size Name', 'vi-VN' => 'Tên Size'),
+                'DataType' => 'Text',
+                'FieldClass' => 'FlowField',
+                'FieldClass_FlowField' => array(
+                    'Method' => 'Lookup',
+                    'Table' => 'QdSize',
+                    'Field' => 'name',
+                    'TableFilter' => array(
+                        0 => array(
+                            'Field' => 'id',
+                            'Type' => 'FIELD',
+                            'Value' => 'size_id'
                         )
                     )
                 )
@@ -231,8 +250,9 @@ class QdProduct extends QdRoot
             ),
             'discount_percent' => array(
                 'DataType' => 'Decimal',
+                'Caption' => array('en-US' => 'Manual Discount Amt', 'vi-VN' => '% Giảm giá'),
                 'Description' => array(
-                    'vi-VN' => '% giảm giá so với Field \'price\', nhập số thập phân vd: 0.56'
+                    'vi-VN' => '% giảm giá so với Field \'Giá\', nhập số thập phân vd: 0.56<br>Độ ưu tiên thấp hơn \'Giảm giá\''
                 ),
             ),
             'struct_lv_4' => array(
@@ -253,12 +273,15 @@ class QdProduct extends QdRoot
                 'Description' => array('vi-VN' => 'Tự động validate theo Loại SP')
             ),
             'struct_lv_3' => array(
-
+                'ReadOnly' => true
             ),
             'struct_lv_2' => array(
-                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Dòng SP'),
+                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Struct Lv2'),
                 'DataType' => 'Option',
                 'Options' => array(
+                    QdProductCat::$LV2_MANUFACTOR_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
                     QdProductCat::$LV2_MANUFACTOR_DIENTHOAI => array(
                         'Caption' => array('en-US' => 'Phone', 'vi-VN' => 'Điện thoại'),
                     ),
@@ -306,7 +329,26 @@ class QdProduct extends QdRoot
                 'Description' => array('vi-VN' => 'Tự động validate theo Loại SP')
             ),
             'struct_lv_1' => array(
-
+                'ReadOnly' => true,
+                'Caption' => array('en-US' => 'Type', 'vi-VN' => 'Struct Lv1'),
+                'DataType' => 'Option',
+                'Options' => array(
+                    QdProductCat::$LV1_DF => array(
+                        'Caption' => array('en-US' => 'Default', 'vi-VN' => 'Mặc định'),
+                    ),
+                    QdProductCat::$LV1_DCN => array(
+                        'Caption' => array('en-US' => 'DCN', 'vi-VN' => 'Đồ công nghệ'),
+                    ),
+                    QdProductCat::$LV1_XE => array(
+                        'Caption' => array('en-US' => 'XE', 'vi-VN' => 'Xe'),
+                    ),
+                    QdProductCat::$LV1_DOHIEU => array(
+                        'Caption' => array('en-US' => 'DOHIEU', 'vi-VN' => 'Đồ hiệu'),
+                    ),
+                    QdProductCat::$LV1_THIETBI => array(
+                        'Caption' => array('en-US' => 'THIETBI', 'vi-VN' => 'Thiết bị'),
+                    ),
+                )
             ),
             'price_range_type' => array(
 
@@ -331,6 +373,13 @@ class QdProduct extends QdRoot
                 'ReadOnly' => true
                 */
             ),
+            'manual_discount_amt' => array(
+                'Caption' => array('en-US' => 'Manual Discount Amt', 'vi-VN' => 'Giảm giá'),
+                'DataType' => 'Integer',
+                'Description' => array(
+                    'vi-VN' => 'Giá giảm giá so với \'Giá\', nhập số nguyên vd: 135000<br>Độ ưu tiên cao hơn \'% Giảm giá\''
+                ),
+            )
         ));
         $obj['id']['Description'] = array(
             'vi-VN' => sprintf('Mã SP quản lý trong hệ thống, không hiển thị trên Web<br>Muốn hiển thị mã trên Web, dùng Field \'%s\'', $obj['code']['Caption']['vi-VN'])
@@ -441,12 +490,12 @@ class QdProduct extends QdRoot
 
     public function getBreadcrumbs()
     {
+        $re = array();
         if($this->getProductCatObj()!=null){
             $re = $this->getProductCatObj()->getBreadcrumbs();
-            array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
-            return $re;
         }
-        return array();
+        array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
+        return $re;
     }
 
     /*
@@ -546,7 +595,7 @@ class QdProduct extends QdRoot
     {
         $obj = new QdProduct();
         $obj->description = Qdmvc_Config::getProductSetup()->df_product_desc_tpl;
-        $obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_DIENTHOAI;
+        //$obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_DIENTHOAI;
         $obj->stock_status = static::$STOCK_DF;
         return $obj;
     }
@@ -588,10 +637,16 @@ class QdProduct extends QdRoot
             return $this->qd_cached_attr[$flowfield_name];
         }
         if ($flowfield_name == '_price_discount') {
+            $tmp = 0;
+            if($this->manual_discount_amt > 0){
+                $tmp = $this->price - $this->manual_discount_amt;
+            } else if($this->discount_percent > 0){
+                $tmp = $this->price - ($this->price * $this->discount_percent);
+            }
 
-            $this->qd_cached_attr[$flowfield_name] = $this->price - ($this->price * $this->discount_percent);
+            $this->qd_cached_attr[$flowfield_name] = $tmp;
             //return
-            return $this->qd_cached_attr[$flowfield_name];
+            return $tmp;
         } else if ($flowfield_name == '_seo_title_preview') {
             $seo = $this->getSEOMeta();
             foreach ($seo as $item) {

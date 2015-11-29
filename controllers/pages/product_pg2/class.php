@@ -13,6 +13,7 @@ class Qdmvc_Page_Product_PG2_Card extends Qdmvc_Page_Product_Card
     {
         $obj = parent::initFields();
         unset($obj['General']['Fields']['size_id']);
+        unset($obj['General']['Fields']['_size_name']);
         return $obj;
     }
 

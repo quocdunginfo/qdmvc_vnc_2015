@@ -27,10 +27,11 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
                 'Fields' => array(
                     'id' => array(
                         'Order' => 100,
-                        'ReadOnly' => false
+                        'ReadOnly' => false,
                     ),
                     'type' => array(
                         'Order' => 200,
+                        'Hidden' => true
                     ),
                     'property_grp_type' => array(
                         'Order' => 300
@@ -43,7 +44,7 @@ class Qdmvc_Page_ProductCat_Card extends Qdmvc_Page_Root
                     ),
                     'struct_lv_3' => array(
                         'Order' => 600,
-                        'Hidden' => false
+                        'Hidden' => true
                     ),
                     'struct_lv_4' => array(
                         'Order' => 700,

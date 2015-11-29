@@ -232,7 +232,7 @@ class QdProductCat extends QdRoot
                 )
             ),
             'struct_lv_4' => array(
-                'Caption' => array('en-US' => 'Struct Lv4', 'vi-VN' => 'Struct Lv4'),
+                'Caption' => array('en-US' => 'Struct Lv4', 'vi-VN' => 'Phân loại thời trang'),
                 'DataType' => 'Option',
                 'Options' => array(
                     static::$LV4_DF => array(
@@ -392,14 +392,21 @@ class QdProductCat extends QdRoot
         $re = array();
         $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
         array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
-        array_push($re, array('name' => $this->name, 'url' => $this->getPermalink()));
+        $p = $this;
+        $tmp = array();
+        while($p!=null){
+            array_push($tmp, array('name' => $p->name, 'url' => $p->getPermalink()));
+            $p = $p->getParentObj();
+        }
+        $tmp = array_reverse($tmp);
+        $re = array_merge($re, $tmp);
         return $re;
     }
 
     protected function orderOnValidate($field_name)
     {
         if ($this->$field_name <= 0) {
-            $this->pushValidateError($field_name, 'Order phải lớn hơn 0');
+            //$this->pushValidateError($field_name, 'Order phải lớn hơn 0');
         }
     }
 
@@ -421,7 +428,17 @@ class QdProductCat extends QdRoot
             }
         }
         $this->level = $this->getDeepLevel();
+        $this->levelOnValidate('level');
     }
+
+    protected function levelOnValidate($field_name)
+    {
+        if($this->$field_name === 3){
+            $this->struct_lv_3 = $this->id;
+            $this->pushValidateError($field_name, 'Tự động gán struct_lv_3 = id!', 'info');
+        }
+    }
+
 
     protected function avatarOnValidate($field_name)
     {
@@ -480,14 +497,14 @@ class QdProductCat extends QdRoot
     protected static function getPermalinkSearchPageStructLv1($struct_id)
     {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        $query = add_query_arg(array('product-cat-lv1-id' => $struct_id), $query);
+        $query = add_query_arg(array('product-cat-id' => $struct_id), $query);
         return $query;
     }
 
     protected static function getPermalinkSearchPageStructLv2($struct_id)
     {
         $query = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        $query = add_query_arg(array('product-cat-lv2-id' => $struct_id), $query);
+        $query = add_query_arg(array('product-cat-id' => $struct_id), $query);
         return $query;
     }
 
@@ -509,7 +526,22 @@ class QdProductCat extends QdRoot
 
         return parent::CALCFIELDS($flowfield_name);
     }
-
+    public function getCalPriceRanges(){
+        if($this->price_range_type != static::$PRICE_RANGE_DF){
+            return static::getPriceRanges($this->price_range_type);
+        } else {
+            $p = $this->getParentObj();
+            $pr = array();
+            while($p!=null){
+                $pr = $p->getPriceRanges($p->price_range_type);
+                if(count($pr) > 0){
+                    break;
+                }
+                $p = $p->getParentObj();
+            }
+            return $pr;
+        }
+    }
     public static function getPriceRanges($range_id)
     {
         switch ($range_id) {
@@ -619,9 +651,9 @@ class QdProductCat extends QdRoot
 
     public function fn_genstructure($location, $params = array())
     {
-        $obj = new QdProductCat();
+        //$obj = new QdProductCat();
         //delete all
-        $obj->DELETEALL(false);
+        //$obj->DELETEALL(false);
         //restruct
 
         //LV1

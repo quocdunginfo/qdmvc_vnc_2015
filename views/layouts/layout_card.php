@@ -118,12 +118,16 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             }
         </script>
         <script>
-            MYAPP.requestLookupWindow = function (src) {
+            MYAPP.requestLookupWindow = function (src, okfn) {
                 //set window iframe source
                 //alert(src);
                 (function ($) {
-                    $("#windowFrame").contents().find("body").html('');//do a trick to hide previous result
-                    $('#windowFrame').attr('src', src);
+                    var winf = $("#windowFrame");
+                    winf.contents().find("body").html('');//do a trick to hide previous result
+                    winf.attr('src', src);
+                    winf[0].onload = function(){
+                        MYAPP.onLookupDone = okfn;
+                    };
                     $('#jqxlookupwin').jqxWindow('open');
                 })(jQuery);
             };
@@ -686,12 +690,13 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             $this->generateFieldText($f_name, $f_val, $readonly);
             return;
         }
+        $placeHolder = $f_dataport==''?'':'Press F3 to search...';
         ?>
         <div class="qd-lookup-input">
             <input data-qddataport="<?= $f_dataport ?>" <?= $readonly == true ? 'readonly' : '' ?> class="text-input"
                    type="text" name="<?= $f_name ?>"
                    id='<?= static::$ctl_prefix . $f_name ?>'
-                   data-bind="jqxInput: {value: <?= $f_name ?>, placeHolder: 'Press --> to search...'}"/>
+                   data-bind="jqxInput: {value: <?= $f_name ?>, placeHolder: '<?=$placeHolder?>'}" autocomplete="off"/>
             <button onclick='MYAPP.requestLookupWindow("<?= $f_lku ?>")'
                     data-lookupurl="<?= $f_lku ?>" id="lookup_cs_<?= $f_name ?>"
                     value="">...
@@ -703,11 +708,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 $(document).ready(function () {
 
                     $("#<?=static::$ctl_prefix.$f_name?>").on('keydown', function (e) {
-                        if (e.keyCode == 39) {
+                        if (e.keyCode == 114) {//F3
                             if (MYAPP.autoCompleteDone == true) {
-                                MYAPP.autoCompleteDone = false;
                                 return;
                             }
+                            MYAPP.autoCompleteDone = true;
 
                             MYAPP.ajax_loader = new ajaxLoader("#cardForm");
 
@@ -740,6 +745,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                 })
                                 .always(function () {
                                     MYAPP.ajax_loader.remove();
+                                    MYAPP.autoCompleteDone = false;
                                 });
                         }
 
@@ -1018,7 +1024,9 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                     $f_val = '';
                                     $f_lku = $tmp_page::getLookupURL($f_name);
                                     $f_dataport = $tmp_page::getFieldDataPort($f_name);
-                                    $f_dataport = Qdmvc_Helper::getDataPortPath($f_dataport);
+                                    if($f_dataport!=''){
+                                        $f_dataport = Qdmvc_Helper::getDataPortPath($f_dataport);
+                                    }
 
                                     $f_multivalue = $tmp_page::isMultiValue($key);
                                     if ($f_multivalue) {

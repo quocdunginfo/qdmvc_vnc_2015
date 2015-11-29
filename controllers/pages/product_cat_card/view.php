@@ -42,6 +42,7 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Open Front-End Lv3 Page'
                 )
             ),
+            /*
             'btn_genstructure' => array(
                 'fn_name' => 'fn_genstructure',
                 'label' => array(
@@ -49,7 +50,7 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                     'en-US' => 'Re-gen Structure'
                 ),
                 'confirm' => true
-            ),
+            ),*/
 
         ));
         return $obj;
@@ -73,7 +74,12 @@ class Qdmvc_View_ProductCat_Card extends Qdmvc_Layout_CardNavigate
                     });
                     //register button
                     $("#qdmanufactors").bind("click", function (event) {
-                        MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_link_manufactors_url']);
+                        if(MYAPP.viewModel.level() == 2) {
+                            MYAPP.requestLookupWindow(MYAPP.getObj()['__sys_link_manufactors_url']);
+                        }
+                        else{
+                            alert('Loại SP với level 2 mới được định nghĩa Hãng SX liên kết');
+                        }
                     });
                 });
             })(jQuery);
