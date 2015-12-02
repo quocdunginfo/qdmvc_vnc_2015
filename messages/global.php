@@ -21,6 +21,7 @@ class Qdmvc_Message
 
         /*Layout card*/
         'btn_viewreport' => 'Xem báo cáo',
+        'btn_addtosel' => 'Đánh dấu chọn',
         'btn_save' => 'Lưu',
         'btn_delete' => 'Xóa',
         'btn_new' => 'Tạo mới',
@@ -67,6 +68,7 @@ class Qdmvc_Message
 
         /*Layout card*/
         'btn_viewreport' => 'View report',
+        'btn_addtosel' => 'Mark selection',
         'btn_save' => 'Save',
         'btn_delete' => 'Delete',
         'btn_new' => 'New',

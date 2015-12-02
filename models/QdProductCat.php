@@ -569,7 +569,10 @@ class QdProductCat extends QdRoot
             case static::$PRICE_RANGE_2:
                 return array(
                     array(
-                        0, 1000000
+                        0, 500000
+                    ),
+                    array(
+                        500000, 1000000
                     ),
                     array(
                         1000000, 2000000
@@ -578,34 +581,22 @@ class QdProductCat extends QdRoot
                         2000000, 3000000
                     ),
                     array(
-                        3000000, 4000000
-                    ),
-                    array(
-                        4000000, 5000000
-                    ),
-                    array(
-                        5000000, -1
+                        3000000, -1
                     ),
                 );
             case static::$PRICE_RANGE_3:
                 return array(
                     array(
-                        0, 10000000
+                        0, 5000000
+                    ),
+                    array(
+                        5000000, 10000000
                     ),
                     array(
                         10000000, 20000000
                     ),
                     array(
-                        20000000, 30000000
-                    ),
-                    array(
-                        30000000, 40000000
-                    ),
-                    array(
-                        40000000, 50000000
-                    ),
-                    array(
-                        50000000, -1
+                        20000000, -1
                     ),
                 );
             case static::$PRICE_RANGE_4:
@@ -620,10 +611,7 @@ class QdProductCat extends QdRoot
                         1000000000, 2000000000
                     ),
                     array(
-                        2000000000, 3000000000
-                    ),
-                    array(
-                        3000000000, -1
+                        2000000000, -1
                     ),
                 );
             default:

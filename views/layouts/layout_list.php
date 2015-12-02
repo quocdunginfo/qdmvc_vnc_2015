@@ -208,12 +208,20 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     <?= Qdmvc_Message::getMsg('btn_choose') ?>
                 </button>
             </span>
+            <span>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdaddtosel"
+                        type="button">
+                    <span id="selectedqueuecount"></span>
+                    <?= Qdmvc_Message::getMsg('btn_addtosel') ?>
+                </button>
+            </span>
 
             <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdgotopagenavigate" style="<?=$this->data['role'] != 'lookup'?'display: none':''?>" type="button" >
                     <?= Qdmvc_Message::getMsg('btn_gotopagenavigate') ?>
                 </button>
             </span>
+
 
             <script type="text/javascript">
                 (function ($) {
@@ -266,6 +274,22 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                                 MYAPP.gotoURL(MYAPP.page_navigate);
                             }
                         });
+                        $("#qdaddtosel").click(function () {
+                            var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
+                            for(var i=0;i<getselectedrowindexes.length;i++) {
+                                row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[i]);
+                                var exist = false;
+                                for(var j=0;j<MYAPP.selectedQueue.length;j++){
+                                    if(MYAPP.selectedQueue[j].id==row.id){
+                                        exist = true;
+                                    }
+                                }
+                                if(!exist){
+                                    MYAPP.selectedQueue.push(row);
+                                }
+                            }
+                            $('#selectedqueuecount').html(MYAPP.selectedQueue.length);
+                        });
 
                     });
                 })(jQuery);
@@ -317,13 +341,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     <?= Qdmvc_Message::getMsg('btn_multiselection') ?>
                 </button>
             </span>
-            <span>
-                <button class="btn btn-primary btn-xs qd-action-btn" id="qdaddtosel"
-                        type="button">
-                    <span id="selectedqueuecount"></span>
-                    <?= Qdmvc_Message::getMsg('btn_addtosel') ?>
-                </button>
-            </span>
+
 
 
         <span>
@@ -355,14 +373,6 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             if (MYAPP.isMultiSelection()) {
                                 $('#jqxgrid').jqxGrid('selectallrows');
                             }
-                        });
-                        $("#qdaddtosel").click(function () {
-                            var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                            for(var i=0;i<getselectedrowindexes.length;i++) {
-                                row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[i]);
-                                MYAPP.selectedQueue.push(row);
-                            }
-                            $('#selectedqueuecount').html(MYAPP.selectedQueue.length);
                         });
 
 
