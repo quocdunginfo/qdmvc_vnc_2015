@@ -413,6 +413,33 @@ class Qdmvc_Page_Root
         }
         return $tmp;
     }
+    /*
+     * Get All fields help (description meta), Page Card only
+     */
+    public static function getAllFields(){
+        $re = array();
+        //get all visible fields
+        $layout = static::getLayout();
+        foreach($layout as $item=>$config){
+            if($config['Type']=='Group'){
+                foreach($config['Fields'] as $field=>$f_config){
+                    $re[$field] = $f_config;
+                }
+            }
+        }
+        return $re;
+    }
+    public static function getFieldsHelp($lang='en-US'){
+        $re = '';
+        $fs = static::getAllFields();
+        foreach($fs as $item=>$config){
+            if(isset($config['Hidden']) && $config['Hidden']===false){
+                continue;
+            }
+            $re .= sprintf('-Field: %s: <br>%s<hr>', static::getFieldCaption($item, $lang), static::getFieldDescription($item, $lang));
+        }
+        return $re;
+    }
 
     public static function getSourceExpr($f_name)
     {

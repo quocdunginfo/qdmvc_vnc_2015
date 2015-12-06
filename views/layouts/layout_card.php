@@ -1301,6 +1301,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                 MYAPP.ajax_loader = new ajaxLoader("#cardForm");
                                 location.reload();
                             });
+                            $("#qdhelp").bind("click", function (event) {
+                                var content = '<?=addslashes($this->page->getFieldsHelp($this->data['language']))?>';
+                                var title = '<?=Qdmvc_Message::getMsg('help')?>';
+                                MYAPP.showModalDialog(title, content);
+                            });
 
                             //prevent form enter key
                             $("#cardForm").keypress(function (e) {
@@ -1778,6 +1783,10 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         'Order' => 200,
                         'Label' => Qdmvc_Message::getMsg('btn_viewreport'),
                         'Hidden' => true
+                    ),
+                    'qdhelp' => array(
+                        'Order' => 300,
+                        'Label' => '?',
                     ),
                 )
             ),

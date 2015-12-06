@@ -101,7 +101,7 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                                 highlight: true,  // Highlight matches by wrapping inside <mark> tags
                                 mode: "hide"  // Grayout unmatched nodes (pass "hide" to remove unmatched node instead)
                             },
-                            activate: function(event, data) {
+                            click: function(event, data) {
                                 var node = data.node;
                                 //add tab
                                 var args = event.args;
