@@ -92,7 +92,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                 return jQuery('#jqxgrid');
             };
             MYAPP.isMultiSelection = function () {
-                return MYAPP.getGrid().jqxGrid('selectionmode') === 'multiplerowsextended';
+                return MYAPP.getGrid().jqxGrid('selectionmode') === 'multiplerowsextended' || MYAPP.selectedQueue.length > 0;
             };
             MYAPP.TmpVar = {};
             MYAPP.updateGrid = function (keepIndex) {
@@ -114,19 +114,43 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     grid.jqxGrid('updatebounddata');
                 })(jQuery);
             };
+            /*
+             * Support Mark Selection
+             * */
             MYAPP.getSelectedRowsId = function () {
                 //update databound
                 return (function ($) {
                     var re = [];
-                    var grid = MYAPP.getGrid();
-                    var rowindex = grid.jqxGrid('getselectedrowindexes');
-                    for (var i = 0; i < rowindex.length; i++) {
-                        var row = grid.jqxGrid('getrowdata', rowindex[i]);
-                        if (row != undefined && row != null) {
-                            re.push(row.id);
-                        }
+                    var objs = MYAPP.getSelectedRowsObj();
+                    for (var i = 0; i < objs.length; i++) {
+                        re.push(objs[i].id);
                     }
                     return re;
+                })(jQuery);
+            };
+            /*
+             * Support Mark Selection
+             * */
+            MYAPP.getSelectedRowsObj = function () {
+                //update databound
+                return (function ($) {
+                    var rows = [];
+                    if (MYAPP.selectedQueue.length > 0) {
+                        rows = MYAPP.selectedQueue;
+                    } else {
+                        var grid = MYAPP.getGrid();
+                        var row;
+                        var rowindex = grid.jqxGrid('getselectedrowindexes');
+                        if (rowindex.length > 0) {
+                            for (i = 0; i < rowindex.length; i++) {
+                                row = grid.jqxGrid('getrowdata', rowindex[i]);
+                                if (row != undefined) {
+                                    rows.push(row);
+                                }
+                            }
+                        }
+                    }
+                    return rows;
                 })(jQuery);
             };
             MYAPP.selectedQueue = [];
@@ -141,16 +165,16 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     var filtercondition = 'contains';
                     var fnameFilter1 = fnameFilterGroup.createfilter('stringfilter', filtervalue, filtercondition);
                     // add the filters to the filter group.
-                    if(operator!=undefined){
+                    if (operator != undefined) {
                         fnameFilterGroup.addfilter(filter_or_operator, fnameFilter1, operator);
-                    }else{
+                    } else {
                         fnameFilterGroup.addfilter(filter_or_operator, fnameFilter1);
                     }
-
+                    var grid = MYAPP.getGrid();
                     // add the filter group to the 'firstname' column in the Grid.
-                    $("#jqxgrid").jqxGrid('addfilter', field_name, fnameFilterGroup);
+                    grid.jqxGrid('addfilter', field_name, fnameFilterGroup);
                     // apply the filters.
-                    $("#jqxgrid").jqxGrid('applyfilters');
+                    grid.jqxGrid('applyfilters');
                 })(jQuery);
             };
         </script>
@@ -162,19 +186,6 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     {
         ?>
         <?= $this->qrCodeScript() ?>
-        <script>
-            function gridGetSelectedRow() {//not work
-                (function ($) {
-                    var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                    if (getselectedrowindexes.length > 0) {
-                        // returns the selected row's data.
-                        var row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[0]);
-                        return row;
-                    }
-                    return null;
-                })(jQuery);
-            }
-        </script>
         <!-- Modal -->
         <div class="modal fade" id="qdMsgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -208,16 +219,10 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                     <?= Qdmvc_Message::getMsg('btn_choose') ?>
                 </button>
             </span>
-            <span>
-                <button class="btn btn-primary btn-xs qd-action-btn" id="qdaddtosel"
-                        type="button">
-                    <span id="selectedqueuecount"></span>
-                    <?= Qdmvc_Message::getMsg('btn_addtosel') ?>
-                </button>
-            </span>
 
             <span>
-                <button class="btn btn-primary btn-xs qd-action-btn" id="qdgotopagenavigate" style="<?=$this->data['role'] != 'lookup'?'display: none':''?>" type="button" >
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdgotopagenavigate"
+                        style="<?= $this->data['role'] != 'lookup' ? 'display: none' : '' ?>" type="button">
                     <?= Qdmvc_Message::getMsg('btn_gotopagenavigate') ?>
                 </button>
             </span>
@@ -231,34 +236,22 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
 
                             //$('#jqxgrid').jqxGrid('addrow', null, {});
 
-                            var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
                             var i;
-                            var rows = [];
-                            var row;
-                            if(MYAPP.selectedQueue.length > 0){
-                                rows = MYAPP.selectedQueue;
-                            }else{
-                                if (getselectedrowindexes.length > 0) {
-                                    for(i=0;i<getselectedrowindexes.length;i++) {
-                                        row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[i]);
-                                        rows.push(row);
-                                    }
-                                }
-                            }
+                            var rows = MYAPP.getSelectedRowsObj();
+
                             if (rows.length > 0) {
                                 // returns the selected row's data.
-                                var re = '';
-                                row;
-                                for(i=0;i<rows.length;i++) {
+                                var re = '', row;
+                                for (i = 0; i < rows.length; i++) {
                                     row = rows[i];
                                     re += row.<?=$this->data['getfield']?>;
-                                    if(i < rows.length-1){
+                                    if (i < rows.length - 1) {
                                         re += '|';
                                     }
                                 }
                                 try {
                                     parent.MYAPP.setLookupResult(re, "<?=$this->data['returnid']?>");
-                                    if(parent.MYAPP.onLookupDone != undefined){
+                                    if (parent.MYAPP.onLookupDone != undefined) {
                                         parent.MYAPP.onLookupDone(rows);
                                     }
                                 } catch (error) {
@@ -268,27 +261,11 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                         });
                         $("#qdgotopagenavigate").click(function () {
                             var ids = MYAPP.getSelectedRowsId();
-                            if(ids.length===1){
+                            if (ids.length === 1) {
                                 MYAPP.gotoURL(MYAPP.appendParam(MYAPP.page_navigate, 'qdlookupid', ids[0]));
-                            }else if(ids.length===0){
+                            } else if (ids.length === 0) {
                                 MYAPP.gotoURL(MYAPP.page_navigate);
                             }
-                        });
-                        $("#qdaddtosel").click(function () {
-                            var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
-                            for(var i=0;i<getselectedrowindexes.length;i++) {
-                                row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[i]);
-                                var exist = false;
-                                for(var j=0;j<MYAPP.selectedQueue.length;j++){
-                                    if(MYAPP.selectedQueue[j].id==row.id){
-                                        exist = true;
-                                    }
-                                }
-                                if(!exist){
-                                    MYAPP.selectedQueue.push(row);
-                                }
-                            }
-                            $('#selectedqueuecount').html(MYAPP.selectedQueue.length);
                         });
 
                     });
@@ -337,8 +314,15 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
             </span>
         <span>
                 <button class="btn btn-primary btn-xs qd-action-btn" id="qdselectionmode"
-                         type="button">
+                        type="button">
                     <?= Qdmvc_Message::getMsg('btn_multiselection') ?>
+                </button>
+            </span>
+            <span>
+                <button class="btn btn-primary btn-xs qd-action-btn" id="qdaddtosel"
+                        type="button">
+                    <span id="selectedqueuecount" data-bind="text: selectedQueue_length"></span>
+                    <?= Qdmvc_Message::getMsg('btn_addtosel') ?>
                 </button>
             </span>
 
@@ -374,6 +358,37 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                                 $('#jqxgrid').jqxGrid('selectallrows');
                             }
                         });
+                        $("#qdaddtosel").click(function () {
+                            var getselectedrowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
+                            for (var i = 0; i < getselectedrowindexes.length; i++) {
+                                row = $('#jqxgrid').jqxGrid('getrowdata', getselectedrowindexes[i]);
+                                if (row == undefined) {
+                                    continue;
+                                }
+                                var exist = false;
+                                for (var j = 0; j < MYAPP.selectedQueue.length; j++) {
+                                    if (MYAPP.selectedQueue[j].id == row.id) {
+                                        exist = true;
+                                    }
+                                }
+                                if (!exist) {
+                                    MYAPP.selectedQueue.push(row);
+                                }
+                                MYAPP.viewModel.selectedQueue_length(MYAPP.selectedQueue.length);
+                            }
+                        });
+                        $("#qdaddtosel").mousedown(function(e){
+                            if( e.button == 2 ) {
+                                MYAPP.selectedQueue = [];
+                                MYAPP.viewModel.selectedQueue_length(MYAPP.selectedQueue.length);
+                                return false;
+                            }
+                            return true;
+                        });
+                        $('#qdaddtosel').contextmenu( function() {
+                            console.log('MYAPP.selectedQueue cleared!');
+                            return false;
+                        });
 
 
                         $("#qdselectionmode").click(function () {
@@ -384,18 +399,22 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             /*Checkbox selectionmode has lot of Bug, checkAll apply to all Pages but UnCheckAll apply for current Page only*/
                             if (mode === 'singlerow') {
                                 $('#qdselectallrows').show();
+
                                 alert('<?= Qdmvc_Message::getMsg('btn_multiselection_guide') ?>');
                                 grid.jqxGrid('selectionmode', 'multiplerowsextended');
                                 $(this).text('<?= Qdmvc_Message::getMsg('btn_singleselection') ?>');
                             } else {
                                 $('#qdselectallrows').hide();
+
+                                //clear queue
+                                MYAPP.selectedQueue = [];
                                 //reload page
                                 //location.reload();//checkbox mode must use this solution
                                 grid.jqxGrid('clearselection');
                                 grid.jqxGrid('selectionmode', 'singlerow');
                                 $(this).text('<?= Qdmvc_Message::getMsg('btn_multiselection') ?>');
                             }
-
+                            MYAPP.viewModel.selectedQueue_length(MYAPP.selectedQueue.length);
                         });
 
                         var scanner_decoder = null;
@@ -458,6 +477,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                 (function ($) {
                     $(document).ready(function () {
                         var theme = 'classic';
+                        var grid = MYAPP.getGrid();
                         var source =
                         {
                             datatype: "json",
@@ -471,7 +491,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             sort: function () {
                                 // update the grid and send a request to the server.
                                 console.log('Send SORT to Server');
-                                $("#jqxgrid").jqxGrid('updatebounddata', 'sort');
+                                grid.jqxGrid('updatebounddata', 'sort');
                             },
                             type: 'POST'//switch from GET to POST
                         };
@@ -479,7 +499,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                         var dataadapter = new $.jqx.dataAdapter(source);
 
                         // initialize jqxGrid
-                        $("#jqxgrid").jqxGrid(
+                        grid.jqxGrid(
                             {
                                 width: '100%',
                                 height: '100%',
@@ -515,10 +535,10 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             });
 
                         //event
-                        $("#jqxgrid").on("filter", function (event) {
+                        grid.on("filter", function (event) {
                             $('#jqxgrid').jqxGrid('updatebounddata');//refresh grid when typing in filter box
                         });
-                        $('#jqxgrid').on('rowselect', function (event) {
+                        grid.on('rowselect', function (event) {
                             // event arguments.
                             var args = event.args;
                             var row = args.row;
@@ -541,7 +561,7 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                             }
                         });
 
-                        $('#jqxgrid').on('rowdoubleclick', function (event) {
+                        grid.on('rowdoubleclick', function (event) {
                             <?php if($this->data['role']==='navigate') { ?>
                             rbindex = event.args.rowindex;
                             obj = $(this).jqxGrid('getrowdata', rbindex);
@@ -552,10 +572,10 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                         });
 
 
-                        $("#jqxgrid").on("pagechanged", function (event) {
+                        grid.on("pagechanged", function (event) {
                             console.log('jqxgrid page changed');
                         });
-                        $("#jqxgrid").on("bindingcomplete", function (event) {
+                        grid.on("bindingcomplete", function (event) {
                             console.log('jqxgrid binding complete');
                             try {
                                 var paging = $(this).jqxGrid('getpaginginformation');
@@ -583,9 +603,9 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
                                 MYAPP.TmpVar.keepIndex = true;
 
                                 //Set lookupid filter for 1st time
-                                if(parent!=undefined && parent!=null) {
+                                if (parent != undefined && parent != null) {
                                     if (parent.MYAPP.LookupMode.isSetLookupFilterForFirstTime == false && parent.MYAPP.LookupMode.lookupid != '') {
-                                        setTimeout(function(){
+                                        setTimeout(function () {
                                             MYAPP.addGridFilter('id', '=' + parent.MYAPP.LookupMode.lookupid);
                                             parent.MYAPP.LookupMode.isSetLookupFilterForFirstTime = true;
                                         }, 500);
@@ -612,16 +632,25 @@ class Qdmvc_Layout_List extends Qdmvc_Layout_Root
     <?php
     }
 
-    protected
-    function onReadyHook()
+    protected function onReadyHook()
     {
         parent::onReadyHook(); // TODO: Change the autogenerated stub
         ?>
+        <script>
+            (function ($) {
+                $(document).ready(function () {
+                    MYAPP.viewModel = {
+                        selectedQueue_length: ko.observable(0)
+                    };
+                    ko.applyBindings(MYAPP.viewModel);
+                });
+            })(jQuery);
+
+        </script>
     <?php
     }
 
-    private
-    function qrCodeScript()
+    private function qrCodeScript()
     {
         ?>
         <script>
