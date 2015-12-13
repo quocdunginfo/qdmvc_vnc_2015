@@ -390,8 +390,8 @@ class QdProductCat extends QdRoot
     public function getBreadcrumbs()
     {
         $re = array();
-        $product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
-        array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
+        //$product_search = get_permalink(Qdmvc_Helper::getPageIdByTemplate('page-templates/product-search.php'));
+        //array_push($re, array('name' => 'Sản phẩm', 'url' => $product_search));
         $p = $this;
         $tmp = array();
         while($p!=null){
