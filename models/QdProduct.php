@@ -214,14 +214,14 @@ class QdProduct extends QdRoot
                 'Caption' => array('vi-VN' => 'Đổi trả/Bảo hành'),
                 'DataType' => 'WYSIWYG',
                 'Description' => array(
-                    'vi-VN' => 'Tab thông tin thứ 2 của trang chi tiết SP'
+                    'vi-VN' => 'Tab thông tin thứ 2 của trang chi tiết SP (Cấu hình Template mặc định trong \'Cấu hình Sản phẩm\')'
                 ),
             ),
             'giaohang_thanhtoan' => array(
                 'Caption' => array('vi-VN' => 'Giao hàng/Thanh toán'),
                 'DataType' => 'WYSIWYG',
                 'Description' => array(
-                    'vi-VN' => 'Tab thông tin thứ 3 của trang chi tiết SP'
+                    'vi-VN' => 'Tab thông tin thứ 3 của trang chi tiết SP (Cấu hình Template mặc định trong \'Cấu hình Sản phẩm\')'
                 ),
             ),
             'stock_status' => array(
@@ -595,6 +595,8 @@ class QdProduct extends QdRoot
     {
         $obj = new QdProduct();
         $obj->description = Qdmvc_Config::getProductSetup()->df_product_desc_tpl;
+        $obj->giaohang_thanhtoan = Qdmvc_Config::getProductSetup()->df_product_giaohang_thanhtoan_tpl;
+        $obj->doitra_baohanh = Qdmvc_Config::getProductSetup()->df_product_doitra_baohanh_tpl;
         //$obj->struct_lv_2 = QdProductCat::$LV2_MANUFACTOR_DIENTHOAI;
         $obj->stock_status = static::$STOCK_DF;
         return $obj;

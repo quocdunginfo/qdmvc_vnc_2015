@@ -27,17 +27,23 @@ class Qdmvc_Page_ProductSetup extends Qdmvc_Page_RootSetup
                 'Name' => 'General',
                 'Fields' => array(
                     'id' => array(
-                        'Order' => 10,
+                        'Order' => 100,
                         'Hidden' => true
                     ),
                     'df_pro_cat_avatar' => array(
-                        'Order' => 20,
+                        'Order' => 200,
                     ),
                     'df_product_desc_tpl' => array(
-                        'Order' => 30,
+                        'Order' => 300,
+                    ),
+                    'df_product_doitra_baohanh_tpl' => array(
+                        'Order' => 400,
+                    ),
+                    'df_product_giaohang_thanhtoan_tpl' => array(
+                        'Order' => 500,
                     ),
                     'df_pro_avatar' => array(
-                        'Order' => 40,
+                        'Order' => 600,
                     ),
                     /*
                     'product_noseries' => array(

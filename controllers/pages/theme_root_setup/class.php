@@ -103,16 +103,22 @@ class Qdmvc_Page_TRootSetup extends Qdmvc_Page_RootSetup
                 ),
                 'Fields' => array(
                     'seo_title_struct' => array(
-                        'Order' => 10,
+                        'Order' => 100,
                     ),
                     'seo_title_struct_2' => array(
-                        'Order' => 20,
+                        'Order' => 200,
+                    ),
+                    'seo_title_struct_3' => array(
+                        'Order' => 300,
+                    ),
+                    'seo_title_struct_4' => array(
+                        'Order' => 400,
                     ),
                     'seo_description_struct' => array(
-                        'Order' => 30,
+                        'Order' => 500,
                     ),
                     'seo_keywords_struct' => array(
-                        'Order' => 40,
+                        'Order' => 600,
                     ),
                 )
             ),

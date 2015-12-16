@@ -19,6 +19,14 @@ class QdSetupProduct extends QdRootSetup
                 'Caption' => array('en-US' => 'DF Product Desc Tpl', 'vi-VN' => 'DF Product Desc Tpl'),
                 'DataType' => 'WYSIWYG'
             ),
+            'df_product_doitra_baohanh_tpl' => array(
+                'Caption' => array('en-US' => 'DF Product ĐT/BH Tpl', 'vi-VN' => 'DF Product ĐT/BH Tpl'),
+                'DataType' => 'WYSIWYG'
+            ),
+            'df_product_giaohang_thanhtoan_tpl' => array(
+                'Caption' => array('en-US' => 'DF Product GH/TT Tpl', 'vi-VN' => 'DF Product GH/TT Tpl'),
+                'DataType' => 'WYSIWYG'
+            ),
             /*
             'product_noseries' => array(
                 'Name' => 'product_noseries',

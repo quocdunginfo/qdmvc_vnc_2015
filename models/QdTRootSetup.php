@@ -17,12 +17,22 @@ class QdTRootSetup extends QdRootSetup
             ),
             'seo_title_struct' => array(
                 'Description' => array(
-                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang Web - Template 1'
+                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang SP - Template 1'
                 ),
             ),
             'seo_title_struct_2' => array(
                 'Description' => array(
-                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang Web - Template 2'
+                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang SP - Template 2'
+                ),
+            ),
+            'seo_title_struct_3' => array(
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang Web - Template 3 (HomePage only)'
+                ),
+            ),
+            'seo_title_struct_4' => array(
+                'Description' => array(
+                    'vi-VN' => 'Cấu hình Template cho tiêu đề trang Web - Template 4 (Title các trang khác)'
                 ),
             ),
             'seo_keywords_struct' => array(
