@@ -192,6 +192,8 @@ class Qdmvc_Layout_Root
                         var url = attachment.url + '?id=' + attachment.id;
                         //alert(attachment.url);
                         eval('MYAPP.viewModel.' + MYAPP.MediaSelector.globalTxtID + '(' + (MYAPP.MediaSelector.globalGetID===true?'attachment.id':'url') + ')');//knockout issue
+                        //consider to trigger change here...
+                        
                     });
                 });
             })(jQuery);

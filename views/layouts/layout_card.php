@@ -525,6 +525,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             MYAPP.setLookupResult = function (value, txtId) {
                 (function ($) {
                     eval('MYAPP.viewModel.' + txtId)(value);
+                    $('#ctl_'+txtId).trigger("change");
                     //auto close window
                     $('#jqxlookupwin').jqxWindow('close');
                 })(jQuery);
@@ -1039,11 +1040,11 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                         continue;
                                     }
                                     ?>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" id="combo_<?=$f_name?>">
                                         <!-- Caption -->
                                         <div
                                             data-qddesc="<?= $this->page->getFieldDescription($f_name, $this->data['language']) ?>"
-                                            class="qd-field-caption pull-left"><?= $this->page->getFieldCaption($f_name, $this->data['language']) ?>
+                                            class="qd-field-caption pull-left" id="lb_<?=$f_name?>"><?= $this->page->getFieldCaption($f_name, $this->data['language']) ?>
                                             :
                                         </div>
                                         <!-- END Caption -->
