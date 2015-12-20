@@ -55,10 +55,18 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
                 })(jQuery);
             };
-            MYAPP.showModalDialog = function (title, content) {
+            MYAPP.showModalDialog = function (title, content, hide_ok, center) {
                 (function ($) {
+                    $('#qdMsgModalContent').removeClass("text-center");
+                    $('#qdMsgModalOKButton').show();
                     $('#qdMsgModalTitle').html(title);
                     $('#qdMsgModalContent').html(content);
+                    if(hide_ok!=undefined && hide_ok==true){
+                        $('#qdMsgModalOKButton').hide();
+                    }
+                    if(center!=undefined && center==true){
+                        $('#qdMsgModalContent').addClass("text-center");
+                    }
                     $('#qdMsgModal').modal('show');
                 })(jQuery);
             };
@@ -343,22 +351,45 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 });
                 MYAPP.WPEditor = {};
                 MYAPP.WPEditor.resize = function (width, height) {
-                    if (wptexteditor_ifr != undefined) {
-                        if (height != undefined) {
-                            wptexteditor_ifr.style.height = (height) + 'px';//quocdunginfo
+                    (function ($) {
+                        var editorWindows = $('#wptexteditor_ifr');
+                        if(editorWindows.length > 0){
+                            if (height != undefined) {
+                                wptexteditor_ifr.style.height = (height) + 'px';//quocdunginfo
+                            }
+                            if (width != undefined) {
+                                wptexteditor_ifr.style.width = (width) + 'px';//quocdunginfo
+                            }
                         }
-                        if (width != undefined) {
-                            wptexteditor_ifr.style.width = (width) + 'px';//quocdunginfo
+                        //Text mode (HTMl only)
+                        else {
+                            editorWindows = $('#wptexteditor');
+                            if(editorWindows.length > 0){
+                                if (height != undefined) {
+                                    wptexteditor.style.height = (height) + 'px';//quocdunginfo
+                                }
+                                if (width != undefined) {
+                                    wptexteditor.style.width = (width) + 'px';//quocdunginfo
+                                }
+                            }else{
+                                console.log('ERROR: wptexteditor_ifr/wptexteditor is not defined in Text mode, could not auto resize');
+                            }
                         }
-                    }
-                    else {
-                        console.log('ERROR: wptexteditor_ifr is not defined');
-                    }
+                    })(jQuery);
+
                 };
                 MYAPP.WPEditor.setContent = function (initVal) {
-                    var ins = tinyMCE.get('wptexteditor');
-                    if (ins != undefined) {
-                        tinyMCE.get('wptexteditor').setContent(initVal);
+                    if(tinyMCE != undefined){
+                        var ins = tinyMCE.get('wptexteditor');
+                        var isVisual = (ins && !ins.isHidden());
+                        //Bug: TinyMCE, setContent not work in Text mode (HTML only)
+                        if(isVisual) {
+                            ins.setContent(initVal);
+                        }else{
+                            wptexteditor.value = initVal;
+                        }
+                    }else{
+                        console.log('ERROR: tinyMCE not found');
                     }
                 }
             })(jQuery);
@@ -375,7 +406,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     <div id="qdMsgModalContent" class="modal-body">
                         [Not Set]
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" id="qdMsgModalOKButton">
                         <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
                     </div>
                 </div>
@@ -415,11 +446,24 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     (function ($) {
                         $(document).ready(function () {
                             $('#wptexteditor_done').click(function () {
-                                var content = tinyMCE.get('wptexteditor').getContent();
-                                $('#' + MYAPP.wptexteditor_returnid).val(content);
-                                $('#' + MYAPP.wptexteditor_returnid).trigger('change');
-                                //close editor
-                                $('#jqxwptexteditor').jqxWindow('close');
+                                if(tinyMCE != undefined){
+                                    var ins = tinyMCE.get('wptexteditor');
+                                    var isVisual = (ins && !ins.isHidden());
+                                    var content = '';
+                                    //Bug: TinyMCE, getContent not work in Text mode (HTML only)
+                                    if(isVisual) {
+                                        content = ins.getContent();
+                                    }else{
+                                        content = wptexteditor.value;
+                                    }
+                                    $('#' + MYAPP.wptexteditor_returnid).val(content);
+                                    $('#' + MYAPP.wptexteditor_returnid).trigger('change');
+                                    //close editor
+                                    $('#jqxwptexteditor').jqxWindow('close');
+                                }else{
+                                    console.log('ERROR: tinyMCE not found');
+                                }
+
                             });
                         });
                     })(jQuery);
@@ -891,7 +935,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
             <img id='<?= static::$ctl_prefix . $f_name ?>'
                  data-bind="attr:{src: <?= $previewfield ?>}"/>
         </div>
-
     <?php
     }
 
@@ -1098,6 +1141,14 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         var title = $(this).text();
                         MYAPP.showModalDialog(title, content);
                     });
+                    $('.qd-image-preview img').click(function () {
+                        if(this.src != undefined) {
+                            MYAPP.showModalDialog('Image Preview', '<img style="max-height: 100%; max-width: 100%" src="' + this.src + '" />', true, true);
+                        }
+                    });
+                    $('#ctl_id').keyup(function () {
+                        MYAPP.manual_no = true;
+                    });
                 });
             })(jQuery);
         </script>
@@ -1114,10 +1165,6 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     <?php if($this->page->hasLines()): ?>
                     $("#qdlines").show();
                     <?php endif; ?>
-
-                    $('#ctl_id').keyup(function () {
-                        MYAPP.manual_no = true;
-                    });
                 });
             })(jQuery);
         </script>
