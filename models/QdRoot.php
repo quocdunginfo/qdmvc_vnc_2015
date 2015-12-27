@@ -1199,10 +1199,11 @@ class QdRoot extends ActiveRecord\Model
             $tmp = array();
             $config = static::getFieldsConfig();
             $t = $config[$field_name]['Options'];
-            foreach ($t as $value => $config) {
-                $tmp[$value] = $config['Caption'][$lang];
+            if(isset($t) && $t!=null){
+            	foreach ($t as $value => $config) {
+                	$tmp[$value] = $config['Caption'][$lang];
+            	}
             }
-
             return $tmp;
         } catch (Exception $ex) {
             return array();

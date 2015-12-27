@@ -8,7 +8,24 @@
  */
 class Qdmvc_Page_DatabaseSvc
 {
-    public function run()
+    public function run(){
+        Qdmvc_Helper::requestCompact();
+        ?>
+        <iframe id="qd-frame" src="/vnc_2015/wp-admin/nav-menus.php" frameborder="0" width="100%" height="6500px"></iframe>
+
+        <script type="text/javascript">
+            (function ($) {
+                $(document).ready(function () {
+                    document.getElementById('qd-frame').onload = function() {
+                        $("#qd-frame").contents().find("head")[0].appendChild($('#qd-compact-style')[0]);
+                    };
+                });
+            })(jQuery);
+        </script>
+
+        <?php
+    }
+    public function run4545()
     {
         //load viewer
         Qdmvc::loadController('/pages/' . static::getPage() . '/' . 'view');

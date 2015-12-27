@@ -258,7 +258,7 @@ class Qdmvc_Helper
     public static function requestCompact()
     {
         ?>
-        <style>
+        <style id="qd-compact-style">
             @media all, screen {
                 /*Hide built-in WP elements*/
                 #wpadminbar, #adminmenuback, #adminmenuwrap, #wpfooter, #update-nag, .update-nag {
