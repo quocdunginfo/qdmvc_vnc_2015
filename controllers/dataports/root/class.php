@@ -227,11 +227,11 @@ class Qdmvc_Dataport
             $this->pushMsg('Permission: Could not Edit!', 'error');
             return;
         }
-        //prevent manual no
-        if ($this->manual_no == true) {
-            $this->pushMsg('[Manual No] are not allowed in update mode', 'error');
-            return;
-        }
+        //prevent manual no: Bug, Press Ctrl + C then could not save record
+        //if ($this->manual_no == true) {
+        //    $this->pushMsg('[Manual No] are not allowed in update mode', 'error');
+        //    return;
+        //}
         //update
         $c = static::$model;
 
