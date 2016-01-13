@@ -438,6 +438,9 @@ class Qdmvc_Helper
         }
         return '=';
     }
+    public static function num_as_group_vn($num, $after=''){
+        return number_format($num, 0, '.', ',') . $after;
+    }
 }
 
 function set_html_content_type()
