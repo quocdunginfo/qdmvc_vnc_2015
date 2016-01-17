@@ -150,7 +150,7 @@ class Qdmvc_Layout_Root
                     if(center!=undefined && center==true){
                         $('#qdMsgModalContent').addClass("text-center");
                     }
-                    $('#qdQRModal').modal('show');
+                    $('#qdMsgModal').modal('show');
                 })(jQuery);
             };
         </script>
