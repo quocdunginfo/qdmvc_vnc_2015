@@ -861,8 +861,10 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
         </select>
     <?php
     }
-
-    private function generateFieldImage($f_name, $value, $readonly = false)
+    private function generateFieldFile($f_name, $value, $readonly = false){
+        $this->generateFieldImage($f_name, $value, $readonly, false);
+    }
+    private function generateFieldImage($f_name, $value, $readonly = false, $onhover = true)
     {
         ?>
         <div class="qd-lookup-input">
@@ -879,16 +881,18 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                             //event.preventDefault();
                             MYAPP.MediaSelector.open('media_cs_<?=$f_name?>', '<?=$f_name?>');
                         });
-                        //hover effect
-                        $("#<?=static::$ctl_prefix.$f_name?>").hover(function () {
-                            var imgURL = $(this).val();
-                            if (imgURL != "") {
-                                var content = '<img style="max-width: 150px; max-height: 150" src="' + imgURL + '" />';
-                                var selector = $("#<?=static::$ctl_prefix.$f_name?>");
-                                selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.8});
-                                selector.jqxTooltip('open');
-                            }
-                        });
+                        <?php if($onhover): ?>
+                            //hover effect
+                            $("#<?=static::$ctl_prefix.$f_name?>").hover(function () {
+                                var imgURL = $(this).val();
+                                if (imgURL != "") {
+                                    var content = '<img style="max-width: 150px; max-height: 150" src="' + imgURL + '" />';
+                                    var selector = $("#<?=static::$ctl_prefix.$f_name?>");
+                                    selector.jqxTooltip({content: content, position: 'bottom', opacity: 0.8});
+                                    selector.jqxTooltip('open');
+                                }
+                            });
+                        <?php endif; ?>
                     });
                 })(jQuery);
             </script>
@@ -1068,6 +1072,8 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                                 $this->generateFieldBoolean($f_name, $f_val, $readonly);
                                             } else if ($type == 'Image') {
                                                 $this->generateFieldImage($f_name, $f_val, $readonly);
+                                            } else if ($type == 'File') {
+                                                $this->generateFieldFile($f_name, $f_val, $readonly);
                                             } else if ($type == 'ImagePreview') {
                                                 $this->generateFieldImagePreview($f_name, $f_val, $imagepreviewfield, $readonly);
                                             } else if ($type == 'Integer') {

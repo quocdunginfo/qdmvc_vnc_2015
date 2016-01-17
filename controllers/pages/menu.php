@@ -2833,6 +2833,31 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdReportDgInStock',
                 'DataPort' => 'report/report_dg_instock_port'
             ),
+            'importdata' => array(
+                'ParentId' => 'folder70',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ImportData',
+                'Caption' => array(
+                    'en-US' => 'Import Data',
+                    'vi-VN' => 'Import Data'
+                ),
+                'Model' => 'QdImportData',
+                'DataPort' => 'importdata_port',
+                'PageList' => 'importdata_list'
+            ),
+            'importdata_list' => array(
+                'ParentId' => 'folder70',
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Report_ImportData_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdImportData',
+                'DataPort' => 'importdata_port'
+            ),
         );
         $obj = array_merge($obj, static::getMenuFolder());
         return $obj;
