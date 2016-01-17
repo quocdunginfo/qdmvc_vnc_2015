@@ -55,21 +55,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
 
                 })(jQuery);
             };
-            MYAPP.showModalDialog = function (title, content, hide_ok, center) {
-                (function ($) {
-                    $('#qdMsgModalContent').removeClass("text-center");
-                    $('#qdMsgModalOKButton').show();
-                    $('#qdMsgModalTitle').html(title);
-                    $('#qdMsgModalContent').html(content);
-                    if(hide_ok!=undefined && hide_ok==true){
-                        $('#qdMsgModalOKButton').hide();
-                    }
-                    if(center!=undefined && center==true){
-                        $('#qdMsgModalContent').addClass("text-center");
-                    }
-                    $('#qdMsgModal').modal('show');
-                })(jQuery);
-            };
+
             MYAPP.AllError = [];
             MYAPP.showMsgHistory = function (limit) {
                 if (limit == undefined) {
@@ -394,24 +380,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                 }
             })(jQuery);
         </script>
-        <!-- Modal -->
-        <div class="modal fade" id="qdMsgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="qdMsgModalTitle">Info</h4>
-                    </div>
-                    <div id="qdMsgModalContent" class="modal-body">
-                        [Not Set]
-                    </div>
-                    <div class="modal-footer" id="qdMsgModalOKButton">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div id="jqxlookupwin" style="display: none">
             <div id="windowHeader">
                     <span>

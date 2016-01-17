@@ -212,6 +212,80 @@ class Qdmvc
     {
         return plugins_url($r_path, __FILE__);
     }
+    public static function extractQdmvcCoreFiles(){
+        $folders = array(
+            //dataports
+            Qdmvc::getPluginDir('controllers/dataports/root') => '_core_pkg/controllers/dataports/root',
+
+            //pages
+            Qdmvc::getPluginDir('controllers/pages/root') => '_core_pkg/controllers/pages/root',
+            Qdmvc::getPluginDir('controllers/pages/root_list') => '_core_pkg/controllers/pages/root_list',
+            Qdmvc::getPluginDir('controllers/pages/root_setup') => '_core_pkg/controllers/pages/root_setup',
+
+            //helper
+            Qdmvc::getPluginDir('helpers') => '_core_pkg/helpers',
+
+            //views
+            Qdmvc::getPluginDir('views') => '_core_pkg/views',
+
+            //widget
+            Qdmvc::getPluginDir('widgets') => '_core_pkg/widgets',
+
+            //widget
+            Qdmvc::getPluginDir('messages') => '_core_pkg/messages',
+        );
+        $coreFiles = array(
+            Qdmvc::getPluginDir('index.php') => '_core_pkg',
+            Qdmvc::getPluginDir('qdmvc.php') => '_core_pkg',
+            Qdmvc::getPluginDir('models/QdRoot.php') => '_core_pkg/models',
+            Qdmvc::getPluginDir('models/QdRootReport.php') => '_core_pkg/models',
+            Qdmvc::getPluginDir('models/QdRootSetup.php') => '_core_pkg/models',
+            Qdmvc::getPluginDir('native/router.php') => '_core_pkg/native',
+            Qdmvc::getPluginDir('native/register-admin-menu.php') => '_core_pkg/native'
+        );
+
+
+        $zip = new ZipArchive();
+        $zipPath = Qdmvc::getPluginDir("_core_pkg.zip");
+
+        $report = '';
+        if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE)===TRUE) {
+            foreach($folders as $rootPath => $rp) {
+
+                $files = new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator($rootPath),
+                    RecursiveIteratorIterator::LEAVES_ONLY
+                );
+
+                foreach ($files as $name => $file) {
+                    // Skip directories (they would be added automatically)
+                    if (!$file->isDir()) {
+                        // Get real and relative path for current file
+                        $filePath = $file->getRealPath();
+                        $relativePath = $rp . '/' . substr($filePath, strlen($rootPath) + 1);
+
+                        // Add current file to archive
+                        $zip->addFile($filePath, $relativePath);
+                        $report .= $filePath . ' => '.$relativePath.'<br>';
+                    }
+                }
+            }
+            foreach($coreFiles as $file=>$rp){
+                // Skip directories (they would be added automatically)
+                if (!is_dir($file)) {
+                    $rootPath = dirname($file);
+                    // Get real and relative path for current file
+                    $relativePath = $rp . '/' . substr($file, strlen($rootPath) + 1);
+
+                    // Add current file to archive
+                    $zip->addFile($file, $relativePath);
+                    $report .= $file . ' => '.$relativePath.'<br>';
+                }
+            }
+            $zip->close();
+        }
+        return $report;
+    }
 }
 
 if (is_admin()) {

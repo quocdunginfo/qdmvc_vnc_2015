@@ -8,6 +8,7 @@
  */
 class Qdmvc_Message
 {
+    private static $custom_loaded = false;
     private static $msg = array(
         'msg_update_ok' => 'Cập nhật thành công, ID = %s',
         'msg_delete_ok' => 'Xóa thành công, ID = %s',
@@ -106,4 +107,14 @@ class Qdmvc_Message
             return isset(static::$msg2[$key]) ? static::$msg2[$key] : '@' . $key;
         }
     }
+    public static function loadCustom(){
+        if(static::$custom_loaded===false){
+            Qdmvc::loadIndex('messages/custom');
+            static::$msg = array_merge(static::$msg, Qdmvc_Message_Custom::$msg);
+            static::$msg2 = array_merge(static::$msg2, Qdmvc_Message_Custom::$msg2);
+
+            static::$custom_loaded = true;
+        }
+    }
 }
+Qdmvc_Message::loadCustom();
