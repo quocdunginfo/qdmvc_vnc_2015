@@ -33,7 +33,7 @@ class QdImportData extends QdRoot
     public function fn_import($location, $params = array())
     {
         if($this->model == 'QdNote'){
-            //
+            QdNote::import($this);
         }
         return true;
     }
