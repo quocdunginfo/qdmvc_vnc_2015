@@ -215,13 +215,16 @@ class Qdmvc
     }
     public static function extractQdmvcCoreFiles(){
         $folders = array(
-            //dataports
+            //FW: dataports
             Qdmvc::getPluginDir('controllers/dataports/root') => '_core_pkg/controllers/dataports/root',
 
-            //pages
+            //FW: pages
             Qdmvc::getPluginDir('controllers/pages/root') => '_core_pkg/controllers/pages/root',
             Qdmvc::getPluginDir('controllers/pages/root_list') => '_core_pkg/controllers/pages/root_list',
             Qdmvc::getPluginDir('controllers/pages/root_setup') => '_core_pkg/controllers/pages/root_setup',
+            //app cores
+            Qdmvc::getPluginDir('controllers/pages/user') => '_core_pkg/controllers/pages/user',
+            Qdmvc::getPluginDir('controllers/pages/user_list') => '_core_pkg/controllers/pages/user_list',
 
             //helper
             Qdmvc::getPluginDir('helpers') => '_core_pkg/helpers',
@@ -231,18 +234,27 @@ class Qdmvc
 
             //widget
             Qdmvc::getPluginDir('widgets') => '_core_pkg/widgets',
-
-            //widget
-            Qdmvc::getPluginDir('messages') => '_core_pkg/messages',
         );
         $coreFiles = array(
+            //FW
             Qdmvc::getPluginDir('index.php') => '_core_pkg',
             Qdmvc::getPluginDir('qdmvc.php') => '_core_pkg',
+
+            //app core models
             Qdmvc::getPluginDir('models/QdRoot.php') => '_core_pkg/models',
             Qdmvc::getPluginDir('models/QdRootReport.php') => '_core_pkg/models',
             Qdmvc::getPluginDir('models/QdRootSetup.php') => '_core_pkg/models',
+            Qdmvc::getPluginDir('models/QdUser.php') => '_core_pkg/models',
+
+            //WP native
             Qdmvc::getPluginDir('native/router.php') => '_core_pkg/native',
-            Qdmvc::getPluginDir('native/register-admin-menu.php') => '_core_pkg/native'
+            Qdmvc::getPluginDir('native/register-admin-menu.php') => '_core_pkg/native',
+            Qdmvc::getPluginDir('native/register-hook.php') => '_core_pkg/native',
+            Qdmvc::getPluginDir('native/db-init.php') => '_core_pkg/native',
+
+            //messages
+            Qdmvc::getPluginDir('messages/index.php') => '_core_pkg/messages',
+            Qdmvc::getPluginDir('messages/global.php') => '_core_pkg/messages',
         );
 
 

@@ -45,4 +45,12 @@ class QdSetup extends QdRootSetup
 
     }
 
+    public function fn_extractcores($location, $params = array())
+    {
+        Qdmvc::extractQdmvcCoreFiles();
+        $this->pushValidateError('', 'Core package extracted under Qdmvc Plugin root directory!', 'info');
+        return true;
+    }
+
+
 }

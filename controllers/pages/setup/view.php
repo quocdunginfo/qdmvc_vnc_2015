@@ -19,6 +19,13 @@ class Qdmvc_View_Setup extends Qdmvc_View_RootSetup
                     'vi-VN' => 'Xóa Cache',
                     'en-US' => 'Remove Cache'
                 )
+            ),
+            'btn_extractcores' => array(
+                'fn_name' => 'fn_extractcores',
+                'label' => array(
+                    'vi-VN' => 'Extract Qdmvc Cores',
+                    'en-US' => 'Extract Qdmvc Cores'
+                )
             )
         ));
         return $obj;
