@@ -422,7 +422,7 @@ class Qdmvc_Dataport
     {
         $class_name = $this->getCalledClassName();
         //get Permissions
-        $u = QdUser::GET(get_current_user_id());
+        $u = Qdmvc_Helper::getCurrentUser();
         if ($u != null) {
             if (!$u->hasPermission($class_name, $method_name)) {
                 $this->pushMsg('You are not allowed to call ' . $class_name . '|' . $method_name, 'error');

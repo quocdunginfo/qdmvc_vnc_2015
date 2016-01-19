@@ -42,7 +42,7 @@ class Qdmvc_Page_Index
 
     public static function buildJSONTree($lang = 'en-US')
     {
-        $u = QdUser::GET(get_current_user_id());
+        $u = Qdmvc_Helper::getCurrentUser();
         $debug_mode = isset($_GET['debugmode']) ? $_GET['debugmode'] : 0;
 
         $re = array();

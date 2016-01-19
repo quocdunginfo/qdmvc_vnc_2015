@@ -392,6 +392,28 @@ class Qdmvc_Helper
         }
         return null;
     }
+    public static function deleteUserCache($uid=null){
+        //delete Qdmvc User Permission Cache, Transient
+        $key = static::getUserCacheKey($uid);
+        delete_transient($key);
+    }
+    public static function getUserCacheKey($uid=null){
+        if($uid==null){
+            $uid = get_current_user_id();
+        }
+        return 'qdmvc_user_group_of_'.$uid;
+    }
+    public static function getCurrentUser(){
+        $key = static::getUserCacheKey();
+        $obj = get_transient($key);
+        if($obj==null){
+            $obj = QdUser::GET(get_current_user_id());
+            $obj->getPermissions();
+            set_transient($key, $obj);
+        }
+
+        return $obj;
+    }
 
     public static function cacheGetByKey($cache_key)
     {

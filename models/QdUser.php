@@ -59,19 +59,20 @@ class QdUser extends QdRoot
         $this->pushValidateError('', 'Total Users: ' . $count, 'info');
         return $count > 0;
     }
-
+    private $_user_group_obj = null;
     public function getUserGroupObj()
     {
-        $tmp = new QdUserInGroup();
-        $tmp->SETRANGE('userid', $this->id);
-        $tmp = $tmp->GETLIST();
-        $tmp = empty($tmp) ? null : $tmp[0];
-        if ($tmp != null) {
-            $g = QdUserGroup::GET($tmp->usergroupid);
-            if ($g != null && $g->active == true)
-                return $g;
+        if($this->_user_group_obj==null){
+            //try to get from DB
+            $tmp = new QdUserInGroup();
+            $tmp->SETRANGE('userid', $this->id);
+            $tmp = $tmp->FINDFIRST();
+            if ($tmp != null) {
+                $this->_user_group_obj = QdUserGroup::GET($tmp->usergroupid);
+            }
         }
-        return null;
+
+        return $this->_user_group_obj;
     }
 
     public function getPermissions()

@@ -18,6 +18,7 @@ class Qdmvc
         'native/db-init',
         'native/shortcode',
         'native/menu-nav-provider',
+        'native/register-hook',
         'notification/index',
     );
     //dependency plugins

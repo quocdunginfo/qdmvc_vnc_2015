@@ -43,7 +43,7 @@ class QdPermission extends QdRoot
 
     protected function usergroupidOnValidate($field_name)
     {
-        $u = QdUser::GET(get_current_user_id());
+        $u = Qdmvc_Helper::getCurrentUser();
         if ($u != null) {
             $g = $u->getUserGroupObj();
             if ($g != null) {

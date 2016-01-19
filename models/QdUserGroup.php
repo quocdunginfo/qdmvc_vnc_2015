@@ -31,18 +31,56 @@ class QdUserGroup extends QdRoot
         return $obj;
     }
 
+    private $_list_per = null;
     public function getPermissions()
     {
-        //find all in Permission
-        $tmp = new QdPermission();
-        $tmp->SETRANGE('usergroupid', $this->id);
-        $tmp->SETRANGE('active', true);
-        return $tmp->GETLIST();
+        if($this->_list_per==null) {
+            //find all in Permission in current obj
+            $tmp = new QdPermission();
+            $tmp->SETRANGE('usergroupid', $this->id);
+            $tmp->SETRANGE('active', true);
+            $pers = $tmp->GETLIST();
+
+            $po = $this->getParentObj();
+            while($po!=null){
+                //get Permission of current parent obj
+                $tmp_ar = $po->getPermissions();
+                if($tmp_ar!=null && is_array($tmp_ar) && !empty($tmp_ar)){
+                    $pers = array_merge($pers, $tmp_ar);
+                }
+                $po = $po->getParentObj();
+            }
+            $this->_list_per = $pers;
+        }
+        return $this->_list_per;
     }
 
+    /**
+     * @param null $class_name Model class Name
+     * @param null $method_name Function Name of Model class
+     * @param null $page_name ID of the Page
+     * @return bool
+     */
     public function hasPermission($class_name = null, $method_name = null, $page_name = null)
     {
-        //find all in Permission
+        //get permission
+        $pers = $this->getPermissions();
+        foreach($pers as $item){
+            if($class_name !== null && $method_name !== null){
+                if($item->classname==$class_name && $item->methodname==$method_name){
+                    return false;
+                }
+            }else{
+                if($page_name!=null){
+                    if($page_name==$item->pagename){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+
+        /*
         $tmp = new QdPermission();
         $tmp->SETRANGE('usergroupid', $this->id);
         $tmp->SETRANGE('active', true);
@@ -53,6 +91,7 @@ class QdUserGroup extends QdRoot
             $tmp->SETRANGE('pagename', $page_name);
         }
 
+        //KHONG nen check permission long nhau kieu nhu vay, nen Flating ra 1 array duy nhat
         $tmp = $tmp->GETLIST();
         if (empty($tmp)) {
             $po = $this->getParentObj();
@@ -62,7 +101,7 @@ class QdUserGroup extends QdRoot
             return true;
         } else {
             return false;
-        }
+        }*/
     }
 
     public function getParentObj()

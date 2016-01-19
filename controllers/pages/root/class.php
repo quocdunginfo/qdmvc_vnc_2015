@@ -466,15 +466,8 @@ class Qdmvc_Page_Root
 
     protected function checkPermission()
     {
-        if ($this->getPage() !== 'nopermission') {
-            //get Permissions
-            $u = QdUser::GET(get_current_user_id());
-            if ($u != null) {
-                if (!$u->hasPermission(null, null, $this->getPage())) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        //get Permissions
+        $u = Qdmvc_Helper::getCurrentUser();
+        return $u->hasPermission(null, null, $this->getPage());
     }
 }
