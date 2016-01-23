@@ -236,6 +236,9 @@ class Qdmvc
             //FW dataports
             Qdmvc::getPluginDir('controllers/dataports/index.php') => '_core_pkg/controllers/dataports',
 
+            //FW Controller
+            Qdmvc::getPluginDir('controllers/index.php') => '_core_pkg/controllers',
+
             //WP native
             Qdmvc::getPluginDir('native/index.php') => '_core_pkg/native',
             Qdmvc::getPluginDir('native/router.php') => '_core_pkg/native',
