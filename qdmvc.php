@@ -201,9 +201,11 @@ class Qdmvc
             Qdmvc::getPluginDir('controllers/pages/root') => '_core_pkg/controllers/pages/root',
             Qdmvc::getPluginDir('controllers/pages/root_list') => '_core_pkg/controllers/pages/root_list',
             Qdmvc::getPluginDir('controllers/pages/root_setup') => '_core_pkg/controllers/pages/root_setup',
+
             //app cores
             Qdmvc::getPluginDir('controllers/pages/user') => '_core_pkg/controllers/pages/user',
             Qdmvc::getPluginDir('controllers/pages/user_list') => '_core_pkg/controllers/pages/user_list',
+            //............
 
             //helper
             Qdmvc::getPluginDir('helpers') => '_core_pkg/helpers',
@@ -225,7 +227,17 @@ class Qdmvc
             Qdmvc::getPluginDir('models/QdRootSetup.php') => '_core_pkg/models',
             Qdmvc::getPluginDir('models/QdUser.php') => '_core_pkg/models',
 
+            //FW page
+            Qdmvc::getPluginDir('controllers/pages/index.php') => '_core_pkg/controllers/pages',
+
+            //FW menus
+            Qdmvc::getPluginDir('controllers/menus/index.php') => '_core_pkg/controllers/menus',
+
+            //FW dataports
+            Qdmvc::getPluginDir('controllers/dataports/index.php') => '_core_pkg/controllers/dataports',
+
             //WP native
+            Qdmvc::getPluginDir('native/index.php') => '_core_pkg/native',
             Qdmvc::getPluginDir('native/router.php') => '_core_pkg/native',
             Qdmvc::getPluginDir('native/register-admin-menu.php') => '_core_pkg/native',
             Qdmvc::getPluginDir('native/register-hook.php') => '_core_pkg/native',

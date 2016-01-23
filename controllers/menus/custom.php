@@ -96,6 +96,16 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Order' => 800
             ),
+            'folder80' => array(
+                'ParentId' => -1,
+                'PageType' => 'Folder',
+                'Active' => true,
+                'Caption' => array(
+                    'vi-VN' => 'Bài viết',
+                    'en-US' => 'Archives'
+                ),
+                'Order' => 900
+            ),
         );
     }
     private static function getMenu()
@@ -1935,18 +1945,53 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdPBHanh',
                 'DataPort' => 'pbhanh_port'
             ),
-            'navigation' => array(
-                'ParentId' => '',
-                'Active' => false,
+            'product_setup' => array(
+                'ParentId' => 'folder50',
+                'Active' => true,
                 'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_Navigation',
+                'Class' => 'Qdmvc_Page_ProductSetup',
                 'Caption' => array(
-                    'en-US' => 'Navigation',
-                    'vi-VN' => 'Navigation'
+                    'en-US' => 'Product Setup',
+                    'vi-VN' => 'Cấu hình Sản phẩm',
                 ),
-                'Model' => 'QdNote',
-                'DataPort' => 'note_port',
-                'PageList' => 'note_list'
+                'Model' => 'QdSetupProduct',
+                'DataPort' => 'product_setup_port'
+            ),
+            'setup_other' => array(
+                'ParentId' => 'folder50',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_SetupOther',
+                'Caption' => array(
+                    'en-US' => 'Other Setup',
+                    'vi-VN' => 'Cấu hình khác',
+                ),
+                'Model' => 'QdSetupOther',
+                'DataPort' => 'setup_other_port'
+            ),
+            'setup_product_order' => array(
+                'ParentId' => 'folder50',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_SetupProductOrder',
+                'Caption' => array(
+                    'en-US' => 'Product Order Setup',
+                    'vi-VN' => 'Cấu hình đặt hàng SP',
+                ),
+                'Model' => 'QdSetupProductOrder',
+                'DataPort' => 'setup_product_order_port'
+            ),
+            'theme_root_setup' => array(
+                'ParentId' => 'folder50',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_TRootSetup',
+                'Caption' => array(
+                    'en-US' => 'Theme Root Setup',
+                    'vi-VN' => 'Theme Root Setup',
+                ),
+                'Model' => 'QdTRootSetup',
+                'DataPort' => 'theme/root_setup_port'
             ),
             'blank_page' => array(
                 'ParentId' => '',

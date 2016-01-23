@@ -7,7 +7,7 @@
  * Time: 9:48 AM
  */
 //load Custom menu
-Qdmvc::loadIndex('controllers/menus/custom');
+Qdmvc::loadIndex('controllers/menus/custom', false);
 class Qdmvc_Page_IndexMenu
 {
     public static function getIndex()
@@ -47,16 +47,6 @@ class Qdmvc_Page_IndexMenu
                     'en-US' => 'System'
                 ),
                 'Order' => 30000
-            ),
-            'folder80' => array(
-                'ParentId' => -1,
-                'PageType' => 'Folder',
-                'Active' => true,
-                'Caption' => array(
-                    'vi-VN' => 'Bài viết',
-                    'en-US' => 'Archives'
-                ),
-                'Order' => 40000
             ),
             'folder110' => array(
                 'ParentId' => -1,
@@ -758,54 +748,6 @@ class Qdmvc_Page_IndexMenu
                 'Model' => 'QdSetup',
                 'DataPort' => 'setup_port'
             ),
-            'product_setup' => array(
-                'ParentId' => 'folder50',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductSetup',
-                'Caption' => array(
-                    'en-US' => 'Product Setup',
-                    'vi-VN' => 'Cấu hình Sản phẩm',
-                ),
-                'Model' => 'QdSetupProduct',
-                'DataPort' => 'product_setup_port'
-            ),
-            'setup_other' => array(
-                'ParentId' => 'folder50',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_SetupOther',
-                'Caption' => array(
-                    'en-US' => 'Other Setup',
-                    'vi-VN' => 'Cấu hình khác',
-                ),
-                'Model' => 'QdSetupOther',
-                'DataPort' => 'setup_other_port'
-            ),
-            'setup_product_order' => array(
-                'ParentId' => 'folder50',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_SetupProductOrder',
-                'Caption' => array(
-                    'en-US' => 'Product Order Setup',
-                    'vi-VN' => 'Cấu hình đặt hàng SP',
-                ),
-                'Model' => 'QdSetupProductOrder',
-                'DataPort' => 'setup_product_order_port'
-            ),
-            'theme_root_setup' => array(
-                'ParentId' => 'folder50',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_TRootSetup',
-                'Caption' => array(
-                    'en-US' => 'Theme Root Setup',
-                    'vi-VN' => 'Theme Root Setup',
-                ),
-                'Model' => 'QdTRootSetup',
-                'DataPort' => 'theme/root_setup_port'
-            ),
             'user_personalization' => array(
                 'ParentId' => 'folder50',
                 'Active' => true,
@@ -835,7 +777,21 @@ class Qdmvc_Page_IndexMenu
     }
     private static function getMenu()
     {
-        $obj = array();
+        $obj = array(
+            'navigation' => array(
+                'ParentId' => '',
+                'Active' => false,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_Navigation',
+                'Caption' => array(
+                    'en-US' => 'Navigation',
+                    'vi-VN' => 'Navigation'
+                ),
+                'Model' => 'QdNote',
+                'DataPort' => 'note_port',
+                'PageList' => 'note_list'
+            ),
+        );
         //collect menu items
         $obj = array_merge($obj, static::getMenuUserRole());
         $obj = array_merge($obj, static::getMenuSetupOption());
