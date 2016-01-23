@@ -3,24 +3,8 @@
 Plugin Name: qdmvc
 */
 
-//Because Helper is declared outside to public provider for other location use (theme)
-//Router and helper does not using Model so it could be loaded 1st
-Qdmvc::loadHelper('main');
-Qdmvc::loadRouter();
-//Model must load public to ensure other location usage
-Qdmvc::loadModel();
-
 class Qdmvc
 {
-    private static $included_file = array(
-        'native/register-admin-menu',
-        'native/page-meta-box',
-        'native/db-init',
-        'native/shortcode',
-        'native/menu-nav-provider',
-        'native/register-hook',
-        'notification/index',
-    );
     //dependency plugins
     private static $dependencies = array('phpactiverecords', 'jqwidgets');
 
@@ -28,22 +12,6 @@ class Qdmvc
     function __construct()
     {
 
-    }
-
-    private static function init()
-    {
-        //require related library
-        foreach (static::$included_file as $item) {
-            static::load($item);
-        }
-        //loading widgets
-        require_once(Qdmvc::getWidget('index.php'));
-    }
-
-    public static function loadJS()
-    {
-        wp_register_script('qdmvc_js_msg-' . Qdmvc_Config::getLanguage(), plugins_url('/messages/js/msg-' . Qdmvc_Config::getLanguage() . '.js', __FILE__));
-        wp_enqueue_script('qdmvc_js_msg-' . Qdmvc_Config::getLanguage());
     }
 
     public static function loadNative($pure_path)
@@ -117,9 +85,9 @@ class Qdmvc
         require_once(static::getController('dataports/' . $pure_path . '/class.php'));
     }
 
-    public static function loadIndex($pure_path)
+    public static function loadIndex($pure_path, $require=true)
     {
-        require_once(static::getPluginDir($pure_path) . '.php');
+        static::load($pure_path, $require);
     }
 
     public static function getPluginDir($pure_path = '')
@@ -168,17 +136,29 @@ class Qdmvc
                 return;
             }
         }
-        //2nd level construct
-        static::init();
+
+        //require global index
+        //Index must be loaded before Model
+        //Reason: QdRoot->getDefaultLookupPage
+        Qdmvc::loadIndex('index');
+
+        //Script and CSS
+        if(is_admin()) {
+            if (Qdmvc::IS_QDMVC_PAGE()) {
+                //register all jqwidget
+                QdJqwidgets::registerAll();
+                //load all jqwidget
+                QdJqwidgets::loadAll();
+            }
+        }
+
+        //load phpActiveRecord Model
+        Qdmvc::loadModel();
     }
 
     public static function loadModel()
     {
-        //Index must be loaded before Model
-        //Reason: QdRoot->getDefaultLookupPage
-        Qdmvc::loadIndex('index');//quocdunginfo, performance
-
-        //Phpactive record init
+        //phpActiveRecord init
         static::$connection = QdPhpactiverecords::getCon();
         $tmp_con = static::$connection;
         ActiveRecord\Config::initialize(function ($cfg) use ($tmp_con) {
@@ -194,14 +174,13 @@ class Qdmvc
         return static::$connection;
     }
 
-    public static function load($pure_path)
+    public static function load($pure_path, $require=true)
     {
-        require_once(Qdmvc::getPluginDir($pure_path) . '.php');
-    }
-
-    public static function loadRouter()
-    {
-        static::load('native/router');
+        if($require) {
+            require_once(Qdmvc::getPluginDir($pure_path) . '.php');
+        }else{
+            include_once(Qdmvc::getPluginDir($pure_path) . '.php');
+        }
     }
 
     public static function IS_QDMVC_PAGE()
@@ -301,11 +280,4 @@ class Qdmvc
     }
 }
 
-if (is_admin()) {
-    Qdmvc::run();
-
-    //load UI Kit
-    if (Qdmvc::IS_QDMVC_PAGE()) {
-        QdJqwidgets::registerResource(true);//quocdunginfo, need to find other solution because every WP page got this hook
-    }
-}
+Qdmvc::run();

@@ -7,3 +7,4 @@
  */
 Qdmvc::loadIndex('controllers/pages/index');
 Qdmvc::loadIndex('controllers/dataports/index');
+Qdmvc::loadIndex('controllers/menus/index');

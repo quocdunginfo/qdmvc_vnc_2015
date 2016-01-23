@@ -5,7 +5,7 @@
  * Date: 15/02/2015
  * Time: 8:06 AM
  */
-Qdmvc::loadIndex('controllers/pages/menu');
+Qdmvc::loadIndex('controllers/menus/index');
 
 class Qdmvc_Page_Index
 {
