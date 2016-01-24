@@ -714,7 +714,7 @@ class QdProduct extends QdRoot
             if ($this->discount_percent > 0) {
                 $price .= ' (' . ($this->discount_percent * 100) . '% OFF)';
             }
-            $tmp->meta_value = substr(strip_tags($this->description), 0, 80) . '...' . $price;
+            $tmp->meta_value = Qdmvc_Helper::subStringByWord(strip_tags($this->description), 80) . '...' . $price;
 
             array_push($obj, $tmp);
         }

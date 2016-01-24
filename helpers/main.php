@@ -439,6 +439,13 @@ class Qdmvc_Helper
         }
         return true;
     }
+    public static function subStringByWord($body, $maxlength){
+        if (strlen($body)<$maxlength) return $body;
+        $body = substr($body, 0, $maxlength);
+        $rpos = strrpos($body,' ');
+        if ($rpos>0) $body = substr($body, 0, $rpos);
+        return $body;
+    }
 
     public static function cacheRemoveAll()
     {

@@ -6,6 +6,7 @@
  * Date: 27/05/2015
  * Time: 10:20 PM
  */
+Qdmvc::loadIndex('messages/custom', false);
 class Qdmvc_Message
 {
     private static $custom_loaded = false;
@@ -109,10 +110,10 @@ class Qdmvc_Message
     }
     public static function loadCustom(){
         if(static::$custom_loaded===false){
-            Qdmvc::loadIndex('messages/custom');
-            static::$msg = array_merge(static::$msg, Qdmvc_Message_Custom::$msg);
-            static::$msg2 = array_merge(static::$msg2, Qdmvc_Message_Custom::$msg2);
-
+            if(class_exists('Qdmvc_Message_Custom')){
+                static::$msg = array_merge(static::$msg, Qdmvc_Message_Custom::$msg);
+                static::$msg2 = array_merge(static::$msg2, Qdmvc_Message_Custom::$msg2);
+            }
             static::$custom_loaded = true;
         }
     }

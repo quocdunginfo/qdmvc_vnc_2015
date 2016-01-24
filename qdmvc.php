@@ -226,12 +226,14 @@ class Qdmvc
             Qdmvc::getPluginDir('models/QdRootReport.php') => '_core_pkg/models',
             Qdmvc::getPluginDir('models/QdRootSetup.php') => '_core_pkg/models',
             Qdmvc::getPluginDir('models/QdUser.php') => '_core_pkg/models',
+            //.............
 
             //FW page
             Qdmvc::getPluginDir('controllers/pages/index.php') => '_core_pkg/controllers/pages',
 
             //FW menus
             Qdmvc::getPluginDir('controllers/menus/index.php') => '_core_pkg/controllers/menus',
+            Qdmvc::getPluginDir('controllers/menus/custom_sample.php') => '_core_pkg/controllers/menus',
 
             //FW dataports
             Qdmvc::getPluginDir('controllers/dataports/index.php') => '_core_pkg/controllers/dataports',
@@ -249,6 +251,7 @@ class Qdmvc
             //messages
             Qdmvc::getPluginDir('messages/index.php') => '_core_pkg/messages',
             Qdmvc::getPluginDir('messages/global.php') => '_core_pkg/messages',
+            Qdmvc::getPluginDir('messages/custom_sample.php') => '_core_pkg/messages',
         );
 
 
