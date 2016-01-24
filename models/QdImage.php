@@ -12,6 +12,7 @@ class QdImage extends QdNote
                 'path' => array(
                     'Caption' => array('en-US' => 'Image', 'vi-VN' => 'Hình ảnh'),
                     'DataType' => 'Image',
+                    'MultiValue' => true
                 ),
                 '_path_preview' => array(
                     'Caption' => array('en-US' => 'Image Preview', 'vi-VN' => 'Xem trước'),
@@ -154,5 +155,30 @@ class QdImage extends QdNote
         }
         return parent::delete($location, $validate);
     }
+
+    protected function pathOnValidate($field_name)
+    {
+        $tmp = explode("|", $this->$field_name);
+        if(count($tmp) > 1){
+            foreach($tmp as $item){
+                $obj = static::getInitObj();
+                $obj->transferFieldsFrom($this);
+
+                $obj->path = $item;
+                $obj->save();
+            }
+        }
+    }
+    public function save($validate = true, $location = '')
+    {
+        $tmp = explode("|", $this->path);
+        if(count($tmp) > 1){
+            $this->pathOnValidate('path');
+            return true;
+        }else{
+            return parent::save($validate, $location);
+        }
+    }
+
 
 }

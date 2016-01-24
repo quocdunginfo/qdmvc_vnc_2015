@@ -92,6 +92,26 @@ class QdRoot extends ActiveRecord\Model
         $this->owner_id = get_current_user_id();
     }
 
+    static $after_create = array('on_after_create'); # new records only
+
+    /**
+     *
+     */
+    public function on_after_create()
+    {
+
+    }
+
+    static $after_update = array('on_after_update'); # new records only
+
+    /**
+     *
+     */
+    public function on_after_update()
+    {
+
+    }
+
     protected static function  addFieldConfig()
     {
 

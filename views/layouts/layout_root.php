@@ -199,36 +199,116 @@ class Qdmvc_Layout_Root
         ?>
         <script>
             MYAPP.MediaSelector = {};
-            MYAPP.MediaSelector.open = function(btnID, txtID, getID){
-                if(getID==undefined){
-                    getID = false;
-                }
-                MYAPP.MediaSelector.globalBtnID = btnID;
-                MYAPP.MediaSelector.globalTxtID = txtID;
-                MYAPP.MediaSelector.globalGetID = getID;
-                MYAPP.MediaSelector.globalFrame.open();
-            };
-            (function ($) {
-                $(document).ready(function () {
+            MYAPP.MediaSelector.open = function(btnID, txtID, getID, isMulti){
+                (function($){
+                    if(getID==undefined){
+                        getID = false;
+                    }
+                    if(isMulti==undefined){
+                        isMulti = false;
+                    }
+                    if(MYAPP.MediaSelector.Instances == undefined){
+                        MYAPP.MediaSelector.Instances = {};
+                    }
+                    var c_instance = undefined;
+                    if(MYAPP.MediaSelector.Instances[btnID] != undefined){
+                        c_instance = MYAPP.MediaSelector.Instances[btnID];
+                    }
+                    else{
+                        c_instance = {};
+                        c_instance.selector = wp.media.frames.globalFrame = wp.media({
+                            title: $(this).data('uploader_title'),
+                            button: {
+                                text: $(this).data('uploader_button_text')
+                            },
+                            multiple: isMulti  // Set to true to allow multiple files to be selected
+                        });
+
+                        c_instance.globalIsMulti = isMulti;
+                        c_instance.globalBtnID = btnID;
+                        c_instance.globalTxtID = txtID;
+                        c_instance.globalGetID = getID;
+                        c_instance.selector.on('select', function () {
+                            var url = '';
+                            attachments = c_instance.selector.state().get('selection');
+                            if(c_instance.globalIsMulti){
+                                for(var i=0;i<attachments.length;i++){
+                                    url += attachments.models[i].attributes.url + '?id=' + attachments.models[i].attributes.id;
+                                    if(i<attachments.length-1){
+                                        url += '|'
+                                    }
+                                }
+                                // iterate through selected elements
+                                //attachments.each(function(attachment) {
+                                //
+                                //});
+                            }else{
+                                attachment = attachments.models[0];
+                                url = attachment.attributes.url + '?id=' + attachment.attributes.id;
+                            }
+
+                            eval('MYAPP.viewModel.' + c_instance.globalTxtID + '(' + (c_instance.globalGetID===true?'attachment.id':'url') + ')');//knockout issue
+                            //consider to trigger change here...
+                        });
+                        MYAPP.MediaSelector.Instances[btnID] = c_instance;
+                    }
+                    c_instance.selector.open();
+                    return;
+
+                    MYAPP.MediaSelector.globalIsMulti = isMulti;
+                    MYAPP.MediaSelector.globalBtnID = btnID;
+                    MYAPP.MediaSelector.globalTxtID = txtID;
+                    MYAPP.MediaSelector.globalGetID = getID;
+                    //MYAPP.MediaSelector.globalFrame.open();
                     // Create the media frame.
                     MYAPP.MediaSelector.globalFrame = wp.media.frames.globalFrame = wp.media({
                         title: $(this).data('uploader_title'),
                         button: {
                             text: $(this).data('uploader_button_text')
                         },
-                        multiple: false  // Set to true to allow multiple files to be selected
+                        multiple: isMulti  // Set to true to allow multiple files to be selected
                     });
-
-                    // When an image is selected, run a callback.
                     MYAPP.MediaSelector.globalFrame.on('select', function () {
-                        // We set multiple to false so only get one image from the uploader
-                        attachment = MYAPP.MediaSelector.globalFrame.state().get('selection').first().toJSON();
-                        var url = attachment.url + '?id=' + attachment.id;
-                        //alert(attachment.url);
+                        var url = '';
+                        attachments = MYAPP.MediaSelector.globalFrame.state().get('selection');
+                        if(MYAPP.MediaSelector.globalIsMulti){
+                            for(var i=0;i<attachments.length;i++){
+                                url += attachments.models[i].attributes.url + '?id=' + attachments.models[i].attributes.id;
+                                if(i<attachments.length-1){
+                                    url += '|'
+                                }
+                            }
+                            // iterate through selected elements
+                            //attachments.each(function(attachment) {
+                            //
+                            //});
+                        }else{
+                            attachment = attachments.models[0];
+                            url = attachment.attributes.url + '?id=' + attachment.attributes.id;
+                        }
+
                         eval('MYAPP.viewModel.' + MYAPP.MediaSelector.globalTxtID + '(' + (MYAPP.MediaSelector.globalGetID===true?'attachment.id':'url') + ')');//knockout issue
                         //consider to trigger change here...
-                        
+
                     });
+                    MYAPP.MediaSelector.globalFrame.open();
+                })(jQuery);
+            };
+            (function ($) {
+                $(document).ready(function () {
+                    // Create the media frame.
+                    /*
+                    MYAPP.MediaSelector.globalFrame = wp.media.frames.globalFrame = wp.media({
+                        title: $(this).data('uploader_title'),
+                        button: {
+                            text: $(this).data('uploader_button_text')
+                        },
+                        multiple: true  // Set to true to allow multiple files to be selected
+                    });
+                    */
+
+                    // When an image is selected, run a callback.
+
                 });
             })(jQuery);
 

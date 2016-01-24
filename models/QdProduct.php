@@ -522,13 +522,18 @@ class QdProduct extends QdRoot
 
     protected function codeOnValidate($field_name)
     {
-        if ($this->$field_name == '') {
-            if ($this->name != null) {
-                $this->pushValidateError($field_name, 'Code tự động in hoa và bằng ID', 'info');
-                $this->$field_name = strtoupper($this->id);
-            }
+        if ($this->$field_name == '' && $this->id != '0') {
+            $this->pushValidateError($field_name, 'Code tự động in hoa và bằng ID', 'info');
+            $this->$field_name = strtoupper($this->id);
         }
     }
+
+    public function on_after_create()
+    {
+        $this->codeOnValidate('code');
+        $this->save(false);
+    }
+
 
     protected function priceOnValidate($field_name)
     {

@@ -864,7 +864,10 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
     private function generateFieldFile($f_name, $value, $readonly = false){
         $this->generateFieldImage($f_name, $value, $readonly, false);
     }
-    private function generateFieldImage($f_name, $value, $readonly = false, $onhover = true)
+    private function generateFieldImageMulti($f_name, $value, $readonly = false, $onhover = true){
+        $this->generateFieldImage($f_name, $value, $readonly, $onhover, true);
+    }
+    private function generateFieldImage($f_name, $value, $readonly = false, $onhover = true, $multi=false)
     {
         ?>
         <div class="qd-lookup-input">
@@ -879,7 +882,7 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                         //register media chooser
                         $('#media_cs_<?=$f_name?>').live('click', function (event) {
                             //event.preventDefault();
-                            MYAPP.MediaSelector.open('media_cs_<?=$f_name?>', '<?=$f_name?>');
+                            MYAPP.MediaSelector.open('media_cs_<?=$f_name?>', '<?=$f_name?>', undefined, <?=$multi?'true':'false'?>);
                         });
                         <?php if($onhover): ?>
                             //hover effect
@@ -1071,7 +1074,12 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                                             } else if ($type == 'Boolean') {
                                                 $this->generateFieldBoolean($f_name, $f_val, $readonly);
                                             } else if ($type == 'Image') {
-                                                $this->generateFieldImage($f_name, $f_val, $readonly);
+                                                if($f_multivalue){
+                                                    $this->generateFieldImageMulti($f_name, $f_val, $readonly);
+                                                }else{
+                                                    $this->generateFieldImage($f_name, $f_val, $readonly);
+                                                }
+
                                             } else if ($type == 'File') {
                                                 $this->generateFieldFile($f_name, $f_val, $readonly);
                                             } else if ($type == 'ImagePreview') {
