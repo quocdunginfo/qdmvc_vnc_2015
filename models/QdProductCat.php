@@ -821,5 +821,14 @@ class QdProductCat extends QdRoot
         //END LV2 - THIETBI
         return true;
     }
+    /*
+     * Fix bug Image, Note, Log Linking
+     * If its derived class use the same Table as this
+     * */
+    protected function getCalledClassName()
+    {
+        //Use for all it derived class
+        return 'QdProductCat';
+    }
 
 }

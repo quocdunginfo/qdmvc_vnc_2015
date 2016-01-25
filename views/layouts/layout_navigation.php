@@ -103,6 +103,12 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                             },
                             click: function(event, data) {
                                 var node = data.node;
+                                //distinguise bewtween click and expand
+                                var tt = $.ui.fancytree.getEventTargetType(event.originalEvent);
+                                if( tt === "expander" ) {
+                                    return;//ignore if click on expander
+                                }
+
                                 //add tab
                                 var args = event.args;
 
@@ -261,8 +267,6 @@ class Qdmvc_Layout_Navigation extends Qdmvc_Layout_Root
                         $('#panelContentpaneljqxTree li').click(function () {
                             //alert('wtf');
                         });
-
-
                     });
                 })(jQuery);
             </script>

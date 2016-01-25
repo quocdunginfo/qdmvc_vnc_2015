@@ -15,6 +15,7 @@ class QdDgRequest extends QdRoot
 
             ),
             'tags' => array(
+                'DataType' => 'Text',
                 'MultiValue' => true,
                 'MultiValue_Field' => 'name',
                 'MultiValue_DataPort' => Qdmvc_Helper::getDataPortPath('mytags_port', array(

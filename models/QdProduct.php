@@ -732,4 +732,14 @@ class QdProduct extends QdRoot
             'en-US' => 'Product'
         );
     }
+    /*
+     * Fix bug Image, Note, Log Linking
+     * If its derived class use the same Table as this
+     * !!!! It may affect to Permission checking
+     * */
+    protected function getCalledClassName()
+    {
+        //Use for all it derived class
+        return 'QdProduct';
+    }
 }

@@ -12,7 +12,7 @@ class Qdmvc_Page_IndexMenu
 {
     public static function getIndex()
     {
-        return array_merge(static::getMenu());
+        return static::getMenu();
     }
     private static function getMenuFolder(){
 
@@ -817,6 +817,10 @@ class Qdmvc_Page_IndexMenu
                 return 0;
             }
             return $a['Order'] - $b['Order'];
+        }else if(isset($a['Order'])){
+            return -1;
+        }else if(isset($b['Order'])){
+            return 1;
         }
         return 0;
     }

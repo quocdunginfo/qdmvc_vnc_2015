@@ -90,4 +90,12 @@ class QdPro2Pro extends QdRoot
         $obj = new QdPro2Pro();
         return $obj;
     }
+    /*
+     * Fix bug Image, Note, Log Linking
+     * */
+    protected function getCalledClassName()
+    {
+        //Use for all it derived class
+        return 'QdPro2Pro';
+    }
 }

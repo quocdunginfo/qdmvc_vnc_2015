@@ -307,6 +307,10 @@ class Qdmvc_Page_Root
                 return 0;
             }
             return $a['Order'] - $b['Order'];
+        }else if(isset($a['Order'])){
+            return -1;
+        }else if(isset($b['Order'])){
+            return 1;
         }
         return 0;
     }

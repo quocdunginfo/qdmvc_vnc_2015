@@ -44,10 +44,9 @@ class Qdmvc_Page_Index
     {
         $u = Qdmvc_Helper::getCurrentUser();
         $debug_mode = isset($_GET['debugmode']) ? $_GET['debugmode'] : 0;
-
         $re = array();
         foreach (static::getIndex() as $key => $config) {
-            if (!$u->hasPermission(null, null, $key)) continue;//quocdunginfo, performance
+            if (!$u->hasPermission(null, null, $key)) continue;
 
             $tmp = array();
             $active = isset($config['Active']) ? $config['Active'] : true;
