@@ -994,7 +994,7 @@ class QdRoot extends ActiveRecord\Model
                 $tmp = $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('note', array('model' => $class_name, 'model_id' => $this->id));
                 //COUNT
                 $record = new QdNote();
-                $record->SETRANGE('model', $this->getCalledClassName());
+                $record->SETRANGE('model', $class_name);
                 $record->SETRANGE('model_id', $this->id);
                 $count = $record->COUNTLIST();
 
@@ -1003,7 +1003,7 @@ class QdRoot extends ActiveRecord\Model
                 $tmp = $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('log', array('model' => $class_name, 'model_id' => $this->id));
                 //COUNT
                 $record = new QdLog();
-                $record->SETRANGE('model', $this->getCalledClassName());
+                $record->SETRANGE('model', $class_name);
                 $record->SETRANGE('model_id', $this->id);
                 $count = $record->COUNTLIST();
 
@@ -1012,7 +1012,7 @@ class QdRoot extends ActiveRecord\Model
                 $tmp = $this->qd_cached_attr[$field_name] = Qdmvc_Helper::getCompactPageListLink('image', array('model' => $class_name, 'model_id' => $this->id));
                 //COUNT
                 $record = new QdImage();
-                $record->SETRANGE('model', $this->getCalledClassName());
+                $record->SETRANGE('model', $class_name);
                 $record->SETRANGE('model_id', $this->id);
                 $count = $record->COUNTLIST();
 

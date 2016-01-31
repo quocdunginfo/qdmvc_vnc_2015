@@ -1,14 +1,12 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: quocd_000
- * Date: 05/03/2015
- * Time: 11:30 PM
- */
 class Qdmvc_Page_DatabaseSvc
 {
     public function run(){
+
+    }
+    public function run_2323(){
+        var_dump(Qdmvc_Page_Index::getIndex());
+        return;
         Qdmvc_Helper::requestCompact();
         ?>
         <iframe id="qd-frame" src="/vnc_2015/wp-admin/nav-menus.php" frameborder="0" width="100%" height="6500px"></iframe>

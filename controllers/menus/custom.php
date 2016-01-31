@@ -108,20 +108,8 @@ class Qdmvc_Page_IndexCustomMenu
             ),
         );
     }
-    private static function getMenu()
-    {
-        $obj = array(
-            'main' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'Class' => 'Qdmvc_Page_Main',
-                'Caption' => array(
-                    'en-US' => 'Page Main',
-                    'vi-VN' => 'Trang chính',
-                ),
-                'Model' => 'QdNote',
-                'DataPort' => 'note_port',
-            ),
+    private static function getMenuSP(){
+        return array(
             'product' => array(
                 'ParentId' => 'folder10',
                 'Active' => true,
@@ -133,7 +121,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProduct',
                 'DataPort' => 'product_port',
-                'PageList' => 'product_list'
+                'PageList' => 'product_list',
+                'Order' => 10000
             ),
             'product_list' => array(
                 'ParentId' => -1,
@@ -147,33 +136,6 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdProduct',
                 'DataPort' => 'product_port'
             ),
-            /*
-            'product_pg2' => array(
-                'ParentId' => 'folder10',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_Product_PG2_Card',
-                'Caption' => array(
-                    'en-US' => 'Product (PG2)',
-                    'vi-VN' => 'Sản phẩm (PG2)',
-                ),
-                'Model' => 'QdProductPG2',
-                'DataPort' => 'product_pg2_port',
-                'PageList' => 'product_pg2_list'
-            ),
-            'product_pg2_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_Product_PG2_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductPG2',
-                'DataPort' => 'product_pg2_port'
-            ),
-            */
             'product_pg2_dcn' => array(
                 'ParentId' => 'folder10',
                 'Active' => true,
@@ -185,7 +147,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductPG2DCN',
                 'DataPort' => 'product_pg2_dcn_port',
-                'PageList' => 'product_pg2_dcn_list'
+                'PageList' => 'product_pg2_dcn_list',
+                'Order' => 20000
             ),
             'product_pg2_dcn_list' => array(
                 'ParentId' => -1,
@@ -199,6 +162,110 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdProductPG2DCN',
                 'DataPort' => 'product_pg2_dcn_port'
             ),
+            'product_dt' => array(
+                'ParentId' => 'product_pg2_dcn',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductDT_Card',
+                'Caption' => array(
+                    'en-US' => 'Product DT',
+                    'vi-VN' => 'SP Điện thoại',
+                ),
+                'Model' => 'QdProductDT',
+                'DataPort' => 'product_dt_port',
+                'PageList' => 'product_dt_list',
+                'Order' => 10000
+            ),
+            'product_dt_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductDT_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductDT',
+                'DataPort' => 'product_dt_port'
+            ),
+            'product_lt' => array(
+                'ParentId' => 'product_pg2_dcn',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductLT_Card',
+                'Caption' => array(
+                    'en-US' => 'Product LT',
+                    'vi-VN' => 'SP Laptop',
+                ),
+                'Model' => 'QdProductLT',
+                'DataPort' => 'product_lt_port',
+                'PageList' => 'product_lt_list',
+                'Order' => 20000
+            ),
+            'product_lt_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductLT_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductLT',
+                'DataPort' => 'product_lt_port'
+            ),
+            'product_pk' => array(
+                'ParentId' => 'product_pg2_dcn',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductPK_Card',
+                'Caption' => array(
+                    'en-US' => 'Product PK',
+                    'vi-VN' => 'SP Phụ kiện',
+                ),
+                'Model' => 'QdProductPK',
+                'DataPort' => 'product_pk_port',
+                'PageList' => 'product_pk_list',
+                'Order' => 30000
+            ),
+            'product_pk_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductPK_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductPK',
+                'DataPort' => 'product_pk_port'
+            ),
+            'product_mtb' => array(
+                'ParentId' => 'product_pg2_dcn',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductMTB_Card',
+                'Caption' => array(
+                    'en-US' => 'Product Tablet',
+                    'vi-VN' => 'SP Máy tính bảng',
+                ),
+                'Model' => 'QdProductMTB',
+                'DataPort' => 'product_mtb_port',
+                'PageList' => 'product_mtb_list',
+                'Order' => 40000
+            ),
+            'product_mtb_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductMTB_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductMTB',
+                'DataPort' => 'product_mtb_port'
+            ),
             'product_pg2_xe' => array(
                 'ParentId' => 'folder10',
                 'Active' => true,
@@ -210,7 +277,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductPG2XE',
                 'DataPort' => 'product_pg2_xe_port',
-                'PageList' => 'product_pg2_xe_list'
+                'PageList' => 'product_pg2_xe_list',
+                'Order' => 30000
             ),
             'product_pg2_xe_list' => array(
                 'ParentId' => -1,
@@ -251,81 +319,7 @@ class Qdmvc_Page_IndexCustomMenu
                 'DataPort' => 'product_pg3_port'
             ),
             */
-            'product_dt' => array(
-                'ParentId' => 'product_pg2_dcn',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductDT_Card',
-                'Caption' => array(
-                    'en-US' => 'Product DT',
-                    'vi-VN' => 'SP Điện thoại',
-                ),
-                'Model' => 'QdProductDT',
-                'DataPort' => 'product_dt_port',
-                'PageList' => 'product_dt_list'
-            ),
-            'product_dt_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductDT_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductDT',
-                'DataPort' => 'product_dt_port'
-            ),
-            'product_lt' => array(
-                'ParentId' => 'product_pg2_dcn',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductLT_Card',
-                'Caption' => array(
-                    'en-US' => 'Product LT',
-                    'vi-VN' => 'SP Laptop',
-                ),
-                'Model' => 'QdProductLT',
-                'DataPort' => 'product_lt_port',
-                'PageList' => 'product_lt_list'
-            ),
-            'product_lt_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductLT_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductLT',
-                'DataPort' => 'product_lt_port'
-            ),
-            'product_pk' => array(
-                'ParentId' => 'product_pg2_dcn',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductPK_Card',
-                'Caption' => array(
-                    'en-US' => 'Product PK',
-                    'vi-VN' => 'SP Phụ kiện',
-                ),
-                'Model' => 'QdProductPK',
-                'DataPort' => 'product_pk_port',
-                'PageList' => 'product_pk_list'
-            ),
-            'product_pk_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductPK_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductPK',
-                'DataPort' => 'product_pk_port'
-            ),
+
             'product_xedap' => array(
                 'ParentId' => 'product_pg2_xe',
                 'Active' => true,
@@ -337,7 +331,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductXEDAP',
                 'DataPort' => 'product_xedap_port',
-                'PageList' => 'product_xedap_list'
+                'PageList' => 'product_xedap_list',
+                'Order' => 10000
             ),
             'product_xedap_list' => array(
                 'ParentId' => -1,
@@ -362,7 +357,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductXEMAY',
                 'DataPort' => 'product_xemay_port',
-                'PageList' => 'product_xemay_list'
+                'PageList' => 'product_xemay_list',
+                'Order' => 20000
             ),
             'product_xemay_list' => array(
                 'ParentId' => -1,
@@ -387,7 +383,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductXEHOI',
                 'DataPort' => 'product_xehoi_port',
-                'PageList' => 'product_xehoi_list'
+                'PageList' => 'product_xehoi_list',
+                'Order' => 30000
             ),
             'product_xehoi_list' => array(
                 'ParentId' => -1,
@@ -412,7 +409,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductDOHIEU',
                 'DataPort' => 'product_dohieu_port',
-                'PageList' => 'product_dohieu_list'
+                'PageList' => 'product_dohieu_list',
+                'Order' => 40000
             ),
             'product_dohieu_list' => array(
                 'ParentId' => -1,
@@ -426,31 +424,6 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdProductDOHIEU',
                 'DataPort' => 'product_dohieu_port'
             ),
-            'product_pg2_thietbi' => array(
-                'ParentId' => 'folder10',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_Product_PG2_THIETBI_Card',
-                'Caption' => array(
-                    'en-US' => 'SP Thiết bị (PG2)',
-                    'vi-VN' => 'SP Thiết bị (PG2)',
-                ),
-                'Model' => 'QdProductPG2THIETBI',
-                'DataPort' => 'product_pg2_thietbi_port',
-                'PageList' => 'product_pg2_thietbi_list'
-            ),
-            'product_pg2_thietbi_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_Product_PG2_THIETBI_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductPG2THIETBI',
-                'DataPort' => 'product_pg2_thietbi_port'
-            ),
             'product_nuochoa' => array(
                 'ParentId' => 'product_dohieu',
                 'Active' => true,
@@ -462,7 +435,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductNUOCHOA',
                 'DataPort' => 'product_nuochoa_port',
-                'PageList' => 'product_nuochoa_list'
+                'PageList' => 'product_nuochoa_list',
+                'Order' => 10000
             ),
             'product_nuochoa_list' => array(
                 'ParentId' => -1,
@@ -487,7 +461,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductTHOITRANG',
                 'DataPort' => 'product_thoitrang_port',
-                'PageList' => 'product_thoitrang_list'
+                'PageList' => 'product_thoitrang_list',
+                'Order' => 20000
             ),
             'product_thoitrang_list' => array(
                 'ParentId' => -1,
@@ -501,81 +476,6 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdProductTHOITRANG',
                 'DataPort' => 'product_thoitrang_port'
             ),
-            'product_dodung' => array(
-                'ParentId' => 'product_pg2_thietbi',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductDODUNG_Card',
-                'Caption' => array(
-                    'en-US' => 'Product DODUNG',
-                    'vi-VN' => 'SP Đồ dùng',
-                ),
-                'Model' => 'QdProductDODUNG',
-                'DataPort' => 'product_dodung_port',
-                'PageList' => 'product_dodung_list'
-            ),
-            'product_dodung_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductDODUNG_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductDODUNG',
-                'DataPort' => 'product_dodung_port'
-            ),
-            'product_ptst' => array(
-                'ParentId' => 'product_pg2_thietbi',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductPTST_Card',
-                'Caption' => array(
-                    'en-US' => 'Product PTST',
-                    'vi-VN' => 'SP Phong thủy - Sưu tập',
-                ),
-                'Model' => 'QdProductPTST',
-                'DataPort' => 'product_ptst_port',
-                'PageList' => 'product_ptst_list'
-            ),
-            'product_ptst_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductPTST_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductPTST',
-                'DataPort' => 'product_ptst_port'
-            ),
-            'product_other' => array(
-                'ParentId' => 'product_pg2_thietbi',
-                'Active' => true,
-                'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductOTHER_Card',
-                'Caption' => array(
-                    'en-US' => 'Product OTHER',
-                    'vi-VN' => 'SP Khác',
-                ),
-                'Model' => 'QdProductOTHER',
-                'DataPort' => 'product_other_port',
-                'PageList' => 'product_other_list'
-            ),
-            'product_other_list' => array(
-                'ParentId' => -1,
-                'Active' => false,
-                'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductOTHER_List',
-                'Caption' => array(
-                    'en-US' => 'List',
-                    'vi-VN' => 'List'
-                ),
-                'Model' => 'QdProductOTHER',
-                'DataPort' => 'product_other_port'
-            ),
             'product_dhmk' => array(
                 'ParentId' => 'product_dohieu',
                 'Active' => true,
@@ -587,7 +487,8 @@ class Qdmvc_Page_IndexCustomMenu
                 ),
                 'Model' => 'QdProductDHMK',
                 'DataPort' => 'product_dhmk_port',
-                'PageList' => 'product_dhmk_list'
+                'PageList' => 'product_dhmk_list',
+                'Order' => 30000
             ),
             'product_dhmk_list' => array(
                 'ParentId' => -1,
@@ -601,31 +502,155 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdProductDHMK',
                 'DataPort' => 'product_dhmk_port'
             ),
-            'product_mtb' => array(
-                'ParentId' => 'product_pg2_dcn',
+            'product_pg2_thietbi' => array(
+                'ParentId' => 'folder10',
                 'Active' => true,
                 'PageType' => 'Card',
-                'Class' => 'Qdmvc_Page_ProductMTB_Card',
+                'Class' => 'Qdmvc_Page_Product_PG2_THIETBI_Card',
                 'Caption' => array(
-                    'en-US' => 'Product Tablet',
-                    'vi-VN' => 'SP Máy tính bảng',
+                    'en-US' => 'SP Thiết bị (PG2)',
+                    'vi-VN' => 'SP Thiết bị (PG2)',
                 ),
-                'Model' => 'QdProductMTB',
-                'DataPort' => 'product_mtb_port',
-                'PageList' => 'product_mtb_list'
+                'Model' => 'QdProductPG2THIETBI',
+                'DataPort' => 'product_pg2_thietbi_port',
+                'PageList' => 'product_pg2_thietbi_list'
             ),
-            'product_mtb_list' => array(
+            'product_pg2_thietbi_list' => array(
                 'ParentId' => -1,
                 'Active' => false,
                 'PageType' => 'List',
-                'Class' => 'Qdmvc_Page_ProductMTB_List',
+                'Class' => 'Qdmvc_Page_Product_PG2_THIETBI_List',
                 'Caption' => array(
                     'en-US' => 'List',
                     'vi-VN' => 'List'
                 ),
-                'Model' => 'QdProductMTB',
-                'DataPort' => 'product_mtb_port'
+                'Model' => 'QdProductPG2THIETBI',
+                'DataPort' => 'product_pg2_thietbi_port',
+                'Order' => 50000
             ),
+            'product_dodung' => array(
+                'ParentId' => 'product_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductDODUNG_Card',
+                'Caption' => array(
+                    'en-US' => 'Product DODUNG',
+                    'vi-VN' => 'SP Đồ dùng',
+                ),
+                'Model' => 'QdProductDODUNG',
+                'DataPort' => 'product_dodung_port',
+                'PageList' => 'product_dodung_list',
+                'Order' => 10000
+            ),
+
+            'product_dodung_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductDODUNG_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductDODUNG',
+                'DataPort' => 'product_dodung_port'
+            ),
+            'product_other' => array(
+                'ParentId' => 'product_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductOTHER_Card',
+                'Caption' => array(
+                    'en-US' => 'Product OTHER',
+                    'vi-VN' => 'SP Khác',
+                ),
+                'Model' => 'QdProductOTHER',
+                'DataPort' => 'product_other_port',
+                'PageList' => 'product_other_list',
+                'Order' => 30000
+            ),
+            'product_other_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductOTHER_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductOTHER',
+                'DataPort' => 'product_other_port'
+            ),
+            'product_ptst' => array(
+                'ParentId' => 'product_pg2_thietbi',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_ProductPTST_Card',
+                'Caption' => array(
+                    'en-US' => 'Product PTST',
+                    'vi-VN' => 'SP Phong thủy - Sưu tập',
+                ),
+                'Model' => 'QdProductPTST',
+                'DataPort' => 'product_ptst_port',
+                'PageList' => 'product_ptst_list',
+                'Order' => 20000
+            ),
+            'product_ptst_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_ProductPTST_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductPTST',
+                'DataPort' => 'product_ptst_port'
+            ),
+        );
+    }
+    private static function getMenu()
+    {
+        $obj = array(
+            'main' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'Class' => 'Qdmvc_Page_Main',
+                'Caption' => array(
+                    'en-US' => 'Page Main',
+                    'vi-VN' => 'Trang chính',
+                ),
+                'Model' => 'QdNote',
+                'DataPort' => 'note_port',
+            ),
+
+            /*
+            'product_pg2' => array(
+                'ParentId' => 'folder10',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_Product_PG2_Card',
+                'Caption' => array(
+                    'en-US' => 'Product (PG2)',
+                    'vi-VN' => 'Sản phẩm (PG2)',
+                ),
+                'Model' => 'QdProductPG2',
+                'DataPort' => 'product_pg2_port',
+                'PageList' => 'product_pg2_list'
+            ),
+            'product_pg2_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_Product_PG2_List',
+                'Caption' => array(
+                    'en-US' => 'List',
+                    'vi-VN' => 'List'
+                ),
+                'Model' => 'QdProductPG2',
+                'DataPort' => 'product_pg2_port'
+            ),
+            */
             'product_cat_card' => array(
                 'ParentId' => 'folder20',
                 'Active' => true,
@@ -1493,6 +1518,56 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdProcat2ManuSel',
                 'DataPort' => 'procat2manusel_port'
             ),
+            'postcat_card' => array(
+                'ParentId' => 'folder80',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_PostCat',
+                'Caption' => array(
+                    'en-US' => 'Post Category',
+                    'vi-VN' => 'Danh mục bài viết'
+                ),
+                'Model' => 'QdPostCat',
+                'DataPort' => 'postcat_port',
+                'PageList' => 'postcat_list'
+            ),
+            'postcat_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_PostCat_list',
+                'Caption' => array(
+                    'en-US' => 'Post Cat List',
+                    'vi-VN' => 'Post Cat List'
+                ),
+                'Model' => 'QdPostCat',
+                'DataPort' => 'postcat_port'
+            ),
+            'post_card' => array(
+                'ParentId' => 'postcat_card',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_Post',
+                'Caption' => array(
+                    'en-US' => 'General Post',
+                    'vi-VN' => 'Bài viết chung'
+                ),
+                'Model' => 'QdPost',
+                'DataPort' => 'post_port',
+                'PageList' => 'post_list'
+            ),
+            'post_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_post_list',
+                'Caption' => array(
+                    'en-US' => 'Post List',
+                    'vi-VN' => 'Post List'
+                ),
+                'Model' => 'QdPost',
+                'DataPort' => 'post_port'
+            ),
             'about' => array(
                 'ParentId' => 'folder80',
                 'Active' => true,
@@ -1518,7 +1593,56 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdAbout',
                 'DataPort' => 'about_port'
             ),
-
+            'partnergrp' => array(
+                'ParentId' => 'folder110',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_PartnerGrp',
+                'Caption' => array(
+                    'en-US' => 'Partner Group',
+                    'vi-VN' => 'Nhóm Đối tác'
+                ),
+                'Model' => 'QdPartnerGrp',
+                'DataPort' => 'partnergrp_port',
+                'PageList' => 'partnergrp_list'
+            ),
+            'partnergrp_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_PartnerGrp_list',
+                'Caption' => array(
+                    'en-US' => 'PartnerGrp List',
+                    'vi-VN' => 'PartnerGrp List'
+                ),
+                'Model' => 'QdPartnerGrp',
+                'DataPort' => 'partnergrp_port',
+            ),
+            'partner' => array(
+                'ParentId' => 'partnergrp',
+                'Active' => true,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_Partner',
+                'Caption' => array(
+                    'en-US' => 'Partner',
+                    'vi-VN' => 'Đối tác'
+                ),
+                'Model' => 'QdPartner',
+                'DataPort' => 'partner_port',
+                'PageList' => 'partner_list'
+            ),
+            'partner_list' => array(
+                'ParentId' => -1,
+                'Active' => false,
+                'PageType' => 'List',
+                'Class' => 'Qdmvc_Page_Partner_list',
+                'Caption' => array(
+                    'en-US' => 'Partner List',
+                    'vi-VN' => 'Partner List'
+                ),
+                'Model' => 'QdPartner',
+                'DataPort' => 'partner_port',
+            ),
             'pro2pro' => array(
                 'ParentId' => 'product',
                 'Active' => false,
@@ -1993,6 +2117,19 @@ class Qdmvc_Page_IndexCustomMenu
                 'Model' => 'QdTRootSetup',
                 'DataPort' => 'theme/root_setup_port'
             ),
+            'cqrs_page' => array(
+                'ParentId' => '',
+                'Active' => false,
+                'PageType' => 'Card',
+                'Class' => 'Qdmvc_Page_CQRS',
+                'Caption' => array(
+                    'en-US' => 'CQRS',
+                    'vi-VN' => 'CQRS'
+                ),
+                'Model' => '',
+                'DataPort' => '',
+                'PageList' => ''
+            ),
             'blank_page' => array(
                 'ParentId' => '',
                 'Active' => false,
@@ -2032,6 +2169,7 @@ class Qdmvc_Page_IndexCustomMenu
                 'DataPort' => 'report/report_dg_instock_port'
             ),
         );
+        $obj = array_merge($obj, static::getMenuSP());
         $obj = array_merge($obj, static::getMenuFolder());
         return $obj;
     }
