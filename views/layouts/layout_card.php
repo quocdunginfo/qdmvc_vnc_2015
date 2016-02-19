@@ -1636,6 +1636,30 @@ class Qdmvc_Layout_Card extends Qdmvc_Layout_Root
                     aria-expanded="false">
                 <?= Qdmvc_Message::getMsg('btn_function') ?> <span class="caret"></span>
             </button>
+            <script>
+                (function ($) {
+                    //Auto pull right or left base on Function group position
+                    $('.dropdown-toggle').on("click", function() {
+                        var dropdownList = $('.dropdown-menu'),
+                            dropdownOffset = $(this).offset(),
+                            offsetLeft = dropdownOffset.left,
+                            dropdownWidth = dropdownList.width(),
+                            docWidth = $(window).width(),
+
+                            subDropdown = dropdownList.eq(1),
+                            subDropdownWidth = subDropdown.width(),
+
+                            isDropdownVisible = (offsetLeft + dropdownWidth <= docWidth),
+                            isSubDropdownVisible = (offsetLeft + dropdownWidth + subDropdownWidth <= docWidth);
+
+                        if (!isDropdownVisible || !isSubDropdownVisible) {
+                            dropdownList.addClass('pull-right');
+                        } else {
+                            dropdownList.removeClass('pull-right');
+                        }
+                    });
+                })(jQuery);
+            </script>
             <ul class="dropdown-menu" role="menu">
                 <?php
                 foreach ($this->serverFunctions() as $item => $config) :
